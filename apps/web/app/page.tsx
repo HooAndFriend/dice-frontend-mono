@@ -1,6 +1,19 @@
+"use client";
+
+import { useLoginMutation } from "@/services";
 import Image from "next/image";
 
 export default function Page(): JSX.Element {
+  const [loginApi] = useLoginMutation();
+
+  const handleLogin = () => {
+    loginApi({ username: "admin", password: "1234" })
+      .unwrap()
+      .then((res) => {
+        console.log(res);
+      });
+  };
+
   return (
     <div className="flex w-full h-screen items-center justify-center bg-black ">
       <div className="bg-white w-2/3 h-2/3 rounded-lg flex">
@@ -48,7 +61,10 @@ export default function Page(): JSX.Element {
           </div>
           <div className="flex justify-center">
             <div className="w-4/5 mt-12">
-              <button className="w-full bg-black text-white rounded-lg h-14 text-2xl font-bold">
+              <button
+                className="w-full bg-black text-white rounded-lg h-14 text-2xl font-bold"
+                onClick={handleLogin}
+              >
                 Log In
               </button>
             </div>

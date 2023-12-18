@@ -9,7 +9,7 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import { Mutex } from "async-mutex";
 
-const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL + "/api";
+const baseUrl = "/api";
 
 const baseQuery = fetchBaseQuery({
   prepareHeaders: (headers, { getState }) => {
@@ -35,7 +35,7 @@ const mutex = new Mutex();
 export const customFetchBase = async (
   args: string | FetchArgs,
   api: BaseQueryApi,
-  extraOptions: object,
+  extraOptions: object
 ) => {
   await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
@@ -57,7 +57,7 @@ export const customFetchBase = async (
             body: { refreshToken },
           },
           api,
-          extraOptions,
+          extraOptions
         )) as { data: ReissuedTokenResponse };
         if (data.statusCode === 200) {
           const { accessToken } = data.data;

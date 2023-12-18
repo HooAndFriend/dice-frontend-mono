@@ -1,51 +1,51 @@
 export interface WorkspaceV0 {
-  id: number
-  role: WorkspaceRole
+  id: number;
+  role: WorkspaceRole;
   workspace: {
-    id: number
-    name: string
-    profile: string
-    isPersonal: boolean
-  }
+    id: number;
+    name: string;
+    profile: string;
+    isPersonal: boolean;
+  };
 }
 
 export interface WorkspaceV1 {
-  id: number
-  name: string
-  profile: string
-  comment: string
-  isPersonal: boolean
+  id: number;
+  name: string;
+  profile: string;
+  comment: string;
+  isPersonal: boolean;
 }
 
 export interface WorkspaceV2 {
-  id: number
-  name: string
-  comment: string
-  profile: string
-  isPersonal: boolean
-  workspaceUser: WorksapceUser[]
+  id: number;
+  name: string;
+  comment: string;
+  profile: string;
+  isPersonal: boolean;
+  workspaceUser: WorksapceUser[];
 }
 
 export interface WorkspaceUpdateParams {
-  id: number
-  name: string
-  comment: string
-  profile: string
+  id: number;
+  name: string;
+  comment: string;
+  profile: string;
 }
 
 export interface WorksapceUser {
-  role: WorkspaceRole
+  role: WorkspaceRole;
   user: {
-    nickname: string
-    email: string
-    profile: string
-  }
+    nickname: string;
+    email: string;
+    profile: string;
+  };
 }
 
-export type WorkspaceRole = 'WRITER' | 'VIEWER' | 'ADMIN' | 'OWNER'
+export type WorkspaceRole = "WRITER" | "VIEWER" | "ADMIN" | "OWNER";
 
 export interface WorkspaceSaveParams {
-  name: string
-  comment: string
-  profile: string
+  name: string;
+  comment: string;
+  profile: string;
 }

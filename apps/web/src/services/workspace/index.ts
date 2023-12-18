@@ -1,19 +1,19 @@
-import type { Response } from '@/types/api'
+import type { Response } from "@/types/api";
 import type {
   WorksapceV2Response,
   WorkspaceV0Response,
   WorkspaceV1Respons,
-} from '@/types/api/workspace'
+} from "@/types/api/workspace";
 import type {
   WorkspaceSaveParams,
   WorkspaceUpdateParams,
-} from '@/types/workspace'
-import { api } from '..'
+} from "@/types/workspace";
+import { api } from "..";
 
 // Workspace Api CreateApi
 export const workspaceApi = api
   .enhanceEndpoints({
-    addTagTypes: ['Workspace'],
+    addTagTypes: ["Workspace"],
   })
   .injectEndpoints({
     overrideExisting: false,
@@ -21,7 +21,7 @@ export const workspaceApi = api
       // Query
       getWorkspaceV0List: builder.query<WorkspaceV0Response, void>({
         query: () => ({
-          url: '/v1/workspace-user',
+          url: "/v1/workspace-user",
         }),
       }),
       getWorkspaceV1: builder.query<WorkspaceV1Respons, number>({
@@ -37,20 +37,20 @@ export const workspaceApi = api
       // Mutation
       updateWorkspace: builder.mutation<Response, WorkspaceUpdateParams>({
         query: (args) => ({
-          url: '/v1/workspace',
-          method: 'PUT',
+          url: "/v1/workspace",
+          method: "PUT",
           body: args,
         }),
       }),
       saveWorksapce: builder.mutation<Response, WorkspaceSaveParams>({
         query: (args) => ({
-          url: '/v1/workspace',
-          method: 'POST',
+          url: "/v1/workspace",
+          method: "POST",
           body: args,
         }),
       }),
     }),
-  })
+  });
 
 export const {
   useGetWorkspaceV0ListQuery,
@@ -58,4 +58,4 @@ export const {
   useLazyGetWorksapceV2Query,
   useUpdateWorkspaceMutation,
   useSaveWorksapceMutation,
-} = workspaceApi
+} = workspaceApi;

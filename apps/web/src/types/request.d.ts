@@ -1,4 +1,4 @@
 export interface RequestSaveParams {
-  name: string
-  collectionId: number
+  name: string;
+  collectionId: number;
 }

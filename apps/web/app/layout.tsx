@@ -1,4 +1,3 @@
-import ReduxProvider from "../src/store/provider";
 import "./globals.css";
 import type { Metadata } from "next";
 
@@ -14,9 +13,7 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body>
-        <ReduxProvider>{children}</ReduxProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

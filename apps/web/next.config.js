@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   transpilePackages: ["@repo/ui"],
-  output: "export",
+  // output: "export",
   distDir: "dist",
   async rewrites() {
     return [

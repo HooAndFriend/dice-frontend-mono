@@ -10,10 +10,13 @@ Node : 18.18.2
 pnpm : 8.11.0
 ```
 
-### Using Stack
+### Mono Repo 구성
 
 ```
-Next13, storybook, pnpm, turborepo, tailwind, rtk, rtk query
+1. apps/web -> 사용자 웹
+2. apps/admin -> 관리자 웹(예정)
+3. apps/download-web -> 다운로드 웹(예정)
+4. packages/ui -> 컴포넌트 레포(Story book)
 ```
 
 ### 필독

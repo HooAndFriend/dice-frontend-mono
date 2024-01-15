@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./button": "./src/button.tsx",
-    "./card": "./src/card.tsx",
-    "./code": "./src/code.tsx"
+    "./Input": "./src/Input.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -35,6 +33,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.6.4",
+    "tailwindcss": "^3.3.6",
     "typescript": "^5.2.2"
   },
   "dependencies": {

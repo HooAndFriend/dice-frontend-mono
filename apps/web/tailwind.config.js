@@ -14,6 +14,9 @@ module.exports = {
       fontFamily: {
         spoqa: ['Spoqa Han Sans Neo', 'sans-serif'],
       },
+      boxShadow: {
+        md: '0px 2px 6px 0px rgba(119, 131, 153, 0.20)',
+      },
     },
   },
   plugins: [],

@@ -6,112 +6,109 @@ export default function Page(): JSX.Element {
   const handleLogin = () => {};
 
   return (
-    <div className="flex w-full h-screen items-center justify-center bg-[##EBEBEC] ">
-      <div className="bg-white w-2/3 h-2/3 rounded-2xl flex shadow-md">
-        <div>
-          {/* <Image src="/dice2.png" alt="My Image2" width={19} height={17}/> */}
-        </div>
+    <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
+      <div className="bg-white w-[900px] h-[613px] rounded-2xl flex shadow-md">
         <div className="w-1/2 h-full  bg-[#F6F8FF] rounded-tl-2xl rounded-bl-2xl flex">
-          <div className="ml-10 mt-10">
+          <div className="w-[89px] h-[27px] ml-[34px] mt-[45px] flex items-center">
             <Image src="/dice2.png" alt="leftTop" width={19} height={17} />
+            <div className="text-[#623AD6] font-open font-medium text-xl ml-1">
+              HIDICE
+            </div>
           </div>
-          <div className="flex items-end justify-end w-22 h-22 ml-20 mb-5">
-            <Image src="/dice.png" alt="My Image" width={300} height={300} />
+          <div className="flex items-end justify-end w-[270px] h-[240px] mt-[332px] ml-[21px]">
+            <Image src="/dice.png" alt="My Image" width={270} height={240} />
           </div>
         </div>
-        <div className="w-1/2 h-full">
-          <div className="flex justify-center">
-            <div className="w-4/5 mt-12">
-              <label
-                htmlFor="first_name"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
-              >
-                Email
-              </label>
-              <input
-                type="text"
-                id="first_name"
-                className="border h-14 border-gray-300 text-gray-900 text-md rounded-lg block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black "
-                placeholder="Enter Your Email"
-                required
-              />
+        <div className="flex w-1/2 h-full justify-center items-center">
+          <div className="w-[330px] h-[409px]">
+            <div className="flex justify-center">
+              <div className="w-full">
+                <label
+                  htmlFor="first_name"
+                  className="block mb-[14px] text-base font-medium text-gray-900 dark:text-black font-spoqa"
+                >
+                  Email
+                </label>
+                <input
+                  type="text"
+                  id="first_name"
+                  className="font-normal font-spoqa border h-[50px] text-gray-900 text-base p-4 rounded-lg block w-full border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+                  placeholder="Enter Your Email"
+                  required
+                />
+              </div>
             </div>
-          </div>
-          <div className="flex justify-center">
-            <div className="w-4/5 mt-6">
-              <label
-                htmlFor="first_name"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
-              >
-                Password
-              </label>
-              <input
-                type="text"
-                id="first_name"
-                className="border h-14 border-gray-300 text-gray-900 text-md rounded-lg block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black "
-                placeholder="Enter Your Password"
-                required
-              />
+            <div className="flex justify-center">
+              <div className="w-full mt-5">
+                <label
+                  htmlFor="first_name"
+                  className="font-spoqa block mb-[14px] text-base font-medium text-gray-900 dark:text-black"
+                >
+                  Password
+                </label>
+                <input
+                  type="text"
+                  id="first_name"
+                  className="font-normal font-spoqa border h-[50px] text-gray-900 text-base p-4 rounded-lg block w-full border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+                  placeholder="Enter Your Password"
+                  required
+                />
+              </div>
             </div>
-          </div>
-          <div className="flex justify-center">
-            <div className="w-4/5 mt-12">
-              <button
-                className="w-full bg-[#623AD6] text-white rounded-xl h-14 text-base font-bold"
-                onClick={handleLogin}
-              >
-                LOGIN
-              </button>
+            <div className="flex justify-center">
+              <div className="w-full mt-12">
+                <button
+                  className="w-full bg-[#623AD6] text-white rounded-xl h-[55px] text-lg font-bold font-spoqa"
+                  onClick={handleLogin}
+                >
+                  LOGIN
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="flex justify-end underline text-gray-500 mt-2 mr-12">
-            HIDICE Signup
-          </div>
-          <div className="w-4/5 flex justify-between m-auto mt-10">
-            <div className="w-12 h-12 bg-white rounded-full shadow-md">
-              <Image
-                className="m-auto mt-3"
-                src="/Microsoft.png"
-                alt="Microsoft"
-                width={24}
-                height={24}
-              />
+            <div className="flex justify-end text-sm underline w-full text-[#676767] mt-4 mr-12 font-spoqa font-medium">
+              HIDICE Signup
             </div>
-            <div className="w-12 h-12 bg-white rounded-full shadow-md">
-              <Image
-                className="m-auto mt-3"
-                src="/google.png"
-                alt="Microsoft"
-                width={24}
-                height={24}
-              />
-            </div>
-            <div className="w-12 h-12 bg-white rounded-full shadow-md">
-              <Image
-                className="m-auto mt-3"
-                src="/apple.png"
-                alt="Microsoft"
-                width={24}
-                height={24}
-              />
-            </div>
-            <div className="w-12 h-12 bg-white rounded-full shadow-md">
-              <Image
-                className="m-auto mt-3"
-                src="/github.png"
-                alt="Microsoft"
-                width={24}
-                height={24}
-              />
-            </div>
-            <div className="w-12 h-12 bg-white rounded-full shadow-md">
-              <Image
-                className="m-auto mt-3"
-                src="/twitter.png"
-                alt="Microsoft"
-                width={24}
-                height={24}
-              />
+            <div className="w-full flex justify-between m-auto mt-[46px]">
+              <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
+                <Image
+                  src="/Microsoft.png"
+                  alt="Microsoft"
+                  width={24}
+                  height={24}
+                />
+              </div>
+              <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
+                <Image
+                  src="/google.png"
+                  alt="Microsoft"
+                  width={24}
+                  height={24}
+                />
+              </div>
+              <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
+                <Image
+                  src="/apple.png"
+                  alt="Microsoft"
+                  width={28}
+                  height={28}
+                />
+              </div>
+              <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
+                <Image
+                  src="/github.png"
+                  alt="Microsoft"
+                  width={28}
+                  height={28}
+                />
+              </div>
+              <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
+                <Image
+                  src="/twitter.png"
+                  alt="Microsoft"
+                  width={24}
+                  height={19.83}
+                />
+              </div>
             </div>
           </div>
         </div>

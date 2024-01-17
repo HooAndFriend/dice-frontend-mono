@@ -1,9 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 
-export default function Page(): JSX.Element {
+export default function Register(): JSX.Element {
   const handleLogin = () => {};
 
   return (
@@ -13,7 +12,7 @@ export default function Page(): JSX.Element {
           <div className="w-[89px] h-[27px] ml-[34px] mt-[45px] flex items-center">
             <Image src="/dice2.png" alt="leftTop" width={19} height={17} />
             <div className="text-[#623AD6] font-open font-medium text-xl ml-1">
-              HIDICE
+              Register
             </div>
           </div>
           <div className="flex items-end justify-end w-[270px] h-[240px] mt-[332px] ml-[21px]">
@@ -67,7 +66,7 @@ export default function Page(): JSX.Element {
               </div>
             </div>
             <div className="flex justify-end text-sm underline w-full text-[#676767] mt-4 mr-12 font-spoqa font-medium">
-              <Link href="/Register">HIDICE Signup</Link>
+              HIDICE Signup
             </div>
             <div className="w-full flex justify-between m-auto mt-[46px]">
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">

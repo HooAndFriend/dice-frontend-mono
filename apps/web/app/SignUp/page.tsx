@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 
-export default function Register(): JSX.Element {
-  const handleLogin = () => {};
+export default function Signup(): JSX.Element {
+  const handleSignup = () => {};
 
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
@@ -59,7 +59,7 @@ export default function Register(): JSX.Element {
               <div className="w-full mt-12">
                 <button
                   className="w-full bg-[#623AD6] text-white rounded-xl h-[55px] text-lg font-bold font-spoqa"
-                  onClick={handleLogin}
+                  onClick={handleSignup}
                 >
                   LOGIN
                 </button>

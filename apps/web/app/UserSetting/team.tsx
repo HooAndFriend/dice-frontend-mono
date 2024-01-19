@@ -15,7 +15,7 @@ export default function Team() {
             <div className="flex">
               <img
                 alt="Sample Image"
-                src="/dice.png"
+                src="/images/dice.png"
                 className="w-8 h-8 rounded-[10px] ml-[17px] mr-[18px]"
               />
               <div className="w-[335px] text-base font-spoqa flex items-center">
@@ -30,7 +30,7 @@ export default function Team() {
             <div className="flex">
               <img
                 alt="Sample Image"
-                src="/dice.png"
+                src="/images/dice.png"
                 className="w-8 h-8 rounded-[10px] ml-[17px] mr-[18px]"
               />
               <div className="w-[335px] text-base font-spoqa flex items-center">
@@ -45,7 +45,7 @@ export default function Team() {
             <div className="flex">
               <img
                 alt="Sample Image"
-                src="/dice.png"
+                src="/images/dice.png"
                 className="w-8 h-8 rounded-[10px] ml-[17px] mr-[18px]"
               />
               <div className="w-[335px] text-base font-spoqa flex items-center">
@@ -60,7 +60,7 @@ export default function Team() {
             <div className="flex">
               <img
                 alt="Sample Image"
-                src="/dice.png"
+                src="/images/dice.png"
                 className="w-8 h-8 rounded-[10px] ml-[17px] mr-[18px]"
               />
               <div className="w-[335px] text-base font-spoqa flex items-center">

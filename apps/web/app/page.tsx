@@ -16,7 +16,12 @@ export default function Page(): JSX.Element {
             </div>
           </div>
           <div className="flex items-end justify-end w-[270px] h-[240px] mt-[332px] ml-[21px]">
-            <img src="/dice.png" alt="My Image" width={270} height={240} />
+            <img
+              src="/images/dice.png"
+              alt="My Image"
+              width={270}
+              height={240}
+            />
           </div>
         </div>
         <div className="flex w-1/2 h-full justify-center items-center">
@@ -71,24 +76,39 @@ export default function Page(): JSX.Element {
             <div className="w-full flex justify-between m-auto mt-[46px]">
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
                 <img
-                  src="/Microsoft.png"
+                  src="/images/microsoft.png"
                   alt="Microsoft"
                   width={24}
                   height={24}
                 />
               </div>
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
-                <img src="/google.png" alt="Microsoft" width={24} height={24} />
-              </div>
-              <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
-                <img src="/apple.png" alt="Microsoft" width={28} height={28} />
-              </div>
-              <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
-                <img src="/github.png" alt="Microsoft" width={28} height={28} />
+                <img
+                  src="/images/google.png"
+                  alt="Microsoft"
+                  width={24}
+                  height={24}
+                />
               </div>
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
                 <img
-                  src="/twitter.png"
+                  src="/images/apple.png"
+                  alt="Microsoft"
+                  width={28}
+                  height={28}
+                />
+              </div>
+              <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
+                <img
+                  src="/images/github.png"
+                  alt="Microsoft"
+                  width={28}
+                  height={28}
+                />
+              </div>
+              <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
+                <img
+                  src="/images/twitter.png"
                   alt="Microsoft"
                   width={24}
                   height={19.83}

@@ -12,7 +12,7 @@ export default function Page(): JSX.Element {
         <div className="w-1/2 h-full  bg-[#F6F8FF] rounded-tl-2xl rounded-bl-2xl flex">
           <div className="w-[89px] h-[27px] ml-[34px] mt-[45px] flex items-center">
             <Image src="/dice2.png" alt="leftTop" width={19} height={17} />
-            <div className="text-[#623AD6] font-open font-medium text-xl ml-1">
+            <div className="text-main font-open font-medium text-xl ml-1">
               HIDICE
             </div>
           </div>
@@ -59,7 +59,7 @@ export default function Page(): JSX.Element {
             <div className="flex justify-center">
               <div className="w-full mt-12">
                 <button
-                  className="w-full bg-[#623AD6] text-white rounded-xl h-[55px] text-lg font-bold font-spoqa"
+                  className="w-full bg-main text-white rounded-xl h-[55px] text-lg font-bold font-spoqa"
                   onClick={handleLogin}
                 >
                   LOGIN

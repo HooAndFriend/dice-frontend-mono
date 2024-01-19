@@ -1,7 +1,3 @@
-'use client';
-
-import Image from 'next/image';
-
 export default function Signup(): JSX.Element {
   const handleSignup = () => {};
 
@@ -77,7 +73,7 @@ export default function Signup(): JSX.Element {
             <button className="h-full w-[257px] bg-[#EBEBEC] rounded-[15px] text-white font-spoqa font-bold">
               CANCEL
             </button>
-            <button className="h-full w-[257px] bg-[#623AD6] rounded-[15px] text-white font-spoqa font-bold">
+            <button className="h-full w-[257px] bg-main rounded-[15px] text-white font-spoqa font-bold">
               JOIN
             </button>
           </div>

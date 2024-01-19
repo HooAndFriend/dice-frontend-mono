@@ -9,3 +9,10 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Mosk';
+  src: url('https://db.onlinewebfonts.com/t/70a0b55fecea9a9200992a7f05f57d79.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

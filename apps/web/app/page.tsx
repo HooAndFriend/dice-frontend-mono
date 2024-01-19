@@ -10,7 +10,7 @@ export default function Page(): JSX.Element {
       <div className="bg-white w-[900px] h-[613px] rounded-2xl flex shadow-md">
         <div className="w-1/2 h-full  bg-[#F6F8FF] rounded-tl-2xl rounded-bl-2xl flex">
           <div className="w-[89px] h-[27px] ml-[34px] mt-[45px] flex items-center">
-            <img src="/dice2.png" alt="leftTop" width={19} height={17} />
+            <img src="/images/dice2.png" alt="leftTop" width={19} height={17} />
             <div className="text-main font-open font-medium text-xl ml-1">
               HIDICE
             </div>

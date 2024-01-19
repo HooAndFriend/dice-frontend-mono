@@ -1,6 +1,12 @@
+'use client';
+
 import Image from 'next/image';
+import {useState} from 'react';
+import Setting from './setting';
 
 export default function UserSetting(): JSX.Element {
+  const [state, setState] = useState('setting');
+
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
       <div className="bg-white w-[1192px] h-[769px] rounded-2xl shadow-md">
@@ -22,30 +28,60 @@ export default function UserSetting(): JSX.Element {
               DICE
             </div>
             <div className="mt-[57px]">
-              <div className="mb-px w-[217px] h-[49px] bg-white rounded-full flex items-center text-xl font-bold font-spoqa text-main">
+              <div
+                onClick={e => {
+                  e.preventDefault();
+                  setState('setting');
+                }}
+                className={`mb-px w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
+                  state == 'setting'
+                    ? 'text-main bg-white'
+                    : 'bg-main text-white'
+                }`}
+              >
                 <Image
                   className="ml-[18px] mr-5"
-                  src="/setting.svg"
+                  src={state == 'setting' ? '/setting.svg' : 'settingW.svg'}
                   alt="setting"
                   width={24}
                   height={24}
                 />
                 Setting
               </div>
-              <div className="mb-px w-[217px] h-[49px] bg-main rounded-full flex items-center text-xl font-bold font-spoqa text-white">
+              <div
+                onClick={e => {
+                  e.preventDefault();
+                  setState('team');
+                }}
+                className={`mb-px w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
+                  state == 'team' ? 'text-main bg-white' : 'bg-main text-white'
+                }`}
+              >
                 <Image
                   className="ml-[18px] mr-5"
-                  src="/team.svg"
+                  src={state == 'team' ? '/team.svg' : 'teamW.svg'}
                   alt="team"
                   width={24}
                   height={24}
                 />
                 Team
               </div>
-              <div className="w-[217px] h-[49px] bg-main rounded-full flex items-center text-xl font-bold font-spoqa text-white">
+              <div
+                onClick={e => {
+                  e.preventDefault();
+                  setState('workspace');
+                }}
+                className={`w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
+                  state == 'workspace'
+                    ? 'text-main bg-white'
+                    : 'bg-main text-white'
+                }`}
+              >
                 <Image
                   className="ml-[18px] mr-5"
-                  src="/workspace.svg"
+                  src={
+                    state == 'workspace' ? '/workspace.svg' : 'workspaceW.svg'
+                  }
                   alt="workspace"
                   width={24}
                   height={24}
@@ -55,38 +91,7 @@ export default function UserSetting(): JSX.Element {
             </div>
           </div>
           <div className="w-[742px] h-[601px]">
-            <label className="font-spoqa text-xl font-bold">Profile</label>
-            <div className="mt-[14px] relative w-[110px] h-[110px]">
-              <img
-                src="/dice.png"
-                alt="Sample Iamge"
-                className="w-[104px] h-[104px] rounded-[20px] bg-purple-200 absolute"
-              />
-              <div className="w-[25px] h-[25px] bg-[#EBEBEC] rounded-[5px] absolute top-[85px] left-[85px] flex justify-center items-center">
-                <Image src="/edit.svg" alt="edit" width={15} height={15} />
-              </div>
-            </div>
-            <div className="mt-5">
-              <label className="font-spoqa text-xl font-bold">Nickname</label>
-              <input
-                id="nickname"
-                placeholder="Enter Your Nickname"
-                className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
-                defaultValue="DICE"
-              />
-            </div>
-            <div className="mt-5">
-              <label className="font-spoqa text-xl font-bold">Email</label>
-              <input
-                id="email"
-                placeholder="Enter Your Email"
-                className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
-                defaultValue="yoonalim2003@gmail.com"
-              />
-            </div>
-            <button className="m-auto mt-[93px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white font-spoqa font-bold text-lg">
-              Update
-            </button>
+            {state == 'setting' ? <Setting /> : null}
           </div>
         </div>
       </div>

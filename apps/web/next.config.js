@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   transpilePackages: ["@repo/ui"],
-  // output: "export",
   distDir: "dist",
+  output: process.env.NODE_ENV === "development" ? "standalone" : "export",
   async rewrites() {
     return [
       {

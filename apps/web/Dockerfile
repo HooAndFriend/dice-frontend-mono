@@ -1,42 +1,37 @@
-# This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
-# Make sure you update both files!
+FROM node:18-alpine AS base
 
-FROM node:alpine AS builder
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+FROM base AS builder
 RUN apk add --no-cache libc6-compat
 RUN apk update
 # Set working directory
 WORKDIR /app
-RUN yarn global add turbo
+RUN npm install -g pnpm
 COPY . .
-RUN turbo prune --scope=web --docker
+RUN pnpm prune
+RUN pnpm install
+RUN pnpm turbo run build --filter=web...
 
 # Add lockfile and package.json's of isolated subworkspace
-FROM node:alpine AS installer
+FROM base AS installer
 RUN apk add --no-cache libc6-compat
 RUN apk update
 WORKDIR /app
-RUN yarn global add turbo
 
 # First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
-RUN yarn install
+COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+
+# Ensure the necessary directories exist before copying
+RUN mkdir -p /app/out/full
+COPY --from=builder /app/out/full/ /app/out/full/
 
 # Build the project
+COPY . .
 COPY --from=builder /app/out/full/ .
-COPY turbo.json turbo.json
+RUN pnpm turbo run build --filter=web...
 
-# Uncomment and use build args to enable remote caching
-# ARG TURBO_TEAM
-# ENV TURBO_TEAM=$TURBO_TEAM
-
-# ARG TURBO_TOKEN
-# ENV TURBO_TOKEN=$TURBO_TOKEN
-
-RUN yarn turbo run build --filter=web...
-
-FROM node:alpine AS runner
+FROM base AS runner
 WORKDIR /app
 
 # Don't run production as root

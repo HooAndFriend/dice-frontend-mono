@@ -1,4 +1,4 @@
 pnpm build
 
-mkdir dist
-cp -r ./apps/web/dist ./dist/web
+mkdir html
+cp -r ./apps/web/dist ./html/www

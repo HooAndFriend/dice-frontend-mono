@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Page(): JSX.Element {
@@ -11,13 +10,13 @@ export default function Page(): JSX.Element {
       <div className="bg-white w-[900px] h-[613px] rounded-2xl flex shadow-md">
         <div className="w-1/2 h-full  bg-[#F6F8FF] rounded-tl-2xl rounded-bl-2xl flex">
           <div className="w-[89px] h-[27px] ml-[34px] mt-[45px] flex items-center">
-            <Image src="/dice2.png" alt="leftTop" width={19} height={17} />
+            <img src="/dice2.png" alt="leftTop" width={19} height={17} />
             <div className="text-main font-open font-medium text-xl ml-1">
               HIDICE
             </div>
           </div>
           <div className="flex items-end justify-end w-[270px] h-[240px] mt-[332px] ml-[21px]">
-            <Image src="/dice.png" alt="My Image" width={270} height={240} />
+            <img src="/dice.png" alt="My Image" width={270} height={240} />
           </div>
         </div>
         <div className="flex w-1/2 h-full justify-center items-center">
@@ -71,7 +70,7 @@ export default function Page(): JSX.Element {
             </div>
             <div className="w-full flex justify-between m-auto mt-[46px]">
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
-                <Image
+                <img
                   src="/Microsoft.png"
                   alt="Microsoft"
                   width={24}
@@ -79,31 +78,16 @@ export default function Page(): JSX.Element {
                 />
               </div>
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
-                <Image
-                  src="/google.png"
-                  alt="Microsoft"
-                  width={24}
-                  height={24}
-                />
+                <img src="/google.png" alt="Microsoft" width={24} height={24} />
               </div>
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
-                <Image
-                  src="/apple.png"
-                  alt="Microsoft"
-                  width={28}
-                  height={28}
-                />
+                <img src="/apple.png" alt="Microsoft" width={28} height={28} />
               </div>
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
-                <Image
-                  src="/github.png"
-                  alt="Microsoft"
-                  width={28}
-                  height={28}
-                />
+                <img src="/github.png" alt="Microsoft" width={28} height={28} />
               </div>
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
-                <Image
+                <img
                   src="/twitter.png"
                   alt="Microsoft"
                   width={24}

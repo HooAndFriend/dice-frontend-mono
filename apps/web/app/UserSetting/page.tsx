@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import {useState} from 'react';
-import Setting from './setting';
-import Team from './team';
-import Workspace from './workspace';
+import Image from "next/image";
+import { useState } from "react";
+import Setting from "./setting";
+import Team from "./team";
+import Workspace from "./workspace";
 
 export default function UserSetting(): JSX.Element {
-  const [state, setState] = useState('setting');
+  const [state, setState] = useState("setting");
 
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
@@ -15,7 +15,7 @@ export default function UserSetting(): JSX.Element {
         <div className="mt-[45px] ml-[60px] w-[1072px] h-[38px] flex justify-between">
           <div className="font-mosk font-bold text-[32px]">User Setting</div>
           <div>
-            <Image alt="X" src="/XButton.svg" width={32} height={32} />
+            <img alt="X" src="/XButton.svg" width={32} height={32} />
           </div>
         </div>
         <div className="flex w-[1072px] h-[601px] ml-[60px] mt-10 justify-between">
@@ -31,19 +31,19 @@ export default function UserSetting(): JSX.Element {
             </div>
             <div className="mt-[57px]">
               <div
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
-                  setState('setting');
+                  setState("setting");
                 }}
                 className={`mb-px w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
-                  state == 'setting'
-                    ? 'text-main bg-white'
-                    : 'bg-main text-white'
+                  state == "setting"
+                    ? "text-main bg-white"
+                    : "bg-main text-white"
                 }`}
               >
-                <Image
+                <img
                   className="ml-[18px] mr-5"
-                  src={state == 'setting' ? '/setting.svg' : 'settingW.svg'}
+                  src={state == "setting" ? "/setting.svg" : "settingW.svg"}
                   alt="setting"
                   width={24}
                   height={24}
@@ -51,17 +51,17 @@ export default function UserSetting(): JSX.Element {
                 Setting
               </div>
               <div
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
-                  setState('team');
+                  setState("team");
                 }}
                 className={`mb-px w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
-                  state == 'team' ? 'text-main bg-white' : 'bg-main text-white'
+                  state == "team" ? "text-main bg-white" : "bg-main text-white"
                 }`}
               >
-                <Image
+                <img
                   className="ml-[18px] mr-5"
-                  src={state == 'team' ? '/team.svg' : 'teamW.svg'}
+                  src={state == "team" ? "/team.svg" : "teamW.svg"}
                   alt="team"
                   width={24}
                   height={24}
@@ -69,20 +69,20 @@ export default function UserSetting(): JSX.Element {
                 Team
               </div>
               <div
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
-                  setState('workspace');
+                  setState("workspace");
                 }}
                 className={`w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
-                  state == 'workspace'
-                    ? 'text-main bg-white'
-                    : 'bg-main text-white'
+                  state == "workspace"
+                    ? "text-main bg-white"
+                    : "bg-main text-white"
                 }`}
               >
-                <Image
+                <img
                   className="ml-[18px] mr-5"
                   src={
-                    state == 'workspace' ? '/workspace.svg' : 'workspaceW.svg'
+                    state == "workspace" ? "/workspace.svg" : "workspaceW.svg"
                   }
                   alt="workspace"
                   width={24}
@@ -93,9 +93,9 @@ export default function UserSetting(): JSX.Element {
             </div>
           </div>
           <div className="w-[742px] h-[601px]">
-            {state == 'setting' ? <Setting /> : null}
-            {state == 'team' ? <Team /> : null}
-            {state == 'workspace' ? <Workspace /> : null}
+            {state == "setting" ? <Setting /> : null}
+            {state == "team" ? <Team /> : null}
+            {state == "workspace" ? <Workspace /> : null}
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import {useState} from 'react';
 import Setting from './setting';
+import Team from './team';
 
 export default function UserSetting(): JSX.Element {
   const [state, setState] = useState('setting');
@@ -92,6 +93,8 @@ export default function UserSetting(): JSX.Element {
           </div>
           <div className="w-[742px] h-[601px]">
             {state == 'setting' ? <Setting /> : null}
+            {state == 'team' ? <Team /> : null}
+            {state == 'workspace' ? '' : null}
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { CommonResponse } from "@/type/common";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-const axiosInstance = axios.create({
+export const client = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_URL + "/api",
 });
 
@@ -9,7 +9,7 @@ export const Get = async <T>(
   url: string,
   config?: AxiosRequestConfig
 ): Promise<AxiosResponse<CommonResponse<T>>> => {
-  const response = await axiosInstance.get(url, config);
+  const response = await client.get(url, config);
 
   return response;
 };
@@ -19,24 +19,22 @@ export const Post = async <T>(
   data?: any,
   config?: AxiosRequestConfig
 ): Promise<AxiosResponse<CommonResponse<T>>> => {
-  const response = await axiosInstance.post(url, data, config);
-
-  return response;
+  return await client.post(url, data, config);
 };
 
 export const Delete = async <T>(
   url: string,
   config?: AxiosRequestConfig
 ): Promise<AxiosResponse<CommonResponse<T>>> => {
-  const response = await axiosInstance.delete(url, config);
+  const response = await client.delete(url, config);
 
   return response;
 };
 
-axiosInstance.interceptors.request.use((config) => {
+client.interceptors.request.use((config) => {
   return config;
 });
 
-axiosInstance.interceptors.response.use((res) => {
+client.interceptors.response.use((res) => {
   return res;
 });

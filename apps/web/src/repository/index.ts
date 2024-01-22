@@ -2,7 +2,7 @@ import { CommonResponse } from "@/type/common";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 export const client = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_SERVER_URL + "/api",
+  baseURL: "/api",
 });
 
 export const Get = async <T>(

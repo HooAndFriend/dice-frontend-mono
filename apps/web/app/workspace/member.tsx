@@ -23,7 +23,10 @@ export default function Member() {
             </div>
           </div>
           <div className="flex mr-[15px]">
-            <select className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center">
+            <select
+              id="select1"
+              className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center"
+            >
               <option className="text-base font-spoqa" value="Admin">
                 Admin
               </option>
@@ -48,7 +51,10 @@ export default function Member() {
             </div>
           </div>
           <div className="flex mr-[15px]">
-            <select className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center">
+            <select
+              id="select1"
+              className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center"
+            >
               <option className="text-base font-spoqa" value="Admin">
                 Admin
               </option>
@@ -73,7 +79,10 @@ export default function Member() {
             </div>
           </div>
           <div className="flex mr-[15px]">
-            <select className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center">
+            <select
+              id="select1"
+              className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center"
+            >
               <option className="text-base font-spoqa" value="Admin">
                 Admin
               </option>
@@ -98,7 +107,10 @@ export default function Member() {
             </div>
           </div>
           <div className="flex mr-[15px]">
-            <select className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center">
+            <select
+              id="select1"
+              className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center"
+            >
               <option className="text-base font-spoqa" value="Admin">
                 Admin
               </option>

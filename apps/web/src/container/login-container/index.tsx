@@ -72,7 +72,7 @@ const LoginContainer = () => {
       onError: (error) => {
         if (error.response.data.statusCode === 404) {
           router.push(
-            `/social/signup?token=${socialLoginUser}&type=${socialLoginUser.type}`
+            `/social-signup?token=${socialLoginUser}&type=${socialLoginUser.type}`
           );
 
           return;

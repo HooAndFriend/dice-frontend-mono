@@ -17,21 +17,15 @@ import LoginContainerView from "./login-container";
 
 // ** Utils Imports
 import useInput from "@/hooks/useInput";
+import { firebaseLogin } from "@/utils/firebase-auth";
 
 // ** Type Imports
 import { DiceLoginParma, SocialLoginParams, SocialType } from "@/type/auth";
-import { firebaseLogin } from "@/utils/firebase-auth";
-import { useState } from "react";
 
 const LoginContainer = () => {
   const { data: loginUser, handleInput } = useInput<DiceLoginParma>({
     email: "",
     password: "",
-  });
-
-  const [socialLoginUser, setSocialLoginUser] = useState<SocialLoginParams>({
-    type: "",
-    token: "",
   });
 
   const setAuthState = useSetRecoilState(AuthState);
@@ -71,12 +65,12 @@ const LoginContainer = () => {
       },
       onError: (error) => {
         if (error.response.data.statusCode === 404) {
-          router.push(
-            `/social-signup?token=${socialLoginUser}&type=${socialLoginUser.type}`
-          );
+          const arg: SocialLoginParams = JSON.parse(error.config.data);
 
-          return;
+          router.push(`/social-signup?token=${arg.token}&type=${arg.type}`);
         }
+
+        return;
       },
     }
   );
@@ -85,7 +79,6 @@ const LoginContainer = () => {
     firebaseLogin(type).then((res) => {
       if (!res) return;
 
-      setSocialLoginUser({ token: res, type });
       socialLogin.trigger({ token: res, type });
     });
   };

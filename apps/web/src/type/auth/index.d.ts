@@ -8,6 +8,13 @@ export interface SocialLoginParams {
   token: string;
 }
 
+export interface SocialSignupParams {
+  type: SocialType;
+  token: string;
+  email: string;
+  nickname: string;
+}
+
 export type SocialType =
   | "GOOGLE"
   | "DICE"

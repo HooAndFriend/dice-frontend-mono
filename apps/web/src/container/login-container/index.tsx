@@ -21,6 +21,8 @@ import { firebaseLogin } from "@/utils/firebase-auth";
 
 // ** Type Imports
 import { DiceLoginParma, SocialLoginParams, SocialType } from "@/type/auth";
+import { DialogProvider, useDialog } from "../../context/DialogContext";
+import { useEffect } from "react";
 
 const LoginContainer = () => {
   const { data: loginUser, handleInput } = useInput<DiceLoginParma>({
@@ -29,6 +31,8 @@ const LoginContainer = () => {
   });
 
   const setAuthState = useSetRecoilState(AuthState);
+
+  const { handleOpen } = useDialog();
 
   const router = useRouter();
 
@@ -82,6 +86,10 @@ const LoginContainer = () => {
       socialLogin.trigger({ token: res, type });
     });
   };
+
+  useEffect(() => {
+    handleOpen();
+  }, []);
 
   return (
     <SwrProvider>

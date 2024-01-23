@@ -19,12 +19,19 @@ import LoginContainerView from "./login-container";
 import useInput from "@/hooks/useInput";
 
 // ** Type Imports
-import { DiceLoginParma } from "@/type/auth";
+import { DiceLoginParma, SocialLoginParams, SocialType } from "@/type/auth";
+import { firebaseLogin } from "@/utils/firebase-auth";
+import { useState } from "react";
 
 const LoginContainer = () => {
   const { data: loginUser, handleInput } = useInput<DiceLoginParma>({
     email: "",
     password: "",
+  });
+
+  const [socialLoginUser, setSocialLoginUser] = useState<SocialLoginParams>({
+    type: "",
+    token: "",
   });
 
   const setAuthState = useSetRecoilState(AuthState);
@@ -49,12 +56,50 @@ const LoginContainer = () => {
     }
   );
 
+  const socialLogin = useSWRMutation(
+    "SocialLogin",
+    () => Post<any>("/v1/auth/social", socialLoginUser),
+    {
+      onSuccess: ({ data }) => {
+        setAuthState({
+          accessToken: data.data.token.refreshToken,
+          refreshToken: data.data.token.refreshToken,
+          username: "",
+        });
+        router.push("/dashboard");
+      },
+      onError: (error) => {
+        if (error.data.statusCode === 404) {
+          router.push(
+            `/social/signup?token=${socialLoginUser}&type=${socialLoginUser.type}`
+          );
+
+          return;
+        }
+
+        console.log(error);
+      },
+    }
+  );
+
+  const handleSocialLogin = async (type: SocialType) => {
+    firebaseLogin(type).then((res) => {
+      if (!res) return;
+
+      console.log(res);
+      //   setSocialLoginUser({ token: res, type });
+
+      //   socialLogin.trigger();
+    });
+  };
+
   return (
     <SwrProvider>
       <LoginContainerView
         loginUser={loginUser}
         handleInput={handleInput}
-        login={login.trigger}
+        handleLogin={login.trigger}
+        handleSocialLogin={handleSocialLogin}
       />
     </SwrProvider>
   );

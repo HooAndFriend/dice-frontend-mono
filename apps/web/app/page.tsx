@@ -1,7 +1,7 @@
 // ** Component Imports
 import LoginContainer from "@/container/login-container";
 
-// ** Recoil Imports
+// ** Provider Imports
 import RocoilRootProvider from "@/components/provider/recoil-provider";
 import { DialogProvider } from "../src/context/DialogContext";
 

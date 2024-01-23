@@ -39,8 +39,8 @@ const LoginContainer = () => {
   const router = useRouter();
 
   const login = useSWRMutation(
-    "Login",
-    () => Post<any>("/v1/auth", loginUser),
+    "/v1/auth",
+    async (url: string) => await Post<any>(url, loginUser),
     {
       onSuccess: ({ data }) => {
         setAuthState({
@@ -57,10 +57,11 @@ const LoginContainer = () => {
   );
 
   const socialLogin = useSWRMutation(
-    "SocialLogin",
-    () => Post<any>("/v1/auth/social", socialLoginUser),
+    "/v1/auth/social",
+    async (url: string, { arg }: { arg: SocialLoginParams }) =>
+      await Post<any>(url, arg),
     {
-      onSuccess: ({ data }) => {
+      onSuccess: ({ data }: any) => {
         setAuthState({
           accessToken: data.data.token.refreshToken,
           refreshToken: data.data.token.refreshToken,
@@ -69,15 +70,13 @@ const LoginContainer = () => {
         router.push("/dashboard");
       },
       onError: (error) => {
-        if (error.data.statusCode === 404) {
+        if (error.response.data.statusCode === 404) {
           router.push(
             `/social/signup?token=${socialLoginUser}&type=${socialLoginUser.type}`
           );
 
           return;
         }
-
-        console.log(error);
       },
     }
   );
@@ -86,10 +85,8 @@ const LoginContainer = () => {
     firebaseLogin(type).then((res) => {
       if (!res) return;
 
-      console.log(res);
-      //   setSocialLoginUser({ token: res, type });
-
-      //   socialLogin.trigger();
+      setSocialLoginUser({ token: res, type });
+      socialLogin.trigger({ token: res, type });
     });
   };
 

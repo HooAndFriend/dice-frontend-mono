@@ -17,7 +17,13 @@
   font-style: normal;
 }
 
-select {
+#select1 {
   appearance: none;
   background: url('../public/svg/selectArrow.svg') no-repeat right 15px center;
+}
+
+#select2 {
+  appearance: none;
+  background: url('../public/svg/selectArrow2.svg') no-repeat right 9.28px
+    center;
 }

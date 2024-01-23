@@ -1,3 +1,6 @@
+import MenuItem from "@/components/menu-item";
+import { MenuList } from "@/constants";
+
 const DashboardRayout = ({
   children,
 }: {
@@ -25,17 +28,11 @@ const DashboardRayout = ({
         </div>
       </div>
       <div className="flex flex-1">
-        <div className="w-[200px] border-r-2 border-[#EBEBEC] flex justify-center">
+        <div className="w-[70px] border-r-2 border-[#EBEBEC] flex justify-center">
           <div>
-            <div>
-              <h1>Dashboard</h1>
-            </div>
-            <div>
-              <h1>Ticket</h1>
-            </div>
-            <div>
-              <h1>QA</h1>
-            </div>
+            {MenuList.map((item) => (
+              <MenuItem key={item.id} image={item.image} alt={item.image} />
+            ))}
           </div>
         </div>
 

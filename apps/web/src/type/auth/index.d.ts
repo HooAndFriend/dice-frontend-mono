@@ -14,4 +14,5 @@ export type SocialType =
   | "APPLE"
   | "GITHUB"
   | "MICROSOFT"
+  | "TWITTER"
   | "";

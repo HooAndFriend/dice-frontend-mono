@@ -101,6 +101,7 @@ const LoginContainerView = ({
                   alt="Microsoft"
                   width={24}
                   height={24}
+                  onClick={() => handleSocialLogin("MICROSOFT")}
                 />
               </div>
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
@@ -118,6 +119,7 @@ const LoginContainerView = ({
                   alt="apple"
                   width={28}
                   height={28}
+                  // onClick={() => handleSocialLogin("APPLE")}
                 />
               </div>
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
@@ -126,6 +128,7 @@ const LoginContainerView = ({
                   alt="github"
                   width={28}
                   height={28}
+                  onClick={() => handleSocialLogin("GITHUB")}
                 />
               </div>
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
@@ -134,6 +137,7 @@ const LoginContainerView = ({
                   alt="twitter"
                   width={24}
                   height={19.83}
+                  onClick={() => handleSocialLogin("TWITTER")}
                 />
               </div>
             </div>

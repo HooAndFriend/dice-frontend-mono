@@ -92,7 +92,7 @@ const LoginContainerView = ({
               </div>
             </div>
             <div className="flex justify-end text-sm underline w-full text-[#676767] mt-4 mr-12 font-spoqa font-medium">
-              <Link href="/SignUp">HIDICE Signup</Link>
+              <Link href="/signup">HIDICE Signup</Link>
             </div>
             <div className="w-full flex justify-between m-auto mt-[46px]">
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">

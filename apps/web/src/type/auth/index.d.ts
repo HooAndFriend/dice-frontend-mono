@@ -8,6 +8,12 @@ export interface SocialLoginParams {
   token: string;
 }
 
+export interface DiceSignupParams {
+  email: string;
+  password: string;
+  nickname: string;
+}
+
 export interface SocialSignupParams {
   type: SocialType;
   token: string;

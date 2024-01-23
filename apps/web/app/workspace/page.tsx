@@ -3,6 +3,7 @@
 import {useState} from 'react';
 import Setting from './setting';
 import Member from './member';
+import AddFunctions from './addfunctions';
 
 export default function WorkspaceSetting(): JSX.Element {
   const [state, setState] = useState('setting');
@@ -123,6 +124,7 @@ export default function WorkspaceSetting(): JSX.Element {
           <div className="w-[742px] h-[601px]">
             {state == 'setting' ? <Setting /> : null}
             {state == 'member' ? <Member /> : null}
+            {state == 'addfunctions' ? <AddFunctions /> : null}
           </div>
         </div>
       </div>

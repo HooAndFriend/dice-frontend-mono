@@ -4,12 +4,12 @@ export default function Setting() {
       <label className="font-spoqa text-xl font-bold">Profile</label>
       <div className="mt-[14px] relative w-[110px] h-[110px]">
         <img
-          src="/dice.png"
+          src="images/dice.png"
           alt="Sample Iamge"
           className="w-[104px] h-[104px] rounded-[20px] bg-purple-200 absolute"
         />
         <div className="w-[25px] h-[25px] bg-[#EBEBEC] rounded-[5px] absolute top-[85px] left-[85px] flex justify-center items-center">
-          <img src="/edit.svg" alt="edit" width={15} height={15} />
+          <img src="svg/edit.svg" alt="edit" width={15} height={15} />
         </div>
       </div>
       <div className="mt-6">

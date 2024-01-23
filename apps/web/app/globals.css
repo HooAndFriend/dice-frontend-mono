@@ -16,3 +16,8 @@
   font-weight: normal;
   font-style: normal;
 }
+
+select {
+  appearance: none;
+  background: url('../public/svg/selectArrow.svg') no-repeat right 15px center;
+}

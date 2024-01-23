@@ -1,8 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import {useState} from 'react';
 import Setting from './setting';
+import Member from './member';
 
 export default function WorkspaceSetting(): JSX.Element {
   const [state, setState] = useState('setting');
@@ -15,13 +15,13 @@ export default function WorkspaceSetting(): JSX.Element {
             Workspace Setting
           </div>
           <div>
-            <Image alt="X" src="/XButton.svg" width={32} height={32} />
+            <img alt="X" src="/svg/XButton.svg" width={32} height={32} />
           </div>
         </div>
         <div className="flex w-[1072px] h-[601px] ml-[60px] mt-[41px] justify-between">
           <div className="bg-main w-[274px] h-[601px] rounded-tr-[20px] rounded-b-[20px] flex flex-col items-center">
             <img
-              src="/dice.png"
+              src="images/dice.png"
               alt="Sample Image"
               className="w-[91px] h-[91px] object-cover rounded-full mt-[50px]"
             />
@@ -31,22 +31,22 @@ export default function WorkspaceSetting(): JSX.Element {
             </div>
             <div className="w-[187px] h-[29.926px] mt-[60px] flex relative">
               <img
-                src="/dice.png"
+                src="images/dice.png"
                 alt="Sample Image"
                 className="w-[29.204px] h-[29.926px] rounded-full"
               />
               <img
-                src="/dice.png"
+                src="images/dice.png"
                 alt="Sample Image"
                 className="w-[29.204px] h-[29.926px] rounded-full absolute left-[24.21px]"
               />
               <img
-                src="/dice.png"
+                src="images/dice.png"
                 alt="Sample Image"
                 className="w-[29.204px] h-[29.926px] rounded-full absolute left-[48.41px]"
               />
               <img
-                src="/dot.svg"
+                src="svg/dot.svg"
                 alt="Sample Image"
                 className="bg-white w-[29.204px] h-[29.926px] rounded-full absolute left-[72.62px]"
               />
@@ -63,9 +63,11 @@ export default function WorkspaceSetting(): JSX.Element {
                     : 'bg-main text-white'
                 }`}
               >
-                <Image
+                <img
                   className="ml-[18px] mr-5"
-                  src={state == 'setting' ? '/setting.svg' : 'settingW.svg'}
+                  src={
+                    state == 'setting' ? 'svg/setting.svg' : 'svg/settingW.svg'
+                  }
                   alt="setting"
                   width={24}
                   height={24}
@@ -75,16 +77,18 @@ export default function WorkspaceSetting(): JSX.Element {
               <div
                 onClick={e => {
                   e.preventDefault();
-                  setState('team');
+                  setState('member');
                 }}
                 className={`mb-[15px] w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
-                  state == 'team' ? 'text-main bg-white' : 'bg-main text-white'
+                  state == 'member'
+                    ? 'text-main bg-white'
+                    : 'bg-main text-white'
                 }`}
               >
-                <Image
+                <img
                   className="ml-[18px] mr-5"
-                  src={state == 'team' ? '/team.svg' : 'teamW.svg'}
-                  alt="team"
+                  src={state == 'member' ? 'svg/team.svg' : 'svg/teamW.svg'}
+                  alt="member"
                   width={24}
                   height={24}
                 />
@@ -93,20 +97,22 @@ export default function WorkspaceSetting(): JSX.Element {
               <div
                 onClick={e => {
                   e.preventDefault();
-                  setState('workspace');
+                  setState('addfunctions');
                 }}
                 className={`w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
-                  state == 'workspace'
+                  state == 'addfunctions'
                     ? 'text-main bg-white'
                     : 'bg-main text-white'
                 }`}
               >
-                <Image
+                <img
                   className="ml-[18px] mr-5"
                   src={
-                    state == 'workspace' ? '/workspace.svg' : 'workspaceW.svg'
+                    state == 'addfunctions'
+                      ? 'svg/workspace.svg'
+                      : 'svg/workspaceW.svg'
                   }
-                  alt="workspace"
+                  alt="addfunctions"
                   width={24}
                   height={24}
                 />
@@ -116,6 +122,7 @@ export default function WorkspaceSetting(): JSX.Element {
           </div>
           <div className="w-[742px] h-[601px]">
             {state == 'setting' ? <Setting /> : null}
+            {state == 'member' ? <Member /> : null}
           </div>
         </div>
       </div>

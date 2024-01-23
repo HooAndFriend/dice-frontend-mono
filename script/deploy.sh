@@ -3,7 +3,7 @@ if [ $# -eq 0 ]; then
     exit 1
 elif [ $1 = "web" ]; then
     scp -r ./html/www/ dice:~/dice/html/www/
-    ssh -t dice "sh ./dice/restart.sh nginx"
+    ssh -t dice "cd ~/dice && sh restart.sh nginx"
 else
     echo "인자가 잘못되었습니다."
     exit 1

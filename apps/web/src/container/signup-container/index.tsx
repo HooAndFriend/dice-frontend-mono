@@ -24,6 +24,9 @@ import useInput from "@/hooks/useInput";
 // ** Type Imports
 import { DiceSignupParams } from "@/type/auth";
 
+// ** Context Imports
+import { useDialog } from "@/context/DialogContext";
+
 const SignupContainer = () => {
   const { data: signupUser, handleInput } = useInput<DiceSignupParams>({
     email: "",
@@ -35,6 +38,8 @@ const SignupContainer = () => {
 
   const setAuthState = useSetRecoilState(AuthState);
 
+  const { handleOpen } = useDialog();
+
   const router = useRouter();
 
   const handleCancel = () => {
@@ -43,6 +48,53 @@ const SignupContainer = () => {
 
   const handlePasswordCheck = (e: ChangeEvent<HTMLInputElement>) => {
     setPasswordCheck(e.target.value);
+  };
+
+  const handleJoin = () => {
+    if (signupUser.email === "") {
+      handleOpen({
+        title: "Error",
+        message: "Enter Email",
+        logLevel: "warn",
+        buttonText: "Close",
+      });
+
+      return;
+    }
+
+    if (signupUser.password === "") {
+      handleOpen({
+        title: "Error",
+        message: "Enter Password",
+        logLevel: "warn",
+        buttonText: "Close",
+      });
+
+      return;
+    }
+
+    if (signupUser.password !== passwordCheck) {
+      handleOpen({
+        title: "Error",
+        message: "Check Password",
+        logLevel: "warn",
+        buttonText: "Close",
+      });
+
+      return;
+    }
+
+    if (signupUser.nickname === "") {
+      handleOpen({
+        title: "Error",
+        message: "Enter Nickname",
+        logLevel: "warn",
+        buttonText: "Close",
+      });
+      return;
+    }
+
+    signup.trigger();
   };
 
   const signup = useSWRMutation(
@@ -58,7 +110,12 @@ const SignupContainer = () => {
         router.push("/dashboard");
       },
       onError: (error) => {
-        console.log(error);
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+        });
       },
     }
   );
@@ -70,7 +127,7 @@ const SignupContainer = () => {
         passwordCheck={passwordCheck}
         handlePasswordCheck={handlePasswordCheck}
         handleInput={handleInput}
-        handleJoin={signup.trigger}
+        handleJoin={handleJoin}
         handleCancel={handleCancel}
       />
     </SwrProvider>

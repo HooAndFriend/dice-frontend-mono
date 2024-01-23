@@ -21,6 +21,9 @@ import useInput from "@/hooks/useInput";
 // ** Type Imports
 import { SocialSignupParams } from "@/type/auth";
 
+// ** Context Imports
+import { useDialog } from "@/context/DialogContext";
+
 const SocialSignupContainer = () => {
   const { data: signupUser, handleInput } = useInput<SocialSignupParams>({
     email: "",
@@ -31,11 +34,38 @@ const SocialSignupContainer = () => {
 
   const setAuthState = useSetRecoilState(AuthState);
 
+  const { handleOpen } = useDialog();
+
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const handleCancel = () => {
     router.push("/");
+  };
+
+  const handleJoin = () => {
+    if (signupUser.email === "") {
+      handleOpen({
+        title: "Error",
+        message: "Enter Email",
+        logLevel: "warn",
+        buttonText: "Close",
+      });
+
+      return;
+    }
+
+    if (signupUser.nickname === "") {
+      handleOpen({
+        title: "Error",
+        message: "Enter Nickname",
+        logLevel: "warn",
+        buttonText: "Close",
+      });
+      return;
+    }
+
+    socialSignup.trigger();
   };
 
   const socialSignup = useSWRMutation(
@@ -56,7 +86,12 @@ const SocialSignupContainer = () => {
         router.push("/dashboard");
       },
       onError: (error) => {
-        console.log(error);
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+        });
       },
     }
   );
@@ -66,7 +101,7 @@ const SocialSignupContainer = () => {
       <SocialSignupContainerView
         handleInput={handleInput}
         signupUser={signupUser}
-        handleJoin={socialSignup.trigger}
+        handleJoin={handleJoin}
         handleCancel={handleCancel}
       />
     </SwrProvider>

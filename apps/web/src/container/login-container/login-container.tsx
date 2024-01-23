@@ -5,15 +5,21 @@ import Link from "next/link";
 import { ChangeEvent } from "react";
 
 // ** Type Imports
-import { DiceLoginParma } from "@/type/auth";
+import { DiceLoginParma, SocialType } from "@/type/auth";
 
 interface PropsType {
   loginUser: DiceLoginParma;
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  login: () => void;
+  handleLogin: () => void;
+  handleSocialLogin: (type: SocialType) => void;
 }
 
-const LoginContainerView = ({ loginUser, handleInput, login }: PropsType) => {
+const LoginContainerView = ({
+  loginUser,
+  handleInput,
+  handleLogin,
+  handleSocialLogin,
+}: PropsType) => {
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
       <div className="bg-white w-[900px] h-[613px] rounded-2xl flex shadow-md">
@@ -79,7 +85,7 @@ const LoginContainerView = ({ loginUser, handleInput, login }: PropsType) => {
               <div className="w-full mt-12">
                 <button
                   className="w-full bg-main text-white rounded-xl h-[55px] text-lg font-bold font-spoqa"
-                  onClick={login}
+                  onClick={handleLogin}
                 >
                   LOGIN
                 </button>
@@ -95,38 +101,43 @@ const LoginContainerView = ({ loginUser, handleInput, login }: PropsType) => {
                   alt="Microsoft"
                   width={24}
                   height={24}
+                  onClick={() => handleSocialLogin("MICROSOFT")}
                 />
               </div>
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
                 <img
                   src="/images/google.png"
-                  alt="Microsoft"
+                  alt="google"
                   width={24}
                   height={24}
+                  onClick={() => handleSocialLogin("GOOGLE")}
                 />
               </div>
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
                 <img
                   src="/images/apple.png"
-                  alt="Microsoft"
+                  alt="apple"
                   width={28}
                   height={28}
+                  // onClick={() => handleSocialLogin("APPLE")}
                 />
               </div>
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
                 <img
                   src="/images/github.png"
-                  alt="Microsoft"
+                  alt="github"
                   width={28}
                   height={28}
+                  onClick={() => handleSocialLogin("GITHUB")}
                 />
               </div>
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">
                 <img
                   src="/images/twitter.png"
-                  alt="Microsoft"
+                  alt="twitter"
                   width={24}
                   height={19.83}
+                  onClick={() => handleSocialLogin("TWITTER")}
                 />
               </div>
             </div>

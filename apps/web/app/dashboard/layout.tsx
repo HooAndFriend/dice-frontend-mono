@@ -1,3 +1,7 @@
+// ** Next Imports
+import Link from "next/link";
+
+// ** Component Imports
 import MenuItem from "@/components/menu-item";
 import TeamPopover from "@/components/popover/team-popover";
 import WorkspacePopover from "@/components/popover/workspace-popover";
@@ -12,13 +16,15 @@ const DashboardRayout = ({
   return (
     <div className="flex flex-col h-screen">
       <div className="h-16 border-b-2 border-[#EBEBEC] flex items-center justify-between">
-        <img
-          src="/images/logo.png"
-          width="110px"
-          height="30px"
-          alt="logo"
-          className="ml-[30px]"
-        />
+        <Link href="/dashboard">
+          <img
+            src="/images/logo.png"
+            width="110px"
+            height="30px"
+            alt="logo"
+            className="ml-[30px]"
+          />
+        </Link>
         <div className="flex items-center mr-[30px]">
           <ProfileBox image="/images/profile.jpg" alt="profile" />
           <h2>김인후</h2>
@@ -29,7 +35,12 @@ const DashboardRayout = ({
           <div className="flex justify-center h-4/5">
             <div>
               {MenuList.map((item) => (
-                <MenuItem key={item.id} image={item.image} alt={item.image} />
+                <MenuItem
+                  key={item.id}
+                  image={item.image}
+                  alt={item.image}
+                  link={item.link}
+                />
               ))}
             </div>
           </div>

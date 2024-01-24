@@ -1,6 +1,6 @@
 export const MenuList = [
-  { id: 1, image: "/images/dashboard.png" },
-  { id: 2, image: "/images/ticket.png" },
-  { id: 3, image: "/images/qa.png" },
-  { id: 4, image: "/images/setting.png" },
+  { id: 1, link: "/dashboard", image: "/images/dashboard.png" },
+  { id: 2, link: "/dashboard/ticket", image: "/images/ticket.png" },
+  { id: 3, link: "/dashboard/qa", image: "/images/qa.png" },
+  { id: 4, link: "/dashboard/setting", image: "/images/setting.png" },
 ];

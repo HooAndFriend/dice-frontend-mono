@@ -1,4 +1,5 @@
 import MenuItem from "@/components/menu-item";
+import TeamPopover from "@/components/popover/team-popover";
 import ProfileBox from "@/components/profile-box";
 import { MenuList } from "@/constants";
 
@@ -33,7 +34,7 @@ const DashboardRayout = ({
           </div>
           <div className="flex h-1/5">
             <div className="flex flex-grow items-end justify-center pb-3">
-              <ProfileBox image="/images/profile.jpg" alt="profile" />
+              <TeamPopover />
             </div>
           </div>
         </div>

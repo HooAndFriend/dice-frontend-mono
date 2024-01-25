@@ -3,6 +3,9 @@
 // ** Next Imports
 import { useRouter, useSearchParams } from "next/navigation";
 
+// ** React Imports
+import { KeyboardEvent } from "react";
+
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
 import { Post } from "@/repository";
@@ -116,6 +119,12 @@ const LoginContainer = () => {
     });
   };
 
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      login.trigger();
+    }
+  };
+
   return (
     <SwrProvider>
       <LoginContainerView
@@ -124,6 +133,7 @@ const LoginContainer = () => {
         handleLogin={login.trigger}
         handleSocialLogin={handleSocialLogin}
         handleSignup={handleSignup}
+        handleEnter={handleEnter}
       />
     </SwrProvider>
   );

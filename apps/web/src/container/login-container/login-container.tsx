@@ -1,5 +1,5 @@
 // ** Reacat Imports
-import { ChangeEvent } from "react";
+import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Type Imports
 import { DiceLoginParma, SocialType } from "@/type/auth";
@@ -10,6 +10,7 @@ interface PropsType {
   handleLogin: () => void;
   handleSignup: () => void;
   handleSocialLogin: (type: SocialType) => void;
+  handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const LoginContainerView = ({
@@ -18,6 +19,7 @@ const LoginContainerView = ({
   handleLogin,
   handleSocialLogin,
   handleSignup,
+  handleEnter,
 }: PropsType) => {
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
@@ -76,6 +78,7 @@ const LoginContainerView = ({
                   onChange={handleInput}
                   name="password"
                   value={loginUser.password}
+                  onKeyDown={handleEnter}
                   required
                 />
               </div>

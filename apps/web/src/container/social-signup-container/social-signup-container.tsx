@@ -1,5 +1,5 @@
 // ** Reacat Imports
-import { ChangeEvent } from "react";
+import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Type Imports
 import { SocialSignupParams } from "@/type/auth";
@@ -9,6 +9,7 @@ interface PropsType {
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
   handleJoin: () => void;
   handleCancel: () => void;
+  handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const SocialSignupContainerView = ({
@@ -16,6 +17,7 @@ const SocialSignupContainerView = ({
   signupUser,
   handleJoin,
   handleCancel,
+  handleEnter,
 }: PropsType) => {
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
@@ -63,6 +65,7 @@ const SocialSignupContainerView = ({
               name="email"
               value={signupUser.email}
               onChange={handleInput}
+              onKeyDown={handleEnter}
               required
             />
           </div>

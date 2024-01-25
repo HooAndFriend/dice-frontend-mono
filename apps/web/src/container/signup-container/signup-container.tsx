@@ -1,5 +1,5 @@
 // ** Reacat Imports
-import { ChangeEvent } from "react";
+import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Type Imports
 import { DiceSignupParams } from "@/type/auth";
@@ -11,6 +11,7 @@ interface PropsType {
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
   handleJoin: () => void;
   handleCancel: () => void;
+  handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const SignupContainerView = ({
@@ -20,6 +21,7 @@ const SignupContainerView = ({
   handleInput,
   handleJoin,
   handleCancel,
+  handleEnter,
 }: PropsType) => {
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
@@ -94,6 +96,7 @@ const SignupContainerView = ({
               value={signupUser.nickname}
               onChange={handleInput}
               name="nickname"
+              onKeyDown={handleEnter}
               required
             />
           </div>

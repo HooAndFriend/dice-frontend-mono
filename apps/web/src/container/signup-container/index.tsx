@@ -4,7 +4,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 
 // ** React Imports
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useState } from "react";
 
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
@@ -125,6 +125,12 @@ const SignupContainer = () => {
     }
   );
 
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleJoin();
+    }
+  };
+
   return (
     <SwrProvider>
       <SignupContainerView
@@ -134,6 +140,7 @@ const SignupContainer = () => {
         handleInput={handleInput}
         handleJoin={handleJoin}
         handleCancel={handleCancel}
+        handleEnter={handleEnter}
       />
     </SwrProvider>
   );

@@ -1,6 +1,3 @@
-// ** Next Imports
-import Link from "next/link";
-
 // ** Reacat Imports
 import { ChangeEvent } from "react";
 
@@ -11,6 +8,7 @@ interface PropsType {
   loginUser: DiceLoginParma;
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
   handleLogin: () => void;
+  handleSignup: () => void;
   handleSocialLogin: (type: SocialType) => void;
 }
 
@@ -19,6 +17,7 @@ const LoginContainerView = ({
   handleInput,
   handleLogin,
   handleSocialLogin,
+  handleSignup,
 }: PropsType) => {
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
@@ -91,8 +90,11 @@ const LoginContainerView = ({
                 </button>
               </div>
             </div>
-            <div className="flex justify-end text-sm underline w-full text-[#676767] mt-4 mr-12 font-spoqa font-medium">
-              <Link href="/signup">HIDICE Signup</Link>
+            <div
+              className="flex justify-end text-sm underline w-full text-[#676767] mt-4 mr-12 font-spoqa font-medium"
+              onClick={handleSignup}
+            >
+              HIDICE Signup
             </div>
             <div className="w-full flex justify-between m-auto mt-[46px]">
               <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full shadow-md">

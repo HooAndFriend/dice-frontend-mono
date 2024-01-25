@@ -49,14 +49,6 @@ const LoginContainer = () => {
           username: "",
         });
 
-        // ** 팀 초대를 받은 경우
-        const uuid = searchParams.get("uuid");
-        if (uuid) {
-          router.push(`/dashboard?uuid=${uuid}`);
-
-          return;
-        }
-
         router.push("/dashboard");
       },
       onError: (error) => {
@@ -81,11 +73,21 @@ const LoginContainer = () => {
           refreshToken: data.data.token.refreshToken,
           username: "",
         });
+
         router.push("/dashboard");
       },
       onError: (error) => {
         if (error.response.data.statusCode === 404) {
           const arg: SocialLoginParams = JSON.parse(error.config.data);
+
+          const uuid = searchParams.get("uuid");
+          if (uuid) {
+            router.push(
+              `/social-signup?token=${arg.token}&type=${arg.type}&uuid=${uuid}`
+            );
+
+            return;
+          }
 
           router.push(`/social-signup?token=${arg.token}&type=${arg.type}`);
         }
@@ -94,6 +96,17 @@ const LoginContainer = () => {
       },
     }
   );
+
+  const handleSignup = () => {
+    const uuid = searchParams.get("uuid");
+    if (uuid) {
+      router.push(`/signup?uuid=${uuid}`);
+
+      return;
+    }
+
+    router.push("/signup");
+  };
 
   const handleSocialLogin = async (type: SocialType) => {
     firebaseLogin(type).then((res) => {
@@ -110,6 +123,7 @@ const LoginContainer = () => {
         handleInput={handleInput}
         handleLogin={login.trigger}
         handleSocialLogin={handleSocialLogin}
+        handleSignup={handleSignup}
       />
     </SwrProvider>
   );

@@ -1,8 +1,8 @@
-export default function AddMember({isOpen}) {
+export default function AddMember({ isOpen }) {
   return (
     <div
       className={`bg-black bg-opacity-25 w-full h-screen font-spoqa flex justify-center items-center fixed top-0 left-0 z-50 ${
-        isOpen ? '' : 'hidden'
+        isOpen ? "" : "hidden"
       }`}
     >
       <div className="w-[617px] h-[171px] rounded-[20px] bg-white pl-[34px] mr-[30px]">

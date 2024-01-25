@@ -97,7 +97,7 @@ const SocialSignupContainer = () => {
           buttonText: "Close",
         });
       },
-    }
+    },
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {

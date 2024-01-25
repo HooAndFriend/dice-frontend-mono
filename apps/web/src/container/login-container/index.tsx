@@ -62,7 +62,7 @@ const LoginContainer = () => {
           buttonText: "Close",
         });
       },
-    }
+    },
   );
 
   const socialLogin = useSWRMutation(
@@ -86,7 +86,7 @@ const LoginContainer = () => {
           const uuid = searchParams.get("uuid");
           if (uuid) {
             router.push(
-              `/social-signup?token=${arg.token}&type=${arg.type}&uuid=${uuid}`
+              `/social-signup?token=${arg.token}&type=${arg.type}&uuid=${uuid}`,
             );
 
             return;
@@ -97,7 +97,7 @@ const LoginContainer = () => {
 
         return;
       },
-    }
+    },
   );
 
   const handleSignup = () => {

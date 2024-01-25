@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import {useState} from 'react';
-import Setting from './setting';
-import Member from './member';
-import AddFunctions from './addfunctions';
-import AddMember from './addMember';
+import { useState } from "react";
+import Setting from "./setting";
+import Member from "./member";
+import AddFunctions from "./addfunctions";
+import AddMember from "./addMember";
 
 export default function WorkspaceSetting(): JSX.Element {
-  const [state, setState] = useState('setting');
+  const [state, setState] = useState("setting");
   const isOpen = false; // true로 변경시 모달 확인 가능
   return (
     <>
@@ -57,22 +57,22 @@ export default function WorkspaceSetting(): JSX.Element {
               </div>
               <div className="mt-[35.07px]">
                 <div
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
-                    setState('setting');
+                    setState("setting");
                   }}
                   className={`mb-[15px] w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
-                    state == 'setting'
-                      ? 'text-main bg-white'
-                      : 'bg-main text-white'
+                    state == "setting"
+                      ? "text-main bg-white"
+                      : "bg-main text-white"
                   }`}
                 >
                   <img
                     className="ml-[18px] mr-5"
                     src={
-                      state == 'setting'
-                        ? 'svg/setting.svg'
-                        : 'svg/settingW.svg'
+                      state == "setting"
+                        ? "svg/setting.svg"
+                        : "svg/settingW.svg"
                     }
                     alt="setting"
                     width={24}
@@ -81,19 +81,19 @@ export default function WorkspaceSetting(): JSX.Element {
                   Setting
                 </div>
                 <div
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
-                    setState('member');
+                    setState("member");
                   }}
                   className={`mb-[15px] w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
-                    state == 'member'
-                      ? 'text-main bg-white'
-                      : 'bg-main text-white'
+                    state == "member"
+                      ? "text-main bg-white"
+                      : "bg-main text-white"
                   }`}
                 >
                   <img
                     className="ml-[18px] mr-5"
-                    src={state == 'member' ? 'svg/team.svg' : 'svg/teamW.svg'}
+                    src={state == "member" ? "svg/team.svg" : "svg/teamW.svg"}
                     alt="member"
                     width={24}
                     height={24}
@@ -101,22 +101,22 @@ export default function WorkspaceSetting(): JSX.Element {
                   Member
                 </div>
                 <div
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
-                    setState('addfunctions');
+                    setState("addfunctions");
                   }}
                   className={`w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
-                    state == 'addfunctions'
-                      ? 'text-main bg-white'
-                      : 'bg-main text-white'
+                    state == "addfunctions"
+                      ? "text-main bg-white"
+                      : "bg-main text-white"
                   }`}
                 >
                   <img
                     className="ml-[18px] mr-5"
                     src={
-                      state == 'addfunctions'
-                        ? 'svg/workspace.svg'
-                        : 'svg/workspaceW.svg'
+                      state == "addfunctions"
+                        ? "svg/workspace.svg"
+                        : "svg/workspaceW.svg"
                     }
                     alt="addfunctions"
                     width={24}
@@ -127,9 +127,9 @@ export default function WorkspaceSetting(): JSX.Element {
               </div>
             </div>
             <div className="w-[742px] h-[601px]">
-              {state == 'setting' ? <Setting /> : null}
-              {state == 'member' ? <Member /> : null}
-              {state == 'addfunctions' ? <AddFunctions /> : null}
+              {state == "setting" ? <Setting /> : null}
+              {state == "member" ? <Member /> : null}
+              {state == "addfunctions" ? <AddFunctions /> : null}
             </div>
           </div>
         </div>

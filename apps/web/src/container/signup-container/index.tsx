@@ -122,7 +122,7 @@ const SignupContainer = () => {
           buttonText: "Close",
         });
       },
-    }
+    },
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {

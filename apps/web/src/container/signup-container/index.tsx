@@ -1,7 +1,7 @@
 "use client";
 
 // ** Next Imports
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // ** React Imports
 import { ChangeEvent, useState } from "react";
@@ -41,6 +41,7 @@ const SignupContainer = () => {
   const { handleOpen } = useDialog();
 
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleCancel = () => {
     router.push("/");
@@ -99,7 +100,11 @@ const SignupContainer = () => {
 
   const signup = useSWRMutation(
     "/v1/auth/user",
-    async (url: string) => await Post<any>(url, signupUser),
+    async (url: string) =>
+      await Post<any>(url, {
+        ...signupUser,
+        uuid: searchParams.get("uuid") ? searchParams.get("uuid") : null,
+      }),
     {
       onSuccess: ({ data }) => {
         setAuthState({

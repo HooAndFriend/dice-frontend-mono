@@ -1,5 +1,8 @@
+// ** Component Imports
+import DashboardContainer from "@/container/dashboard-container";
+
 const DashboardPage = () => {
-  return <h1></h1>;
+  return <DashboardContainer />;
 };
 
 export default DashboardPage;

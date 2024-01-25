@@ -1,7 +1,7 @@
 "use client";
 
 // ** Next Imports
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
@@ -36,6 +36,7 @@ const LoginContainer = () => {
   const { handleOpen } = useDialog();
 
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const login = useSWRMutation(
     "/v1/auth",
@@ -47,6 +48,15 @@ const LoginContainer = () => {
           refreshToken: data.data.token.refreshToken,
           username: "",
         });
+
+        // ** 팀 초대를 받은 경우
+        const uuid = searchParams.get("uuid");
+        if (uuid) {
+          router.push(`/dashboard?uuid=${uuid}`);
+
+          return;
+        }
+
         router.push("/dashboard");
       },
       onError: (error) => {

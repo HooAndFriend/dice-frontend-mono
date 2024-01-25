@@ -75,6 +75,7 @@ const SocialSignupContainer = () => {
         ...signupUser,
         token: searchParams.get("token"),
         type: searchParams.get("type"),
+        uuid: searchParams.get("uuid") ? searchParams.get("uuid") : null,
       }),
     {
       onSuccess: ({ data }) => {

@@ -1,20 +1,16 @@
 'use client';
 
+import Setting from '@/components/teamsetting/setting';
 import {useState} from 'react';
-import Setting from '@/components/usersetting/setting';
-import Team from '@/components/usersetting/team';
-import Workspace from '@/components/usersetting/workspace';
 
-interface PropsType {}
-
-const UserSettingContainerView = ({}: PropsType) => {
+const TeamSettingContainerView = () => {
   const [state, setState] = useState('setting');
 
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
       <div className="bg-white w-[1192px] h-[769px] rounded-2xl shadow-md">
         <div className="mt-[45px] ml-[60px] w-[1072px] h-[38px] flex justify-between">
-          <div className="font-mosk font-bold text-[32px]">User Setting</div>
+          <div className="font-mosk font-bold text-[32px]">Team Setting</div>
           <div>
             <img alt="X" src="/svg/XButton.svg" width={32} height={32} />
           </div>
@@ -58,27 +54,29 @@ const UserSettingContainerView = ({}: PropsType) => {
               <div
                 onClick={e => {
                   e.preventDefault();
-                  setState('team');
+                  setState('member');
                 }}
                 className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-base font-bold font-spoqa ${
-                  state == 'team' ? 'text-main bg-white' : 'bg-main text-white'
+                  state == 'member'
+                    ? 'text-main bg-white'
+                    : 'bg-main text-white'
                 }`}
               >
                 <img
                   className="ml-[18px] mr-5"
-                  src={state == 'team' ? '/svg/team.svg' : '/svg/teamW.svg'}
-                  alt="team"
+                  src={state == 'member' ? '/svg/team.svg' : '/svg/teamW.svg'}
+                  alt="member"
                   width={24}
                   height={24}
                 />
-                Team
+                Member
               </div>
               <div
                 onClick={e => {
                   e.preventDefault();
                   setState('workspace');
                 }}
-                className={`w-[205px] h-[40 px] rounded-full flex items-center text-base font-bold font-spoqa ${
+                className={`w-[205px] h-[40px] rounded-full flex items-center text-base font-bold font-spoqa ${
                   state == 'workspace'
                     ? 'text-main bg-white'
                     : 'bg-main text-white'
@@ -95,14 +93,12 @@ const UserSettingContainerView = ({}: PropsType) => {
                   width={24}
                   height={24}
                 />
-                Workspace
+                WorkSpace
               </div>
             </div>
           </div>
           <div className="w-[742px] h-[601px]">
             {state == 'setting' ? <Setting /> : null}
-            {state == 'team' ? <Team /> : null}
-            {state == 'workspace' ? <Workspace /> : null}
           </div>
         </div>
       </div>
@@ -110,4 +106,4 @@ const UserSettingContainerView = ({}: PropsType) => {
   );
 };
 
-export default UserSettingContainerView;
+export default TeamSettingContainerView;

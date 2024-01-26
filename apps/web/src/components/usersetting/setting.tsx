@@ -13,7 +13,7 @@ export default function Setting() {
         </div>
       </div>
       <div className="mt-5">
-        <label className="font-spoqa text-xl font-bold">Nickname</label>
+        <label className="font-spoqa text-base font-bold">Nickname</label>
         <input
           id="nickname"
           placeholder="Enter Your Nickname"
@@ -22,7 +22,7 @@ export default function Setting() {
         />
       </div>
       <div className="mt-5">
-        <label className="font-spoqa text-xl font-bold">Email</label>
+        <label className="font-spoqa text-base font-bold">Email</label>
         <input
           id="email"
           placeholder="Enter Your Email"

@@ -64,7 +64,7 @@ const WorkspaceContainerView = ({}: PropsType) => {
                     e.preventDefault();
                     setState('setting');
                   }}
-                  className={`mb-[15px] w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
+                  className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-base font-bold font-spoqa ${
                     state == 'setting'
                       ? 'text-main bg-white'
                       : 'bg-main text-white'
@@ -88,7 +88,7 @@ const WorkspaceContainerView = ({}: PropsType) => {
                     e.preventDefault();
                     setState('member');
                   }}
-                  className={`mb-[15px] w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
+                  className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-base font-bold font-spoqa ${
                     state == 'member'
                       ? 'text-main bg-white'
                       : 'bg-main text-white'
@@ -108,7 +108,7 @@ const WorkspaceContainerView = ({}: PropsType) => {
                     e.preventDefault();
                     setState('addfunctions');
                   }}
-                  className={`w-[217px] h-[49px] rounded-full flex items-center text-xl font-bold font-spoqa ${
+                  className={`w-[205px] h-[40px] rounded-full flex items-center text-base font-bold font-spoqa ${
                     state == 'addfunctions'
                       ? 'text-main bg-white'
                       : 'bg-main text-white'

@@ -2,6 +2,7 @@
 
 import Member from '@/components/teamsetting/member';
 import Setting from '@/components/teamsetting/setting';
+import WorkSpace from '@/components/teamsetting/workspace';
 import {useState} from 'react';
 
 const TeamSettingContainerView = () => {
@@ -101,6 +102,7 @@ const TeamSettingContainerView = () => {
           <div className="w-[742px] h-[601px]">
             {state == 'setting' ? <Setting /> : null}
             {state == 'member' ? <Member /> : null}
+            {state == 'workspace' ? <WorkSpace /> : null}
           </div>
         </div>
       </div>

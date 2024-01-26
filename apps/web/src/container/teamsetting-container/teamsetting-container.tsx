@@ -1,5 +1,6 @@
 'use client';
 
+import Member from '@/components/teamsetting/member';
 import Setting from '@/components/teamsetting/setting';
 import {useState} from 'react';
 
@@ -99,6 +100,7 @@ const TeamSettingContainerView = () => {
           </div>
           <div className="w-[742px] h-[601px]">
             {state == 'setting' ? <Setting /> : null}
+            {state == 'member' ? <Member /> : null}
           </div>
         </div>
       </div>

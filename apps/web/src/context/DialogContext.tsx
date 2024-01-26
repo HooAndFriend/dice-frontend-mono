@@ -16,8 +16,10 @@ const Context = createContext<ContextProps>({} as ContextProps);
 const defaultDialogArgs: DialogArgs = {
   title: "Warning",
   buttonText: "Close",
+  comfirmButtonText: "Send",
   message: "You are Dead",
   logLevel: "warn",
+  type: "alert",
 };
 
 export function DialogProvider({ children }: { children: React.ReactNode }) {
@@ -39,6 +41,8 @@ export function DialogProvider({ children }: { children: React.ReactNode }) {
         open={open}
         setOpen={setOpen}
         cancelButtonRef={cancelButtonRef}
+        comfirmButtonText={dialogArgs.comfirmButtonText}
+        type={dialogArgs.type}
       />
     </Context.Provider>
   );

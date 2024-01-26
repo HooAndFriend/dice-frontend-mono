@@ -7,7 +7,7 @@ import {
   ExclamationTriangleIcon,
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
-import { LogLevel } from "@/type/component";
+import { DialogType, LogLevel } from "@/type/component";
 
 interface PropsType {
   title: string;
@@ -16,6 +16,8 @@ interface PropsType {
   logLevel: LogLevel;
   open: boolean;
   cancelButtonRef: any;
+  type: DialogType;
+  comfirmButtonText: string;
   setOpen: (open: boolean) => void;
 }
 
@@ -27,6 +29,8 @@ const AlertDialog = ({
   message,
   buttonText,
   logLevel,
+  comfirmButtonText,
+  type,
 }: PropsType) => {
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -107,6 +111,15 @@ const AlertDialog = ({
                   >
                     {buttonText}
                   </button>
+                  {type === "comfirm" && (
+                    <button
+                      type="button"
+                      className={`inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-5 sm:ml-3 sm:w-auto`}
+                      onClick={() => setOpen(false)}
+                    >
+                      {comfirmButtonText}
+                    </button>
+                  )}
                 </div>
               </Dialog.Panel>
             </Transition.Child>

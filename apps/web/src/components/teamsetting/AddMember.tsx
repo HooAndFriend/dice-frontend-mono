@@ -17,7 +17,7 @@ export default function AddMember({isOpen, setIsOpen}) {
           />
         </div>
         <div className="w-full h-[50px] flex mt-[23px]">
-          <div className="w-[436px] h-full border border-[#EBEBEC] rounded-[10px] flex pl-4 items-center">
+          <div className="w-[316px] h-full border border-[#EBEBEC] rounded-[10px] flex pl-4 items-center">
             <div className="bg-[#F4F4FA] w-[86px] h-[29px] rounded-lg flex items-center text-xs mr-[10px]">
               <img
                 className="rounded-full ml-2 mr-[2px]"
@@ -29,23 +29,23 @@ export default function AddMember({isOpen, setIsOpen}) {
               <img
                 className="ml-1"
                 src="svg/boldX.svg"
-                width={18}
-                height={18}
+                width={17}
+                height={17}
               />
             </div>
             <input
-              className="focus:outline-none w-[249px]"
+              className="focus:outline-none w-[180px]"
               placeholder="Enter Email or nickName"
             />
-            <select
-              id="select2"
-              className="w-[80px] text-[#676767] focus:outline-none"
-            >
-              <option>Read</option>
-            </select>
           </div>
-          <button className="bg-main w-[110px] ml-[7px] rounded-[10px] text-white font-bold">
-            Invite
+          <select
+            id="select2"
+            className="p-[15px] ml-[10px] w-[111px] h-full text-[#DDDDDD] focus:outline-none border border-[#EBEBEC] rounded-[10px]"
+          >
+            <option>Read</option>
+          </select>
+          <button className="bg-main w-[110px] ml-[10px] rounded-[10px] text-white font-bold tracking-[-1px]">
+            SEND
           </button>
         </div>
       </div>

@@ -11,10 +11,9 @@ interface PropsType {}
 
 const WorkspaceContainerView = ({}: PropsType) => {
   const [state, setState] = useState('setting');
-  const isOpen = false; // true로 변경시 모달 확인 가능
+
   return (
     <>
-      <AddMember isOpen={isOpen} />
       <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
         <div className="bg-white w-[1192px] h-[769px] rounded-2xl shadow-md">
           <div className="mt-[45px] ml-[60px] w-[1072px] h-[38px] flex justify-between">

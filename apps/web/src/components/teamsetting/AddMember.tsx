@@ -18,19 +18,21 @@ export default function AddMember({isOpen, setIsOpen}) {
         </div>
         <div className="w-full h-[50px] flex mt-[23px]">
           <div className="w-[316px] h-full border border-[#EBEBEC] rounded-[10px] flex pl-4 items-center">
-            <div className="bg-[#F4F4FA] w-[86px] h-[29px] rounded-lg flex items-center text-xs mr-[10px]">
+            <div className="bg-[#F4F4FA] w-[86px] h-[29px] rounded-lg flex items-center mr-[10px]">
               <img
                 className="rounded-full ml-2 mr-[2px]"
                 src="images/dice.png"
                 width={17}
                 height={17}
               />
-              임유나
+              <div className="h-[29px] font-spoqa text-xs leading-[29px] tracking-[-1px]">
+                임유나
+              </div>
               <img
-                className="ml-1"
+                className="ml-[7px]"
                 src="svg/boldX.svg"
-                width={17}
-                height={17}
+                width={13}
+                height={13}
               />
             </div>
             <input

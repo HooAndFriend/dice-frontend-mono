@@ -1,12 +1,24 @@
 // ** Component Imports
+import TeamModal from "@/components/modal/team-modal";
 import ProfileBox from "../../profile-box";
 
 interface PropsType {
   open: boolean;
+  modalOpen: boolean;
+  cancelButtonRef: any;
+  setModalOpen: (value: boolean) => void;
+  handleModalOpen: () => void;
   handleOpen: () => void;
 }
 
-const TeamPopoverView = ({ open, handleOpen }: PropsType) => {
+const TeamPopoverView = ({
+  open,
+  modalOpen,
+  cancelButtonRef,
+  handleModalOpen,
+  handleOpen,
+  setModalOpen,
+}: PropsType) => {
   return (
     <div>
       <div onClick={handleOpen}>
@@ -23,7 +35,9 @@ const TeamPopoverView = ({ open, handleOpen }: PropsType) => {
                 height="18px"
                 className="mr-1"
               />
-              <h4 className="mr-3 text-sm">Setting</h4>
+              <h4 className="mr-3 text-sm" onClick={handleModalOpen}>
+                Setting
+              </h4>
               <img
                 src="/images/logout.png"
                 width="18px"
@@ -65,6 +79,13 @@ const TeamPopoverView = ({ open, handleOpen }: PropsType) => {
             <h4 className="text-[#EBEBEC]">Add Team</h4>
           </div>
         </div>
+      )}
+      {modalOpen && (
+        <TeamModal
+          open={modalOpen}
+          setOpen={setModalOpen}
+          cancelButtonRef={cancelButtonRef}
+        />
       )}
     </div>
   );

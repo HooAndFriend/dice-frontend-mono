@@ -1,17 +1,20 @@
-export default function AddMember({isOpen, setIsOpen}) {
+interface PropsType {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
+
+const AddMemberContent = ({ open, setOpen }: PropsType) => {
   return (
     <div
       className={`bg-black bg-opacity-25 w-full h-screen font-spoqa flex justify-center items-center fixed top-0 left-0 z-50 ${
-        isOpen ? '' : 'hidden'
+        open ? "" : "hidden"
       }`}
     >
       <div className="w-[617px] h-[171px] rounded-[20px] bg-white pl-[34px] mr-[30px]">
         <div className=" h-[22px] w-full text-xl font-bold mt-[30px] flex justify-between">
           Add Member
           <img
-            onClick={() => {
-              setIsOpen(false);
-            }}
+            onClick={() => setOpen(false)}
             className="mr-[30px]"
             src="svg/XButton.svg"
           />
@@ -53,4 +56,6 @@ export default function AddMember({isOpen, setIsOpen}) {
       </div>
     </div>
   );
-}
+};
+
+export default AddMemberContent;

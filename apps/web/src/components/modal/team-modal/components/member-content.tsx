@@ -1,15 +1,10 @@
-import {useState} from 'react';
-import AddMember from './AddMember';
+interface PropsType {
+  handleOpen: () => void;
+}
 
-export default function Member() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const AddMemberHandler = () => {
-    setIsOpen(true);
-  };
+const MemberContent = ({ handleOpen }: PropsType) => {
   return (
     <div>
-      <AddMember isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="font-bold text-xl mb-[14px] font-spoqa">
         Invite Member
       </div>
@@ -25,7 +20,7 @@ export default function Member() {
       <div className="mt-[31px] flex w-full h-[23px] justify-between mb-[14px]">
         <div className="text-lg font-spoqa font-bold">Member</div>
         <div
-          onClick={AddMemberHandler}
+          onClick={handleOpen}
           className="flex justify-center items-center font-spoqa font-base font-bold"
         >
           <img
@@ -97,4 +92,6 @@ export default function Member() {
       </div>
     </div>
   );
-}
+};
+
+export default MemberContent;

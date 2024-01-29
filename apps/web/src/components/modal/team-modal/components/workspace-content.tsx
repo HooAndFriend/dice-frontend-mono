@@ -1,6 +1,6 @@
-export default function WorkSpace() {
+const WorkSpaceContent = () => {
   return (
-    <>
+    <div>
       <div className="font-spoqa font-bold tracking-[-1px] text-lg mb-[14px]">
         WorkSpaceList
       </div>
@@ -58,6 +58,8 @@ export default function WorkSpace() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default WorkSpaceContent;

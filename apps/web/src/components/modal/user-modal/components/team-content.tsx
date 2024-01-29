@@ -1,6 +1,6 @@
-export default function Team() {
+const TeamContent = () => {
   return (
-    <>
+    <div>
       <div className="h-[39px] w-[735px] flex relative">
         <div className="w-[130px] h-[38px] bg-[#EBEBEC] rounded-t-[10px] absolute top-px text-base font-bold font-spoqa flex justify-center items-center">
           Team List
@@ -73,6 +73,7 @@ export default function Team() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
+export default TeamContent;

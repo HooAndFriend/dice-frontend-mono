@@ -1,6 +1,6 @@
-export default function Setting() {
+const SettingContent = () => {
   return (
-    <>
+    <div>
       <label className="font-spoqa text-xl font-bold">Profile</label>
       <div className="mt-[14px] relative w-[110px] h-[110px]">
         <img
@@ -33,6 +33,8 @@ export default function Setting() {
       <button className="m-auto mt-[93px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white font-spoqa font-bold text-lg">
         Update
       </button>
-    </>
+    </div>
   );
-}
+};
+
+export default SettingContent;

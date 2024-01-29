@@ -1,4 +1,4 @@
-export default function Workspace() {
+const WorkspaceContent = () => {
   return (
     <>
       <div className="h-[39px] w-[735px] flex relative">
@@ -45,4 +45,6 @@ export default function Workspace() {
       </div>
     </>
   );
-}
+};
+
+export default WorkspaceContent;

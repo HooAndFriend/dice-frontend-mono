@@ -66,7 +66,7 @@ const WorkspaceModalView = ({
                       <div className="font-mosk font-bold text-[32px]">
                         Workspace Setting
                       </div>
-                      <div>
+                      <div onClick={() => setOpen(false)}>
                         <img
                           alt="X"
                           src="/svg/XButton.svg"

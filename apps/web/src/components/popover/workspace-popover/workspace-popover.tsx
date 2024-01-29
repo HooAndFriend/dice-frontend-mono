@@ -1,12 +1,24 @@
 // ** Component Imports
+import WorkspaceModal from "@/components/modal/workspace-modal";
 import ProfileBox from "../../profile-box";
 
 interface PropsType {
   open: boolean;
+  modalOpen: boolean;
+  cancelButtonRef: any;
+  setModalOpen: (value: boolean) => void;
+  handleModalOpen: () => void;
   handleOpen: () => void;
 }
 
-const WorkspacePopoverView = ({ open, handleOpen }: PropsType) => {
+const WorkspacePopoverView = ({
+  open,
+  modalOpen,
+  cancelButtonRef,
+  handleModalOpen,
+  handleOpen,
+  setModalOpen,
+}: PropsType) => {
   return (
     <div>
       <div onClick={handleOpen}>
@@ -16,7 +28,7 @@ const WorkspacePopoverView = ({ open, handleOpen }: PropsType) => {
         <div className="popover p-5 rounded-[20px] w-[350px] h-[250px] absolute bg-white shadow-md p- -translate-y-full translate-x-20">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold">DICE</h3>
-            <div className="flex items-center">
+            <div className="flex items-center" onClick={handleModalOpen}>
               <img
                 src="/images/settings.png"
                 width="18px"
@@ -58,6 +70,13 @@ const WorkspacePopoverView = ({ open, handleOpen }: PropsType) => {
             <h4 className="text-[#EBEBEC]">Add Workspace</h4>
           </div>
         </div>
+      )}
+      {modalOpen && (
+        <WorkspaceModal
+          open={modalOpen}
+          setOpen={setModalOpen}
+          cancelButtonRef={cancelButtonRef}
+        />
       )}
     </div>
   );

@@ -1,6 +1,6 @@
-export default function AddFunctions() {
+const AddFunctionsContent = () => {
   return (
-    <>
+    <div>
       <div className="w-full h-[50px] border border-[#EBEBEC] rounded-[10px] flex justify-between">
         <input
           className="ml-[15px] border-none focus:outline-none w-full"
@@ -62,6 +62,8 @@ export default function AddFunctions() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default AddFunctionsContent;

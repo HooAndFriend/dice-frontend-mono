@@ -1,16 +1,11 @@
-import {useState} from 'react';
-import AddMember from './addMember';
+interface PropsType {
+  handleOpen: () => void;
+}
 
-export default function Member({}) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const AddMemberModal = () => {
-    setIsOpen(true);
-  };
+const MemberContent = ({ handleOpen }: PropsType) => {
   return (
-    <>
-      <AddMember isOpen={isOpen} setIsOpen={setIsOpen} />
-      <div onClick={AddMemberModal} className="h-6 w-full flex justify-end">
+    <div>
+      <div onClick={handleOpen} className="h-6 w-full flex justify-end">
         <img className="mr-[10px]" src="svg/addMember.svg" alt="addMember" />
         <div className="font-spoqa font-bold text-base">Add Member</div>
       </div>
@@ -128,6 +123,8 @@ export default function Member({}) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default MemberContent;

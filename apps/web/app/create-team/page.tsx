@@ -1,5 +1,5 @@
 // ** Component Imports
-import WorkspaceContainer from '@/container/workspace-container';
+import CreateTeamContainer from '@/container/createteam-container';
 
 // ** Provider Imports
 import RocoilRootProvider from '@/components/provider/recoil-provider';
@@ -9,7 +9,7 @@ export default function Signup(): JSX.Element {
   return (
     <RocoilRootProvider>
       <DialogProvider>
-        <WorkspaceContainer />
+        <CreateTeamContainer />
       </DialogProvider>
     </RocoilRootProvider>
   );

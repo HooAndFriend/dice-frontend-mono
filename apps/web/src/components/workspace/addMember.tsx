@@ -1,30 +1,38 @@
-export default function AddMember({ isOpen }) {
+export default function AddMember({isOpen, setIsOpen}) {
   return (
     <div
       className={`bg-black bg-opacity-25 w-full h-screen font-spoqa flex justify-center items-center fixed top-0 left-0 z-50 ${
-        isOpen ? "" : "hidden"
+        isOpen ? '' : 'hidden'
       }`}
     >
       <div className="w-[617px] h-[171px] rounded-[20px] bg-white pl-[34px] mr-[30px]">
         <div className=" h-[22px] w-full text-xl font-bold mt-[30px] flex justify-between">
           Add Member
-          <img className="mr-[30px]" src="svg/XButton.svg" />
+          <img
+            onClick={() => {
+              setIsOpen(false);
+            }}
+            className="mr-[30px]"
+            src="svg/XButton.svg"
+          />
         </div>
         <div className="w-full h-[50px] flex mt-[23px]">
           <div className="w-[436px] h-full border border-[#EBEBEC] rounded-[10px] flex pl-4 items-center">
-            <div className="bg-[#F4F4FA] w-[86px] h-[29px] rounded-lg flex items-center text-xs mr-[10px]">
+            <div className="bg-[#F4F4FA] w-[86px] h-[29px] rounded-lg flex items-center mr-[10px]">
               <img
                 className="rounded-full ml-2 mr-[2px]"
                 src="images/dice.png"
                 width={17}
                 height={17}
               />
-              임유나
+              <div className="h-[29px] font-spoqa text-xs leading-[29px] tracking-[-1px]">
+                임유나
+              </div>
               <img
-                className="ml-1"
+                className="ml-[7px]"
                 src="svg/boldX.svg"
-                width={18}
-                height={18}
+                width={13}
+                height={13}
               />
             </div>
             <input

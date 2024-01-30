@@ -7,6 +7,9 @@ elif [ $1 = "web" ]; then
 elif [ $1 = "admin" ]; then
     scp -r ./html/admin/* dice:~/dice/html/admin/
     ssh -t dice "cd ~/dice && sh restart.sh nginx"
+elif [ $1 = "admin" ]; then
+    scp -r ./html/download/* dice:~/dice/html/download/
+    ssh -t dice "cd ~/dice && sh restart.sh nginx"
 elif [ $1 = "all" ]; then
     scp -r ./html/* dice:~/dice/html/
     ssh -t dice "cd ~/dice && sh restart.sh nginx"

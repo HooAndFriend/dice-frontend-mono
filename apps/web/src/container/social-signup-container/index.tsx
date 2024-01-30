@@ -53,6 +53,7 @@ const SocialSignupContainer = () => {
         message: "Enter Email",
         logLevel: "warn",
         buttonText: "Close",
+        type: "alert",
       });
 
       return;
@@ -64,6 +65,7 @@ const SocialSignupContainer = () => {
         message: "Enter Nickname",
         logLevel: "warn",
         buttonText: "Close",
+        type: "alert",
       });
       return;
     }
@@ -95,9 +97,10 @@ const SocialSignupContainer = () => {
           message: error.response.data.message,
           logLevel: "warn",
           buttonText: "Close",
+          type: "alert",
         });
       },
-    },
+    }
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {

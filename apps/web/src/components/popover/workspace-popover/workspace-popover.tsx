@@ -25,7 +25,7 @@ const WorkspacePopoverView = ({
         <ProfileBox image="/images/profile.jpg" alt="profile" />
       </div>
       {open && (
-        <div className="popover p-5 rounded-[20px] w-[350px] h-[250px] absolute bg-white shadow-md p- -translate-y-full translate-x-20">
+        <div className="popover p-5 rounded-[20px] w-[350px] h-[250px] absolute bg-white shadow-md p- translate-y-10 -translate-x-3/4">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold">DICE</h3>
             <div className="flex items-center" onClick={handleModalOpen}>

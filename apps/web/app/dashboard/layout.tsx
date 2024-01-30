@@ -6,6 +6,7 @@ import MenuItem from "@/components/menu-item";
 import WorkspacePopover from "@/components/popover/workspace-popover";
 import ProfileBox from "@/components/profile-box";
 import { MenuList } from "@/constants";
+import TeamPopover from "@/components/popover/team-popover";
 
 const DashboardRayout = ({
   children,
@@ -26,7 +27,7 @@ const DashboardRayout = ({
             />
           </Link>
           <div className="flex items-center mr-[30px]">
-            <ProfileBox image="/images/profile.jpg" alt="profile" />
+            <WorkspacePopover />
             <h2>김인후</h2>
           </div>
         </div>
@@ -45,8 +46,8 @@ const DashboardRayout = ({
               </div>
             </div>
             <div className="flex h-1/5">
-              <div className="flex flex-grow items-end justify-center pb-3">
-                <WorkspacePopover />
+              <div className="flex items-end justify-center flex-grow pb-3">
+                <TeamPopover />
               </div>
             </div>
           </div>

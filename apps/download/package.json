@@ -1,0 +1,44 @@
+{
+  "name": "download",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "Electron.cjs",
+  "homepage": "./",
+  "scripts": {
+    "dev": "vite --port 3000 --mode development",
+    "local": "vite --port 3000 --mode local",
+    "test": "vite --port 3000 --mode test",
+    "build": "tsc && vite build --mode development",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
+    "lint": "eslint --fix \"src/**/*.{ts,tsx,js,jsx}\"",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.12.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.198",
+    "@types/node": "^20.2.6",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "@vitejs/plugin-react-swc": "^3.3.2",
+    "electron": "^26.1.0",
+    "electron-builder": "^24.6.4",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "identity-obj-proxy": "^3.0.0",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9"
+  }
+}

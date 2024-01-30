@@ -58,6 +58,7 @@ const SignupContainer = () => {
         message: "Enter Email",
         logLevel: "warn",
         buttonText: "Close",
+        type: "alert",
       });
 
       return;
@@ -69,6 +70,7 @@ const SignupContainer = () => {
         message: "Enter Password",
         logLevel: "warn",
         buttonText: "Close",
+        type: "alert",
       });
 
       return;
@@ -80,6 +82,7 @@ const SignupContainer = () => {
         message: "Check Password",
         logLevel: "warn",
         buttonText: "Close",
+        type: "alert",
       });
 
       return;
@@ -91,6 +94,7 @@ const SignupContainer = () => {
         message: "Enter Nickname",
         logLevel: "warn",
         buttonText: "Close",
+        type: "alert",
       });
       return;
     }
@@ -120,9 +124,10 @@ const SignupContainer = () => {
           message: error.response.data.message,
           logLevel: "warn",
           buttonText: "Close",
+          type: "alert",
         });
       },
-    },
+    }
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {

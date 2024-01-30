@@ -1,5 +1,5 @@
 {
-  "name": "dice-frontend",
+  "name": "admin",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,13 +9,10 @@
     "dev": "vite --port 3000 --mode development",
     "local": "vite --port 3000 --mode local",
     "test": "vite --port 3000 --mode test",
-    "build": "tsc && vite build --mode production",
-    "build:dev": "tsc && vite build --mode development",
+    "build": "tsc && vite build --mode development",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "lint": "eslint --fix \"src/**/*.{ts,tsx,js,jsx}\"",
-    "preview": "vite preview",
-    "docker": "docker build --no-cache --rm -f Dockerfile -t pinomaker/dice-frontend:latest . --platform linux/amd64",
-    "docker-push": "docker push pinomaker/dice-frontend:latest"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

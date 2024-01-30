@@ -4,6 +4,12 @@ if [ $# -eq 0 ]; then
 elif [ $1 = "web" ]; then
     scp -r ./html/www/* dice:~/dice/html/www/
     ssh -t dice "cd ~/dice && sh restart.sh nginx"
+elif [ $1 = "admin" ]; then
+    scp -r ./html/admin/* dice:~/dice/html/admin/
+    ssh -t dice "cd ~/dice && sh restart.sh nginx"
+elif [ $1 = "all" ]; then
+    scp -r ./html/* dice:~/dice/html/
+    ssh -t dice "cd ~/dice && sh restart.sh nginx"
 else
     echo "인자가 잘못되었습니다."
     exit 1

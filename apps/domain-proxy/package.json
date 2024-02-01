@@ -12,6 +12,6 @@
     "typescript": "^5.0.4"
   },
   "scripts": {
-    "dev": "ts-node . --swc"
+    "dev:start": "ts-node . --swc"
   }
 }

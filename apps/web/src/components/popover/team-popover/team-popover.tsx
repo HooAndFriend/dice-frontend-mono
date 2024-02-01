@@ -1,5 +1,5 @@
 // ** Component Imports
-import TeamModal from "@/components/modal/team-modal";
+import TeamModal from "@/src/components/modal/team-modal";
 import ProfileBox from "../../profile-box";
 
 interface PropsType {

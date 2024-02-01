@@ -1,5 +1,5 @@
-import SwrProvider from '@/components/provider/swr-provider';
-import CreateWorkspaceContainerView from './createworkspace-container';
+import SwrProvider from "@/src/components/provider/swr-provider";
+import CreateWorkspaceContainerView from "./createworkspace-container";
 
 const CreateWorkspaceContainer = () => {
   return (

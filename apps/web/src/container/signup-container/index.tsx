@@ -8,24 +8,24 @@ import { ChangeEvent, KeyboardEvent, useState } from "react";
 
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
-import { Post } from "@/repository";
-import SwrProvider from "@/components/provider/swr-provider";
+import { Post } from "@/src/repository";
+import SwrProvider from "@/src/components/provider/swr-provider";
 
 // ** Recoil Imports
 import { useSetRecoilState } from "recoil";
-import { AuthState } from "@/app";
+import { AuthState } from "@/src/app";
 
 // ** Component Imports
 import SignupContainerView from "./signup-container";
 
 // ** Utils Imports
-import useInput from "@/hooks/useInput";
+import useInput from "@/src/hooks/useInput";
 
 // ** Type Imports
-import { DiceSignupParams } from "@/type/auth";
+import { DiceSignupParams } from "@/src/type/auth";
 
 // ** Context Imports
-import { useDialog } from "@/context/DialogContext";
+import { useDialog } from "@/src/context/DialogContext";
 
 const SignupContainer = () => {
   const { data: signupUser, handleInput } = useInput<DiceSignupParams>({

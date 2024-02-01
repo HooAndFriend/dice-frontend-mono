@@ -1,8 +1,8 @@
 // ** Component Imports
-import LoginContainer from "@/container/login-container";
+import LoginContainer from "@/src/container/login-container";
 
 // ** Provider Imports
-import RocoilRootProvider from "@/components/provider/recoil-provider";
+import RocoilRootProvider from "@/src/components/provider/recoil-provider";
 import { DialogProvider } from "../src/context/DialogContext";
 
 export default function Page(): JSX.Element {

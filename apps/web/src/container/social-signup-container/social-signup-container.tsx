@@ -2,7 +2,7 @@
 import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Type Imports
-import { SocialSignupParams } from "@/type/auth";
+import { SocialSignupParams } from "@/src/type/auth";
 
 interface PropsType {
   signupUser: SocialSignupParams;

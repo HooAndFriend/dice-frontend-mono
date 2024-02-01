@@ -8,22 +8,22 @@ import { KeyboardEvent } from "react";
 
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
-import { Post } from "@/repository";
-import SwrProvider from "@/components/provider/swr-provider";
+import { Post } from "@/src/repository";
+import SwrProvider from "@/src/components/provider/swr-provider";
 
 // ** Recoil Imports
 import { useSetRecoilState } from "recoil";
-import { AuthState } from "@/app";
+import { AuthState } from "@/src/app";
 
 // ** Component Imports
 import LoginContainerView from "./login-container";
 
 // ** Utils Imports
-import useInput from "@/hooks/useInput";
-import { firebaseLogin } from "@/utils/firebase-auth";
+import useInput from "@/src/hooks/useInput";
+import { firebaseLogin } from "@/src/utils/firebase-auth";
 
 // ** Type Imports
-import { DiceLoginParma, SocialLoginParams, SocialType } from "@/type/auth";
+import { DiceLoginParma, SocialLoginParams, SocialType } from "@/src/type/auth";
 
 // ** Dialog Imports
 import { useDialog } from "../../context/DialogContext";

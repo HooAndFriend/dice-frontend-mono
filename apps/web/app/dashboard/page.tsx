@@ -1,5 +1,5 @@
 // ** Component Imports
-import DashboardContainer from "@/container/dashboard-container";
+import DashboardContainer from "@/src/container/dashboard-container";
 
 const DashboardPage = () => {
   return <DashboardContainer />;

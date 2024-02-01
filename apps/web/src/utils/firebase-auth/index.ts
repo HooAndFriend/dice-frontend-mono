@@ -1,5 +1,5 @@
-import { auth } from "@/config/firebaseConfig";
-import { SocialType } from "@/type/auth";
+import { auth } from "@/src/config/firebaseConfig";
+import { SocialType } from "@/src/type/auth";
 import {
   GoogleAuthProvider,
   signInWithPopup,

@@ -1,5 +1,5 @@
 // ** Component Imports
-import WorkspaceModal from "@/components/modal/workspace-modal";
+import WorkspaceModal from "@/src/components/modal/workspace-modal";
 import ProfileBox from "../../profile-box";
 
 interface PropsType {

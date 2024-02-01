@@ -2,11 +2,11 @@
 import Link from "next/link";
 
 // ** Component Imports
-import MenuItem from "@/components/menu-item";
-import WorkspacePopover from "@/components/popover/workspace-popover";
-import ProfileBox from "@/components/profile-box";
-import { MenuList } from "@/constants";
-import TeamPopover from "@/components/popover/team-popover";
+import MenuItem from "@/src/components/menu-item";
+import WorkspacePopover from "@/src/components/popover/workspace-popover";
+import ProfileBox from "@/src/components/profile-box";
+import { MenuList } from "@/src/constants/menu";
+import TeamPopover from "@/src/components/popover/team-popover";
 
 const DashboardRayout = ({
   children,
@@ -36,12 +36,7 @@ const DashboardRayout = ({
             <div className="flex justify-center h-4/5">
               <div>
                 {MenuList.map((item) => (
-                  <MenuItem
-                    key={item.id}
-                    image={item.image}
-                    alt={item.image}
-                    link={item.link}
-                  />
+                  <MenuItem {...item} alt="item" key={item.id} />
                 ))}
               </div>
             </div>

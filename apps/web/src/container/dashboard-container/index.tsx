@@ -1,7 +1,7 @@
 "use client";
 
 // ** Service Imports
-import SwrProvider from "@/components/provider/swr-provider";
+import SwrProvider from "@/src/components/provider/swr-provider";
 
 // ** Component Imports
 import DashboardContainerView from "./dashboard-container";

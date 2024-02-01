@@ -2,7 +2,7 @@
 import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Type Imports
-import { DiceSignupParams } from "@/type/auth";
+import { DiceSignupParams } from "@/src/type/auth";
 
 interface PropsType {
   signupUser: DiceSignupParams;

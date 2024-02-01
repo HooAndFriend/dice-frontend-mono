@@ -1,7 +1,7 @@
 // ** Component Imports
-import WorkspaceModal from "@/components/modal/workspace-modal";
+import WorkspaceModal from "@/src/components/modal/workspace-modal";
 import ProfileBox from "../../profile-box";
-import UserModal from "@/components/modal/user-modal";
+import UserModal from "@/src/components/modal/user-modal";
 
 interface PropsType {
   open: boolean;

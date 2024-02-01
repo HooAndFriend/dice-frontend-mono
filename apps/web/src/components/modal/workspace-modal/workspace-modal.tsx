@@ -5,9 +5,9 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 // ** Component Imports
-import SettingContent from "@/components/modal/workspace-modal/components/setting-content";
-import MemberContent from "@/components/modal/workspace-modal/components/member-content";
-import AddFunctionsContent from "@/components/modal/workspace-modal/components/addfunctions-content";
+import SettingContent from "@/src/components/modal/workspace-modal/components/setting-content";
+import MemberContent from "@/src/components/modal/workspace-modal/components/member-content";
+import AddFunctionsContent from "@/src/components/modal/workspace-modal/components/addfunctions-content";
 import AddMemberContent from "./components/addMember-content";
 
 interface PropsType {
@@ -46,10 +46,10 @@ const WorkspaceModalView = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" />
         </Transition.Child>
         <div className="fixed inset-0 z-10 w-full overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div className="flex items-end justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -59,7 +59,7 @@ const WorkspaceModalView = ({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all">
+              <Dialog.Panel className="relative overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl">
                 <div className="flex w-full items-center justify-center bg-[#FAFAFB] ">
                   <div className="bg-white w-[1192px] h-[769px] rounded-2xl shadow-md">
                     <div className="mt-[45px] ml-[60px] w-[1072px] h-[38px] flex justify-between">

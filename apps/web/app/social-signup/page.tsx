@@ -1,9 +1,9 @@
 // ** Component Imports
-import SocialSignupContainer from "@/container/social-signup-container";
+import SocialSignupContainer from "@/src/container/social-signup-container";
 
 // ** Provider Imports
-import RocoilRootProvider from "@/components/provider/recoil-provider";
-import { DialogProvider } from "@/context/DialogContext";
+import RocoilRootProvider from "@/src/components/provider/recoil-provider";
+import { DialogProvider } from "@/src/context/DialogContext";
 
 export default function Signup(): JSX.Element {
   return (

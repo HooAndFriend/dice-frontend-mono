@@ -1,9 +1,9 @@
 // ** Component Imports
-import CreateTeamContainer from '@/container/createteam-container';
+import CreateTeamContainer from "@/src/container/createteam-container";
 
 // ** Provider Imports
-import RocoilRootProvider from '@/components/provider/recoil-provider';
-import {DialogProvider} from '@/context/DialogContext';
+import RocoilRootProvider from "@/src/components/provider/recoil-provider";
+import { DialogProvider } from "@/src/context/DialogContext";
 
 export default function Signup(): JSX.Element {
   return (

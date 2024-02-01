@@ -1,9 +1,9 @@
 // ** Component Imports
-import CreateWorkspaceContainer from '@/container/createworkspace-container';
+import CreateWorkspaceContainer from "@/src/container/createworkspace-container";
 
 // ** Provider Imports
-import RocoilRootProvider from '@/components/provider/recoil-provider';
-import {DialogProvider} from '@/context/DialogContext';
+import RocoilRootProvider from "@/src/components/provider/recoil-provider";
+import { DialogProvider } from "@/src/context/DialogContext";
 
 export default function Signup(): JSX.Element {
   return (

@@ -6,27 +6,27 @@ import { ReactNode } from "react";
 export interface MenuType {
   id: number;
   link: string;
-  image: string;
   icon: ReactNode;
+  isClicked: boolean;
 }
 
 export const MenuList = [
   {
     id: 1,
     link: "/dashboard",
-    image: "/images/dashboard.png",
     icon: DashboardIcon,
+    isClicked: true,
   },
   {
     id: 2,
     link: "/dashboard/ticket",
-    image: "/images/ticket.png",
     icon: TicketIcon,
+    isClicked: false,
   },
   {
     id: 3,
     link: "/dashboard/qa",
-    image: "/images/qa.png",
     icon: QaIcon,
+    isClicked: false,
   },
 ];

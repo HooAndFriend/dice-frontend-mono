@@ -1,38 +1,24 @@
 // ** Next Imports
 import Link from "next/link";
-import DashboardIcon from "@/public/svg/dashboard.svg";
 import { ReactNode } from "react";
 
 interface PropsType {
-  image: string;
-  icon: any;
-  alt: string;
+  icon: React.FC<{ className: string }>;
+  isClicked: boolean;
   link: string;
-  width?: string | number;
-  height?: string | number;
 }
 
-const MenuItem = ({
-  image,
-  alt,
-  width,
-  height,
-  link,
-  icon: Icon,
-}: PropsType) => {
+const MenuItem = ({ link, icon: Icon, isClicked }: PropsType) => {
   return (
     <Link href={link}>
-      <div className="py-5">
-        <DashboardIcon
-          className="mx-auto"
-          style={{ backgroundColor: "#00f" }}
-        />
-        {/* <img
-          src={image}
-          width={width ? width : "50px"}
-          height={height ? height : "50px"}
-          alt={alt}
-        /> */}
+      <div className="py-3">
+        <div
+          className={`${
+            isClicked ? "bg-[#623AD6]" : ""
+          } rounded-lg w-[40px] h-[40px] flex justify-center items-center`}
+        >
+          <Icon className="" />
+        </div>
       </div>
     </Link>
   );

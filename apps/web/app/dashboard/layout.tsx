@@ -36,7 +36,7 @@ const DashboardRayout = ({
             <div className="flex justify-center h-4/5">
               <div>
                 {MenuList.map((item) => (
-                  <MenuItem {...item} alt="item" key={item.id} />
+                  <MenuItem {...item} key={item.id} />
                 ))}
               </div>
             </div>

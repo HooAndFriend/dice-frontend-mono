@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { persistAtom } from "../util";
 
 interface AuthStateType {
   accessToken: string;
@@ -11,4 +12,5 @@ export const AuthState = atom<AuthStateType>({
     accessToken: "",
     refreshToken: "",
   },
+  effects_UNSTABLE: [persistAtom],
 });

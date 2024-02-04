@@ -10,7 +10,7 @@ import { MenuList } from "@/src/constants/menu";
 // ** Recoil Imports
 import { useRecoilValue } from "recoil";
 import { WorkspaceState } from "@/src/app";
-import { isUndefined } from "swr/_internal";
+import { isUndefined } from "loadsh";
 
 const DashboardSidebard = () => {
   const { workspaceFunction } = useRecoilValue(WorkspaceState);

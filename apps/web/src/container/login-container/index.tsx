@@ -54,27 +54,33 @@ const LoginContainer = () => {
     async (url: string) => await Post<DiceLoginResponse>(url, loginUser),
     {
       onSuccess: ({ data }) => {
-        setAuthState((prevState) => ({
-          ...prevState,
+        setAuthState({
           accessToken: data.token.accessToken,
           refreshToken: data.token.refreshToken,
-        }));
+        });
 
-        setUserState((prevState) => ({
-          ...prevState,
+        setUserState({
           email: data.user.email,
           profile: data.user.profile,
           nickname: data.user.nickname,
-        }));
+        });
 
-        setWorkspaceState((prevState) => ({
-          ...prevState,
-          id: data.workspace.id,
-          name: data.workspace.name,
-          profile: data.workspace.profile,
-          uuid: data.workspace.uuid,
-          workspaceFunction: data.workspace.workspaceFunction,
-        }));
+        setWorkspaceState({
+          id: data.workspace[0].id,
+          name: data.workspace[0].name,
+          profile: data.workspace[0].profile,
+          uuid: data.workspace[0].uuid,
+          workspaceFunction: data.workspace[0].workspaceFunction,
+        });
+
+        console.log(1, {
+          id: data.workspace[0].id,
+          name: data.workspace[0].name,
+          profile: data.workspace[0].profile,
+          uuid: data.workspace[0].uuid,
+          workspaceFunction: data.workspace[0].workspaceFunction,
+        });
+
         router.push("/dashboard");
       },
       onError: (error) => {

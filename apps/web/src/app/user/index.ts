@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { persistAtom } from "../util";
 
 interface UserStateType {
   email: string;
@@ -13,4 +14,5 @@ export const UserState = atom<UserStateType>({
     nickname: "",
     profile: "",
   },
+  effects_UNSTABLE: [persistAtom],
 });

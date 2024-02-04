@@ -1,5 +1,6 @@
 import { WorksapceFunction } from "@/src/type/workspace";
 import { atom } from "recoil";
+import { persistAtom } from "../util";
 
 interface WorksapceStateType {
   id: number;
@@ -18,4 +19,5 @@ export const WorkspaceState = atom<WorksapceStateType>({
     uuid: "",
     workspaceFunction: [],
   },
+  effects_UNSTABLE: [persistAtom],
 });

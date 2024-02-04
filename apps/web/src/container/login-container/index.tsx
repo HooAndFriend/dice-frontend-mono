@@ -13,7 +13,7 @@ import SwrProvider from "@/src/components/provider/swr-provider";
 
 // ** Recoil Imports
 import { useSetRecoilState } from "recoil";
-import { AuthState } from "@/src/app";
+import { AuthState, UserState, WorkspaceState } from "@/src/app";
 
 // ** Component Imports
 import LoginContainerView from "./login-container";
@@ -23,7 +23,12 @@ import useInput from "@/src/hooks/useInput";
 import { firebaseLogin } from "@/src/utils/firebase-auth";
 
 // ** Type Imports
-import { DiceLoginParma, SocialLoginParams, SocialType } from "@/src/type/auth";
+import {
+  DiceLoginParma,
+  DiceLoginResponse,
+  SocialLoginParams,
+  SocialType,
+} from "@/src/type/auth";
 
 // ** Dialog Imports
 import { useDialog } from "../../context/DialogContext";
@@ -35,6 +40,8 @@ const LoginContainer = () => {
   });
 
   const setAuthState = useSetRecoilState(AuthState);
+  const setUserState = useSetRecoilState(UserState);
+  const setWorkspaceState = useSetRecoilState(WorkspaceState);
 
   const { handleOpen } = useDialog();
 
@@ -43,15 +50,25 @@ const LoginContainer = () => {
 
   const login = useSWRMutation(
     "/v1/auth",
-    async (url: string) => await Post<any>(url, loginUser),
+    async (url: string) => await Post<DiceLoginResponse>(url, loginUser),
     {
       onSuccess: ({ data }) => {
         setAuthState({
-          accessToken: data.data.token.refreshToken,
-          refreshToken: data.data.token.refreshToken,
-          username: "",
+          accessToken: data.token.accessToken,
+          refreshToken: data.token.refreshToken,
         });
-
+        setUserState({
+          email: data.user.email,
+          profile: data.user.profile,
+          nickname: data.user.nickname,
+        });
+        setWorkspaceState({
+          id: data.workspace.id,
+          name: data.workspace.name,
+          profile: data.workspace.profile,
+          uuid: data.workspace.uuid,
+          workspaceFunction: data.workspace.workspaceFunction,
+        });
         router.push("/dashboard");
       },
       onError: (error) => {
@@ -75,7 +92,6 @@ const LoginContainer = () => {
         setAuthState({
           accessToken: data.data.token.refreshToken,
           refreshToken: data.data.token.refreshToken,
-          username: "",
         });
 
         router.push("/dashboard");

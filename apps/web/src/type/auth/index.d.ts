@@ -51,3 +51,59 @@ export interface DiceLoginResponse extends Response {
     workspaceFunction: WorksapceFunction[];
   };
 }
+
+export interface DiceSignupResponse extends Response {
+  token: {
+    accessToken: string;
+    refreshToken: string;
+  };
+  user: {
+    email: string;
+    nickname: string;
+    profile: string;
+  };
+  workspace: {
+    id: number;
+    name: string;
+    profile: string;
+    uuid: string;
+    workspaceFunction: WorksapceFunction[];
+  };
+}
+export interface DiceSocialLoginResponse extends Response {
+  token: {
+    accessToken: string;
+    refreshToken: string;
+  };
+  user: {
+    email: string;
+    nickname: string;
+    profile: string;
+  };
+  workspace: {
+    id: number;
+    name: string;
+    profile: string;
+    uuid: string;
+    workspaceFunction: WorksapceFunction[];
+  };
+}
+
+export interface DiceSocialSignupResponse extends Response {
+  token: {
+    accessToken: string;
+    refreshToken: string;
+  };
+  user: {
+    email: string;
+    nickname: string;
+    profile: string;
+  };
+  workspace: {
+    id: number;
+    name: string;
+    profile: string;
+    uuid: string;
+    workspaceFunction: WorksapceFunction[];
+  };
+}

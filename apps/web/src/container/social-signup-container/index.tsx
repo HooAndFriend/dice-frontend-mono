@@ -13,7 +13,7 @@ import SwrProvider from "@/src/components/provider/swr-provider";
 
 // ** Recoil Imports
 import { useSetRecoilState } from "recoil";
-import { AuthState } from "@/src/app";
+import { AuthState, UserState, WorkspaceState } from "@/src/app";
 
 // ** Component Imports
 import SocialSignupContainerView from "./social-signup-container";
@@ -22,7 +22,7 @@ import SocialSignupContainerView from "./social-signup-container";
 import useInput from "@/src/hooks/useInput";
 
 // ** Type Imports
-import { SocialSignupParams } from "@/src/type/auth";
+import { DiceSocialSignupResponse, SocialSignupParams } from "@/src/type/auth";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
@@ -36,6 +36,8 @@ const SocialSignupContainer = () => {
   });
 
   const setAuthState = useSetRecoilState(AuthState);
+  const setUserState = useSetRecoilState(UserState);
+  const setWorkspaceState = useSetRecoilState(WorkspaceState);
 
   const { handleOpen } = useDialog();
 
@@ -76,7 +78,7 @@ const SocialSignupContainer = () => {
   const socialSignup = useSWRMutation(
     "/v1/auth/social/user",
     async (url: string) =>
-      await Post<any>(url, {
+      await Post<DiceSocialSignupResponse>(url, {
         ...signupUser,
         token: searchParams.get("token"),
         type: searchParams.get("type"),
@@ -85,9 +87,20 @@ const SocialSignupContainer = () => {
     {
       onSuccess: ({ data }) => {
         setAuthState({
-          accessToken: data.data.token.refreshToken,
-          refreshToken: data.data.token.refreshToken,
-          username: "",
+          accessToken: data.token.accessToken,
+          refreshToken: data.token.refreshToken,
+        });
+        setUserState({
+          email: data.user.email,
+          profile: data.user.profile,
+          nickname: data.user.nickname,
+        });
+        setWorkspaceState({
+          id: data.workspace.id,
+          name: data.workspace.name,
+          profile: data.workspace.profile,
+          uuid: data.workspace.uuid,
+          workspaceFunction: data.workspace.workspaceFunction,
         });
         router.push("/dashboard");
       },

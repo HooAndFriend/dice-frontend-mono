@@ -26,6 +26,7 @@ import { firebaseLogin } from "@/src/utils/firebase-auth";
 import {
   DiceLoginParma,
   DiceLoginResponse,
+  DiceSocialLoginResponse,
   SocialLoginParams,
   SocialType,
 } from "@/src/type/auth";
@@ -86,12 +87,24 @@ const LoginContainer = () => {
   const socialLogin = useSWRMutation(
     "/v1/auth/social",
     async (url: string, { arg }: { arg: SocialLoginParams }) =>
-      await Post<any>(url, arg),
+      await Post<DiceSocialLoginResponse>(url, arg),
     {
       onSuccess: ({ data }: any) => {
         setAuthState({
-          accessToken: data.data.token.refreshToken,
-          refreshToken: data.data.token.refreshToken,
+          accessToken: data.token.accessToken,
+          refreshToken: data.token.refreshToken,
+        });
+        setUserState({
+          email: data.user.email,
+          profile: data.user.profile,
+          nickname: data.user.nickname,
+        });
+        setWorkspaceState({
+          id: data.workspace.id,
+          name: data.workspace.name,
+          profile: data.workspace.profile,
+          uuid: data.workspace.uuid,
+          workspaceFunction: data.workspace.workspaceFunction,
         });
 
         router.push("/dashboard");

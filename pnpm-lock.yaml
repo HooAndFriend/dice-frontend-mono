@@ -184,6 +184,12 @@ importers:
       react-router-dom:
         specifier: ^6.12.1
         version: 6.21.3(react-dom@18.2.0)(react@18.2.0)
+      recoil:
+        specifier: ^0.7.7
+        version: 0.7.7(react-dom@18.2.0)(react@18.2.0)
+      recoil-persist:
+        specifier: ^5.1.0
+        version: 5.1.0(recoil@0.7.7)
       style-loader:
         specifier: ^3.3.4
         version: 3.3.4(webpack@5.89.0)

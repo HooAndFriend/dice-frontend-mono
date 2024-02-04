@@ -1,5 +1,5 @@
 {
-  "name": "@ai-voice-studio/domain-proxy",
+  "name": "domain-proxy",
   "dependencies": {
     "express": "^4.17.1",
     "http-proxy-middleware": "^2.0.1",

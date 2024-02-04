@@ -1,5 +1,5 @@
-const TestPageView = () => {
+const MainPageView = () => {
   return <h1 className="text-3xl font-bold underline">Hello world!</h1>
 }
 
-export default TestPageView
+export default MainPageView

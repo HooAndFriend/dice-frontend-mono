@@ -2,7 +2,8 @@
 import { Routes, Route } from 'react-router-dom'
 
 // ** Router Imports
-import TestPage from './pages/test-age'
+import MainPage from './pages/main-page'
+import CsPage from './pages/cs-page'
 
 // ** Context Imports
 import { ErrorProvider } from './context/ErrorContext'
@@ -13,7 +14,8 @@ const App = () => {
     <ErrorProvider>
       <DialogProvider>
         <Routes>
-          <Route path="/" element={<TestPage />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/cs" element={<CsPage />} />
         </Routes>
       </DialogProvider>
     </ErrorProvider>

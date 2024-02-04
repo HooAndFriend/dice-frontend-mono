@@ -10,7 +10,7 @@ import { DialogProvider } from './context/DialogContext'
 
 // ** Style Imports
 import { ThemeProvider } from '@mui/material'
-import { theme } from '@/theme'
+import { theme } from '@/src/theme'
 import { GlobalStyles } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline'
 

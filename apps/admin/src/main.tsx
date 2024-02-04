@@ -11,7 +11,7 @@ import App from './App'
 import { RecoilRoot } from 'recoil'
 
 // ** Style Imports
-import '@/style/global.css'
+import '@/src/style/global.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 

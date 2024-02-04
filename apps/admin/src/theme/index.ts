@@ -2,7 +2,7 @@
 import { createTheme } from '@mui/material'
 
 // ** Constant Imports
-import Color from '@/constants/color'
+import Color from '@/src/constants/color'
 
 export const theme = createTheme({
   palette: {

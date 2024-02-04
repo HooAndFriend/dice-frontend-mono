@@ -1,5 +1,5 @@
 import { useState, createContext, useContext } from 'react'
-import { Alert } from '@/components/Alert'
+import { Alert } from '@/src/components/Alert'
 
 interface ContextProps {
   onError(title: string, contents: string): void

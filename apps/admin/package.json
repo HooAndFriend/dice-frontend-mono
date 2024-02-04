@@ -29,7 +29,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.12.1",
     "recoil": "^0.7.7",
-    "recoil-persist": "^5.1.0"
+    "recoil-persist": "^5.1.0",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.198",

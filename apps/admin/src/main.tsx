@@ -10,6 +10,9 @@ import App from './App'
 // ** Recoil Imports
 import { RecoilRoot } from 'recoil'
 
+// ** Swr Imports
+import { SWRConfig } from 'swr'
+
 // ** Style Imports
 import '@/src/style/global.css'
 
@@ -17,8 +20,10 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
   <RecoilRoot>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <SWRConfig>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </SWRConfig>
   </RecoilRoot>,
 )

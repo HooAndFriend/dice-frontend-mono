@@ -3,7 +3,6 @@ import { atom } from "recoil";
 interface AuthStateType {
   accessToken: string;
   refreshToken: string;
-  username: string;
 }
 
 export const AuthState = atom<AuthStateType>({
@@ -11,6 +10,5 @@ export const AuthState = atom<AuthStateType>({
   default: {
     accessToken: "",
     refreshToken: "",
-    username: "",
   },
 });

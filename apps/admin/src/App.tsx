@@ -1,6 +1,5 @@
 // ** Router Imports
 import { Routes, Route } from 'react-router-dom'
-import { ProtectRoute, PublicRoute } from './utils/protect-route'
 
 // ** Router Imports
 import TestPage from './pages/test-age'
@@ -23,10 +22,7 @@ const App = () => {
       <ErrorProvider>
         <DialogProvider>
           <Routes>
-            <Route element={<PublicRoute />}>
-              <Route path="/" element={<TestPage />} />
-            </Route>
-            <Route element={<ProtectRoute />}></Route>
+            <Route path="/" element={<TestPage />} />
           </Routes>
         </DialogProvider>
       </ErrorProvider>

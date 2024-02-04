@@ -7,13 +7,18 @@ import { BrowserRouter } from 'react-router-dom'
 // ** Components Imports
 import App from './App'
 
+// ** Recoil Imports
+import { RecoilRoot } from 'recoil'
+
 // ** Style Imports
 import '@/style/global.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <RecoilRoot>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </RecoilRoot>,
 )

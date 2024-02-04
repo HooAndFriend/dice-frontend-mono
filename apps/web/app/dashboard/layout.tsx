@@ -2,11 +2,11 @@
 import Link from "next/link";
 
 // ** Component Imports
-import MenuItem from "@/src/components/menu-item";
 import WorkspacePopover from "@/src/components/popover/workspace-popover";
-import ProfileBox from "@/src/components/profile-box";
-import { MenuList } from "@/src/constants/menu";
-import TeamPopover from "@/src/components/popover/team-popover";
+import DashboardSidebard from "@/src/components/dashboard/sidebar";
+
+// ** Provider Imports
+import RocoilRootProvider from "@/src/components/provider/recoil-provider";
 
 const DashboardRayout = ({
   children,
@@ -14,7 +14,7 @@ const DashboardRayout = ({
   children: React.ReactNode;
 }): JSX.Element => {
   return (
-    <html lang="en">
+    <RocoilRootProvider>
       <div className="flex flex-col h-screen">
         <div className="h-16 border-b-2 border-[#EBEBEC] flex items-center justify-between">
           <Link href="/dashboard">
@@ -32,24 +32,11 @@ const DashboardRayout = ({
           </div>
         </div>
         <div className="flex flex-1">
-          <div className="w-[70px] border-r-2 border-[#EBEBEC]">
-            <div className="flex justify-center h-4/5">
-              <div>
-                {MenuList.map((item) => (
-                  <MenuItem {...item} key={item.id} />
-                ))}
-              </div>
-            </div>
-            <div className="flex h-1/5">
-              <div className="flex items-end justify-center flex-grow pb-3">
-                <TeamPopover />
-              </div>
-            </div>
-          </div>
+          <DashboardSidebard />
           <div className="flex-1 bg-[#FAFAFB]">{children}</div>
         </div>
       </div>
-    </html>
+    </RocoilRootProvider>
   );
 };
 

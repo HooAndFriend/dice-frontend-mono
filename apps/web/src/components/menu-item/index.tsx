@@ -1,6 +1,5 @@
 // ** Next Imports
 import Link from "next/link";
-import { ReactNode } from "react";
 
 interface PropsType {
   icon: React.FC<{ className: string }>;

@@ -15,6 +15,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
     "autoprefixer": "^10.4.16",
     "css-loader": "^6.9.1",
     "lodash": "^4.17.21",

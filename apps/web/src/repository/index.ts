@@ -1,5 +1,5 @@
 import { CommonResponse } from "@/src/type/common";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 export const client = axios.create({
   baseURL: "/api",
@@ -8,27 +8,49 @@ export const client = axios.create({
 export const Get = async <T>(
   url: string,
   config?: AxiosRequestConfig
-): Promise<AxiosResponse<CommonResponse<T>>> => {
+): Promise<CommonResponse<T>> => {
   const response = await client.get(url, config);
 
-  return response;
+  return response.data;
 };
 
 export const Post = async <T>(
   url: string,
   data?: any,
   config?: AxiosRequestConfig
-): Promise<AxiosResponse<CommonResponse<T>>> => {
-  return await client.post(url, data, config);
+): Promise<CommonResponse<T>> => {
+  const response = await client.post(url, data, config);
+
+  return response.data;
+};
+
+export const Put = async <T>(
+  url: string,
+  data?: any,
+  config?: AxiosRequestConfig
+): Promise<CommonResponse<T>> => {
+  const response = await client.put(url, data, config);
+
+  return response.data;
+};
+
+export const Patch = async <T>(
+  url: string,
+  data?: any,
+  config?: AxiosRequestConfig
+): Promise<CommonResponse<T>> => {
+  const response = await client.patch(url, data, config);
+
+  return response.data;
 };
 
 export const Delete = async <T>(
   url: string,
   config?: AxiosRequestConfig
-): Promise<AxiosResponse<CommonResponse<T>>> => {
+): Promise<CommonResponse<T>> => {
   const response = await client.delete(url, config);
 
-  return response;
+  return response.data;
 };
 
 client.interceptors.request.use((config) => {

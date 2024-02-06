@@ -1,8 +1,8 @@
 // ** Component Imports
 import { MenuType } from "@/src/constants/menu";
 import MenuItem from "../../menu-item";
-import TeamPopover from "../../popover/team-popover";
 import DashboardIcon from "@/public/svg/dashboard.svg";
+import WorkspacePopover from "../../popover/workspace-popover";
 
 interface Props {
   sidbarMenuList: MenuType[];
@@ -21,7 +21,7 @@ const DashboardSidebardView = ({ sidbarMenuList }: Props) => {
       </div>
       <div className="flex h-1/5">
         <div className="flex items-end justify-center flex-grow pb-3">
-          <TeamPopover />
+          <WorkspacePopover />
         </div>
       </div>
     </div>

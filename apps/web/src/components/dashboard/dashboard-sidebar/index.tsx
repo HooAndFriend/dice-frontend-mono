@@ -4,7 +4,7 @@
 import { useMemo } from "react";
 
 // ** Component Imports
-import DashboardSidebardView from "./sidebar";
+import DashboardSidebardView from "./dashboard-sidebar";
 import { MenuList } from "@/src/constants/menu";
 
 // ** Recoil Imports
@@ -20,9 +20,9 @@ const DashboardSidebard = () => {
       isUndefined(workspaceFunction)
         ? []
         : MenuList.filter((item) =>
-            workspaceFunction.find((_) => _.function === item.name),
+            workspaceFunction.find((_) => _.function === item.name)
           ),
-    [workspaceFunction],
+    [workspaceFunction]
   );
 
   return <DashboardSidebardView sidbarMenuList={sidbarMenuList} />;

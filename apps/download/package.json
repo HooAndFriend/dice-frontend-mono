@@ -29,6 +29,7 @@
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
     "style-loader": "^3.3.4",
+    "swr": "^2.2.4",
     "tailwindcss": "^3.3.6"
   },
   "devDependencies": {

@@ -6,11 +6,13 @@ interface AuthStateType {
   refreshToken: string;
 }
 
+export const authInitState = {
+  accessToken: "",
+  refreshToken: "",
+};
+
 export const AuthState = atom<AuthStateType>({
   key: "authState",
-  default: {
-    accessToken: "",
-    refreshToken: "",
-  },
+  default: authInitState,
   effects_UNSTABLE: [persistAtom],
 });

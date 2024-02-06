@@ -10,14 +10,16 @@ interface WorksapceStateType {
   workspaceFunction: WorksapceFunction[];
 }
 
+export const workspaceInitState = {
+  id: 0,
+  name: "",
+  profile: "",
+  uuid: "",
+  workspaceFunction: [],
+};
+
 export const WorkspaceState = atom<WorksapceStateType>({
   key: "workspaceState",
-  default: {
-    id: 0,
-    name: "",
-    profile: "",
-    uuid: "",
-    workspaceFunction: [],
-  },
+  default: workspaceInitState,
   effects_UNSTABLE: [persistAtom],
 });

@@ -7,12 +7,14 @@ interface UserStateType {
   profile: string;
 }
 
+export const userInitState = {
+  email: "",
+  nickname: "",
+  profile: "",
+};
+
 export const UserState = atom<UserStateType>({
   key: "userState",
-  default: {
-    email: "",
-    nickname: "",
-    profile: "",
-  },
+  default: userInitState,
   effects_UNSTABLE: [persistAtom],
 });

@@ -12,7 +12,7 @@ elif [ $1 = "admin" ]; then
     ssh -t dice "cd ~/dice && sh restart.sh nginx"
 elif [ $1 = "all" ]; then
     scp -r ./html/* dice:~/html/
-    ssh -t dice "cd ~/dice && sh restart.sh nginx"
+    ssh -t dice "sh restart.sh nginx"
 else
     echo "인자가 잘못되었습니다."
     exit 1

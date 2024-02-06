@@ -98,7 +98,79 @@ const QaContainerView = () => {
             </div>
 
             <div className="w-full h-[521px] flex justify-between mb-[168px]">
-              <div className="w-1/2 h-[521px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC]"></div>
+              <div className="w-1/2 h-[521px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC]">
+                <div className="h-[125px] m-6">
+                  <div className="w-full h-[30px] flex mb-[5px]">
+                    <div className="flex items-center mr-5">ISSLE-01</div>
+                    <div className="bg-[#F13333] w-[67px] h-[30px] rounded-[10px] text-white flex items-center justify-center font-spoqa text-base text-center">
+                      NEW
+                    </div>
+                  </div>
+                  <div className="w-full h-[30px] font-spoqa font-medium text-lg mb-[15px]">
+                    [AOS] 상세보기 버튼 누락
+                  </div>
+                  <div className="w-full h-[45px] flex justify-between items-center">
+                    <div className="flex items-center">
+                      <img
+                        className="rounded-full border border-[#EBEBEC] mr-[10px] "
+                        src="images/dice.png"
+                        width={30}
+                        height={30}
+                      />
+                      <div className="font-spoqa">김인후</div>
+                    </div>
+                    <button className="w-[120px] h-[45px] rounded-[30px] bg-main flex justify-center items-center text-white font-spoqa font-bold ">
+                      WAITING
+                    </button>
+                  </div>
+                </div>
+                <div className="h-[1px] bg-[#EBEBEC] mx-6"></div>
+                <div className="h-[125px] m-6">
+                  <div className="w-full h-[30px] flex mb-[5px]">
+                    <div className="flex items-center mr-5">ISSLE-01</div>
+                  </div>
+                  <div className="w-full h-[30px] font-spoqa font-medium text-lg mb-[15px]">
+                    [AOS] 상세보기 버튼 누락
+                  </div>
+                  <div className="w-full h-[45px] flex justify-between items-center">
+                    <div className="flex items-center">
+                      <img
+                        className="rounded-full border border-[#EBEBEC] mr-[10px] "
+                        src="images/dice.png"
+                        width={30}
+                        height={30}
+                      />
+                      <div className="font-spoqa">김인후</div>
+                    </div>
+                    <button className="w-[120px] h-[45px] rounded-[30px] bg-main flex justify-center items-center text-white font-spoqa font-bold ">
+                      WAITING
+                    </button>
+                  </div>
+                </div>
+                <div className="h-[1px] bg-[#EBEBEC] mx-6"></div>
+                <div className="h-[125px] m-6">
+                  <div className="w-full h-[30px] flex mb-[5px]">
+                    <div className="flex items-center mr-5">ISSLE-01</div>
+                  </div>
+                  <div className="w-full h-[30px] font-spoqa font-medium text-lg mb-[15px]">
+                    [AOS] 상세보기 버튼 누락
+                  </div>
+                  <div className="w-full h-[45px] flex justify-between items-center">
+                    <div className="flex items-center">
+                      <img
+                        className="rounded-full border border-[#EBEBEC] mr-[10px] "
+                        src="images/dice.png"
+                        width={30}
+                        height={30}
+                      />
+                      <div className="font-spoqa">김인후</div>
+                    </div>
+                    <button className="w-[120px] h-[45px] rounded-[30px] bg-main flex justify-center items-center text-white font-spoqa font-bold ">
+                      WAITING
+                    </button>
+                  </div>
+                </div>
+              </div>
               <div className="w-1/2 h-[521px] rounded-[20px] bg-white shadow-md border-[#EBEBEC]"></div>
             </div>
           </div>

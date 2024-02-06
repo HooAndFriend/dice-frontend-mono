@@ -9,6 +9,7 @@ interface PropsType {
   setModalOpen: (value: boolean) => void;
   handleModalOpen: () => void;
   handleOpen: () => void;
+  handleLogout: () => void;
 }
 
 const TeamPopoverView = ({
@@ -18,6 +19,7 @@ const TeamPopoverView = ({
   handleModalOpen,
   handleOpen,
   setModalOpen,
+  handleLogout,
 }: PropsType) => {
   return (
     <div>
@@ -38,13 +40,15 @@ const TeamPopoverView = ({
               <h4 className="mr-3 text-sm" onClick={handleModalOpen}>
                 Setting
               </h4>
-              <img
-                src="/images/logout.png"
-                width="18px"
-                height="18px"
-                className="mr-1"
-              />
-              <h3 className="mr-1 text-sm">Logout</h3>
+              <div className="flex" onClick={handleLogout}>
+                <img
+                  src="/images/logout.png"
+                  width="18px"
+                  height="18px"
+                  className="mr-1"
+                />
+                <h3 className="mr-1 text-sm">Logout</h3>
+              </div>
             </div>
           </div>
           <hr className="mt-3" />

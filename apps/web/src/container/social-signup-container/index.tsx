@@ -113,7 +113,7 @@ const SocialSignupContainer = () => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {

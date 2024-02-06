@@ -7,7 +7,7 @@ export const client = axios.create({
 
 export const Get = async <T>(
   url: string,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<CommonResponse<T>> => {
   const response = await client.get(url, config);
 
@@ -17,7 +17,7 @@ export const Get = async <T>(
 export const Post = async <T>(
   url: string,
   data?: any,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<CommonResponse<T>> => {
   const response = await client.post(url, data, config);
 
@@ -27,7 +27,7 @@ export const Post = async <T>(
 export const Put = async <T>(
   url: string,
   data?: any,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<CommonResponse<T>> => {
   const response = await client.put(url, data, config);
 
@@ -37,7 +37,7 @@ export const Put = async <T>(
 export const Patch = async <T>(
   url: string,
   data?: any,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<CommonResponse<T>> => {
   const response = await client.patch(url, data, config);
 
@@ -46,7 +46,7 @@ export const Patch = async <T>(
 
 export const Delete = async <T>(
   url: string,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<CommonResponse<T>> => {
   const response = await client.delete(url, config);
 

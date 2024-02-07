@@ -1,9 +1,16 @@
-import useSWR from "swr";
+// ** Component Imports
 import TeamContentView from "./team-content";
+
+// ** Recoil Imports
 import { AuthState } from "@/src/app";
 import { useRecoilValue } from "recoil";
-import { GetUserTeamListResponse } from "@/src/type/team";
+
+// ** Service Imports
+import useSWR from "swr";
 import { Get } from "@/src/repository";
+
+// ** Type Imports
+import { GetUserTeamListResponse } from "@/src/type/team";
 
 const TeamContent = () => {
   const { accessToken } = useRecoilValue(AuthState);

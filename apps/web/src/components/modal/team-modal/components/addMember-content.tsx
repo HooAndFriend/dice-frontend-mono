@@ -24,7 +24,7 @@ const AddMemberContent = ({ open, setOpen }: PropsType) => {
             <div className="bg-[#F4F4FA] w-[86px] h-[29px] rounded-lg flex items-center mr-[10px]">
               <img
                 className="rounded-full ml-2 mr-[2px]"
-                src="images/dice.png"
+                src="/images/dice.png"
                 width={17}
                 height={17}
               />

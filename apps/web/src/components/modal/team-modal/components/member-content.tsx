@@ -36,7 +36,7 @@ const MemberContent = ({ handleOpen }: PropsType) => {
         <div className="mb-[21px] w-[746px] h-20 border-[#EBEBEC] border shadow-md rounded-[15px] flex items-center justify-between">
           <div className="flex">
             <img
-              src="images/dice.png"
+              src="/images/dice.png"
               alt="Sample Image"
               width={45}
               height={45}
@@ -64,7 +64,7 @@ const MemberContent = ({ handleOpen }: PropsType) => {
         <div className="mb-[21px] w-[746px] h-20 border-[#EBEBEC] border shadow-md rounded-[15px] flex items-center justify-between">
           <div className="flex">
             <img
-              src="images/dice.png"
+              src="/images/dice.png"
               alt="Sample Image"
               width={45}
               height={45}

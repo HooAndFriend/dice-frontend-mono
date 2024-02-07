@@ -6,7 +6,7 @@ const CreateTeamContainerView = ({}: PropsType) => {
       <div className="w-[330px] h-[513px]">
         <img
           className="m-auto"
-          src="images/workspaceLogo.png"
+          src="/images/workspaceLogo.png"
           width={192}
           height={192}
         />

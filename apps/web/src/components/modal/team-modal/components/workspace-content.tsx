@@ -10,7 +10,7 @@ const WorkSpaceContent = () => {
             <div className="flex text-center items-center font-spoqa tracking-[-1px]">
               <img
                 className="rounded-full mr-4"
-                src="images/dice.png"
+                src="/images/dice.png"
                 width={39}
                 height={39}
               />
@@ -22,7 +22,7 @@ const WorkSpaceContent = () => {
             <div className="flex text-center items-center font-spoqa tracking-[-1px]">
               <img
                 className="rounded-full mr-4"
-                src="images/dice.png"
+                src="/images/dice.png"
                 width={39}
                 height={39}
               />
@@ -36,7 +36,7 @@ const WorkSpaceContent = () => {
             <div className="flex text-center items-center font-spoqa tracking-[-1px]">
               <img
                 className="rounded-full mr-4"
-                src="images/dice.png"
+                src="/images/dice.png"
                 width={39}
                 height={39}
               />
@@ -48,7 +48,7 @@ const WorkSpaceContent = () => {
             <div className="flex text-center items-center font-spoqa tracking-[-1px]">
               <img
                 className="rounded-full mr-4"
-                src="images/dice.png"
+                src="/images/dice.png"
                 width={39}
                 height={39}
               />

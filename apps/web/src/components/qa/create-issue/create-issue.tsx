@@ -11,7 +11,7 @@ const CreateIssueView = () => {
         <div className="flex mr-[45px]">
           <img
             className="rounded-full border border-[#EBEBEC] mr-[10px]"
-            src="images/dice.png"
+            src="/images/dice.png"
             width={20}
             height={20}
           />
@@ -21,7 +21,7 @@ const CreateIssueView = () => {
         <div className="flex">
           <img
             className="rounded-full border border-[#EBEBEC] mr-[10px]"
-            src="images/dice.png"
+            src="/images/dice.png"
             width={20}
             height={20}
           />

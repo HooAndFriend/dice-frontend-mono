@@ -78,7 +78,7 @@ const WorkspaceModalView = ({
                     <div className="flex w-[1072px] h-[601px] ml-[60px] mt-[41px] justify-between">
                       <div className="bg-main w-[274px] h-[601px] rounded-tr-[20px] rounded-b-[20px] flex flex-col items-center">
                         <img
-                          src="images/dice.png"
+                          src="/images/dice.png"
                           alt="Sample Image"
                           className="w-[91px] h-[91px] object-cover rounded-full mt-[50px]"
                         />
@@ -88,17 +88,17 @@ const WorkspaceModalView = ({
                         </div>
                         <div className="w-[187px] h-[29.926px] mt-[60px] flex relative">
                           <img
-                            src="images/dice.png"
+                            src="/images/dice.png"
                             alt="Sample Image"
                             className="w-[29.204px] h-[29.926px] rounded-full"
                           />
                           <img
-                            src="images/dice.png"
+                            src="/images/dice.png"
                             alt="Sample Image"
                             className="w-[29.204px] h-[29.926px] rounded-full absolute left-[24.21px]"
                           />
                           <img
-                            src="images/dice.png"
+                            src="/images/dice.png"
                             alt="Sample Image"
                             className="w-[29.204px] h-[29.926px] rounded-full absolute left-[48.41px]"
                           />

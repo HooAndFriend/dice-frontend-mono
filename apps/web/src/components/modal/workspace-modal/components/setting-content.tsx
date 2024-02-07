@@ -4,7 +4,7 @@ const SettingContent = () => {
       <label className="font-spoqa text-xl font-bold">Profile</label>
       <div className="mt-[14px] relative w-[110px] h-[110px]">
         <img
-          src="images/dice.png"
+          src="/images/dice.png"
           alt="Sample Iamge"
           className="w-[104px] h-[104px] rounded-[20px] bg-purple-200 absolute"
         />

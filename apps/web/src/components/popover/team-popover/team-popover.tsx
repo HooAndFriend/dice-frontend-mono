@@ -1,12 +1,15 @@
 // ** Component Imports
 import TeamModal from "@/src/components/modal/team-modal";
 import ProfileBox from "../../profile-box";
+import UserModal from "../../modal/user-modal";
 
 interface PropsType {
   open: boolean;
-  modalOpen: boolean;
+  modalTeamOpen: boolean;
+  userModalOpen: boolean;
   cancelButtonRef: any;
-  setModalOpen: (value: boolean) => void;
+  setTeamModalOpen: (value: boolean) => void;
+  setUserModalOpen: (value: boolean) => void;
   handleModalOpen: () => void;
   handleOpen: () => void;
   handleLogout: () => void;
@@ -14,12 +17,14 @@ interface PropsType {
 
 const TeamPopoverView = ({
   open,
-  modalOpen,
+  modalTeamOpen,
   cancelButtonRef,
   handleModalOpen,
   handleOpen,
-  setModalOpen,
+  setTeamModalOpen,
   handleLogout,
+  userModalOpen,
+  setUserModalOpen,
 }: PropsType) => {
   return (
     <div>
@@ -84,10 +89,17 @@ const TeamPopoverView = ({
           </div>
         </div>
       )}
-      {modalOpen && (
+      {modalTeamOpen && (
         <TeamModal
-          open={modalOpen}
-          setOpen={setModalOpen}
+          open={modalTeamOpen}
+          setOpen={setTeamModalOpen}
+          cancelButtonRef={cancelButtonRef}
+        />
+      )}
+      {userModalOpen && (
+        <UserModal
+          open={userModalOpen}
+          setOpen={setUserModalOpen}
           cancelButtonRef={cancelButtonRef}
         />
       )}

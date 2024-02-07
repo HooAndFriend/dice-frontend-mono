@@ -10,9 +10,10 @@ import { useState, useRef } from "react";
 import TeamPopoverView from "./team-popover";
 
 // ** Recoil Imports
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   AuthState,
+  TeamState,
   UserState,
   WorkspaceState,
   authInitState,
@@ -22,7 +23,10 @@ import {
 
 const TeamPopover = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [teamModalOpen, setTeamModalOpen] = useState<boolean>(false);
+  const [userModalOpen, setUserModalOpen] = useState<boolean>(false);
+
+  const { id } = useRecoilValue(TeamState);
 
   const router = useRouter();
 
@@ -33,7 +37,15 @@ const TeamPopover = () => {
   const cancelButtonRef = useRef(null);
 
   const handleOpen = () => setOpen((cur) => !cur);
-  const handleModalOpen = () => setModalOpen(true);
+  const handleModalOpen = () => {
+    if (id === 0) {
+      setUserModalOpen(true);
+
+      return;
+    }
+
+    setTeamModalOpen(true);
+  };
 
   const handleLogout = () => {
     setAuthState(authInitState);
@@ -46,11 +58,13 @@ const TeamPopover = () => {
   return (
     <TeamPopoverView
       open={open}
-      handleOpen={handleOpen}
-      modalOpen={modalOpen}
+      userModalOpen={userModalOpen}
+      modalTeamOpen={teamModalOpen}
       cancelButtonRef={cancelButtonRef}
-      setModalOpen={setModalOpen}
+      setTeamModalOpen={setTeamModalOpen}
+      setUserModalOpen={setUserModalOpen}
       handleModalOpen={handleModalOpen}
+      handleOpen={handleOpen}
       handleLogout={handleLogout}
     />
   );

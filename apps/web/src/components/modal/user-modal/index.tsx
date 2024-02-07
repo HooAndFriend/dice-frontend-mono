@@ -1,4 +1,7 @@
+// ** React Imports
 import { useState } from "react";
+
+// ** Component Imports
 import UserModalView from "./user-modal";
 
 interface PropsType {

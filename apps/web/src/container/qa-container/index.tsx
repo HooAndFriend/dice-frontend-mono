@@ -1,10 +1,12 @@
-"use client";
-
-// ** Component Imports
+import SwrProvider from "@/src/components/provider/swr-provider";
 import QaContainerView from "./qa-container";
 
-const QaConatiner = () => {
-  return <QaContainerView />;
+const QaContainer = () => {
+  return (
+    <SwrProvider>
+      <QaContainerView />
+    </SwrProvider>
+  );
 };
 
-export default QaConatiner;
+export default QaContainer;

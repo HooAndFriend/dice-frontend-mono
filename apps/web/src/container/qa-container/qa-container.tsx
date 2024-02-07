@@ -1,3 +1,5 @@
+// ** Component Imports
+import CustomSelect from "@/src/components/input/custom-select";
 import CreateIssue from "@/src/components/qa/create-issue";
 import IssueDetail from "@/src/components/qa/issue-detail";
 
@@ -11,9 +13,7 @@ const QaContainerView = () => {
           <div className="font-spoqa text-base font-bold ml-[25px] mr-[33px] text-center">
             Title
           </div>
-          <select className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] text-[#EBEBEC] pl-4">
-            <option>Title</option>
-          </select>
+          <CustomSelect />
           <div className="font-spoqa text-base font-bold ml-[50px] mr-[29px] text-center">
             Search
           </div>

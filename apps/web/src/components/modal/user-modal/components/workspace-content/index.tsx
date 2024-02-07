@@ -7,7 +7,7 @@ import { AuthState } from "@/src/app";
 import { useRecoilValue } from "recoil";
 
 // ** Type Imports
-import { GetUserTeamListResponse } from "@/src/type/team";
+import { GetUserWorkspaceListResponse } from "@/src/type/workspace";
 
 // ** Components Imports
 import WorkspaceContentView from "./workspace-content";
@@ -18,7 +18,7 @@ const WorkspaceContent = () => {
   const { data, error, isLoading } = useSWR(
     "/v1/workspace-user/my",
     async (url) =>
-      Get<GetUserTeamListResponse>(url, {
+      Get<GetUserWorkspaceListResponse>(url, {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
   );

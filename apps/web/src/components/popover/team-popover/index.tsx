@@ -21,6 +21,13 @@ import {
   workspaceInitState,
 } from "@/src/app";
 
+// ** Type Imports
+import { GetUserTeamListResponse } from "@/src/type/team";
+
+// ** Service Imports
+import useSWR from "swr";
+import { Get } from "@/src/repository";
+
 const TeamPopover = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [teamModalOpen, setTeamModalOpen] = useState<boolean>(false);
@@ -30,11 +37,18 @@ const TeamPopover = () => {
 
   const router = useRouter();
 
+  const { accessToken } = useRecoilValue(AuthState);
   const setAuthState = useSetRecoilState(AuthState);
   const setUserState = useSetRecoilState(UserState);
   const setWorkspaceState = useSetRecoilState(WorkspaceState);
 
   const cancelButtonRef = useRef(null);
+
+  const { data, error, isLoading } = useSWR("/v1/team-user", async (url) =>
+    Get<GetUserTeamListResponse>(url, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    })
+  );
 
   const handleOpen = () => setOpen((cur) => !cur);
   const handleModalOpen = () => {
@@ -55,6 +69,8 @@ const TeamPopover = () => {
     router.push("/");
   };
 
+  if (isLoading) return null;
+
   return (
     <TeamPopoverView
       open={open}
@@ -66,6 +82,7 @@ const TeamPopover = () => {
       handleModalOpen={handleModalOpen}
       handleOpen={handleOpen}
       handleLogout={handleLogout}
+      data={data.data.data}
     />
   );
 };

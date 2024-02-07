@@ -1,4 +1,6 @@
 interface PropsType {}
+import CreateIssue from "@/src/components/qa/create-issue";
+import IssueDetail from "@/src/components/qa/issue-detail";
 
 const QaContainerView = () => {
   return (
@@ -173,7 +175,8 @@ const QaContainerView = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-1/2 h-[521px] rounded-[20px] bg-white shadow-md border-[#EBEBEC]"></div>
+              {/*<CreateIssue />*/}
+              <IssueDetail />
             </div>
           </div>
         </div>

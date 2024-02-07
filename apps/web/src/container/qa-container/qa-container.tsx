@@ -1,4 +1,5 @@
 import CreateIssue from '@/src/components/qa/create-issue';
+import IssueDetail from '@/src/components/qa/issue-detail';
 
 const QaContainerView = () => {
   return (
@@ -174,6 +175,7 @@ const QaContainerView = () => {
                 </div>
               </div>
               {/*<CreateIssue />*/}
+              <IssueDetail />
             </div>
           </div>
         </div>

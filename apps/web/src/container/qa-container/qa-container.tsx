@@ -1,3 +1,5 @@
+import CreateIssue from '@/src/components/qa/create-issue';
+
 const QaContainerView = () => {
   return (
     <div className="w-full h-full">
@@ -171,7 +173,7 @@ const QaContainerView = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-1/2 h-[521px] rounded-[20px] bg-white shadow-md border-[#EBEBEC]"></div>
+              {/*<CreateIssue />*/}
             </div>
           </div>
         </div>

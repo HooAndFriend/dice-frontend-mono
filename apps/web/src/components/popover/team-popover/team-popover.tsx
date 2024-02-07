@@ -5,14 +5,15 @@ import UserModal from "../../modal/user-modal";
 import TeamBox from "./component/team-box";
 
 // ** Type Imports
-import { TeamInfo } from "@/src/type/team";
+import { TeamUserInfo } from "@/src/type/team";
 
 interface PropsType {
   open: boolean;
   modalTeamOpen: boolean;
   userModalOpen: boolean;
   cancelButtonRef: any;
-  data: TeamInfo[];
+  data: TeamUserInfo[];
+  handleUpdateTeam: (item: TeamUserInfo) => void;
   setTeamModalOpen: (value: boolean) => void;
   setUserModalOpen: (value: boolean) => void;
   handleModalOpen: () => void;
@@ -31,6 +32,7 @@ const TeamPopoverView = ({
   handleLogout,
   userModalOpen,
   setUserModalOpen,
+  handleUpdateTeam,
 }: PropsType) => {
   return (
     <div>
@@ -68,6 +70,7 @@ const TeamPopoverView = ({
               key={item.id}
               profile={item.team.profile}
               name={item.team.name}
+              onClick={() => handleUpdateTeam(item)}
             />
           ))}
           <div className="flex items-center mt-5">

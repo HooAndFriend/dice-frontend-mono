@@ -1,11 +1,11 @@
 // ** Component Imports
-import CustomSelect from "@/src/components/input/custom-select";
-import CreateIssue from "@/src/components/qa/create-issue";
-import IssueDetail from "@/src/components/qa/issue-detail";
+import CustomSelect from '@/src/components/input/custom-select';
+import CreateIssue from './components/create-issue';
+import IssueDetail from './components/issue-detail';
 
 const QaContainerView = () => {
   return (
-    <div className="w-full border-t border-[#EBEBEC] bg-[#FAFAFB] border-x">
+    <div className="w-full bg-[#FAFAFB] ">
       {/* 오른쪽 내용 */}
       <div className="ml-[47px] w-[95%]">
         <div className="font-mosk font-bold text-[32px]">QA</div>
@@ -124,7 +124,7 @@ const QaContainerView = () => {
               </div>
             </div>
           </div>
-          {/*<CreateIssue />*/}
+          {/* <CreateIssue /> */}
           <IssueDetail />
         </div>
       </div>

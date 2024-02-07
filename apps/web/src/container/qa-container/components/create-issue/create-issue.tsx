@@ -29,11 +29,15 @@ const CreateIssueView = () => {
         </div>
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
-      <div className="h-[20px] flex mt-5">
+      <div className="h-[20px] flex mt-5 ">
         <div className="font-spoqa font-medium mr-[65px]">RegDate</div>
-        <div className="font-spoqa font-normal mr-[30px]">2024-01-15</div>
+        <div className="font-spoqa font-normal mr-[30px] text-darkGray tracking-[1px]">
+          2024-01-15
+        </div>
         <div className="font-spoqa font-medium mr-[58px]">modDate</div>
-        <div className="font-spoqa font-normal">2024-01-15</div>
+        <div className="font-spoqa font-normal text-darkGray tracking-[1px]">
+          2024-01-15
+        </div>
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
       <div className="mt-5 mb-[14px]">As-Is</div>
@@ -43,7 +47,7 @@ const CreateIssueView = () => {
       <div className="mt-5 mb-[14px]">Memo</div>
       <input className="border border-[#EBEBEC] h-[80px] w-full rounded-[10px]" />
       <div className="mt-5 mb-[14px]">
-        FILE <span className="font-spoqa">(MAX:4)</span>
+        FILE <span className="font-spoqa text-darkGray text-sm">(MAX:4)</span>
       </div>
       <div className="w-[40px] h-[40px] rounded-[6px] bg-[#D9E0FF]"></div>
       <div className="w-full flex justify-center">

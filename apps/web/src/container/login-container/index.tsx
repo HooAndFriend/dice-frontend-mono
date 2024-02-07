@@ -73,14 +73,6 @@ const LoginContainer = () => {
           workspaceFunction: data.workspace[0].workspaceFunction,
         });
 
-        console.log(1, {
-          id: data.workspace[0].id,
-          name: data.workspace[0].name,
-          profile: data.workspace[0].profile,
-          uuid: data.workspace[0].uuid,
-          workspaceFunction: data.workspace[0].workspaceFunction,
-        });
-
         router.push("/dashboard");
       },
       onError: (error) => {
@@ -92,7 +84,7 @@ const LoginContainer = () => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const socialLogin = useSWRMutation(
@@ -127,7 +119,7 @@ const LoginContainer = () => {
           const uuid = searchParams.get("uuid");
           if (uuid) {
             router.push(
-              `/social-signup?token=${arg.token}&type=${arg.type}&uuid=${uuid}`,
+              `/social-signup?token=${arg.token}&type=${arg.type}&uuid=${uuid}`
             );
 
             return;
@@ -138,7 +130,7 @@ const LoginContainer = () => {
 
         return;
       },
-    },
+    }
   );
 
   const handleSignup = () => {

@@ -2,12 +2,17 @@
 import TeamModal from "@/src/components/modal/team-modal";
 import ProfileBox from "../../profile-box";
 import UserModal from "../../modal/user-modal";
+import TeamBox from "./component/team-box";
+
+// ** Type Imports
+import { TeamInfo } from "@/src/type/team";
 
 interface PropsType {
   open: boolean;
   modalTeamOpen: boolean;
   userModalOpen: boolean;
   cancelButtonRef: any;
+  data: TeamInfo[];
   setTeamModalOpen: (value: boolean) => void;
   setUserModalOpen: (value: boolean) => void;
   handleModalOpen: () => void;
@@ -17,6 +22,7 @@ interface PropsType {
 
 const TeamPopoverView = ({
   open,
+  data,
   modalTeamOpen,
   cancelButtonRef,
   handleModalOpen,
@@ -57,26 +63,13 @@ const TeamPopoverView = ({
             </div>
           </div>
           <hr className="mt-3" />
-          <div className="flex items-center mt-5">
-            <img
-              className="border rounded-[10px] mr-3"
-              src="/images/profile.jpg"
-              alt="profile"
-              width="30px"
-              height="30px"
+          {data.map((item) => (
+            <TeamBox
+              key={item.id}
+              profile={item.team.profile}
+              name={item.team.name}
             />
-            <h4>HooAndFriend</h4>
-          </div>
-          <div className="flex items-center mt-5">
-            <img
-              className="border rounded-[10px] mr-3"
-              src="/images/profile.jpg"
-              alt="profile"
-              width="30px"
-              height="30px"
-            />
-            <h4>HooAndFriend</h4>
-          </div>
+          ))}
           <div className="flex items-center mt-5">
             <img
               className="border rounded-[10px] mr-3"

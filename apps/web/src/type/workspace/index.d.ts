@@ -16,7 +16,9 @@ export interface WorksapceInfo {
   id: number;
   role: RoleType;
   workspace: {
+    id: number;
     name: string;
     profile: string;
+    uuid: string;
   };
 }

@@ -1,9 +1,8 @@
 // ** Component Imports
-import { WorksapceInfo } from "@/src/type/workspace";
 import ProfileBox from "../profile-box";
 
 // ** Type Imports
-import { TeamInfo } from "@/src/type/team";
+import { WorksapceInfo } from "@/src/type/workspace";
 
 interface PropsType {
   data: WorksapceInfo[];

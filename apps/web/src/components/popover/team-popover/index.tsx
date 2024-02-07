@@ -22,7 +22,7 @@ import {
 } from "@/src/app";
 
 // ** Type Imports
-import { GetUserTeamListResponse } from "@/src/type/team";
+import { GetUserTeamListResponse, TeamUserInfo } from "@/src/type/team";
 
 // ** Service Imports
 import useSWR from "swr";
@@ -41,6 +41,7 @@ const TeamPopover = () => {
   const setAuthState = useSetRecoilState(AuthState);
   const setUserState = useSetRecoilState(UserState);
   const setWorkspaceState = useSetRecoilState(WorkspaceState);
+  const setTeamState = useSetRecoilState(TeamState);
 
   const cancelButtonRef = useRef(null);
 
@@ -59,6 +60,15 @@ const TeamPopover = () => {
     }
 
     setTeamModalOpen(true);
+  };
+
+  const handleUpdateTeam = (item: TeamUserInfo) => {
+    setTeamState({
+      id: item.team.id,
+      name: item.team.name,
+      profile: item.team.profile,
+      uuid: item.team.uuid,
+    });
   };
 
   const handleLogout = () => {
@@ -81,6 +91,7 @@ const TeamPopover = () => {
       setUserModalOpen={setUserModalOpen}
       handleModalOpen={handleModalOpen}
       handleOpen={handleOpen}
+      handleUpdateTeam={handleUpdateTeam}
       handleLogout={handleLogout}
       data={data.data.data}
     />

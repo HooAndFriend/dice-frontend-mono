@@ -2,10 +2,10 @@
 import ProfileBox from "../profile-box";
 
 // ** Type Imports
-import { TeamInfo } from "@/src/type/team";
+import { TeamUserInfo } from "@/src/type/team";
 
 interface PropsType {
-  data: TeamInfo[];
+  data: TeamUserInfo[];
 }
 
 const TeamContentView = ({ data }: PropsType) => {

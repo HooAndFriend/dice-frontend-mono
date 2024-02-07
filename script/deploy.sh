@@ -3,13 +3,13 @@ if [ $# -eq 0 ]; then
     exit 1
 elif [ $1 = "web" ]; then
     scp -r ./html/www/* dice:~/html/www/
-    ssh -t dice "cd ~/dice && sh restart.sh nginx"
+    ssh -t dice "sh restart.sh nginx"
 elif [ $1 = "admin" ]; then
     scp -r ./html/admin/* dice:~/html/admin/
-    ssh -t dice "cd ~/dice && sh restart.sh nginx"
-elif [ $1 = "admin" ]; then
+    ssh -t dice "sh restart.sh nginx"
+elif [ $1 = "download" ]; then
     scp -r ./html/download/* dice:~/html/download/
-    ssh -t dice "cd ~/dice && sh restart.sh nginx"
+    ssh -t dice "sh restart.sh nginx"
 elif [ $1 = "all" ]; then
     scp -r ./html/* dice:~/html/
     ssh -t dice "sh restart.sh nginx"

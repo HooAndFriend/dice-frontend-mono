@@ -1,14 +1,19 @@
 // ** Component Imports
 import WorkspaceModal from "@/src/components/modal/workspace-modal";
 import ProfileBox from "../../profile-box";
+import { WorkspaceInfo } from "@/src/type/workspace";
+import WorkspaceBox from "./component/workspace-box";
 
 interface PropsType {
   open: boolean;
   modalOpen: boolean;
   cancelButtonRef: any;
+  data: WorkspaceInfo[];
+  id: number;
   setModalOpen: (value: boolean) => void;
   handleModalOpen: () => void;
   handleOpen: () => void;
+  handleUpdateWorkspace: (item: WorkspaceInfo) => void;
 }
 
 const WorkspacePopoverView = ({
@@ -18,6 +23,9 @@ const WorkspacePopoverView = ({
   handleModalOpen,
   handleOpen,
   setModalOpen,
+  data,
+  id,
+  handleUpdateWorkspace,
 }: PropsType) => {
   return (
     <div>
@@ -39,26 +47,18 @@ const WorkspacePopoverView = ({
             </div>
           </div>
           <hr className="mt-3" />
-          <div className="flex items-center mt-5">
-            <img
-              className="border rounded-[10px] mr-3"
-              src="/images/profile.jpg"
-              alt="profile"
-              width="30px"
-              height="30px"
+          {data.map((item) => (
+            <WorkspaceBox
+              key={item.id}
+              id={id}
+              workspaceId={item.id}
+              profile={item.profile}
+              name={item.name}
+              onClick={() => {
+                handleUpdateWorkspace(item);
+              }}
             />
-            <h4>HooAndFriend</h4>
-          </div>
-          <div className="flex items-center mt-5">
-            <img
-              className="border rounded-[10px] mr-3"
-              src="/images/profile.jpg"
-              alt="profile"
-              width="30px"
-              height="30px"
-            />
-            <h4>HooAndFriend</h4>
-          </div>
+          ))}
           <div className="flex items-center mt-5">
             <img
               className="border rounded-[10px] mr-3"

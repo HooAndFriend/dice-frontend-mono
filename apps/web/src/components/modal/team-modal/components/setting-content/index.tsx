@@ -4,8 +4,10 @@ import { Get, Put } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Component Imports
-import { useRecoilState, useRecoilValue } from "recoil";
 import SettingContentView from "./setting-content";
+
+// ** Recoil Imports
+import { useRecoilState, useRecoilValue } from "recoil";
 import { AuthState, TeamState } from "@/src/app";
 
 // ** Context Imports

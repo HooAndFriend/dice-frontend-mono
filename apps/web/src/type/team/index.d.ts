@@ -7,6 +7,11 @@ export interface GetUserTeamListResponse extends CommonResponse {
 
 export interface GetTeamResponse extends CommonResponse, TeamInfo {}
 
+export interface GetTeamUserListResponse extends CommonResponse {
+  count: number;
+  data: TeamUserInfo[];
+}
+
 export interface TeamUserInfo {
   id: number;
   role: RoleType;
@@ -19,4 +24,15 @@ export interface TeamInfo {
   profile: string;
   uuid: string;
   description: string;
+}
+
+export interface TeamUserInfo {
+  id: number;
+  role: RoleType;
+  user: {
+    id: number;
+    email: string;
+    nickname: string;
+    profile: string;
+  };
 }

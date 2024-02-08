@@ -47,27 +47,29 @@ const WorkspacePopoverView = ({
             </div>
           </div>
           <hr className="mt-3" />
-          {data.map((item) => (
-            <WorkspaceBox
-              key={item.id}
-              id={id}
-              workspaceId={item.id}
-              profile={item.profile}
-              name={item.name}
-              onClick={() => {
-                handleUpdateWorkspace(item);
-              }}
-            />
-          ))}
-          <div className="flex items-center mt-5">
-            <img
-              className="border rounded-[10px] mr-3"
-              src="/images/plus.png"
-              alt="profile"
-              width="30px"
-              height="30px"
-            />
-            <h4 className="text-[#EBEBEC]">Add Workspace</h4>
+          <div className="mt-2 w-[350px] h-[150px] overflow-y-scroll">
+            {data.map((item) => (
+              <WorkspaceBox
+                key={item.id}
+                id={id}
+                workspaceId={item.id}
+                profile={item.profile}
+                name={item.name}
+                onClick={() => {
+                  handleUpdateWorkspace(item);
+                }}
+              />
+            ))}
+            <div className="flex items-center mt-5">
+              <img
+                className="border rounded-[10px] mr-3"
+                src="/images/plus.png"
+                alt="profile"
+                width="30px"
+                height="30px"
+              />
+              <h4 className="text-[#EBEBEC]">Add Workspace</h4>
+            </div>
           </div>
         </div>
       )}

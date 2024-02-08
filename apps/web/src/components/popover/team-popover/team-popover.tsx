@@ -12,6 +12,7 @@ interface PropsType {
   modalTeamOpen: boolean;
   userModalOpen: boolean;
   cancelButtonRef: any;
+  teamName: string;
   id: number;
   user: { email: string; nickname: string; profile: string };
   data: TeamUserInfo[];
@@ -37,6 +38,7 @@ const TeamPopoverView = ({
   handleUpdateTeam,
   id,
   user,
+  teamName,
 }: PropsType) => {
   return (
     <div>
@@ -46,7 +48,9 @@ const TeamPopoverView = ({
       {open && (
         <div className="popover p-5 rounded-[20px] w-[350px] h-[250px] absolute bg-white shadow-md p- translate-y-10 -translate-x-3/4">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-bold">DICE</h3>
+            <h3 className="text-lg font-bold">
+              {id === 0 ? user.nickname : teamName}
+            </h3>
             <div className="flex items-center">
               <img
                 src="/images/settings.png"

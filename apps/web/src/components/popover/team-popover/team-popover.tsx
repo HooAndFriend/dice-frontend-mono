@@ -13,8 +13,9 @@ interface PropsType {
   userModalOpen: boolean;
   cancelButtonRef: any;
   id: number;
+  user: { email: string; nickname: string; profile: string };
   data: TeamUserInfo[];
-  handleUpdateTeam: (item: TeamUserInfo) => void;
+  handleUpdateTeam: (item: TeamUserInfo | 0) => void;
   setTeamModalOpen: (value: boolean) => void;
   setUserModalOpen: (value: boolean) => void;
   handleModalOpen: () => void;
@@ -35,6 +36,7 @@ const TeamPopoverView = ({
   setUserModalOpen,
   handleUpdateTeam,
   id,
+  user,
 }: PropsType) => {
   return (
     <div>
@@ -67,25 +69,34 @@ const TeamPopoverView = ({
             </div>
           </div>
           <hr className="mt-3" />
-          {data.map((item) => (
+          <div className="mt-2 w-[350px] h-[150px] overflow-y-scroll">
             <TeamBox
-              key={item.id}
               id={id}
-              teamId={item.team.id}
-              profile={item.team.profile}
-              name={item.team.name}
-              onClick={() => handleUpdateTeam(item)}
+              teamId={0}
+              profile={user.profile}
+              name={user.nickname}
+              onClick={() => handleUpdateTeam(0)}
             />
-          ))}
-          <div className="flex items-center mt-5">
-            <img
-              className="border rounded-[10px] mr-3"
-              src="/images/plus.png"
-              alt="profile"
-              width="30px"
-              height="30px"
-            />
-            <h4 className="text-[#EBEBEC]">Add Team</h4>
+            {data.map((item) => (
+              <TeamBox
+                key={item.id}
+                id={id}
+                teamId={item.team.id}
+                profile={item.team.profile}
+                name={item.team.name}
+                onClick={() => handleUpdateTeam(item)}
+              />
+            ))}
+            <div className="flex items-center mt-5">
+              <img
+                className="border rounded-[10px] mr-3"
+                src="/images/plus.png"
+                alt="profile"
+                width="30px"
+                height="30px"
+              />
+              <h4 className="text-[#EBEBEC]">Add Team</h4>
+            </div>
           </div>
         </div>
       )}

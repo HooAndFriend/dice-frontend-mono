@@ -17,6 +17,7 @@ import {
   UserState,
   WorkspaceState,
   authInitState,
+  teamInitState,
   userInitState,
   workspaceInitState,
 } from "@/src/app";
@@ -38,6 +39,7 @@ const TeamPopover = () => {
   const router = useRouter();
 
   const { accessToken } = useRecoilValue(AuthState);
+  const user = useRecoilValue(UserState);
   const setAuthState = useSetRecoilState(AuthState);
   const setUserState = useSetRecoilState(UserState);
   const setWorkspaceState = useSetRecoilState(WorkspaceState);
@@ -62,7 +64,11 @@ const TeamPopover = () => {
     setTeamModalOpen(true);
   };
 
-  const handleUpdateTeam = (item: TeamUserInfo) => {
+  const handleUpdateTeam = (item: TeamUserInfo | 0) => {
+    if (item === 0) {
+      setTeamState(teamInitState);
+      return;
+    }
     setTeamState({
       id: item.team.id,
       name: item.team.name,
@@ -85,6 +91,7 @@ const TeamPopover = () => {
     <TeamPopoverView
       open={open}
       id={id}
+      user={user}
       userModalOpen={userModalOpen}
       modalTeamOpen={teamModalOpen}
       cancelButtonRef={cancelButtonRef}

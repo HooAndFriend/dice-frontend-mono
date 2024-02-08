@@ -15,6 +15,8 @@ interface PropsType {
   addOpen: boolean;
   cancelButtonRef: any;
   tab: number;
+  name: string;
+  profile: string;
   setTab: (tab: number) => void;
   setAddOpen: (open: boolean) => void;
   setOpen: (open: boolean) => void;
@@ -28,6 +30,8 @@ const TeamModalView = ({
   setAddOpen,
   tab,
   setTab,
+  name,
+  profile,
 }: PropsType) => {
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -79,13 +83,13 @@ const TeamModalView = ({
                     <div className="flex w-[1072px] h-[601px] ml-[60px] mt-10 justify-between">
                       <div className="bg-main w-[274px] h-[601px] rounded-tr-[20px] rounded-b-[20px] flex flex-col items-center">
                         <img
-                          src="/images/dice.png"
+                          src={profile}
                           alt="Sample Image"
                           className="w-[91px] h-[91px] object-cover rounded-full mt-[52px]"
                         />
 
                         <div className="mt-[21px] font-spoqa font-bold text-[25px] text-white">
-                          DICE
+                          {name}
                         </div>
                         <div className="mt-[57px]">
                           <div

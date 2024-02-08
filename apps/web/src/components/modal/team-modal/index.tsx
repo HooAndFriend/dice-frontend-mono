@@ -1,6 +1,8 @@
 import { useState } from "react";
 import TeamModalView from "./team-modal";
 import { DialogProvider } from "@/src/context/DialogContext";
+import { useRecoilValue } from "recoil";
+import { TeamState } from "@/src/app";
 
 interface PropsType {
   open: boolean;
@@ -10,6 +12,8 @@ interface PropsType {
 
 const TeamModal = ({ open, setOpen, cancelButtonRef }: PropsType) => {
   const [tab, setTab] = useState<number>(0);
+
+  const { name, profile } = useRecoilValue(TeamState);
 
   const [addOpen, setAddOpen] = useState<boolean>(false);
 
@@ -23,6 +27,8 @@ const TeamModal = ({ open, setOpen, cancelButtonRef }: PropsType) => {
         setAddOpen={setAddOpen}
         setOpen={setOpen}
         cancelButtonRef={cancelButtonRef}
+        name={name}
+        profile={profile}
       />
     </DialogProvider>
   );

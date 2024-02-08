@@ -1,10 +1,18 @@
-const SettingContent = () => {
+// ** Type Imports
+import { TeamInfo } from "@/src/type/team";
+
+interface PropsType {
+  data: TeamInfo;
+  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const SettingContentView = ({ data, handleInput }: PropsType) => {
   return (
     <div>
-      <label className="font-spoqa text-xl font-bold">Profile</label>
+      <label className="text-xl font-bold font-spoqa">Profile</label>
       <div className="mt-[14px] relative w-[110px] h-[110px]">
         <img
-          src="/images/dice.png"
+          src={data.profile}
           alt="Sample Iamge"
           className="w-[104px] h-[104px] rounded-[20px] bg-purple-200 absolute"
         />
@@ -13,20 +21,24 @@ const SettingContent = () => {
         </div>
       </div>
       <div className="mt-5">
-        <label className="font-spoqa text-base font-bold">Team Name</label>
+        <label className="text-base font-bold font-spoqa">Team Name</label>
         <input
           id="nickname"
           placeholder="Enter Your Nickname"
           className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
-          defaultValue="DICE"
+          value={data.name}
+          onChange={handleInput}
+          name="name"
         />
       </div>
       <div className="mt-[30px]">
-        <label className="font-spoqa text-base font-bold">description</label>
+        <label className="text-base font-bold font-spoqa">description</label>
         <input
           id="description"
           className="mt-[14px] font-normal font-spoqa border h-[175px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
-          defaultValue="이 팀은 DICE입니다."
+          value={data.description}
+          onChange={handleInput}
+          name="name"
         />
       </div>
       <button className="m-auto mt-[40px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white font-spoqa font-bold text-lg">
@@ -36,4 +48,4 @@ const SettingContent = () => {
   );
 };
 
-export default SettingContent;
+export default SettingContentView;

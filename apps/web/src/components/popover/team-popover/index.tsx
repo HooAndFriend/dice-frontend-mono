@@ -10,7 +10,7 @@ import { useState, useRef } from "react";
 import TeamPopoverView from "./team-popover";
 
 // ** Recoil Imports
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   AuthState,
   TeamState,
@@ -43,7 +43,7 @@ const TeamPopover = () => {
   const setAuthState = useSetRecoilState(AuthState);
   const setUserState = useSetRecoilState(UserState);
   const setWorkspaceState = useSetRecoilState(WorkspaceState);
-  const setTeamState = useSetRecoilState(TeamState);
+  const [teamState, setTeamState] = useRecoilState(TeamState);
 
   const cancelButtonRef = useRef(null);
 
@@ -90,6 +90,7 @@ const TeamPopover = () => {
   return (
     <TeamPopoverView
       open={open}
+      teamName={teamState.name}
       id={id}
       user={user}
       userModalOpen={userModalOpen}

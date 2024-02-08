@@ -1,10 +1,12 @@
 interface PropsType {
+  id: number;
+  teamId: number;
   profile: string;
   name: string;
   onClick: () => void;
 }
 
-const TeamBox = ({ profile, name, onClick }: PropsType) => {
+const TeamBox = ({ profile, name, onClick, id, teamId }: PropsType) => {
   return (
     <div className="flex items-center mt-5" onClick={onClick}>
       <img
@@ -14,7 +16,7 @@ const TeamBox = ({ profile, name, onClick }: PropsType) => {
         width="30px"
         height="30px"
       />
-      <h4>{name}</h4>
+      <h4 className={`${id === teamId && "text-[#623AD6]"}`}>{name}</h4>
     </div>
   );
 };

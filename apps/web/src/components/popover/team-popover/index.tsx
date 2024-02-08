@@ -84,6 +84,7 @@ const TeamPopover = () => {
   return (
     <TeamPopoverView
       open={open}
+      id={id}
       userModalOpen={userModalOpen}
       modalTeamOpen={teamModalOpen}
       cancelButtonRef={cancelButtonRef}

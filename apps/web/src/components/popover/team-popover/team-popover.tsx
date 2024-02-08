@@ -12,6 +12,7 @@ interface PropsType {
   modalTeamOpen: boolean;
   userModalOpen: boolean;
   cancelButtonRef: any;
+  id: number;
   data: TeamUserInfo[];
   handleUpdateTeam: (item: TeamUserInfo) => void;
   setTeamModalOpen: (value: boolean) => void;
@@ -33,6 +34,7 @@ const TeamPopoverView = ({
   userModalOpen,
   setUserModalOpen,
   handleUpdateTeam,
+  id,
 }: PropsType) => {
   return (
     <div>
@@ -68,6 +70,8 @@ const TeamPopoverView = ({
           {data.map((item) => (
             <TeamBox
               key={item.id}
+              id={id}
+              teamId={item.team.id}
               profile={item.team.profile}
               name={item.team.name}
               onClick={() => handleUpdateTeam(item)}

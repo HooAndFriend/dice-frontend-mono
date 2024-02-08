@@ -12,6 +12,11 @@ export interface GetUserWorkspaceListResponse extends CommonResponse {
   data: TeamInfo[];
 }
 
+export interface GetTeamWorkspaceListResponse extends CommonResponse {
+  count: number;
+  data: TeamWorkspaceInfo[];
+}
+
 export interface WorksapceInfo {
   id: number;
   role: RoleType;
@@ -21,4 +26,13 @@ export interface WorksapceInfo {
     profile: string;
     uuid: string;
   };
+}
+
+export interface TeamWorkspaceInfo {
+  workspace_id: number;
+  workspace_name: string;
+  workspace_comment: string;
+  workspace_profile: string;
+  workspace_uuid: string;
+  workspaceUserCount: string;
 }

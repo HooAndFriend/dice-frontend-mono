@@ -2,10 +2,10 @@
 import ProfileBox from "../profile-box";
 
 // ** Type Imports
-import { WorksapceInfo } from "@/src/type/workspace";
+import { WorksapceUserInfo } from "@/src/type/workspace";
 
 interface PropsType {
-  data: WorksapceInfo[];
+  data: WorksapceUserInfo[];
 }
 
 const WorkspaceContentView = ({ data }: PropsType) => {

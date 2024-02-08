@@ -17,7 +17,7 @@ export interface GetTeamWorkspaceListResponse extends CommonResponse {
   data: TeamWorkspaceInfo[];
 }
 
-export interface WorksapceInfo {
+export interface WorksapceUserInfo {
   id: number;
   role: RoleType;
   workspace: {

@@ -34,8 +34,6 @@ const TeamPopover = () => {
   const [teamModalOpen, setTeamModalOpen] = useState<boolean>(false);
   const [userModalOpen, setUserModalOpen] = useState<boolean>(false);
 
-  const { id } = useRecoilValue(TeamState);
-
   const router = useRouter();
 
   const { accessToken } = useRecoilValue(AuthState);
@@ -55,7 +53,7 @@ const TeamPopover = () => {
 
   const handleOpen = () => setOpen((cur) => !cur);
   const handleModalOpen = () => {
-    if (id === 0) {
+    if (teamState.id === 0) {
       setUserModalOpen(true);
 
       return;
@@ -91,7 +89,7 @@ const TeamPopover = () => {
     <TeamPopoverView
       open={open}
       teamName={teamState.name}
-      id={id}
+      id={teamState.id}
       user={user}
       userModalOpen={userModalOpen}
       modalTeamOpen={teamModalOpen}

@@ -32,52 +32,65 @@ const SettingContent = () => {
 
   const { handleOpen } = useDialog();
 
-  const { error, isLoading } = useSWR(`/v1/team/${team.id}`, async (url) =>
+  const { error, isLoading } = useSWR("/v1/team", async (url) =>
     Get<GetTeamResponse>(url, {
-      headers: { Authorization: `Bearer ${accessToken}` },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "team-code": team.uuid,
+      },
     }).then((res) => {
       setData(res.data);
     })
   );
 
-  //   const updateUser = useSWRMutation(
-  //     "/v1/user",
-  //     async (url: string) =>
-  //       await Put<CommonResponse<void>>(
-  //         url,
-  //         {
-  //           nickname: data.nickname,
-  //           profile: data.profile,
-  //         },
-  //         {
-  //           headers: { Authorization: `Bearer ${accessToken}` },
-  //         }
-  //       ),
-  //     {
-  //       onSuccess: ({ data: responseData }) => {
-  //         mutate("/v1/user");
-  //         setTeam((cur) => ({
-  //           ...cur,
-  //           profile: data.profile,
-  //           name: data.name,
-  //           description: data.description,
-  //         }));
-  //       },
-  //       onError: (error) => {
-  //         handleOpen({
-  //           title: "Error",
-  //           message: error.response.data.message,
-  //           logLevel: "warn",
-  //           buttonText: "Close",
-  //           type: "alert",
-  //         });
-  //       },
-  //     }
-  //   );
+  const updateTeam = useSWRMutation(
+    "/v1/team",
+    async (url: string) =>
+      await Put<CommonResponse<void>>(
+        url,
+        {
+          name: data.name,
+          description: data.description,
+          profile: data.profile,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "team-code": team.uuid,
+          },
+        }
+      ),
+    {
+      onSuccess: () => {
+        mutate("/v1/team");
+        setTeam((cur) => ({
+          ...cur,
+          profile: data.profile,
+          name: data.name,
+          description: data.description,
+        }));
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
 
   if (isLoading) return null;
 
-  return <SettingContentView data={data} handleInput={handleInput} />;
+  return (
+    <SettingContentView
+      data={data}
+      handleInput={handleInput}
+      handleUpdate={updateTeam.trigger}
+    />
+  );
 };
 
 export default SettingContent;

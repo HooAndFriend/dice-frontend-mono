@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TeamModalView from "./team-modal";
+import { DialogProvider } from "@/src/context/DialogContext";
 
 interface PropsType {
   open: boolean;
@@ -13,15 +14,17 @@ const TeamModal = ({ open, setOpen, cancelButtonRef }: PropsType) => {
   const [addOpen, setAddOpen] = useState<boolean>(false);
 
   return (
-    <TeamModalView
-      open={open}
-      addOpen={addOpen}
-      tab={tab}
-      setTab={setTab}
-      setAddOpen={setAddOpen}
-      setOpen={setOpen}
-      cancelButtonRef={cancelButtonRef}
-    />
+    <DialogProvider>
+      <TeamModalView
+        open={open}
+        addOpen={addOpen}
+        tab={tab}
+        setTab={setTab}
+        setAddOpen={setAddOpen}
+        setOpen={setOpen}
+        cancelButtonRef={cancelButtonRef}
+      />
+    </DialogProvider>
   );
 };
 

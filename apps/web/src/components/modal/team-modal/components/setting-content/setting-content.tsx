@@ -4,9 +4,10 @@ import { TeamInfo } from "@/src/type/team";
 interface PropsType {
   data: TeamInfo;
   handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleUpdate: () => void;
 }
 
-const SettingContentView = ({ data, handleInput }: PropsType) => {
+const SettingContentView = ({ data, handleInput, handleUpdate }: PropsType) => {
   return (
     <div>
       <label className="text-xl font-bold font-spoqa">Profile</label>
@@ -38,10 +39,13 @@ const SettingContentView = ({ data, handleInput }: PropsType) => {
           className="mt-[14px] font-normal font-spoqa border h-[175px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
           value={data.description}
           onChange={handleInput}
-          name="name"
+          name="description"
         />
       </div>
-      <button className="m-auto mt-[40px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white font-spoqa font-bold text-lg">
+      <button
+        className="m-auto mt-[40px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white font-spoqa font-bold text-lg"
+        onClick={handleUpdate}
+      >
         Update
       </button>
     </div>

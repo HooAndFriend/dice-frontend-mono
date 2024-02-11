@@ -9,4 +9,4 @@ export interface CommonResponse<T> {
   data?: T;
 }
 
-export type RoleType = "ADMIN" | "VIEWER" | "WRITEER";
+export type RoleType = "ADMIN" | "VIEWER" | "WRITEER" | "";

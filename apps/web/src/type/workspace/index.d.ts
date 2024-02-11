@@ -22,6 +22,17 @@ export interface GetWorkspaceListResponse extends CommonResponse {
   data: WorkspaceInfo[];
 }
 
+export interface GetWorkspaceInfoResponse
+  extends CommonResponse,
+    WorkspaceDetailInfo {}
+
+export interface WorkspaceDetailInfo {
+  id: number;
+  name: string;
+  comment: string;
+  profile: string;
+}
+
 export interface WorksapceUserInfo {
   id: number;
   role: RoleType;

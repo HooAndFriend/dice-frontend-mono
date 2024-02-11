@@ -71,6 +71,7 @@ const LoginContainer = () => {
           name: data.team.name,
           profile: data.team.profile,
           uuid: data.team.uuid,
+          role: "ADMIN",
         });
 
         setWorkspaceState({
@@ -79,8 +80,8 @@ const LoginContainer = () => {
           profile: data.team.workspace[0].profile,
           uuid: data.team.workspace[0].uuid,
           workspaceFunction: data.team.workspace[0].workspaceFunction,
+          role: "ADMIN",
         });
-
         router.push("/dashboard");
       },
       onError: (error) => {
@@ -116,6 +117,7 @@ const LoginContainer = () => {
           name: data.team.name,
           profile: data.team.profile,
           uuid: data.team.uuid,
+          role: "ADMIN",
         });
 
         setWorkspaceState({
@@ -124,6 +126,7 @@ const LoginContainer = () => {
           profile: data.team.workspace[0].profile,
           uuid: data.team.workspace[0].uuid,
           workspaceFunction: data.team.workspace[0].workspaceFunction,
+          role: "ADMIN",
         });
 
         router.push("/dashboard");

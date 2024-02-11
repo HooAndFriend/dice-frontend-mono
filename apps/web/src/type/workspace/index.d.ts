@@ -26,6 +26,24 @@ export interface GetWorkspaceInfoResponse
   extends CommonResponse,
     WorkspaceDetailInfo {}
 
+export interface GetWorkspaceUserListResponse extends CommonResponse {
+  count: number;
+  data: WorkspaceUserDetailInfo[];
+}
+
+export interface WorkspaceUserDetailInfo {
+  id: number;
+  role: RoleType;
+  teamUser: {
+    id: 3;
+    user: {
+      email: string;
+      nickname: string;
+      profile: string;
+    };
+  };
+}
+
 export interface WorkspaceDetailInfo {
   id: number;
   name: string;

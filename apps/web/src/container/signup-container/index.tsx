@@ -13,7 +13,7 @@ import SwrProvider from "@/src/components/provider/swr-provider";
 
 // ** Recoil Imports
 import { useSetRecoilState } from "recoil";
-import { AuthState, UserState, WorkspaceState } from "@/src/app";
+import { AuthState, TeamState, UserState, WorkspaceState } from "@/src/app";
 
 // ** Component Imports
 import SignupContainerView from "./signup-container";
@@ -39,6 +39,7 @@ const SignupContainer = () => {
   const setAuthState = useSetRecoilState(AuthState);
   const setUserState = useSetRecoilState(UserState);
   const setWorkspaceState = useSetRecoilState(WorkspaceState);
+  const setTeamState = useSetRecoilState(TeamState);
 
   const { handleOpen } = useDialog();
 
@@ -122,12 +123,18 @@ const SignupContainer = () => {
           profile: data.user.profile,
           nickname: data.user.nickname,
         });
+        setTeamState({
+          id: data.team.id,
+          name: data.team.name,
+          profile: data.team.profile,
+          uuid: data.team.uuid,
+        });
         setWorkspaceState({
-          id: data.workspace.id,
-          name: data.workspace.name,
-          profile: data.workspace.profile,
-          uuid: data.workspace.uuid,
-          workspaceFunction: data.workspace.workspaceFunction,
+          id: data.team.workspace[0].id,
+          name: data.team.workspace[0].name,
+          profile: data.team.workspace[0].profile,
+          uuid: data.team.workspace[0].uuid,
+          workspaceFunction: data.team.workspace[0].workspaceFunction,
         });
         router.push("/dashboard");
       },
@@ -140,7 +147,7 @@ const SignupContainer = () => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {

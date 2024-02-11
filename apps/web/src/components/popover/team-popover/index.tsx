@@ -67,11 +67,13 @@ const TeamPopover = () => {
       setTeamState(teamInitState);
       return;
     }
+
     setTeamState({
       id: item.team.id,
       name: item.team.name,
       profile: item.team.profile,
       uuid: item.team.uuid,
+      role: item.role,
     });
   };
 

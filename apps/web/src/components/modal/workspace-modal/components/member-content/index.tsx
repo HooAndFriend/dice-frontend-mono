@@ -22,8 +22,6 @@ const MemberContent = ({ handleOpen }: PropsType) => {
     })
   );
 
-  console.log(data);
-
   return <MemberContentView handleOpen={handleOpen} data={data.data.data} />;
 };
 

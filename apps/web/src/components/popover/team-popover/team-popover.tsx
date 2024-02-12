@@ -6,6 +6,7 @@ import TeamBox from "./component/team-box";
 
 // ** Type Imports
 import { TeamUserInfo } from "@/src/type/team";
+import Link from "next/link";
 
 interface PropsType {
   open: boolean;
@@ -91,16 +92,18 @@ const TeamPopoverView = ({
                 onClick={() => handleUpdateTeam(item)}
               />
             ))}
-            <div className="flex items-center mt-5">
-              <img
-                className="border rounded-[10px] mr-3"
-                src="/images/plus.png"
-                alt="profile"
-                width="30px"
-                height="30px"
-              />
-              <h4 className="text-[#EBEBEC]">Add Team</h4>
-            </div>
+            <Link href="/save-team">
+              <div className="flex items-center mt-5">
+                <img
+                  className="border rounded-[10px] mr-3"
+                  src="/images/plus.png"
+                  alt="profile"
+                  width="30px"
+                  height="30px"
+                />
+                <h4 className="text-[#EBEBEC]">Add Team</h4>
+              </div>
+            </Link>
           </div>
         </div>
       )}

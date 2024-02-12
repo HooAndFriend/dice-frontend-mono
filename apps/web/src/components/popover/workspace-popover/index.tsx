@@ -40,13 +40,15 @@ const WorkspacePopover = () => {
   const handleModalOpen = () => setModalOpen(true);
 
   const handleUpdateWorkspace = (item: WorkspaceInfo) => {
-    setWorkspaceState({
-      id: item.id,
-      name: item.name,
-      profile: item.profile,
-      uuid: item.uuid,
-      workspaceFunction: item.workspaceFunction,
-    });
+    console.log(item);
+    // setWorkspaceState({
+    //   id: item.id,
+    //   name: item.name,
+    //   profile: item.profile,
+    //   uuid: item.uuid,
+    //   workspaceFunction: item.workspaceFunction,
+    //   role : ""
+    // });
   };
 
   if (isLoading) return;

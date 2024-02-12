@@ -1,9 +1,26 @@
+// ** React Imports
+import { ChangeEvent } from "react";
+
+// ** Type Imports
+import { InviteTeamUserParam } from "@/src/type/team";
+
 interface PropsType {
   open: boolean;
+  data: InviteTeamUserParam;
+  handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSelect: (e: ChangeEvent<HTMLSelectElement>) => void;
+  handleInvite: () => void;
   setOpen: (open: boolean) => void;
 }
 
-const AddMemberContent = ({ open, setOpen }: PropsType) => {
+const AddMemberContentView = ({
+  open,
+  setOpen,
+  handleInput,
+  data,
+  handleSelect,
+  handleInvite,
+}: PropsType) => {
   return (
     <div
       className={`bg-black bg-opacity-25 w-full h-screen font-spoqa flex justify-center items-center fixed top-0 left-0 z-50 ${
@@ -21,35 +38,29 @@ const AddMemberContent = ({ open, setOpen }: PropsType) => {
         </div>
         <div className="w-full h-[50px] flex mt-[23px]">
           <div className="w-[316px] h-full border border-[#EBEBEC] rounded-[10px] flex pl-4 items-center">
-            <div className="bg-[#F4F4FA] w-[86px] h-[29px] rounded-lg flex items-center mr-[10px]">
-              <img
-                className="rounded-full ml-2 mr-[2px]"
-                src="/images/dice.png"
-                width={17}
-                height={17}
-              />
-              <div className="h-[29px] font-spoqa text-xs leading-[29px] tracking-[-1px]">
-                임유나
-              </div>
-              <img
-                className="ml-[7px]"
-                src="svg/boldX.svg"
-                width={13}
-                height={13}
-              />
-            </div>
             <input
-              className="focus:outline-none w-[180px]"
+              className="focus:outline-none w-[280px]"
               placeholder="Enter Email or nickName"
+              name="email"
+              value={data.email}
+              onChange={handleInput}
             />
           </div>
           <select
             id="select2"
             className="p-[15px] ml-[10px] w-[111px] h-full text-[#DDDDDD] focus:outline-none border border-[#EBEBEC] rounded-[10px]"
+            value={data.role}
+            onChange={handleSelect}
+            name="role"
           >
-            <option>Read</option>
+            <option value="VIEWER">VIEWER</option>
+            <option value="WRITER">WRITER</option>
+            <option value="ADMIN">ADMIN</option>
           </select>
-          <button className="bg-main w-[110px] ml-[10px] rounded-[10px] text-white font-bold tracking-[-1px]">
+          <button
+            className="bg-main w-[110px] ml-[10px] rounded-[10px] text-white font-bold tracking-[-1px]"
+            onClick={handleInvite}
+          >
             SEND
           </button>
         </div>
@@ -58,4 +69,4 @@ const AddMemberContent = ({ open, setOpen }: PropsType) => {
   );
 };
 
-export default AddMemberContent;
+export default AddMemberContentView;

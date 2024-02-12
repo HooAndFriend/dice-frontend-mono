@@ -11,12 +11,23 @@ const useInput = <T extends Record<string, any>>(initialValue: T) => {
         [name]: value,
       });
     },
-    [data],
+    [data]
+  );
+
+  const handleSelect = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      const { value, name } = e.target;
+      setData({
+        ...data,
+        [name]: value,
+      });
+    },
+    [data]
   );
 
   const handleInit = useCallback(() => setData(initialValue), [data]);
 
-  return { data, handleInit, setData, handleInput } as const;
+  return { data, handleInit, setData, handleInput, handleSelect } as const;
 };
 
 export default useInput;

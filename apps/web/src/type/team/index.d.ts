@@ -36,3 +36,8 @@ export interface TeamUserInfo {
     profile: string;
   };
 }
+
+export interface InviteTeamUserParam {
+  email: string;
+  role: RoleType;
+}

@@ -29,7 +29,7 @@ import { useDialog } from "@/src/context/DialogContext";
 import { CommonResponse } from "@/src/type/common";
 
 const SaveTeamContainer = () => {
-  const { data, handleInput } = useInput<SaveTeamParam>({
+  const { data, handleInput, setData } = useInput<SaveTeamParam>({
     name: "",
     description: "",
     profile:
@@ -64,6 +64,10 @@ const SaveTeamContainer = () => {
     }
   );
 
+  const handleImage = (profile: string) => {
+    setData((cur) => ({ ...cur, profile }));
+  };
+
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       saveTeam.trigger();
@@ -77,6 +81,7 @@ const SaveTeamContainer = () => {
         handleInput={handleInput}
         handleEnter={handleEnter}
         handleSaveTeam={saveTeam.trigger}
+        handleImage={handleImage}
       />
     </SwrProvider>
   );

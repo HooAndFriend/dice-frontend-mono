@@ -6,14 +6,26 @@ import UserBox from "../user-box";
 
 // ** Utils Imports
 import { CopyToClipboard } from "react-copy-to-clipboard";
+// ** Type Imports
+import { RoleType } from "@/src/type/common";
 
 interface PropsType {
   data: TeamUserInfo[];
+  role: RoleType;
   uuid: string;
+  handleDeleteTeamUser: (teamUserId: number) => void;
+  handleTeamUserRole: (teamUserId: number, role: RoleType) => void;
   handleOpen: () => void;
 }
 
-const MemberContentView = ({ handleOpen, data, uuid }: PropsType) => {
+const MemberContentView = ({
+  handleOpen,
+  data,
+  uuid,
+  role,
+  handleTeamUserRole,
+  handleDeleteTeamUser,
+}: PropsType) => {
   return (
     <div>
       <div className="font-bold text-xl mb-[14px] font-spoqa">
@@ -53,10 +65,14 @@ const MemberContentView = ({ handleOpen, data, uuid }: PropsType) => {
         {data.map((item) => (
           <UserBox
             key={item.id}
+            id={item.id}
             email={item.user.email}
             nickname={item.user.nickname}
             role={item.role}
             profile={item.user.profile}
+            userRole={role}
+            handleTeamUserRole={handleTeamUserRole}
+            handleDeleteTeamUser={handleDeleteTeamUser}
           />
         ))}
       </div>

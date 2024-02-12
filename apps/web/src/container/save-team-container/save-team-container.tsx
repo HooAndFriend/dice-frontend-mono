@@ -3,12 +3,14 @@ import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Type Imports
 import { SaveTeamParam } from "@/src/type/team";
+import { ImageUploader } from "@/src/components/image-uploader";
 
 interface PropsType {
   data: SaveTeamParam;
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSaveTeam: () => void;
   handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
+  handleImage: (profile: string) => void;
 }
 
 const SaveTeamContainerView = ({
@@ -16,17 +18,20 @@ const SaveTeamContainerView = ({
   handleInput,
   handleEnter,
   handleSaveTeam,
+  handleImage,
 }: PropsType) => {
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
       <div className="-mt-12">
         <div className="flex justify-center w-full">
-          <img
-            src={data.profile}
+          <ImageUploader
+            image={data.profile}
             width="192px"
             height="192px"
-            alt="team-profile"
-            className="border-2 border-[#EBEBEC] rounded-full"
+            borderRadius="96px"
+            setPath={handleImage}
+            borderWidth="3px"
+            borderColor="#EBEBEC"
           />
         </div>
         <div className="flex w-full mt-[30px]">

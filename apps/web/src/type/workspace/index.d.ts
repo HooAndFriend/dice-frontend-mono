@@ -73,9 +73,13 @@ export interface TeamWorkspaceInfo {
 
 export interface WorkspaceInfo {
   id: number;
-  name: string;
-  profile: string;
-  uuid: string;
-  comment: string;
-  workspaceFunction: WorksapceFunction[];
+  role: RoleType;
+  workspace: {
+    id: number;
+    name: string;
+    profile: string;
+    uuid: string;
+    comment: string;
+    workspaceFunction: WorksapceFunction[];
+  };
 }

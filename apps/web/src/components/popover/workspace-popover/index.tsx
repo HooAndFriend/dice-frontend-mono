@@ -25,13 +25,15 @@ const WorkspacePopover = () => {
   const { uuid, id } = useRecoilValue(TeamState);
   const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState);
 
-  const { data, error, isLoading } = useSWR("/v1/workspace/list", async (url) =>
-    Get<GetWorkspaceListResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "team-code": id === 0 ? "personal" : uuid,
-      },
-    })
+  const { data, error, isLoading } = useSWR(
+    "/v1/workspace-user/team",
+    async (url) =>
+      Get<GetWorkspaceListResponse>(url, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "team-code": id === 0 ? "personal" : uuid,
+        },
+      })
   );
 
   const cancelButtonRef = useRef(null);
@@ -40,15 +42,14 @@ const WorkspacePopover = () => {
   const handleModalOpen = () => setModalOpen(true);
 
   const handleUpdateWorkspace = (item: WorkspaceInfo) => {
-    console.log(item);
-    // setWorkspaceState({
-    //   id: item.id,
-    //   name: item.name,
-    //   profile: item.profile,
-    //   uuid: item.uuid,
-    //   workspaceFunction: item.workspaceFunction,
-    //   role : ""
-    // });
+    setWorkspaceState({
+      id: item.id,
+      name: item.workspace.name,
+      profile: item.workspace.profile,
+      uuid: item.workspace.uuid,
+      workspaceFunction: item.workspace.workspaceFunction,
+      role: item.role,
+    });
   };
 
   if (isLoading) return;

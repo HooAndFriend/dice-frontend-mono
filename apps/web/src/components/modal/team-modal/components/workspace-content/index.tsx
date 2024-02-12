@@ -14,15 +14,15 @@ const WorkSpaceContent = () => {
   const { accessToken } = useRecoilValue(AuthState);
   const { uuid } = useRecoilValue(TeamState);
 
-  const { data, error, isLoading } = useSWR("/v1/workspace/list", async (url) =>
-    Get<GetTeamWorkspaceListResponse>(url, {
-      headers: { Authorization: `Bearer ${accessToken}`, "team-code": uuid },
-    })
-  );
+  // const { data, error, isLoading } = useSWR("/v1/workspace/list", async (url) =>
+  //   Get<GetTeamWorkspaceListResponse>(url, {
+  //     headers: { Authorization: `Bearer ${accessToken}`, "team-code": uuid },
+  //   })
+  // );
 
-  if (isLoading) return null;
+  // if (isLoading) return null;
 
-  return <WorkSpaceContentView data={data.data.data} />;
+  return <WorkSpaceContentView data={[]} />;
 };
 
 export default WorkSpaceContent;

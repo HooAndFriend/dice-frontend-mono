@@ -1,5 +1,4 @@
 import { RoleType } from "@/src/type/common";
-import { WorkspaceUserDetailInfo } from "@/src/type/workspace";
 
 interface PropsType {
   nickname: string;
@@ -33,7 +32,12 @@ const UserBox = ({ nickname, email, role, profile }: PropsType) => {
             {role}
           </option>
         </select>
-        <img src="svg/boldX.svg" width={24} height={24} />
+        <img
+          src="svg/boldX.svg"
+          width={24}
+          height={24}
+          onClick={() => console.log("Hello")}
+        />
       </div>
     </div>
   );

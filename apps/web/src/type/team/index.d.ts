@@ -5,6 +5,12 @@ export interface GetUserTeamListResponse extends CommonResponse {
   data: TeamUserInfo[];
 }
 
+export interface SaveTeamParam {
+  name: string;
+  description: string;
+  profile: string;
+}
+
 export interface GetTeamResponse extends CommonResponse, TeamInfo {}
 
 export interface GetTeamUserListResponse extends CommonResponse {

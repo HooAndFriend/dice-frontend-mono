@@ -53,8 +53,8 @@ const WorkspacePopoverView = ({
                 key={item.id}
                 id={id}
                 workspaceId={item.id}
-                profile={item.profile}
-                name={item.name}
+                profile={item.workspace.profile}
+                name={item.workspace.name}
                 onClick={() => {
                   handleUpdateWorkspace(item);
                 }}

@@ -4,11 +4,15 @@ import { ChangeEvent, KeyboardEvent } from "react";
 // ** Type Imports
 import { SaveWorkspaceParam } from "@/src/type/workspace";
 
+// ** Component Imports
+import { ImageUploader } from "@/src/components/image-uploader";
+
 interface PropsType {
   data: SaveWorkspaceParam;
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
   handleWorkspaceTeam: () => void;
   handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
+  handleImage: (profile: string) => void;
 }
 
 const SaveWorkspaceContainerView = ({
@@ -16,17 +20,20 @@ const SaveWorkspaceContainerView = ({
   handleInput,
   handleEnter,
   handleWorkspaceTeam,
+  handleImage,
 }: PropsType) => {
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
       <div className="-mt-12">
         <div className="flex justify-center w-full">
-          <img
-            src={data.profile}
+          <ImageUploader
+            image={data.profile}
             width="192px"
             height="192px"
-            alt="team-profile"
-            className="border-2 border-[#EBEBEC] rounded-full"
+            borderRadius="96px"
+            setPath={handleImage}
+            borderWidth="3px"
+            borderColor="#EBEBEC"
           />
         </div>
         <div className="flex w-full mt-[30px]">

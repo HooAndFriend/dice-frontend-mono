@@ -32,7 +32,13 @@ const MemberContent = ({ handleOpen }: PropsType) => {
 
   if (isLoading) return;
 
-  return <MemberContentView handleOpen={handleOpen} data={data.data.data} />;
+  return (
+    <MemberContentView
+      handleOpen={handleOpen}
+      data={data.data.data}
+      uuid={uuid}
+    />
+  );
 };
 
 export default MemberContent;

@@ -29,7 +29,7 @@ import { SaveWorkspaceParam } from "@/src/type/workspace";
 import { useDialog } from "@/src/context/DialogContext";
 
 const SaveWorkspaceContainer = () => {
-  const { data, handleInput } = useInput<SaveWorkspaceParam>({
+  const { data, handleInput, setData } = useInput<SaveWorkspaceParam>({
     name: "",
     comment: "",
     profile:
@@ -65,6 +65,10 @@ const SaveWorkspaceContainer = () => {
     }
   );
 
+  const handleImage = (profile: string) => {
+    setData((cur) => ({ ...cur, profile }));
+  };
+
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       saveWorkspace.trigger();
@@ -78,6 +82,7 @@ const SaveWorkspaceContainer = () => {
         handleInput={handleInput}
         handleEnter={handleEnter}
         handleWorkspaceTeam={saveWorkspace.trigger}
+        handleImage={handleImage}
       />
     </SwrProvider>
   );

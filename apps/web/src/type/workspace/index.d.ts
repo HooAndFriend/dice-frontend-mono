@@ -1,5 +1,11 @@
 import { RoleType, CommonResponse } from "../common";
 
+export interface SaveWorkspaceParam {
+  name: string;
+  comment: string;
+  profile: string;
+}
+
 export interface WorksapceFunction {
   id: nunber;
   function: WorksapceFunctionType;

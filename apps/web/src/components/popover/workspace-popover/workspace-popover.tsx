@@ -1,7 +1,12 @@
+// ** Next Imports
+import Link from "next/link";
+
+// ** Type Imports
+import { WorkspaceInfo } from "@/src/type/workspace";
+
 // ** Component Imports
 import WorkspaceModal from "@/src/components/modal/workspace-modal";
 import ProfileBox from "../../profile-box";
-import { WorkspaceInfo } from "@/src/type/workspace";
 import WorkspaceBox from "./component/workspace-box";
 
 interface PropsType {
@@ -60,16 +65,18 @@ const WorkspacePopoverView = ({
                 }}
               />
             ))}
-            <div className="flex items-center mt-5">
-              <img
-                className="border rounded-[10px] mr-3"
-                src="/images/plus.png"
-                alt="profile"
-                width="30px"
-                height="30px"
-              />
-              <h4 className="text-[#EBEBEC]">Add Workspace</h4>
-            </div>
+            <Link href="/save-workspace">
+              <div className="flex items-center mt-5">
+                <img
+                  className="border rounded-[10px] mr-3"
+                  src="/images/plus.png"
+                  alt="profile"
+                  width="30px"
+                  height="30px"
+                />
+                <h4 className="text-[#EBEBEC]">Add Workspace</h4>
+              </div>
+            </Link>
           </div>
         </div>
       )}

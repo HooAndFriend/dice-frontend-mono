@@ -3,7 +3,15 @@ import CustomSelect from '@/src/components/input/custom-select';
 import CreateIssue from './components/create-issue';
 import IssueDetail from './components/issue-detail';
 
-const QaContainerView = () => {
+interface PropsType {
+  openCreateIssue: boolean;
+  handleCreateIssueOpen: () => void;
+}
+
+const QaContainerView = ({
+  openCreateIssue,
+  handleCreateIssueOpen,
+}: PropsType) => {
   return (
     <div className="w-full bg-[#FAFAFB] ">
       {/* 오른쪽 내용 */}
@@ -41,7 +49,10 @@ const QaContainerView = () => {
               <div className="h-[15px] w-px bg-[#EBEBEC]"></div>
               <div>COMPLETE</div>
             </div>
-            <div className="w-[120px] h-[50px] rounded-[30px] flex items-center bg-white border border-[#EBEBEC] justify-center ml-8">
+            <div
+              onClick={handleCreateIssueOpen}
+              className="w-[120px] h-[50px] rounded-[30px] flex items-center bg-white border border-[#EBEBEC] justify-center ml-8"
+            >
               <img src="/images/Add_To_Queue.png" width={24} height={24} />
               <div className="font-spoqa font-bold text-center ml-[5px]">
                 Add
@@ -124,8 +135,10 @@ const QaContainerView = () => {
               </div>
             </div>
           </div>
-          {/* <CreateIssue /> */}
-          <IssueDetail />
+          <div className="w-1/2 h-[564px] rounded-[20px] bg-white shadow-md border-[#EBEBEC] p-6 overflow-auto">
+            {openCreateIssue && <CreateIssue />}
+            {/* <IssueDetail /> */}
+          </div>
         </div>
       </div>
     </div>

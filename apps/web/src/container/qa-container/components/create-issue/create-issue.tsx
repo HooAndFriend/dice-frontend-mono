@@ -1,6 +1,6 @@
 const CreateIssueView = () => {
   return (
-    <div className="w-1/2 h-[564px] rounded-[20px] bg-white shadow-md border-[#EBEBEC] p-6 overflow-auto">
+    <>
       <input
         className="h-[50px] w-full p-4 placeholder-[#EBEBEC] border border-[#EBEBEC] rounded-[10px]"
         placeholder="Enter Title"
@@ -55,7 +55,7 @@ const CreateIssueView = () => {
           ADD
         </button>
       </div>
-    </div>
+    </>
   );
 };
 

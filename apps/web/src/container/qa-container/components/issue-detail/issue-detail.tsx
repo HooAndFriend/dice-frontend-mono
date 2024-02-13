@@ -2,7 +2,7 @@ import CustomSelect from '@/src/components/input/custom-select';
 
 const IssueDetailView = () => {
   return (
-    <div className="w-1/2 h-[564px] rounded-[20px] bg-white shadow-md border-[#EBEBEC] p-6 overflow-auto">
+    <>
       <div className="h-[40px] flex items-center justify-between">
         <div className="font-spoqa font-medium text-lg">ISSUE-101</div>
         <div className="flex font-spoqa font-bold">
@@ -134,7 +134,7 @@ const IssueDetailView = () => {
           <div className="ml-[41px] mt-[9px]">댓글입니다.</div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

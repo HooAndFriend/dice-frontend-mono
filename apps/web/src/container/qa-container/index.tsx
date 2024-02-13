@@ -15,36 +15,21 @@ const QaContainer = () => {
 
   const {uuid} = useRecoilValue(WorkspaceState);
   const {accessToken} = useRecoilValue(AuthState);
-  console.log(uuid);
-  console.log(accessToken);
-
-  const dd = [];
 
   const handleCreateIssueOpen = () => {
     setOpen(cur => !cur);
   };
 
-  const {data, error, isLoading} = useSWR(
-    "/v1/qa?status=ALL",
-    async url =>
-      Get<GetIssueListResponse>(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Workspace-code": `${uuid}`,
-        },
-      }),
-    {
-      onSuccess: () => {
-        console.log("가져오기 성공");
+  const {data, error, isLoading} = useSWR("/v1/qa?status=ALL", async url =>
+    Get<GetIssueListResponse>(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Workspace-code": `${uuid}`,
       },
-      onError: error => {
-        console.log(error + "가져오기 실패");
-      },
-    }
+    })
   );
   if (isLoading) return null;
 
-  console.log(data.data.qa);
   return (
     <SwrProvider>
       <QaContainerView

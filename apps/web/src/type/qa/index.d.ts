@@ -22,8 +22,8 @@ export interface CreateIssueResponse extends Response {
 }
 
 export interface GetIssueListResponse extends CommonResponse {
+  qa: IssueInfo[];
   count: number;
-  data: IssueInfo[];
 }
 
 export interface IssueInfo {

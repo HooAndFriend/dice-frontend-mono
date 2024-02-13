@@ -67,7 +67,7 @@ const QaContainerView = ({
         <div className="w-full h-[521px] flex justify-between">
           <div className="w-1/2 h-[521px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC]">
             {data.map(item => (
-              <>
+              <div key={item.id}>
                 <div className="h-[125px] m-6">
                   <div className="w-full h-[30px] flex mb-[5px]">
                     <div className="flex items-center mr-5">{item.number}</div>
@@ -94,7 +94,7 @@ const QaContainerView = ({
                   </div>
                 </div>
                 <div className="h-[1px] bg-[#EBEBEC] mx-6"></div>
-              </>
+              </div>
             ))}
           </div>
           <div className="w-1/2 h-[564px] rounded-[20px] bg-white shadow-md border-[#EBEBEC] p-6 overflow-auto">

@@ -1,7 +1,32 @@
-import IssueDetailView from './issue-detail';
+"use client";
+
+import {GetIssueListResponse} from "@/src/type/qa";
+import IssueDetailView from "./issue-detail";
+import useSWR from "swr";
+import {Get} from "@/src/repository";
+import {useRecoilValue} from "recoil";
+import {AuthState, WorkspaceState} from "@/src/app";
 
 const IssueDetail = () => {
-  return <IssueDetailView />;
+  const {accessToken} = useRecoilValue(AuthState);
+  const {uuid} = useRecoilValue(WorkspaceState);
+
+  const {data, error, isLoading} = useSWR(
+    `/v1/qa?status=ALL&qaId=${1}`,
+    async url =>
+      Get<GetIssueListResponse>(url, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Workspace-code": `${uuid}`,
+        },
+      })
+  );
+
+  if (isLoading) return null;
+
+  console.log(data.data.qa);
+
+  return <IssueDetailView data={data.data.qa[0]} />;
 };
 
 export default IssueDetail;

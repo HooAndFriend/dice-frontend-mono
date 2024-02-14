@@ -1,10 +1,15 @@
-import CustomSelect from '@/src/components/input/custom-select';
+import CustomSelect from "@/src/components/input/custom-select";
+import {IssueInfo} from "@/src/type/qa";
 
-const IssueDetailView = () => {
+interface PropsType {
+  data: IssueInfo;
+}
+
+const IssueDetailView = ({data}: PropsType) => {
   return (
     <>
       <div className="h-[40px] flex items-center justify-between">
-        <div className="font-spoqa font-medium text-lg">ISSUE-101</div>
+        <div className="font-spoqa font-medium text-lg">{data.number}</div>
         <div className="flex font-spoqa font-bold">
           <div className="w-[110px] h-[40px] rounded-[30px] border border-lightGray flex justify-center items-center mr-[10px]">
             <img
@@ -27,10 +32,8 @@ const IssueDetailView = () => {
         </div>
       </div>
       <div className="h-[50px] flex justify-between mt-[30px] font-spoqa">
-        <div className="text-xl font-bold flex items-center">
-          상세보기 버튼 누락
-        </div>
-        <CustomSelect />
+        <div className="text-xl font-bold flex items-center">{data.title} </div>
+        <CustomSelect option={data.status} />
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
       <div className="h-5 mt-5 flex">
@@ -38,45 +41,71 @@ const IssueDetailView = () => {
         <div className="flex mr-[45px]">
           <img
             className="rounded-full border border-[#EBEBEC] mr-[10px]"
-            src="/images/dice.png"
+            src={data.admin.profile}
             width={20}
             height={20}
           />
-          <div className="flex items-center font-normal">이가인</div>
+          <div className="flex items-center font-normal">
+            {data.admin.nickname}
+          </div>
         </div>
         <div className="font-spoqa mr-[80px] font-medium">Worker</div>
         <div className="flex">
           <img
             className="rounded-full border border-[#EBEBEC] mr-[10px]"
-            src="/images/dice.png"
+            src={data.admin.profile}
             width={20}
             height={20}
           />
-          <div className="flex items-center font-normal">김인후</div>
+          <div className="flex items-center font-normal">
+            {data.admin.nickname}
+          </div>
         </div>
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
       <div className="h-[20px] flex mt-5 ">
         <div className="font-spoqa font-medium mr-[65px]">RegDate</div>
         <div className="font-spoqa font-normal mr-[30px] text-darkGray tracking-[1px]">
-          2024-01-15
+          {data.modifiedDate.substring(0, 10)}
         </div>
         <div className="font-spoqa font-medium mr-[58px]">modDate</div>
         <div className="font-spoqa font-normal text-darkGray tracking-[1px]">
-          2024-01-15
+          {data.modifiedDate.substring(0, 10)}
         </div>
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
       <div className="mt-5 mb-[14px]">As-Is</div>
-      <input className="border border-[#EBEBEC] h-[80px] w-full rounded-[10px]" />
+      <input
+        id="asIs"
+        value={data.asIs}
+        className="border border-[#EBEBEC] h-[80px] w-full rounded-[10px]"
+      />
       <div className="mt-5 mb-[14px]">To-Be</div>
-      <input className="border border-[#EBEBEC] h-[80px] w-full rounded-[10px]" />
+      <input
+        id="toBe"
+        value={data.toBe}
+        className="border border-[#EBEBEC] h-[80px] w-full rounded-[10px]"
+      />
       <div className="mt-5 mb-[14px]">Memo</div>
-      <input className="border border-[#EBEBEC] h-[80px] w-full rounded-[10px]" />
+      <input
+        id="memo"
+        value={data.memo}
+        className="border border-[#EBEBEC] h-[80px] w-full rounded-[10px]"
+      />
       <div className="mt-5 mb-[14px]">
         FILE <span className="font-spoqa text-darkGray text-sm">(MAX:4)</span>
       </div>
-      <div className="w-[40px] h-[40px] rounded-[6px] bg-[#D9E0FF]"></div>
+      {data.file ? (
+        data.file.map(item => {
+          <img
+            src={item.url}
+            className="w-[40px] h-[40px] rounded-[6px] bg-[#D9E0FF]"
+          />;
+        })
+      ) : (
+        <div className="w-[40px] h-[40px] rounded-[6px] bg-[#D9E0FF]"></div>
+      )}
+
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
       <div className="flex mt-5">
         <input className="w-full border border-lightGray rounded-[10px] mr-[10px]" />

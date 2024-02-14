@@ -7,12 +7,16 @@ import {Get} from "@/src/repository";
 import {useRecoilValue} from "recoil";
 import {AuthState, WorkspaceState} from "@/src/app";
 
-const IssueDetail = () => {
+interface PropsType {
+  qaId: number;
+}
+
+const IssueDetail = ({qaId}: PropsType) => {
   const {accessToken} = useRecoilValue(AuthState);
   const {uuid} = useRecoilValue(WorkspaceState);
 
   const {data, error, isLoading} = useSWR(
-    `/v1/qa?status=ALL&qaId=${1}`,
+    `/v1/qa?status=ALL&qaId=${qaId}`,
     async url =>
       Get<GetIssueListResponse>(url, {
         headers: {

@@ -61,11 +61,21 @@ export interface GetCommentListResponse extends CommonResponse {
 
 export interface CommentInfo {
   commentId: number;
+  content: string;
+  createdDate: string;
+  modifiedDate: string;
   user: {
     profile: string;
     nickname: string;
-    content: String;
-    createdDate: string;
-    modifiedDate: string;
   };
+}
+
+export interface AddCommentParams {
+  content: string;
+  qaId: number;
+}
+
+export interface AddCommentResponse extends Response {
+  statusCode: number;
+  message: string;
 }

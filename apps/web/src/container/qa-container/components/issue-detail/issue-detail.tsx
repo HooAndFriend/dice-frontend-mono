@@ -1,14 +1,23 @@
 import CustomSelect from "@/src/components/input/custom-select";
-import {CommentInfo, IssueInfo} from "@/src/type/qa";
+import {AddCommentParams, CommentInfo, IssueInfo} from "@/src/type/qa";
 import IssueComment from "../issue-comment";
+import {ChangeEvent} from "react";
 
 interface PropsType {
   data: IssueInfo;
   commentData: CommentInfo[];
+  comment: AddCommentParams;
+  handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleAdd: () => void;
 }
 
-const IssueDetailView = ({data, commentData}: PropsType) => {
-  console.log(commentData);
+const IssueDetailView = ({
+  data,
+  commentData,
+  comment,
+  handleInput,
+  handleAdd,
+}: PropsType) => {
   return (
     <>
       <div className="h-[40px] flex items-center justify-between">
@@ -111,14 +120,23 @@ const IssueDetailView = ({data, commentData}: PropsType) => {
 
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
       <div className="flex mt-5">
-        <input className="w-full border border-lightGray rounded-[10px] mr-[10px]" />
-        <div className="w-[40px] h-[40px] bg-black text-white rounded-[10px] flex justify-center items-center">
+        <input
+          id="content"
+          name="content"
+          onChange={handleInput}
+          value={comment.content}
+          className="w-full border border-lightGray rounded-[10px] mr-[10px]"
+        />
+        <div
+          onClick={handleAdd}
+          className="w-[40px] h-[40px] bg-black text-white rounded-[10px] flex justify-center items-center"
+        >
           <img src="/images/plus.png" width={24} height={24} />
         </div>
       </div>
       <div className="mt-9">
         {commentData.map(item => (
-          <IssueComment data={item} />
+          <IssueComment key={item.commentId} data={item} />
         ))}
       </div>
     </>

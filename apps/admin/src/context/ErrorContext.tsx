@@ -1,5 +1,4 @@
 import { useState, createContext, useContext } from 'react'
-import { Alert } from '@/src/components/Alert'
 
 interface ContextProps {
   onError(title: string, contents: string): void
@@ -25,7 +24,7 @@ export function ErrorProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <Context.Provider value={{ onError }}>
-      <Alert open={open} {...alertContents} type="alert" onClose={onClose} />
+      {/* <Alert open={open} {...alertContents} type="alert" onClose={onClose} /> */}
       {children}
     </Context.Provider>
   )

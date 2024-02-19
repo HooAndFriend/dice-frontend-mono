@@ -6,14 +6,20 @@ import {IssueInfo} from "@/src/type/qa";
 
 interface PropsType {
   openCreateIssue: boolean;
+  openIssueDetail: boolean;
   data: IssueInfo[];
+  qaId: number;
   handleCreateIssueOpen: () => void;
+  handleIssueDetailOpen: (id: number) => void;
 }
 
 const QaContainerView = ({
   openCreateIssue,
+  openIssueDetail,
   data,
+  qaId,
   handleCreateIssueOpen,
+  handleIssueDetailOpen,
 }: PropsType) => {
   return (
     <div className="w-full bg-[#FAFAFB] ">
@@ -24,7 +30,7 @@ const QaContainerView = ({
           <div className="font-spoqa text-base font-bold ml-[25px] mr-[33px] text-center">
             Title
           </div>
-          <CustomSelect />
+          <CustomSelect option="title" />
           <div className="font-spoqa text-base font-bold ml-[50px] mr-[29px] text-center">
             Search
           </div>
@@ -68,7 +74,10 @@ const QaContainerView = ({
           <div className="w-1/2 h-[521px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC]">
             {data.map(item => (
               <div key={item.id}>
-                <div className="h-[125px] m-6">
+                <div
+                  onClick={() => handleIssueDetailOpen(item.id)}
+                  className="h-[125px] m-6"
+                >
                   <div className="w-full h-[30px] flex mb-[5px]">
                     <div className="flex items-center mr-5">{item.number}</div>
                     <div className="bg-[#F13333] w-[67px] h-[30px] rounded-[10px] text-white flex items-center justify-center font-spoqa text-base text-center">
@@ -99,7 +108,7 @@ const QaContainerView = ({
           </div>
           <div className="w-1/2 h-[564px] rounded-[20px] bg-white shadow-md border-[#EBEBEC] p-6 overflow-auto">
             {openCreateIssue && <CreateIssue />}
-            {/* <IssueDetail /> */}
+            {openIssueDetail && <IssueDetail qaId={qaId} />}
           </div>
         </div>
       </div>

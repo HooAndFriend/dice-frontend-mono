@@ -1,8 +1,12 @@
 // ** Component Imports
 import CustomSelectView from "./custom-select";
 
-const CustomSelect = () => {
-  return <CustomSelectView />;
+interface PropsType {
+  option: string;
+}
+
+const CustomSelect = ({option}: PropsType) => {
+  return <CustomSelectView option={option} />;
 };
 
 export default CustomSelect;

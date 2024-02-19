@@ -53,3 +53,29 @@ export interface IssueInfo {
   createdDate: string;
   modifiedDate: string;
 }
+
+export interface GetCommentListResponse extends CommonResponse {
+  count: number;
+  data: CommentInfo[];
+}
+
+export interface CommentInfo {
+  commentId: number;
+  content: string;
+  createdDate: string;
+  modifiedDate: string;
+  user: {
+    profile: string;
+    nickname: string;
+  };
+}
+
+export interface AddCommentParams {
+  content: string;
+  qaId: number;
+}
+
+export interface AddCommentResponse extends Response {
+  statusCode: number;
+  message: string;
+}

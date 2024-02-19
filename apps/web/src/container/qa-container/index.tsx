@@ -9,15 +9,25 @@ import useSWR from "swr";
 import {GetIssueListResponse} from "@/src/type/qa";
 import {useRecoilValue} from "recoil";
 import {AuthState, WorkspaceState} from "@/src/app";
+import IssueDetail from "./components/issue-detail";
 
 const QaContainer = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const [detail, setDetail] = useState<boolean>(false);
+  const [qaId, setQaId] = useState<number>();
 
   const {uuid} = useRecoilValue(WorkspaceState);
   const {accessToken} = useRecoilValue(AuthState);
 
   const handleCreateIssueOpen = () => {
+    setDetail(false);
     setOpen(cur => !cur);
+  };
+
+  const handleIssueDetailOpen = id => {
+    setOpen(false);
+    setDetail(cur => !cur);
+    setQaId(id);
   };
 
   const {data, error, isLoading} = useSWR("/v1/qa?status=ALL", async url =>
@@ -34,7 +44,10 @@ const QaContainer = () => {
     <SwrProvider>
       <QaContainerView
         openCreateIssue={open}
+        openIssueDetail={detail}
         handleCreateIssueOpen={handleCreateIssueOpen}
+        handleIssueDetailOpen={handleIssueDetailOpen}
+        qaId={qaId}
         data={data.data.qa}
       />
     </SwrProvider>

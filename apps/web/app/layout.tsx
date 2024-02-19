@@ -1,6 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
 
+// ** Provider Imports
+import RocoilRootProvider from "@/src/components/provider/recoil-provider";
+import { DialogProvider } from "../src/context/DialogContext";
+
 export const metadata: Metadata = {
   title: "HI-DICE",
   description: "HI-DICE",
@@ -16,7 +20,11 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <RocoilRootProvider>
+          <DialogProvider>{children}</DialogProvider>
+        </RocoilRootProvider>
+      </body>
     </html>
   );
 }

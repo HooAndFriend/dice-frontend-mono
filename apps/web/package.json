@@ -18,6 +18,8 @@
     "aws-sdk": "^2.1555.0",
     "axios": "^1.6.5",
     "firebase": "^10.7.2",
+    "flowbite": "^2.3.0",
+    "flowbite-react": "^0.7.2",
     "loadsh": "^0.0.4",
     "next": "^14.0.3",
     "react": "^18.2.0",

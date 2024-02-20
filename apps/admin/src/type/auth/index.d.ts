@@ -5,7 +5,7 @@ export interface LoginParam {
   password: string
 }
 
-export interface LoginResponse extends Response {
+export interface LoginResponse {
   admin: {
     createdDate: Date
     modifiedDate: Date

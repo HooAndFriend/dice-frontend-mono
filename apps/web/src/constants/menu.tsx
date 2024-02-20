@@ -13,7 +13,7 @@ export const MenuList = [
   {
     id: 1,
     name: "TICKET",
-    link: "/dashboard/ticket",
+    link: "/dashboard/epic",
     icon: TicketIcon,
     isClicked: false,
   },

@@ -1,5 +1,3 @@
-"use client";
-
 // ** Component Imports
 import TicketContainerView from "./ticket-container";
 

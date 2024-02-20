@@ -20,21 +20,21 @@ const TicketSidebar = () => {
         {
           id: 1,
           name: "Epic",
-          link: "/dashboard/ticket",
+          link: "/dashboard/epic",
           icon: EpicIcon,
           isClicked: false,
         },
         {
           id: 2,
           name: "Ticket",
-          link: "/dashboard/ticket/ticket",
+          link: "/dashboard/epic/ticket",
           icon: TicketIcon,
           isClicked: false,
         },
         {
           id: 3,
           name: "Sprint",
-          link: "/dashboard/ticket/sprint",
+          link: "/dashboard/epic/sprint",
           icon: SprintIcon,
           isClicked: false,
         },
@@ -44,7 +44,7 @@ const TicketSidebar = () => {
         }
         return item;
       }),
-    []
+    [pathname]
   );
 
   return <TicketSidebarView sidebarMenuList={sidebarMenuList} />;

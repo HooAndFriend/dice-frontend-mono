@@ -1,6 +1,7 @@
 // ** Component Imports
 import CustomInput from "@/src/components/input/custom-input";
 import CustomSelect from "@/src/components/input/custom-select";
+import TicketTable from "./components/ticket-table";
 
 interface PropsType {}
 
@@ -32,6 +33,10 @@ const TicketContainerView = ({}: PropsType) => {
           <CustomInput />
         </div>
       </div>
+      <div className="mt-8">
+        <h1 className="pl-4 font-bold text-md">총 4건</h1>
+      </div>
+      <TicketTable />
     </div>
   );
 };

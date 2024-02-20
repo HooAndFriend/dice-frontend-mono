@@ -1,20 +1,36 @@
+import Image from "next/image";
+
 interface PropsType {
   image: string;
   alt: string;
-  width?: string | number;
-  height?: string | number;
+  width?: number;
+  height?: number;
 }
 
 const ProfileBox = ({ image, alt, width, height }: PropsType) => {
   return (
     <div>
-      <img
-        src={image}
-        width={width ? width : "30px"}
-        height={height ? height : "30px"}
-        alt={alt}
-        className="rounded-full border-2 border-[#EBEBEC] mr-[10px]"
-      />
+      {image ? (
+        <Image
+          src={image}
+          width={width ? width : 30}
+          height={height ? height : 30}
+          alt={alt}
+          className={`w-[${width ? width : "30px"}] h-[${
+            height ? height : "30px"
+          }] rounded-full border-2 border-[#EBEBEC] mr-[10px]`}
+        />
+      ) : (
+        <Image
+          src="/images/dice.png"
+          width={width ? width : 30}
+          height={height ? height : 30}
+          alt={alt}
+          className={`w-[${width ? width : "30px"}] h-[${
+            height ? height : "30px"
+          }] rounded-full border-2 border-[#EBEBEC] mr-[10px]`}
+        />
+      )}
     </div>
   );
 };

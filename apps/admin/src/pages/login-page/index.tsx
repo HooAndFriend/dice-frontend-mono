@@ -39,9 +39,15 @@ const LoginPage = () => {
     '/v1/auth',
     async (url: string) => await Post<LoginResponse>(url, data),
     {
-      onSuccess: (data) => {
-        // setAuthState(data.data?.admin)
-        console.log(data)
+      onSuccess: ({ data: { admin, token } }) => {
+        setAdminState({
+          email: admin.email,
+          nickname: admin.nickname,
+          profile: admin.profile,
+          role: admin.role,
+        })
+        setAuthState(token)
+        navigate('/dashboard')
       },
       onError: (error) => {
         console.log(error)

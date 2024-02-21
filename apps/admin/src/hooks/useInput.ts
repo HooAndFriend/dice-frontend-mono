@@ -1,4 +1,3 @@
-import { SelectChangeEvent } from '@mui/material'
 import { useState, useCallback, ChangeEvent } from 'react'
 
 function useInput<T extends Record<string, any>>(initialValue: T) {
@@ -16,7 +15,7 @@ function useInput<T extends Record<string, any>>(initialValue: T) {
   )
 
   const handleSelect = useCallback(
-    (e: SelectChangeEvent<HTMLInputElement>) => {
+    (e: ChangeEvent<HTMLSelectElement>) => {
       const { value, name } = e.target
       setData({
         ...data,

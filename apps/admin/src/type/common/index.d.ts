@@ -6,7 +6,7 @@ export interface PaginationRequest {
 export interface CommonResponse<T> {
   statusCode: number
   message: string
-  data?: T
+  data: T
 }
 
 export type RoleType = 'ADMIN' | 'VIEWER' | 'WRITEER' | ''

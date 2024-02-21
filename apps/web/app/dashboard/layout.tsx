@@ -1,7 +1,7 @@
 "use client";
 
 // ** Next Imports
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 // ** Component Imports
 import DashboardSidebard from "@/src/components/dashboard/dashboard-sidebar";
@@ -16,13 +16,13 @@ const DashboardRayout = ({
 }: {
   children: React.ReactNode;
 }): JSX.Element => {
-  const { accessToken } = useRecoilValue(AuthState);
+  // const { accessToken } = useRecoilValue(AuthState);
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  if (accessToken === "") {
-    router.push("/");
-  }
+  // if (accessToken === "") {
+  //   router.push("/");
+  // }
 
   return (
     <div className="flex flex-col h-screen">

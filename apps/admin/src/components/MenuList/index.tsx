@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 
 // ** Component Imports
 import DashboardPage from '@/src/pages/dashboard-page'
+import UserPage from '@/src/pages/user-page'
 
 interface MenuType {
   route: string
@@ -19,7 +20,7 @@ const MenuList: MenuType[] = [
   {
     route: '/user',
     name: '사용자 관리',
-    element: <h1>사용자 관리</h1>,
+    element: <UserPage />,
   },
   {
     route: '/team',

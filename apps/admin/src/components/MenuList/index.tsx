@@ -7,7 +7,7 @@ interface MenuType {
   element: ReactNode
 }
 
-const MenuItem: MenuType[] = [
+const MenuList: MenuType[] = [
   {
     route: '/',
     name: '대시보드',
@@ -40,4 +40,4 @@ const MenuItem: MenuType[] = [
   },
 ]
 
-export default MenuItem
+export default MenuList

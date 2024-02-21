@@ -4,6 +4,7 @@ import { ReactNode } from 'react'
 // ** Component Imports
 import DashboardPage from '@/src/pages/dashboard-page'
 import UserPage from '@/src/pages/user-page'
+import TeamPage from '@/src/pages/team-page'
 
 interface MenuType {
   route: string
@@ -25,7 +26,7 @@ const MenuList: MenuType[] = [
   {
     route: '/team',
     name: '팀 관리',
-    element: <h1>팀 관리</h1>,
+    element: <TeamPage />,
   },
   {
     route: '/workspace',

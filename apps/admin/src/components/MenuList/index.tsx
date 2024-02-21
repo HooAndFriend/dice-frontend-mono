@@ -1,6 +1,9 @@
 // ** React Imports
 import { ReactNode } from 'react'
 
+// ** Component Imports
+import DashboardPage from '@/src/pages/dashboard-page'
+
 interface MenuType {
   route: string
   name: string
@@ -11,7 +14,7 @@ const MenuList: MenuType[] = [
   {
     route: '/',
     name: '대시보드',
-    element: <h1>대시보드</h1>,
+    element: <DashboardPage />,
   },
   {
     route: '/user',

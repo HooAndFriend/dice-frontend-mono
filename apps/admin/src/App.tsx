@@ -1,23 +1,26 @@
 // ** Router Imports
 import { Routes, Route } from 'react-router-dom'
 
-// ** Router Imports
-import LoginPage from './pages/login-page'
-
 // ** Context Imports
 import { ErrorProvider } from './context/ErrorContext'
 import { DialogProvider } from './context/DialogContext'
-import Dashboard from './components/Dashboard'
 
-// ** Style Imports
+// ** Component Imports
+import LoginPage from './pages/login-page'
+import Dashboard from './components/Dashboard'
+import { ProtectRoute, PublicRoute } from './utils/protect-route'
 
 const App = () => {
   return (
     <ErrorProvider>
       <DialogProvider>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route element={<PublicRoute />}>
+            <Route path="/" element={<LoginPage />} />
+          </Route>
+          <Route element={<ProtectRoute />}>
+            <Route path="/dashboard/*" element={<Dashboard />} />
+          </Route>
         </Routes>
       </DialogProvider>
     </ErrorProvider>

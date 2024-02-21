@@ -6,6 +6,7 @@ import DashboardPage from '@/src/pages/dashboard-page'
 import UserPage from '@/src/pages/user-page'
 import TeamPage from '@/src/pages/team-page'
 import WorkspacePage from '@/src/pages/workspace-page'
+import CsPage from '@/src/pages/cs-page'
 
 interface MenuType {
   route: string
@@ -37,7 +38,7 @@ const MenuList: MenuType[] = [
   {
     route: '/cs',
     name: '고객센터 관리',
-    element: <h1>고객센터 관리</h1>,
+    element: <CsPage />,
   },
   {
     route: '/manage',

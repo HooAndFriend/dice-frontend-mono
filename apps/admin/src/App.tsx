@@ -9,6 +9,7 @@ import { DialogProvider } from './context/DialogContext'
 import LoginPage from './pages/login-page'
 import Dashboard from './components/Dashboard'
 import { ProtectRoute, PublicRoute } from './utils/protect-route'
+import PasswordPage from './pages/password-page'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Routes>
           <Route element={<PublicRoute />}>
             <Route path="/" element={<LoginPage />} />
+            <Route path="/password" element={<PasswordPage />} />
           </Route>
           <Route element={<ProtectRoute />}>
             <Route path="/dashboard/*" element={<Dashboard />} />

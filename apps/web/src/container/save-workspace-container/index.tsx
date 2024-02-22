@@ -9,7 +9,6 @@ import { KeyboardEvent } from "react";
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
 import { Post } from "@/src/repository";
-import SwrProvider from "@/src/components/provider/swr-provider";
 
 // ** Recoil Imports
 import { useRecoilValue } from "recoil";
@@ -76,15 +75,13 @@ const SaveWorkspaceContainer = () => {
   };
 
   return (
-    <SwrProvider>
-      <SaveWorkspaceContainerView
-        data={data}
-        handleInput={handleInput}
-        handleEnter={handleEnter}
-        handleWorkspaceTeam={saveWorkspace.trigger}
-        handleImage={handleImage}
-      />
-    </SwrProvider>
+    <SaveWorkspaceContainerView
+      data={data}
+      handleInput={handleInput}
+      handleEnter={handleEnter}
+      handleWorkspaceTeam={saveWorkspace.trigger}
+      handleImage={handleImage}
+    />
   );
 };
 

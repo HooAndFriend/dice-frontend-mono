@@ -1,36 +1,34 @@
 "use client";
 
-import SwrProvider from "@/src/components/provider/swr-provider";
 import QaContainerView from "./qa-container";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
-import {Get} from "@/src/repository";
+import { Get } from "@/src/repository";
 import useSWR from "swr";
-import {GetIssueListResponse} from "@/src/type/qa";
-import {useRecoilValue} from "recoil";
-import {AuthState, WorkspaceState} from "@/src/app";
-import IssueDetail from "./components/issue-detail";
+import { GetIssueListResponse } from "@/src/type/qa";
+import { useRecoilValue } from "recoil";
+import { AuthState, WorkspaceState } from "@/src/app";
 
 const QaContainer = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [detail, setDetail] = useState<boolean>(false);
   const [qaId, setQaId] = useState<number>();
 
-  const {uuid} = useRecoilValue(WorkspaceState);
-  const {accessToken} = useRecoilValue(AuthState);
+  const { uuid } = useRecoilValue(WorkspaceState);
+  const { accessToken } = useRecoilValue(AuthState);
 
   const handleCreateIssueOpen = () => {
     setDetail(false);
-    setOpen(cur => !cur);
+    setOpen((cur) => !cur);
   };
 
-  const handleIssueDetailOpen = id => {
+  const handleIssueDetailOpen = (id) => {
     setOpen(false);
-    setDetail(cur => !cur);
+    setDetail((cur) => !cur);
     setQaId(id);
   };
 
-  const {data, error, isLoading} = useSWR("/v1/qa?status=ALL", async url =>
+  const { data, error, isLoading } = useSWR("/v1/qa?status=ALL", async (url) =>
     Get<GetIssueListResponse>(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -41,16 +39,14 @@ const QaContainer = () => {
   if (isLoading) return null;
 
   return (
-    <SwrProvider>
-      <QaContainerView
-        openCreateIssue={open}
-        openIssueDetail={detail}
-        handleCreateIssueOpen={handleCreateIssueOpen}
-        handleIssueDetailOpen={handleIssueDetailOpen}
-        qaId={qaId}
-        data={data.data.qa}
-      />
-    </SwrProvider>
+    <QaContainerView
+      openCreateIssue={open}
+      openIssueDetail={detail}
+      handleCreateIssueOpen={handleCreateIssueOpen}
+      handleIssueDetailOpen={handleIssueDetailOpen}
+      qaId={qaId}
+      data={data.data.qa}
+    />
   );
 };
 

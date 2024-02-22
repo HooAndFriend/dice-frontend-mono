@@ -1,12 +1,7 @@
-import SwrProvider from "@/src/components/provider/swr-provider";
 import CreateWorkspaceContainerView from "./createworkspace-container";
 
 const CreateWorkspaceContainer = () => {
-  return (
-    <SwrProvider>
-      <CreateWorkspaceContainerView />
-    </SwrProvider>
-  );
+  return <CreateWorkspaceContainerView />;
 };
 
 export default CreateWorkspaceContainer;

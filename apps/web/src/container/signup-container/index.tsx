@@ -9,7 +9,6 @@ import { ChangeEvent, KeyboardEvent, useState } from "react";
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
 import { Post } from "@/src/repository";
-import SwrProvider from "@/src/components/provider/swr-provider";
 
 // ** Recoil Imports
 import { useSetRecoilState } from "recoil";
@@ -160,17 +159,15 @@ const SignupContainer = () => {
   };
 
   return (
-    <SwrProvider>
-      <SignupContainerView
-        signupUser={signupUser}
-        passwordCheck={passwordCheck}
-        handlePasswordCheck={handlePasswordCheck}
-        handleInput={handleInput}
-        handleJoin={handleJoin}
-        handleCancel={handleCancel}
-        handleEnter={handleEnter}
-      />
-    </SwrProvider>
+    <SignupContainerView
+      signupUser={signupUser}
+      passwordCheck={passwordCheck}
+      handlePasswordCheck={handlePasswordCheck}
+      handleInput={handleInput}
+      handleJoin={handleJoin}
+      handleCancel={handleCancel}
+      handleEnter={handleEnter}
+    />
   );
 };
 

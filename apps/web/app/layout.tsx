@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 // ** Provider Imports
 import RocoilRootProvider from "@/src/components/provider/recoil-provider";
 import { DialogProvider } from "../src/context/DialogContext";
+import SwrProvider from "@/src/components/provider/swr-provider";
 
 export const metadata: Metadata = {
   title: "HI-DICE",
@@ -21,9 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <RocoilRootProvider>
-          <DialogProvider>{children}</DialogProvider>
-        </RocoilRootProvider>
+        <SwrProvider>
+          <RocoilRootProvider>
+            <DialogProvider>{children}</DialogProvider>
+          </RocoilRootProvider>
+        </SwrProvider>
       </body>
     </html>
   );

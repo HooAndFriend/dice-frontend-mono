@@ -1,5 +1,3 @@
-import CustomCalendar from "@/src/components/Calendar";
-
 interface PropsType {
   width?: string;
   height?: string;

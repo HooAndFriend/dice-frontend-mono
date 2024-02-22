@@ -11,6 +11,9 @@
     "docker:build": "docker build --no-cache -t pinomaker/dice-web ."
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.11",
+    "@fullcalendar/daygrid": "^6.1.11",
+    "@fullcalendar/react": "^6.1.11",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "@reduxjs/toolkit": "^2.0.1",

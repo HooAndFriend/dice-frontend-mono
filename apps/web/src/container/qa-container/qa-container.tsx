@@ -1,9 +1,9 @@
 // ** Component Imports
-import CustomSelect from "@/src/components/input/custom-select";
+import CustomSelect from "@/src/components/Input/custom-select";
 import CreateIssue from "./components/create-issue";
 import IssueDetail from "./components/issue-detail";
 import { IssueInfo } from "@/src/type/qa";
-import CustomInput from "@/src/components/input/custom-input";
+import CustomInput from "@/src/components/Input/custom-input";
 
 interface PropsType {
   openCreateIssue: boolean;

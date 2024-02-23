@@ -1,4 +1,4 @@
-import TicketSidebar from "@/src/components/dashboard/ticket-sidebar";
+import TicketSidebar from "@/src/components/Dashboard/ticket-sidebar";
 
 export default function Layout({
   children,

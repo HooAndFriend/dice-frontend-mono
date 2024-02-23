@@ -4,8 +4,8 @@
 // import { useRouter } from "next/navigation";
 
 // ** Component Imports
-import DashboardSidebard from "@/src/components/dashboard/dashboard-sidebar";
-import DashboardHeader from "@/src/components/dashboard/dashboard-header";
+import DashboardSidebard from "@/src/components/Dashboard/dashboard-sidebar";
+import DashboardHeader from "@/src/components/Dashboard/dashboard-header";
 
 // ** Recoil Imports
 import { useRecoilValue } from "recoil";

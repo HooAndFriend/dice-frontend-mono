@@ -1,7 +1,7 @@
 // ** Component Imports
 import { MenuType } from "@/src/constants/menu";
-import MenuItem from "../../menu-item";
-import WorkspacePopover from "../../popover/workspace-popover";
+import MenuItem from "../../MenuItem";
+import WorkspacePopover from "../../Popover/workspace-popover";
 
 interface Props {
   sidbarMenuList: MenuType[];

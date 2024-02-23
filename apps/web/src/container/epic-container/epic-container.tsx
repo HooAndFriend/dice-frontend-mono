@@ -1,6 +1,6 @@
 // ** Component Imports
-import CustomInput from "@/src/components/input/custom-input";
-import CustomSelect from "@/src/components/input/custom-select";
+import CustomInput from "@/src/components/Input/custom-input";
+import CustomSelect from "@/src/components/Input/custom-select";
 import TicketTable from "./components/ticket-table";
 
 interface PropsType {}

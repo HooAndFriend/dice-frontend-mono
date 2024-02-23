@@ -1,7 +1,7 @@
 // ** Component Imports
-import TeamModal from "@/src/components/modal/team-modal";
-import ProfileBox from "../../profile-box";
-import UserModal from "../../modal/user-modal";
+import TeamModal from "@/src/components/Modal/team-modal";
+import ProfileBox from "../../ProfileBox";
+import UserModal from "../../Modal/user-modal";
 import TeamBox from "./component/team-box";
 
 // ** Type Imports

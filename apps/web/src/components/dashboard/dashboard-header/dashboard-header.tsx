@@ -2,7 +2,7 @@
 import Link from "next/link";
 
 // ** Component Imports
-import TeamPopover from "@/src/components/popover/team-popover";
+import TeamPopover from "@/src/components/Popover/team-popover";
 
 interface PropsType {
   name: string;

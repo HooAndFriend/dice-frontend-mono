@@ -1,5 +1,5 @@
 // ** Component Imports
-import ProfileBox from "@/src/components/profile-box";
+import ProfileBox from "@/src/components/ProfileBox";
 
 const TicketToggleItem = () => {
   return (

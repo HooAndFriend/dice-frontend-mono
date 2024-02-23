@@ -1,7 +1,7 @@
-import CustomSelect from "@/src/components/input/custom-select";
-import {AddCommentParams, CommentInfo, IssueInfo} from "@/src/type/qa";
+import CustomSelect from "@/src/components/Input/custom-select";
+import { AddCommentParams, CommentInfo, IssueInfo } from "@/src/type/qa";
 import IssueComment from "../issue-comment";
-import {ChangeEvent} from "react";
+import { ChangeEvent } from "react";
 
 interface PropsType {
   data: IssueInfo;
@@ -108,7 +108,7 @@ const IssueDetailView = ({
         FILE <span className="font-spoqa text-darkGray text-sm">(MAX:4)</span>
       </div>
       {data.file ? (
-        data.file.map(item => {
+        data.file.map((item) => {
           <img
             src={item.url}
             className="w-[40px] h-[40px] rounded-[6px] bg-[#D9E0FF]"
@@ -135,7 +135,7 @@ const IssueDetailView = ({
         </div>
       </div>
       <div className="mt-9">
-        {commentData.map(item => (
+        {commentData.map((item) => (
           <IssueComment key={item.commentId} data={item} />
         ))}
       </div>

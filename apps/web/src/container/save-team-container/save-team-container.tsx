@@ -3,7 +3,7 @@ import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Type Imports
 import { SaveTeamParam } from "@/src/type/team";
-import { ImageUploader } from "@/src/components/image-uploader";
+import { ImageUploader } from "@/src/components/ImageUploader";
 
 interface PropsType {
   data: SaveTeamParam;

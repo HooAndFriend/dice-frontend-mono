@@ -5,9 +5,9 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 // ** Component Imports
-import SettingContent from "@/src/components/modal/workspace-modal/components/setting-content";
-import MemberContent from "@/src/components/modal/workspace-modal/components/member-content";
-import AddFunctionsContent from "@/src/components/modal/workspace-modal/components/addfunctions-content";
+import SettingContent from "@/src/components/Modal/workspace-modal/components/setting-content";
+import MemberContent from "@/src/components/Modal/workspace-modal/components/member-content";
+import AddFunctionsContent from "@/src/components/Modal/workspace-modal/components/addfunctions-content";
 import AddMemberContent from "./components/addMember-content";
 
 interface PropsType {

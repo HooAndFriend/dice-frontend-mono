@@ -6,7 +6,7 @@ interface PropsType {}
 
 const DashboardContainerView = ({}: PropsType) => {
   return (
-    <div className="w-calc(100% - 70px) p-5 flex justify-center">
+    <div className="flex justify-center p-5">
       <div>
         <div className="flex items-center justify-between">
           <h1 className="text-[32px] font-bold">HooAndFriend</h1>

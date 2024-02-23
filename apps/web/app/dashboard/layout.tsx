@@ -4,7 +4,7 @@
 // import { useRouter } from "next/navigation";
 
 // ** Component Imports
-import DashboardSidebard from "@/src/components/Dashboard/dashboard-sidebar";
+import DashboardSidebar from "@/src/components/Dashboard/dashboard-sidebar";
 import DashboardHeader from "@/src/components/Dashboard/dashboard-header";
 
 // ** Recoil Imports
@@ -25,11 +25,11 @@ const DashboardRayout = ({
   // }
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col w-full h-screen">
       <DashboardHeader />
-      <div className="flex flex-1">
-        <DashboardSidebard />
-        <div className="flex-1 bg-[#FAFAFB]">{children}</div>
+      <div className="flex flex-1 w-full">
+        <DashboardSidebar />
+        <div className="flex-1 bg-[#FAFAFB] overflow-hidden">{children}</div>
       </div>
     </div>
   );

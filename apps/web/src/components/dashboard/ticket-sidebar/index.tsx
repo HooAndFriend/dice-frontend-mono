@@ -10,6 +10,7 @@ import TicketSidebarView from "./ticket-sidebar";
 import TicketIcon from "@/public/svg/ticket-icon.svg";
 import EpicIcon from "@/public/svg/epic-icon.svg";
 import SprintIcon from "@/public/svg/sprint-icon.svg";
+import SettintIcon from "@/public/svg/ticket-setting.svg";
 
 const TicketSidebar = () => {
   const pathname = usePathname();
@@ -36,6 +37,13 @@ const TicketSidebar = () => {
           name: "Sprint",
           link: "/dashboard/epic/sprint",
           icon: SprintIcon,
+          isClicked: false,
+        },
+        {
+          id: 3,
+          name: "Setting",
+          link: "/dashboard/epic/setting",
+          icon: SettintIcon,
           isClicked: false,
         },
       ].map((item) => {

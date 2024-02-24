@@ -1,4 +1,5 @@
 import TicketSidebar from "@/src/components/Dashboard/ticket-sidebar";
+import EpicSearchCard from "@/src/container/epic-container/components/EpicSearchCard";
 
 export default function Layout({
   children,
@@ -8,7 +9,10 @@ export default function Layout({
   return (
     <div className="flex w-full h-full">
       <TicketSidebar />
-      {children}
+      <div className="w-full p-5 ml-235px">
+        <EpicSearchCard />
+        {children}
+      </div>
     </div>
   );
 }

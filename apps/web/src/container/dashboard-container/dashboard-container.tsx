@@ -10,7 +10,7 @@ const DashboardContainerView = ({}: PropsType) => {
       <div>
         <div className="flex items-center justify-between">
           <h1 className="text-[32px] font-bold">HooAndFriend</h1>
-          <h1 className="text-[20px] text-[#676767] pr-[64px]">
+          <h1 className="text-[20px] text-[#676767]">
             Feb 20, 2023 ~ Sep 24, 2024
           </h1>
         </div>

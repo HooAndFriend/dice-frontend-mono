@@ -1,4 +1,4 @@
-import TicketItem from "../ticket-item";
+import TicketItem from "../TicketItem";
 import EpicAddItem from "../EpicAddItem";
 
 const TicketTableView = () => {

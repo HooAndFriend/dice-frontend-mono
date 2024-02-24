@@ -3,7 +3,7 @@
 // ** Component Imports
 import CustomSearch from "@/src/components/Input/custom-search";
 import CustomSelect from "@/src/components/Input/custom-select";
-import TicketTable from "./components/ticket-table";
+import TicketTable from "./components/TicketTable";
 
 interface PropsType {}
 

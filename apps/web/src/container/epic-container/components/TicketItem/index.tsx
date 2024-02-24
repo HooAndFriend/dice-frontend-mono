@@ -1,6 +1,6 @@
 // ** Component Imports
 import { useState } from "react";
-import TicketItemView from "./ticket-item";
+import TicketItemView from "./TicketItem";
 
 const TicketItem = () => {
   const [open, setOpen] = useState<boolean>(false);

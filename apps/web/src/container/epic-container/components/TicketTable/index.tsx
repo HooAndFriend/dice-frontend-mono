@@ -1,5 +1,5 @@
 // ** Component Imports
-import TicketTableView from "./ticket-table";
+import TicketTableView from "./TicketTable";
 
 const TicketTable = () => {
   return <TicketTableView />;

@@ -1,6 +1,6 @@
 // ** Next Imports
 import Image from "next/image";
-import TicketToggleItem from "./components/ticket-toggle-item";
+import TicketToggleItem from "./components/TicketToggleItem";
 
 interface PropsType {
   open: boolean;

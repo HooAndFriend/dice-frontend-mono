@@ -19,6 +19,14 @@ const DashboardSidebard = () => {
   const { workspaceFunction } = useRecoilValue(WorkspaceState);
   const pathname = usePathname();
 
+  const path = useMemo(
+    () =>
+      pathname.split("/")[2]
+        ? `/dashboard/${pathname.split("/")[2]}`
+        : "/dashboard",
+    [pathname]
+  );
+
   const sidbarMenuList = useMemo(
     () =>
       isUndefined(workspaceFunction)
@@ -36,12 +44,12 @@ const DashboardSidebard = () => {
               workspaceFunction.find((_) => _.function === item.name)
             ),
           ].map((item) => {
-            if (item.link === pathname) {
+            if (item.link === path) {
               return { ...item, isClicked: true };
             }
             return item;
           }),
-    [workspaceFunction, pathname]
+    [workspaceFunction, path]
   );
 
   return <DashboardSidebardView sidbarMenuList={sidbarMenuList} />;

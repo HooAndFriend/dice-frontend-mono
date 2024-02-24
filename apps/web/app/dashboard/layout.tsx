@@ -32,7 +32,9 @@ const DashboardRayout = ({
         style={{ maxHeight: `calc(100% - 70px)` }}
       >
         <DashboardSidebar />
-        <div className="flex-1 bg-[#FAFAFB] overflow-y-scroll">{children}</div>
+        <div className="flex-1 bg-[#FAFAFB] overflow-y-scroll overflow-x-hidden">
+          {children}
+        </div>
       </div>
     </div>
   );

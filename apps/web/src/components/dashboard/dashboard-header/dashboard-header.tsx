@@ -10,7 +10,7 @@ interface PropsType {
 
 const DashboardHeaderView = ({ name }: PropsType) => {
   return (
-    <div className="h-16 border-b-2 border-[#EBEBEC] flex items-center justify-between">
+    <div className="h-[64px] border-b-2 border-[#EBEBEC] flex items-center justify-between">
       <Link href="/dashboard">
         <img
           src="/images/logo.png"

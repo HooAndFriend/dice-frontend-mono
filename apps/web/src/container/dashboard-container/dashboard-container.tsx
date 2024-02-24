@@ -27,7 +27,8 @@ const DashboardContainerView = ({}: PropsType) => {
           <DashboardCard
             width="380px"
             height="215px"
-            color="#ECF6FF"
+            // color="#ECF6FF"
+            color="#F4F4FA"
             icon="/svg/dashboard-task.svg"
             title="Total Tasks"
             text="25건"
@@ -36,7 +37,8 @@ const DashboardContainerView = ({}: PropsType) => {
           <DashboardCard
             width="380px"
             height="215px"
-            color="#FAEBFF"
+            // color="#FAEBFF"
+            color="#F4F4FA"
             icon="/svg/dashboard-task-2.svg"
             title="Compoleted Tasks"
             text="25건"
@@ -45,7 +47,8 @@ const DashboardContainerView = ({}: PropsType) => {
           <DashboardCard
             width="380px"
             height="215px"
-            color="#FFEBF1"
+            // color="#FFEBF1"
+            color="#F4F4FA"
             icon="/svg/dashboard-progress.svg"
             title="Progress"
             text="75%"

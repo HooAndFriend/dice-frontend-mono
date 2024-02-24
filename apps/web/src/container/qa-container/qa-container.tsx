@@ -3,7 +3,7 @@ import CustomSelect from "@/src/components/Input/custom-select";
 import CreateIssue from "./components/create-issue";
 import IssueDetail from "./components/issue-detail";
 import { IssueInfo } from "@/src/type/qa";
-import CustomInput from "@/src/components/Input/custom-input";
+import CustomSearch from "@/src/components/Input/custom-search";
 
 interface PropsType {
   openCreateIssue: boolean;
@@ -35,7 +35,7 @@ const QaContainerView = ({
           <div className="font-spoqa text-base font-bold ml-[50px] mr-[29px] text-center">
             Search
           </div>
-          <CustomInput />
+          <CustomSearch />
         </div>
         <div className="h-[50px] w-full flex justify-between items-center mt-[43px] mb-[30px]">
           <div className="text-lg font-medium text-center font-spoqa">

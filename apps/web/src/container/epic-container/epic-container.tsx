@@ -1,7 +1,7 @@
 "use client";
 
 // ** Component Imports
-import CustomInput from "@/src/components/Input/custom-input";
+import CustomSearch from "@/src/components/Input/custom-search";
 import CustomSelect from "@/src/components/Input/custom-select";
 import TicketTable from "./components/ticket-table";
 
@@ -32,7 +32,7 @@ const EpicContainerView = ({}: PropsType) => {
           <div className="font-spoqa text-base font-bold ml-[25px] mr-[33px]">
             Search
           </div>
-          <CustomInput />
+          <CustomSearch />
         </div>
       </div>
       <div className="mt-8">

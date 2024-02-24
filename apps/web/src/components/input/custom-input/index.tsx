@@ -1,10 +1,12 @@
 // ** Component Imports
 import CustomInputView from "./custom-input";
 
-interface PropsType {}
+interface PropsType {
+  placeholder?: string;
+}
 
-const CustomInput = ({}: PropsType) => {
-  return <CustomInputView />;
+const CustomInput = ({ placeholder }: PropsType) => {
+  return <CustomInputView placeholder={placeholder} />;
 };
 
 export default CustomInput;

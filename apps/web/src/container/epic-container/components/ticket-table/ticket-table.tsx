@@ -1,4 +1,5 @@
 import TicketItem from "../ticket-item";
+import EpicAddItem from "../EpicAddItem";
 
 const TicketTableView = () => {
   return (
@@ -8,7 +9,7 @@ const TicketTableView = () => {
       <TicketItem />
       <TicketItem />
       <TicketItem />
-      <TicketItem />
+      <EpicAddItem />
     </div>
   );
 };

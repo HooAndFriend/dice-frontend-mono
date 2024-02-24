@@ -57,6 +57,7 @@ const TicketItemView = ({ open, handleOpen }: PropsType) => {
           <TicketToggleItem />
         </div>
       )}
+      <hr className="bg-[#EBEBEC]" />
     </div>
   );
 };

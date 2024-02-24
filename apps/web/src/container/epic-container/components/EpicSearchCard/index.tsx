@@ -8,9 +8,7 @@ import EpicSearchCardView from "./EpicSearchCard";
 const EpicSearchCard = () => {
   const pathname = usePathname();
 
-  if (pathname === "/dashboard/epic/setting") return;
-
-  return <EpicSearchCardView />;
+  return <EpicSearchCardView pathname={pathname} />;
 };
 
 export default EpicSearchCard;

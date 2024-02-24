@@ -8,10 +8,6 @@ import { Link } from 'react-router-dom'
 import { Menu, Transition } from '@headlessui/react'
 import { MenuType } from '../MenuList'
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
 interface PropsType {
   name: string
   route: string

@@ -6,7 +6,7 @@ export default function Layout({
   children: React.ReactNode;
 }): JSX.Element {
   return (
-    <div className="flex flex-1 h-full">
+    <div className="flex w-full h-full">
       <TicketSidebar />
       {children}
     </div>

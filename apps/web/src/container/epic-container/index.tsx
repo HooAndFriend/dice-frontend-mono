@@ -1,5 +1,3 @@
-"use client";
-
 // ** Component Imports
 import EpicContainerView from "./epic-container";
 

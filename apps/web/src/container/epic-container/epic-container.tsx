@@ -1,3 +1,5 @@
+"use client";
+
 // ** Component Imports
 import CustomInput from "@/src/components/Input/custom-input";
 import CustomSelect from "@/src/components/Input/custom-select";
@@ -7,7 +9,7 @@ interface PropsType {}
 
 const EpicContainerView = ({}: PropsType) => {
   return (
-    <div className="w-calc(100% - 235px) p-5">
+    <div className="w-full p-5 ml-235px">
       <div>
         <h1 className="text-3xl font-bold">Ticket / Epic</h1>
       </div>

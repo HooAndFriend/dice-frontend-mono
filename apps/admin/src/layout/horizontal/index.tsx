@@ -1,9 +1,12 @@
 // ** Router Imports
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 // ** Component Imports
 import MenuList from '@/src/components/MenuList'
 import ProfileBox from '@/src/components/ProfileBox'
+import MenuDropDown from '@/src/components/MenuDropDown'
+
+// ** Recoil Imports
 import { useRecoilValue } from 'recoil'
 import { AdminState } from '@/src/app/admin'
 
@@ -22,15 +25,13 @@ const HorizontalHeader = () => {
           className="mr-12"
         />
         {MenuList.map((item) => (
-          <Link to={`/dashboard${item.route}`} key={item.route}>
-            <div className="mx-12">
-              {`/dashboard${item.route}` === pathname ? (
-                <h1 className="text-[#623AD6]">{item.name}</h1>
-              ) : (
-                <h1>{item.name}</h1>
-              )}
-            </div>
-          </Link>
+          <MenuDropDown
+            name={item.name}
+            route={item.route}
+            pathname={pathname}
+            children={item.children}
+            key={item.route}
+          />
         ))}
       </div>
       <div className="flex items-center">

@@ -56,7 +56,7 @@ const DashboardContainerView = ({}: PropsType) => {
           />
         </div>
         <div className="flex space-x-4">
-          <DashboardChart />
+          {/* <DashboardChart /> */}
           <DashboardCalendar width="1140px" height="400px" />
         </div>
       </div>

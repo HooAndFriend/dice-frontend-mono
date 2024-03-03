@@ -5,7 +5,7 @@ import UserModal from "../../modal/user-modal";
 import TeamBox from "./component/team-box";
 
 // ** Type Imports
-import { TeamUserInfo } from "@/src/type/team";
+import {TeamUserInfo} from "@/src/type/team";
 import Link from "next/link";
 
 interface PropsType {
@@ -15,7 +15,7 @@ interface PropsType {
   cancelButtonRef: any;
   teamName: string;
   id: number;
-  user: { email: string; nickname: string; profile: string };
+  user: {email: string; nickname: string; profile: string};
   data: TeamUserInfo[];
   handleUpdateTeam: (item: TeamUserInfo | 0) => void;
   setTeamModalOpen: (value: boolean) => void;
@@ -82,7 +82,7 @@ const TeamPopoverView = ({
               name={user.nickname}
               onClick={() => handleUpdateTeam(0)}
             />
-            {data.map((item) => (
+            {data.map(item => (
               <TeamBox
                 key={item.id}
                 id={id}

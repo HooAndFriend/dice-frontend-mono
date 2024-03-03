@@ -71,7 +71,7 @@ const QaContainerView = ({
         </div>
 
         <div className="w-full h-[521px] flex justify-between">
-          <div className="w-1/2 h-[521px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC]">
+          <div className="w-1/2 h-[521px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC] overflow-auto">
             {data.map(item => (
               <div key={item.id}>
                 <div

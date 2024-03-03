@@ -8,10 +8,15 @@ import {CreateIssueParams, CreateIssueResponse} from "@/src/type/qa";
 import {useDialog} from "@/src/context/DialogContext";
 import useSWRMutation from "swr/mutation";
 import {Post} from "@/src/repository";
+import {useState} from "react";
+import {storage} from "@/src/config/firebaseConfig";
+import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 
 interface PropsType {}
 
 const CreateIssue = ({}: PropsType) => {
+  const [file, setFile] = useState(null);
+  const [url, setUrl] = useState("");
   const {email, nickname} = useRecoilValue(UserState);
   const {accessToken} = useRecoilValue(AuthState);
   const {data: createIssue, handleInput} = useInput<CreateIssueParams>({
@@ -24,14 +29,26 @@ const CreateIssue = ({}: PropsType) => {
     memo: "",
     fileurls: [
       {
-        url: "",
+        url: url,
       },
     ],
   });
 
   const {handleOpen} = useDialog();
 
+  const handleUpload = () => {
+    if (file == null) return;
+    const imageRef = ref(storage, `images/${file.name}`);
+    uploadBytes(imageRef, file).then(snapshot => {
+      getDownloadURL(snapshot.ref).then(downUrl => {
+        setUrl(downUrl);
+      });
+    });
+  };
+
   const handleAdd = () => {
+    handleUpload();
+    console.log(url);
     if (createIssue.title === "") {
       handleOpen({
         title: "Error",
@@ -102,6 +119,7 @@ const CreateIssue = ({}: PropsType) => {
       createIssue={createIssue}
       handleInput={handleInput}
       handleAdd={handleAdd}
+      setFile={setFile}
       name={nickname}
     />
   );

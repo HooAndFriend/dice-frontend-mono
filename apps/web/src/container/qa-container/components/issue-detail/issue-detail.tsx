@@ -18,6 +18,7 @@ const IssueDetailView = ({
   handleInput,
   handleAdd,
 }: PropsType) => {
+  console.log(data.file[0].url);
   return (
     <>
       <div className="h-[40px] flex items-center justify-between">
@@ -30,7 +31,7 @@ const IssueDetailView = ({
               width={24}
               height={24}
             />
-            <div className="">Edit</div>
+            <div>Edit</div>
           </div>
           <button className="w-[110px] h-[40px] rounded-[30px] bg-black text-white flex justify-center items-center">
             <img
@@ -44,7 +45,7 @@ const IssueDetailView = ({
         </div>
       </div>
       <div className="h-[50px] flex justify-between mt-[30px] font-spoqa">
-        <div className="text-xl font-bold flex items-center">{data.title} </div>
+        <div className="text-xl font-bold flex items-center">{data.title}</div>
         <CustomSelect option={data.status} />
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
@@ -107,16 +108,12 @@ const IssueDetailView = ({
       <div className="mt-5 mb-[14px]">
         FILE <span className="font-spoqa text-darkGray text-sm">(MAX:4)</span>
       </div>
-      {data.file ? (
-        data.file.map(item => {
-          <img
-            src={item.url}
-            className="w-[40px] h-[40px] rounded-[6px] bg-[#D9E0FF]"
-          />;
-        })
-      ) : (
-        <div className="w-[40px] h-[40px] rounded-[6px] bg-[#D9E0FF]"></div>
-      )}
+      {data.file[0].url != null ? (
+        <img
+          className="w-[40px] h-[40px] rounded-[6px]"
+          src={data.file[0].url}
+        />
+      ) : null}
 
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
       <div className="flex mt-5">

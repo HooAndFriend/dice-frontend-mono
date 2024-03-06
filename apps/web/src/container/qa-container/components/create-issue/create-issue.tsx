@@ -59,7 +59,7 @@ const CreateIssueView = ({
             "-" +
             ("0" + (today.getMonth() + 1)).slice(-2) +
             "-" +
-            today.getDate()}
+            ("0" + today.getDate()).slice(-2)}
         </div>
         <div className="font-spoqa font-medium mr-[58px]">modDate</div>
         <div className="font-spoqa font-normal text-darkGray tracking-[1px]">
@@ -67,7 +67,7 @@ const CreateIssueView = ({
             "-" +
             ("0" + (today.getMonth() + 1)).slice(-2) +
             "-" +
-            today.getDate()}
+            ("0" + today.getDate()).slice(-2)}
         </div>
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>

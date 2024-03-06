@@ -64,7 +64,7 @@ const IssueDetailView = ({
         </div>
         <div className="font-spoqa mr-[80px] font-medium">Worker</div>
         <div className="flex">
-          <img
+          {/* <img
             className="rounded-full border border-[#EBEBEC] mr-[10px]"
             src={data.admin.profile}
             width={20}
@@ -72,7 +72,14 @@ const IssueDetailView = ({
           />
           <div className="flex items-center font-normal">
             {data.admin.nickname}
-          </div>
+          </div> */}
+          <img
+            className="rounded-full border border-[#EBEBEC] mr-[10px]"
+            src="/faviconGray.png"
+            width={20}
+            height={20}
+          />
+          <div className="flex items-center font-normal">NoWorker</div>
         </div>
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>

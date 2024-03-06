@@ -17,11 +17,7 @@ interface PropsType {}
 const CreateIssue = ({}: PropsType) => {
   const {email, nickname} = useRecoilValue(UserState);
   const {accessToken} = useRecoilValue(AuthState);
-  const {
-    data: createIssue,
-    handleInput,
-    setData,
-  } = useInput<CreateIssueParams>({
+  const {data: createIssue, handleInput} = useInput<CreateIssueParams>({
     adminId: email,
     workerId: email,
     number: "ISSUE-01", // 임시로 1번으로 지정

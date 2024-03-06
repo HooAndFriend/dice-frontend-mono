@@ -9,11 +9,9 @@ export interface CreateIssueParams {
   asIs: string;
   toBe: string;
   memo: string;
-  fileurls: [
-    {
-      url: string;
-    },
-  ];
+  fileurls: {
+    url: string;
+  }[];
 }
 
 export interface CreateIssueResponse extends Response {

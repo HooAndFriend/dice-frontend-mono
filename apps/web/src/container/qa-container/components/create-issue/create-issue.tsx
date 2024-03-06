@@ -5,16 +5,16 @@ interface PropsType {
   createIssue: CreateIssueParams;
   name: string;
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleUpload: (e) => void;
   handleAdd: () => void;
-  setFile: (e) => void;
 }
 
 const CreateIssueView = ({
   createIssue,
   name,
   handleInput,
+  handleUpload,
   handleAdd,
-  setFile,
 }: PropsType) => {
   let today = new Date();
 
@@ -102,7 +102,7 @@ const CreateIssueView = ({
         <input
           type="file"
           onChange={event => {
-            setFile(event.target.files[0]);
+            handleUpload(event.target.files[0]);
           }}
           hidden
         />

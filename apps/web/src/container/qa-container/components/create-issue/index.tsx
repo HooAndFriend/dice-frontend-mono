@@ -15,11 +15,13 @@ import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 interface PropsType {}
 
 const CreateIssue = ({}: PropsType) => {
-  const [file, setFile] = useState(null);
-  const [url, setUrl] = useState("");
   const {email, nickname} = useRecoilValue(UserState);
   const {accessToken} = useRecoilValue(AuthState);
-  const {data: createIssue, handleInput} = useInput<CreateIssueParams>({
+  const {
+    data: createIssue,
+    handleInput,
+    setData,
+  } = useInput<CreateIssueParams>({
     adminId: email,
     workerId: email,
     number: "ISSUE-01", // 임시로 1번으로 지정
@@ -29,26 +31,25 @@ const CreateIssue = ({}: PropsType) => {
     memo: "",
     fileurls: [
       {
-        url: url,
+        url: "",
       },
     ],
   });
 
   const {handleOpen} = useDialog();
 
-  const handleUpload = () => {
-    if (file == null) return;
-    const imageRef = ref(storage, `images/${file.name}`);
-    uploadBytes(imageRef, file).then(snapshot => {
+  const handleUpload = (fileUrl: File) => {
+    const timestamp = new Date();
+    const imageRef = ref(storage, `images/issue_${timestamp.getTime()}`);
+    uploadBytes(imageRef, fileUrl).then(snapshot => {
       getDownloadURL(snapshot.ref).then(downUrl => {
-        setUrl(downUrl);
+        createIssue.fileurls[0].url = downUrl;
       });
     });
   };
 
   const handleAdd = () => {
-    handleUpload();
-    console.log(url);
+    console.log(createIssue);
     if (createIssue.title === "") {
       handleOpen({
         title: "Error",
@@ -119,7 +120,7 @@ const CreateIssue = ({}: PropsType) => {
       createIssue={createIssue}
       handleInput={handleInput}
       handleAdd={handleAdd}
-      setFile={setFile}
+      handleUpload={handleUpload}
       name={nickname}
     />
   );

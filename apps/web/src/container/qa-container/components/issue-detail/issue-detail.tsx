@@ -18,7 +18,7 @@ const IssueDetailView = ({
   handleInput,
   handleAdd,
 }: PropsType) => {
-  console.log(data.file[0].url);
+  console.log(data.file);
   return (
     <>
       <div className="h-[40px] flex items-center justify-between">
@@ -108,7 +108,7 @@ const IssueDetailView = ({
       <div className="mt-5 mb-[14px]">
         FILE <span className="font-spoqa text-darkGray text-sm">(MAX:4)</span>
       </div>
-      {data.file[0].url != null ? (
+      {data.file[0].url != "" ? (
         <img
           className="w-[40px] h-[40px] rounded-[6px]"
           src={data.file[0].url}

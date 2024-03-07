@@ -45,7 +45,6 @@ const CreateIssue = ({}: PropsType) => {
   };
 
   const handleAdd = () => {
-    console.log(createIssue);
     if (createIssue.title === "") {
       handleOpen({
         title: "Error",

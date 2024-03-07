@@ -1,0 +1,27 @@
+.fc-toolbar-title {
+  width: 260px;
+  font-size: 32px !important;
+  font-weight: bold;
+  margin-left: unset !important;
+  text-align: center;
+}
+
+.fc-toolbar-chunk {
+  display: flex;
+  gap: 10px;
+}
+
+.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+  margin-left: unset !important;
+}
+
+.fc .fc-button-primary,
+.fc .fc-button-primary:hover,
+.fc .fc-button-primary:focus,
+.fc .fc-button-primary:active,
+.fc-button-primary:not(:disabled):active {
+  background: unset !important;
+  border: unset !important;
+  color: #676767 !important;
+  box-shadow: unset !important;
+}

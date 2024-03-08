@@ -1,4 +1,4 @@
-import TicketTable from "../epic-container/components/EpicTable";
+import TicketTable from "@/src/components/Ticket/TicketTable";
 
 interface PropsType {}
 

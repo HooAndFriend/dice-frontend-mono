@@ -16,7 +16,7 @@ const CustomInput = ({
       className={`w-[${width}] h-[${height}] rounded-[${borderRadius}] border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4`}
     >
       <input
-        className="w-full placeholder-[#EBEBEC] focus:outline-none"
+        className={`w-[${width}] placeholder-[#EBEBEC] focus:outline-none`}
         placeholder={placeholder ? placeholder : ""}
       />
     </div>

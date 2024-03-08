@@ -1,6 +1,3 @@
-// ** Component Imports
-import CustomInputView from "./custom-input";
-
 interface PropsType {
   placeholder?: string;
   width?: string;
@@ -8,8 +5,22 @@ interface PropsType {
   borderRadius?: string;
 }
 
-const CustomInput = (props: PropsType) => {
-  return <CustomInputView {...props} />;
+const CustomInput = ({
+  placeholder,
+  width,
+  height,
+  borderRadius,
+}: PropsType) => {
+  return (
+    <div
+      className={`w-[${width}] h-[${height}] rounded-[${borderRadius}] border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4`}
+    >
+      <input
+        className="w-full placeholder-[#EBEBEC] focus:outline-none"
+        placeholder={placeholder ? placeholder : ""}
+      />
+    </div>
+  );
 };
 
 export default CustomInput;

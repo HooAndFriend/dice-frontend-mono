@@ -9,3 +9,5 @@ export interface DialogArgs {
 
 export type LogLevel = "" | "warn" | "info";
 export type DialogType = "" | "comfirm" | "alert";
+
+export type TicketStatus = "REOPEN" | "FINISH" | "DOING";

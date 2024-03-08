@@ -1,9 +1,17 @@
 // ** Component Imports
 import ProfileBox from "@/src/components/ProfileBox";
 
-const TicketItem = () => {
+interface PropsType {
+  id: number;
+  handleClick?: (id: number) => void;
+}
+
+const TicketItem = ({ handleClick = (id: number) => {}, id }: PropsType) => {
   return (
-    <div className="flex h-[60px]">
+    <div
+      className="flex h-[60px] hover:bg-slate-400 rounded-lg"
+      onClick={() => handleClick(id)}
+    >
       <div className="flex w-[10%] items-center justify-center">
         <div className="w-[24px] h-[24px] bg-green-300 rounded-lg"></div>
       </div>

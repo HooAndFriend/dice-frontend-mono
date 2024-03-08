@@ -1,7 +1,7 @@
 "use client";
 
 // ** Component Imports
-import TicketTable from "./components/TicketTable";
+import TicketTable from "./components/EpicTable";
 
 interface PropsType {}
 

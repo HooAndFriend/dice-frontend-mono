@@ -1,7 +1,16 @@
+import TicketTable from "../epic-container/components/EpicTable";
+
 interface PropsType {}
 
 const TicketContainerView = ({}: PropsType) => {
-  return <div>Ticket</div>;
+  return (
+    <div className="w-full">
+      <div className="mt-8">
+        <h1 className="pl-4 font-bold text-md">총 4건</h1>
+      </div>
+      <TicketTable />
+    </div>
+  );
 };
 
 export default TicketContainerView;

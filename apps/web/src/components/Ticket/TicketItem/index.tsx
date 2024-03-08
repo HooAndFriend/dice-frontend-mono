@@ -1,7 +1,7 @@
 // ** Component Imports
 import ProfileBox from "@/src/components/ProfileBox";
 
-const TicketToggleItem = () => {
+const TicketItem = () => {
   return (
     <div className="flex h-[60px]">
       <div className="flex w-[10%] items-center justify-center">
@@ -31,4 +31,4 @@ const TicketToggleItem = () => {
   );
 };
 
-export default TicketToggleItem;
+export default TicketItem;

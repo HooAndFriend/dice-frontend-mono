@@ -8,6 +8,9 @@ import {CreateIssueParams, CreateIssueResponse} from "@/src/type/qa";
 import {useDialog} from "@/src/context/DialogContext";
 import useSWRMutation from "swr/mutation";
 import {Post} from "@/src/repository";
+import {useState} from "react";
+import {storage} from "@/src/config/firebaseConfig";
+import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 
 interface PropsType {}
 
@@ -31,7 +34,18 @@ const CreateIssue = ({}: PropsType) => {
 
   const {handleOpen} = useDialog();
 
+  const handleUpload = (fileUrl: File) => {
+    const timestamp = new Date();
+    const imageRef = ref(storage, `images/issue_${timestamp.getTime()}`);
+    uploadBytes(imageRef, fileUrl).then(snapshot => {
+      getDownloadURL(snapshot.ref).then(downUrl => {
+        createIssue.fileurls[0].url = downUrl;
+      });
+    });
+  };
+
   const handleAdd = () => {
+    console.log(createIssue);
     if (createIssue.title === "") {
       handleOpen({
         title: "Error",
@@ -102,6 +116,7 @@ const CreateIssue = ({}: PropsType) => {
       createIssue={createIssue}
       handleInput={handleInput}
       handleAdd={handleAdd}
+      handleUpload={handleUpload}
       name={nickname}
     />
   );

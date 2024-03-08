@@ -3,10 +3,13 @@ import CustomInputView from "./custom-input";
 
 interface PropsType {
   placeholder?: string;
+  width?: string;
+  height?: string;
+  borderRadius?: string;
 }
 
-const CustomInput = ({ placeholder }: PropsType) => {
-  return <CustomInputView placeholder={placeholder} />;
+const CustomInput = (props: PropsType) => {
+  return <CustomInputView {...props} />;
 };
 
 export default CustomInput;

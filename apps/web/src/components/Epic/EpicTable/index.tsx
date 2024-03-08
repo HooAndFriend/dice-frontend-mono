@@ -1,7 +1,14 @@
 // ** Component Imports
 import EpicTableView from "./EpicTable";
 
-const EpicTable = () => {
-  return <EpicTableView />;
+// ** Type Imports
+import { EpicInfo } from "@/src/type/epic";
+
+interface PropsType {
+  epicData: EpicInfo[];
+}
+
+const EpicTable = ({ epicData }: PropsType) => {
+  return <EpicTableView epicData={epicData} />;
 };
 export default EpicTable;

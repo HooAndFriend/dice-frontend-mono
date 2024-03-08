@@ -1,17 +1,20 @@
-"use client";
-
 // ** Component Imports
 import EpicTable from "@/src/components/Epic/EpicTable";
 
-interface PropsType {}
+// ** Type Imports
+import { EpicInfo } from "@/src/type/epic";
 
-const EpicContainerView = ({}: PropsType) => {
+interface PropsType {
+  epicData: EpicInfo[];
+}
+
+const EpicContainerView = ({ epicData }: PropsType) => {
   return (
     <div className="w-full">
       <div className="mt-8">
         <h1 className="pl-4 font-bold text-md">총 4건</h1>
       </div>
-      <EpicTable />
+      <EpicTable epicData={epicData} />
     </div>
   );
 };

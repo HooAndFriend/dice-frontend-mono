@@ -6,7 +6,9 @@ import React from "react";
 
 import { ApexOptions } from "apexcharts";
 
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: true });
+const Chart = dynamic(() => import("react-apexcharts"), {
+  ssr: process.env.NODE_ENV === "development",
+});
 
 interface PropsType {
   width?: string;

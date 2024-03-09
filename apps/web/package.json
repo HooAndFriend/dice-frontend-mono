@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "env-cmd -f .env.development next dev",
-    "build": "next build",
+    "build": "next build --no-lint",
     "start": "env-cmd -f .env.production next start",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",

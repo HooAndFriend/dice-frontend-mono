@@ -8,6 +8,7 @@ import TeamPage from '@/src/pages/team-page'
 import WorkspacePage from '@/src/pages/workspace-page'
 import CsPage from '@/src/pages/cs-page'
 import ManagePage from '@/src/pages/manage-page'
+import UserDeletePage from '@/src/pages/user-delete-page'
 
 export interface MenuType {
   route: string
@@ -16,7 +17,7 @@ export interface MenuType {
   children: MenuType[]
 }
 
-const MenuList: MenuType[] = [
+export const MenuList: MenuType[] = [
   {
     route: '/',
     name: '대시보드',
@@ -35,9 +36,9 @@ const MenuList: MenuType[] = [
         children: [],
       },
       {
-        route: '/user/delete',
+        route: '/user/remove',
         name: '탈퇴 사용자 조회',
-        element: <UserPage />,
+        element: <UserDeletePage />,
         children: [],
       },
     ],
@@ -106,4 +107,71 @@ const MenuList: MenuType[] = [
   },
 ]
 
-export default MenuList
+export const DashboardMenuList: MenuType[] = [
+  {
+    route: '/',
+    name: '대시보드',
+    element: <DashboardPage />,
+    children: [],
+  },
+  {
+    route: '/user',
+    name: '사용자 조회',
+    element: <UserPage />,
+    children: [],
+  },
+  {
+    route: '/user/remove',
+    name: '탈퇴 사용자 조회',
+    element: <UserDeletePage />,
+    children: [],
+  },
+  {
+    route: '/team',
+    name: '팀 관리',
+    element: <TeamPage />,
+    children: [],
+  },
+  {
+    route: '/workspace',
+    name: '워크스페이스 관리',
+    element: <WorkspacePage />,
+    children: [],
+  },
+  {
+    route: '/cs',
+    name: '1:1 문의 조회',
+    element: <CsPage />,
+    children: [],
+  },
+  {
+    route: '/cs/faq',
+    name: '자주 묻는 질문',
+    element: <CsPage />,
+    children: [],
+  },
+  {
+    route: '/manage',
+    name: '프로그램 버전',
+    element: <CsPage />,
+    children: [],
+  },
+  {
+    route: '/manage/state',
+    name: '상태값 관리',
+    element: <CsPage />,
+    children: [],
+  },
+  {
+    route: '/manage/admin',
+    name: '관리자 목록',
+    element: <CsPage />,
+    children: [],
+  },
+  {
+    route: '/manage/authoriy',
+    name: '권한 관리',
+    element: <CsPage />,
+    children: [],
+  },
+]

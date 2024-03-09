@@ -1,13 +1,19 @@
+import { TableHeaderType, TableItemType } from '@/src/type/component'
 import TableHeader from './TableHeader'
 import TableItem from './TableItem'
 
-const CustomTable = () => {
+interface PropsType {
+  headerData: TableHeaderType[]
+  bodyData: TableItemType[][]
+}
+
+const CustomTable = ({ headerData, bodyData }: PropsType) => {
   return (
     <div>
-      <TableHeader />
-      <TableItem />
-      <TableItem />
-      <TableItem />
+      <TableHeader data={headerData} />
+      {bodyData.map((item) => (
+        <TableItem data={item} />
+      ))}
     </div>
   )
 }

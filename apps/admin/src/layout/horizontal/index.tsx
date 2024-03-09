@@ -2,7 +2,7 @@
 import { useLocation } from 'react-router-dom'
 
 // ** Component Imports
-import MenuList from '@/src/components/MenuList'
+import { MenuList } from '@/src/components/MenuList'
 import ProfileBox from '@/src/components/ProfileBox'
 import MenuDropDown from '@/src/components/MenuDropDown'
 

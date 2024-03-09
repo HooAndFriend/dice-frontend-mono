@@ -2,7 +2,7 @@
 import { Route, Routes } from 'react-router-dom'
 
 // ** Menu Imports
-import MenuList from '../MenuList'
+import { DashboardMenuList } from '../MenuList'
 
 // ** Utils Imports
 import { compact } from 'lodash'
@@ -15,7 +15,7 @@ const Dashboard = () => {
     <UseLayout>
       <Routes>
         {compact(
-          MenuList.map((item) => (
+          DashboardMenuList.map((item) => (
             <Route
               key={item.name}
               path={`/${item.route}`}

@@ -25,6 +25,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.12.1",
+    "react-tailwindcss-datepicker": "^1.6.6",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
     "swr": "^2.2.4"

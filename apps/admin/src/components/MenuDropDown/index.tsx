@@ -16,9 +16,6 @@ interface PropsType {
 }
 
 const MenuDropDown = ({ name, children, route, pathname }: PropsType) => {
-  if (name === '사용자 관리') {
-    console.log('pathname : ', pathname.split('/'))
-  }
   return (
     <Menu as="div" className="relative inline-block mx-12 text-left">
       {children.length > 0 ? (

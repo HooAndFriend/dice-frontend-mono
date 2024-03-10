@@ -12,6 +12,7 @@ import UserDeletePage from '@/src/pages/user-delete-page'
 import QnaPage from '@/src/pages/qna-page'
 import FaqPage from '@/src/pages/faq-page'
 import ProgramPage from '@/src/pages/program-page'
+import AdminPage from '@/src/pages/admin-page'
 
 export interface MenuType {
   route: string
@@ -97,7 +98,7 @@ export const MenuList: MenuType[] = [
       {
         route: '/manage/admin',
         name: '관리자 목록',
-        element: <CsPage />,
+        element: <AdminPage />,
         children: [],
       },
       {
@@ -168,7 +169,7 @@ export const DashboardMenuList: MenuType[] = [
   {
     route: '/manage/admin',
     name: '관리자 목록',
-    element: <CsPage />,
+    element: <AdminPage />,
     children: [],
   },
   {

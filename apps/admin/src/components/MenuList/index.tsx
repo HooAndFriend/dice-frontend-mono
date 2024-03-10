@@ -16,6 +16,7 @@ import AdminPage from '@/src/pages/admin-page'
 import StatePage from '@/src/pages/state-page'
 import AuthorityPage from '@/src/pages/authority-page'
 import ProfilePage from '@/src/pages/profile-page'
+import PasswordPage from '@/src/pages/password-page'
 
 export interface MenuType {
   route: string
@@ -185,6 +186,12 @@ export const DashboardMenuList: MenuType[] = [
     route: '/profile',
     name: '설정',
     element: <ProfilePage />,
+    children: [],
+  },
+  {
+    route: '/password',
+    name: '비밀번호 재설정',
+    element: <PasswordPage />,
     children: [],
   },
 ]

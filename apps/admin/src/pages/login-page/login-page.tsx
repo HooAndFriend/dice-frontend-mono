@@ -1,4 +1,5 @@
 import { LoginParam } from '@/src/type/auth'
+import { Link } from 'react-router-dom'
 
 interface PropsType {
   data: LoginParam
@@ -62,7 +63,9 @@ const LoginPageView = ({
             </div>
           </div>
           <div className="flex justify-end w-full mt-6">
-            <h4 className="text-[#623AD6] pr-3">비밀번호 재설정</h4>
+            <Link to="/password">
+              <h4 className="text-[#623AD6] pr-3">비밀번호 재설정</h4>
+            </Link>
           </div>
           <div className="flex justify-center w-full">
             <button

@@ -13,6 +13,7 @@ import QnaPage from '@/src/pages/qna-page'
 import FaqPage from '@/src/pages/faq-page'
 import ProgramPage from '@/src/pages/program-page'
 import AdminPage from '@/src/pages/admin-page'
+import StatePage from '@/src/pages/state-page'
 
 export interface MenuType {
   route: string
@@ -92,7 +93,7 @@ export const MenuList: MenuType[] = [
       {
         route: '/manage/state',
         name: '상태값 관리',
-        element: <CsPage />,
+        element: <StatePage />,
         children: [],
       },
       {
@@ -163,7 +164,7 @@ export const DashboardMenuList: MenuType[] = [
   {
     route: '/manage/state',
     name: '상태값 관리',
-    element: <CsPage />,
+    element: <StatePage />,
     children: [],
   },
   {

@@ -1,17 +1,35 @@
+'use client'
+
 // ** React Imports
 import { Fragment } from 'react'
 
 // ** Router Imports
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // ** Ui Imports
 import { Menu, Transition } from '@headlessui/react'
+
+// ** Recoil Imports
+import { useSetRecoilState } from 'recoil'
+import { AuthState, AuthDefaultState } from '@/src/app/auth'
+import { AdminState, AdminDefaultState } from '@/src/app/admin'
 
 interface PropsType {
   name: string
 }
 
 const ProfileDropDown = ({ name }: PropsType) => {
+  const navigate = useNavigate()
+
+  const setAuthState = useSetRecoilState(AuthState)
+  const setAdminState = useSetRecoilState(AdminState)
+
+  const handleLogout = () => {
+    setAuthState(AuthDefaultState)
+    setAdminState(AdminDefaultState)
+    navigate('/')
+  }
+
   return (
     <Menu as="div" className="relative inline-block ml-2 text-left">
       <Menu.Button className="inline-flex justify-center w-full px-3 py-2">
@@ -35,7 +53,11 @@ const ProfileDropDown = ({ name }: PropsType) => {
             )}
           </Menu.Item>
           <Menu.Item>
-            {({ active }) => <p className="px-4 py-2">로그아웃</p>}
+            {({ active }) => (
+              <p className="px-4 py-2" onClick={handleLogout}>
+                로그아웃
+              </p>
+            )}
           </Menu.Item>
         </Menu.Items>
       </Transition>

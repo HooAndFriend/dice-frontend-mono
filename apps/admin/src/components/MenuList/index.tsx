@@ -15,6 +15,7 @@ import ProgramPage from '@/src/pages/program-page'
 import AdminPage from '@/src/pages/admin-page'
 import StatePage from '@/src/pages/state-page'
 import AuthorityPage from '@/src/pages/authority-page'
+import ProfilePage from '@/src/pages/profile-page'
 
 export interface MenuType {
   route: string
@@ -178,6 +179,12 @@ export const DashboardMenuList: MenuType[] = [
     route: '/manage/authoriy',
     name: '권한 관리',
     element: <AuthorityPage />,
+    children: [],
+  },
+  {
+    route: '/profile',
+    name: '설정',
+    element: <ProfilePage />,
     children: [],
   },
 ]

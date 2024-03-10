@@ -2,7 +2,7 @@
 import CustomTable from '@/src/components/Table'
 import TablePagination from '@/src/components/Table/TablePagination'
 import TitleBox from '@/src/components/TitleBox'
-import UserSearchBox from '@/src/components/UserSearchBox'
+import UserSearchBox from '@/src/components/SearchBox/UserSearchBox'
 
 interface PropsType {}
 

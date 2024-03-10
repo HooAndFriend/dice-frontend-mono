@@ -11,6 +11,7 @@ import ManagePage from '@/src/pages/manage-page'
 import UserDeletePage from '@/src/pages/user-delete-page'
 import QnaPage from '@/src/pages/qna-page'
 import FaqPage from '@/src/pages/faq-page'
+import ProgramPage from '@/src/pages/program-page'
 
 export interface MenuType {
   route: string
@@ -79,12 +80,12 @@ export const MenuList: MenuType[] = [
   {
     route: '/manage',
     name: '운영 관리',
-    element: <ManagePage />,
+    element: <ProgramPage />,
     children: [
       {
         route: '/manage',
         name: '프로그램 버전',
-        element: <CsPage />,
+        element: <ProgramPage />,
         children: [],
       },
       {
@@ -155,7 +156,7 @@ export const DashboardMenuList: MenuType[] = [
   {
     route: '/manage',
     name: '프로그램 버전',
-    element: <CsPage />,
+    element: <ProgramPage />,
     children: [],
   },
   {

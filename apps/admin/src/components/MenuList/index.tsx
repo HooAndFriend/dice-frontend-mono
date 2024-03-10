@@ -6,9 +6,11 @@ import DashboardPage from '@/src/pages/dashboard-page'
 import UserPage from '@/src/pages/user-page'
 import TeamPage from '@/src/pages/team-page'
 import WorkspacePage from '@/src/pages/workspace-page'
-import CsPage from '@/src/pages/cs-page'
+import CsPage from '@/src/pages/qna-page'
 import ManagePage from '@/src/pages/manage-page'
 import UserDeletePage from '@/src/pages/user-delete-page'
+import QnaPage from '@/src/pages/qna-page'
+import FaqPage from '@/src/pages/faq-page'
 
 export interface MenuType {
   route: string
@@ -58,18 +60,18 @@ export const MenuList: MenuType[] = [
   {
     route: '/cs',
     name: '고객센터 관리',
-    element: <CsPage />,
+    element: <QnaPage />,
     children: [
       {
         route: '/cs',
         name: '1:1 문의 조회',
-        element: <CsPage />,
+        element: <QnaPage />,
         children: [],
       },
       {
         route: '/cs/faq',
         name: '자주 묻는 질문',
-        element: <CsPage />,
+        element: <FaqPage />,
         children: [],
       },
     ],
@@ -141,13 +143,13 @@ export const DashboardMenuList: MenuType[] = [
   {
     route: '/cs',
     name: '1:1 문의 조회',
-    element: <CsPage />,
+    element: <QnaPage />,
     children: [],
   },
   {
     route: '/cs/faq',
     name: '자주 묻는 질문',
-    element: <CsPage />,
+    element: <FaqPage />,
     children: [],
   },
   {

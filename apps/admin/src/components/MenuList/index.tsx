@@ -14,6 +14,7 @@ import FaqPage from '@/src/pages/faq-page'
 import ProgramPage from '@/src/pages/program-page'
 import AdminPage from '@/src/pages/admin-page'
 import StatePage from '@/src/pages/state-page'
+import AuthorityPage from '@/src/pages/authority-page'
 
 export interface MenuType {
   route: string
@@ -105,7 +106,7 @@ export const MenuList: MenuType[] = [
       {
         route: '/manage/authoriy',
         name: '권한 관리',
-        element: <CsPage />,
+        element: <AuthorityPage />,
         children: [],
       },
     ],
@@ -176,7 +177,7 @@ export const DashboardMenuList: MenuType[] = [
   {
     route: '/manage/authoriy',
     name: '권한 관리',
-    element: <CsPage />,
+    element: <AuthorityPage />,
     children: [],
   },
 ]

@@ -9,6 +9,7 @@ import MenuDropDown from '@/src/components/MenuDropDown'
 // ** Recoil Imports
 import { useRecoilValue } from 'recoil'
 import { AdminState } from '@/src/app/admin'
+import ProfileDropDown from '@/src/components/ProfileDropDown'
 
 const HorizontalHeader = () => {
   const { profile, nickname } = useRecoilValue(AdminState)
@@ -36,7 +37,7 @@ const HorizontalHeader = () => {
       </div>
       <div className="flex items-center">
         <ProfileBox image={profile} />
-        <h1 className="ml-[20px] mr-[10px]">{nickname}</h1>
+        <ProfileDropDown name={nickname} />
       </div>
     </div>
   )

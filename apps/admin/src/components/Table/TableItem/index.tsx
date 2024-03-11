@@ -9,7 +9,9 @@ interface PropsType {
 const TableItem = ({ data, disabledClick, handleClick }: PropsType) => {
   return (
     <div
-      className="w-full flex items-center h-[45px] hover:bg-slate-400"
+      className={`w-full flex items-center h-[45px] ${
+        !disabledClick && 'hover:bg-slate-400'
+      }`}
       onClick={() => {
         if (!disabledClick && handleClick) {
           handleClick(1)

@@ -47,7 +47,11 @@ const DashboardPageView = ({}: PropsType) => {
         </div>
         <div className="h-[400px] w-2/4 bg-white rounded-[10px] p-4 mx-4">
           <h1 className="text-[19px] font-bold">일자별 요약</h1>
-          <CustomTable headerData={headerData} bodyData={bodyData} />
+          <CustomTable
+            headerData={headerData}
+            bodyData={bodyData}
+            disabledClick
+          />
         </div>
       </div>
       <div className="flex w-full mt-[20px]">
@@ -55,11 +59,19 @@ const DashboardPageView = ({}: PropsType) => {
           <h1 className="text-[19px] font-bold">
             신규 등록 워크스페이스 (3건)
           </h1>
-          <CustomTable headerData={headerData} bodyData={bodyData} />
+          <CustomTable
+            headerData={headerData}
+            bodyData={bodyData}
+            disabledClick
+          />
         </div>
         <div className="h-[400px] w-2/4 bg-white rounded-[10px] p-4 mx-4">
           <h1 className="text-[19px] font-bold">미답변 1:1 문의 (4명)</h1>
-          <CustomTable headerData={headerData} bodyData={bodyData} />
+          <CustomTable
+            headerData={headerData}
+            bodyData={bodyData}
+            disabledClick
+          />
         </div>
       </div>
     </div>

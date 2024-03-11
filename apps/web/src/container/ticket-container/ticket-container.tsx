@@ -13,7 +13,7 @@ const TicketContainerView = ({ ticketId, setTicketId }: PropsType) => {
         <h1 className="pl-4 font-bold text-md">총 4건</h1>
       </div>
       <div className={`${ticketId !== 0 && "flex"}`}>
-        <div className={`w-[${ticketId === 0 ? "100%" : "65%"}]`}>
+        <div style={{ width: ticketId !== 0 ? "65%" : "100%" }}>
           <TicketTable handleClick={setTicketId} />
         </div>
         {ticketId !== 0 && (

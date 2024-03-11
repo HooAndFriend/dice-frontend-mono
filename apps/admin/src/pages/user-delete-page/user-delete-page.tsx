@@ -1,9 +1,11 @@
+// ** React Imports
+import { useRef, useState } from 'react'
+
 // ** Component Imports
 import CustomTable from '@/src/components/Table'
 import TablePagination from '@/src/components/Table/TablePagination'
 import TitleBox from '@/src/components/TitleBox'
 import UserSearchBox from '@/src/components/SearchBox/UserSearchBox'
-import { useRef, useState } from 'react'
 import UserDeleteModal from '@/src/components/Modal/UserDeleteModal'
 
 interface PropsType {}

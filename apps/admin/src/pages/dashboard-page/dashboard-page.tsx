@@ -10,7 +10,7 @@ interface PropsType {}
 const DashboardPageView = ({}: PropsType) => {
   return (
     <div className="p-4">
-      <div className="flex items-end">
+      <div className="flex items-end px-4">
         <h1 className="font-bold text-[24px]">오늘의 운영 현황</h1>
         <p className="text-[#656565] text-[14px] ml-4">
           Today Date {dayjs().format('YYYY-MM-DD')}

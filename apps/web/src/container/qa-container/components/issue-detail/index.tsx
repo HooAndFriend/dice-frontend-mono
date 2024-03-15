@@ -8,9 +8,9 @@ import {
 } from "@/src/type/qa";
 import IssueDetailView from "./issue-detail";
 import useSWR from "swr";
-import {Get, Post} from "@/src/repository";
-import {useRecoilValue} from "recoil";
-import {AuthState, WorkspaceState} from "@/src/app";
+import { Get, Post } from "@/src/repository";
+import { useRecoilValue } from "recoil";
+import { AuthState, WorkspaceState } from "@/src/app";
 import useInput from "@/src/hooks/useInput";
 import useSWRMutation from "swr/mutation";
 
@@ -18,10 +18,10 @@ interface PropsType {
   qaId: number;
 }
 
-const IssueDetail = ({qaId}: PropsType) => {
-  const {accessToken} = useRecoilValue(AuthState);
-  const {uuid} = useRecoilValue(WorkspaceState);
-  const {data: comment, handleInput} = useInput<AddCommentParams>({
+const IssueDetail = ({ qaId }: PropsType) => {
+  const { accessToken } = useRecoilValue(AuthState);
+  const { uuid } = useRecoilValue(WorkspaceState);
+  const { data: comment, handleInput } = useInput<AddCommentParams>({
     content: "",
     qaId: qaId,
   });
@@ -42,7 +42,7 @@ const IssueDetail = ({qaId}: PropsType) => {
     async (url: string) =>
       await Post<AddCommentResponse>(
         url,
-        {...comment},
+        { ...comment },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -53,7 +53,7 @@ const IssueDetail = ({qaId}: PropsType) => {
       onSuccess: () => {
         alert("댓글이 등록되었습니다");
       },
-      onError: error => {
+      onError: (error) => {
         console.log(error + " 등록 실패");
       },
     }
@@ -63,7 +63,7 @@ const IssueDetail = ({qaId}: PropsType) => {
     data: issueData,
     error: issueError,
     isLoading: issueLoading,
-  } = useSWR(`/v1/qa?status=ALL&qaId=${qaId}`, async url =>
+  } = useSWR(`/v1/qa?status=ALL&qaId=${qaId}`, async (url) =>
     Get<GetIssueListResponse>(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -79,7 +79,7 @@ const IssueDetail = ({qaId}: PropsType) => {
     isLoading: commentLoading,
   } = useSWR(
     `/v1/qa/comment/${qaId}`,
-    async url =>
+    async (url) =>
       Get<GetCommentListResponse>(url, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -87,7 +87,7 @@ const IssueDetail = ({qaId}: PropsType) => {
         },
       }),
     {
-      onSuccess: status => {
+      onSuccess: (status) => {
         console.log(status);
       },
     }

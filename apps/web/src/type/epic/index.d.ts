@@ -12,3 +12,5 @@ export interface EpicInfo {
   allTicketCount: 20;
   doneTicketCount: 16;
 }
+
+export type EpicStatus = "ALL" | "WAITING" | "DOING" | "DONE" | "COMPLETE";

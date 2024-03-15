@@ -1,5 +1,5 @@
-import {stringTo2048} from "aws-sdk/clients/customerprofiles";
-import {CommonResponse} from "../common";
+import { stringTo2048 } from "aws-sdk/clients/customerprofiles";
+import { CommonResponse } from "../common";
 
 export interface CreateIssueParams {
   adminId: string;
@@ -76,4 +76,9 @@ export interface AddCommentParams {
 export interface AddCommentResponse extends Response {
   statusCode: number;
   message: string;
+}
+
+export interface QaQuery {
+  type: string;
+  value: string;
 }

@@ -26,6 +26,8 @@ const WorkSpaceContent = () => {
 
   if (isLoading) return null;
 
+  if (error) return;
+
   return <WorkSpaceContentView data={data.data.data} />;
 };
 

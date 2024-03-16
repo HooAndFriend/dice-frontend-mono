@@ -28,6 +28,10 @@ const MemberContent = ({ handleOpen }: PropsType) => {
     })
   );
 
+  if (isLoading) return;
+
+  if (error) return;
+
   return <MemberContentView handleOpen={handleOpen} data={data.data.data} />;
 };
 

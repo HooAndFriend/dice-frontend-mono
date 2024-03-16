@@ -86,6 +86,8 @@ const SettingContent = () => {
 
   if (isLoading) return;
 
+  if (error) return;
+
   return (
     <SettingContentView
       data={data}

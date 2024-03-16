@@ -1,6 +1,6 @@
 // ** Componnet Imports
-import CustomSearch from "@/src/components/Input/custom-search";
-import CustomSelect from "@/src/components/Input/custom-select";
+import CustomSearch from "@/src/components/Input/CustomSearch";
+import CustomSelect from "@/src/components/Input/CustomSelect";
 
 interface PropsType {
   pathname: string;

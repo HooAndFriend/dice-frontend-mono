@@ -13,7 +13,7 @@ import useInput from "@/src/hooks/useInput";
 import { SaveQaParam } from "@/src/type/qa";
 
 // ** Component Imports
-import CustomInput from "../../Input/custom-input";
+import CustomInput from "../../Input/CustomInput";
 import useSWRMutation from "swr/mutation";
 import { Post } from "@/src/repository";
 import { CommonResponse } from "@/src/type/common";

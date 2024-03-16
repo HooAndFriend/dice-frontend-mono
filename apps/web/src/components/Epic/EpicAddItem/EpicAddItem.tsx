@@ -1,5 +1,5 @@
 // ** Next Imports
-import CustomInput from "@/src/components/Input/custom-input";
+import CustomInput from "@/src/components/Input/CustomInput";
 import Image from "next/image";
 
 interface PropsType {

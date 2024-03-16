@@ -1,5 +1,5 @@
 // ** Component Imports
-import CustomInput from "../../Input/custom-input";
+import CustomInput from "../../Input/CustomInput";
 
 interface PropsType {}
 

@@ -1,4 +1,4 @@
-import CustomSelect from "@/src/components/Input/custom-select";
+import CustomSelect from "@/src/components/Input/CustomSelect";
 import { AddCommentParams, CommentInfo, IssueInfo } from "@/src/type/qa";
 import IssueComment from "../issue-comment";
 import { ChangeEvent } from "react";

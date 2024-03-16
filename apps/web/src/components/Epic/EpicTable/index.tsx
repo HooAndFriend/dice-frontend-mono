@@ -1,5 +1,6 @@
 // ** Component Imports
-import EpicTableView from "./EpicTable";
+import EpicItem from "../EpicItem";
+import EpicAddItem from "../EpicAddItem";
 
 // ** Type Imports
 import { EpicInfo } from "@/src/type/epic";
@@ -9,6 +10,13 @@ interface PropsType {
 }
 
 const EpicTable = ({ epicData }: PropsType) => {
-  return <EpicTableView epicData={epicData} />;
+  return (
+    <div className="mt-6 h-[530px] overflow-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8">
+      {epicData.map((item) => (
+        <EpicItem key={item.id} item={item} />
+      ))}
+      <EpicAddItem />
+    </div>
+  );
 };
 export default EpicTable;

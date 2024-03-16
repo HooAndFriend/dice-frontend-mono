@@ -23,7 +23,7 @@ const EpicConatiner = () => {
 
   if (isLoading) return;
 
-  return <EpicContainerView epicData={data.data.data} />;
+  return <EpicContainerView epicData={data.data.epic} />;
 };
 
 export default EpicConatiner;

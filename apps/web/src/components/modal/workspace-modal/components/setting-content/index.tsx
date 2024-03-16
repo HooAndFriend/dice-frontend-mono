@@ -56,7 +56,7 @@ const SettingContent = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${authState.accessToken}`,
             "team-code": workspaceState.uuid,
           },
         }

@@ -43,7 +43,7 @@ const MemberContent = ({ handleOpen }: PropsType) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${authState.accessToken}`,
           "team-code": teamState.uuid,
         },
       }
@@ -65,7 +65,7 @@ const MemberContent = ({ handleOpen }: PropsType) => {
   const handleDeleteTeamUser = async (teamUserId) => {
     await Delete<CommonResponse<void>>(`/v1/team-user/${teamUserId}`, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${authState.accessToken}`,
         "team-code": teamState.uuid,
       },
     })

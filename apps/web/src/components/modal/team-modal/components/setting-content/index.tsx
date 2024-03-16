@@ -62,7 +62,7 @@ const SettingContent = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${authState.accessToken}`,
             "team-code": teamState.uuid,
           },
         }

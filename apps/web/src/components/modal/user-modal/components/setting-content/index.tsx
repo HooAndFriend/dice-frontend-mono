@@ -49,7 +49,7 @@ const SettingContent = () => {
           profile: data.profile,
         },
         {
-          headers: { Authorization: `Bearer ${accessToken}` },
+          headers: { Authorization: `Bearer ${authState.accessToken}` },
         }
       ),
     {

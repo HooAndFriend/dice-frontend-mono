@@ -81,7 +81,7 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
     async (url: string) =>
       await Delete<CommonResponse<void>>(url, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${authState.accessToken}`,
           "workspace-code": `${workspaceState.uuid}`,
         },
       }),
@@ -108,7 +108,7 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
   } = useSWR(`/v1/qa?status=ALL&qaId=${qaId}`, async (url) =>
     Get<GetIssueListResponse>(url, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${authState.accessToken}`,
         "Workspace-code": `${workspaceState.uuid}`,
       },
     })
@@ -124,7 +124,7 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
     async (url) =>
       Get<GetCommentListResponse>(url, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${authState.accessToken}`,
           "Workspace-code": `${workspaceState.uuid}`,
         },
       }),

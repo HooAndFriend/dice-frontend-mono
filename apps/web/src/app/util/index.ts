@@ -7,3 +7,9 @@ export const { persistAtom } = recoilPersist({
   key: "sessionStorageState",
   storage: sessionStorage,
 });
+
+export const { persistAtom: persistStorageAtom } = recoilPersist({
+  key: "recoil-persist",
+  storage: localStorage,
+  converter: JSON,
+});

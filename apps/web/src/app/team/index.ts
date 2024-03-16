@@ -1,5 +1,11 @@
-import { atom } from "recoil";
+// ** React Imports
+import { useEffect, useState } from "react";
+
+// ** Recoil Imports
+import { atom, useRecoilState } from "recoil";
 import { persistAtom } from "../util";
+
+// ** Type Imports
 import { RoleType } from "@/src/type/common";
 
 interface TeamStateType {
@@ -23,3 +29,14 @@ export const TeamState = atom<TeamStateType>({
   default: teamInitState,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const useTeamStateSSR = () => {
+  const [isInitial, setIsInitial] = useState(true);
+  const [value, setValue] = useRecoilState(TeamState);
+
+  useEffect(() => {
+    setIsInitial(false);
+  }, []);
+
+  return [isInitial ? teamInitState : value, setValue] as const;
+};

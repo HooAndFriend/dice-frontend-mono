@@ -16,6 +16,7 @@ interface PropsType {
   data: IssueInfo[];
   status: EpicStatus;
   query: QaQuery;
+  count: number;
   handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOpenQa: (id: number) => void;
@@ -39,6 +40,7 @@ const QaContainerView = ({
   handleOpenQa,
   handleSelect,
   handleInput,
+  count,
 }: PropsType) => {
   return (
     <div className="w-full bg-[#FAFAFB] p-5">
@@ -52,18 +54,19 @@ const QaContainerView = ({
           option="title"
           item={SelectItem}
           value={query.type}
+          name="type"
           setValue={handleSelect}
         />
         <div className="font-spoqa text-base font-bold ml-[50px] mr-[29px] text-center">
           Search
         </div>
-        <CustomSearch value={query.value} onChange={handleInput} />
+        <CustomSearch value={query.value} onChange={handleInput} name="value" />
       </div>
       <div className="flex justify-between w-full">
         <div className={`${open ? "w-1/2" : "w-full"} pr-5`}>
           <div className="h-[50px] w-full flex justify-between items-center mt-[43px] mb-[30px]">
             <div className="text-lg font-medium text-center font-spoqa">
-              Total 4건
+              Total {count}건
             </div>
             <div className="flex items-center">
               <div className="flex items-center h-6 w-[406px] justify-between font-spoqa text-[#EBEBEC]">
@@ -72,7 +75,7 @@ const QaContainerView = ({
                 <StatusItem
                   status={status}
                   setStatus={setStatus}
-                  value="WAITING"
+                  value="WAIT"
                 />
                 <div className="h-[15px] w-px bg-[#EBEBEC]" />
                 <StatusItem

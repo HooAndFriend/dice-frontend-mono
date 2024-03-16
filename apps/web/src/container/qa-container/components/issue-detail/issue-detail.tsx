@@ -7,8 +7,10 @@ interface PropsType {
   data: IssueInfo;
   commentData: CommentInfo[];
   comment: AddCommentParams;
+  deleteQa: () => void;
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
   handleAdd: () => void;
+  handleClose: () => void;
 }
 
 const IssueDetailView = ({
@@ -17,6 +19,8 @@ const IssueDetailView = ({
   comment,
   handleInput,
   handleAdd,
+  deleteQa,
+  handleClose,
 }: PropsType) => {
   return (
     <>
@@ -32,7 +36,10 @@ const IssueDetailView = ({
             />
             <div>Edit</div>
           </div>
-          <button className="w-[110px] h-[40px] rounded-[30px] bg-black text-white flex justify-center items-center">
+          <button
+            className="w-[110px] h-[40px] rounded-[30px] bg-black text-white flex justify-center items-center cursor-pointer"
+            onClick={deleteQa}
+          >
             <img
               className="mr-[5px]"
               src="/images/Trash_Full.png"
@@ -41,6 +48,12 @@ const IssueDetailView = ({
             />
             <div className="flex items-center">Delete</div>
           </button>
+          <h1
+            className="text-[24px] font-bold ml-8 cursor-pointer"
+            onClick={handleClose}
+          >
+            X
+          </h1>
         </div>
       </div>
       <div className="h-[50px] flex justify-between mt-[30px] font-spoqa">

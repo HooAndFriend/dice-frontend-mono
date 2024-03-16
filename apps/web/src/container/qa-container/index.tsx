@@ -80,6 +80,7 @@ const QaContainer = () => {
       saveOpen={saveOpen}
       setSaveOpen={setSaveOpen}
       refetch={mutate}
+      setOpen={setOpen}
     />
   );
 };

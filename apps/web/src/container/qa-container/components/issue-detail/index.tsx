@@ -1,30 +1,47 @@
 "use client";
 
+// ** Component Imports
+import IssueDetailView from "./issue-detail";
+
+// ** Service Imports
+import useSWR from "swr";
+import { Delete, Get, Post } from "@/src/repository";
+import useSWRMutation from "swr/mutation";
+
+// ** Recoil Imports
+import { useRecoilValue } from "recoil";
+import { AuthState, WorkspaceState } from "@/src/app";
+
+// ** Utils Imports
+import useInput from "@/src/hooks/useInput";
+
+// ** Type Imports
+import { CommonResponse } from "@/src/type/common";
 import {
   AddCommentParams,
   AddCommentResponse,
   GetCommentListResponse,
   GetIssueListResponse,
 } from "@/src/type/qa";
-import IssueDetailView from "./issue-detail";
-import useSWR from "swr";
-import { Get, Post } from "@/src/repository";
-import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
-import useInput from "@/src/hooks/useInput";
-import useSWRMutation from "swr/mutation";
+
+// ** Context Imports
+import { useDialog } from "@/src/context/DialogContext";
 
 interface PropsType {
   qaId: number;
+  handleClose: () => void;
 }
 
-const IssueDetail = ({ qaId }: PropsType) => {
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid } = useRecoilValue(WorkspaceState);
+const IssueDetail = ({ qaId, handleClose }: PropsType) => {
   const { data: comment, handleInput } = useInput<AddCommentParams>({
     content: "",
-    qaId: qaId,
+    qaId,
   });
+
+  const { accessToken } = useRecoilValue(AuthState);
+  const { uuid } = useRecoilValue(WorkspaceState);
+
+  const { handleOpen } = useDialog();
 
   const handleAdd = () => {
     if (comment.content === "") {
@@ -55,6 +72,32 @@ const IssueDetail = ({ qaId }: PropsType) => {
       },
       onError: (error) => {
         console.log(error + " 등록 실패");
+      },
+    }
+  );
+
+  //댓글 등록
+  const deleteQa = useSWRMutation(
+    `/v1/qa/${qaId}`,
+    async (url: string) =>
+      await Delete<CommonResponse<void>>(url, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "workspace-code": `${uuid}`,
+        },
+      }),
+    {
+      onSuccess: () => {
+        handleClose();
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
       },
     }
   );
@@ -106,6 +149,8 @@ const IssueDetail = ({ qaId }: PropsType) => {
       comment={comment}
       handleAdd={handleAdd}
       handleInput={handleInput}
+      deleteQa={deleteQa.trigger}
+      handleClose={handleClose}
     />
   );
 };

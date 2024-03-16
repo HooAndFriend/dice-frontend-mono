@@ -9,8 +9,7 @@ import { Delete, Get, Post } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
+import { useAuthStateSSR, useWorkspaceStateSSR } from "@/src/app";
 
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
@@ -38,8 +37,8 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
     qaId,
   });
 
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid } = useRecoilValue(WorkspaceState);
+  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { handleOpen } = useDialog();
 
@@ -62,7 +61,7 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
         { ...comment },
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${authState.accessToken}`,
           },
         }
       ),
@@ -83,7 +82,7 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
       await Delete<CommonResponse<void>>(url, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          "workspace-code": `${uuid}`,
+          "workspace-code": `${workspaceState.uuid}`,
         },
       }),
     {
@@ -110,7 +109,7 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
     Get<GetIssueListResponse>(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Workspace-code": `${uuid}`,
+        "Workspace-code": `${workspaceState.uuid}`,
       },
     })
   );
@@ -126,7 +125,7 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
       Get<GetCommentListResponse>(url, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          "Workspace-code": `${uuid}`,
+          "Workspace-code": `${workspaceState.uuid}`,
         },
       }),
     {

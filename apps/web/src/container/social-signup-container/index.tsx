@@ -11,8 +11,12 @@ import useSWRMutation from "swr/mutation";
 import { Post } from "@/src/repository";
 
 // ** Recoil Imports
-import { useSetRecoilState } from "recoil";
-import { AuthState, TeamState, UserState, WorkspaceState } from "@/src/app";
+import {
+  useAuthStateSSR,
+  useTeamStateSSR,
+  useUserStateSSR,
+  useWorkspaceStateSSR,
+} from "@/src/app";
 
 // ** Component Imports
 import SocialSignupContainerView from "./social-signup-container";
@@ -34,10 +38,10 @@ const SocialSignupContainer = () => {
     type: "",
   });
 
-  const setAuthState = useSetRecoilState(AuthState);
-  const setUserState = useSetRecoilState(UserState);
-  const setWorkspaceState = useSetRecoilState(WorkspaceState);
-  const setTeamState = useSetRecoilState(TeamState);
+  const [userState, setUserState] = useUserStateSSR();
+  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
+  const [teamState, setTeamState] = useTeamStateSSR();
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { handleOpen } = useDialog();
 

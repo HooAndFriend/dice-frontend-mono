@@ -7,8 +7,11 @@ import { useRef, useState } from "react";
 import WorkspacePopoverView from "./workspace-popover";
 
 // ** Recoil Imports
-import { AuthState, TeamState, WorkspaceState } from "@/src/app";
-import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  useAuthStateSSR,
+  useTeamStateSSR,
+  useWorkspaceStateSSR,
+} from "@/src/app";
 
 // ** Service Imports
 import useSWR from "swr";
@@ -21,17 +24,17 @@ const WorkspacePopover = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid, id } = useRecoilValue(TeamState);
-  const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState);
+  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
+  const [teamState, setTeamState] = useTeamStateSSR();
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { data, error, isLoading } = useSWR(
     "/v1/workspace-user/team",
     async (url) =>
       Get<GetWorkspaceListResponse>(url, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "team-code": id === 0 ? "personal" : uuid,
+          Authorization: `Bearer ${authState.accessToken}`,
+          "team-code": teamState.id === 0 ? "personal" : teamState.uuid,
         },
       })
   );

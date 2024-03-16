@@ -1,6 +1,5 @@
 // ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { AuthState, TeamState } from "@/src/app";
+import { useAuthStateSSR, useTeamStateSSR } from "@/src/app";
 
 // ** Component Imports
 import AddMemberContentView from "./addMember-content";
@@ -30,8 +29,8 @@ const AddMemberContent = ({ open, setOpen }: PropsType) => {
     role: "VIEWER",
   });
 
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid } = useRecoilValue(TeamState);
+  const [teamState, setTeamState] = useTeamStateSSR();
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { handleOpen } = useDialog();
 
@@ -40,8 +39,8 @@ const AddMemberContent = ({ open, setOpen }: PropsType) => {
     async (url: string) =>
       await Post<CommonResponse<void>>(url, data, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "team-code": uuid,
+          Authorization: `Bearer ${authState.accessToken}`,
+          "team-code": teamState.uuid,
         },
       }),
     {

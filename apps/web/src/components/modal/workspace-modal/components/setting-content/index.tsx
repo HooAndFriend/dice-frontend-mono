@@ -1,18 +1,23 @@
 // ** Recoil Imports
-import { useRecoilState, useRecoilValue } from "recoil";
-import { AuthState, TeamState, WorkspaceState } from "@/src/app";
+import { useAuthStateSSR, useWorkspaceStateSSR } from "@/src/app";
 
 // ** Component Imports
 import SettingContentView from "./setting-content";
-import useSWR, { mutate } from "swr";
+
+// ** Type Imports
 import {
   GetWorkspaceInfoResponse,
   WorkspaceDetailInfo,
 } from "@/src/type/workspace";
-import { Get, Put } from "@/src/repository";
 import useInput from "@/src/hooks/useInput";
-import useSWRMutation from "swr/mutation";
 import { CommonResponse } from "@/src/type/common";
+
+// ** Service Imports
+import { Get, Put } from "@/src/repository";
+import useSWRMutation from "swr/mutation";
+import useSWR, { mutate } from "swr";
+
+// ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 
 const SettingContent = () => {
@@ -23,16 +28,16 @@ const SettingContent = () => {
     comment: "",
   });
 
-  const { accessToken } = useRecoilValue(AuthState);
-  const [workspace, setWorkspace] = useRecoilState(WorkspaceState);
+  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { handleOpen } = useDialog();
 
   const { error, isLoading } = useSWR("/v1/workspace/home", async (url) =>
     Get<GetWorkspaceInfoResponse>(url, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "workspace-code": workspace.uuid,
+        Authorization: `Bearer ${authState.accessToken}`,
+        "workspace-code": workspaceState.uuid,
       },
     }).then((res) => {
       setData(res.data);
@@ -52,7 +57,7 @@ const SettingContent = () => {
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "team-code": workspace.uuid,
+            "team-code": workspaceState.uuid,
           },
         }
       ),
@@ -60,7 +65,7 @@ const SettingContent = () => {
       onSuccess: () => {
         mutate("/v1/workspace/home");
 
-        setWorkspace((cur) => ({
+        setWorkspaceState((cur) => ({
           ...cur,
           profile: data.profile,
           name: data.name,

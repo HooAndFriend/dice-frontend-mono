@@ -3,22 +3,24 @@ import { Get } from "@/src/repository";
 import useSWR from "swr";
 
 // ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { AuthState, TeamState } from "@/src/app";
+import { useAuthStateSSR, useTeamStateSSR } from "@/src/app";
 
 // ** Component Imports
 import WorkSpaceContentView from "./workspace-content";
 import { GetTeamWorkspaceListResponse } from "@/src/type/workspace";
 
 const WorkSpaceContent = () => {
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid } = useRecoilValue(TeamState);
+  const [teamState, setTeamState] = useTeamStateSSR();
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { data, error, isLoading } = useSWR(
     "/v1/workspace/list/popup",
     async (url) =>
       Get<GetTeamWorkspaceListResponse>(url, {
-        headers: { Authorization: `Bearer ${accessToken}`, "team-code": uuid },
+        headers: {
+          Authorization: `Bearer ${authState.accessToken}`,
+          "team-code": teamState.uuid,
+        },
       })
   );
 

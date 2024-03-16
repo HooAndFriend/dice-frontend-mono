@@ -4,8 +4,7 @@ import { Get, Put } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Recoil Imports
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { AuthState, UserState } from "@/src/app";
+import { useAuthStateSSR, useUserStateSSR } from "@/src/app";
 
 // ** Component Imports
 import SettingContentView from "./setting-content";
@@ -26,14 +25,15 @@ const SettingContent = () => {
     nickname: "",
     profile: "",
   });
-  const { accessToken } = useRecoilValue(AuthState);
-  const setUserState = useSetRecoilState(UserState);
+
+  const [userState, setUserState] = useUserStateSSR();
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { handleOpen } = useDialog();
 
   const { error, isLoading } = useSWR("/v1/user", async (url) =>
     Get<GetUserInfoResponse>(url, {
-      headers: { Authorization: `Bearer ${accessToken}` },
+      headers: { Authorization: `Bearer ${authState.accessToken}` },
     }).then((res) => {
       setData(res.data);
     })

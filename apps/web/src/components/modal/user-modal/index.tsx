@@ -3,9 +3,12 @@ import { useState } from "react";
 
 // ** Component Imports
 import UserModalView from "./user-modal";
+
+// ** Context Imports
 import { DialogProvider } from "@/src/context/DialogContext";
-import { useRecoilValue } from "recoil";
-import { UserState } from "@/src/app";
+
+// ** Recoil Imports
+import { useUserStateSSR } from "@/src/app";
 
 interface PropsType {
   open: boolean;
@@ -16,7 +19,7 @@ interface PropsType {
 const UserModal = ({ open, setOpen, cancelButtonRef }: PropsType) => {
   const [tab, setTab] = useState<number>(0);
 
-  const { profile, nickname } = useRecoilValue(UserState);
+  const [userState, setUserState] = useUserStateSSR();
 
   return (
     <DialogProvider>
@@ -26,8 +29,8 @@ const UserModal = ({ open, setOpen, cancelButtonRef }: PropsType) => {
         setTab={setTab}
         setOpen={setOpen}
         cancelButtonRef={cancelButtonRef}
-        profile={profile}
-        nickname={nickname}
+        profile={userState.profile}
+        nickname={userState.nickname}
       />
     </DialogProvider>
   );

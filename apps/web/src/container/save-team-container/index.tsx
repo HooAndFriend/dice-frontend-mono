@@ -11,8 +11,7 @@ import useSWRMutation from "swr/mutation";
 import { Post } from "@/src/repository";
 
 // ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { AuthState } from "@/src/app";
+import { useAuthStateSSR } from "@/src/app";
 
 // ** Component Imports
 import SaveTeamContainerView from "./save-team-container";
@@ -35,7 +34,7 @@ const SaveTeamContainer = () => {
       "https://firebasestorage.googleapis.com/v0/b/dice-dev-a5b63.appspot.com/o/images%2FIMG_6159.jpg?alt=media&token=450c0181-8826-4856-b611-509712872450",
   });
 
-  const { accessToken } = useRecoilValue(AuthState);
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { handleOpen } = useDialog();
 
@@ -45,7 +44,7 @@ const SaveTeamContainer = () => {
     "/v1/team",
     async (url: string) =>
       await Post<CommonResponse<void>>(url, data, {
-        headers: { Authorization: `Bearer ${accessToken}` },
+        headers: { Authorization: `Bearer ${authState.accessToken}` },
       }),
     {
       onSuccess: ({ data }) => {

@@ -1,23 +1,29 @@
+// ** Service Imports
 import useSWR from "swr";
-import MemberContentView from "./member-content";
 import { Get } from "@/src/repository";
+
+// ** Component Imports
+import MemberContentView from "./member-content";
+
+// ** Type Imports
 import { GetWorkspaceUserListResponse } from "@/src/type/workspace";
-import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
+
+// ** Recoil Imports
+import { useAuthStateSSR, useWorkspaceStateSSR } from "@/src/app";
 
 interface PropsType {
   handleOpen: () => void;
 }
 
 const MemberContent = ({ handleOpen }: PropsType) => {
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid } = useRecoilValue(WorkspaceState);
+  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { data, error, isLoading } = useSWR("/v1/workspace-user", async (url) =>
     Get<GetWorkspaceUserListResponse>(url, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "workspace-code": uuid,
+        Authorization: `Bearer ${authState.accessToken}`,
+        "workspace-code": workspaceState.uuid,
       },
     })
   );

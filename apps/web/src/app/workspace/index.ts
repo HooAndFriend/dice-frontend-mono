@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 // ** Recoil Imports
 import { atom, useRecoilState } from "recoil";
-import { persistAtom } from "../util";
+import { persistStorageAtom } from "../util";
 
 // ** Type Imports
 import { WorksapceFunction } from "@/src/type/workspace";
@@ -30,7 +30,7 @@ export const workspaceInitState: WorksapceStateType = {
 export const WorkspaceState = atom<WorksapceStateType>({
   key: "workspaceState",
   default: workspaceInitState,
-  effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistStorageAtom],
 });
 
 export const useWorkspaceStateSSR = () => {

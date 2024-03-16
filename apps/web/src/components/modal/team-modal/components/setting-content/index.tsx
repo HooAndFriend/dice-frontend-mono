@@ -8,7 +8,12 @@ import SettingContentView from "./setting-content";
 
 // ** Recoil Imports
 import { useRecoilState, useRecoilValue } from "recoil";
-import { AuthState, TeamState } from "@/src/app";
+import {
+  AuthState,
+  TeamState,
+  useAuthStateSSR,
+  useTeamStateSSR,
+} from "@/src/app";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
@@ -29,16 +34,16 @@ const SettingContent = () => {
     description: "",
   });
 
-  const { accessToken } = useRecoilValue(AuthState);
-  const [team, setTeam] = useRecoilState(TeamState);
+  const [teamState, setTeamState] = useTeamStateSSR();
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { handleOpen } = useDialog();
 
   const { error, isLoading } = useSWR("/v1/team", async (url) =>
     Get<GetTeamResponse>(url, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "team-code": team.uuid,
+        Authorization: `Bearer ${authState.accessToken}`,
+        "team-code": teamState.uuid,
       },
     }).then((res) => {
       setData(res.data);
@@ -58,14 +63,14 @@ const SettingContent = () => {
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "team-code": team.uuid,
+            "team-code": teamState.uuid,
           },
         }
       ),
     {
       onSuccess: () => {
         mutate("/v1/team");
-        setTeam((cur) => ({
+        setTeamState((cur) => ({
           ...cur,
           profile: data.profile,
           name: data.name,

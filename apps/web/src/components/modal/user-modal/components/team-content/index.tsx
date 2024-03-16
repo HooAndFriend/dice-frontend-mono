@@ -2,8 +2,7 @@
 import TeamContentView from "./team-content";
 
 // ** Recoil Imports
-import { AuthState } from "@/src/app";
-import { useRecoilValue } from "recoil";
+import { useAuthStateSSR } from "@/src/app";
 
 // ** Service Imports
 import useSWR from "swr";
@@ -13,11 +12,11 @@ import { Get } from "@/src/repository";
 import { GetUserTeamListResponse } from "@/src/type/team";
 
 const TeamContent = () => {
-  const { accessToken } = useRecoilValue(AuthState);
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { data, error, isLoading } = useSWR("/v1/team-user", async (url) =>
     Get<GetUserTeamListResponse>(url, {
-      headers: { Authorization: `Bearer ${accessToken}` },
+      headers: { Authorization: `Bearer ${authState.accessToken}` },
     })
   );
 

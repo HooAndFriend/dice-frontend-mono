@@ -11,15 +11,20 @@ import useInput from "@/src/hooks/useInput";
 
 // ** Type Imports
 import { SaveQaParam } from "@/src/type/qa";
+import { CommonResponse } from "@/src/type/common";
 
 // ** Component Imports
 import CustomInput from "../../Input/CustomInput";
+
+// ** Service Imports
 import useSWRMutation from "swr/mutation";
 import { Post } from "@/src/repository";
-import { CommonResponse } from "@/src/type/common";
+
+// ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
-import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
+
+// ** Recoil Imports
+import { useAuthStateSSR, useWorkspaceStateSSR } from "@/src/app";
 
 interface PropsType {
   open: boolean;
@@ -39,8 +44,8 @@ const QaSaveModal = ({
     number: "",
   });
 
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid } = useRecoilValue(WorkspaceState);
+  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { handleOpen } = useDialog();
 
@@ -49,8 +54,8 @@ const QaSaveModal = ({
     async (url: string) =>
       await Post<CommonResponse<void>>(url, data, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "workspace-code": `${uuid}`,
+          Authorization: `Bearer ${authState.accessToken}`,
+          "workspace-code": `${workspaceState.uuid}`,
         },
       }),
     {

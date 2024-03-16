@@ -3,8 +3,7 @@ import { Get } from "@/src/repository";
 import useSWR from "swr";
 
 // ** Recoil Imports
-import { AuthState } from "@/src/app";
-import { useRecoilValue } from "recoil";
+import { useAuthStateSSR } from "@/src/app";
 
 // ** Type Imports
 import { GetUserWorkspaceListResponse } from "@/src/type/workspace";
@@ -13,13 +12,13 @@ import { GetUserWorkspaceListResponse } from "@/src/type/workspace";
 import WorkspaceContentView from "./workspace-content";
 
 const WorkspaceContent = () => {
-  const { accessToken } = useRecoilValue(AuthState);
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { data, error, isLoading } = useSWR(
     "/v1/workspace-user/my",
     async (url) =>
       Get<GetUserWorkspaceListResponse>(url, {
-        headers: { Authorization: `Bearer ${accessToken}` },
+        headers: { Authorization: `Bearer ${authState.accessToken}` },
       })
   );
 

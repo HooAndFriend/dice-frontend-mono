@@ -3,8 +3,7 @@ import useSWR, { mutate } from "swr";
 import { Get, Patch, Delete } from "@/src/repository";
 
 // ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { AuthState, TeamState } from "@/src/app";
+import { useAuthStateSSR, useTeamStateSSR } from "@/src/app";
 
 // ** Component Imports
 import MemberContentView from "./member-content";
@@ -21,16 +20,16 @@ interface PropsType {
 }
 
 const MemberContent = ({ handleOpen }: PropsType) => {
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid, role } = useRecoilValue(TeamState);
+  const [teamState, setTeamState] = useTeamStateSSR();
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const { handleOpen: handleDialogOpen } = useDialog();
 
   const { data, error, isLoading } = useSWR("/v1/team-user/user", async (url) =>
     Get<GetTeamUserListResponse>(url, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "team-code": uuid,
+        Authorization: `Bearer ${authState.accessToken}`,
+        "team-code": teamState.uuid,
       },
     })
   );
@@ -45,7 +44,7 @@ const MemberContent = ({ handleOpen }: PropsType) => {
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          "team-code": uuid,
+          "team-code": teamState.uuid,
         },
       }
     )
@@ -67,7 +66,7 @@ const MemberContent = ({ handleOpen }: PropsType) => {
     await Delete<CommonResponse<void>>(`/v1/team-user/${teamUserId}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "team-code": uuid,
+        "team-code": teamState.uuid,
       },
     })
       .then((res) => {
@@ -90,8 +89,8 @@ const MemberContent = ({ handleOpen }: PropsType) => {
     <MemberContentView
       handleOpen={handleOpen}
       data={data.data.data}
-      uuid={uuid}
-      role={role}
+      uuid={teamState.uuid}
+      role={teamState.role}
       handleTeamUserRole={handleTeamUserRole}
       handleDeleteTeamUser={handleDeleteTeamUser}
     />

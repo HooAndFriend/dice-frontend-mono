@@ -9,7 +9,12 @@ import useSWR from "swr";
 
 // ** Recoil Imports
 import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
+import {
+  AuthState,
+  WorkspaceState,
+  useAuthStateSSR,
+  useWorkspaceStateSSR,
+} from "@/src/app";
 
 // ** Type Imports
 import { GetIssueListResponse, QaQuery } from "@/src/type/qa";
@@ -27,7 +32,11 @@ const QaContainer = () => {
 
   const [status, setStatus] = useState<EpicStatus>("ALL");
 
+  const [qaId, setQaId] = useState<number>(0);
+
   const cancelButtonRef = useRef();
+
+  const [authState, setAuthState] = useAuthStateSSR();
 
   const {
     data: query,
@@ -35,21 +44,18 @@ const QaContainer = () => {
     handleSelect,
   } = useInput<QaQuery>({ type: "title", value: "" });
 
-  const [qaId, setQaId] = useState<number>(0);
-
   const handleOpenQa = (id: number) => {
     setQaId(id);
     setOpen(true);
   };
 
-  const { uuid } = useRecoilValue(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
+  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
 
   const { data, error, isLoading, mutate } = useSWR("/v1/qa", async (url) =>
     Get<GetIssueListResponse>(url, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Workspace-code": `${uuid}`,
+        Authorization: `Bearer ${authState.accessToken}`,
+        "Workspace-code": `${workspaceState.uuid}`,
       },
       params: {
         status,
@@ -63,6 +69,8 @@ const QaContainer = () => {
   }, [query, status]);
 
   if (isLoading) return null;
+
+  if (error) return;
 
   return (
     <QaContainerView

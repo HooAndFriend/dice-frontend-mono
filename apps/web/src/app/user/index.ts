@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 // ** Recoil Imports
 import { atom, useRecoilState } from "recoil";
-import { persistAtom } from "../util";
+import { persistStorageAtom } from "../util";
 
 interface UserStateType {
   email: string;
@@ -20,7 +20,7 @@ export const userInitState = {
 export const UserState = atom<UserStateType>({
   key: "userState",
   default: userInitState,
-  effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistStorageAtom],
 });
 
 export const useUserStateSSR = () => {

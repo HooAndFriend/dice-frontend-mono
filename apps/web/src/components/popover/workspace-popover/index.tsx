@@ -19,6 +19,7 @@ import { Get } from "@/src/repository";
 
 // ** Type Imports
 import { GetWorkspaceListResponse, WorkspaceInfo } from "@/src/type/workspace";
+import { er } from "@fullcalendar/core/internal-common";
 
 const WorkspacePopover = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -56,6 +57,8 @@ const WorkspacePopover = () => {
   };
 
   if (isLoading) return;
+
+  if (error) return;
 
   return (
     <WorkspacePopoverView

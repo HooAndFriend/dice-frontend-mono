@@ -84,6 +84,8 @@ const TeamPopover = () => {
 
   if (isLoading) return null;
 
+  if (error) return;
+
   return (
     <TeamPopoverView
       open={open}

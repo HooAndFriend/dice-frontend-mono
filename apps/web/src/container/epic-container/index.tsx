@@ -28,6 +28,8 @@ const EpicConatiner = () => {
 
   if (isLoading) return;
 
+  if (error) return;
+
   return <EpicContainerView epicData={data.data.epic} />;
 };
 

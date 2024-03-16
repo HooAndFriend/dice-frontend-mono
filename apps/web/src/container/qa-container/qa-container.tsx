@@ -5,6 +5,7 @@ import IssueDetail from "./components/issue-detail";
 import CustomSearch from "@/src/components/Input/custom-search";
 import StatusItem from "./components/StatusItem";
 import EpicItem from "./components/EpicItem";
+import QaSaveModal from "@/src/components/Modal/QaSaveModal";
 
 // ** Type Imports
 import { IssueInfo, QaQuery } from "@/src/type/qa";
@@ -12,15 +13,19 @@ import { EpicStatus } from "@/src/type/epic";
 
 interface PropsType {
   open: boolean;
+  saveOpen: boolean;
   qaId: number;
   data: IssueInfo[];
   status: EpicStatus;
   query: QaQuery;
   count: number;
+  cancelButtonRef: any;
   handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOpenQa: (id: number) => void;
   setStatus: (status: EpicStatus) => void;
+  setSaveOpen: (value: boolean) => void;
+  refetch: () => void;
 }
 
 const SelectItem = [
@@ -41,6 +46,10 @@ const QaContainerView = ({
   handleSelect,
   handleInput,
   count,
+  saveOpen,
+  setSaveOpen,
+  cancelButtonRef,
+  refetch,
 }: PropsType) => {
   return (
     <div className="w-full bg-[#FAFAFB] p-5">
@@ -101,7 +110,10 @@ const QaContainerView = ({
                 className="w-[120px] h-[50px] rounded-[30px] flex items-center bg-white border border-[#EBEBEC] justify-center ml-8"
               >
                 <img src="/images/Add_To_Queue.png" width={24} height={24} />
-                <div className="font-spoqa font-bold text-center ml-[5px]">
+                <div
+                  className="font-spoqa font-bold text-center ml-[5px]"
+                  onClick={() => setSaveOpen(true)}
+                >
                   Add
                 </div>
               </div>
@@ -117,6 +129,14 @@ const QaContainerView = ({
           <div className="w-1/2 mt-[123px] h-[564px] rounded-[20px] bg-white shadow-md border-[#EBEBEC] p-5 overflow-y-auto">
             <IssueDetail qaId={qaId} />
           </div>
+        )}
+        {saveOpen && (
+          <QaSaveModal
+            open={saveOpen}
+            setOpen={setSaveOpen}
+            cancelButtonRef={cancelButtonRef}
+            refetch={refetch}
+          />
         )}
       </div>
     </div>

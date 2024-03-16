@@ -82,3 +82,8 @@ export interface QaQuery {
   type: string;
   value: string;
 }
+
+export interface SaveQaParam {
+  title: string;
+  number: string;
+}

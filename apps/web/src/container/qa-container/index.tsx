@@ -1,7 +1,7 @@
 "use client";
 
 // ** React Imports
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // ** Service Imports
 import { Get } from "@/src/repository";
@@ -23,7 +23,11 @@ import QaContainerView from "./qa-container";
 
 const QaContainer = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const [saveOpen, setSaveOpen] = useState<boolean>(false);
+
   const [status, setStatus] = useState<EpicStatus>("ALL");
+
+  const cancelButtonRef = useRef();
 
   const {
     data: query,
@@ -72,6 +76,10 @@ const QaContainer = () => {
       handleInput={handleInput}
       setStatus={setStatus}
       handleOpenQa={handleOpenQa}
+      cancelButtonRef={cancelButtonRef}
+      saveOpen={saveOpen}
+      setSaveOpen={setSaveOpen}
+      refetch={mutate}
     />
   );
 };

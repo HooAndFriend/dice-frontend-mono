@@ -3,6 +3,9 @@ interface PropsType {
   width?: string;
   height?: string;
   borderRadius?: string;
+  value?: string;
+  name?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CustomInput = ({
@@ -10,6 +13,9 @@ const CustomInput = ({
   width,
   height,
   borderRadius,
+  value,
+  onChange,
+  name,
 }: PropsType) => {
   return (
     <div
@@ -18,6 +24,9 @@ const CustomInput = ({
       <input
         className={`w-[${width}] placeholder-[#EBEBEC] focus:outline-none`}
         placeholder={placeholder ? placeholder : ""}
+        value={value}
+        name={name}
+        onChange={onChange}
       />
     </div>
   );

@@ -2,7 +2,7 @@ import { CommonResponse, RoleType } from "../common";
 
 export interface GetEpicListResponse extends CommonResponse {
   count: number;
-  epic: EpicInfo[];
+  data: EpicInfo[];
 }
 
 export interface EpicInfo {

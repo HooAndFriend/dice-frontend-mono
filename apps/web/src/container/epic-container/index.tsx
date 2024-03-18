@@ -31,7 +31,7 @@ const EpicConatiner = () => {
 
   if (error) return;
 
-  return <EpicContainerView epicData={data.data.epic} />;
+  return <EpicContainerView epicData={data.data.data} />;
 };
 
 export default EpicConatiner;

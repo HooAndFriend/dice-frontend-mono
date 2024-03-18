@@ -70,7 +70,7 @@ const QaContainer = () => {
     <QaContainerView
       open={open}
       status={status}
-      data={data.data.qa}
+      data={data.data.data}
       count={data.data.count}
       qaId={qaId}
       query={query}

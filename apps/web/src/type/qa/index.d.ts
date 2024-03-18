@@ -20,7 +20,7 @@ export interface CreateIssueResponse extends Response {
 }
 
 export interface GetIssueListResponse extends CommonResponse {
-  qa: IssueInfo[];
+  data: IssueInfo[];
   count: number;
 }
 

@@ -144,7 +144,7 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
 
   return (
     <IssueDetailView
-      data={issueData.data.qa[0]}
+      data={issueData.data.data[0]}
       commentData={commentData.data.data}
       comment={comment}
       handleAdd={handleAdd}

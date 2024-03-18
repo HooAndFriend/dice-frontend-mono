@@ -1,15 +1,16 @@
 "use client";
 
 // ** Recoil Imports
-import { useUserStateSSR } from "@/src/app";
+import { UserState } from "@/src/app";
+import { useRecoilValue } from "recoil";
 
 // ** Component Imports
 import DashboardHeaderView from "./dashboard-header";
 
 const DashboardHeader = () => {
-  const [userState, setUserState] = useUserStateSSR();
+  const { nickname } = useRecoilValue(UserState);
 
-  return <DashboardHeaderView name={userState.nickname} />;
+  return <DashboardHeaderView name={nickname} />;
 };
 
 export default DashboardHeader;

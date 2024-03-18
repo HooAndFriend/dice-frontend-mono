@@ -8,6 +8,9 @@ export const { persistAtom } = recoilPersist({
   storage: sessionStorage,
 });
 
+const localStorage =
+  typeof window !== "undefined" ? window.localStorage : undefined;
+
 export const { persistAtom: persistStorageAtom } = recoilPersist({
   key: "recoil-persist",
   storage: localStorage,

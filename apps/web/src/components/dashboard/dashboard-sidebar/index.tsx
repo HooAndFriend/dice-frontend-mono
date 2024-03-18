@@ -11,13 +11,14 @@ import { MenuList } from "@/src/constants/menu";
 import DashboardIcon from "@/public/svg/dashboard.svg";
 
 // ** Recoil Imports
-import { useWorkspaceStateSSR } from "@/src/app";
+import { WorkspaceState } from "@/src/app";
+import { useRecoilValue } from "recoil";
 
 // ** Utils Imports
 import { isUndefined } from "loadsh";
 
 const DashboardSidebard = () => {
-  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
+  const { workspaceFunction } = useRecoilValue(WorkspaceState);
 
   const pathname = usePathname();
 
@@ -31,7 +32,7 @@ const DashboardSidebard = () => {
 
   const sidbarMenuList = useMemo(
     () =>
-      isUndefined(workspaceState.workspaceFunction)
+      isUndefined(workspaceFunction)
         ? []
         : [
             {
@@ -43,9 +44,7 @@ const DashboardSidebard = () => {
             },
             ,
             ...MenuList.filter((item) =>
-              workspaceState.workspaceFunction.find(
-                (_) => _.function === item.name
-              )
+              workspaceFunction.find((_) => _.function === item.name)
             ),
           ].map((item) => {
             if (item.link === path) {
@@ -53,7 +52,7 @@ const DashboardSidebard = () => {
             }
             return item;
           }),
-    [workspaceState.workspaceFunction, path]
+    [workspaceFunction, path]
   );
 
   return <DashboardSidebardView sidbarMenuList={sidbarMenuList} />;

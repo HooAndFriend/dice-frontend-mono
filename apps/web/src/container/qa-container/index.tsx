@@ -9,12 +9,7 @@ import useSWR from "swr";
 
 // ** Recoil Imports
 import { useRecoilValue } from "recoil";
-import {
-  AuthState,
-  WorkspaceState,
-  useAuthStateSSR,
-  useWorkspaceStateSSR,
-} from "@/src/app";
+import { AuthState, WorkspaceState } from "@/src/app";
 
 // ** Type Imports
 import { GetIssueListResponse, QaQuery } from "@/src/type/qa";
@@ -36,7 +31,8 @@ const QaContainer = () => {
 
   const cancelButtonRef = useRef();
 
-  const [authState, setAuthState] = useAuthStateSSR();
+  const { accessToken } = useRecoilValue(AuthState);
+  const { uuid } = useRecoilValue(WorkspaceState);
 
   const {
     data: query,
@@ -49,13 +45,11 @@ const QaContainer = () => {
     setOpen(true);
   };
 
-  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
-
   const { data, error, isLoading, mutate } = useSWR("/v1/qa", async (url) =>
     Get<GetIssueListResponse>(url, {
       headers: {
-        Authorization: `Bearer ${authState.accessToken}`,
-        "Workspace-code": `${workspaceState.uuid}`,
+        Authorization: `Bearer ${accessToken}`,
+        "Workspace-code": uuid,
       },
       params: {
         status,

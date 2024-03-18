@@ -3,7 +3,8 @@ import useSWR, { mutate } from "swr";
 import { Get, Patch, Delete } from "@/src/repository";
 
 // ** Recoil Imports
-import { useAuthStateSSR, useTeamStateSSR } from "@/src/app";
+import { AuthState, TeamState } from "@/src/app";
+import { useRecoilValue } from "recoil";
 
 // ** Component Imports
 import MemberContentView from "./member-content";
@@ -20,16 +21,16 @@ interface PropsType {
 }
 
 const MemberContent = ({ handleOpen }: PropsType) => {
-  const [teamState, setTeamState] = useTeamStateSSR();
-  const [authState, setAuthState] = useAuthStateSSR();
+  const { accessToken } = useRecoilValue(AuthState);
+  const { uuid, role } = useRecoilValue(TeamState);
 
   const { handleOpen: handleDialogOpen } = useDialog();
 
   const { data, error, isLoading } = useSWR("/v1/team-user/user", async (url) =>
     Get<GetTeamUserListResponse>(url, {
       headers: {
-        Authorization: `Bearer ${authState.accessToken}`,
-        "team-code": teamState.uuid,
+        Authorization: `Bearer ${accessToken}`,
+        "team-code": uuid,
       },
     })
   );
@@ -43,8 +44,8 @@ const MemberContent = ({ handleOpen }: PropsType) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${authState.accessToken}`,
-          "team-code": teamState.uuid,
+          Authorization: `Bearer ${accessToken}`,
+          "team-code": uuid,
         },
       }
     )
@@ -65,8 +66,8 @@ const MemberContent = ({ handleOpen }: PropsType) => {
   const handleDeleteTeamUser = async (teamUserId) => {
     await Delete<CommonResponse<void>>(`/v1/team-user/${teamUserId}`, {
       headers: {
-        Authorization: `Bearer ${authState.accessToken}`,
-        "team-code": teamState.uuid,
+        Authorization: `Bearer ${accessToken}`,
+        "team-code": uuid,
       },
     })
       .then((res) => {
@@ -91,8 +92,8 @@ const MemberContent = ({ handleOpen }: PropsType) => {
     <MemberContentView
       handleOpen={handleOpen}
       data={data.data.data}
-      uuid={teamState.uuid}
-      role={teamState.role}
+      uuid={uuid}
+      role={role}
       handleTeamUserRole={handleTeamUserRole}
       handleDeleteTeamUser={handleDeleteTeamUser}
     />

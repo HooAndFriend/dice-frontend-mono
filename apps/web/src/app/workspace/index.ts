@@ -32,14 +32,3 @@ export const WorkspaceState = atom<WorksapceStateType>({
   default: workspaceInitState,
   effects_UNSTABLE: [persistStorageAtom],
 });
-
-export const useWorkspaceStateSSR = () => {
-  const [isInitial, setIsInitial] = useState(true);
-  const [value, setValue] = useRecoilState(WorkspaceState);
-
-  useEffect(() => {
-    setIsInitial(false);
-  }, []);
-
-  return [isInitial ? workspaceInitState : value, setValue] as const;
-};

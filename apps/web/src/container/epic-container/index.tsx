@@ -4,7 +4,8 @@
 import EpicContainerView from "./epic-container";
 
 // ** Recoil Imports
-import { useAuthStateSSR, useWorkspaceStateSSR } from "@/src/app";
+import { AuthState, WorkspaceState } from "@/src/app";
+import { useRecoilValue } from "recoil";
 
 // ** Service Imports
 import useSWR from "swr";
@@ -14,14 +15,14 @@ import { Get } from "@/src/repository";
 import { GetEpicListResponse } from "@/src/type/epic";
 
 const EpicConatiner = () => {
-  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
-  const [authState, setAuthState] = useAuthStateSSR();
+  const { uuid } = useRecoilValue(WorkspaceState);
+  const { accessToken } = useRecoilValue(AuthState);
 
   const { data, error, isLoading } = useSWR("/v1/ticket/epic", async (url) =>
     Get<GetEpicListResponse>(url, {
       headers: {
-        Authorization: `Bearer ${authState.accessToken}`,
-        "workspace-code": workspaceState.uuid,
+        Authorization: `Bearer ${accessToken}`,
+        "workspace-code": uuid,
       },
     })
   );

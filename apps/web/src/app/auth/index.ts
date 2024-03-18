@@ -20,14 +20,3 @@ export const AuthState = atom<AuthStateType>({
   default: authInitState,
   effects_UNSTABLE: [persistStorageAtom],
 });
-
-export const useAuthStateSSR = () => {
-  const [isInitial, setIsInitial] = useState(true);
-  const [value, setValue] = useRecoilState(AuthState);
-
-  useEffect(() => {
-    setIsInitial(false);
-  }, []);
-
-  return [isInitial ? authInitState : value, setValue] as const;
-};

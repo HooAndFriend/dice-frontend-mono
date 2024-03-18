@@ -9,7 +9,8 @@ import { Delete, Get, Post } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Recoil Imports
-import { useAuthStateSSR, useWorkspaceStateSSR } from "@/src/app";
+import { AuthState, WorkspaceState } from "@/src/app";
+import { useRecoilValue } from "recoil";
 
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
@@ -37,8 +38,8 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
     qaId,
   });
 
-  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
-  const [authState, setAuthState] = useAuthStateSSR();
+  const { uuid } = useRecoilValue(WorkspaceState);
+  const { accessToken } = useRecoilValue(AuthState);
 
   const { handleOpen } = useDialog();
 
@@ -61,7 +62,7 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
         { ...comment },
         {
           headers: {
-            Authorization: `Bearer ${authState.accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       ),
@@ -81,8 +82,8 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
     async (url: string) =>
       await Delete<CommonResponse<void>>(url, {
         headers: {
-          Authorization: `Bearer ${authState.accessToken}`,
-          "workspace-code": `${workspaceState.uuid}`,
+          Authorization: `Bearer ${accessToken}`,
+          "workspace-code": `${uuid}`,
         },
       }),
     {
@@ -108,8 +109,8 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
   } = useSWR(`/v1/qa?status=ALL&qaId=${qaId}`, async (url) =>
     Get<GetIssueListResponse>(url, {
       headers: {
-        Authorization: `Bearer ${authState.accessToken}`,
-        "Workspace-code": `${workspaceState.uuid}`,
+        Authorization: `Bearer ${accessToken}`,
+        "Workspace-code": `${uuid}`,
       },
     })
   );
@@ -124,8 +125,8 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
     async (url) =>
       Get<GetCommentListResponse>(url, {
         headers: {
-          Authorization: `Bearer ${authState.accessToken}`,
-          "Workspace-code": `${workspaceState.uuid}`,
+          Authorization: `Bearer ${accessToken}`,
+          "Workspace-code": `${uuid}`,
         },
       }),
     {

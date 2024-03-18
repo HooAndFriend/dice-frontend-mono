@@ -1,5 +1,6 @@
 // ** Recoil Imports
-import { useAuthStateSSR, useWorkspaceStateSSR } from "@/src/app";
+import { AuthState, WorkspaceState } from "@/src/app";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 // ** Component Imports
 import SettingContentView from "./setting-content";
@@ -28,15 +29,15 @@ const SettingContent = () => {
     comment: "",
   });
 
-  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
-  const [authState, setAuthState] = useAuthStateSSR();
+  const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState);
+  const { accessToken } = useRecoilValue(AuthState);
 
   const { handleOpen } = useDialog();
 
   const { error, isLoading } = useSWR("/v1/workspace/home", async (url) =>
     Get<GetWorkspaceInfoResponse>(url, {
       headers: {
-        Authorization: `Bearer ${authState.accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
         "workspace-code": workspaceState.uuid,
       },
     }).then((res) => {
@@ -56,7 +57,7 @@ const SettingContent = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${authState.accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
             "team-code": workspaceState.uuid,
           },
         }

@@ -11,15 +11,16 @@ import TeamPopoverView from "./team-popover";
 
 // ** Recoil Imports
 import {
+  AuthState,
+  TeamState,
+  UserState,
+  WorkspaceState,
   authInitState,
   teamInitState,
-  useAuthStateSSR,
-  useTeamStateSSR,
-  useUserStateSSR,
-  useWorkspaceStateSSR,
   userInitState,
   workspaceInitState,
 } from "@/src/app";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 // ** Type Imports
 import { GetUserTeamListResponse, TeamUserInfo } from "@/src/type/team";
@@ -35,10 +36,10 @@ const TeamPopover = () => {
 
   const router = useRouter();
 
-  const [userState, setUserState] = useUserStateSSR();
-  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
-  const [teamState, setTeamState] = useTeamStateSSR();
-  const [authState, setAuthState] = useAuthStateSSR();
+  const [userState, setUserState] = useRecoilState(UserState);
+  const setWorkspaceState = useSetRecoilState(WorkspaceState);
+  const [teamState, setTeamState] = useRecoilState(TeamState);
+  const [authState, setAuthState] = useRecoilState(AuthState);
 
   const cancelButtonRef = useRef(null);
 

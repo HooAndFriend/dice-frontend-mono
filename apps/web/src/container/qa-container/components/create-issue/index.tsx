@@ -1,7 +1,8 @@
 "use client";
 
 // ** Recoil Imports
-import { useAuthStateSSR, useUserStateSSR } from "@/src/app";
+import { AuthState, UserState } from "@/src/app";
+import { useRecoilValue } from "recoil";
 
 // ** Compoent Imports
 import CreateIssueView from "./create-issue";
@@ -24,13 +25,13 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 interface PropsType {}
 
 const CreateIssue = ({}: PropsType) => {
-  const [userState, setUserState] = useUserStateSSR();
-  const [authState, setAuthState] = useAuthStateSSR();
+  const { email, nickname } = useRecoilValue(UserState);
+  const { accessToken } = useRecoilValue(AuthState);
 
   const { data: createIssue, handleInput } = useInput<CreateIssueParams>({
-    adminId: userState.email,
-    workerId: userState.email,
-    number: "ISSUE-01", // 임시로 1번으로 지정
+    adminId: email,
+    workerId: email,
+    number: "ISSUE-01",
     title: "",
     asIs: "",
     toBe: "",
@@ -104,7 +105,7 @@ const CreateIssue = ({}: PropsType) => {
         },
         {
           headers: {
-            Authorization: `Bearer ${authState.accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       ),
@@ -124,7 +125,7 @@ const CreateIssue = ({}: PropsType) => {
       handleInput={handleInput}
       handleAdd={handleAdd}
       handleUpload={handleUpload}
-      name={userState.nickname}
+      name={nickname}
     />
   );
 };

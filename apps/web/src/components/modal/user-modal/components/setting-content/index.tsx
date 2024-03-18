@@ -4,7 +4,7 @@ import { Get, Put } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Recoil Imports
-import { useAuthStateSSR, useUserStateSSR } from "@/src/app";
+import { AuthState, UserState } from "@/src/app";
 
 // ** Component Imports
 import SettingContentView from "./setting-content";
@@ -18,6 +18,7 @@ import { useDialog } from "@/src/context/DialogContext";
 
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const SettingContent = () => {
   const { data, setData, handleInput } = useInput<UserInfo>({
@@ -26,14 +27,14 @@ const SettingContent = () => {
     profile: "",
   });
 
-  const [userState, setUserState] = useUserStateSSR();
-  const [authState, setAuthState] = useAuthStateSSR();
+  const setUserState = useSetRecoilState(UserState);
+  const { accessToken } = useRecoilValue(AuthState);
 
   const { handleOpen } = useDialog();
 
   const { error, isLoading } = useSWR("/v1/user", async (url) =>
     Get<GetUserInfoResponse>(url, {
-      headers: { Authorization: `Bearer ${authState.accessToken}` },
+      headers: { Authorization: `Bearer ${accessToken}` },
     }).then((res) => {
       setData(res.data);
     })
@@ -49,7 +50,7 @@ const SettingContent = () => {
           profile: data.profile,
         },
         {
-          headers: { Authorization: `Bearer ${authState.accessToken}` },
+          headers: { Authorization: `Bearer ${accessToken}` },
         }
       ),
     {

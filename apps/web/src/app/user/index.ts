@@ -22,14 +22,3 @@ export const UserState = atom<UserStateType>({
   default: userInitState,
   effects_UNSTABLE: [persistStorageAtom],
 });
-
-export const useUserStateSSR = () => {
-  const [isInitial, setIsInitial] = useState(true);
-  const [value, setValue] = useRecoilState(UserState);
-
-  useEffect(() => {
-    setIsInitial(false);
-  }, []);
-
-  return [isInitial ? userInitState : value, setValue] as const;
-};

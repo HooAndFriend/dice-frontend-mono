@@ -29,14 +29,3 @@ export const TeamState = atom<TeamStateType>({
   default: teamInitState,
   effects_UNSTABLE: [persistStorageAtom],
 });
-
-export const useTeamStateSSR = () => {
-  const [isInitial, setIsInitial] = useState(true);
-  const [value, setValue] = useRecoilState(TeamState);
-
-  useEffect(() => {
-    setIsInitial(false);
-  }, []);
-
-  return [isInitial ? teamInitState : value, setValue] as const;
-};

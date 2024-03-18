@@ -9,21 +9,22 @@ import MemberContentView from "./member-content";
 import { GetWorkspaceUserListResponse } from "@/src/type/workspace";
 
 // ** Recoil Imports
-import { useAuthStateSSR, useWorkspaceStateSSR } from "@/src/app";
+import { AuthState, WorkspaceState } from "@/src/app";
+import { useRecoilValue } from "recoil";
 
 interface PropsType {
   handleOpen: () => void;
 }
 
 const MemberContent = ({ handleOpen }: PropsType) => {
-  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
-  const [authState, setAuthState] = useAuthStateSSR();
+  const { uuid } = useRecoilValue(WorkspaceState);
+  const { accessToken } = useRecoilValue(AuthState);
 
   const { data, error, isLoading } = useSWR("/v1/workspace-user", async (url) =>
     Get<GetWorkspaceUserListResponse>(url, {
       headers: {
-        Authorization: `Bearer ${authState.accessToken}`,
-        "workspace-code": workspaceState.uuid,
+        Authorization: `Bearer ${accessToken}`,
+        "workspace-code": uuid,
       },
     })
   );

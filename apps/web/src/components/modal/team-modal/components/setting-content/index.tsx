@@ -8,12 +8,7 @@ import SettingContentView from "./setting-content";
 
 // ** Recoil Imports
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  AuthState,
-  TeamState,
-  useAuthStateSSR,
-  useTeamStateSSR,
-} from "@/src/app";
+import { AuthState, TeamState } from "@/src/app";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
@@ -34,15 +29,15 @@ const SettingContent = () => {
     description: "",
   });
 
-  const [teamState, setTeamState] = useTeamStateSSR();
-  const [authState, setAuthState] = useAuthStateSSR();
+  const [teamState, setTeamState] = useRecoilState(TeamState);
+  const { accessToken } = useRecoilValue(AuthState);
 
   const { handleOpen } = useDialog();
 
   const { error, isLoading } = useSWR("/v1/team", async (url) =>
     Get<GetTeamResponse>(url, {
       headers: {
-        Authorization: `Bearer ${authState.accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
         "team-code": teamState.uuid,
       },
     }).then((res) => {
@@ -62,7 +57,7 @@ const SettingContent = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${authState.accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
             "team-code": teamState.uuid,
           },
         }

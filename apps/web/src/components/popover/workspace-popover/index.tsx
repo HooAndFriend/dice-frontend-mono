@@ -7,11 +7,8 @@ import { useRef, useState } from "react";
 import WorkspacePopoverView from "./workspace-popover";
 
 // ** Recoil Imports
-import {
-  useAuthStateSSR,
-  useTeamStateSSR,
-  useWorkspaceStateSSR,
-} from "@/src/app";
+import { AuthState, TeamState, WorkspaceState } from "@/src/app";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 // ** Service Imports
 import useSWR from "swr";
@@ -19,23 +16,22 @@ import { Get } from "@/src/repository";
 
 // ** Type Imports
 import { GetWorkspaceListResponse, WorkspaceInfo } from "@/src/type/workspace";
-import { er } from "@fullcalendar/core/internal-common";
 
 const WorkspacePopover = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const [workspaceState, setWorkspaceState] = useWorkspaceStateSSR();
-  const [teamState, setTeamState] = useTeamStateSSR();
-  const [authState, setAuthState] = useAuthStateSSR();
+  const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState);
+  const { id, uuid } = useRecoilValue(TeamState);
+  const { accessToken } = useRecoilValue(AuthState);
 
   const { data, error, isLoading } = useSWR(
     "/v1/workspace-user/team",
     async (url) =>
       Get<GetWorkspaceListResponse>(url, {
         headers: {
-          Authorization: `Bearer ${authState.accessToken}`,
-          "team-code": teamState.id === 0 ? "personal" : teamState.uuid,
+          Authorization: `Bearer ${accessToken}`,
+          "team-code": id === 0 ? "personal" : uuid,
         },
       })
   );

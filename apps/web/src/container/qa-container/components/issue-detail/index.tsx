@@ -22,6 +22,7 @@ import {
   AddCommentResponse,
   GetCommentListResponse,
   GetIssueListResponse,
+  GetIssueResponse,
 } from "@/src/type/qa";
 
 // ** Context Imports
@@ -106,8 +107,8 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
     data: issueData,
     error: issueError,
     isLoading: issueLoading,
-  } = useSWR(`/v1/qa?status=ALL&qaId=${qaId}`, async (url) =>
-    Get<GetIssueListResponse>(url, {
+  } = useSWR(`/v1/qa/${qaId}`, async (url) =>
+    Get<GetIssueResponse>(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Workspace-code": `${uuid}`,
@@ -144,7 +145,7 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
 
   return (
     <IssueDetailView
-      data={issueData.data.data[0]}
+      data={issueData.data}
       commentData={commentData.data.data}
       comment={comment}
       handleAdd={handleAdd}

@@ -66,12 +66,12 @@ const IssueDetailView = ({
         <div className="flex mr-[45px]">
           <img
             className="rounded-full border border-[#EBEBEC] mr-[10px]"
-            src={data.admin.profile}
+            src={data.admin ? data.admin.profile : "/dice.png"}
             width={20}
             height={20}
           />
           <div className="flex items-center font-normal">
-            {data.admin.nickname}
+            {data.admin ? data.admin.nickname : ""}
           </div>
         </div>
         <div className="font-spoqa mr-[80px] font-medium">Worker</div>

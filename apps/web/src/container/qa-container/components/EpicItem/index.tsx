@@ -1,8 +1,8 @@
 // ** Type Imports
 import { IssueInfo } from "@/src/type/qa";
-import { getStateBoxColor } from "@/src/utils/color";
 
 // ** Utils Imports
+import { getStateBoxColor } from "@/src/utils/color";
 import dayjs from "dayjs";
 
 interface PropsType {
@@ -11,8 +11,6 @@ interface PropsType {
 }
 
 const EpicItem = ({ item, handleOpenQa }: PropsType) => {
-  console.log(getStateBoxColor(item.status));
-
   return (
     <div className="hover:bg-blue-50">
       <div onClick={() => handleOpenQa(item.id)} className="h-[125px] m-6">

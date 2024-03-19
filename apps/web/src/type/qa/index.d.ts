@@ -24,17 +24,19 @@ export interface GetIssueListResponse extends CommonResponse {
   count: number;
 }
 
+export interface GetIssueResponse extends CommonResponse, IssueInfo {}
+
 export interface IssueInfo {
   id: number;
   number: string;
   status: EpicStatus;
   title: string;
-  admin: {
+  admin?: {
     email: string;
     nickname: string;
     profile: string;
   };
-  worker: {
+  worker?: {
     email: string;
     nickname: string;
     profile: string;

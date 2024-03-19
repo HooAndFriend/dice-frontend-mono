@@ -1,7 +1,6 @@
 // ** Component Imports
 import CustomSelect from "@/src/components/Input/CustomSelect";
-import CreateIssue from "./components/create-issue";
-import IssueDetail from "./components/issue-detail";
+import QaCard from "./components/QaCard";
 import CustomSearch from "@/src/components/Input/CustomSearch";
 import StatusItem from "./components/StatusItem";
 import QaItem from "./components/QaItem";
@@ -134,7 +133,7 @@ const QaContainerView = ({
         </div>
         {open && (
           <div className="w-1/2 mt-[123px] h-[564px] rounded-[20px] bg-white shadow-md border-[#EBEBEC] p-5 overflow-y-auto">
-            <IssueDetail qaId={qaId} handleClose={() => setOpen(false)} />
+            <QaCard qaId={qaId} handleClose={() => setOpen(false)} />
           </div>
         )}
         {saveOpen && (

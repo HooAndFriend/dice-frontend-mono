@@ -1,15 +1,15 @@
 "use client";
 
 // ** Component Imports
-import IssueDetailView from "./issue-detail";
+import QaCardView from "./QaCard";
 
 // ** Service Imports
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { Delete, Get, Post } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Recoil Imports
-import { AuthState, WorkspaceState } from "@/src/app";
+import { AuthState, UserState, WorkspaceState } from "@/src/app";
 import { useRecoilValue } from "recoil";
 
 // ** Utils Imports
@@ -27,26 +27,38 @@ import {
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
+import { useState } from "react";
 
 interface PropsType {
   qaId: number;
   handleClose: () => void;
 }
 
-const IssueDetail = ({ qaId, handleClose }: PropsType) => {
-  const { data: comment, handleInput } = useInput<AddCommentParams>({
-    content: "",
-    qaId,
-  });
+const QaCard = ({ qaId, handleClose }: PropsType) => {
+  const [comment, setComment] = useState<string>("");
+  const [mode, setMode] = useState<"view" | "edit">("view");
 
-  const { uuid } = useRecoilValue(WorkspaceState);
+  const { uuid, role } = useRecoilValue(WorkspaceState);
   const { accessToken } = useRecoilValue(AuthState);
+  const { email } = useRecoilValue(UserState);
 
   const { handleOpen } = useDialog();
 
+  const handleComment = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setComment(e.target.value);
+  };
+
+  const handleEdit = () => setMode("edit");
+
   const handleAdd = () => {
-    if (comment.content === "") {
-      alert("댓글을 입력해주세요");
+    if (comment === "") {
+      handleOpen({
+        title: "Error",
+        message: "Enter Comment",
+        logLevel: "warn",
+        buttonText: "Close",
+        type: "alert",
+      });
 
       return;
     }
@@ -60,7 +72,7 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
     async (url: string) =>
       await Post<AddCommentResponse>(
         url,
-        { ...comment },
+        { content: comment, qaId },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -69,15 +81,21 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
       ),
     {
       onSuccess: () => {
-        alert("댓글이 등록되었습니다");
+        setComment("");
+        mutate("/v1/qa/comment");
       },
       onError: (error) => {
-        console.log(error + " 등록 실패");
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
       },
     }
   );
 
-  //댓글 등록
   const deleteQa = useSWRMutation(
     `/v1/qa/${qaId}`,
     async (url: string) =>
@@ -121,20 +139,13 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
     data: commentData,
     error: commentError,
     isLoading: commentLoading,
-  } = useSWR(
-    `/v1/qa/comment/${qaId}`,
-    async (url) =>
-      Get<GetCommentListResponse>(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Workspace-code": `${uuid}`,
-        },
-      }),
-    {
-      onSuccess: (status) => {
-        console.log(status);
+  } = useSWR(`/v1/qa/comment/${qaId}`, async (url) =>
+    Get<GetCommentListResponse>(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Workspace-code": `${uuid}`,
       },
-    }
+    })
   );
 
   if (issueLoading && commentLoading) return null;
@@ -144,16 +155,20 @@ const IssueDetail = ({ qaId, handleClose }: PropsType) => {
   }
 
   return (
-    <IssueDetailView
+    <QaCardView
       data={issueData.data}
       commentData={commentData.data.data}
       comment={comment}
+      role={role}
+      mode={mode}
+      email={email}
+      handleComment={handleComment}
       handleAdd={handleAdd}
-      handleInput={handleInput}
       deleteQa={deleteQa.trigger}
       handleClose={handleClose}
+      handleEdit={handleEdit}
     />
   );
 };
 
-export default IssueDetail;
+export default QaCard;

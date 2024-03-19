@@ -60,13 +60,14 @@ export interface GetCommentListResponse extends CommonResponse {
 }
 
 export interface CommentInfo {
-  commentId: number;
+  id: number;
   content: string;
   createdDate: string;
   modifiedDate: string;
   user: {
     profile: string;
     nickname: string;
+    email: string;
   };
 }
 

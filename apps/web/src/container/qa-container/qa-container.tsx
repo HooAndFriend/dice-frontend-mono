@@ -4,7 +4,7 @@ import CreateIssue from "./components/create-issue";
 import IssueDetail from "./components/issue-detail";
 import CustomSearch from "@/src/components/Input/CustomSearch";
 import StatusItem from "./components/StatusItem";
-import EpicItem from "./components/EpicItem";
+import QaItem from "./components/QaItem";
 import QaSaveModal from "@/src/components/Modal/QaSaveModal";
 
 // ** Type Imports
@@ -128,7 +128,7 @@ const QaContainerView = ({
           </div>
           <div className="w-full p-5 h-[564px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC] overflow-auto">
             {data.map((item) => (
-              <EpicItem item={item} key={item.id} handleOpenQa={handleOpenQa} />
+              <QaItem item={item} key={item.id} handleOpenQa={handleOpenQa} />
             ))}
           </div>
         </div>

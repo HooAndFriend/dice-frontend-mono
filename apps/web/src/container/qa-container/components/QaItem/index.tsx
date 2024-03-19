@@ -10,7 +10,7 @@ interface PropsType {
   handleOpenQa: (id: number) => void;
 }
 
-const EpicItem = ({ item, handleOpenQa }: PropsType) => {
+const QaItem = ({ item, handleOpenQa }: PropsType) => {
   return (
     <div className="hover:bg-blue-50">
       <div onClick={() => handleOpenQa(item.id)} className="h-[125px] m-6">
@@ -48,4 +48,4 @@ const EpicItem = ({ item, handleOpenQa }: PropsType) => {
   );
 };
 
-export default EpicItem;
+export default QaItem;

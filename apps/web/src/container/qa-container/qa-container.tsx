@@ -81,12 +81,17 @@ const QaContainerView = ({
             </div>
             <div className="flex items-center">
               <div className="flex items-center h-6 w-[406px] justify-between font-spoqa text-[#EBEBEC]">
-                <StatusItem status={status} setStatus={setStatus} value="ALL" />
+                <StatusItem
+                  status={status}
+                  setStatus={setStatus}
+                  value=""
+                  label="ALL"
+                />
                 <div className="h-[15px] w-px bg-[#EBEBEC]" />
                 <StatusItem
                   status={status}
                   setStatus={setStatus}
-                  value="WAIT"
+                  value="WAITING"
                 />
                 <div className="h-[15px] w-px bg-[#EBEBEC]" />
                 <StatusItem

@@ -3,10 +3,11 @@ import { EpicStatus } from "@/src/type/epic";
 interface PropsType {
   status: EpicStatus;
   value: EpicStatus;
+  label?: string;
   setStatus: (status: EpicStatus) => void;
 }
 
-const StatusItem = ({ status, setStatus, value }: PropsType) => {
+const StatusItem = ({ status, setStatus, value, label }: PropsType) => {
   return (
     <div
       className={`cursor-pointer ${
@@ -14,7 +15,7 @@ const StatusItem = ({ status, setStatus, value }: PropsType) => {
       }`}
       onClick={() => setStatus(value)}
     >
-      {value}
+      {label ? label : value}
     </div>
   );
 };

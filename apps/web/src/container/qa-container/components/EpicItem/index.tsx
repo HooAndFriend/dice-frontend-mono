@@ -1,5 +1,6 @@
 // ** Type Imports
 import { IssueInfo } from "@/src/type/qa";
+import { getStateBoxColor } from "@/src/utils/color";
 
 // ** Utils Imports
 import dayjs from "dayjs";
@@ -10,6 +11,8 @@ interface PropsType {
 }
 
 const EpicItem = ({ item, handleOpenQa }: PropsType) => {
+  console.log(getStateBoxColor(item.status));
+
   return (
     <div className="hover:bg-blue-50">
       <div onClick={() => handleOpenQa(item.id)} className="h-[125px] m-6">
@@ -34,7 +37,10 @@ const EpicItem = ({ item, handleOpenQa }: PropsType) => {
             />
             <div className="font-spoqa">{item.admin.nickname}</div>
           </div>
-          <button className="w-[120px] h-[45px] rounded-[30px] bg-main flex justify-center items-center text-white font-spoqa font-bold ">
+          <button
+            className={`w-[120px] h-[45px] rounded-[30px] flex justify-center items-center text-white font-spoqa font-bold`}
+            style={{ backgroundColor: getStateBoxColor(item.status) }}
+          >
             {item.status}
           </button>
         </div>

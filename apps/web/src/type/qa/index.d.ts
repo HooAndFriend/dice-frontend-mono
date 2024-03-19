@@ -27,7 +27,7 @@ export interface GetIssueListResponse extends CommonResponse {
 export interface IssueInfo {
   id: number;
   number: string;
-  status: string;
+  status: EpicStatus;
   title: string;
   admin: {
     email: string;

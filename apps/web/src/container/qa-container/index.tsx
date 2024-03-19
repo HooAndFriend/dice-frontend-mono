@@ -25,7 +25,7 @@ const QaContainer = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [saveOpen, setSaveOpen] = useState<boolean>(false);
 
-  const [status, setStatus] = useState<EpicStatus>("ALL");
+  const [status, setStatus] = useState<EpicStatus>("");
 
   const [qaId, setQaId] = useState<number>(0);
 
@@ -45,18 +45,25 @@ const QaContainer = () => {
     setOpen(true);
   };
 
-  const { data, error, isLoading, mutate } = useSWR("/v1/qa", async (url) =>
-    Get<GetIssueListResponse>(url, {
+  const { data, error, isLoading, mutate } = useSWR("/v1/qa", async (url) => {
+    const params = {};
+
+    if (status !== "") {
+      params[status] = status;
+    }
+
+    if (query.value !== "") {
+      params[query.type] = query.value;
+    }
+
+    return Get<GetIssueListResponse>(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Workspace-code": uuid,
       },
-      params: {
-        status,
-        [query.type]: query.value,
-      },
-    })
-  );
+      params,
+    });
+  });
 
   useEffect(() => {
     mutate();

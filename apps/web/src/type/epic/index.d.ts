@@ -14,10 +14,11 @@ export interface EpicInfo {
 }
 
 export type EpicStatus =
-  | "ALL"
-  | "WAIT"
+  | ""
+  | "WAITING"
   | "DOING"
   | "DONE"
   | "COMPLETE"
   | "REOPEN"
-  | "HOLD";
+  | "HOLD"
+  | "NOTHING";

@@ -23,7 +23,7 @@ const TicketTypeAddItem = () => {
   const {data, handleInput} = useInput<CreateTicketSettingParams>({
     color: "",
     type: "",
-    description: "냐",
+    description: "",
   });
 
   const handleOpen = () => {
@@ -41,7 +41,15 @@ const TicketTypeAddItem = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         }
-      )
+      ),
+    {
+      onSuccess: () => {
+        alert("등록이 완료되었습니다");
+      },
+      onError: error => {
+        console.log(error + "등록실패");
+      },
+    }
   );
 
   const handleAdd = () => {

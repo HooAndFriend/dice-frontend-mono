@@ -1,26 +1,69 @@
 "use client";
 
 // ** React Imports
-import { useState } from "react";
+import {useState} from "react";
 
 // ** Next Imports
 import CustomInput from "@/src/components/Input/CustomInput";
 import Image from "next/image";
+import useSWRMutation from "swr/mutation";
+import {Post} from "@/src/repository";
+import {
+  CreateTicketSettingParams,
+  CreateTicketSettingResponse,
+} from "@/src/type/ticket";
+import {useRecoilState, useRecoilValue} from "recoil";
+import {AuthState, WorkspaceState} from "@/src/app";
+import useInput from "@/src/hooks/useInput";
 
 const TicketTypeAddItem = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const {accessToken} = useRecoilValue(AuthState);
+
+  const {data, handleInput} = useInput<CreateTicketSettingParams>({
+    color: "",
+    type: "",
+    description: "냐",
+  });
 
   const handleOpen = () => {
-    // setOpen((c) => !c);
+    setOpen(c => !c);
+  };
+
+  const addTicketSetting = useSWRMutation(
+    "/v1/ticket/setting",
+    async (url: string) =>
+      await Post<CreateTicketSettingResponse>(
+        url,
+        {...data},
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+  );
+
+  const handleAdd = () => {
+    addTicketSetting.trigger();
   };
 
   return (
     <div className="w-full h-[75px] flex items-center">
       {open ? (
         <>
-          <div className="mr-8 w-[24px] h-[24px] bg-green-300 rounded-lg" />
-          <CustomInput placeholder="Enter Type Name" />
-          <div className="ml-4">
+          <input
+            name="color"
+            type="color"
+            onChange={handleInput}
+            className="mr-8 w-[24px] h-[24px] bg-green-300 rounded-lg"
+          />
+          <CustomInput
+            name="type"
+            onChange={handleInput}
+            placeholder="Enter Type Name"
+          />
+          <div onClick={handleAdd} className="ml-4">
             <Image
               onClick={handleOpen}
               src={"/svg/add-black-box.svg"}

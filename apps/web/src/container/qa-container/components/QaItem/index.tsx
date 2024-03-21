@@ -4,6 +4,7 @@ import { IssueInfo } from "@/src/type/qa";
 // ** Utils Imports
 import { getStateBoxColor } from "@/src/utils/color";
 import dayjs from "dayjs";
+import QaStatusButton from "../QaStatusButton";
 
 interface PropsType {
   item: IssueInfo;
@@ -35,12 +36,7 @@ const QaItem = ({ item, handleOpenQa }: PropsType) => {
             />
             <div className="font-spoqa">{item.admin.nickname}</div>
           </div>
-          <button
-            className={`w-[120px] h-[45px] rounded-[30px] flex justify-center items-center text-white font-spoqa font-bold`}
-            style={{ backgroundColor: getStateBoxColor(item.status) }}
-          >
-            {item.status}
-          </button>
+          <QaStatusButton status={item.status} />
         </div>
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mx-6"></div>

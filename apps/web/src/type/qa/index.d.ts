@@ -1,5 +1,6 @@
 import { stringTo2048 } from "aws-sdk/clients/customerprofiles";
 import { CommonResponse } from "../common";
+import { EpicStatus } from "../epic";
 
 export interface CreateIssueParams {
   adminId: string;

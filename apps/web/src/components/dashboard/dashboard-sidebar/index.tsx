@@ -27,7 +27,7 @@ const DashboardSidebard = () => {
       pathname.split("/")[2]
         ? `/dashboard/${pathname.split("/")[2]}`
         : "/dashboard",
-    [pathname]
+    [pathname],
   );
 
   const sidbarMenuList = useMemo(
@@ -44,7 +44,7 @@ const DashboardSidebard = () => {
             },
             ,
             ...MenuList.filter((item) =>
-              workspaceFunction.find((_) => _.function === item.name)
+              workspaceFunction.find((_) => _.function === item.name),
             ),
           ].map((item) => {
             if (item.link === path) {
@@ -52,7 +52,7 @@ const DashboardSidebard = () => {
             }
             return item;
           }),
-    [workspaceFunction, path]
+    [workspaceFunction, path],
   );
 
   return <DashboardSidebardView sidbarMenuList={sidbarMenuList} />;

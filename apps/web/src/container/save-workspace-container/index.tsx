@@ -64,7 +64,7 @@ const SaveWorkspaceContainer = () => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const handleImage = (profile: string) => {

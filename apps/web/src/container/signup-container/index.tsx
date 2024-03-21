@@ -149,7 +149,7 @@ const SignupContainer = () => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {

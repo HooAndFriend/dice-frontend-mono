@@ -42,7 +42,7 @@ const TicketStatusButton = ({
   return (
     <button
       className={`${getButtonColor(status)} ${getTextColor(
-        status
+        status,
       )} w-[${width}] h-[${height}] rounded-[${borderRadius}]`}
     >
       {status}

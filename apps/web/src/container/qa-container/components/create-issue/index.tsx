@@ -107,7 +107,7 @@ const CreateIssue = ({}: PropsType) => {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       ),
     {
       onSuccess: () => {
@@ -116,7 +116,7 @@ const CreateIssue = ({}: PropsType) => {
       onError: (error) => {
         console.log(error + "등록 실패");
       },
-    }
+    },
   );
 
   return (

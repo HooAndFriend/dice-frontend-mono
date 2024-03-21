@@ -11,7 +11,7 @@ const useInput = <T extends Record<string, any>>(initialValue: T) => {
         [name]: value,
       });
     },
-    [data]
+    [data],
   );
 
   const handleSelect = useCallback(
@@ -22,7 +22,7 @@ const useInput = <T extends Record<string, any>>(initialValue: T) => {
         [name]: value,
       });
     },
-    [data]
+    [data],
   );
 
   const handleInit = useCallback(() => setData(initialValue), [data]);

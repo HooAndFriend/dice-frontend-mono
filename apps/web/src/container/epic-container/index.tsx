@@ -24,7 +24,7 @@ const EpicConatiner = () => {
         Authorization: `Bearer ${accessToken}`,
         "workspace-code": uuid,
       },
-    })
+    }),
   );
 
   if (isLoading) return;

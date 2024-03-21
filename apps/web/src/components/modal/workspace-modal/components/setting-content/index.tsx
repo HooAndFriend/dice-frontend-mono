@@ -42,7 +42,7 @@ const SettingContent = () => {
       },
     }).then((res) => {
       setData(res.data);
-    })
+    }),
   );
 
   const updateWorkspace = useSWRMutation(
@@ -60,7 +60,7 @@ const SettingContent = () => {
             Authorization: `Bearer ${accessToken}`,
             "team-code": workspaceState.uuid,
           },
-        }
+        },
       ),
     {
       onSuccess: () => {
@@ -82,7 +82,7 @@ const SettingContent = () => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   if (isLoading) return;

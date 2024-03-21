@@ -57,7 +57,7 @@ const AddMemberContent = ({ open, setOpen }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   return (

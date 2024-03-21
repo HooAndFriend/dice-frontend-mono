@@ -63,7 +63,7 @@ const QaStatusButton = ({ status: defaultStatus, qaId }: PropsType) => {
             Authorization: `Bearer ${accessToken}`,
             "workspace-code": uuid,
           },
-        }
+        },
       ),
     {
       onSuccess: () => {
@@ -79,7 +79,7 @@ const QaStatusButton = ({ status: defaultStatus, qaId }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   return (

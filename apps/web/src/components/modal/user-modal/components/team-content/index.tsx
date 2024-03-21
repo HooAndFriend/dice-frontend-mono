@@ -17,7 +17,7 @@ const TeamContent = () => {
   const { data, error, isLoading } = useSWR("/v1/team-user", async (url) =>
     Get<GetUserTeamListResponse>(url, {
       headers: { Authorization: `Bearer ${accessToken}` },
-    })
+    }),
   );
 
   if (isLoading) return null;

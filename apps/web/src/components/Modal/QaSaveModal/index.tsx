@@ -73,7 +73,7 @@ const QaSaveModal = ({
           type: "alert",
         });
       },
-    }
+    },
   );
 
   return (

@@ -22,7 +22,7 @@ const WorkSpaceContent = () => {
           Authorization: `Bearer ${accessToken}`,
           "team-code": uuid,
         },
-      })
+      }),
   );
 
   if (isLoading) return null;

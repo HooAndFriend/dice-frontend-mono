@@ -1,5 +1,5 @@
-import {CreateIssueParams} from "@/src/type/qa";
-import {ChangeEvent} from "react";
+import { CreateIssueParams } from "@/src/type/qa";
+import { ChangeEvent } from "react";
 
 interface PropsType {
   createIssue: CreateIssueParams;
@@ -101,7 +101,7 @@ const CreateIssueView = ({
       <label>
         <input
           type="file"
-          onChange={event => {
+          onChange={(event) => {
             handleUpload(event.target.files[0]);
           }}
           hidden

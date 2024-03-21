@@ -32,7 +32,7 @@ const MemberContent = ({ handleOpen }: PropsType) => {
         Authorization: `Bearer ${accessToken}`,
         "team-code": uuid,
       },
-    })
+    }),
   );
 
   const handleTeamUserRole = async (teamUserId: number, role: RoleType) => {
@@ -47,7 +47,7 @@ const MemberContent = ({ handleOpen }: PropsType) => {
           Authorization: `Bearer ${accessToken}`,
           "team-code": uuid,
         },
-      }
+      },
     )
       .then((res) => {
         mutate("/v1/team-user/user");

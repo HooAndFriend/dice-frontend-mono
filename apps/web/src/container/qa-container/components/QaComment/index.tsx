@@ -49,7 +49,7 @@ const QaComment = ({ data }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   return (

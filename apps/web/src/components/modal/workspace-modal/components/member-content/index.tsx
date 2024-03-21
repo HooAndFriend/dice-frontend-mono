@@ -26,7 +26,7 @@ const MemberContent = ({ handleOpen }: PropsType) => {
         Authorization: `Bearer ${accessToken}`,
         "workspace-code": uuid,
       },
-    })
+    }),
   );
 
   if (isLoading) return;

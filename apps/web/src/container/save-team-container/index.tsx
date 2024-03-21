@@ -60,7 +60,7 @@ const SaveTeamContainer = () => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const handleImage = (profile: string) => {

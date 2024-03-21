@@ -125,7 +125,7 @@ const QaContainerView = ({
               </div>
             </div>
           </div>
-          <div className="w-full p-5 h-[564px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC] overflow-auto">
+          <div className="w-full py-5 h-[564px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC] overflow-auto">
             {data.map((item) => (
               <QaItem item={item} key={item.id} handleOpenQa={handleOpenQa} />
             ))}

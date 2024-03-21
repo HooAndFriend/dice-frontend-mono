@@ -29,7 +29,7 @@ const QaStatusButton = ({ status }: PropsType) => {
   const handleOpen = () => setOpen((c) => !c);
 
   return (
-    <div className="relative">
+    <div className="relative z-4">
       <button
         className="w-[120px] h-[45px] rounded-[30px] flex justify-center items-center text-white font-spoqa font-bold"
         style={{ backgroundColor: getStateBoxColor(status) }}
@@ -38,7 +38,7 @@ const QaStatusButton = ({ status }: PropsType) => {
         {status}
       </button>
       {open && (
-        <div className="absolute w-[150px] h-[150px] bg-slate-50 z-10 top-[50px] left-0 rounded-lg overflow-y-auto">
+        <div className="absolute w-[150px] h-[150px] bg-slate-50 top-[50px] left-0 rounded-lg overflow-y-auto z-10">
           {statusList
             .filter((item) => item !== status)
             .map((item) => (

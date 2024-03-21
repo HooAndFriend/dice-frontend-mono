@@ -1,5 +1,5 @@
 // ** React Imports
-import { ChangeEvent } from "react";
+import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Component Imports
 import CustomSelect from "@/src/components/Input/CustomSelect";
@@ -23,6 +23,7 @@ interface PropsType {
   handleEditClose: () => void;
   handleClose: () => void;
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleCommentEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const QaCardView = ({
@@ -39,6 +40,7 @@ const QaCardView = ({
   handleEditClose,
   handleInput,
   updateQa,
+  handleCommentEnter,
 }: PropsType) => {
   return (
     <div>
@@ -191,6 +193,7 @@ const QaCardView = ({
               onChange={handleComment}
               value={comment}
               className="px-4 w-full border border-lightGray rounded-[10px] mr-[10px]"
+              onKeyDown={handleCommentEnter}
             />
             <div
               onClick={handleAdd}

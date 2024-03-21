@@ -1,4 +1,6 @@
 "use client";
+// ** React Imports
+import { useState, KeyboardEvent } from "react";
 
 // ** Component Imports
 import QaCardView from "./QaCard";
@@ -28,7 +30,6 @@ import {
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
-import { useState } from "react";
 
 interface PropsType {
   qaId: number;
@@ -205,6 +206,12 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     })
   );
 
+  const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      addComment.trigger();
+    }
+  };
+
   if (issueLoading && commentLoading) return null;
 
   if (!commentData) {
@@ -226,6 +233,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
       handleEditClose={handleEditClose}
       handleInput={handleInput}
       updateQa={updateQa.trigger}
+      handleCommentEnter={handleCommentEnter}
     />
   );
 };

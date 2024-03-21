@@ -60,7 +60,6 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
 
   const { uuid, role } = useRecoilValue(WorkspaceState);
   const { accessToken } = useRecoilValue(AuthState);
-  const { email } = useRecoilValue(UserState);
 
   const { handleOpen } = useDialog();
 

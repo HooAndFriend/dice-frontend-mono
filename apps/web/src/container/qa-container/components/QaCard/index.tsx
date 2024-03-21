@@ -5,7 +5,7 @@ import QaCardView from "./QaCard";
 
 // ** Service Imports
 import useSWR, { mutate } from "swr";
-import { Delete, Get, Post } from "@/src/repository";
+import { Delete, Get, Post, Put } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Recoil Imports
@@ -23,6 +23,7 @@ import {
   GetCommentListResponse,
   GetIssueListResponse,
   GetIssueResponse,
+  IssueInfo,
 } from "@/src/type/qa";
 
 // ** Context Imports
@@ -38,6 +39,25 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
   const [comment, setComment] = useState<string>("");
   const [mode, setMode] = useState<"view" | "edit">("view");
 
+  const {
+    data: issueData,
+    handleInput,
+    setData: setIssueData,
+  } = useInput<IssueInfo>({
+    id: 0,
+    number: "",
+    status: "",
+    title: "",
+    admin: { email: "", nickname: "", profile: "" },
+    worker: { email: "", nickname: "", profile: "" },
+    file: [{ id: 0, url: "" }],
+    asIs: "",
+    toBe: "",
+    memo: "",
+    createdDate: "",
+    modifiedDate: "",
+  });
+
   const { uuid, role } = useRecoilValue(WorkspaceState);
   const { accessToken } = useRecoilValue(AuthState);
   const { email } = useRecoilValue(UserState);
@@ -49,6 +69,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
   };
 
   const handleEdit = () => setMode("edit");
+  const handleEditClose = () => setMode("view");
 
   const handleAdd = () => {
     if (comment === "") {
@@ -121,17 +142,54 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     }
   );
 
+  const updateQa = useSWRMutation(
+    "v1/qa",
+    async (url: string) =>
+      await Put<CommonResponse<void>>(
+        url,
+        { ...issueData, qaId: issueData.id, workerId: 1, fileurls: [] },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "workspace-code": `${uuid}`,
+          },
+        }
+      ),
+    {
+      onSuccess: () => {
+        mutate(`/v1/qa/${qaId}`);
+        handleEditClose();
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
   const {
-    data: issueData,
+    data,
     error: issueError,
     isLoading: issueLoading,
-  } = useSWR(`/v1/qa/${qaId}`, async (url) =>
-    Get<GetIssueResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Workspace-code": `${uuid}`,
+  } = useSWR(
+    `/v1/qa/${qaId}`,
+    async (url) =>
+      Get<GetIssueResponse>(url, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Workspace-code": `${uuid}`,
+        },
+      }),
+    {
+      onSuccess: (res) => {
+        setIssueData(res.data);
       },
-    })
+    }
   );
 
   //댓글 확인
@@ -156,17 +214,19 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
 
   return (
     <QaCardView
-      data={issueData.data}
+      data={issueData}
       commentData={commentData.data.data}
       comment={comment}
       role={role}
       mode={mode}
-      email={email}
       handleComment={handleComment}
       handleAdd={handleAdd}
       deleteQa={deleteQa.trigger}
       handleClose={handleClose}
       handleEdit={handleEdit}
+      handleEditClose={handleEditClose}
+      handleInput={handleInput}
+      updateQa={updateQa.trigger}
     />
   );
 };

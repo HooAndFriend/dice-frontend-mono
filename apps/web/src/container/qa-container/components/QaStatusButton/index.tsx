@@ -1,8 +1,7 @@
 "use client";
 
 // ** React Imports
-import { useState } from "react";
-import type { MouseEvent } from "react";
+import { useState, useRef, useEffect } from "react";
 
 // ** Type Imports
 import { EpicStatus } from "@/src/type/epic";
@@ -22,6 +21,7 @@ import { useRecoilValue } from "recoil";
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 import { mutate } from "swr";
+import { ex } from "@fullcalendar/core/internal-common";
 
 interface PropsType {
   qaId: number;
@@ -39,6 +39,8 @@ const statusList: EpicStatus[] = [
 ];
 
 const QaStatusButton = ({ status: defaultStatus, qaId }: PropsType) => {
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
   const [status, setStatus] = useState<EpicStatus>(defaultStatus);
   const [open, setOpen] = useState<boolean>(false);
 
@@ -47,8 +49,7 @@ const QaStatusButton = ({ status: defaultStatus, qaId }: PropsType) => {
 
   const { handleOpen: handleModalOpen } = useDialog();
 
-  const handleOpen = (e: MouseEvent) => {
-    e.stopPropagation();
+  const handleOpen = () => {
     setOpen((c) => !c);
   };
 
@@ -86,17 +87,40 @@ const QaStatusButton = ({ status: defaultStatus, qaId }: PropsType) => {
     }
   );
 
+  useEffect(() => {
+    const clickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        handleOpen();
+      }
+    };
+
+    document.addEventListener("mousedown", clickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", clickOutside);
+    };
+  }, []);
+
   return (
     <div className="relative z-4">
       <button
         className="w-[120px] h-[45px] rounded-[30px] flex justify-center items-center text-white font-spoqa font-bold"
         style={{ backgroundColor: getStateBoxColor(status) }}
-        onClick={handleOpen}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleOpen();
+        }}
       >
         {status}
       </button>
       {open && (
-        <div className="absolute w-[150px] h-[150px] bg-slate-50 top-[50px] left-0 rounded-lg overflow-y-auto z-10">
+        <div
+          className="absolute w-[150px] h-[150px] bg-slate-50 top-[50px] left-0 rounded-lg overflow-y-auto z-10"
+          ref={dropdownRef}
+        >
           {statusList
             .filter((item) => item !== status)
             .map((item) => (

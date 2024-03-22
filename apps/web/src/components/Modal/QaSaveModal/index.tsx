@@ -1,7 +1,7 @@
 "use client";
 
 // ** React Imports
-import { Fragment } from "react";
+import { Fragment, KeyboardEvent } from "react";
 
 // ** ui Imports
 import { Dialog, Transition } from "@headlessui/react";
@@ -73,8 +73,14 @@ const QaSaveModal = ({
           type: "alert",
         });
       },
-    },
+    }
   );
+
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      saveQa.trigger();
+    }
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -123,6 +129,7 @@ const QaSaveModal = ({
                       value={data.title}
                       name="title"
                       onChange={handleInput}
+                      onKeyDown={handleEnter}
                     />
                   </div>
                   <div className="flex w-full mt-5">
@@ -131,6 +138,7 @@ const QaSaveModal = ({
                       value={data.number}
                       name="number"
                       onChange={handleInput}
+                      onKeyDown={handleEnter}
                     />
                   </div>
                   <div className="flex justify-end mt-5">

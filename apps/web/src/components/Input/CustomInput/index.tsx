@@ -6,6 +6,7 @@ interface PropsType {
   value?: string;
   name?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const CustomInput = ({
@@ -14,8 +15,9 @@ const CustomInput = ({
   height,
   borderRadius,
   value,
-  onChange,
   name,
+  onChange,
+  onKeyDown,
 }: PropsType) => {
   return (
     <div
@@ -27,6 +29,7 @@ const CustomInput = ({
         value={value}
         name={name}
         onChange={onChange}
+        onKeyDown={onKeyDown}
       />
     </div>
   );

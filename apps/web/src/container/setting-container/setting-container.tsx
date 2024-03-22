@@ -1,13 +1,18 @@
 import TicketSettingItem from "@/src/components/Ticket/TicketSettingItem";
 import TicketTypeAddItem from "@/src/components/Ticket/TicketTypeAddItem";
+import {SettingListInfo} from "@/src/type/ticket";
 
-interface PropsType {}
+interface PropsType {
+  data: SettingListInfo[];
+}
 
-const SettingContainerView = ({}: PropsType) => {
+const SettingContainerView = ({data}: PropsType) => {
   return (
     <div>
       <div className="mt-6 overflow-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8">
-        <TicketSettingItem />
+        {data.map(item => (
+          <TicketSettingItem item={item} />
+        ))}
         <hr className="my-[25px]" />
         <TicketTypeAddItem />
       </div>

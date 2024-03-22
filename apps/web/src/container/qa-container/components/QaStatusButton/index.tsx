@@ -2,6 +2,7 @@
 
 // ** React Imports
 import { useState } from "react";
+import type { MouseEvent } from "react";
 
 // ** Type Imports
 import { EpicStatus } from "@/src/type/epic";
@@ -46,7 +47,10 @@ const QaStatusButton = ({ status: defaultStatus, qaId }: PropsType) => {
 
   const { handleOpen: handleModalOpen } = useDialog();
 
-  const handleOpen = () => setOpen((c) => !c);
+  const handleOpen = (e: MouseEvent) => {
+    e.stopPropagation();
+    setOpen((c) => !c);
+  };
 
   const handleStatus = (status: EpicStatus) => {
     updateQaStatus.trigger(status);
@@ -63,7 +67,7 @@ const QaStatusButton = ({ status: defaultStatus, qaId }: PropsType) => {
             Authorization: `Bearer ${accessToken}`,
             "workspace-code": uuid,
           },
-        },
+        }
       ),
     {
       onSuccess: () => {
@@ -79,7 +83,7 @@ const QaStatusButton = ({ status: defaultStatus, qaId }: PropsType) => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   return (

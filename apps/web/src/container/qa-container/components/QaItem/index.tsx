@@ -3,6 +3,7 @@ import { IssueInfo } from "@/src/type/qa";
 
 // ** Utils Imports
 import QaStatusButton from "../QaStatusButton";
+import QaUserButton from "../QaUserButton";
 
 interface PropsType {
   item: IssueInfo;
@@ -27,15 +28,10 @@ const QaItem = ({ item, handleOpenQa }: PropsType) => {
         <h1 className="ml-2">{item.title}</h1>
       </div>
       <div className="w-full h-[45px] flex justify-between items-end mb-2">
-        <div className="flex items-center">
-          <img
-            className="rounded-full border border-[#EBEBEC] mr-[10px] "
-            src={item.admin.profile}
-            width={30}
-            height={30}
-          />
-          <div className="font-spoqa">{item.admin.nickname}</div>
-        </div>
+        <QaUserButton
+          profile={item.admin.profile}
+          nickname={item.admin.nickname}
+        />
         <QaStatusButton status={item.status} qaId={item.id} />
       </div>
     </div>

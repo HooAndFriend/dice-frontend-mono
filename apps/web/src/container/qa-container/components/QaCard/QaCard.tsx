@@ -9,6 +9,7 @@ import IssueComment from "../QaComment";
 import { CommentInfo, IssueInfo } from "@/src/type/qa";
 import { RoleType } from "@/src/type/common";
 import QaStatusButton from "../QaStatusButton";
+import QaUserButton from "../QaUserButton";
 
 interface PropsType {
   data: IssueInfo;
@@ -109,29 +110,21 @@ const QaCardView = ({
         </div>
       )}
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
-      <div className="flex h-5 mt-5">
+      <div className="flex justify-between h-5 mt-5">
         <div className="font-spoqa mr-[79px] font-medium">Admin</div>
-        <div className="flex mr-[45px]">
-          <img
-            className="rounded-full border border-[#EBEBEC] mr-[10px]"
-            src={data.admin ? data.admin.profile : "/dice.png"}
-            width={20}
-            height={20}
-          />
-          <div className="flex items-center font-normal">
-            {data.admin ? data.admin.nickname : ""}
-          </div>
-        </div>
+        <QaUserButton
+          profile={data.admin ? data.admin.profile : "/dice.png"}
+          nickname={data.admin ? data.admin.nickname : ""}
+          width={20}
+          height={20}
+        />
         <div className="font-spoqa mr-[80px] font-medium">Worker</div>
-        <div className="flex">
-          <img
-            className="rounded-full border border-[#EBEBEC] mr-[10px]"
-            src="/faviconGray.png"
-            width={20}
-            height={20}
-          />
-          <div className="flex items-center font-normal">NoWorker</div>
-        </div>
+        <QaUserButton
+          profile="/faviconGray.png"
+          nickname="NoWorker"
+          width={20}
+          height={20}
+        />
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
       <div className="h-[20px] flex mt-5 ">

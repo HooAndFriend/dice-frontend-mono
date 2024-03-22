@@ -5,9 +5,11 @@ import { useEffect, useRef, useState } from "react";
 interface PropsType {
   profile: string;
   nickname: string;
+  width?: string | number;
+  height?: string | number;
 }
 
-const QaUserButton = ({ profile, nickname }: PropsType) => {
+const QaUserButton = ({ profile, nickname, width, height }: PropsType) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const [open, setOpen] = useState<boolean>(false);
@@ -45,8 +47,8 @@ const QaUserButton = ({ profile, nickname }: PropsType) => {
         <img
           className="rounded-full border border-[#EBEBEC] mr-[10px] "
           src={profile}
-          width={30}
-          height={30}
+          width={width ? width : 30}
+          height={height ? height : 30}
         />
         <div className="font-spoqa">{nickname}</div>
       </div>

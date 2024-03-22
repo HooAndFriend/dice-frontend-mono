@@ -25,6 +25,7 @@ import { mutate } from "swr";
 interface PropsType {
   qaId: number;
   status: EpicStatus;
+  refetch?: () => void;
 }
 
 const statusList: EpicStatus[] = [
@@ -37,7 +38,7 @@ const statusList: EpicStatus[] = [
   "NOTHING",
 ];
 
-const QaStatusButton = ({ status, qaId }: PropsType) => {
+const QaStatusButton = ({ status, qaId, refetch }: PropsType) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const [open, setOpen] = useState<boolean>(false);
@@ -72,6 +73,7 @@ const QaStatusButton = ({ status, qaId }: PropsType) => {
       onSuccess: () => {
         setOpen(false);
         mutate("/v1/qa");
+        refetch();
       },
       onError: (error) => {
         handleModalOpen({

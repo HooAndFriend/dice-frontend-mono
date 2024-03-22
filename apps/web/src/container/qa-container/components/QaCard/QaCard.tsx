@@ -8,6 +8,7 @@ import IssueComment from "../QaComment";
 // ** Type Imports
 import { CommentInfo, IssueInfo } from "@/src/type/qa";
 import { RoleType } from "@/src/type/common";
+import QaStatusButton from "../QaStatusButton";
 
 interface PropsType {
   data: IssueInfo;
@@ -24,6 +25,7 @@ interface PropsType {
   handleClose: () => void;
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
   handleCommentEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
+  refetch: () => void;
 }
 
 const QaCardView = ({
@@ -41,6 +43,7 @@ const QaCardView = ({
   handleInput,
   updateQa,
   handleCommentEnter,
+  refetch,
 }: PropsType) => {
   return (
     <div>
@@ -88,7 +91,11 @@ const QaCardView = ({
           <div className="flex items-center text-xl font-bold">
             {data.title}
           </div>
-          <CustomSelect option={data.status} />
+          <QaStatusButton
+            qaId={data.id}
+            status={data.status}
+            refetch={refetch}
+          />
         </div>
       ) : (
         <div className="h-[50px] flex justify-between mt-[30px] font-spoqa">

@@ -98,7 +98,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        },
+        }
       ),
     {
       onSuccess: () => {
@@ -114,7 +114,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const deleteQa = useSWRMutation(
@@ -139,7 +139,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const updateQa = useSWRMutation(
@@ -153,7 +153,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
             Authorization: `Bearer ${accessToken}`,
             "workspace-code": `${uuid}`,
           },
-        },
+        }
       ),
     {
       onSuccess: () => {
@@ -169,14 +169,10 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
-  const {
-    data,
-    error: issueError,
-    isLoading: issueLoading,
-  } = useSWR(
+  const { isLoading: issueLoading, mutate: refetch } = useSWR(
     `/v1/qa/${qaId}`,
     async (url) =>
       Get<GetIssueResponse>(url, {
@@ -189,7 +185,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
       onSuccess: (res) => {
         setIssueData(res.data);
       },
-    },
+    }
   );
 
   //댓글 확인
@@ -203,7 +199,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
         Authorization: `Bearer ${accessToken}`,
         "Workspace-code": `${uuid}`,
       },
-    }),
+    })
   );
 
   const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -234,6 +230,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
       handleInput={handleInput}
       updateQa={updateQa.trigger}
       handleCommentEnter={handleCommentEnter}
+      refetch={refetch}
     />
   );
 };

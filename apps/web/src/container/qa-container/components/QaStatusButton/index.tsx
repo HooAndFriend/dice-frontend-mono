@@ -21,7 +21,6 @@ import { useRecoilValue } from "recoil";
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 import { mutate } from "swr";
-import { ex } from "@fullcalendar/core/internal-common";
 
 interface PropsType {
   qaId: number;
@@ -38,10 +37,9 @@ const statusList: EpicStatus[] = [
   "NOTHING",
 ];
 
-const QaStatusButton = ({ status: defaultStatus, qaId }: PropsType) => {
+const QaStatusButton = ({ status, qaId }: PropsType) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const [status, setStatus] = useState<EpicStatus>(defaultStatus);
   const [open, setOpen] = useState<boolean>(false);
 
   const { uuid } = useRecoilValue(WorkspaceState);
@@ -124,11 +122,17 @@ const QaStatusButton = ({ status: defaultStatus, qaId }: PropsType) => {
           {statusList
             .filter((item) => item !== status)
             .map((item) => (
-              <div className="w-full h-[30px] py-2 px-4 hover:bg-slate-200">
+              <div
+                className="w-full h-[30px] py-2 px-4 hover:bg-slate-200"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleStatus(item);
+                }}
+                key={item}
+              >
                 <button
                   className={`p-2 h-[100%] rounded-[30px] flex justify-center items-center text-white font-spoqa font-bold text-[10px]`}
                   style={{ backgroundColor: getStateBoxColor(item) }}
-                  onClick={() => handleStatus(item)}
                 >
                   {item}
                 </button>

@@ -117,6 +117,8 @@ const QaCardView = ({
           nickname={data.admin ? data.admin.nickname : ""}
           width={20}
           height={20}
+          type="admin"
+          qaId={data.id}
         />
         <div className="font-spoqa mr-[80px] font-medium">Worker</div>
         <QaUserButton
@@ -124,6 +126,8 @@ const QaCardView = ({
           nickname="NoWorker"
           width={20}
           height={20}
+          type="user"
+          qaId={data.id}
         />
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>

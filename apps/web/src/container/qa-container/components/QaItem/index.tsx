@@ -29,8 +29,10 @@ const QaItem = ({ item, handleOpenQa }: PropsType) => {
       </div>
       <div className="w-full h-[45px] flex justify-between items-end mb-2">
         <QaUserButton
-          profile={item.admin.profile}
-          nickname={item.admin.nickname}
+          profile={item.worker.profile}
+          nickname={item.worker.nickname}
+          type="user"
+          qaId={item.id}
         />
         <QaStatusButton status={item.status} qaId={item.id} />
       </div>

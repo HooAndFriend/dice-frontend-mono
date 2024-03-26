@@ -8,6 +8,7 @@ import TitleBox from '@/src/components/TitleBox'
 import UserSearchBox from '@/src/components/SearchBox/UserSearchBox'
 import UserModal from '@/src/components/Modal/UserModal'
 import { UserInfo, UserInfoQuery } from '@/src/type/user'
+import { formatDate } from './index';
 
 interface PropsType {
   userData: UserInfo[];
@@ -16,18 +17,20 @@ interface PropsType {
   count: number;
 }
 
-function formatDate(date: Date): string {
-  const d = new Date(date);
-  d.setHours(d.getHours() + 9);
-  return new Date(d).toISOString().replace('T', ' ').substring(0, 19);
-}
-
-const UserPageView = ({userData,count,query, handleSearch}: PropsType) => {
+const UserPageView = ({
+  userData,
+  count,
+  query,
+  handleSearch
+}: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
+  const [selectedUser, setSelectedUser] = useState<UserInfo | undefined>(); 
+
+
 
   const cancelButtonRef = useRef(null)
-  
   const bodyData = userData.map((user, index) => [
+  { name: user.user_id.toString(), size: '0%' },
   { name: (index + 1).toString(), size: '5%' },
   { name: user.user_nickname, size: '15%' },
   { name: user.user_email, size: '20%' },
@@ -39,6 +42,14 @@ const UserPageView = ({userData,count,query, handleSearch}: PropsType) => {
 ]);
 
   const handleOpen = () => setOpen((c) => !c)
+
+  const handleItemClick = (userId: number) => {
+    const user = userData.find(user => user.user_id === userId);
+    if (user) {
+      setSelectedUser(user);
+      handleOpen();
+    }
+  };
   return (
     <div className="w-full px-4 mt-4">
       <TitleBox title="사용자 관리 / 사용자 조회" text="사용자 조회" />
@@ -49,19 +60,22 @@ const UserPageView = ({userData,count,query, handleSearch}: PropsType) => {
           headerData={headerData}
           bodyData={bodyData}
           disabledClick={false}
-          handleClick={handleOpen}
+          userIds={userData.map(user => user.user_id)}
+          handleClick={handleItemClick}
         />
         <div className="flex justify-end w-full">
           <TablePagination />
         </div>
       </div>
-      {open && (
+      { selectedUser && open && (
         <UserModal
+          userInfo={selectedUser}
           open={open}
           setOpen={setOpen}
           cancelButtonRef={cancelButtonRef}
-        />
-      )}
+          />
+        )
+      }
     </div>
   )
 }

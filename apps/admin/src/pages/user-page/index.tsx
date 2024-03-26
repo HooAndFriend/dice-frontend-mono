@@ -7,7 +7,13 @@ import useSWR from 'swr'
 import { useRecoilValue } from 'recoil'
 import {AuthState} from '@/src/app/auth'
 import { Get } from '@/src/repository'
-import { useEffect } from 'react'
+import { useState } from 'react'
+
+export function formatDate(date: Date): string {
+  const d = new Date(date);
+  d.setHours(d.getHours() + 9);
+  return new Date(d).toISOString().replace('T', ' ').substring(0, 19);
+}
 
 const handleDateChange = (endDate) => {
     const nextDay = new Date(endDate);
@@ -15,6 +21,7 @@ const handleDateChange = (endDate) => {
     return new Date(nextDay).toISOString().replace('T', ' ').substring(0, 10);
 }
 const UserPage = () => {
+
   const { accessToken } = useRecoilValue(AuthState);
   const { data: query, setData: setQuery } = useInput<UserInfoQuery>({
     createdStartDate: null,
@@ -60,6 +67,13 @@ const UserPage = () => {
   if (isLoading || !data) return null;
   if (error) return;
 
-  return <UserPageView query={query} count={data.data.count} userData={data.data.data} handleSearch={handleSearch} />
+  return (
+    <UserPageView
+      query={query}
+      count={data.data.count}
+      userData={data.data.data}
+      handleSearch={handleSearch}
+    />
+  )
 }
 export default UserPage

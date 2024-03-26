@@ -30,7 +30,6 @@ const UserPageView = ({
   const [selectedUser, setSelectedUser] = useState<UserInfo>(); 
 
   const cancelButtonRef = useRef(null)
-  
   const bodyData = userData.map((user, index) => [
     { name: user.user_id.toString(), size: '0%' },
     { name: (index + 1).toString(), size: '5%' },
@@ -52,7 +51,6 @@ const UserPageView = ({
       handleOpen();
     }
   };
-
   return (
     <div className="w-full px-4 mt-4">
       <TitleBox title="사용자 관리 / 사용자 조회" text="사용자 조회" />

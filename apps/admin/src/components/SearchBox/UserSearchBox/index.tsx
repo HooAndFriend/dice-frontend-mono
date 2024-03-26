@@ -6,7 +6,10 @@ import { useState } from 'react'
 // ** Component Imports
 import Datepicker from 'react-tailwindcss-datepicker'
 import CustomCheckbox from '../../CustomInput/CustomCheckbox'
+
+// ** Type Imports
 import { DateRange, UserInfoQuery } from '@/src/type/user'
+
 
 interface PropsType {
   query: UserInfoQuery;

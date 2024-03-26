@@ -11,7 +11,6 @@ export function formatDate(date: Date): string {
   d.setHours(d.getHours() + 9)
   return new Date(d).toISOString().replace('T', ' ').substring(0, 19)
 }
-
 const handleDateChange = (endDate) => {
   const nextDay = new Date(endDate)
   nextDay.setDate(nextDay.getDate() + 1)

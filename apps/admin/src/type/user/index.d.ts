@@ -1,6 +1,4 @@
 import { CommonResponse } from '../common';
-import { GetUserWorkspaceResponse } from '@/src/type/user';
-
 
 export interface GetUserListResponse extends CommonResponse {
   count: number;

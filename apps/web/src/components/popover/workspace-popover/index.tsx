@@ -22,7 +22,7 @@ const WorkspacePopover = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState);
-  const { id, uuid } = useRecoilValue(TeamState);
+  const { id, uuid, name } = useRecoilValue(TeamState);
   const { accessToken } = useRecoilValue(AuthState);
 
   const { data, error, isLoading } = useSWR(
@@ -33,7 +33,7 @@ const WorkspacePopover = () => {
           Authorization: `Bearer ${accessToken}`,
           "team-code": id === 0 ? "personal" : uuid,
         },
-      }),
+      })
   );
 
   const cancelButtonRef = useRef(null);
@@ -52,6 +52,8 @@ const WorkspacePopover = () => {
     });
   };
 
+  // console.log(data.data);
+
   if (isLoading) return;
 
   if (error) return;
@@ -67,6 +69,7 @@ const WorkspacePopover = () => {
       setModalOpen={setModalOpen}
       handleModalOpen={handleModalOpen}
       handleUpdateWorkspace={handleUpdateWorkspace}
+      teamName={name}
     />
   );
 };

@@ -15,6 +15,7 @@ interface PropsType {
   cancelButtonRef: any;
   data: WorkspaceInfo[];
   id: number;
+  teamName: string;
   setModalOpen: (value: boolean) => void;
   handleModalOpen: () => void;
   handleOpen: () => void;
@@ -30,6 +31,7 @@ const WorkspacePopoverView = ({
   setModalOpen,
   data,
   id,
+  teamName,
   handleUpdateWorkspace,
 }: PropsType) => {
   return (
@@ -40,9 +42,9 @@ const WorkspacePopoverView = ({
       {open && (
         <>
           <div onClick={handleOpen} className="fixed inset-0 z-10" />
-          <div className="popover p-5 rounded-[20px] w-[350px] h-[250px] absolute bg-white shadow-md p- -translate-y-full translate-x-20">
+          <div className="popover p-5 rounded-[20px] w-[350px] h-[250px] absolute bg-white shadow-md p- -translate-y-full translate-x-20 z-10">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-bold">DICE</h3>
+              <h3 className="text-lg font-bold">{teamName}</h3>
               <div className="flex items-center" onClick={handleModalOpen}>
                 <img
                   src="/images/settings.png"

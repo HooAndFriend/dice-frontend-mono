@@ -42,7 +42,7 @@ const SettingContent = () => {
       },
     }).then((res) => {
       setData(res.data);
-    }),
+    })
   );
 
   const updateWorkspace = useSWRMutation(
@@ -60,7 +60,7 @@ const SettingContent = () => {
             Authorization: `Bearer ${accessToken}`,
             "team-code": workspaceState.uuid,
           },
-        },
+        }
       ),
     {
       onSuccess: () => {
@@ -82,8 +82,12 @@ const SettingContent = () => {
           type: "alert",
         });
       },
-    },
+    }
   );
+
+  const handleImage = (profile: string) => {
+    setData((cur) => ({ ...cur, profile }));
+  };
 
   if (isLoading) return;
 
@@ -94,6 +98,7 @@ const SettingContent = () => {
       data={data}
       handleInput={handleInput}
       handleUpdate={updateWorkspace.trigger}
+      handleImage={handleImage}
     />
   );
 };

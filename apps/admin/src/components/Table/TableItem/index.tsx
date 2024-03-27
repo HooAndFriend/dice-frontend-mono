@@ -24,8 +24,8 @@ const TableItem = ({ data, disabledClick, userId, handleClick }: PropsType) => {
         }
       }}
     >
-      {data.map((item) => (
-        <div className={`pl-4 w-[${item.size}]`} style={{ width: item.size }}>
+      {data.map((item, index) => (
+        <div className={`pl-4 w-[${item.size}]`} style={{ width: item.size }} key={index}>
           {item.name}
         </div>
       ))}

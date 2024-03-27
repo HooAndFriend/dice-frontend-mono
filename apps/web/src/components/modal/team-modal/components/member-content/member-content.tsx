@@ -13,19 +13,11 @@ interface PropsType {
   data: TeamUserInfo[];
   role: RoleType;
   uuid: string;
-  handleDeleteTeamUser: (teamUserId: number) => void;
-  handleTeamUserRole: (teamUserId: number, role: RoleType) => void;
+
   handleOpen: () => void;
 }
 
-const MemberContentView = ({
-  handleOpen,
-  data,
-  uuid,
-  role,
-  handleTeamUserRole,
-  handleDeleteTeamUser,
-}: PropsType) => {
+const MemberContentView = ({ handleOpen, data, uuid, role }: PropsType) => {
   return (
     <div>
       <div className="font-bold text-xl mb-[14px] font-spoqa">
@@ -61,7 +53,7 @@ const MemberContentView = ({
           AddMember
         </div>
       </div>
-      <div>
+      <div className="h-[420px] w-full overflow-y-auto">
         {data.map((item) => (
           <UserBox
             key={item.id}
@@ -71,8 +63,6 @@ const MemberContentView = ({
             role={item.role}
             profile={item.user.profile}
             userRole={role}
-            handleTeamUserRole={handleTeamUserRole}
-            handleDeleteTeamUser={handleDeleteTeamUser}
           />
         ))}
       </div>

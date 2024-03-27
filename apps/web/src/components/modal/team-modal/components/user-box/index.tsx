@@ -1,4 +1,10 @@
-import { RoleType } from "@/src/type/common";
+import { AuthState, TeamState } from "@/src/app";
+import { useDialog } from "@/src/context/DialogContext";
+import { Delete, Patch } from "@/src/repository";
+import { CommonResponse, RoleType } from "@/src/type/common";
+import { useRecoilValue } from "recoil";
+import { mutate } from "swr";
+import useSWRMutation from "swr/mutation";
 
 interface PropsType {
   id: number;
@@ -7,8 +13,6 @@ interface PropsType {
   nickname: string;
   userRole: RoleType;
   role: RoleType;
-  handleTeamUserRole: (teamUserId: number, role: RoleType) => void;
-  handleDeleteTeamUser: (teamUserId: number) => void;
 }
 
 const UserBox = ({
@@ -18,11 +22,71 @@ const UserBox = ({
   nickname,
   userRole,
   id,
-  handleTeamUserRole,
-  handleDeleteTeamUser,
 }: PropsType) => {
+  const { accessToken } = useRecoilValue(AuthState);
+  const { uuid } = useRecoilValue(TeamState);
+
+  const { handleOpen } = useDialog();
+
+  const updateTeamRole = useSWRMutation(
+    "/v1/team-user",
+    async (url: string, { arg }: { arg: RoleType }) =>
+      await Patch<CommonResponse<void>>(
+        url,
+        {
+          teamUserId: id,
+          role: arg,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "team-code": uuid,
+          },
+        }
+      ),
+    {
+      onSuccess: ({ data }) => {
+        mutate("/v1/team-user/user");
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
+  const removeTeamUser = useSWRMutation(
+    `/v1/team-user/${id}`,
+    async (url: string) =>
+      await Delete<CommonResponse<void>>(url, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "team-code": uuid,
+        },
+      }),
+    {
+      onSuccess: ({ data }) => {
+        mutate("/v1/team-user/user");
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
   return (
-    <div className="mb-[21px] w-[746px] h-20 border-[#EBEBEC] border shadow-md rounded-[15px] flex items-center justify-between">
+    <div className="mb-[21px] w-[740px] h-20 border-[#EBEBEC] border shadow-md rounded-[15px] flex items-center justify-between">
       <div className="flex">
         <img
           src={profile}
@@ -42,7 +106,7 @@ const UserBox = ({
           className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center"
           disabled={userRole !== "ADMIN"}
           value={role}
-          onChange={(e) => handleTeamUserRole(id, e.target.value as RoleType)}
+          onChange={(e) => updateTeamRole.trigger(e.target.value as RoleType)}
         >
           <option className="text-base font-spoqa" value="VIEWER">
             VIEWER
@@ -59,7 +123,8 @@ const UserBox = ({
             src="svg/boldX.svg"
             width={24}
             height={24}
-            onClick={() => handleDeleteTeamUser(id)}
+            className="cursor-pointer"
+            onClick={removeTeamUser.trigger}
           />
         )}
       </div>

@@ -1,12 +1,12 @@
 interface PropsType {
-  id: number;
-  teamId: number;
+  teamUuid: string;
+  uuid: string;
   profile: string;
   name: string;
   onClick: () => void;
 }
 
-const TeamBox = ({ profile, name, onClick, id, teamId }: PropsType) => {
+const TeamBox = ({ profile, name, onClick, teamUuid, uuid }: PropsType) => {
   return (
     <div className="flex items-center mt-5" onClick={onClick}>
       <img
@@ -16,7 +16,7 @@ const TeamBox = ({ profile, name, onClick, id, teamId }: PropsType) => {
         width="30px"
         height="30px"
       />
-      <h4 className={`${id === teamId && "text-[#623AD6]"}`}>{name}</h4>
+      <h4 className={`${uuid === teamUuid && "text-[#623AD6]"}`}>{name}</h4>
     </div>
   );
 };

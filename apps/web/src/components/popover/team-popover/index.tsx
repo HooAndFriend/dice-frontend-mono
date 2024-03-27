@@ -96,11 +96,13 @@ const TeamPopover = () => {
 
   if (error) return;
 
+  console.log(teamState.id);
+
   return (
     <TeamPopoverView
       open={open}
       teamName={teamState.name}
-      id={teamState.id}
+      uuid={teamState.uuid}
       user={userState}
       userModalOpen={userModalOpen}
       modalTeamOpen={teamModalOpen}

@@ -1,3 +1,6 @@
+// ** Next Imports
+import Link from "next/link";
+
 // ** Component Imports
 import TeamModal from "@/src/components/Modal/team-modal";
 import ProfileBox from "../../ProfileBox";
@@ -6,7 +9,6 @@ import TeamBox from "./component/team-box";
 
 // ** Type Imports
 import { TeamUserInfo } from "@/src/type/team";
-import Link from "next/link";
 
 interface PropsType {
   open: boolean;
@@ -14,7 +16,7 @@ interface PropsType {
   userModalOpen: boolean;
   cancelButtonRef: any;
   teamName: string;
-  id: number;
+  uuid: string;
   user: { email: string; nickname: string; profile: string };
   data: TeamUserInfo[];
   handleUpdateTeam: (item: TeamUserInfo | 0) => void;
@@ -37,7 +39,7 @@ const TeamPopoverView = ({
   userModalOpen,
   setUserModalOpen,
   handleUpdateTeam,
-  id,
+  uuid,
   user,
   teamName,
 }: PropsType) => {
@@ -52,9 +54,7 @@ const TeamPopoverView = ({
             <div onClick={handleOpen} className="fixed inset-0 z-10" />
             <div className="popover p-5 rounded-[20px] w-[350px] h-[250px] absolute bg-white shadow-md p- translate-y-10 -translate-x-3/4 z-10">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold">
-                  {id === 0 ? user.nickname : teamName}
-                </h3>
+                <h3 className="text-lg font-bold">{user.nickname}</h3>
                 <div className="flex items-center">
                   <img
                     src="/images/settings.png"
@@ -78,18 +78,11 @@ const TeamPopoverView = ({
               </div>
               <hr className="mt-3" />
               <div className="mt-2 w-[350px] h-[150px] overflow-y-scroll">
-                <TeamBox
-                  id={id}
-                  teamId={0}
-                  profile={user.profile}
-                  name={user.nickname}
-                  onClick={() => handleUpdateTeam(0)}
-                />
                 {data.map((item) => (
                   <TeamBox
                     key={item.id}
-                    id={id}
-                    teamId={item.team.id}
+                    uuid={item.team.uuid}
+                    teamUuid={uuid}
                     profile={item.team.profile}
                     name={item.team.name}
                     onClick={() => handleUpdateTeam(item)}

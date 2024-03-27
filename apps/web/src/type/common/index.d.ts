@@ -9,4 +9,9 @@ export interface CommonResponse<T> {
   data?: T;
 }
 
+export interface Dates {
+  startDate: Dayjs;
+  endDate: Dayjs;
+}
+
 export type RoleType = "ADMIN" | "VIEWER" | "WRITEER" | "";

@@ -13,6 +13,7 @@ interface TeamStateType {
   name: string;
   profile: string;
   uuid: string;
+  isPersonal: boolean;
   role: RoleType;
 }
 
@@ -21,6 +22,7 @@ export const teamInitState: TeamStateType = {
   name: "",
   profile: "",
   uuid: "",
+  isPersonal: true,
   role: "",
 };
 

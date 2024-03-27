@@ -15,7 +15,6 @@ interface PropsType {
   modalTeamOpen: boolean;
   userModalOpen: boolean;
   cancelButtonRef: any;
-  teamName: string;
   uuid: string;
   user: { email: string; nickname: string; profile: string };
   data: TeamUserInfo[];
@@ -41,7 +40,6 @@ const TeamPopoverView = ({
   handleUpdateTeam,
   uuid,
   user,
-  teamName,
 }: PropsType) => {
   return (
     <>

@@ -27,6 +27,7 @@ export interface TeamUserInfo {
     profile: string;
     id: number;
     uuid: string;
+    isPersonal: boolean;
     workspace: TeamWorkspaceInfo[];
   };
 }

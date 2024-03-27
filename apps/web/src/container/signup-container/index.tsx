@@ -127,6 +127,7 @@ const SignupContainer = () => {
           name: data.team.name,
           profile: data.team.profile,
           uuid: data.team.uuid,
+          isPersonal: true,
           role: "ADMIN",
         });
 
@@ -149,7 +150,7 @@ const SignupContainer = () => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {

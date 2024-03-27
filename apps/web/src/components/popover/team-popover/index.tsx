@@ -16,7 +16,6 @@ import {
   UserState,
   WorkspaceState,
   authInitState,
-  teamInitState,
   userInitState,
   workspaceInitState,
 } from "@/src/app";
@@ -26,7 +25,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { GetUserTeamListResponse, TeamUserInfo } from "@/src/type/team";
 
 // ** Service Imports
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { Get } from "@/src/repository";
 
 const TeamPopover = () => {
@@ -51,7 +50,7 @@ const TeamPopover = () => {
 
   const handleOpen = () => setOpen((cur) => !cur);
   const handleModalOpen = () => {
-    if (teamState.id === 0) {
+    if (teamState.isPersonal) {
       setUserModalOpen(true);
 
       return;
@@ -60,17 +59,13 @@ const TeamPopover = () => {
     setTeamModalOpen(true);
   };
 
-  const handleUpdateTeam = (item: TeamUserInfo | 0) => {
-    if (item === 0) {
-      setTeamState(teamInitState);
-      return;
-    }
-
+  const handleUpdateTeam = (item: TeamUserInfo) => {
     setTeamState({
       id: item.team.id,
       name: item.team.name,
       profile: item.team.profile,
       uuid: item.team.uuid,
+      isPersonal: item.team.isPersonal,
       role: item.role,
     });
 
@@ -82,6 +77,8 @@ const TeamPopover = () => {
       role: item.team.workspace[0].workspaceUser[0].role,
       workspaceFunction: item.team.workspace[0].workspaceFunction,
     });
+
+    mutate("/v1/workspace-user/team");
   };
 
   const handleLogout = () => {
@@ -96,12 +93,9 @@ const TeamPopover = () => {
 
   if (error) return;
 
-  console.log(teamState.id);
-
   return (
     <TeamPopoverView
       open={open}
-      teamName={teamState.name}
       uuid={teamState.uuid}
       user={userState}
       userModalOpen={userModalOpen}

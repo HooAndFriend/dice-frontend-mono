@@ -37,7 +37,7 @@ const SettingContent = () => {
       headers: { Authorization: `Bearer ${accessToken}` },
     }).then((res) => {
       setData(res.data);
-    }),
+    })
   );
 
   const updateUser = useSWRMutation(
@@ -51,7 +51,7 @@ const SettingContent = () => {
         },
         {
           headers: { Authorization: `Bearer ${accessToken}` },
-        },
+        }
       ),
     {
       onSuccess: ({ data: responseData }) => {
@@ -71,8 +71,12 @@ const SettingContent = () => {
           type: "alert",
         });
       },
-    },
+    }
   );
+
+  const handleImage = (profile: string) => {
+    setData((cur) => ({ ...cur, profile }));
+  };
 
   if (isLoading) return null;
 
@@ -81,6 +85,7 @@ const SettingContent = () => {
       data={data}
       handleInput={handleInput}
       handleUpdate={updateUser.trigger}
+      handleImage={handleImage}
     />
   );
 };

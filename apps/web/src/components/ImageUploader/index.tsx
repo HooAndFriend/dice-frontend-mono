@@ -15,6 +15,7 @@ interface PropsType {
   borderColor?: string;
   borderWidth?: string;
   borderRadius?: string | number;
+  mode?: "write" | "edit";
   setPath: (e: string) => void;
 }
 export const ImageUploader = ({
@@ -26,6 +27,7 @@ export const ImageUploader = ({
   height,
   borderColor,
   borderWidth,
+  mode,
 }: PropsType) => {
   const inputRef = useRef<HTMLInputElement | any>(null);
 
@@ -85,6 +87,7 @@ export const ImageUploader = ({
       height={height}
       borderColor={borderColor}
       borderWidth={borderWidth}
+      mode={mode}
     />
   );
 };

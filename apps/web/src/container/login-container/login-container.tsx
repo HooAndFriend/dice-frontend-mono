@@ -94,55 +94,65 @@ const LoginContainerView = ({
               </div>
             </div>
             <div
-              className="flex justify-end text-sm underline w-full text-[#676767] mt-4 mr-12 font-spoqa font-medium"
+              className="flex justify-end text-sm underline w-full text-[#676767] mt-4 mr-12 font-spoqa font-medium cursor-pointer"
               onClick={handleSignup}
             >
               HIDICE Signup
             </div>
             <div className="w-full flex justify-between m-auto mt-[46px]">
-              <div className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md">
+              <div
+                className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
+                onClick={() => handleSocialLogin("MICROSOFT")}
+              >
                 <img
                   src="/images/microsoft.png"
                   alt="Microsoft"
                   width={24}
                   height={24}
-                  onClick={() => handleSocialLogin("MICROSOFT")}
                 />
               </div>
-              <div className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md">
+              <div
+                className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
+                onClick={() => handleSocialLogin("GOOGLE")}
+              >
                 <img
                   src="/images/google.png"
                   alt="google"
                   width={24}
                   height={24}
-                  onClick={() => handleSocialLogin("GOOGLE")}
                 />
               </div>
-              <div className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md">
+              <div
+                className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
+                // onClick={() => handleSocialLogin("APPLE")}
+              >
                 <img
                   src="/images/apple.png"
                   alt="apple"
                   width={28}
                   height={28}
-                  // onClick={() => handleSocialLogin("APPLE")}
                 />
               </div>
-              <div className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md">
+              <div
+                className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
+                onClick={() => handleSocialLogin("GITHUB")}
+              >
                 <img
                   src="/images/github.png"
                   alt="github"
                   width={28}
                   height={28}
-                  onClick={() => handleSocialLogin("GITHUB")}
                 />
               </div>
-              <div className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md">
+              <div
+                className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
+                onClick={() => handleSocialLogin("TWITTER")}
+              >
                 <img
                   src="/images/twitter.png"
                   alt="twitter"
                   width={24}
                   height={19.83}
-                  onClick={() => handleSocialLogin("TWITTER")}
                 />
               </div>
             </div>

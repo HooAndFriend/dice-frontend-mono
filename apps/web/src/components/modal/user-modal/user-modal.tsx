@@ -127,7 +127,7 @@ const UserModalView = ({
                           </div>
                           <div
                             onClick={() => setTab(2)}
-                            className={`w-[205px] h-[40 px] rounded-full flex items-center text-base font-bold font-spoqa ${
+                            className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-base font-bold font-spoqa ${
                               tab === 2
                                 ? "text-main bg-white"
                                 : "bg-main text-white"

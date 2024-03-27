@@ -42,7 +42,7 @@ const SettingContent = () => {
       },
     }).then((res) => {
       setData(res.data);
-    }),
+    })
   );
 
   const updateTeam = useSWRMutation(
@@ -60,7 +60,7 @@ const SettingContent = () => {
             Authorization: `Bearer ${accessToken}`,
             "team-code": teamState.uuid,
           },
-        },
+        }
       ),
     {
       onSuccess: () => {
@@ -81,8 +81,12 @@ const SettingContent = () => {
           type: "alert",
         });
       },
-    },
+    }
   );
+
+  const handleImage = (profile: string) => {
+    setData((cur) => ({ ...cur, profile }));
+  };
 
   if (isLoading) return null;
 
@@ -93,6 +97,7 @@ const SettingContent = () => {
       data={data}
       handleInput={handleInput}
       handleUpdate={updateTeam.trigger}
+      handleImage={handleImage}
     />
   );
 };

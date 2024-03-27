@@ -1,26 +1,24 @@
 // ** Type Imports
+import { ImageUploader } from "@/src/components/ImageUploader";
 import { TeamInfo } from "@/src/type/team";
 
 interface PropsType {
   data: TeamInfo;
   handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleUpdate: () => void;
+  handleImage: (profile: string) => void;
 }
 
-const SettingContentView = ({ data, handleInput, handleUpdate }: PropsType) => {
+const SettingContentView = ({
+  data,
+  handleInput,
+  handleUpdate,
+  handleImage,
+}: PropsType) => {
   return (
     <div>
       <label className="text-xl font-bold font-spoqa">Profile</label>
-      <div className="mt-[14px] relative w-[110px] h-[110px]">
-        <img
-          src={data.profile}
-          alt="Sample Iamge"
-          className="w-[104px] h-[104px] rounded-[20px] bg-purple-200 absolute"
-        />
-        <div className="w-[25px] h-[25px] bg-[#EBEBEC] rounded-[5px] absolute top-[85px] left-[85px] flex justify-center items-center">
-          <img src="/svg/edit.svg" alt="edit" width={15} height={15} />
-        </div>
-      </div>
+      <ImageUploader image={data.profile} setPath={handleImage} mode="edit" />
       <div className="mt-5">
         <label className="text-base font-bold font-spoqa">Team Name</label>
         <input

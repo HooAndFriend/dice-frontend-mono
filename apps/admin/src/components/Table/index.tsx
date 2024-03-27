@@ -23,6 +23,7 @@ const CustomTable = ({
       <TableHeader data={headerData} />
       {bodyData.map((item,index) => (
         <TableItem
+          key={index}
           data={item}
           userId={userIdList[index]}
           disabledClick={disabledClick}

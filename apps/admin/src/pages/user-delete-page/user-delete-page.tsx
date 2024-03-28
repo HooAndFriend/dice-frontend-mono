@@ -20,7 +20,7 @@ const UserDeletePageView = ({}: PropsType) => {
   return (
     <div className="w-full px-4 mt-4">
       <TitleBox title="사용자 관리 / 탈퇴회원 조회" text="탈퇴회원 조회" />
-      <UserSearchBox />
+      {/* <UserSearchBox query={}/> */}
       <div className="h-[730px] w-full bg-white rounded-[10px] py-4 px-8 mt-4">
         <h1 className="mb-8 font-bold">탈퇴회원 목록(30명)</h1>
         <CustomTable

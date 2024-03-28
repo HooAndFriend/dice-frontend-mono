@@ -20,7 +20,7 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
           />
         </div>
         <div className="w-full h-[50px] flex mt-[23px]">
-          <div className="w-[436px] h-full border border-[#EBEBEC] rounded-[10px] flex pl-4 items-center">
+          <div className="w-[436px] h-full border border-[#EBEBEC] rounded-[10px] flex px-4 items-center">
             <div className="bg-[#F4F4FA] w-[86px] h-[29px] rounded-lg flex items-center mr-[10px]">
               <img
                 className="rounded-full ml-2 mr-[2px]"
@@ -44,9 +44,12 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
             />
             <select
               id="select2"
-              className="w-[80px] text-[#676767] focus:outline-none"
+              className="w-[50px] text-[#676767] focus:outline-none border-none"
+              style={{ padding: 0 }}
             >
-              <option>Read</option>
+              <option className="w-full">Read</option>
+              <option className="w-full">Writer</option>
+              <option className="w-full">Admin</option>
             </select>
           </div>
           <button className="bg-main w-[110px] ml-[7px] rounded-[10px] text-white font-bold">

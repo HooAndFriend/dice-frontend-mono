@@ -11,7 +11,7 @@ export interface DeleteUserInfo {
   email: string;
   type: string;
   nickname;
-  deleteDate: Date;
+  deletedDate: Date;
 }
 
 export interface DeleteUserQuery {

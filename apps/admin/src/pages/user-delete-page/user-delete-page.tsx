@@ -33,7 +33,7 @@ const UserDeletePageView = ({ userData, count, query, handleSearch }: PropsType)
     { name: user.email, size: '20%' },
     { name: user.type, size: '15%' },
     { name: formatDate(user.createdDate), size: '20%' },
-    { name: formatDate(user.createdDate), size: '20%' },
+    { name: formatDate(user.deletedDate), size: '20%' },
   ])
   console.log(userData);
 

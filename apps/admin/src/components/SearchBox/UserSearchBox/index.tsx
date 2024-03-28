@@ -9,12 +9,13 @@ import CustomCheckbox from '../../CustomInput/CustomCheckbox'
 
 // ** Type Imports
 import { DateRange, UserInfoQuery } from '@/src/type/user'
+import { DeleteUserQuery } from '@/src/type/user-delete';
 
 
 interface PropsType {
   searchDate: string[]
-  query: UserInfoQuery;
-  onChange: (createdDate: any, lastLoginDate: any, nickname: string, types: string[]) => void;
+  query: UserInfoQuery | DeleteUserQuery
+  onChange: (createdDate: DateRange, lastLoginDate: DateRange, nickname: string, types: string[]) => void;
 }
 
 const defaultDate = () => {
@@ -37,8 +38,8 @@ const UserSearchBox = ({ searchDate, query, onChange }: PropsType) => {
     endDate: query.createdEndDate
   })
   const [lastLoginDate, setLastLoginDate] = useState<DateRange>({
-    startDate: query.lastLoginStartDate,
-    endDate: query.lastLoginEndDate
+    startDate: (query as UserInfoQuery).lastLoginStartDate || (query as DeleteUserQuery).deletedStartDate,
+    endDate: (query as UserInfoQuery).lastLoginEndDate || (query as DeleteUserQuery).deletedEndDate
   })
   const [nickname, setNickname] = useState(query.nickname);
   const [types, setTypes] = useState<string[]>(query.type);

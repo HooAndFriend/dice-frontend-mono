@@ -36,8 +36,6 @@ const UserDeletePageView = ({ userData, count, query, handleSearch }: PropsType)
     { name: formatDate(user.createdDate), size: '20%' },
     { name: formatDate(user.deletedDate), size: '20%' },
   ])
-  console.log(userData);
-
   const handleOpen = () => setOpen((c) => !c)
 
   const handleItemClick = (userId: number) => {

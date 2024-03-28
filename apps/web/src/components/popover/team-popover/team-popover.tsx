@@ -4,7 +4,7 @@ import Link from "next/link";
 // ** Component Imports
 import TeamModal from "@/src/components/Modal/TeamModal";
 import ProfileBox from "../../ProfileBox";
-import UserModal from "../../Modal/user-modal";
+import UserModal from "../../Modal/UserModal";
 import TeamBox from "./component/team-box";
 
 // ** Type Imports

@@ -20,12 +20,12 @@ export interface UserInfo {
 
 
 export interface UserInfoQuery {
-  createdStartDate: string | null;
-  createdEndDate: string | null;
-  lastLoginStartDate: string | null;
-  lastLoginEndDate: string | null;
-  nickname: string | null;
-  type: string[] | null;
+  createdStartDate: string;
+  createdEndDate: string;
+  lastLoginStartDate: string ;
+  lastLoginEndDate: string;
+  nickname: string;
+  type: string[];
 }
 
 interface GetUserTeamResponse extends CommonResponse {
@@ -56,4 +56,9 @@ export interface UserWorkspace {
 
 export interface WorkspaceInfo{
   name: string;
+}
+
+export interface DateRange{
+  startDate: string;
+  endDate: string;
 }

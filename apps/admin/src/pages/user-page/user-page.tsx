@@ -7,14 +7,16 @@ import TablePagination from '@/src/components/Table/TablePagination'
 import TitleBox from '@/src/components/TitleBox'
 import UserSearchBox from '@/src/components/SearchBox/UserSearchBox'
 import UserModal from '@/src/components/Modal/UserModal'
-import { UserInfo, UserInfoQuery } from '@/src/type/user'
+
+// ** Type Imports
+import { DateRange, UserInfo, UserInfoQuery } from '@/src/type/user'
 import { formatDate } from './index';
 
 interface PropsType {
   userData: UserInfo[];
-  handleSearch: (createdDate: any, lastLoginDate: any, nickname: string, types: string[]) => void;
   query: UserInfoQuery;
   count: number;
+  handleSearch: (createdDate: DateRange, lastLoginDate: DateRange, nickname: string, types: string[]) => void;
 }
 
 const UserPageView = ({
@@ -23,23 +25,23 @@ const UserPageView = ({
   query,
   handleSearch
 }: PropsType) => {
+
   const [open, setOpen] = useState<boolean>(false)
-  const [selectedUser, setSelectedUser] = useState<UserInfo | undefined>(); 
-
-
+  const [selectedUser, setSelectedUser] = useState<UserInfo>(); 
 
   const cancelButtonRef = useRef(null)
+  
   const bodyData = userData.map((user, index) => [
-  { name: user.user_id.toString(), size: '0%' },
-  { name: (index + 1).toString(), size: '5%' },
-  { name: user.user_nickname, size: '15%' },
-  { name: user.user_email, size: '20%' },
-  { name: user.user_type, size: '10%' },
-  { name: formatDate(user.user_created_date), size: '15%' },
-  { name: formatDate(user.user_last_login_date), size: '15%' },
-  { name: user.workspaceUserCount, size: '10%' },
-  { name: user.teamUserCount, size: '10%' }
-]);
+    { name: user.user_id.toString(), size: '0%' },
+    { name: (index + 1).toString(), size: '5%' },
+    { name: user.user_nickname, size: '15%' },
+    { name: user.user_email, size: '20%' },
+    { name: user.user_type, size: '10%' },
+    { name: formatDate(user.user_created_date), size: '15%' },
+    { name: formatDate(user.user_last_login_date), size: '15%' },
+    { name: user.workspaceUserCount, size: '10%' },
+    { name: user.teamUserCount, size: '10%' }
+  ]);
 
   const handleOpen = () => setOpen((c) => !c)
 
@@ -50,6 +52,7 @@ const UserPageView = ({
       handleOpen();
     }
   };
+
   return (
     <div className="w-full px-4 mt-4">
       <TitleBox title="사용자 관리 / 사용자 조회" text="사용자 조회" />

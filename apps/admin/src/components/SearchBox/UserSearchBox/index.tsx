@@ -6,11 +6,15 @@ import { useState } from 'react'
 // ** Component Imports
 import Datepicker from 'react-tailwindcss-datepicker'
 import CustomCheckbox from '../../CustomInput/CustomCheckbox'
-import { UserInfoQuery } from '@/src/type/user'
+import { DateRange, UserInfoQuery } from '@/src/type/user'
 
 interface PropsType {
   query: UserInfoQuery;
   onChange: (createdDate: any, lastLoginDate: any, nickname: string, types: string[]) => void;
+}
+
+const defaultDate = () => {
+  return { startDate: '2024-01-01', endDate: new Date().toLocaleDateString() };
 }
 
 const CheckboxItem = [
@@ -24,16 +28,16 @@ const CheckboxItem = [
 ];
 
 const UserSearchBox = ({ query, onChange }: PropsType) => {
-  const [createdDate, setCreatedDate] = useState<any>({
-    startDate: query.createdStartDate || null,
-    endDate: query.createdEndDate || null
+  const [createdDate, setCreatedDate] = useState<DateRange>({
+    startDate: query.createdStartDate,
+    endDate: query.createdEndDate
   })
-  const [lastLoginDate, setLastLoginDate] = useState<any>({
-    startDate: query.lastLoginStartDate || null,
-    endDate: query.lastLoginEndDate || null
+  const [lastLoginDate, setLastLoginDate] = useState<DateRange>({
+    startDate: query.lastLoginStartDate,
+    endDate: query.lastLoginEndDate
   })
-  const [nickname, setNickname] = useState(query.nickname || '');
-  const [types, setTypes] = useState<string[]>(query.type || []);
+  const [nickname, setNickname] = useState(query.nickname);
+  const [types, setTypes] = useState<string[]>(query.type);
  
   const handleCreatedDate = (newDate) => { setCreatedDate(newDate); }
   const handleLastLoginDate = (newDate) => { setLastLoginDate(newDate); }
@@ -41,8 +45,8 @@ const UserSearchBox = ({ query, onChange }: PropsType) => {
   const handleTypes = (selectedValues: string[]) => { setTypes(selectedValues); };
 
   const handleReset = () => {
-    setCreatedDate({ startDate: null, endDate: null });
-    setLastLoginDate({ startDate: null, endDate: null });
+    setCreatedDate(defaultDate);
+    setLastLoginDate(defaultDate);
     setNickname('');
     setTypes([]);
   };

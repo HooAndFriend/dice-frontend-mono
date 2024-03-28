@@ -1,13 +1,11 @@
 
 import useInput from '@/src/hooks/useInput'
 import UserPageView from './user-page'
-import { GetUserListResponse, UserInfoQuery } from '@/src/type/user'
-
+import { GetUserListResponse, UserInfoQuery, DateRange } from '@/src/type/user'
 import useSWR from 'swr'
 import { useRecoilValue } from 'recoil'
 import {AuthState} from '@/src/app/auth'
 import { Get } from '@/src/repository'
-import { useState } from 'react'
 
 export function formatDate(date: Date): string {
   const d = new Date(date);
@@ -20,16 +18,17 @@ const handleDateChange = (endDate) => {
     nextDay.setDate(nextDay.getDate() + 1);
     return new Date(nextDay).toISOString().replace('T', ' ').substring(0, 10);
 }
+
 const UserPage = () => {
 
   const { accessToken } = useRecoilValue(AuthState);
   const { data: query, setData: setQuery } = useInput<UserInfoQuery>({
-    createdStartDate: null,
-    createdEndDate: null,
-    lastLoginStartDate: null,
-    lastLoginEndDate: null,
-    nickname: null,
-    type: null,
+    createdStartDate: '2024-01-01',
+    createdEndDate: new Date().toLocaleDateString(),
+    lastLoginStartDate: '2024-01-01',
+    lastLoginEndDate: new Date().toLocaleDateString(),
+    nickname: '',
+    type: [],
   });
 
   const { data, error, isLoading, mutate } = useSWR('/v1/user', async (url) => {
@@ -51,7 +50,7 @@ const UserPage = () => {
       params,
     });
   });
-  const handleSearch = (createdDate: any, lastLoginDate: any, nickname: string, types: string[]) => {
+  const handleSearch = (createdDate: DateRange, lastLoginDate: DateRange, nickname: string, types: string[]) => {
     const { startDate: createdStartDate, endDate: createdEndDate } = createdDate;
     const { startDate: lastLoginStartDate, endDate: lastLoginEndDate } = lastLoginDate;
   

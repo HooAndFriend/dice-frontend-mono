@@ -18,10 +18,20 @@ const CustomTable = ({
   handleClick,
 }: PropsType) => {
   const userIdList = userIds || [];
+  const filteredBodyData = bodyData.map(data => {
+    const filteredData: TableItemType[] = [];
+    data.forEach(item => {
+      if (item.size !== '0%') {
+        filteredData.push(item);
+      }
+    });
+    return filteredData;
+  });
+
   return (
     <div>
       <TableHeader data={headerData} />
-      {bodyData.map((item,index) => (
+      {filteredBodyData.map((item,index) => (
         <TableItem
           key={index}
           data={item}

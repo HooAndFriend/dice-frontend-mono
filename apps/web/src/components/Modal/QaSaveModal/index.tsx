@@ -1,7 +1,7 @@
 "use client";
 
 // ** React Imports
-import { Fragment, KeyboardEvent } from "react";
+import { Fragment, KeyboardEvent, useState } from "react";
 
 // ** ui Imports
 import { Dialog, Transition } from "@headlessui/react";
@@ -42,7 +42,6 @@ const QaSaveModal = ({
 }: PropsType) => {
   const { data, handleInput, handleInit } = useInput<SaveQaParam>({
     title: "",
-    number: "",
   });
 
   const { uuid } = useRecoilValue(WorkspaceState);
@@ -123,22 +122,15 @@ const QaSaveModal = ({
                       X
                     </h1>
                   </div>
-                  <div className="flex w-full mt-5">
+                  <div className="flex items-center w-full mt-5">
                     <h1 className="w-1/5 mr-5">Qa Name</h1>
-                    <CustomInput
+                    <input
+                      type="text"
                       value={data.title}
                       name="title"
                       onChange={handleInput}
                       onKeyDown={handleEnter}
-                    />
-                  </div>
-                  <div className="flex w-full mt-5">
-                    <h1 className="w-1/5 mr-5">Qa Number</h1>
-                    <CustomInput
-                      value={data.number}
-                      name="number"
-                      onChange={handleInput}
-                      onKeyDown={handleEnter}
+                      className="w-[400px] h-[40px] border-solid border-1 border-[#EFEFEF] rounded-[8px] pl-4 focus:outline-none"
                     />
                   </div>
                   <div className="flex justify-end mt-5">

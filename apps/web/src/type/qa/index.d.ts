@@ -89,5 +89,4 @@ export interface QaQuery {
 
 export interface SaveQaParam {
   title: string;
-  number: string;
 }

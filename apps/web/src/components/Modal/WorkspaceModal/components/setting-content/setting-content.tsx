@@ -41,7 +41,7 @@ const SettingContentView = ({
       </div>
       <button
         className="m-auto mt-[30px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white font-spoqa font-bold text-lg"
-        // onClick={handleUpdate}
+        onClick={handleUpdate}
       >
         Update
       </button>

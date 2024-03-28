@@ -20,6 +20,7 @@ import useSWR, { mutate } from "swr";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
+import { useEffect } from "react";
 
 const SettingContent = () => {
   const { data, handleInput, setData } = useInput<WorkspaceDetailInfo>({
@@ -34,14 +35,16 @@ const SettingContent = () => {
 
   const { handleOpen } = useDialog();
 
-  const { error, isLoading } = useSWR("/v1/workspace/home", async (url) =>
+  const {
+    error,
+    isLoading,
+    data: workspaceData,
+  } = useSWR("/v1/workspace/home", async (url) =>
     Get<GetWorkspaceInfoResponse>(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "workspace-code": workspaceState.uuid,
       },
-    }).then((res) => {
-      setData(res.data);
     })
   );
 
@@ -88,6 +91,14 @@ const SettingContent = () => {
   const handleImage = (profile: string) => {
     setData((cur) => ({ ...cur, profile }));
   };
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    if (error) return;
+
+    setData(workspaceData.data);
+  }, [workspaceData]);
 
   if (isLoading) return;
 

@@ -1,19 +1,22 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+// ** React Imports
+import { useEffect, useState } from 'react';
 
 interface CheckboxProps {
-  item?: { label: string; value: string }[];
+  item: { label: string; value: string }[];
   name?: string;
   value: string[];
   onChange: (value: string[]) => void;
 }
 
 const CustomCheckbox = ({ item, value, onChange, name }: CheckboxProps) => {
-  const [allChecked, setAllChecked] = useState(false);
+  const [allChecked, setAllChecked] = useState<boolean>(false);
 
-  // 전체 체크 여부
   useEffect(() => {
-    if (allChecked) { onChange(item?.map((i) => i.value) || []); }
-    else {onChange(value.filter((val) => val !== '전체'));}
+    if (allChecked) {
+      onChange(item.map((i) => i.value) || []);
+      return;
+    }
+    onChange(value.filter((val) => val !== '전체'));
   }, [allChecked]);
 
   const handleChange = (itemValue: string) => {
@@ -21,33 +24,20 @@ const CustomCheckbox = ({ item, value, onChange, name }: CheckboxProps) => {
 
     if (itemValue === '전체') {
       setAllChecked(!allChecked);
-      if (!allChecked) {
-        updatedValues = item?.map((i) => i.value) || [];
-      } else {
-        updatedValues = [];
-      }
-    } else { 
+      updatedValues = !allChecked ? item.map((i) => i.value) : [];
+    } else {
       updatedValues = value.includes(itemValue)
         ? value.filter((val) => val !== itemValue)
         : [...value, itemValue];
-
-      if (
-        updatedValues.length === (item?.length || 0) - 1 &&
-        !updatedValues.includes('전체')
-      ) {
-        updatedValues.push('전체');
-        setAllChecked(true);
-      } else {
-        setAllChecked(false);
-      }
+      const isAllChecked = updatedValues.length === (item.length || 0) - 1 && !updatedValues.includes('전체');
+      setAllChecked(isAllChecked);
     }
-
     onChange(updatedValues);
   };
 
   return (
     <div className="flex items-center">
-      {item?.map((checkboxItem, index) => ( 
+      {item.map((checkboxItem, index) => ( 
         <div key={index} className="flex items-center">
           <input
             name={name}

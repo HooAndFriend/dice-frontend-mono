@@ -34,7 +34,6 @@ const UserDeletePage = () => {
   })
   const { data, error, isLoading, mutate } = useSWR('/v1/user/delete', async (url) => {
     const { createdStartDate, createdEndDate, deletedStartDate, deletedEndDate, nickname, type } = query
-
     const params = {
       ...(createdStartDate !== null && { createdStartDate }),
       ...(createdEndDate !== null && {
@@ -42,10 +41,10 @@ const UserDeletePage = () => {
       }),
       ...(deletedStartDate !== null && { deletedStartDate }),
       ...(deletedEndDate !== null && {
-        lastLoginEndDate: handleDateChange(deletedEndDate),
+        deletedEndDate: handleDateChange(deletedEndDate),
       }),
       ...(nickname !== null && { nickname }),
-      ...(type !== null && { type }),
+      // ...(type !== null && { type }),
     }
 
     return Get<GetDeleteUserListResponse>(url, {
@@ -70,7 +69,7 @@ const UserDeletePage = () => {
     query.deletedStartDate = lastLoginStartDate
     query.deletedEndDate = lastLoginEndDate
     query.nickname = nickname
-    // query.type = types;
+    query.type = types;
     mutate()
   }
   if (isLoading || !data) return <div></div>

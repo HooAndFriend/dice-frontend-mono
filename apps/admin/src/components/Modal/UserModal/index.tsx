@@ -1,3 +1,5 @@
+
+// ** UI Imports
 import UserModalView from './UserModal'
 
 // ** Context Imports
@@ -12,7 +14,6 @@ import { Get } from '@/src/repository';
 
 // ** Type Imports
 import { UserInfo, GetUserTeamResponse, GetUserWorkspaceResponse } from '@/src/type/user';
-
 interface PropsType {
   open: boolean;
   userInfo: UserInfo;

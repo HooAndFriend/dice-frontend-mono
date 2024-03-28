@@ -1,9 +1,16 @@
-import { AuthState, TeamState } from "@/src/app";
+// ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
-import { Delete, Patch } from "@/src/repository";
+
+// ** Type Imports
 import { CommonResponse, RoleType } from "@/src/type/common";
+
+// ** Recoil Imports
+import { AuthState, TeamState } from "@/src/app";
 import { useRecoilValue } from "recoil";
+
+// ** Service Imports
 import { mutate } from "swr";
+import { Delete, Patch } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 interface PropsType {

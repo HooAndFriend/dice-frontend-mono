@@ -43,6 +43,7 @@ const WorkspaceMemberContent = ({ handleOpen }: PropsType) => {
         {data.data.data.map((item) => (
           <WorkspaceUserBox
             key={item.id}
+            id={item.id}
             email={item.teamUser.user.email}
             profile={item.teamUser.user.profile}
             nickname={item.teamUser.user.nickname}

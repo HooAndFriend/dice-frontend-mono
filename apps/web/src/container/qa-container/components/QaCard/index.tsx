@@ -140,6 +140,31 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     }
   );
 
+  const deleteQaFile = useSWRMutation(
+    "/v1/qa/file/",
+    async (url: string, { arg }: { arg: number }) =>
+      await Delete<CommonResponse<void>>(url + arg, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "workspace-code": `${uuid}`,
+        },
+      }),
+    {
+      onSuccess: () => {
+        refetch();
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
   const updateQa = useSWRMutation(
     "v1/qa",
     async (url: string) =>
@@ -228,6 +253,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
       handleInput={handleInput}
       updateQa={updateQa.trigger}
       handleCommentEnter={handleCommentEnter}
+      handleDeleteQaFile={deleteQaFile.trigger}
       refetch={refetch}
     />
   );

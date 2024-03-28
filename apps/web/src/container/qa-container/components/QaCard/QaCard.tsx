@@ -2,15 +2,14 @@
 import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Component Imports
-import CustomSelect from "@/src/components/Input/CustomSelect";
 import IssueComment from "../QaComment";
+import QaStatusButton from "../QaStatusButton";
+import QaUserButton from "../QaUserButton";
 
 // ** Type Imports
 import { CommentInfo, IssueInfo } from "@/src/type/qa";
 import { RoleType } from "@/src/type/common";
-import QaStatusButton from "../QaStatusButton";
-import QaUserButton from "../QaUserButton";
-import { QaFileUploader } from "@/src/components/ImageUploader";
+import { QaFileUploader } from "../QaFileUploader";
 
 interface PropsType {
   data: IssueInfo;
@@ -28,6 +27,7 @@ interface PropsType {
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
   handleCommentEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
   refetch: () => void;
+  handleDeleteQaFile: (fileId: number) => void;
 }
 
 const QaCardView = ({
@@ -46,6 +46,7 @@ const QaCardView = ({
   updateQa,
   handleCommentEnter,
   refetch,
+  handleDeleteQaFile,
 }: PropsType) => {
   return (
     <div>
@@ -178,10 +179,19 @@ const QaCardView = ({
           <QaFileUploader qaId={data.id} refetch={refetch} />
         )}
         {data.file.map((item) => (
-          <img
-            src={item.url}
-            className="w-[40px] h-[40px] rounded-[6px] bg-[#D9E0FF] mr-4"
-          />
+          <div className="relative w-[40px] h-[40px] mr-4">
+            <img
+              src={item.url}
+              alt="Description"
+              className="absolute inset-0 w-full h-full rounded-[6px] bg-[#D9E0FF]"
+            />
+            <h1
+              className="absolute px-2 py-1 m-1 text-xs leading-none text-white bg-black rounded-full cursor-pointer -right-2 -top-2"
+              onClick={() => handleDeleteQaFile(item.id)}
+            >
+              X
+            </h1>
+          </div>
         ))}
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]" />

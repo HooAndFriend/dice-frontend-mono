@@ -85,7 +85,8 @@ const UserPageView = ({
 
 export default UserPageView
 
-const searchData = ['가입일', '최근 로그인']
+const searchData = ['가입일', '최근로그인']
+
 const headerData = [
   { name: '번호', size: '5%' },
   { name: '닉네임', size: '15%' },

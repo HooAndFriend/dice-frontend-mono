@@ -6,11 +6,15 @@ import { useState } from 'react'
 // ** Component Imports
 import Datepicker from 'react-tailwindcss-datepicker'
 import CustomCheckbox from '../../CustomInput/CustomCheckbox'
+
+// ** Type Imports
 import { DateRange, UserInfoQuery } from '@/src/type/user'
+import { DeleteUserQuery } from '@/src/type/user-delete';
 
 interface PropsType {
-  query: UserInfoQuery;
-  onChange: (createdDate: any, lastLoginDate: any, nickname: string, types: string[]) => void;
+  searchData: string[]
+  query: UserInfoQuery | DeleteUserQuery
+  onChange: (createdDate: DateRange, lastLoginDate: DateRange, nickname: string, types: string[]) => void;
 }
 
 const defaultDate = () => {
@@ -27,14 +31,14 @@ const CheckboxItem = [
   { value: "TWITTER", label: "Twitter" },
 ];
 
-const UserSearchBox = ({ query, onChange }: PropsType) => {
+const UserSearchBox = ({ searchData, query, onChange }: PropsType) => {
   const [createdDate, setCreatedDate] = useState<DateRange>({
     startDate: query.createdStartDate,
     endDate: query.createdEndDate
   })
   const [lastLoginDate, setLastLoginDate] = useState<DateRange>({
-    startDate: query.lastLoginStartDate,
-    endDate: query.lastLoginEndDate
+    startDate: (query as UserInfoQuery).lastLoginStartDate || (query as DeleteUserQuery).deletedStartDate,
+    endDate: (query as UserInfoQuery).lastLoginEndDate || (query as DeleteUserQuery).deletedEndDate
   })
   const [nickname, setNickname] = useState(query.nickname);
   const [types, setTypes] = useState<string[]>(query.type);
@@ -58,11 +62,11 @@ const UserSearchBox = ({ query, onChange }: PropsType) => {
   return (
     <div className="h-[152px] w-full bg-white rounded-[10px] py-4 px-8 mt-4">
       <div className="flex items-center">
-        <h1 className="mr-4">가입일</h1>
+        <h1 className="mr-4">{searchData[0]}</h1>
         <div className="w-[250px] mr-8">
           <Datepicker value={createdDate} onChange={handleCreatedDate} />
         </div>
-        <h1 className="mr-4">최근 로그인</h1>
+        <h1 className="mr-4">{searchData[1]}</h1>
         <div className="w-[250px] mr-8">
           <Datepicker value={lastLoginDate} onChange={handleLastLoginDate} />
         </div>

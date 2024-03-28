@@ -56,7 +56,7 @@ const UserPageView = ({
   return (
     <div className="w-full px-4 mt-4">
       <TitleBox title="사용자 관리 / 사용자 조회" text="사용자 조회" />
-      <UserSearchBox query={query} onChange={handleSearch} />
+      <UserSearchBox searchData={searchData} query={query} onChange={handleSearch} />
       <div className="h-[730px] w-full bg-white rounded-[10px] py-4 px-8 mt-4">
         <h1 className="mb-8 font-bold">사용자 목록({count})</h1>
         <CustomTable
@@ -85,6 +85,7 @@ const UserPageView = ({
 
 export default UserPageView
 
+const searchData = ['가입일', '최근 로그인']
 const headerData = [
   { name: '번호', size: '5%' },
   { name: '닉네임', size: '15%' },

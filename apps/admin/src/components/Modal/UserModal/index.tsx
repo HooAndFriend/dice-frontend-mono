@@ -1,11 +1,17 @@
-import { UserInfo, GetUserTeamResponse, GetUserWorkspaceResponse } from '@/src/type/user';
 import UserModalView from './UserModal'
+
+// ** Context Imports
 import { DialogProvider } from '@/src/context/DialogContext'
+// ** Recoil Imports
 import { useRecoilValue } from 'recoil';
-import useInput from '@/src/hooks/useInput';
 import { AuthState } from '@/src/app/auth';
+
+// ** Swr Imports
 import useSWR from 'swr';
 import { Get } from '@/src/repository';
+
+// ** Type Imports
+import { UserInfo, GetUserTeamResponse, GetUserWorkspaceResponse } from '@/src/type/user';
 
 interface PropsType {
   open: boolean;
@@ -42,7 +48,9 @@ const UserModal = ({ open, setOpen, userInfo, cancelButtonRef }: PropsType) : JS
     <DialogProvider>
       <UserModalView
         userData={userInfo}
+        teamCount={team.data.count}
         teamData={team.data.data}
+        workspaceCount={workspace.data.count}
         workspaceData={workspace.data.data}
         open={open}
         setOpen={setOpen}

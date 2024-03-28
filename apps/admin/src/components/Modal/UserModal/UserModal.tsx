@@ -5,6 +5,8 @@ import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import CustomTable from '../../Table'
 import TablePagination from '../../Table/TablePagination'
+
+// ** Type Imports
 import { UserInfo, UserTeam, UserWorkspace } from '@/src/type/user'
 import { formatDate } from '@/src/pages/user-page'
 
@@ -13,11 +15,13 @@ interface PropsType {
   userData: UserInfo
   teamData: UserTeam[]
   workspaceData: UserWorkspace[]
+  teamCount: number
+  workspaceCount: number
   cancelButtonRef: any
   setOpen: (open: boolean) => void
 }
 
-const UserModalView = ({ open, userData, teamData, workspaceData,cancelButtonRef, setOpen }: PropsType) => {
+const UserModalView = ({ open, userData, teamData, workspaceData, teamCount, workspaceCount,cancelButtonRef, setOpen }: PropsType) => {
 
   const TeamBodyData = teamData.map((team) => [
     {name: team.team.name, size: '30%'},
@@ -104,7 +108,7 @@ const UserModalView = ({ open, userData, teamData, workspaceData,cancelButtonRef
                       </div>
                     </div>
                     <div className="w-full mt-[20px] px-4">
-                      <h1 className="font-bold mb-[12px]">ㅁ 소속 팀 수</h1>
+                      <h1 className="font-bold mb-[12px]">ㅁ 소속 팀 수 ( {teamCount} )</h1>
                       <CustomTable
                         headerData={headerData}
                         bodyData={TeamBodyData}
@@ -116,7 +120,7 @@ const UserModalView = ({ open, userData, teamData, workspaceData,cancelButtonRef
                     </div>
                     <div className="w-full mt-[20px] px-4">
                       <h1 className="font-bold mb-[12px]">
-                        ㅁ 소속 워크스페이스 수
+                        ㅁ 소속 워크스페이스 수 ( {workspaceCount} )
                       </h1>
                       <CustomTable
                         headerData={headerWorkspaceData}

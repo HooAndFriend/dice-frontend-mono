@@ -106,7 +106,7 @@ const WorkspaceModalView = ({
                             className="w-[29.204px] h-[29.926px] rounded-full absolute left-[48.41px]"
                           />
                           <img
-                            src="svg/dot.svg"
+                            src="/svg/dot.svg"
                             alt="Sample Image"
                             className="bg-white w-[29.204px] h-[29.926px] rounded-full absolute left-[72.62px]"
                           />

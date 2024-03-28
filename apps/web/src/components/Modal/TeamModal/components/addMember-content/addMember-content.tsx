@@ -33,7 +33,7 @@ const AddMemberContentView = ({
           <img
             onClick={() => setOpen(false)}
             className="mr-[30px]"
-            src="svg/XButton.svg"
+            src="/svg/XButton.svg"
           />
         </div>
         <div className="w-full h-[50px] flex mt-[23px]">

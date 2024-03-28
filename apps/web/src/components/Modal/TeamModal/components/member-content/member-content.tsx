@@ -46,7 +46,7 @@ const MemberContentView = ({ handleOpen, data, uuid, role }: PropsType) => {
         >
           <img
             className="mr-[10px]"
-            src="svg/addMember.svg"
+            src="/svg/addMember.svg"
             width={24}
             height={24}
           />

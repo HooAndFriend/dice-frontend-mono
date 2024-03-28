@@ -16,7 +16,7 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
           <img
             onClick={() => setOpen(false)}
             className="mr-[30px]"
-            src="svg/XButton.svg"
+            src="/svg/XButton.svg"
           />
         </div>
         <div className="w-full h-[50px] flex mt-[23px]">
@@ -33,7 +33,7 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
               </div>
               <img
                 className="ml-[7px]"
-                src="svg/boldX.svg"
+                src="/svg/boldX.svg"
                 width={13}
                 height={13}
               />

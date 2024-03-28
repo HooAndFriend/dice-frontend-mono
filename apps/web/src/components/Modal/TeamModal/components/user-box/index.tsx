@@ -120,7 +120,7 @@ const UserBox = ({
         </select>
         {userRole === "ADMIN" && (
           <img
-            src="svg/boldX.svg"
+            src="/svg/boldX.svg"
             width={24}
             height={24}
             className="cursor-pointer"

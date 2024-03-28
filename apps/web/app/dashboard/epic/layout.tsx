@@ -1,4 +1,4 @@
-import TicketSidebar from "@/src/components/Dashboard/ticket-sidebar";
+import TicketSidebar from "@/src/components/Dashboard/TicketSidebar";
 import EpicSearchCard from "@/src/components/Epic/EpicSearchCard";
 
 export default function Layout({

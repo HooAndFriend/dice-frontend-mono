@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 
 // ** Component Imports
-import DashboardSidebardView from "./dashboard-sidebar";
+import MenuItem from "../../MenuItem";
+import WorkspacePopover from "../../Popover/workspace-popover";
 import { MenuList } from "@/src/constants/menu";
 import DashboardIcon from "@/public/svg/dashboard.svg";
 
@@ -27,7 +28,7 @@ const DashboardSidebard = () => {
       pathname.split("/")[2]
         ? `/dashboard/${pathname.split("/")[2]}`
         : "/dashboard",
-    [pathname],
+    [pathname]
   );
 
   const sidbarMenuList = useMemo(
@@ -44,7 +45,7 @@ const DashboardSidebard = () => {
             },
             ,
             ...MenuList.filter((item) =>
-              workspaceFunction.find((_) => _.function === item.name),
+              workspaceFunction.find((_) => _.function === item.name)
             ),
           ].map((item) => {
             if (item.link === path) {
@@ -52,10 +53,25 @@ const DashboardSidebard = () => {
             }
             return item;
           }),
-    [workspaceFunction, path],
+    [workspaceFunction, path]
   );
 
-  return <DashboardSidebardView sidbarMenuList={sidbarMenuList} />;
+  return (
+    <div className="w-[70px] border-r-2 border-[#EBEBEC]">
+      <div className="flex justify-center h-4/5">
+        <div>
+          {sidbarMenuList.map((item) => (
+            <MenuItem {...item} key={item.id} />
+          ))}
+        </div>
+      </div>
+      <div className="flex h-1/5">
+        <div className="flex items-end justify-center flex-grow pb-3">
+          <WorkspacePopover />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default DashboardSidebard;

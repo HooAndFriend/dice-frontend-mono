@@ -4,7 +4,7 @@
 // import { useRouter } from "next/navigation";
 
 // ** Component Imports
-import DashboardSidebar from "@/src/components/Dashboard/dashboard-sidebar";
+import DashboardSidebar from "@/src/components/Dashboard/DashboardSidebar";
 import DashboardHeader from "@/src/components/Dashboard/DashboardHeader";
 
 const DashboardRayout = ({

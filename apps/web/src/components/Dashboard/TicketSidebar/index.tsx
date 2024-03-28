@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 
 // ** Component Imports
-import TicketSidebarView from "./ticket-sidebar";
+import TicketMenuItem from "../TicketMenuItem";
 import TicketIcon from "@/public/svg/ticket-icon.svg";
 import EpicIcon from "@/public/svg/epic-icon.svg";
 import SprintIcon from "@/public/svg/sprint-icon.svg";
@@ -52,10 +52,20 @@ const TicketSidebar = () => {
         }
         return item;
       }),
-    [pathname],
+    [pathname]
   );
 
-  return <TicketSidebarView sidebarMenuList={sidebarMenuList} />;
+  return (
+    <div className="w-[235px] bg-white border-r-2 border-[#EBEBEC]">
+      <div className="flex justify-center h-4/5">
+        <div className="w-full">
+          {sidebarMenuList.map((item) => (
+            <TicketMenuItem {...item} key={item.id} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default TicketSidebar;

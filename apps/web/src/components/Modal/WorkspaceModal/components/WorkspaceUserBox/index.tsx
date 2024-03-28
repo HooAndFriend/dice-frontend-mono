@@ -7,7 +7,7 @@ interface PropsType {
   role: RoleType;
 }
 
-const UserBox = ({ nickname, email, role, profile }: PropsType) => {
+const WorkspaceUserBox = ({ nickname, email, role, profile }: PropsType) => {
   return (
     <div className="mb-[21px] w-[726px] h-20 border-[#EBEBEC] border shadow-md rounded-[15px] flex items-center justify-between">
       <div className="flex">
@@ -33,7 +33,7 @@ const UserBox = ({ nickname, email, role, profile }: PropsType) => {
           </option>
         </select>
         <img
-          src="svg/boldX.svg"
+          src="/svg/boldX.svg"
           width={24}
           height={24}
           onClick={() => console.log("Hello")}
@@ -43,4 +43,4 @@ const UserBox = ({ nickname, email, role, profile }: PropsType) => {
   );
 };
 
-export default UserBox;
+export default WorkspaceUserBox;

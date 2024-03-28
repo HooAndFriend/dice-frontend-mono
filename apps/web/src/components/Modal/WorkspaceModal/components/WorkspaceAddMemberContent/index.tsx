@@ -3,7 +3,7 @@ interface PropsType {
   setOpen: (value: boolean) => void;
 }
 
-const AddMemberContent = ({ open, setOpen }: PropsType) => {
+const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
   return (
     <div
       className={`bg-black bg-opacity-25 w-full h-screen font-spoqa flex justify-center items-center fixed top-0 left-0 z-50 ${
@@ -58,4 +58,4 @@ const AddMemberContent = ({ open, setOpen }: PropsType) => {
   );
 };
 
-export default AddMemberContent;
+export default WorkspaceAddMemberContent;

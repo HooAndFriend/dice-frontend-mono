@@ -5,16 +5,18 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 // ** Component Imports
-import SettingContent from "@/src/components/Modal/WorkspaceModal/components/setting-content";
-import MemberContent from "@/src/components/Modal/WorkspaceModal/components/member-content";
-import AddFunctionsContent from "@/src/components/Modal/WorkspaceModal/components/addfunctions-content";
-import AddMemberContent from "./components/addMember-content";
+import WorkspaceSettingContent from "@/src/components/Modal/WorkspaceModal/components/WorkspaceSettingContent";
+import WorkspaceMemberContent from "@/src/components/Modal/WorkspaceModal/components/WorkspaceMemberContent";
+import WorkspaceAddFunctionContent from "@/src/components/Modal/WorkspaceModal/components/WorkspaceAddFunctionContent";
+import WorkspaceAddMemberContent from "./components/WorkspaceAddMemberContent";
 
 interface PropsType {
   open: boolean;
   addOpen: boolean;
   cancelButtonRef: any;
   tab: number;
+  profile: string;
+  name: string;
   setTab: (tab: number) => void;
   setAddOpen: (open: boolean) => void;
   setOpen: (open: boolean) => void;
@@ -24,6 +26,8 @@ const WorkspaceModalView = ({
   open,
   addOpen,
   cancelButtonRef,
+  profile,
+  name,
   setOpen,
   setAddOpen,
   tab,
@@ -78,13 +82,12 @@ const WorkspaceModalView = ({
                     <div className="flex w-[1072px] h-[601px] ml-[60px] mt-[41px] justify-between">
                       <div className="bg-main w-[274px] h-[601px] rounded-tr-[20px] rounded-b-[20px] flex flex-col items-center">
                         <img
-                          src="/images/dice.png"
+                          src={profile}
                           alt="Sample Image"
                           className="w-[91px] h-[91px] object-cover rounded-full mt-[50px]"
                         />
-
                         <div className="mt-[21px] font-spoqa font-bold text-[25px] text-white">
-                          DICE
+                          {name}
                         </div>
                         <div className="w-[187px] h-[29.926px] mt-[60px] flex relative">
                           <img
@@ -121,8 +124,8 @@ const WorkspaceModalView = ({
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 0
-                                  ? "svg/setting.svg"
-                                  : "svg/settingW.svg"
+                                  ? "/svg/setting.svg"
+                                  : "/svg/settingW.svg"
                               }
                               alt="setting"
                               width={24}
@@ -140,7 +143,9 @@ const WorkspaceModalView = ({
                           >
                             <img
                               className="ml-[18px] mr-5"
-                              src={tab === 1 ? "svg/team.svg" : "svg/teamW.svg"}
+                              src={
+                                tab === 1 ? "/svg/team.svg" : "/svg/teamW.svg"
+                              }
                               alt="member"
                               width={24}
                               height={24}
@@ -159,8 +164,8 @@ const WorkspaceModalView = ({
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 2
-                                  ? "svg/workspace.svg"
-                                  : "svg/workspaceW.svg"
+                                  ? "/svg/workspace.svg"
+                                  : "/svg/workspaceW.svg"
                               }
                               alt="addfunctions"
                               width={24}
@@ -171,13 +176,15 @@ const WorkspaceModalView = ({
                         </div>
                       </div>
                       <div className="w-[742px] h-[601px]">
-                        {tab === 0 && <SettingContent />}
+                        {tab === 0 && <WorkspaceSettingContent />}
                         {tab === 1 && (
-                          <MemberContent handleOpen={() => setAddOpen(true)} />
+                          <WorkspaceMemberContent
+                            handleOpen={() => setAddOpen(true)}
+                          />
                         )}
-                        {tab === 2 && <AddFunctionsContent />}
+                        {tab === 2 && <WorkspaceAddFunctionContent />}
                         {addOpen && (
-                          <AddMemberContent
+                          <WorkspaceAddMemberContent
                             open={addOpen}
                             setOpen={setAddOpen}
                           />

@@ -3,14 +3,13 @@ import { AuthState, WorkspaceState } from "@/src/app";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 // ** Component Imports
-import SettingContentView from "./setting-content";
+import { ImageUploader } from "@/src/components/ImageUploader";
 
 // ** Type Imports
 import {
   GetWorkspaceInfoResponse,
   WorkspaceDetailInfo,
 } from "@/src/type/workspace";
-import useInput from "@/src/hooks/useInput";
 import { CommonResponse } from "@/src/type/common";
 
 // ** Service Imports
@@ -22,7 +21,10 @@ import useSWR, { mutate } from "swr";
 import { useDialog } from "@/src/context/DialogContext";
 import { useEffect } from "react";
 
-const SettingContent = () => {
+// ** Utils Imports
+import useInput from "@/src/hooks/useInput";
+
+const WorkspaceSettingContent = () => {
   const { data, handleInput, setData } = useInput<WorkspaceDetailInfo>({
     id: 0,
     name: "",
@@ -105,13 +107,38 @@ const SettingContent = () => {
   if (error) return;
 
   return (
-    <SettingContentView
-      data={data}
-      handleInput={handleInput}
-      handleUpdate={updateWorkspace.trigger}
-      handleImage={handleImage}
-    />
+    <div>
+      <label className="text-xl font-bold font-spoqa">Profile</label>
+      <ImageUploader image={data.profile} mode="edit" setPath={handleImage} />
+      <div className="mt-6">
+        <label className="text-xl font-bold font-spoqa">Workspace Name</label>
+        <input
+          id="workspace name"
+          placeholder="Enter Your Nickname"
+          className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+          value={data.name}
+          onChange={handleInput}
+          name="name"
+        />
+      </div>
+      <div className="mt-[30px]">
+        <label className="text-xl font-bold font-spoqa">description</label>
+        <input
+          id="description"
+          className="text-left mt-[14px] font-normal font-spoqa border h-[175px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+          value={data.comment}
+          onChange={handleInput}
+          name="comment"
+        />
+      </div>
+      <button
+        className="m-auto mt-[30px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white font-spoqa font-bold text-lg"
+        onClick={updateWorkspace.trigger}
+      >
+        Update
+      </button>
+    </div>
   );
 };
 
-export default SettingContent;
+export default WorkspaceSettingContent;

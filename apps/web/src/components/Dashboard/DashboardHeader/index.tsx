@@ -11,7 +11,7 @@ import { UserState } from "@/src/app";
 import { useRecoilValue } from "recoil";
 
 // ** Component Imports
-import TeamPopover from "@/src/components/Popover/team-popover";
+import TeamPopover from "@/src/components/Popover/TeamPopover";
 
 const DashboardHeader = () => {
   const [name, setName] = useState<string>("");

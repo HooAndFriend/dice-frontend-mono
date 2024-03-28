@@ -7,7 +7,7 @@ import { useMemo } from "react";
 
 // ** Component Imports
 import MenuItem from "../../MenuItem";
-import WorkspacePopover from "../../Popover/workspace-popover";
+import WorkspacePopover from "../../Popover/WorkspacePopover";
 import { MenuList } from "@/src/constants/menu";
 import DashboardIcon from "@/public/svg/dashboard.svg";
 

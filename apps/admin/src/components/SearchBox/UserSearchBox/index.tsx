@@ -12,6 +12,7 @@ import { DateRange, UserInfoQuery } from '@/src/type/user'
 
 
 interface PropsType {
+  searchDate: string[]
   query: UserInfoQuery;
   onChange: (createdDate: any, lastLoginDate: any, nickname: string, types: string[]) => void;
 }
@@ -30,7 +31,7 @@ const CheckboxItem = [
   { value: "TWITTER", label: "Twitter" },
 ];
 
-const UserSearchBox = ({ query, onChange }: PropsType) => {
+const UserSearchBox = ({ searchDate, query, onChange }: PropsType) => {
   const [createdDate, setCreatedDate] = useState<DateRange>({
     startDate: query.createdStartDate,
     endDate: query.createdEndDate
@@ -61,11 +62,11 @@ const UserSearchBox = ({ query, onChange }: PropsType) => {
   return (
     <div className="h-[152px] w-full bg-white rounded-[10px] py-4 px-8 mt-4">
       <div className="flex items-center">
-        <h1 className="mr-4">가입일</h1>
+        <h1 className="mr-4">{searchDate[0]}</h1>
         <div className="w-[250px] mr-8">
           <Datepicker value={createdDate} onChange={handleCreatedDate} />
         </div>
-        <h1 className="mr-4">최근 로그인</h1>
+        <h1 className="mr-4">{searchDate[1]}</h1>
         <div className="w-[250px] mr-8">
           <Datepicker value={lastLoginDate} onChange={handleLastLoginDate} />
         </div>

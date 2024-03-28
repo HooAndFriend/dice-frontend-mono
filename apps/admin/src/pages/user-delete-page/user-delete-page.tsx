@@ -51,7 +51,7 @@ const UserDeletePageView = ({ userData, count, query, handleSearch }: PropsType)
       <TitleBox title="사용자 관리 / 탈퇴회원 조회" text="탈퇴회원 조회" />
       <UserSearchBox searchData={searchData} query={query} onChange={handleSearch} />
       <div className="h-[730px] w-full bg-white rounded-[10px] py-4 px-8 mt-4">
-        <h1 className="mb-8 font-bold">탈퇴회원 목록(30명)</h1>
+        <h1 className="mb-8 font-bold">탈퇴회원 목록( {count}   )</h1>
         <CustomTable
           headerData={headerData}
           bodyData={bodyData}

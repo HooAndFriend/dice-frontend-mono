@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 
 // ** React Imports
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 // ** Component Imports
 import MenuItem from "../../MenuItem";
@@ -21,40 +21,47 @@ import { isUndefined } from "loadsh";
 const DashboardSidebard = () => {
   const { workspaceFunction } = useRecoilValue(WorkspaceState);
 
+  const [path, setPath] = useState<string>("");
+  const [sidbarMenuList, setSidbarMenuList] = useState([]);
+
   const pathname = usePathname();
 
-  const path = useMemo(
-    () =>
+  useEffect(() => {
+    setPath(
       pathname.split("/")[2]
         ? `/dashboard/${pathname.split("/")[2]}`
-        : "/dashboard",
-    [pathname]
-  );
+        : "/dashboard"
+    );
+  }, [pathname]);
 
-  const sidbarMenuList = useMemo(
-    () =>
-      isUndefined(workspaceFunction)
-        ? []
-        : [
-            {
-              id: 0,
-              name: "DASHBOARD",
-              link: "/dashboard",
-              icon: DashboardIcon,
-              isClicked: false,
-            },
-            ,
-            ...MenuList.filter((item) =>
-              workspaceFunction.find((_) => _.function === item.name)
-            ),
-          ].map((item) => {
-            if (item.link === path) {
-              return { ...item, isClicked: true };
-            }
-            return item;
-          }),
-    [workspaceFunction, path]
-  );
+  useEffect(() => {
+    if (isUndefined(workspaceFunction)) {
+      setSidbarMenuList([]);
+
+      return;
+    }
+
+    const arr = [
+      {
+        id: 0,
+        name: "DASHBOARD",
+        link: "/dashboard",
+        icon: DashboardIcon,
+        isClicked: false,
+      },
+      ,
+      ...MenuList.filter((item) =>
+        workspaceFunction.find((_) => _.function === item.name)
+      ),
+    ].map((item) => {
+      if (item.link === path) {
+        return { ...item, isClicked: true };
+      }
+      return item;
+    });
+
+    setSidbarMenuList(arr);
+  }, [workspaceFunction, path]);
 
   return (
     <div className="w-[70px] border-r-2 border-[#EBEBEC]">

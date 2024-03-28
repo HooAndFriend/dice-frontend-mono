@@ -161,3 +161,8 @@ export interface UserWorkspace {
 export interface WorkspaceInfo{
   name: string;
 }
+
+export interface DateRange{
+  startDate: string;
+  endDate: string;
+}

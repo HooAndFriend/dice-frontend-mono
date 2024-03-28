@@ -61,7 +61,6 @@ export const ImageUploader = ({
       };
       s3.upload(params, (err, data) => {
         if (err) {
-          console.error(3, err);
           return;
         }
         setPath(data.Location);

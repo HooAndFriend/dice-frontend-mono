@@ -10,6 +10,7 @@ import { CommentInfo, IssueInfo } from "@/src/type/qa";
 import { RoleType } from "@/src/type/common";
 import QaStatusButton from "../QaStatusButton";
 import QaUserButton from "../QaUserButton";
+import { QaFileUploader } from "@/src/components/ImageUploader";
 
 interface PropsType {
   data: IssueInfo;
@@ -172,22 +173,17 @@ const QaCardView = ({
       <div className="mt-5 mb-[14px]">
         FILE <span className="text-sm font-spoqa text-darkGray">(MAX:4)</span>
       </div>
-      {/* {data.file ? (
-        data.file.map((item) => {
+      <div className="flex items-center">
+        {data.file.length < 4 && (
+          <QaFileUploader qaId={data.id} refetch={refetch} />
+        )}
+        {data.file.map((item) => (
           <img
             src={item.url}
-            className="w-[40px] h-[40px] rounded-[6px] bg-[#D9E0FF]"
-          />;
-        })
-      ) : (
-        <div className="w-[40px] h-[40px] rounded-[6px] bg-[#D9E0FF]"></div>
-      )} */}
-      {data.file.length > 0 && data.file[0]?.url != "" ? (
-        <img
-          className="w-[40px] h-[40px] rounded-[6px]"
-          src={data.file[0].url}
-        />
-      ) : null}
+            className="w-[40px] h-[40px] rounded-[6px] bg-[#D9E0FF] mr-4"
+          />
+        ))}
+      </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]" />
       {mode === "view" ? (
         <>

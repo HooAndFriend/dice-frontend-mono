@@ -11,7 +11,7 @@ import { Delete, Get, Post, Put } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Recoil Imports
-import { AuthState, UserState, WorkspaceState } from "@/src/app";
+import { AuthState, WorkspaceState } from "@/src/app";
 import { useRecoilValue } from "recoil";
 
 // ** Utils Imports
@@ -20,10 +20,8 @@ import useInput from "@/src/hooks/useInput";
 // ** Type Imports
 import { CommonResponse } from "@/src/type/common";
 import {
-  AddCommentParams,
   AddCommentResponse,
   GetCommentListResponse,
-  GetIssueListResponse,
   GetIssueResponse,
   IssueInfo,
 } from "@/src/type/qa";

@@ -23,8 +23,8 @@ const DashboardContainer = () => {
   });
 
   const { name } = useRecoilValue(WorkspaceState);
-
-  return <DashboardContainerView name={name} dates={dates} />;
+  return <h1></h1>;
+  // return <DashboardContainerView name={name} dates={dates} />;
 };
 
 export default DashboardContainer;

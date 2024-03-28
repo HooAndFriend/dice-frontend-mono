@@ -1,14 +1,26 @@
+"use client";
+
 // ** Next Imports
 import Link from "next/link";
+
+// ** React Imports
+import { useEffect, useState } from "react";
+
+// ** Recoil Imports
+import { UserState } from "@/src/app";
+import { useRecoilValue } from "recoil";
 
 // ** Component Imports
 import TeamPopover from "@/src/components/Popover/team-popover";
 
-interface PropsType {
-  name: string;
-}
+const DashboardHeader = () => {
+  const [name, setName] = useState<string>("");
+  const { nickname } = useRecoilValue(UserState);
 
-const DashboardHeaderView = ({ name }: PropsType) => {
+  useEffect(() => {
+    setName(nickname);
+  }, [nickname]);
+
   return (
     <div className="h-[64px] border-b-2 border-[#EBEBEC] flex items-center justify-between">
       <Link href="/dashboard">
@@ -28,4 +40,4 @@ const DashboardHeaderView = ({ name }: PropsType) => {
   );
 };
 
-export default DashboardHeaderView;
+export default DashboardHeader;

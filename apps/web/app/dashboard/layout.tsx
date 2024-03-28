@@ -5,25 +5,13 @@
 
 // ** Component Imports
 import DashboardSidebar from "@/src/components/Dashboard/dashboard-sidebar";
-import DashboardHeader from "@/src/components/Dashboard/dashboard-header";
-
-// ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { AuthState } from "@/src/app";
+import DashboardHeader from "@/src/components/Dashboard/DashboardHeader";
 
 const DashboardRayout = ({
   children,
 }: {
   children: React.ReactNode;
 }): JSX.Element => {
-  // const { accessToken } = useRecoilValue(AuthState);
-
-  // const router = useRouter();
-
-  // if (accessToken === "") {
-  //   router.push("/");
-  // }
-
   return (
     <div className="flex flex-col w-full h-screen">
       <DashboardHeader />

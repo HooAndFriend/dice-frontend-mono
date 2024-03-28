@@ -5,7 +5,7 @@ import Link from "next/link";
 import { WorkspaceInfo } from "@/src/type/workspace";
 
 // ** Component Imports
-import WorkspaceModal from "@/src/components/Modal/workspace-modal";
+import WorkspaceModal from "@/src/components/Modal/WorkspaceModal";
 import ProfileBox from "../../ProfileBox";
 import WorkspaceBox from "./component/workspace-box";
 

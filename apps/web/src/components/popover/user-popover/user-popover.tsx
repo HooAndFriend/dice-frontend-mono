@@ -1,5 +1,5 @@
 // ** Component Imports
-import WorkspaceModal from "@/src/components/Modal/workspace-modal";
+import WorkspaceModal from "@/src/components/Modal/WorkspaceModal";
 import ProfileBox from "../../ProfileBox";
 import UserModal from "@/src/components/Modal/UserModal";
 

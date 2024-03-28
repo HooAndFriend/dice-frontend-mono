@@ -13,7 +13,7 @@ import { DeleteUserQuery } from '@/src/type/user-delete';
 
 
 interface PropsType {
-  searchDate: string[]
+  searchData: string[]
   query: UserInfoQuery | DeleteUserQuery
   onChange: (createdDate: DateRange, lastLoginDate: DateRange, nickname: string, types: string[]) => void;
 }

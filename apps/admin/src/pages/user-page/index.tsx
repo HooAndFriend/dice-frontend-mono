@@ -20,9 +20,9 @@ export function formatDate(date: Date): string {
   return new Date(d).toISOString().replace('T', ' ').substring(0, 19)
 }
 const handleDateChange = (endDate) => {
-  const nextDay = new Date(endDate)
-  nextDay.setDate(nextDay.getDate() + 1)
-  return new Date(nextDay).toISOString().replace('T', ' ').substring(0, 10)
+  const date = new Date(endDate);
+  const nextDay = new Date(date.setDate(date.getDate() + 1));
+  return nextDay.toISOString().substring(0, 10);
 }
 
 const UserPage = () => {

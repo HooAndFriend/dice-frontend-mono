@@ -15,7 +15,7 @@ interface PropsType {
   role: RoleType;
 }
 
-const UserBox = ({
+const TeamMemberBox = ({
   email,
   profile,
   role,
@@ -132,4 +132,4 @@ const UserBox = ({
   );
 };
 
-export default UserBox;
+export default TeamMemberBox;

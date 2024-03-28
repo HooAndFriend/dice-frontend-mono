@@ -1,26 +1,62 @@
-// ** React Imports
-import { ChangeEvent } from "react";
+// ** Recoil Imports
+import { AuthState, TeamState } from "@/src/app";
+import { useRecoilValue } from "recoil";
+
+// ** Utils Imports
+import useInput from "@/src/hooks/useInput";
+
+// ** Service Imports
+import useSWRMutation from "swr/mutation";
+import { Post } from "@/src/repository";
 
 // ** Type Imports
+import { CommonResponse } from "@/src/type/common";
 import { InviteTeamUserParam } from "@/src/type/team";
+
+// ** Context Imports
+import { useDialog } from "@/src/context/DialogContext";
 
 interface PropsType {
   open: boolean;
-  data: InviteTeamUserParam;
-  handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleSelect: (e: ChangeEvent<HTMLSelectElement>) => void;
-  handleInvite: () => void;
   setOpen: (open: boolean) => void;
 }
 
-const AddMemberContentView = ({
-  open,
-  setOpen,
-  handleInput,
-  data,
-  handleSelect,
-  handleInvite,
-}: PropsType) => {
+const TeamAddMemberContent = ({ open, setOpen }: PropsType) => {
+  const { data, handleInput, handleSelect } = useInput<InviteTeamUserParam>({
+    email: "",
+    role: "VIEWER",
+  });
+
+  const { uuid } = useRecoilValue(TeamState);
+  const { accessToken } = useRecoilValue(AuthState);
+
+  const { handleOpen } = useDialog();
+
+  const inviteTeamUser = useSWRMutation(
+    "/v1/team-user",
+    async (url: string) =>
+      await Post<CommonResponse<void>>(url, data, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "team-code": uuid,
+        },
+      }),
+    {
+      onSuccess: () => {
+        setOpen(false);
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
   return (
     <div
       className={`bg-black bg-opacity-25 w-full h-screen font-spoqa flex justify-center items-center fixed top-0 left-0 z-50 ${
@@ -59,7 +95,7 @@ const AddMemberContentView = ({
           </select>
           <button
             className="bg-main w-[110px] ml-[10px] rounded-[10px] text-white font-bold tracking-[-1px]"
-            onClick={handleInvite}
+            onClick={inviteTeamUser.trigger}
           >
             SEND
           </button>
@@ -69,4 +105,4 @@ const AddMemberContentView = ({
   );
 };
 
-export default AddMemberContentView;
+export default TeamAddMemberContent;

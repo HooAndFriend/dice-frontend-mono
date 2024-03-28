@@ -4,7 +4,7 @@ import { Get, Put } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Component Imports
-import SettingContentView from "./setting-content";
+import { ImageUploader } from "@/src/components/ImageUploader";
 
 // ** Recoil Imports
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -20,7 +20,7 @@ import useInput from "@/src/hooks/useInput";
 import { GetTeamResponse, TeamInfo } from "@/src/type/team";
 import { CommonResponse } from "@/src/type/common";
 
-const SettingContent = () => {
+const TeamSettingContent = () => {
   const { data, setData, handleInput } = useInput<TeamInfo>({
     id: 0,
     name: "",
@@ -93,13 +93,38 @@ const SettingContent = () => {
   if (error) return;
 
   return (
-    <SettingContentView
-      data={data}
-      handleInput={handleInput}
-      handleUpdate={updateTeam.trigger}
-      handleImage={handleImage}
-    />
+    <div>
+      <label className="text-xl font-bold font-spoqa">Profile</label>
+      <ImageUploader image={data.profile} setPath={handleImage} mode="edit" />
+      <div className="mt-5">
+        <label className="text-base font-bold font-spoqa">Team Name</label>
+        <input
+          id="nickname"
+          placeholder="Enter Your Nickname"
+          className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+          value={data.name}
+          onChange={handleInput}
+          name="name"
+        />
+      </div>
+      <div className="mt-[30px]">
+        <label className="text-base font-bold font-spoqa">description</label>
+        <input
+          id="description"
+          className="mt-[14px] font-normal font-spoqa border h-[175px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+          value={data.description}
+          onChange={handleInput}
+          name="description"
+        />
+      </div>
+      <button
+        className="m-auto mt-[40px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white font-spoqa font-bold text-lg"
+        onClick={updateTeam.trigger}
+      >
+        Update
+      </button>
+    </div>
   );
 };
 
-export default SettingContent;
+export default TeamSettingContent;

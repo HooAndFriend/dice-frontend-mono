@@ -7,10 +7,12 @@ import { AuthState, TeamState } from "@/src/app";
 import { useRecoilValue } from "recoil";
 
 // ** Component Imports
-import WorkSpaceContentView from "./workspace-content";
+import TeamWorkspaceBox from "../TeamWorkspaceBox";
+
+// ** Type Imports
 import { GetTeamWorkspaceListResponse } from "@/src/type/workspace";
 
-const WorkSpaceContent = () => {
+const TeamWorkSpaceContent = () => {
   const { uuid } = useRecoilValue(TeamState);
   const { accessToken } = useRecoilValue(AuthState);
 
@@ -22,14 +24,28 @@ const WorkSpaceContent = () => {
           Authorization: `Bearer ${accessToken}`,
           "team-code": uuid,
         },
-      }),
+      })
   );
 
-  if (isLoading) return null;
+  if (isLoading) return;
 
   if (error) return;
 
-  return <WorkSpaceContentView data={data.data.data} />;
+  return (
+    <div className="w-full h-full">
+      <h1 className="mb-5 text-2xl font-bold">Workspace List</h1>
+      <div className="grid grid-cols-2 gap-6">
+        {data.data.data.map((item) => (
+          <TeamWorkspaceBox
+            key={item.workspace_id}
+            name={item.workspace_name}
+            profile={item.workspace_profile}
+            count={item.workspaceUserCount}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
 
-export default WorkSpaceContent;
+export default TeamWorkSpaceContent;

@@ -5,10 +5,10 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 // ** Component Imports
-import SettingContent from "./components/setting-content";
-import MemberContent from "./components/member-content";
-import WorkSpaceContent from "./components/workspace-content";
-import AddMemberContent from "./components/addMember-content";
+import SettingContent from "./components/TeamSettingContent";
+import MemberContent from "./components/TeamMemberContent";
+import TeamWorkSpaceContent from "./components/TeamWorkspaceContent";
+import AddMemberContent from "./components/TeamAddMemberContent";
 
 interface PropsType {
   open: boolean;
@@ -160,7 +160,7 @@ const TeamModalView = ({
                         {tab === 1 && (
                           <MemberContent handleOpen={() => setAddOpen(true)} />
                         )}
-                        {tab === 2 && <WorkSpaceContent />}
+                        {tab === 2 && <TeamWorkSpaceContent />}
                         {addOpen && (
                           <AddMemberContent
                             open={addOpen}

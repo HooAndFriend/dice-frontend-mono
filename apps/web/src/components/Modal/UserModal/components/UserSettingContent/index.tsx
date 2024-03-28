@@ -7,7 +7,7 @@ import useSWRMutation from "swr/mutation";
 import { AuthState, UserState } from "@/src/app";
 
 // ** Component Imports
-import SettingContentView from "./setting-content";
+import { ImageUploader } from "@/src/components/ImageUploader";
 import { GetUserInfoResponse, UserInfo } from "@/src/type/user";
 
 // ** Type Imports
@@ -20,7 +20,7 @@ import { useDialog } from "@/src/context/DialogContext";
 import useInput from "@/src/hooks/useInput";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-const SettingContent = () => {
+const UserSettingContent = () => {
   const { data, setData, handleInput } = useInput<UserInfo>({
     email: "",
     nickname: "",
@@ -81,13 +81,39 @@ const SettingContent = () => {
   if (isLoading) return null;
 
   return (
-    <SettingContentView
-      data={data}
-      handleInput={handleInput}
-      handleUpdate={updateUser.trigger}
-      handleImage={handleImage}
-    />
+    <div>
+      <label className="text-xl font-bold font-spoqa">Profile</label>
+      <ImageUploader mode="edit" image={data.profile} setPath={handleImage} />
+      <div className="mt-5">
+        <label className="text-base font-bold font-spoqa">Nickname</label>
+        <input
+          id="nickname"
+          placeholder="Enter Your Nickname"
+          className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+          value={data.nickname}
+          name="nickname"
+          onChange={handleInput}
+        />
+      </div>
+      <div className="mt-5">
+        <label className="text-base font-bold font-spoqa">Email</label>
+        <input
+          id="email"
+          placeholder="Enter Your Email"
+          className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+          value={data.email}
+          name="email"
+          onChange={handleInput}
+        />
+      </div>
+      <button
+        className="m-auto mt-[93px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white font-spoqa font-bold text-lg"
+        onClick={updateUser.trigger}
+      >
+        Update
+      </button>
+    </div>
   );
 };
 
-export default SettingContent;
+export default UserSettingContent;

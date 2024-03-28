@@ -5,9 +5,9 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 // ** Component Imports
-import SettingContent from "./components/setting-content";
-import TeamContent from "./components/team-content";
-import WorkspaceContent from "./components/workspace-content";
+import SettingContent from "./components/UserSettingContent";
+import TeamContent from "./components/UserTeamContent";
+import WorkspaceContent from "./components/UserWorkspaceContent";
 
 interface PropsType {
   open: boolean;

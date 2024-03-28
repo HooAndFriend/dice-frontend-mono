@@ -6,7 +6,7 @@ interface PropsType {
   role: RoleType;
 }
 
-const ProfileBox = ({ name, profile, role }: PropsType) => {
+const UserProfileBox = ({ name, profile, role }: PropsType) => {
   return (
     <div className="w-[361px] h-[89px] rounded-3xl shadow-md flex items-center justify-between p-5">
       <div className="flex items-center">
@@ -24,4 +24,4 @@ const ProfileBox = ({ name, profile, role }: PropsType) => {
   );
 };
 
-export default ProfileBox;
+export default UserProfileBox;

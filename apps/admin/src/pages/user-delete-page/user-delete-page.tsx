@@ -23,6 +23,7 @@ interface PropsType {
 
 const UserDeletePageView = ({ userData, count, query, handleSearch }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
+  const [selectedUser, setSelectedUser] = useState<DeleteUserInfo>(); 
 
   const cancelButtonRef = useRef(null)
 
@@ -39,6 +40,14 @@ const UserDeletePageView = ({ userData, count, query, handleSearch }: PropsType)
 
   const handleOpen = () => setOpen((c) => !c)
 
+  const handleItemClick = (userId: number) => {
+    const user = userData.find(user => user.id === userId);
+    if (user) {
+      setSelectedUser(user);
+      handleOpen();
+    }
+  };
+
   return (
     <div className="w-full px-4 mt-4">
       <TitleBox title="사용자 관리 / 탈퇴회원 조회" text="탈퇴회원 조회" />
@@ -49,14 +58,16 @@ const UserDeletePageView = ({ userData, count, query, handleSearch }: PropsType)
           headerData={headerData}
           bodyData={bodyData}
           disabledClick={false}
-          handleClick={handleOpen}
+          userIds={userData.map(user => user.id)}
+          handleClick={handleItemClick}
         />
         <div className="flex justify-end w-full">
           <TablePagination />
         </div>
       </div>
-      {open && (
+      { selectedUser && open && (
         <UserDeleteModal
+          userInfo={selectedUser}
           open={open}
           setOpen={setOpen}
           cancelButtonRef={cancelButtonRef}

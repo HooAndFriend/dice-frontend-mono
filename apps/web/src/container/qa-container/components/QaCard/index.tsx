@@ -101,7 +101,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     {
       onSuccess: () => {
         setComment("");
-        mutate("/v1/qa/comment");
+        commentRefetch();
       },
       onError: (error) => {
         handleOpen({
@@ -180,6 +180,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
       ),
     {
       onSuccess: () => {
+        mutate("/v1/qa");
         mutate(`/v1/qa/${qaId}`);
         handleEditClose();
       },
@@ -216,6 +217,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     data: commentData,
     error: commentError,
     isLoading: commentLoading,
+    mutate: commentRefetch,
   } = useSWR(`/v1/qa/comment/${qaId}`, async (url) =>
     Get<GetCommentListResponse>(url, {
       headers: {
@@ -255,6 +257,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
       handleCommentEnter={handleCommentEnter}
       handleDeleteQaFile={deleteQaFile.trigger}
       refetch={refetch}
+      commentRefetch={commentRefetch}
     />
   );
 };

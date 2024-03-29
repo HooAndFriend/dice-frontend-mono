@@ -18,9 +18,10 @@ import { CommentInfo } from "@/src/type/qa";
 
 interface PropsType {
   data: CommentInfo;
+  commentRefetch: () => void;
 }
 
-const QaComment = ({ data }: PropsType) => {
+const QaComment = ({ data, commentRefetch }: PropsType) => {
   const { accessToken } = useRecoilValue(AuthState);
   const { uuid } = useRecoilValue(WorkspaceState);
   const { email } = useRecoilValue(UserState);
@@ -38,7 +39,7 @@ const QaComment = ({ data }: PropsType) => {
       }),
     {
       onSuccess: () => {
-        mutate("/v1/qa/comment");
+        commentRefetch();
       },
       onError: (error) => {
         handleOpen({
@@ -49,7 +50,7 @@ const QaComment = ({ data }: PropsType) => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   return (

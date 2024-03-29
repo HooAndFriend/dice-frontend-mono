@@ -2,7 +2,7 @@
 import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Component Imports
-import IssueComment from "../QaComment";
+import QaComment from "../QaComment";
 import QaStatusButton from "../QaStatusButton";
 import QaUserButton from "../QaUserButton";
 
@@ -28,6 +28,7 @@ interface PropsType {
   handleCommentEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
   refetch: () => void;
   handleDeleteQaFile: (fileId: number) => void;
+  commentRefetch: () => void;
 }
 
 const QaCardView = ({
@@ -47,6 +48,7 @@ const QaCardView = ({
   handleCommentEnter,
   refetch,
   handleDeleteQaFile,
+  commentRefetch,
 }: PropsType) => {
   return (
     <div>
@@ -214,7 +216,11 @@ const QaCardView = ({
           </div>
           <div className="mt-9">
             {commentData.map((item) => (
-              <IssueComment key={item.id} data={item} />
+              <QaComment
+                key={item.id}
+                data={item}
+                commentRefetch={commentRefetch}
+              />
             ))}
           </div>
         </>

@@ -36,6 +36,7 @@ export interface UserTeam {
   createdDate: Date
   id: number
   role: string
+  invitedId: string
   team: TeamInfo
 }
 export interface TeamInfo {
@@ -50,6 +51,7 @@ export interface UserWorkspace {
   createdDate: Date
   id: number
   role: string
+  invitedId: string
   workspace: WorkspaceInfo
 }
 

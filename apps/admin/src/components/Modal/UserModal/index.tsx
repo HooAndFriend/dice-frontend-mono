@@ -23,7 +23,8 @@ interface PropsType {
 
 const UserModal = ({ open, setOpen, userInfo, cancelButtonRef }: PropsType) : JSX.Element | null => {
   const { accessToken } = useRecoilValue(AuthState);
-  const userId = userInfo?.user_id;
+  const userId = userInfo.id;
+  console.log(userId);
   
   const { data:team, isLoading:teamLoading, error:teamError } = useSWR(`/v1/user/team/${userId}`, async (url) => {
     return Get<GetUserTeamResponse>(url, {

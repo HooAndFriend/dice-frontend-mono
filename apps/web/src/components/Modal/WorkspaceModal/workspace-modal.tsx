@@ -10,6 +10,9 @@ import WorkspaceMemberContent from "@/src/components/Modal/WorkspaceModal/compon
 import WorkspaceAddFunctionContent from "@/src/components/Modal/WorkspaceModal/components/WorkspaceAddFunctionContent";
 import WorkspaceAddMemberContent from "./components/WorkspaceAddMemberContent";
 
+// ** Type Imports
+import { WorkspaceUserDetailInfo } from "@/src/type/workspace";
+
 interface PropsType {
   open: boolean;
   addOpen: boolean;
@@ -17,6 +20,7 @@ interface PropsType {
   tab: number;
   profile: string;
   name: string;
+  data: WorkspaceUserDetailInfo[];
   setTab: (tab: number) => void;
   setAddOpen: (open: boolean) => void;
   setOpen: (open: boolean) => void;
@@ -32,6 +36,7 @@ const WorkspaceModalView = ({
   setAddOpen,
   tab,
   setTab,
+  data,
 }: PropsType) => {
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -90,21 +95,14 @@ const WorkspaceModalView = ({
                           {name}
                         </div>
                         <div className="w-[187px] h-[29.926px] mt-[60px] flex relative">
-                          <img
-                            src="/images/dice.png"
-                            alt="Sample Image"
-                            className="w-[29.204px] h-[29.926px] rounded-full"
-                          />
-                          <img
-                            src="/images/dice.png"
-                            alt="Sample Image"
-                            className="w-[29.204px] h-[29.926px] rounded-full absolute left-[24.21px]"
-                          />
-                          <img
-                            src="/images/dice.png"
-                            alt="Sample Image"
-                            className="w-[29.204px] h-[29.926px] rounded-full absolute left-[48.41px]"
-                          />
+                          {data.slice(0, 3).map((item) => (
+                            <img
+                              src={item.teamUser.user.profile}
+                              key={item.id}
+                              alt="Sample Image"
+                              className="w-[29.204px] h-[29.926px] rounded-full"
+                            />
+                          ))}
                           <img
                             src="/svg/dot.svg"
                             alt="Sample Image"

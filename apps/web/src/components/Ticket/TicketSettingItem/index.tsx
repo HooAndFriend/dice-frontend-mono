@@ -36,7 +36,8 @@ const TicketSettingItem = ({item, onUpdate}: PropsType) => {
           value={data.color}
           onChange={handleInput}
           type="color"
-          className="w-[40px] h-[40px] bg-green-300 rounded-lg"
+          className="appearance-none border-none bg-transparent w-[40px] h-[40px] rounded-lg"
+          style={{borderRadius: "8px"}}
         />
       </div>
       <div className="px-8">

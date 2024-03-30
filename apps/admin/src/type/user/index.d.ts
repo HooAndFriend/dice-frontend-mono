@@ -1,6 +1,4 @@
 import { CommonResponse } from '../common';
-import { GetUserWorkspaceResponse } from '@/src/type/user';
-
 
 export interface GetUserListResponse extends CommonResponse {
   count: number;
@@ -26,6 +24,111 @@ export interface UserInfoQuery {
   lastLoginEndDate: string;
   nickname: string;
   type: string[];
+}
+
+interface GetUserTeamResponse extends CommonResponse {
+  count: number;
+  data: UserTeam[];
+}
+
+export interface UserTeam {
+  createdDate: Date;
+  id: number;
+  role: string;
+  team: TeamInfo;
+};
+export interface TeamInfo {
+  name: string;
+}
+
+interface GetUserWorkspaceResponse extends CommonResponse {
+  count: number;
+  data: UserWorkspace[];
+}
+export interface UserWorkspace {
+  createdDate: Date;
+  id: number;
+  role: string;
+  workspace: WorkspaceInfo;
+}
+
+export interface WorkspaceInfo{
+  name: string;
+}
+
+export interface DateRange{
+  startDate: string;
+  endDate: string;
+}
+
+interface GetUserTeamResponse extends CommonResponse {
+  count: number;
+  data: UserTeam[];
+}
+
+export interface UserTeam {
+  createdDate: Date;
+  id: number;
+  role: string;
+  team: TeamInfo;
+};
+export interface TeamInfo {
+  name: string;
+}
+
+interface GetUserWorkspaceResponse extends CommonResponse {
+  count: number;
+  data: UserWorkspace[];
+}
+export interface UserWorkspace {
+  createdDate: Date;
+  id: number;
+  role: string;
+  workspace: WorkspaceInfo;
+}
+
+export interface WorkspaceInfo{
+  name: string;
+}
+
+export interface DateRange{
+  startDate: string;
+  endDate: string;
+}
+
+interface GetUserTeamResponse extends CommonResponse {
+  count: number;
+  data: UserTeam[];
+}
+
+export interface UserTeam {
+  createdDate: Date;
+  id: number;
+  role: string;
+  team: TeamInfo;
+};
+export interface TeamInfo {
+  name: string;
+}
+
+interface GetUserWorkspaceResponse extends CommonResponse {
+  count: number;
+  data: UserWorkspace[];
+}
+export interface UserWorkspace {
+  createdDate: Date;
+  id: number;
+  role: string;
+  workspace: WorkspaceInfo;
+}
+
+export interface WorkspaceInfo{
+  name: string;
+}
+
+export interface DateRange{
+  startDate: string;
+  endDate: string;
 }
 
 interface GetUserTeamResponse extends CommonResponse {

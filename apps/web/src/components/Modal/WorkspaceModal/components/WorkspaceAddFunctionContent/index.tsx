@@ -11,7 +11,7 @@ import { GetWorkspaceFunctionListResponse } from "@/src/type/workspace";
 
 const WorkspaceAddFunctionContent = () => {
   const { accessToken } = useRecoilValue(AuthState);
-  const { uuid } = useRecoilValue(WorkspaceState);
+  const { uuid, role } = useRecoilValue(WorkspaceState);
 
   const { data, error, isLoading, mutate } = useSWR(
     "/v1/workspace-function/function",
@@ -51,12 +51,14 @@ const WorkspaceAddFunctionContent = () => {
                 key={item.function}
               >
                 {item.function}
-                <img
-                  className="mr-[13px]"
-                  src="/svg/trashcanIcon.svg"
-                  width={15}
-                  height={15}
-                />
+                {role === "ADMIN" && (
+                  <img
+                    className="mr-[13px]"
+                    src="/svg/trashcanIcon.svg"
+                    width={15}
+                    height={15}
+                  />
+                )}
               </div>
             ))}
         </div>
@@ -78,15 +80,17 @@ const WorkspaceAddFunctionContent = () => {
                   />
                   {item.function}
                 </div>
-                <div className="w-[97px] h-9 border border-[#EBEBEC] rounded-[50px] flex items-center font-spoqa font-bold text-base justify-center mr-[18px]">
-                  <img
-                    className="mr-2"
-                    src="/svg/edit_plus.svg"
-                    width={24}
-                    height={24}
-                  />
-                  <div className="pt-1">Add</div>
-                </div>
+                {role === "ADMIN" && (
+                  <div className="w-[97px] h-9 border border-[#EBEBEC] rounded-[50px] flex items-center font-spoqa font-bold text-base justify-center mr-[18px]">
+                    <img
+                      className="mr-2"
+                      src="/svg/edit_plus.svg"
+                      width={24}
+                      height={24}
+                    />
+                    <div className="pt-1">Add</div>
+                  </div>
+                )}
               </div>
             ))}
         </div>

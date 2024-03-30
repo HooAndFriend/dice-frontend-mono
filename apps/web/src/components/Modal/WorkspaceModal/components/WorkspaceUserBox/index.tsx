@@ -106,33 +106,42 @@ const WorkspaceUserBox = ({
           <div className="font-spoqa text-base text-[#9A9A9A]">{email}</div>
         </div>
       </div>
-      <div className="flex mr-[15px]">
-        <select
-          disabled={userRole !== "ADMIN"}
-          value={role}
-          className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center"
-          onChange={(e) =>
-            updateWorkspaceRole.trigger(e.target.value as RoleType)
-          }
-        >
-          <option className="text-base font-spoqa" value="VIEWER">
-            VIEWER
-          </option>
-          <option className="text-base font-spoqa" value="WRITER">
-            WRITER
-          </option>
-          <option className="text-base font-spoqa" value="ADMIN">
+      {role === "ADMIN" ? (
+        <div className="flex mr-[15px]">
+          <div className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center">
             ADMIN
-          </option>
-        </select>
-        <img
-          src="/svg/boldX.svg"
-          width={24}
-          height={24}
-          className="cursor-pointer"
-          onClick={removeWorkspaceUser.trigger}
-        />
-      </div>
+          </div>
+          <div style={{ width: 24 }} />
+        </div>
+      ) : (
+        <div className="flex mr-[15px]">
+          <select
+            disabled={userRole !== "ADMIN"}
+            value={role}
+            className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center"
+            onChange={(e) =>
+              updateWorkspaceRole.trigger(e.target.value as RoleType)
+            }
+          >
+            <option className="text-base font-spoqa" value="VIEWER">
+              VIEWER
+            </option>
+            <option className="text-base font-spoqa" value="WRITER">
+              WRITER
+            </option>
+            <option className="text-base font-spoqa" value="ADMIN">
+              ADMIN
+            </option>
+          </select>
+          <img
+            src="/svg/boldX.svg"
+            width={24}
+            height={24}
+            className="cursor-pointer"
+            onClick={removeWorkspaceUser.trigger}
+          />
+        </div>
+      )}
     </div>
   );
 };

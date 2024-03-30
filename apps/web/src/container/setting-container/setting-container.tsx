@@ -1,7 +1,14 @@
+// ** Component Imports
 import TicketSettingItem from "@/src/components/Ticket/TicketSettingItem";
 import TicketTypeAddItem from "@/src/components/Ticket/TicketTypeAddItem";
-import useInput from "@/src/hooks/useInput";
+
+// ** Service Imports
+import {Get, Patch} from "@/src/repository";
+import useSWR from "swr";
+
+// ** Type Imports
 import {SettingListInfo} from "@/src/type/ticket";
+
 import {useEffect, useState} from "react";
 
 interface PropsType {
@@ -12,9 +19,14 @@ interface PropsType {
     type: string,
     description: string
   ) => void;
+  handleTicketDelete: (id: number) => void;
 }
 
-const SettingContainerView = ({data, handleTicketSetting}: PropsType) => {
+const SettingContainerView = ({
+  data,
+  handleTicketSetting,
+  handleTicketDelete,
+}: PropsType) => {
   const [settingItems, setSettingItems] = useState<SettingListInfo[]>(data);
 
   const handleUpdate = (index: number, updatedItem: SettingListInfo) => {
@@ -22,6 +34,8 @@ const SettingContainerView = ({data, handleTicketSetting}: PropsType) => {
     newItems[index] = updatedItem;
     setSettingItems(newItems);
   };
+
+  const handleReset = () => {};
 
   return (
     <div>
@@ -35,6 +49,7 @@ const SettingContainerView = ({data, handleTicketSetting}: PropsType) => {
                   onUpdate={updatedItem => {
                     handleUpdate(index, updatedItem);
                   }}
+                  handleTicketDelete={handleTicketDelete}
                 />
                 <hr className="my-[25px]" />
               </>
@@ -44,7 +59,10 @@ const SettingContainerView = ({data, handleTicketSetting}: PropsType) => {
         <TicketTypeAddItem />
       </div>
       <div className="flex justify-end mt-[40px]">
-        <button className="w-[275px] h-[55px] text-[#623AD6] border-[#623AD6] rounded-[15px] bg-white border-solid border-[2px]">
+        <button
+          onClick={handleReset}
+          className="w-[275px] h-[55px] text-[#623AD6] border-[#623AD6] rounded-[15px] bg-white border-solid border-[2px]"
+        >
           RESET
         </button>
         <button

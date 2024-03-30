@@ -34,15 +34,13 @@ const TicketTypeAddItem = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         }
-      ),
-    {
-      onSuccess: () => {
-        console.log("row추가");
-      },
-      onError: error => {
-        console.log(error + "등록실패");
-      },
-    }
+      )
+        .then(res => {
+          alert("등록되었습니다");
+        })
+        .catch(error => {
+          console.log(error);
+        })
   );
 
   const handleAdd = () => {

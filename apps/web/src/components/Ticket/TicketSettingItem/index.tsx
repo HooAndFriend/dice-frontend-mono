@@ -3,13 +3,15 @@ import {SettingListInfo, SettingQuery} from "@/src/type/ticket";
 import CustomInput from "../../Input/CustomInput";
 import useInput from "@/src/hooks/useInput";
 import {useEffect} from "react";
+import Image from "next/image";
 
 interface PropsType {
   item: SettingListInfo;
   onUpdate: (updatedItem: SettingListInfo) => void;
+  handleTicketDelete: (id: number) => void;
 }
 
-const TicketSettingItem = ({item, onUpdate}: PropsType) => {
+const TicketSettingItem = ({item, onUpdate, handleTicketDelete}: PropsType) => {
   const {data, handleInput} = useInput({
     id: item.id,
     color: item.color,
@@ -37,7 +39,6 @@ const TicketSettingItem = ({item, onUpdate}: PropsType) => {
           onChange={handleInput}
           type="color"
           className="appearance-none border-none bg-transparent w-[40px] h-[40px] rounded-lg"
-          style={{borderRadius: "8px"}}
         />
       </div>
       <div className="px-8">
@@ -59,6 +60,9 @@ const TicketSettingItem = ({item, onUpdate}: PropsType) => {
           height="50px"
           borderRadius="10px"
         />
+      </div>
+      <div onClick={() => handleTicketDelete(item.id)} className="ml-4">
+        <Image src={"/svg/boldX.svg"} alt="black-box" width={36} height={36} />
       </div>
     </div>
   );

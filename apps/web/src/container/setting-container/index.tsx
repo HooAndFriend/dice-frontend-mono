@@ -4,7 +4,7 @@
 import SettingContainerView from "./setting-container";
 
 // ** Service Imports
-import {Get, Patch} from "@/src/repository";
+import {Delete, Get, Patch} from "@/src/repository";
 import useSWR from "swr";
 
 // ** Recoil Imports
@@ -51,8 +51,23 @@ const SettingConatiner = () => {
           "Workspace-code": uuid,
         },
       }
-    ).catch(error => {
-      console.log(error);
+    )
+      .then(res => {
+        mutate();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  const handleTicketDelete = async (id: number) => {
+    await Delete(`/v1/ticket/setting/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Workspace-code": uuid,
+      },
+    }).then(res => {
+      mutate();
     });
   };
 
@@ -64,6 +79,7 @@ const SettingConatiner = () => {
 
   return (
     <SettingContainerView
+      handleTicketDelete={handleTicketDelete}
       handleTicketSetting={handleTicketSetting}
       data={data.data.data}
     />

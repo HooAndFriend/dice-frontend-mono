@@ -1,6 +1,6 @@
 "use client";
 // ** React Imports
-import { useState, KeyboardEvent } from "react";
+import { useState, KeyboardEvent, useEffect } from "react";
 
 // ** Component Imports
 import QaCardView from "./QaCard";
@@ -246,6 +246,10 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
       addComment.trigger();
     }
   };
+
+  useEffect(() => {
+    setMode({ asIs: "view", toBe: "view", memo: "view", title: "view" });
+  }, [qaId]);
 
   if (issueLoading && commentLoading) return;
 

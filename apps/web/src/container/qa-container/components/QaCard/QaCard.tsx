@@ -5,12 +5,13 @@ import { ChangeEvent, KeyboardEvent } from "react";
 import QaComment from "../QaComment";
 import QaStatusButton from "../QaStatusButton";
 import QaUserButton from "../QaUserButton";
+import QuillEditor from "@/src/components/QuillEditor";
+import { QaFileUploader } from "../QaFileUploader";
 
 // ** Type Imports
 import { CommentInfo, IssueInfo } from "@/src/type/qa";
 import { QaCardEditMode, RoleType } from "@/src/type/common";
-import { QaFileUploader } from "../QaFileUploader";
-import QuillEditor from "@/src/components/QuillEditor";
+import dayjs from "dayjs";
 
 interface PropsType {
   data: IssueInfo;
@@ -54,24 +55,18 @@ const QaCardView = ({
   return (
     <div>
       <div className="h-[40px] flex items-center justify-between">
-        <div className="text-lg font-medium font-spoqa">{data.number}</div>
-        <div className="flex font-bold font-spoqa">
+        <div className="flex items-center text-lg font-medium font-spoqa">
+          <h1 className="mr-4">{data.number}</h1>
           {role !== "VIEWER" && (
-            <div className="flex">
-              <button
-                className="w-[110px] h-[40px] rounded-[30px] bg-black text-white flex justify-center items-center cursor-pointer"
-                onClick={deleteQa}
-              >
-                <img
-                  className="mr-[5px]"
-                  src="/images/Trash_Full.png"
-                  width={24}
-                  height={24}
-                />
-                <div className="flex items-center">Delete</div>
-              </button>
-            </div>
+            <p
+              className="text-[12px] text-gray-500 cursor-pointer underline"
+              onClick={deleteQa}
+            >
+              Delete
+            </p>
           )}
+        </div>
+        <div className="flex font-bold font-spoqa">
           <h1
             className="text-[24px] font-bold ml-8 cursor-pointer"
             onClick={handleClose}
@@ -81,7 +76,7 @@ const QaCardView = ({
         </div>
       </div>
       {mode.title === "view" ? (
-        <div className="h-[50px] flex justify-between mt-[30px] font-spoqa">
+        <div className="h-[50px] flex justify-between mt-[15px] font-spoqa">
           <div
             className="flex items-center text-xl font-bold"
             onDoubleClick={() => {
@@ -98,7 +93,7 @@ const QaCardView = ({
           />
         </div>
       ) : (
-        <div className="h-[50px] flex justify-between mt-[30px] font-spoqa">
+        <div className="h-[50px] flex justify-between mt-[15px] font-spoqa">
           <div className="flex items-center w-full">
             <input
               type="text"
@@ -109,13 +104,13 @@ const QaCardView = ({
             />
             <div className="flex items-center mx-2">
               <button
-                className="w-[30px] h-[30px] bg-blue-200 rounded-sm mr-2"
+                className="w-[30px] h-[30px] bg-[#623AD6] text-white rounded-[8px] flex items-center justify-center mr-2"
                 onClick={() => handleUpdateQa("title")}
               >
                 V
               </button>
               <button
-                className="w-[30px] h-[30px] bg-black text-white rounded-sm"
+                className="w-[30px] h-[30px] rounded-[8px] flex items-center justify-center"
                 onClickCapture={() => setMode({ ...mode, title: "view" })}
               >
                 X
@@ -130,35 +125,39 @@ const QaCardView = ({
         </div>
       )}
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
-      <div className="flex justify-between h-5 mt-5">
-        <div className="font-spoqa mr-[79px] font-medium">Admin</div>
-        <QaUserButton
-          profile={data.admin ? data.admin.profile : "/dice.png"}
-          nickname={data.admin ? data.admin.nickname : ""}
-          width={20}
-          height={20}
-          type="admin"
-          qaId={data.id}
-        />
-        <div className="font-spoqa mr-[80px] font-medium">Worker</div>
-        <QaUserButton
-          profile="/faviconGray.png"
-          nickname="NoWorker"
-          width={20}
-          height={20}
-          type="user"
-          qaId={data.id}
-        />
+      <div className="flex h-5 mt-5">
+        <div className="flex items-center">
+          <div className="font-spoqa mr-[80px] font-medium">Admin</div>
+          <QaUserButton
+            profile={data.admin ? data.admin.profile : "/dice.png"}
+            nickname={data.admin ? data.admin.nickname : ""}
+            width={20}
+            height={20}
+            type="admin"
+            qaId={data.id}
+          />
+        </div>
+        <div className="flex items-center">
+          <div className="font-spoqa mx-[80px] font-medium">Worker</div>
+          <QaUserButton
+            profile="/faviconGray.png"
+            nickname="NoWorker"
+            width={20}
+            height={20}
+            type="user"
+            qaId={data.id}
+          />
+        </div>
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
       <div className="h-[20px] flex mt-5 ">
-        <div className="font-spoqa font-medium mr-[65px]">RegDate</div>
-        <div className="font-spoqa font-normal mr-[30px] text-darkGray tracking-[1px]">
-          {data.modifiedDate.substring(0, 10)}
-        </div>
-        <div className="font-spoqa font-medium mr-[58px]">modDate</div>
+        <div className="font-spoqa font-medium mr-[80px]">regDate</div>
         <div className="font-spoqa font-normal text-darkGray tracking-[1px]">
-          {data.modifiedDate.substring(0, 10)}
+          {dayjs(data.createdDate).format("YYYY-MM-DD")}
+        </div>
+        <div className="font-spoqa font-medium mx-[80px]">modDate</div>
+        <div className="font-spoqa font-normal text-darkGray tracking-[1px]">
+          {dayjs(data.modifiedDate).format("YYYY-MM-DD")}
         </div>
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
@@ -183,16 +182,16 @@ const QaCardView = ({
           />
           <div className="flex items-center mt-2">
             <button
-              className="w-[30px] h-[30px] bg-blue-200 rounded-sm mr-2"
+              className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
               onClick={() => handleUpdateQa("asIs")}
             >
-              V
+              save
             </button>
             <button
-              className="w-[30px] h-[30px] bg-black text-white rounded-sm"
+              className="w-[60px] h-[30px] flex items-center justify-center rounded-[8px]"
               onClickCapture={() => setMode({ ...mode, asIs: "view" })}
             >
-              X
+              cancel
             </button>
           </div>
         </div>
@@ -219,16 +218,16 @@ const QaCardView = ({
           />
           <div className="flex items-center mt-2">
             <button
-              className="w-[30px] h-[30px] bg-blue-200 rounded-sm mr-2"
+              className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
               onClick={() => handleUpdateQa("toBe")}
             >
-              V
+              save
             </button>
             <button
-              className="w-[30px] h-[30px] bg-black text-white rounded-sm"
+              className="w-[60px] h-[30px] flex items-center justify-center rounded-[8px]"
               onClickCapture={() => setMode({ ...mode, toBe: "view" })}
             >
-              X
+              cancel
             </button>
           </div>
         </div>
@@ -254,16 +253,16 @@ const QaCardView = ({
           />
           <div className="flex items-center mt-2">
             <button
-              className="w-[30px] h-[30px] bg-blue-200 rounded-sm mr-2"
+              className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
               onClick={() => handleUpdateQa("memo")}
             >
-              V
+              save
             </button>
             <button
-              className="w-[30px] h-[30px] bg-black text-white rounded-sm"
+              className="w-[60px] h-[30px] flex items-center justify-center rounded-[8px]"
               onClickCapture={() => setMode({ ...mode, memo: "view" })}
             >
-              X
+              cancel
             </button>
           </div>
         </div>

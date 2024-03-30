@@ -17,13 +17,15 @@ interface PropsType {
   query: UserInfoQuery;
   count: number;
   handleSearch: (createdDate: DateRange, lastLoginDate: DateRange, nickname: string, types: string[]) => void;
+  handlePage: (page: number) => void;
 }
 
 const UserPageView = ({
   userData,
   count,
   query,
-  handleSearch
+  handleSearch,
+  handlePage
 }: PropsType) => {
 
   const [open, setOpen] = useState<boolean>(false)
@@ -32,13 +34,13 @@ const UserPageView = ({
   const cancelButtonRef = useRef(null)
   
   const bodyData = userData.map((user, index) => [
-    { name: user.user_id.toString(), size: '0%' },
+    { name: user.id.toString(), size: '0%' },
     { name: (index + 1).toString(), size: '5%' },
-    { name: user.user_nickname, size: '15%' },
-    { name: user.user_email, size: '20%' },
-    { name: user.user_type, size: '10%' },
-    { name: formatDate(user.user_created_date), size: '15%' },
-    { name: formatDate(user.user_last_login_date), size: '15%' },
+    { name: user.nickname, size: '15%' },
+    { name: user.email, size: '20%' },
+    { name: user.type, size: '10%' },
+    { name: formatDate(user.createdDate), size: '15%' },
+    { name: formatDate(user.lastLoginDate), size: '15%' },
     { name: user.workspaceUserCount, size: '10%' },
     { name: user.teamUserCount, size: '10%' }
   ]);
@@ -46,7 +48,7 @@ const UserPageView = ({
   const handleOpen = () => setOpen((c) => !c)
 
   const handleItemClick = (userId: number) => {
-    const user = userData.find(user => user.user_id === userId);
+    const user = userData.find(user => user.id === userId);
     if (user) {
       setSelectedUser(user);
       handleOpen();
@@ -63,11 +65,11 @@ const UserPageView = ({
           headerData={headerData}
           bodyData={bodyData}
           disabledClick={false}
-          userIds={userData.map(user => user.user_id)}
+          userIds={userData.map(user => user.id)}
           handleClick={handleItemClick}
         />
         <div className="flex justify-end w-full">
-          <TablePagination />
+          <TablePagination count={count} pageSize={query.pageSize} handlePage={handlePage} />
         </div>
       </div>
       { selectedUser && open && (

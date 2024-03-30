@@ -6,12 +6,12 @@ export interface GetUserListResponse extends CommonResponse {
 }
 
 export interface UserInfo {
-  user_created_date: Date;
-  user_id: number;
-  user_email: string;
-  user_type: string;
-  user_nickname: string;
-  user_last_login_date: Date;
+  createdDate: Date;
+  id: number;
+  email: string;
+  type: string;
+  nickname: string;
+  lastLoginDate: Date;
   workspaceUserCount: string;
   teamUserCount: string;
 }
@@ -24,6 +24,8 @@ export interface UserInfoQuery {
   lastLoginEndDate: string;
   nickname: string;
   type: string[];
+  page: number;
+  pageSize: number;
 }
 
 interface GetUserTeamResponse extends CommonResponse {

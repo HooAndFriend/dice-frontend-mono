@@ -2,32 +2,34 @@
 import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Component Imports
-import IssueComment from "../QaComment";
+import QaComment from "../QaComment";
 import QaStatusButton from "../QaStatusButton";
 import QaUserButton from "../QaUserButton";
 
 // ** Type Imports
 import { CommentInfo, IssueInfo } from "@/src/type/qa";
-import { RoleType } from "@/src/type/common";
+import { QaCardEditMode, RoleType } from "@/src/type/common";
 import { QaFileUploader } from "../QaFileUploader";
+import QuillEditor from "@/src/components/QuillEditor";
 
 interface PropsType {
   data: IssueInfo;
   commentData: CommentInfo[];
   comment: string;
   role: RoleType;
-  mode: "view" | "edit";
+  mode: QaCardEditMode;
   deleteQa: () => void;
-  updateQa: () => void;
+  handleUpdateQa: (type: "title" | "asIs" | "toBe" | "memo") => void;
   handleComment: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleAdd: () => void;
-  handleEdit: () => void;
-  handleEditClose: () => void;
+  handleAddComment: () => void;
   handleClose: () => void;
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
   handleCommentEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
   refetch: () => void;
   handleDeleteQaFile: (fileId: number) => void;
+  commentRefetch: () => void;
+  setIssueData: (value: IssueInfo) => void;
+  setMode: (value: QaCardEditMode) => void;
 }
 
 const QaCardView = ({
@@ -37,36 +39,25 @@ const QaCardView = ({
   role,
   mode,
   handleComment,
-  handleAdd,
-  deleteQa,
+  handleAddComment,
   handleClose,
-  handleEdit,
-  handleEditClose,
   handleInput,
-  updateQa,
   handleCommentEnter,
   refetch,
   handleDeleteQaFile,
+  commentRefetch,
+  setIssueData,
+  setMode,
+  deleteQa,
+  handleUpdateQa,
 }: PropsType) => {
   return (
     <div>
       <div className="h-[40px] flex items-center justify-between">
         <div className="text-lg font-medium font-spoqa">{data.number}</div>
         <div className="flex font-bold font-spoqa">
-          {role !== "VIEWER" && mode === "view" && (
+          {role !== "VIEWER" && (
             <div className="flex">
-              <button
-                className="w-[110px] h-[40px] rounded-[30px] border border-lightGray flex justify-center items-center mr-[10px]"
-                onClick={handleEdit}
-              >
-                <img
-                  className="mr-[5px]"
-                  src="/svg/note_edit.svg"
-                  width={24}
-                  height={24}
-                />
-                <div>Edit</div>
-              </button>
               <button
                 className="w-[110px] h-[40px] rounded-[30px] bg-black text-white flex justify-center items-center cursor-pointer"
                 onClick={deleteQa}
@@ -89,9 +80,15 @@ const QaCardView = ({
           </h1>
         </div>
       </div>
-      {mode === "view" ? (
+      {mode.title === "view" ? (
         <div className="h-[50px] flex justify-between mt-[30px] font-spoqa">
-          <div className="flex items-center text-xl font-bold">
+          <div
+            className="flex items-center text-xl font-bold"
+            onDoubleClick={() => {
+              if (role === "VIEWER") return;
+              setMode({ ...mode, title: "edit" });
+            }}
+          >
             {data.title}
           </div>
           <QaStatusButton
@@ -102,12 +99,33 @@ const QaCardView = ({
         </div>
       ) : (
         <div className="h-[50px] flex justify-between mt-[30px] font-spoqa">
-          <input
-            type="text"
-            value={data.title}
-            name="title"
-            onChange={handleInput}
-            className="w-full h-[40px] border border-[#EBEBEC] rounded-[10px] px-4"
+          <div className="flex items-center w-full">
+            <input
+              type="text"
+              value={data.title}
+              name="title"
+              onChange={handleInput}
+              className="w-full h-[40px] border border-[#EBEBEC] rounded-[10px] px-4"
+            />
+            <div className="flex items-center mx-2">
+              <button
+                className="w-[30px] h-[30px] bg-blue-200 rounded-sm mr-2"
+                onClick={() => handleUpdateQa("title")}
+              >
+                V
+              </button>
+              <button
+                className="w-[30px] h-[30px] bg-black text-white rounded-sm"
+                onClickCapture={() => setMode({ ...mode, title: "view" })}
+              >
+                X
+              </button>
+            </div>
+          </div>
+          <QaStatusButton
+            qaId={data.id}
+            status={data.status}
+            refetch={refetch}
           />
         </div>
       )}
@@ -145,32 +163,111 @@ const QaCardView = ({
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
       <div className="mt-5 mb-[14px]">As-Is</div>
-      <input
-        id="asIs"
-        value={data.asIs}
-        name="asIs"
-        onChange={handleInput}
-        className="border border-[#EBEBEC] h-[80px] w-full rounded-[10px] px-4"
-        disabled={mode === "view"}
-      />
+      {mode.asIs === "view" ? (
+        <div
+          dangerouslySetInnerHTML={{ __html: data.asIs }}
+          className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto"
+          onDoubleClick={() => {
+            if (role === "VIEWER") return;
+            setMode({ ...mode, asIs: "edit" });
+          }}
+        />
+      ) : (
+        <div>
+          <QuillEditor
+            value={data.asIs}
+            onChange={(value: string) =>
+              setIssueData({ ...data, asIs: value } as IssueInfo)
+            }
+            name="asIs"
+          />
+          <div className="flex items-center mt-2">
+            <button
+              className="w-[30px] h-[30px] bg-blue-200 rounded-sm mr-2"
+              onClick={() => handleUpdateQa("asIs")}
+            >
+              V
+            </button>
+            <button
+              className="w-[30px] h-[30px] bg-black text-white rounded-sm"
+              onClickCapture={() => setMode({ ...mode, asIs: "view" })}
+            >
+              X
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="mt-5 mb-[14px]">To-Be</div>
-      <input
-        id="toBe"
-        value={data.toBe}
-        name="toBe"
-        onChange={handleInput}
-        className="px-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px]"
-        disabled={mode === "view"}
-      />
+      {mode.toBe === "view" ? (
+        <div
+          dangerouslySetInnerHTML={{ __html: data.toBe }}
+          className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto"
+          onDoubleClick={() => {
+            if (role === "VIEWER") return;
+            setMode({ ...mode, toBe: "edit" });
+          }}
+        />
+      ) : (
+        <div>
+          <QuillEditor
+            value={data.toBe}
+            onChange={(value: string) =>
+              setIssueData({ ...data, toBe: value } as IssueInfo)
+            }
+            name="toBe"
+          />
+          <div className="flex items-center mt-2">
+            <button
+              className="w-[30px] h-[30px] bg-blue-200 rounded-sm mr-2"
+              onClick={() => handleUpdateQa("toBe")}
+            >
+              V
+            </button>
+            <button
+              className="w-[30px] h-[30px] bg-black text-white rounded-sm"
+              onClickCapture={() => setMode({ ...mode, toBe: "view" })}
+            >
+              X
+            </button>
+          </div>
+        </div>
+      )}
       <div className="mt-5 mb-[14px]">Memo</div>
-      <input
-        id="memo"
-        value={data.memo}
-        name="memo"
-        onChange={handleInput}
-        className="px-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px]"
-        disabled={mode === "view"}
-      />
+      {mode.memo === "view" ? (
+        <div
+          dangerouslySetInnerHTML={{ __html: data.memo }}
+          className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto"
+          onDoubleClick={() => {
+            if (role === "VIEWER") return;
+            setMode({ ...mode, memo: "edit" });
+          }}
+        />
+      ) : (
+        <div>
+          <QuillEditor
+            value={data.memo}
+            onChange={(value: string) =>
+              setIssueData({ ...data, memo: value } as IssueInfo)
+            }
+            name="memo"
+          />
+          <div className="flex items-center mt-2">
+            <button
+              className="w-[30px] h-[30px] bg-blue-200 rounded-sm mr-2"
+              onClick={() => handleUpdateQa("memo")}
+            >
+              V
+            </button>
+            <button
+              className="w-[30px] h-[30px] bg-black text-white rounded-sm"
+              onClickCapture={() => setMode({ ...mode, memo: "view" })}
+            >
+              X
+            </button>
+          </div>
+        </div>
+      )}
       <div className="mt-5 mb-[14px]">
         FILE <span className="text-sm font-spoqa text-darkGray">(MAX:4)</span>
       </div>
@@ -195,44 +292,30 @@ const QaCardView = ({
         ))}
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]" />
-      {mode === "view" ? (
-        <>
-          <div className="flex mt-5">
-            <input
-              id="content"
-              onChange={handleComment}
-              value={comment}
-              className="px-4 w-full border border-lightGray rounded-[10px] mr-[10px]"
-              onKeyDown={handleCommentEnter}
-            />
-            <div
-              onClick={handleAdd}
-              className="w-[40px] h-[40px] bg-black text-white rounded-[10px] flex justify-center items-center"
-            >
-              <img src="/images/plus.png" width={24} height={24} />
-            </div>
-          </div>
-          <div className="mt-9">
-            {commentData.map((item) => (
-              <IssueComment key={item.id} data={item} />
-            ))}
-          </div>
-        </>
-      ) : (
-        <div className="flex justify-end mt-4">
-          <button className="mr-4 w-[110px] h-[40px] rounded-[30px] bg-black text-white flex justify-center items-center cursor-pointer">
-            <div className="flex items-center" onClick={updateQa}>
-              Save
-            </div>
-          </button>
-          <button
-            className="w-[110px] h-[40px] rounded-[30px] bg-black text-white flex justify-center items-center cursor-pointer"
-            onClick={handleEditClose}
-          >
-            <div className="flex items-center">Cancel</div>
-          </button>
+      <div className="flex mt-5">
+        <input
+          id="content"
+          onChange={handleComment}
+          value={comment}
+          className="px-4 w-full border border-lightGray rounded-[10px] mr-[10px]"
+          onKeyDown={handleCommentEnter}
+        />
+        <div
+          onClick={handleAddComment}
+          className="w-[40px] h-[40px] bg-black text-white rounded-[10px] flex justify-center items-center"
+        >
+          <img src="/images/plus.png" width={24} height={24} />
         </div>
-      )}
+      </div>
+      <div className="mt-9">
+        {commentData.map((item) => (
+          <QaComment
+            key={item.id}
+            data={item}
+            commentRefetch={commentRefetch}
+          />
+        ))}
+      </div>
     </div>
   );
 };

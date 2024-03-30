@@ -7,7 +7,7 @@ import QaCardView from "./QaCard";
 
 // ** Service Imports
 import useSWR, { mutate } from "swr";
-import { Delete, Get, Post, Put } from "@/src/repository";
+import { Delete, Get, Patch, Post, Put } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Recoil Imports
@@ -18,7 +18,7 @@ import { useRecoilValue } from "recoil";
 import useInput from "@/src/hooks/useInput";
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
+import { CommonResponse, QaCardEditMode } from "@/src/type/common";
 import {
   AddCommentResponse,
   GetCommentListResponse,
@@ -36,7 +36,15 @@ interface PropsType {
 
 const QaCard = ({ qaId, handleClose }: PropsType) => {
   const [comment, setComment] = useState<string>("");
-  const [mode, setMode] = useState<"view" | "edit">("view");
+  const [currentArg, setCurrentArg] = useState<
+    "title" | "asIs" | "toBe" | "memo"
+  >("title");
+  const [mode, setMode] = useState<QaCardEditMode>({
+    asIs: "view",
+    toBe: "view",
+    memo: "view",
+    title: "view",
+  });
 
   const {
     data: issueData,
@@ -66,10 +74,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     setComment(e.target.value);
   };
 
-  const handleEdit = () => setMode("edit");
-  const handleEditClose = () => setMode("view");
-
-  const handleAdd = () => {
+  const handleAddComment = () => {
     if (comment === "") {
       handleOpen({
         title: "Error",
@@ -85,7 +90,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     addComment.trigger();
   };
 
-  //댓글 등록
+  //** 댓글 등록
   const addComment = useSWRMutation(
     "/v1/qa/comment",
     async (url: string) =>
@@ -115,6 +120,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     }
   );
 
+  // ** Qa 삭제
   const deleteQa = useSWRMutation(
     `/v1/qa/${qaId}`,
     async (url: string) =>
@@ -140,6 +146,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     }
   );
 
+  // ** QA File 삭제
   const deleteQaFile = useSWRMutation(
     "/v1/qa/file/",
     async (url: string, { arg }: { arg: number }) =>
@@ -165,24 +172,30 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     }
   );
 
+  // ** QA 수정
   const updateQa = useSWRMutation(
     "v1/qa",
-    async (url: string) =>
-      await Put<CommonResponse<void>>(
+    async (
+      url: string,
+      { arg }: { arg: "title" | "asIs" | "toBe" | "memo" }
+    ) => {
+      setCurrentArg(arg);
+      return await Patch<CommonResponse<void>>(
         url,
-        { ...issueData, qaId: issueData.id, workerId: 1, fileurls: [] },
+        { qaId, value: issueData[arg], type: arg },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             "workspace-code": `${uuid}`,
           },
         }
-      ),
+      );
+    },
     {
       onSuccess: () => {
+        setMode((c) => ({ ...c, [currentArg]: "view" }));
         mutate("/v1/qa");
         mutate(`/v1/qa/${qaId}`);
-        handleEditClose();
       },
       onError: (error) => {
         handleOpen({
@@ -196,6 +209,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     }
   );
 
+  // ** QA 정보 조회
   const { isLoading: issueLoading, mutate: refetch } = useSWR(
     `/v1/qa/${qaId}`,
     async (url) =>
@@ -212,7 +226,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     }
   );
 
-  //댓글 확인
+  // ** 댓글 리스트 조회
   const {
     data: commentData,
     error: commentError,
@@ -233,11 +247,9 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     }
   };
 
-  if (issueLoading && commentLoading) return null;
+  if (issueLoading && commentLoading) return;
 
-  if (!commentData) {
-    return null;
-  }
+  if (!commentData) return;
 
   return (
     <QaCardView
@@ -247,17 +259,17 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
       role={role}
       mode={mode}
       handleComment={handleComment}
-      handleAdd={handleAdd}
+      handleAddComment={handleAddComment}
       deleteQa={deleteQa.trigger}
       handleClose={handleClose}
-      handleEdit={handleEdit}
-      handleEditClose={handleEditClose}
       handleInput={handleInput}
-      updateQa={updateQa.trigger}
       handleCommentEnter={handleCommentEnter}
       handleDeleteQaFile={deleteQaFile.trigger}
       refetch={refetch}
       commentRefetch={commentRefetch}
+      setMode={setMode}
+      setIssueData={setIssueData}
+      handleUpdateQa={updateQa.trigger}
     />
   );
 };

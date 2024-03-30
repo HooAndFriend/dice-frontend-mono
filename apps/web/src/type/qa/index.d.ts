@@ -51,6 +51,7 @@ export interface IssueInfo {
   asIs: string;
   toBe: string;
   memo: string;
+  dueDate: string;
   createdDate: string;
   modifiedDate: string;
 }

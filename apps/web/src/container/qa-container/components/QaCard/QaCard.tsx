@@ -7,10 +7,13 @@ import QaStatusButton from "../QaStatusButton";
 import QaUserButton from "../QaUserButton";
 import QuillEditor from "@/src/components/QuillEditor";
 import { QaFileUploader } from "../QaFileUploader";
+import QaDatePicker from "../QaDatePicker";
 
 // ** Type Imports
 import { CommentInfo, IssueInfo } from "@/src/type/qa";
 import { QaCardEditMode, RoleType } from "@/src/type/common";
+
+// ** Utils Imports
 import dayjs from "dayjs";
 
 interface PropsType {
@@ -158,6 +161,15 @@ const QaCardView = ({
         <div className="font-spoqa font-medium mx-[80px]">modDate</div>
         <div className="font-spoqa font-normal text-darkGray tracking-[1px]">
           {dayjs(data.modifiedDate).format("YYYY-MM-DD")}
+        </div>
+      </div>
+      <div className="h-[20px] flex mt-5 ">
+        <div className="font-spoqa font-medium mr-[60px]">due date</div>
+        <div className="font-spoqa font-normal text-darkGray tracking-[1px]">
+          <QaDatePicker
+            value={dayjs(data.dueDate).format("YYYY-MM-DD")}
+            qaId={data.id}
+          />
         </div>
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>

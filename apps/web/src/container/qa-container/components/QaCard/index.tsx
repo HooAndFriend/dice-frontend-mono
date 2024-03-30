@@ -63,6 +63,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     memo: "",
     createdDate: "",
     modifiedDate: "",
+    dueDate: null,
   });
 
   const { uuid, role } = useRecoilValue(WorkspaceState);

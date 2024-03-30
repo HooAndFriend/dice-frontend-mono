@@ -17,8 +17,10 @@ export interface DeleteUserInfo {
 export interface DeleteUserQuery {
   createdStartDate: string
   createdEndDate: string
-  deletedStartDate: string
+  deletedStartDate: string 
   deletedEndDate: string
   nickname: string
   type: string[]
+  page: number
+  pageSize: number
 }

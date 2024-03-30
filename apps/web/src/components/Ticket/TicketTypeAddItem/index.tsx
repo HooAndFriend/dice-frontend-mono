@@ -12,8 +12,8 @@ import {
   CreateTicketSettingParams,
   CreateTicketSettingResponse,
 } from "@/src/type/ticket";
-import {useRecoilState, useRecoilValue} from "recoil";
-import {AuthState, WorkspaceState} from "@/src/app";
+import {useRecoilValue} from "recoil";
+import {AuthState} from "@/src/app";
 import useInput from "@/src/hooks/useInput";
 
 const TicketTypeAddItem = () => {
@@ -59,18 +59,33 @@ const TicketTypeAddItem = () => {
   return (
     <div className="w-full h-[75px] flex items-center">
       {open ? (
-        <>
-          <input
-            name="color"
-            type="color"
-            onChange={handleInput}
-            className="mr-8 w-[24px] h-[24px] bg-green-300 rounded-lg"
-          />
-          <CustomInput
-            name="type"
-            onChange={handleInput}
-            placeholder="Enter Type Name"
-          />
+        <div className="flex h-[60px] items-center">
+          <div className="flex items-center justify-center">
+            <input
+              name="color"
+              onChange={handleInput}
+              type="color"
+              className="w-[40px] h-[40px] bg-green-300 rounded-lg"
+            />
+          </div>
+          <div className="px-8">
+            <CustomInput
+              name="type"
+              onChange={handleInput}
+              width="165px"
+              height="50px"
+              borderRadius="10px"
+            />
+          </div>
+          <div>
+            <CustomInput
+              name="description"
+              onChange={handleInput}
+              width="1000px"
+              height="50px"
+              borderRadius="10px"
+            />
+          </div>
           <div onClick={handleAdd} className="ml-4">
             <Image
               onClick={handleOpen}
@@ -80,7 +95,7 @@ const TicketTypeAddItem = () => {
               height={36}
             />
           </div>
-        </>
+        </div>
       ) : (
         <div onClick={handleOpen} className="flex items-center w-full h-full">
           <Image src="/svg/add-box.svg" width={36} height={36} alt="add-box" />

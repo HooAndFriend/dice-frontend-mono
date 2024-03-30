@@ -16,6 +16,12 @@ export interface SettingListInfo {
   };
 }
 
+export interface SettingQuery {
+  color: string;
+  type: string;
+  description: string;
+}
+
 export interface CreateTicketSettingParams {
   color: string;
   type: string;

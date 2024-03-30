@@ -18,6 +18,11 @@ export interface GetUserWorkspaceListResponse extends CommonResponse {
   data: TeamInfo[];
 }
 
+export interface GetWorkspaceFunctionListResponse extends CommonResponse {
+  count: number;
+  data: WorkspaceFunction[];
+}
+
 export interface GetTeamWorkspaceListResponse extends CommonResponse {
   count: number;
   data: TeamWorkspaceInfo[];
@@ -118,4 +123,9 @@ export interface WorkspaceInfo {
     comment: string;
     workspaceFunction: WorksapceFunction[];
   };
+}
+
+export interface WorkspaceFunction {
+  function: WorksapceFunctionType;
+  isUse: boolean;
 }

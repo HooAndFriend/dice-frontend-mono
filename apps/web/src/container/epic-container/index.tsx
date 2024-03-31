@@ -24,14 +24,16 @@ const EpicConatiner = () => {
         Authorization: `Bearer ${accessToken}`,
         "workspace-code": uuid,
       },
-    }),
+    })
   );
 
   if (isLoading) return;
 
   if (error) return;
 
-  return <EpicContainerView epicData={data.data.data} />;
+  return (
+    <EpicContainerView epicData={data.data.data} epicCount={data.data.count} />
+  );
 };
 
 export default EpicConatiner;

@@ -13,6 +13,7 @@ import { getStateBoxColor } from "@/src/utils/color";
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
 import { Put } from "@/src/repository";
+import { mutate } from "swr";
 
 // ** Recoil Imports
 import { AuthState, WorkspaceState } from "@/src/app";
@@ -20,7 +21,6 @@ import { useRecoilValue } from "recoil";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
-import { mutate } from "swr";
 
 interface PropsType {
   qaId: number;
@@ -67,7 +67,7 @@ const QaStatusButton = ({ status, qaId, refetch }: PropsType) => {
             Authorization: `Bearer ${accessToken}`,
             "workspace-code": uuid,
           },
-        },
+        }
       ),
     {
       onSuccess: () => {
@@ -84,7 +84,7 @@ const QaStatusButton = ({ status, qaId, refetch }: PropsType) => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   useEffect(() => {

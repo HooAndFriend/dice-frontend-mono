@@ -40,7 +40,7 @@ const TicketSidebar = () => {
           isClicked: false,
         },
         {
-          id: 3,
+          id: 4,
           name: "Setting",
           link: "/dashboard/epic/setting",
           icon: SettintIcon,
@@ -52,7 +52,7 @@ const TicketSidebar = () => {
         }
         return item;
       }),
-    [pathname],
+    [pathname]
   );
 
   return (

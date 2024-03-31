@@ -1,5 +1,5 @@
 // ** Component Imports
-import EpicTable from "@/src/components/Epic/EpicTable";
+import EpicTable from "@/src/container/epic-container/components/EpicTable";
 
 // ** Type Imports
 import { EpicInfo } from "@/src/type/epic";

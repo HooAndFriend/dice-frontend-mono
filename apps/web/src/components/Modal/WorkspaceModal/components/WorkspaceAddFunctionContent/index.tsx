@@ -142,12 +142,14 @@ const WorkspaceAddFunctionContent = () => {
       </div>
       <div className="w-[750px] mt-[42px]">
         <div className="text-base font-spoqa">More Functions</div>
-        <div className="w-[750px] mt-3 ml-[6px] flex">
+        <div className="w-[750px] mt-3 ml-[6px] flex flex-wrap">
           {data.data.data
             .filter((item) => !item.isUse)
-            .map((item) => (
+            .map((item, index) => (
               <div
-                className="border border-[#EBEBEC] w-[360px] h-[76px] rounded-[20px] flex items-center font-spoqa text-base justify-between"
+                className={`border border-[#EBEBEC] w-[360px] h-[76px] rounded-[20px] flex items-center font-spoqa text-base justify-between mb-3 ${
+                  index % 2 === 0 ? "mr-3" : "ml-3"
+                }`}
                 key={item.function}
               >
                 <div className="flex">

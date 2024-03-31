@@ -18,8 +18,11 @@ import { CommonResponse } from "@/src/type/common";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
+import { useState } from "react";
 
 const WorkspaceAddFunctionContent = () => {
+  const [word, setWord] = useState<string>("");
+
   const { accessToken } = useRecoilValue(AuthState);
   const { uuid, role } = useRecoilValue(WorkspaceState);
 
@@ -106,6 +109,8 @@ const WorkspaceAddFunctionContent = () => {
         <input
           className="ml-[15px] border-none focus:outline-none w-full"
           placeholder="Search"
+          value={word}
+          onChange={(e) => setWord(e.target.value)}
         />
         <img
           className="mr-[15px]"
@@ -119,6 +124,7 @@ const WorkspaceAddFunctionContent = () => {
         <div className="mt-[13px] w-full h-10 flex items-center">
           {data.data.data
             .filter((item) => item.isUse)
+            .filter((item) => item.function.includes(word))
             .map((item) => (
               <div
                 className="w-[103px] h-10 rounded-[50px] border border-[#EBEBEC] text-base font-spoqa flex items-center pl-[15px] justify-between mr-4"
@@ -145,6 +151,7 @@ const WorkspaceAddFunctionContent = () => {
         <div className="w-[750px] mt-3 ml-[6px] flex flex-wrap">
           {data.data.data
             .filter((item) => !item.isUse)
+            .filter((item) => item.function.includes(word))
             .map((item, index) => (
               <div
                 className={`border border-[#EBEBEC] w-[360px] h-[76px] rounded-[20px] flex items-center font-spoqa text-base justify-between mb-3 ${

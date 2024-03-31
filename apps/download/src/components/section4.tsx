@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const choices = [
   {
     title: '대시보드',
-    description: '소속 멤버, 업무 진행도\n나의 하루 업무 관리',
+    description: '소속 멤버, 업무 진행도 \n 나의 하루 업무 관리',
   },
   {
     title: '워크스페이스 설정',
@@ -60,7 +60,7 @@ const Container = styled.section`
 const TextWrapper = styled.div`
   width: 90%;
   margin-bottom: 20px;
-  margin-top: 10%;
+  margin-top: 10vh;
 
   flex-direction: space-between;
 `
@@ -81,9 +81,9 @@ const TextHighlight = styled.span`
 
 const ChoiceBoxContainer = styled.div`
   display: flex;
-  height: 640px;
-  width: 350px;
-  margin-top: 6%;
+  height: 70vh;
+
+  margin-top: 15vh;
   margin-left: 5%;
 
   background-color: #f5f5f5;
@@ -127,8 +127,8 @@ const SubText = styled.div`
 `
 const Noimg = styled.img`
   width: 70%;
-  height: 640px;
+  height: 70vh;
   display: flex;
   margin-left: 2%;
-  margin-top: 6%;
+  margin-top: 15vh;
 `

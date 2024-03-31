@@ -74,7 +74,7 @@ const Container = styled.section`
 const TextWrapper = styled.div`
   width: 90%;
   margin-bottom: 20px;
-  margin-top: 10%;
+  margin-top: 15vh;
 `
 
 const Text = styled.p`

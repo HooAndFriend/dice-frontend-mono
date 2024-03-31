@@ -49,7 +49,6 @@ const Container = styled.section`
 const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 `
 
 const Text = styled.span`

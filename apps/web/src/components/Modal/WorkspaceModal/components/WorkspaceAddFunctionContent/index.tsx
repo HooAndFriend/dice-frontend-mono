@@ -4,14 +4,26 @@ import { AuthState, WorkspaceState } from "@/src/app";
 
 // ** Service Imports
 import useSWR from "swr";
-import { Get } from "@/src/repository";
+import { Get, Post, Put } from "@/src/repository";
 
 // ** Type Imports
-import { GetWorkspaceFunctionListResponse } from "@/src/type/workspace";
+import {
+  GetWorkspaceFunctionListResponse,
+  WorksapceFunctionType,
+} from "@/src/type/workspace";
+import useSWRMutation from "swr/mutation";
+
+// ** Type Imports
+import { CommonResponse } from "@/src/type/common";
+
+// ** Context Imports
+import { useDialog } from "@/src/context/DialogContext";
 
 const WorkspaceAddFunctionContent = () => {
   const { accessToken } = useRecoilValue(AuthState);
   const { uuid, role } = useRecoilValue(WorkspaceState);
+
+  const { handleOpen } = useDialog();
 
   const { data, error, isLoading, mutate } = useSWR(
     "/v1/workspace-function/function",
@@ -21,7 +33,69 @@ const WorkspaceAddFunctionContent = () => {
           Authorization: `Bearer ${accessToken}`,
           "workspace-code": uuid,
         },
-      }),
+      })
+  );
+
+  const removeWorkspaceFunction = useSWRMutation(
+    "/v1/workspace-function",
+    async (url: string, { arg }: { arg: WorksapceFunctionType }) =>
+      await Put<CommonResponse<void>>(
+        url,
+        {
+          function: arg,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "workspace-code": uuid,
+          },
+        }
+      ),
+    {
+      onSuccess: () => {
+        mutate();
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
+  const addWorkspaceFunction = useSWRMutation(
+    "/v1/workspace-function",
+    async (url: string, { arg }: { arg: WorksapceFunctionType }) =>
+      await Post<CommonResponse<void>>(
+        url,
+        {
+          function: arg,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "workspace-code": uuid,
+          },
+        }
+      ),
+    {
+      onSuccess: () => {
+        mutate();
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
   );
 
   if (isLoading) return;
@@ -53,10 +127,13 @@ const WorkspaceAddFunctionContent = () => {
                 {item.function}
                 {role === "ADMIN" && (
                   <img
-                    className="mr-[13px]"
+                    className="mr-[13px] cursor-pointer"
                     src="/svg/trashcanIcon.svg"
                     width={15}
                     height={15}
+                    onClick={() =>
+                      removeWorkspaceFunction.trigger(item.function)
+                    }
                   />
                 )}
               </div>
@@ -81,7 +158,10 @@ const WorkspaceAddFunctionContent = () => {
                   {item.function}
                 </div>
                 {role === "ADMIN" && (
-                  <div className="w-[97px] h-9 border border-[#EBEBEC] rounded-[50px] flex items-center font-spoqa font-bold text-base justify-center mr-[18px]">
+                  <div
+                    className="w-[97px] h-9 border border-[#EBEBEC] rounded-[50px] flex items-center font-spoqa font-bold text-base justify-center mr-[18px] cursor-pointer"
+                    onClick={() => addWorkspaceFunction.trigger(item.function)}
+                  >
                     <img
                       className="mr-2"
                       src="/svg/edit_plus.svg"

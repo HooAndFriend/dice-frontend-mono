@@ -33,7 +33,7 @@ const WorkspacePopover = () => {
           Authorization: `Bearer ${accessToken}`,
           "team-code": id === 0 ? "personal" : uuid,
         },
-      })
+      }),
   );
 
   const cancelButtonRef = useRef(null);

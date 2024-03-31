@@ -21,7 +21,7 @@ const WorkspaceAddFunctionContent = () => {
           Authorization: `Bearer ${accessToken}`,
           "workspace-code": uuid,
         },
-      })
+      }),
   );
 
   if (isLoading) return;

@@ -14,10 +14,9 @@ const TableItem = ({ data, disabledClick, userId, handleClick }: PropsType) => {
         !disabledClick && 'hover:bg-slate-400'
       }`}
       onClick={() => {
-        
         if (!disabledClick && handleClick) {
           if (userId !== undefined) {
-            handleClick(userId); // 사용자 ID를 handleClick 콜백에 전달
+            handleClick(userId) // 사용자 ID를 handleClick 콜백에 전달
           } else {
             handleClick(1)
           }
@@ -25,7 +24,11 @@ const TableItem = ({ data, disabledClick, userId, handleClick }: PropsType) => {
       }}
     >
       {data.map((item, index) => (
-        <div className={`pl-4 w-[${item.size}]`} style={{ width: item.size }} key={index}>
+        <div
+          className={`pl-4 w-[${item.size}]`}
+          style={{ width: item.size }}
+          key={index}
+        >
           {item.name}
         </div>
       ))}

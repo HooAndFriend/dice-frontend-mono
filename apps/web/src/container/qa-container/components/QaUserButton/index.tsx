@@ -66,7 +66,7 @@ const QaUserButton = ({
         "Workspace-code": uuid,
       },
       params: { name },
-    })
+    }),
   );
 
   const updateQaUser = useSWRMutation(
@@ -80,7 +80,7 @@ const QaUserButton = ({
             Authorization: `Bearer ${accessToken}`,
             "workspace-code": `${uuid}`,
           },
-        }
+        },
       ),
     {
       onSuccess: () => {
@@ -96,7 +96,7 @@ const QaUserButton = ({
           type: "alert",
         });
       },
-    }
+    },
   );
 
   useEffect(() => {

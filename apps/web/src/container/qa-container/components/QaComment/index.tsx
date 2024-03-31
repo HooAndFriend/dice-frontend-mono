@@ -61,7 +61,7 @@ const QaComment = ({ data, commentRefetch }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const updateComment = useSWRMutation(
@@ -78,7 +78,7 @@ const QaComment = ({ data, commentRefetch }: PropsType) => {
             Authorization: `Bearer ${accessToken}`,
             "workspace-code": `${uuid}`,
           },
-        }
+        },
       ),
     {
       onSuccess: () => {
@@ -94,7 +94,7 @@ const QaComment = ({ data, commentRefetch }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   return (

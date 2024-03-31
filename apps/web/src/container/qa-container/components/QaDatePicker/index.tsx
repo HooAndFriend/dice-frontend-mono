@@ -36,7 +36,7 @@ const QaDatePicker = ({ value, qaId }: PropsType) => {
             Authorization: `Bearer ${accessToken}`,
             "workspace-code": `${uuid}`,
           },
-        }
+        },
       ),
     {
       onSuccess: () => {
@@ -52,7 +52,7 @@ const QaDatePicker = ({ value, qaId }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {

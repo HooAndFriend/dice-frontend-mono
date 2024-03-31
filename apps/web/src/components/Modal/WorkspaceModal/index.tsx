@@ -37,7 +37,7 @@ const WorkspaceModal = ({ open, setOpen, cancelButtonRef }: PropsType) => {
         Authorization: `Bearer ${accessToken}`,
         "workspace-code": uuid,
       },
-    })
+    }),
   );
 
   if (isLoading) return;

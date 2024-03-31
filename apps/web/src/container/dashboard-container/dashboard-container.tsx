@@ -22,7 +22,7 @@ const DashboardContainerView = ({ name, dates }: PropsType) => {
           <h1 className="text-[32px] font-bold">{name}</h1>
           <h1 className="text-[20px] text-[#676767]">
             {`${dates.startDate.format(
-              "MMM DD, YYYY"
+              "MMM DD, YYYY",
             )} ~ ${dates.endDate.format("MMM DD, YYYY")}`}
           </h1>
         </div>

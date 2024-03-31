@@ -52,7 +52,7 @@ const TicketSidebar = () => {
         }
         return item;
       }),
-    [pathname]
+    [pathname],
   );
 
   return (

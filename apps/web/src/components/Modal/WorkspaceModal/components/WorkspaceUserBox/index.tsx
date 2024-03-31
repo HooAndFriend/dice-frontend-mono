@@ -48,7 +48,7 @@ const WorkspaceUserBox = ({
             Authorization: `Bearer ${accessToken}`,
             "workspace-code": uuid,
           },
-        }
+        },
       ),
     {
       onSuccess: ({ data }) => {
@@ -63,7 +63,7 @@ const WorkspaceUserBox = ({
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const removeWorkspaceUser = useSWRMutation(
@@ -88,7 +88,7 @@ const WorkspaceUserBox = ({
           type: "alert",
         });
       },
-    }
+    },
   );
 
   return (

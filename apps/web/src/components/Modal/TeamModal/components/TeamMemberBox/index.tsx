@@ -49,7 +49,7 @@ const TeamMemberBox = ({
             Authorization: `Bearer ${accessToken}`,
             "team-code": uuid,
           },
-        }
+        },
       ),
     {
       onSuccess: ({ data }) => {
@@ -64,7 +64,7 @@ const TeamMemberBox = ({
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const removeTeamUser = useSWRMutation(
@@ -89,7 +89,7 @@ const TeamMemberBox = ({
           type: "alert",
         });
       },
-    }
+    },
   );
 
   return (

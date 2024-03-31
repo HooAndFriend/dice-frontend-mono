@@ -29,7 +29,7 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
   const [word, setWord] = useState<string>("");
   const [role, setRole] = useState<RoleType>("VIEWER");
   const [inviteUserList, setInvietUserList] = useState<WorkspaceInviteUser[]>(
-    []
+    [],
   );
 
   const { accessToken } = useRecoilValue(AuthState);
@@ -45,7 +45,7 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
           Authorization: `Bearer ${accessToken}`,
           "workspace-code": uuid,
         },
-      })
+      }),
   );
 
   const inviteWorkspaceUser = useSWRMutation(
@@ -62,7 +62,7 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
             Authorization: `Bearer ${accessToken}`,
             "workspace-code": uuid,
           },
-        }
+        },
       ),
     {
       onSuccess: ({ data }) => {
@@ -78,7 +78,7 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const handleAddInviteUser = (data: WorkspaceInviteUser) => {
@@ -159,11 +159,11 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
                   .filter(
                     (item) =>
                       item.user.email.includes(word) ||
-                      item.user.nickname.includes(word)
+                      item.user.nickname.includes(word),
                   )
                   .filter(
                     (item) =>
-                      inviteUserList.findIndex((_) => _.id === item.id) === -1
+                      inviteUserList.findIndex((_) => _.id === item.id) === -1,
                   )
                   .map((item) => (
                     <div

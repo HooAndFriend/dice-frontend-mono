@@ -102,7 +102,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       ),
     {
       onSuccess: () => {
@@ -118,7 +118,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   // ** Qa 삭제
@@ -144,7 +144,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   // ** QA File 삭제
@@ -170,7 +170,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   // ** QA 수정
@@ -178,7 +178,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     "v1/qa",
     async (
       url: string,
-      { arg }: { arg: "title" | "asIs" | "toBe" | "memo" }
+      { arg }: { arg: "title" | "asIs" | "toBe" | "memo" },
     ) => {
       setCurrentArg(arg);
       return await Patch<CommonResponse<void>>(
@@ -189,7 +189,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
             Authorization: `Bearer ${accessToken}`,
             "workspace-code": `${uuid}`,
           },
-        }
+        },
       );
     },
     {
@@ -207,7 +207,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   // ** QA 정보 조회
@@ -224,7 +224,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
       onSuccess: (res) => {
         setIssueData(res.data);
       },
-    }
+    },
   );
 
   // ** 댓글 리스트 조회
@@ -239,7 +239,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
         Authorization: `Bearer ${accessToken}`,
         "Workspace-code": `${uuid}`,
       },
-    })
+    }),
   );
 
   const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {

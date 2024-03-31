@@ -67,7 +67,7 @@ const QaStatusButton = ({ status, qaId, refetch }: PropsType) => {
             Authorization: `Bearer ${accessToken}`,
             "workspace-code": uuid,
           },
-        }
+        },
       ),
     {
       onSuccess: () => {
@@ -84,7 +84,7 @@ const QaStatusButton = ({ status, qaId, refetch }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   useEffect(() => {

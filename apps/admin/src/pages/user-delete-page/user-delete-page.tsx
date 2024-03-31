@@ -11,19 +11,28 @@ import UserDeleteModal from '@/src/components/Modal/UserDeleteModal'
 // ** Type Imports
 import { DeleteUserInfo, DeleteUserQuery } from '@/src/type/user-delete'
 import { DateRange } from '@/src/type/user'
-import { formatDate } from '@/src/pages/user-page';
+import { formatDate } from '@/src/pages/user-page'
 
 interface PropsType {
   userData: DeleteUserInfo[]
   query: DeleteUserQuery
   count: number
-  handleSearch: (createdDate: DateRange, lastLoginDate: DateRange, nickname: string, types: string[]) => void;
-
+  handleSearch: (
+    createdDate: DateRange,
+    lastLoginDate: DateRange,
+    nickname: string,
+    types: string[],
+  ) => void
 }
 
-const UserDeletePageView = ({ userData, count, query, handleSearch }: PropsType) => {
+const UserDeletePageView = ({
+  userData,
+  count,
+  query,
+  handleSearch,
+}: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
-  const [selectedUser, setSelectedUser] = useState<DeleteUserInfo>(); 
+  const [selectedUser, setSelectedUser] = useState<DeleteUserInfo>()
 
   const cancelButtonRef = useRef(null)
 
@@ -39,31 +48,35 @@ const UserDeletePageView = ({ userData, count, query, handleSearch }: PropsType)
   const handleOpen = () => setOpen((c) => !c)
 
   const handleItemClick = (userId: number) => {
-    const user = userData.find(user => user.id === userId);
+    const user = userData.find((user) => user.id === userId)
     if (user) {
-      setSelectedUser(user);
-      handleOpen();
+      setSelectedUser(user)
+      handleOpen()
     }
-  };
+  }
 
   return (
     <div className="w-full px-4 mt-4">
       <TitleBox title="사용자 관리 / 탈퇴회원 조회" text="탈퇴회원 조회" />
-      <UserSearchBox searchData={searchData} query={query} onChange={handleSearch} />
+      <UserSearchBox
+        searchData={searchData}
+        query={query}
+        onChange={handleSearch}
+      />
       <div className="h-[730px] w-full bg-white rounded-[10px] py-4 px-8 mt-4">
-        <h1 className="mb-8 font-bold">탈퇴회원 목록( {count}   )</h1>
+        <h1 className="mb-8 font-bold">탈퇴회원 목록( {count} )</h1>
         <CustomTable
           headerData={headerData}
           bodyData={bodyData}
           disabledClick={false}
-          userIds={userData.map(user => user.id)}
+          userIds={userData.map((user) => user.id)}
           handleClick={handleItemClick}
         />
         <div className="flex justify-end w-full">
           <TablePagination />
         </div>
       </div>
-      { selectedUser && open && (
+      {selectedUser && open && (
         <UserDeleteModal
           userInfo={selectedUser}
           open={open}
@@ -77,8 +90,7 @@ const UserDeletePageView = ({ userData, count, query, handleSearch }: PropsType)
 
 export default UserDeletePageView
 
-const searchData = ["가입일", "탈퇴일"]
-
+const searchData = ['가입일', '탈퇴일']
 
 const headerData = [
   { name: '번호', size: '5%' },

@@ -20,7 +20,7 @@ const QaItem = ({ item, handleOpenQa }: PropsType) => {
       onClick={() => handleOpenQa(item.id)}
     >
       <div className="flex w-full h-[30px] font-spoqa font-medium text-lg">
-        <h1 className="font-bold">[{item.number}]</h1>
+        <h1 className="font-bold">[{item.code}]</h1>
         <h1 className="ml-2 mr-4">{item.title}</h1>
         {dayjs().diff(dayjs(item.createdDate), "hour") <= 24 && (
           <div className="bg-[#F13333] w-[67px] h-[30px] rounded-[10px] text-white flex items-center justify-center font-spoqa text-base text-center">

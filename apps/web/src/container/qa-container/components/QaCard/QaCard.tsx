@@ -59,7 +59,7 @@ const QaCardView = ({
     <div>
       <div className="h-[40px] flex items-center justify-between">
         <div className="flex items-center text-lg font-medium font-spoqa">
-          <h1 className="mr-4">{data.number}</h1>
+          <h1 className="mr-4">{data.code}</h1>
           {role !== "VIEWER" && (
             <p
               className="text-[12px] text-gray-500 cursor-pointer underline"
@@ -143,8 +143,8 @@ const QaCardView = ({
         <div className="flex items-center">
           <div className="font-spoqa mx-[80px] font-medium">Worker</div>
           <QaUserButton
-            profile="/faviconGray.png"
-            nickname="NoWorker"
+            profile={data.worker.profile}
+            nickname={data.worker.nickname}
             width={20}
             height={20}
             type="user"

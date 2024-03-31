@@ -1,5 +1,6 @@
 import TicketCard from "@/src/components/Ticket/TicketCard";
 import TicketTable from "@/src/components/Ticket/TicketTable";
+import TicketSearchCard from "./components/TicketSearchCard";
 
 interface PropsType {
   ticketId: number;
@@ -9,6 +10,7 @@ interface PropsType {
 const TicketContainerView = ({ ticketId, setTicketId }: PropsType) => {
   return (
     <div className="w-full">
+      <TicketSearchCard />
       <div className="mt-8">
         <h1 className="pl-4 font-bold text-md">총 4건</h1>
       </div>

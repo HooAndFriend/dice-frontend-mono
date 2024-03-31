@@ -16,6 +16,7 @@ const Footer = () => {
 export default Footer
 
 const HeaderWrapper = styled.header`
+  bottom: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;

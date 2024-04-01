@@ -16,6 +16,7 @@ interface PropsType {
   data: WorkspaceInfo[];
   id: number;
   teamName: string;
+  profile: string;
   setModalOpen: (value: boolean) => void;
   handleModalOpen: () => void;
   handleOpen: () => void;
@@ -31,13 +32,14 @@ const WorkspacePopoverView = ({
   setModalOpen,
   data,
   id,
+  profile,
   teamName,
   handleUpdateWorkspace,
 }: PropsType) => {
   return (
     <div>
       <div onClick={handleOpen}>
-        <ProfileBox image="/images/profile.jpg" alt="profile" />
+        <ProfileBox image={profile} alt="profile" />
       </div>
       {open && (
         <>

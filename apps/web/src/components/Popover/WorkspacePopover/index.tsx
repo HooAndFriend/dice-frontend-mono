@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import WorkspacePopoverView from "./workspace-popover";
 
 // ** Recoil Imports
-import { AuthState, TeamState, WorkspaceState } from "@/src/app";
+import { AuthState, TeamState, UserState, WorkspaceState } from "@/src/app";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 // ** Service Imports
@@ -33,7 +33,7 @@ const WorkspacePopover = () => {
           Authorization: `Bearer ${accessToken}`,
           "team-code": id === 0 ? "personal" : uuid,
         },
-      }),
+      })
   );
 
   const cancelButtonRef = useRef(null);
@@ -72,6 +72,7 @@ const WorkspacePopover = () => {
       handleModalOpen={handleModalOpen}
       handleUpdateWorkspace={handleUpdateWorkspace}
       teamName={name}
+      profile={workspaceState.profile}
     />
   );
 };

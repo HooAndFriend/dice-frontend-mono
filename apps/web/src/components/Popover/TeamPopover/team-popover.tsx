@@ -18,6 +18,7 @@ interface PropsType {
   uuid: string;
   user: { email: string; nickname: string; profile: string };
   data: TeamUserInfo[];
+  profile: string;
   handleUpdateTeam: (item: TeamUserInfo | 0) => void;
   setTeamModalOpen: (value: boolean) => void;
   setUserModalOpen: (value: boolean) => void;
@@ -40,12 +41,13 @@ const TeamPopoverView = ({
   handleUpdateTeam,
   uuid,
   user,
+  profile,
 }: PropsType) => {
   return (
     <>
       <div>
         <div onClick={handleOpen}>
-          <ProfileBox image={user.profile} alt="profile" />
+          <ProfileBox image={profile} alt="profile" />
         </div>
         {open && (
           <>

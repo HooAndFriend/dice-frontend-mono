@@ -13,8 +13,11 @@ import { Get } from "@/src/repository";
 
 // ** Type Imports
 import { GetEpicListResponse } from "@/src/type/epic";
+import { useState } from "react";
 
 const EpicConatiner = () => {
+  const [word, setWord] = useState<string>("");
+
   const { uuid } = useRecoilValue(WorkspaceState);
   const { accessToken } = useRecoilValue(AuthState);
 
@@ -24,14 +27,21 @@ const EpicConatiner = () => {
         Authorization: `Bearer ${accessToken}`,
         "workspace-code": uuid,
       },
-    }),
+    })
   );
 
   if (isLoading) return;
 
   if (error) return;
 
-  return <EpicContainerView epicData={data.data.data} />;
+  return (
+    <EpicContainerView
+      epicData={data.data.data}
+      epicCount={data.data.count}
+      word={word}
+      handleWord={(e) => setWord(e.target.value)}
+    />
+  );
 };
 
 export default EpicConatiner;

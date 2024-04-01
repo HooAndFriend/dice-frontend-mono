@@ -4,7 +4,7 @@ const TicketHeader = () => {
       <div className="flex w-[10%] items-center justify-center">
         <h1>Code</h1>
       </div>
-      <div className="flex w-[40%] items-center justify-center">
+      <div className="flex w-[40%] items-center">
         <h1>Name</h1>
       </div>
       <div className="flex w-[10%] items-center justify-center">

@@ -54,7 +54,7 @@ const TeamAddMemberContent = ({ open, setOpen }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   return (

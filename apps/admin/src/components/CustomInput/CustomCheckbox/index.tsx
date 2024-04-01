@@ -1,43 +1,45 @@
 // ** React Imports
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 interface CheckboxProps {
-  item: { label: string; value: string }[];
-  name?: string;
-  value: string[];
-  onChange: (value: string[]) => void;
+  item: { label: string; value: string }[]
+  name?: string
+  value: string[]
+  onChange: (value: string[]) => void
 }
 
 const CustomCheckbox = ({ item, value, onChange, name }: CheckboxProps) => {
-  const [allChecked, setAllChecked] = useState<boolean>(false);
+  const [allChecked, setAllChecked] = useState<boolean>(false)
 
   useEffect(() => {
     if (allChecked) {
-      onChange(item.map((i) => i.value) || []);
-      return;
+      onChange(item.map((i) => i.value) || [])
+      return
     }
-    onChange(value.filter((val) => val !== '전체'));
-  }, [allChecked]);
+    onChange(value.filter((val) => val !== '전체'))
+  }, [allChecked])
 
   const handleChange = (itemValue: string) => {
-    let updatedValues: string[];
+    let updatedValues: string[]
 
     if (itemValue === '전체') {
-      setAllChecked(!allChecked);
-      updatedValues = !allChecked ? item.map((i) => i.value) : [];
+      setAllChecked(!allChecked)
+      updatedValues = !allChecked ? item.map((i) => i.value) : []
     } else {
       updatedValues = value.includes(itemValue)
         ? value.filter((val) => val !== itemValue)
-        : [...value, itemValue];
-      const isAllChecked = updatedValues.length === (item.length || 0) - 1 && !updatedValues.includes('전체');
-      setAllChecked(isAllChecked);
+        : [...value, itemValue]
+      const isAllChecked =
+        updatedValues.length === (item.length || 0) - 1 &&
+        !updatedValues.includes('전체')
+      setAllChecked(isAllChecked)
     }
-    onChange(updatedValues);
-  };
+    onChange(updatedValues)
+  }
 
   return (
     <div className="flex items-center">
-      {item.map((checkboxItem, index) => ( 
+      {item.map((checkboxItem, index) => (
         <div key={index} className="flex items-center">
           <input
             name={name}
@@ -50,7 +52,7 @@ const CustomCheckbox = ({ item, value, onChange, name }: CheckboxProps) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default CustomCheckbox;
+export default CustomCheckbox

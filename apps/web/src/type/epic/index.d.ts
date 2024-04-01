@@ -6,11 +6,28 @@ export interface GetEpicListResponse extends CommonResponse {
 }
 
 export interface EpicInfo {
-  id: 3;
-  code: "DICE-1";
-  name: "게시판";
-  allTicketCount: 20;
-  doneTicketCount: 16;
+  id: number;
+  code: string;
+  name: string;
+  dueDate: Date;
+  doneTicketCount: number;
+  ticket: EpicTicketInfo[];
+}
+
+export interface EpicTicketInfo {
+  code: string;
+  completeDate: Date;
+  createdDate: Date;
+  dueDate: Date;
+  id: nunber;
+  name: string;
+  reopenDate: Date;
+  status: EpicStatus;
+  worker: {
+    id: number;
+    nickname: string;
+    profile: string;
+  };
 }
 
 export type EpicStatus =

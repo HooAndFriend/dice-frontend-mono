@@ -10,7 +10,7 @@ import UserModal from '@/src/components/Modal/UserModal'
 
 // ** Type Imports
 import { DateRange, UserInfo, UserInfoQuery } from '@/src/type/user'
-import { formatDate } from './index';
+import { formatDate } from './index'
 
 interface PropsType {
   userData: UserInfo[];
@@ -29,10 +29,10 @@ const UserPageView = ({
 }: PropsType) => {
 
   const [open, setOpen] = useState<boolean>(false)
-  const [selectedUser, setSelectedUser] = useState<UserInfo>(); 
+  const [selectedUser, setSelectedUser] = useState<UserInfo>()
 
   const cancelButtonRef = useRef(null)
-  
+
   const bodyData = userData.map((user, index) => [
     { name: user.id.toString(), size: '0%' },
     { name: (index + 1).toString(), size: '5%' },
@@ -42,23 +42,27 @@ const UserPageView = ({
     { name: formatDate(user.createdDate), size: '15%' },
     { name: formatDate(user.lastLoginDate), size: '15%' },
     { name: user.workspaceUserCount, size: '10%' },
-    { name: user.teamUserCount, size: '10%' }
-  ]);
+    { name: user.teamUserCount, size: '10%' },
+  ])
 
   const handleOpen = () => setOpen((c) => !c)
 
   const handleItemClick = (userId: number) => {
     const user = userData.find(user => user.id === userId);
     if (user) {
-      setSelectedUser(user);
-      handleOpen();
+      setSelectedUser(user)
+      handleOpen()
     }
-  };
+  }
 
   return (
     <div className="w-full px-4 mt-4">
       <TitleBox title="사용자 관리 / 사용자 조회" text="사용자 조회" />
-      <UserSearchBox searchData={searchData} query={query} onChange={handleSearch} />
+      <UserSearchBox
+        searchData={searchData}
+        query={query}
+        onChange={handleSearch}
+      />
       <div className="h-[730px] w-full bg-white rounded-[10px] py-4 px-8 mt-4">
         <h1 className="mb-8 font-bold">사용자 목록({count})</h1>
         <CustomTable
@@ -72,15 +76,14 @@ const UserPageView = ({
           <TablePagination count={count} pageSize={query.pageSize} handlePage={handlePage} />
         </div>
       </div>
-      { selectedUser && open && (
+      {selectedUser && open && (
         <UserModal
           userInfo={selectedUser}
           open={open}
           setOpen={setOpen}
           cancelButtonRef={cancelButtonRef}
-          />
-        )
-      }
+        />
+      )}
     </div>
   )
 }
@@ -98,4 +101,3 @@ const headerData = [
   { name: '소속 팀 수', size: '10%' },
   { name: '소속 워크스페이스 수', size: '10%' },
 ]
-

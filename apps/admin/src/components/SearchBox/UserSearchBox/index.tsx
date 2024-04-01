@@ -9,51 +9,68 @@ import CustomCheckbox from '../../CustomInput/CustomCheckbox'
 
 // ** Type Imports
 import { DateRange, UserInfoQuery } from '@/src/type/user'
-import { DeleteUserQuery } from '@/src/type/user-delete';
+import { DeleteUserQuery } from '@/src/type/user-delete'
 
 interface PropsType {
   searchData: string[]
   query: UserInfoQuery | DeleteUserQuery
-  onChange: (createdDate: DateRange, lastLoginDate: DateRange, nickname: string, types: string[]) => void;
+  onChange: (
+    createdDate: DateRange,
+    lastLoginDate: DateRange,
+    nickname: string,
+    types: string[],
+  ) => void
 }
 
 const defaultDate = () => {
-  return { startDate: '2024-01-01', endDate: new Date().toLocaleDateString() };
+  return { startDate: '2024-01-01', endDate: new Date().toLocaleDateString() }
 }
 
 const CheckboxItem = [
-  { value: "전체", label: "전체" },
-  { value: "DICE", label: "일반" },
-  { value: "MICROSOFT", label: "Microsoft" },
-  { value: "GOOGLE", label: "Google" },
-  { value: "APPLE", label: "Apple" },
-  { value: "GITHUB", label: "Github" },
-  { value: "TWITTER", label: "Twitter" },
-];
+  { value: '전체', label: '전체' },
+  { value: 'DICE', label: '일반' },
+  { value: 'MICROSOFT', label: 'Microsoft' },
+  { value: 'GOOGLE', label: 'Google' },
+  { value: 'APPLE', label: 'Apple' },
+  { value: 'GITHUB', label: 'Github' },
+  { value: 'TWITTER', label: 'Twitter' },
+]
 
 const UserSearchBox = ({ searchData, query, onChange }: PropsType) => {
   const [createdDate, setCreatedDate] = useState<DateRange>({
     startDate: query.createdStartDate,
-    endDate: query.createdEndDate
+    endDate: query.createdEndDate,
   })
   const [lastLoginDate, setLastLoginDate] = useState<DateRange>({
-    startDate: (query as UserInfoQuery).lastLoginStartDate || (query as DeleteUserQuery).deletedStartDate,
-    endDate: (query as UserInfoQuery).lastLoginEndDate || (query as DeleteUserQuery).deletedEndDate
+    startDate:
+      (query as UserInfoQuery).lastLoginStartDate ||
+      (query as DeleteUserQuery).deletedStartDate,
+    endDate:
+      (query as UserInfoQuery).lastLoginEndDate ||
+      (query as DeleteUserQuery).deletedEndDate,
   })
-  const [nickname, setNickname] = useState(query.nickname);
-  const [types, setTypes] = useState<string[]>(query.type);
- 
-  const handleCreatedDate = (newDate) => { setCreatedDate(newDate); }
-  const handleLastLoginDate = (newDate) => { setLastLoginDate(newDate); }
-  const handleNickName = (event) => { setNickname(event.target.value); }
-  const handleTypes = (selectedValues: string[]) => { setTypes(selectedValues); };
+  const [nickname, setNickname] = useState(query.nickname)
+  const [types, setTypes] = useState<string[]>(query.type)
+
+  const handleCreatedDate = (newDate) => {
+    setCreatedDate(newDate)
+  }
+  const handleLastLoginDate = (newDate) => {
+    setLastLoginDate(newDate)
+  }
+  const handleNickName = (event) => {
+    setNickname(event.target.value)
+  }
+  const handleTypes = (selectedValues: string[]) => {
+    setTypes(selectedValues)
+  }
 
   const handleReset = () => {
-    setCreatedDate(defaultDate);
-    setLastLoginDate(defaultDate);
-    setNickname('');
-    setTypes([]);
-  };
+    setCreatedDate(defaultDate)
+    setLastLoginDate(defaultDate)
+    setNickname('')
+    setTypes([])
+  }
 
   const handleSearch = () => {
     onChange(createdDate, lastLoginDate, nickname, types)
@@ -72,7 +89,7 @@ const UserSearchBox = ({ searchData, query, onChange }: PropsType) => {
         </div>
         <h1 className="mr-4">닉네임</h1>
         <input
-          name='nickname'
+          name="nickname"
           value={nickname}
           onChange={handleNickName}
           type="text"
@@ -85,16 +102,22 @@ const UserSearchBox = ({ searchData, query, onChange }: PropsType) => {
           <h1 className="mr-8">가입 구분</h1>
           <CustomCheckbox
             item={CheckboxItem}
-            name='type'
+            name="type"
             value={types}
             onChange={handleTypes}
           />
         </div>
         <div className="flex items-center">
-          <button className="w-[90px] h-[36px] rounded-[8px] bg-[#EFEFEF] mr-4" onClick={handleReset}>
+          <button
+            className="w-[90px] h-[36px] rounded-[8px] bg-[#EFEFEF] mr-4"
+            onClick={handleReset}
+          >
             초기화
           </button>
-          <button className="w-[90px] h-[36px] rounded-[8px] bg-[#623AD6] text-white" onClick={handleSearch}>
+          <button
+            className="w-[90px] h-[36px] rounded-[8px] bg-[#623AD6] text-white"
+            onClick={handleSearch}
+          >
             검색
           </button>
         </div>

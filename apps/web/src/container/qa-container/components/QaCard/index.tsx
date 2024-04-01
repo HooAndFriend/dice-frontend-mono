@@ -52,7 +52,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     setData: setIssueData,
   } = useInput<IssueInfo>({
     id: 0,
-    number: "",
+    code: "",
     status: "",
     title: "",
     admin: { email: "", nickname: "", profile: "" },
@@ -63,6 +63,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     memo: "",
     createdDate: "",
     modifiedDate: "",
+    dueDate: null,
   });
 
   const { uuid, role } = useRecoilValue(WorkspaceState);

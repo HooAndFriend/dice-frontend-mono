@@ -21,8 +21,16 @@ interface PropsType {
   setOpen: (open: boolean) => void
 }
 
-const UserModalView = ({ open, userData, teamData, workspaceData, teamCount, workspaceCount,cancelButtonRef, setOpen }: PropsType) => {
-
+const UserModalView = ({
+  open,
+  userData,
+  teamData,
+  workspaceData,
+  teamCount,
+  workspaceCount,
+  cancelButtonRef,
+  setOpen,
+}: PropsType) => {
   const TeamBodyData = teamData.map((team) => [
     {name: team.team.name, size: '30%'},
     {name: team.role, size: '20%'},
@@ -108,7 +116,9 @@ const UserModalView = ({ open, userData, teamData, workspaceData, teamCount, wor
                       </div>
                     </div>
                     <div className="w-full mt-[20px] px-4">
-                      <h1 className="font-bold mb-[12px]">ㅁ 소속 팀 수 ( {teamCount} )</h1>
+                      <h1 className="font-bold mb-[12px]">
+                        ㅁ 소속 팀 수 ( {teamCount} )
+                      </h1>
                       <CustomTable
                         headerData={headerData}
                         bodyData={TeamBodyData}
@@ -164,7 +174,7 @@ const headerWorkspaceData = [
   { name: '소속일', size: '30%' },
 ]
 
-  const bodyData = [
+const bodyData = [
   [
     { name: 'DICE_DEV', size: '30%' },
     { name: 'Admin', size: '20%' },
@@ -182,5 +192,5 @@ const headerWorkspaceData = [
     { name: 'Admin', size: '20%' },
     { name: 'babting', size: '20%' },
     { name: '2024-01-01 23:10:12', size: '30%' },
-    ],
-  ]
+  ],
+]

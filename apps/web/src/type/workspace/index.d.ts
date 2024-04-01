@@ -18,6 +18,11 @@ export interface GetUserWorkspaceListResponse extends CommonResponse {
   data: TeamInfo[];
 }
 
+export interface GetWorkspaceFunctionListResponse extends CommonResponse {
+  count: number;
+  data: WorkspaceFunction[];
+}
+
 export interface GetTeamWorkspaceListResponse extends CommonResponse {
   count: number;
   data: TeamWorkspaceInfo[];
@@ -37,6 +42,11 @@ export interface GetWorkspaceUserListResponse extends CommonResponse {
   data: WorkspaceUserDetailInfo[];
 }
 
+export interface GetWorkspaceUserInviteListResponse extends CommonResponse {
+  count: number;
+  data: WorkspaceInviteUser[];
+}
+
 export interface GetSearchWorkspaceUserListResponse extends CommonResponse {
   count: number;
   data: WorkspaceUser[];
@@ -52,6 +62,17 @@ export interface WorkspaceUserDetailInfo {
       nickname: string;
       profile: string;
     };
+  };
+}
+
+export interface WorkspaceInviteUser {
+  id: number;
+  role: RoleType;
+  user: {
+    id: number;
+    email: string;
+    nickname: string;
+    profile: string;
   };
 }
 
@@ -102,4 +123,9 @@ export interface WorkspaceInfo {
     comment: string;
     workspaceFunction: WorksapceFunction[];
   };
+}
+
+export interface WorkspaceFunction {
+  function: WorksapceFunctionType;
+  isUse: boolean;
 }

@@ -47,7 +47,7 @@ const WorkspaceSettingContent = () => {
         Authorization: `Bearer ${accessToken}`,
         "workspace-code": workspaceState.uuid,
       },
-    })
+    }),
   );
 
   const updateWorkspace = useSWRMutation(
@@ -65,7 +65,7 @@ const WorkspaceSettingContent = () => {
             Authorization: `Bearer ${accessToken}`,
             "team-code": workspaceState.uuid,
           },
-        }
+        },
       ),
     {
       onSuccess: () => {
@@ -87,7 +87,7 @@ const WorkspaceSettingContent = () => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const handleImage = (profile: string) => {

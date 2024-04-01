@@ -24,7 +24,7 @@ const TeamWorkSpaceContent = () => {
           Authorization: `Bearer ${accessToken}`,
           "team-code": uuid,
         },
-      })
+      }),
   );
 
   if (isLoading) return;

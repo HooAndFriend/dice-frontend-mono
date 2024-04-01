@@ -7,10 +7,13 @@ import QaStatusButton from "../QaStatusButton";
 import QaUserButton from "../QaUserButton";
 import QuillEditor from "@/src/components/QuillEditor";
 import { QaFileUploader } from "../QaFileUploader";
+import QaDatePicker from "../QaDatePicker";
 
 // ** Type Imports
 import { CommentInfo, IssueInfo } from "@/src/type/qa";
 import { QaCardEditMode, RoleType } from "@/src/type/common";
+
+// ** Utils Imports
 import dayjs from "dayjs";
 
 interface PropsType {
@@ -56,7 +59,7 @@ const QaCardView = ({
     <div>
       <div className="h-[40px] flex items-center justify-between">
         <div className="flex items-center text-lg font-medium font-spoqa">
-          <h1 className="mr-4">{data.number}</h1>
+          <h1 className="mr-4">{data.code}</h1>
           {role !== "VIEWER" && (
             <p
               className="text-[12px] text-gray-500 cursor-pointer underline"
@@ -140,8 +143,8 @@ const QaCardView = ({
         <div className="flex items-center">
           <div className="font-spoqa mx-[80px] font-medium">Worker</div>
           <QaUserButton
-            profile="/faviconGray.png"
-            nickname="NoWorker"
+            profile={data.worker.profile}
+            nickname={data.worker.nickname}
             width={20}
             height={20}
             type="user"
@@ -158,6 +161,15 @@ const QaCardView = ({
         <div className="font-spoqa font-medium mx-[80px]">modDate</div>
         <div className="font-spoqa font-normal text-darkGray tracking-[1px]">
           {dayjs(data.modifiedDate).format("YYYY-MM-DD")}
+        </div>
+      </div>
+      <div className="h-[20px] flex mt-5 ">
+        <div className="font-spoqa font-medium mr-[60px]">due date</div>
+        <div className="font-spoqa font-normal text-darkGray tracking-[1px]">
+          <QaDatePicker
+            value={dayjs(data.dueDate).format("YYYY-MM-DD")}
+            qaId={data.id}
+          />
         </div>
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>

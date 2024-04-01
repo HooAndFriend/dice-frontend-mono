@@ -11,7 +11,12 @@ interface PropsType {
   setOpen: (open: boolean) => void
 }
 
-const UserDeleteModal = ({ open, setOpen, userInfo, cancelButtonRef }: PropsType) => {
+const UserDeleteModal = ({
+  open,
+  setOpen,
+  userInfo,
+  cancelButtonRef,
+}: PropsType) => {
   return (
     <DialogProvider>
       <UserDeleteModalView

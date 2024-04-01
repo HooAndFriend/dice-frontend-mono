@@ -1,9 +1,21 @@
 "use client";
 
+// ** React Imports
 import { useState } from "react";
+
+// ** Component Imports
 import WorkspaceModalView from "./workspace-modal";
+
+// ** Recoil Imports
 import { useRecoilValue } from "recoil";
-import { WorkspaceState } from "@/src/app";
+import { AuthState, WorkspaceState } from "@/src/app";
+
+// ** Service Imports
+import useSWR from "swr";
+import { Get } from "@/src/repository";
+
+// ** Type Imports
+import { GetWorkspaceUserListResponse } from "@/src/type/workspace";
 
 interface PropsType {
   open: boolean;
@@ -16,7 +28,19 @@ const WorkspaceModal = ({ open, setOpen, cancelButtonRef }: PropsType) => {
 
   const [addOpen, setAddOpen] = useState<boolean>(false);
 
-  const { profile, name } = useRecoilValue(WorkspaceState);
+  const { accessToken } = useRecoilValue(AuthState);
+  const { profile, name, uuid } = useRecoilValue(WorkspaceState);
+
+  const { data, error, isLoading } = useSWR("/v1/workspace-user", async (url) =>
+    Get<GetWorkspaceUserListResponse>(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "workspace-code": uuid,
+      },
+    }),
+  );
+
+  if (isLoading) return;
 
   return (
     <WorkspaceModalView
@@ -29,6 +53,7 @@ const WorkspaceModal = ({ open, setOpen, cancelButtonRef }: PropsType) => {
       setAddOpen={setAddOpen}
       setOpen={setOpen}
       cancelButtonRef={cancelButtonRef}
+      data={data.data.data}
     />
   );
 };

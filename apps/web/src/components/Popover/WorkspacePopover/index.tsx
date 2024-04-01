@@ -1,7 +1,7 @@
 "use client";
 
 // ** React Imports
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // ** Component Imports
 import WorkspacePopoverView from "./workspace-popover";
@@ -25,7 +25,7 @@ const WorkspacePopover = () => {
   const { id, uuid, name } = useRecoilValue(TeamState);
   const { accessToken } = useRecoilValue(AuthState);
 
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading, mutate } = useSWR(
     "/v1/workspace-user/team",
     async (url) =>
       Get<GetWorkspaceListResponse>(url, {
@@ -33,7 +33,7 @@ const WorkspacePopover = () => {
           Authorization: `Bearer ${accessToken}`,
           "team-code": id === 0 ? "personal" : uuid,
         },
-      })
+      }),
   );
 
   const cancelButtonRef = useRef(null);
@@ -52,7 +52,9 @@ const WorkspacePopover = () => {
     });
   };
 
-  // console.log(data.data);
+  useEffect(() => {
+    mutate();
+  }, [id]);
 
   if (isLoading) return;
 

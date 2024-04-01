@@ -42,7 +42,7 @@ export const QaFileUploader = ({ qaId, refetch }: PropsType) => {
             Authorization: `Bearer ${accessToken}`,
             "workspace-code": uuid,
           },
-        }
+        },
       ),
     {
       onSuccess: () => {
@@ -57,7 +57,7 @@ export const QaFileUploader = ({ qaId, refetch }: PropsType) => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const clearInput = () => {

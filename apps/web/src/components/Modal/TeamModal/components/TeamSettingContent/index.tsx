@@ -42,7 +42,7 @@ const TeamSettingContent = () => {
       },
     }).then((res) => {
       setData(res.data);
-    })
+    }),
   );
 
   const updateTeam = useSWRMutation(
@@ -60,7 +60,7 @@ const TeamSettingContent = () => {
             Authorization: `Bearer ${accessToken}`,
             "team-code": teamState.uuid,
           },
-        }
+        },
       ),
     {
       onSuccess: () => {
@@ -81,7 +81,7 @@ const TeamSettingContent = () => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const handleImage = (profile: string) => {

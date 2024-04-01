@@ -29,7 +29,7 @@ export interface GetIssueResponse extends CommonResponse, IssueInfo {}
 
 export interface IssueInfo {
   id: number;
-  number: string;
+  code: string;
   status: EpicStatus;
   title: string;
   admin?: {
@@ -51,6 +51,7 @@ export interface IssueInfo {
   asIs: string;
   toBe: string;
   memo: string;
+  dueDate: string;
   createdDate: string;
   modifiedDate: string;
 }

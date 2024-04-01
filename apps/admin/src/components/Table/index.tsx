@@ -17,21 +17,21 @@ const CustomTable = ({
   userIds,
   handleClick,
 }: PropsType) => {
-  const userIdList = userIds || [];
-  const filteredBodyData = bodyData.map(data => {
-    const filteredData: TableItemType[] = [];
-    data.forEach(item => {
+  const userIdList = userIds || []
+  const filteredBodyData = bodyData.map((data) => {
+    const filteredData: TableItemType[] = []
+    data.forEach((item) => {
       if (item.size !== '0%') {
-        filteredData.push(item);
+        filteredData.push(item)
       }
-    });
-    return filteredData;
-  });
+    })
+    return filteredData
+  })
 
   return (
     <div>
       <TableHeader data={headerData} />
-      {filteredBodyData.map((item,index) => (
+      {filteredBodyData.map((item, index) => (
         <TableItem
           key={index}
           data={item}

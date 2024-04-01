@@ -37,7 +37,7 @@ const UserSettingContent = () => {
       headers: { Authorization: `Bearer ${accessToken}` },
     }).then((res) => {
       setData(res.data);
-    })
+    }),
   );
 
   const updateUser = useSWRMutation(
@@ -51,7 +51,7 @@ const UserSettingContent = () => {
         },
         {
           headers: { Authorization: `Bearer ${accessToken}` },
-        }
+        },
       ),
     {
       onSuccess: ({ data: responseData }) => {
@@ -71,7 +71,7 @@ const UserSettingContent = () => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const handleImage = (profile: string) => {

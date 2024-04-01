@@ -20,7 +20,7 @@ const UserWorkspaceContent = () => {
     async (url) =>
       Get<GetUserWorkspaceListResponse>(url, {
         headers: { Authorization: `Bearer ${accessToken}` },
-      })
+      }),
   );
 
   if (isLoading) return;

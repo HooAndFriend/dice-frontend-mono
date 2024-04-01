@@ -1,24 +1,27 @@
-
 // ** UI Imports
 import UserModalView from './UserModal'
 
 // ** Context Imports
 import { DialogProvider } from '@/src/context/DialogContext'
 // ** Recoil Imports
-import { useRecoilValue } from 'recoil';
-import { AuthState } from '@/src/app/auth';
+import { useRecoilValue } from 'recoil'
+import { AuthState } from '@/src/app/auth'
 
 // ** Swr Imports
-import useSWR from 'swr';
-import { Get } from '@/src/repository';
+import useSWR from 'swr'
+import { Get } from '@/src/repository'
 
 // ** Type Imports
-import { UserInfo, GetUserTeamResponse, GetUserWorkspaceResponse } from '@/src/type/user';
+import {
+  UserInfo,
+  GetUserTeamResponse,
+  GetUserWorkspaceResponse,
+} from '@/src/type/user'
 interface PropsType {
-  open: boolean;
-  userInfo: UserInfo;
-  cancelButtonRef: any;
-  setOpen: (open: boolean) => void;
+  open: boolean
+  userInfo: UserInfo
+  cancelButtonRef: any
+  setOpen: (open: boolean) => void
 }
 
 const UserModal = ({ open, setOpen, userInfo, cancelButtonRef }: PropsType) : JSX.Element | null => {
@@ -31,20 +34,23 @@ const UserModal = ({ open, setOpen, userInfo, cancelButtonRef }: PropsType) : JS
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    });
-  });
-  const { data:workspace, isLoading:wsLoading, error:wsError } = useSWR(`/v1/user/workspace/${userId}`, async (url) => {
+    })
+  })
+  const {
+    data: workspace,
+    isLoading: wsLoading,
+    error: wsError,
+  } = useSWR(`/v1/user/workspace/${userId}`, async (url) => {
     return Get<GetUserWorkspaceResponse>(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    });
-  });
+    })
+  })
 
-  if (!team || !workspace) return null;
-  if (teamLoading || wsLoading) return null;
-  if (teamError || wsError) return null;
-
+  if (!team || !workspace) return null
+  if (teamLoading || wsLoading) return null
+  if (teamError || wsError) return null
 
   return (
     <DialogProvider>

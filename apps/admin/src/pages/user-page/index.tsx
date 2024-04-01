@@ -20,9 +20,9 @@ export function formatDate(date: Date): string {
   return new Date(d).toISOString().replace('T', ' ').substring(0, 19)
 }
 const handleDateChange = (endDate) => {
-  const date = new Date(endDate);
-  const nextDay = new Date(date.setDate(date.getDate() + 1));
-  return nextDay.toISOString().substring(0, 10);
+  const date = new Date(endDate)
+  const nextDay = new Date(date.setDate(date.getDate() + 1))
+  return nextDay.toISOString().substring(0, 10)
 }
 
 const UserPage = () => {
@@ -44,11 +44,11 @@ const UserPage = () => {
     const params = {
       ...(createdStartDate !== null && { createdStartDate }),
       ...(createdEndDate !== null && {
-      createdEndDate: handleDateChange(createdEndDate),
+        createdEndDate: handleDateChange(createdEndDate),
       }),
       ...(lastLoginStartDate !== null && { lastLoginStartDate }),
       ...(lastLoginEndDate !== null && {
-      lastLoginEndDate: handleDateChange(lastLoginEndDate),
+        lastLoginEndDate: handleDateChange(lastLoginEndDate),
       }),
       ...(nickname !== null && { nickname }),
       ...(type !== null && { type }),
@@ -70,7 +70,8 @@ const UserPage = () => {
     types: string[],
   ) => {
     const { startDate: createdStartDate, endDate: createdEndDate } = createdDate
-    const { startDate: lastLoginStartDate, endDate: lastLoginEndDate } = lastLoginDate
+    const { startDate: lastLoginStartDate, endDate: lastLoginEndDate } =
+      lastLoginDate
 
     query.createdStartDate = createdStartDate
     query.createdEndDate = createdEndDate

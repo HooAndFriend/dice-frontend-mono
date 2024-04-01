@@ -24,3 +24,4 @@ export interface DeleteUserQuery {
   page: number
   pageSize: number
 }
+

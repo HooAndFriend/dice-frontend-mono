@@ -39,6 +39,7 @@ export interface UserTeam {
   invitedId: string
   team: TeamInfo
 }
+
 export interface TeamInfo {
   name: string
 }

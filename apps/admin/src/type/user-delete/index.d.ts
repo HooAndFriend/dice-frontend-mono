@@ -21,4 +21,7 @@ export interface DeleteUserQuery {
   deletedEndDate: string
   nickname: string
   type: string[]
+  page: number
+  pageSize: number
 }
+

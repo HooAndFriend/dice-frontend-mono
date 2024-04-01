@@ -32,17 +32,17 @@ const UserModalView = ({
   setOpen,
 }: PropsType) => {
   const TeamBodyData = teamData.map((team) => [
-    {name: team.team.name, size: '30%'},
-    {name: team.role, size: '20%'},
-    {name: team.invitedId, size: '20%'},
-    {name: formatDate(team.createdDate), size: '30%'}
-  ]);
+    { name: team.team.name, size: '30%' },
+    { name: team.role, size: '20%' },
+    { name: '누군가', size: '20%' },
+    { name: formatDate(team.createdDate), size: '30%' },
+  ])
 
   const WorkspaceBodyData = workspaceData.map((workspace) => [
-    {name: workspace.workspace.name, size: '30%'},
-    {name: workspace.role, size: '20%'},
-    {name: workspace.invitedId, size: '20%'},
-    {name: formatDate(workspace.createdDate), size: '30%'}
+    { name: workspace.workspace.name, size: '30%' },
+    { name: workspace.role, size: '20%' },
+    { name: '누군가', size: '20%' },
+    { name: formatDate(workspace.createdDate), size: '30%' },
   ])
 
   return (
@@ -90,21 +90,27 @@ const UserModalView = ({
                     <div className="flex items-center">
                       <div className="w-full h-[20px] flex items-center">
                         <h1 className="w-[100px] px-4 font-bold">닉네임</h1>
-                        <h1 className="text-[#696374]">{userData.nickname}</h1>
+                        <h1 className="text-[#696374]">
+                          {userData.user_nickname}
+                        </h1>
                       </div>
                       <div className="w-full h-[20px] flex items-center">
                         <h1 className="w-[100px] px-4 font-bold">이메일</h1>
-                        <h1 className="text-[#696374]">{userData.email}</h1>
+                        <h1 className="text-[#696374]">
+                          {userData.user_email}
+                        </h1>
                       </div>
                     </div>
                     <div className="flex items-center mt-[20px]">
                       <div className="w-full h-[20px] flex items-center">
                         <h1 className="w-[100px] px-4 font-bold">가입구분</h1>
-                        <h1 className="text-[#696374]">{userData.type}</h1>
+                        <h1 className="text-[#696374]">{userData.user_type}</h1>
                       </div>
                       <div className="w-full h-[20px] flex items-center">
                         <h1 className="w-[100px] px-4 font-bold">가입일</h1>
-                        <h1 className="text-[#696374]">{formatDate(userData.createdDate)}</h1>
+                        <h1 className="text-[#696374]">
+                          {formatDate(userData.user_created_date)}
+                        </h1>
                       </div>
                     </div>
                     <div className="flex items-center mt-[20px]">
@@ -112,7 +118,9 @@ const UserModalView = ({
                         <h1 className="w-[100px] px-4 font-bold">
                           최근 로그인
                         </h1>
-                        <h1 className="text-[#696374]">{formatDate(userData.lastLoginDate)}</h1>
+                        <h1 className="text-[#696374]">
+                          {formatDate(userData.user_last_login_date)}
+                        </h1>
                       </div>
                     </div>
                     <div className="w-full mt-[20px] px-4">
@@ -125,6 +133,7 @@ const UserModalView = ({
                         disabledClick
                       />
                       <div className="flex justify-end w-full">
+                        <TablePagination />
                       </div>
                     </div>
                     <div className="w-full mt-[20px] px-4">
@@ -137,6 +146,7 @@ const UserModalView = ({
                         disabledClick
                       />
                       <div className="flex justify-end w-full">
+                        <TablePagination />
                       </div>
                     </div>
                     <div className="flex justify-end w-full mt-[20px]">

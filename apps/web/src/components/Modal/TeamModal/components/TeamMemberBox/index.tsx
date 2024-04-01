@@ -49,7 +49,7 @@ const TeamMemberBox = ({
             Authorization: `Bearer ${accessToken}`,
             "team-code": uuid,
           },
-        },
+        }
       ),
     {
       onSuccess: ({ data }) => {
@@ -64,7 +64,7 @@ const TeamMemberBox = ({
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const removeTeamUser = useSWRMutation(
@@ -89,11 +89,11 @@ const TeamMemberBox = ({
           type: "alert",
         });
       },
-    },
+    }
   );
 
   return (
-    <div className="mb-[21px] w-[740px] h-20 border-[#EBEBEC] border shadow-md rounded-[15px] flex items-center justify-between">
+    <div className="mb-[21px] w-[full] h-20 border-[#EBEBEC] border shadow-md rounded-[15px] flex items-center justify-between">
       <div className="flex">
         <img
           src={profile}

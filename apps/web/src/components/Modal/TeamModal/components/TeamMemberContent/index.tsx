@@ -35,7 +35,7 @@ const TeamMemberContent = ({ handleOpen }: PropsType) => {
         Authorization: `Bearer ${accessToken}`,
         "team-code": uuid,
       },
-    }),
+    })
   );
 
   const handleTeamUserRole = async (teamUserId: number, role: RoleType) => {
@@ -50,7 +50,7 @@ const TeamMemberContent = ({ handleOpen }: PropsType) => {
           Authorization: `Bearer ${accessToken}`,
           "team-code": uuid,
         },
-      },
+      }
     )
       .then((res) => {
         mutate("/v1/team-user/user");
@@ -105,7 +105,7 @@ const TeamMemberContent = ({ handleOpen }: PropsType) => {
           AddMember
         </div>
       </div>
-      <div className="h-[420px] w-full overflow-y-auto">
+      <div className="h-[420px] w-full overflow-y-auto overflow-x-hidden">
         {data.data.data.map((item) => (
           <TeamMemberBox
             key={item.id}

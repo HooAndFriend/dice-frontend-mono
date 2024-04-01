@@ -8,6 +8,7 @@ import { WorkspaceInfo } from "@/src/type/workspace";
 import WorkspaceModal from "@/src/components/Modal/WorkspaceModal";
 import ProfileBox from "../../ProfileBox";
 import WorkspaceBox from "./component/workspace-box";
+import { WorkspaceStateType } from "@/src/app";
 
 interface PropsType {
   open: boolean;
@@ -15,8 +16,8 @@ interface PropsType {
   cancelButtonRef: any;
   data: WorkspaceInfo[];
   id: number;
-  teamName: string;
   profile: string;
+  workspace: WorkspaceStateType;
   setModalOpen: (value: boolean) => void;
   handleModalOpen: () => void;
   handleOpen: () => void;
@@ -33,7 +34,7 @@ const WorkspacePopoverView = ({
   data,
   id,
   profile,
-  teamName,
+  workspace,
   handleUpdateWorkspace,
 }: PropsType) => {
   return (
@@ -46,7 +47,7 @@ const WorkspacePopoverView = ({
           <div onClick={handleOpen} className="fixed inset-0 z-10" />
           <div className="popover p-5 rounded-[20px] w-[350px] h-[250px] absolute bg-white shadow-md p- -translate-y-full translate-x-20 z-10">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-bold">{teamName}</h3>
+              <h3 className="text-lg font-bold">{workspace.name}</h3>
               <div className="flex items-center" onClick={handleModalOpen}>
                 <img
                   src="/images/settings.png"

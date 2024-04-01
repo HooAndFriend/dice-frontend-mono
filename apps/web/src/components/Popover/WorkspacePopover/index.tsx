@@ -71,7 +71,7 @@ const WorkspacePopover = () => {
       setModalOpen={setModalOpen}
       handleModalOpen={handleModalOpen}
       handleUpdateWorkspace={handleUpdateWorkspace}
-      teamName={name}
+      workspace={workspaceState}
       profile={workspaceState.profile}
     />
   );

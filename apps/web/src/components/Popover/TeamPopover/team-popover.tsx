@@ -9,6 +9,7 @@ import TeamBox from "./component/team-box";
 
 // ** Type Imports
 import { TeamUserInfo } from "@/src/type/team";
+import { TeamStateType } from "@/src/app";
 
 interface PropsType {
   open: boolean;
@@ -18,6 +19,7 @@ interface PropsType {
   uuid: string;
   user: { email: string; nickname: string; profile: string };
   data: TeamUserInfo[];
+  teamState: TeamStateType;
   profile: string;
   handleUpdateTeam: (item: TeamUserInfo | 0) => void;
   setTeamModalOpen: (value: boolean) => void;
@@ -41,6 +43,7 @@ const TeamPopoverView = ({
   handleUpdateTeam,
   uuid,
   user,
+  teamState,
   profile,
 }: PropsType) => {
   return (
@@ -54,7 +57,7 @@ const TeamPopoverView = ({
             <div onClick={handleOpen} className="fixed inset-0 z-10" />
             <div className="popover p-5 rounded-[20px] w-[350px] h-[250px] absolute bg-white shadow-md p- translate-y-10 -translate-x-3/4 z-10">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold">{user.nickname}</h3>
+                <h3 className="text-lg font-bold">{teamState.name}</h3>
                 <div className="flex items-center">
                   <img
                     src="/images/settings.png"

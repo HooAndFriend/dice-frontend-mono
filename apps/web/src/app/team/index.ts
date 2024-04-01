@@ -8,7 +8,7 @@ import { persistStorageAtom } from "../util";
 // ** Type Imports
 import { RoleType } from "@/src/type/common";
 
-interface TeamStateType {
+export interface TeamStateType {
   id: number;
   name: string;
   profile: string;

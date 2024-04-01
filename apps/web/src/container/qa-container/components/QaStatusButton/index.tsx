@@ -73,9 +73,10 @@ const QaStatusButton = ({ status, qaId, refetch }: PropsType) => {
       onSuccess: () => {
         setOpen(false);
         mutate("/v1/qa");
-        refetch();
+        refetch && refetch();
       },
       onError: (error) => {
+        console.log(error);
         handleModalOpen({
           title: "Error",
           message: error.response.data.message,

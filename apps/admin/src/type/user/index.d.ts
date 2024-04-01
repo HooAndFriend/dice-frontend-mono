@@ -6,12 +6,12 @@ export interface GetUserListResponse extends CommonResponse {
 }
 
 export interface UserInfo {
-  createdDate: Date
-  id: number
-  email: string
-  type: string
-  nickname: string
-  lastLoginDate: Date
+  user_created_date: Date
+  user_id: number
+  user_email: string
+  user_type: string
+  user_nickname: string
+  user_last_login_date: Date
   workspaceUserCount: string
   teamUserCount: string
 }
@@ -19,12 +19,10 @@ export interface UserInfo {
 export interface UserInfoQuery {
   createdStartDate: string
   createdEndDate: string
-  lastLoginStartDate: string 
+  lastLoginStartDate: string
   lastLoginEndDate: string
   nickname: string
   type: string[]
-  page: number
-  pageSize: number
 }
 
 interface GetUserTeamResponse extends CommonResponse {
@@ -36,10 +34,8 @@ export interface UserTeam {
   createdDate: Date
   id: number
   role: string
-  invitedId: string
   team: TeamInfo
 }
-
 export interface TeamInfo {
   name: string
 }
@@ -52,7 +48,111 @@ export interface UserWorkspace {
   createdDate: Date
   id: number
   role: string
-  invitedId: string
+  workspace: WorkspaceInfo
+}
+
+export interface WorkspaceInfo {
+  name: string
+}
+
+export interface DateRange {
+  startDate: string
+  endDate: string
+}
+
+interface GetUserTeamResponse extends CommonResponse {
+  count: number
+  data: UserTeam[]
+}
+
+export interface UserTeam {
+  createdDate: Date
+  id: number
+  role: string
+  team: TeamInfo
+}
+export interface TeamInfo {
+  name: string
+}
+
+interface GetUserWorkspaceResponse extends CommonResponse {
+  count: number
+  data: UserWorkspace[]
+}
+export interface UserWorkspace {
+  createdDate: Date
+  id: number
+  role: string
+  workspace: WorkspaceInfo
+}
+
+export interface WorkspaceInfo {
+  name: string
+}
+
+export interface DateRange {
+  startDate: string
+  endDate: string
+}
+
+interface GetUserTeamResponse extends CommonResponse {
+  count: number
+  data: UserTeam[]
+}
+
+export interface UserTeam {
+  createdDate: Date
+  id: number
+  role: string
+  team: TeamInfo
+}
+export interface TeamInfo {
+  name: string
+}
+
+interface GetUserWorkspaceResponse extends CommonResponse {
+  count: number
+  data: UserWorkspace[]
+}
+export interface UserWorkspace {
+  createdDate: Date
+  id: number
+  role: string
+  workspace: WorkspaceInfo
+}
+
+export interface WorkspaceInfo {
+  name: string
+}
+
+export interface DateRange {
+  startDate: string
+  endDate: string
+}
+
+interface GetUserTeamResponse extends CommonResponse {
+  count: number
+  data: UserTeam[]
+}
+
+export interface UserTeam {
+  createdDate: Date
+  id: number
+  role: string
+  team: TeamInfo
+}
+export interface TeamInfo {
+  name: string
+}
+
+interface GetUserWorkspaceResponse extends CommonResponse {
+  count: number
+  data: UserWorkspace[]
+}
+export interface UserWorkspace {
+  createdDate: Date
+  id: number
+  role: string
   workspace: WorkspaceInfo
 }
 

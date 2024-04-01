@@ -17,11 +17,20 @@ interface PropsType {
   userData: DeleteUserInfo[]
   query: DeleteUserQuery
   count: number
-  handleSearch: (createdDate: DateRange, lastLoginDate: DateRange, nickname: string, types: string[]) => void;
-  handlePage: (page: number) => void
+  handleSearch: (
+    createdDate: DateRange,
+    lastLoginDate: DateRange,
+    nickname: string,
+    types: string[],
+  ) => void
 }
 
-const UserDeletePageView = ({ userData, count, query, handleSearch, handlePage }: PropsType) => {
+const UserDeletePageView = ({
+  userData,
+  count,
+  query,
+  handleSearch,
+}: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
   const [selectedUser, setSelectedUser] = useState<DeleteUserInfo>()
 
@@ -64,7 +73,7 @@ const UserDeletePageView = ({ userData, count, query, handleSearch, handlePage }
           handleClick={handleItemClick}
         />
         <div className="flex justify-end w-full">
-          <TablePagination count={count} pageSize={query.pageSize} handlePage={handlePage} />
+          <TablePagination />
         </div>
       </div>
       {selectedUser && open && (

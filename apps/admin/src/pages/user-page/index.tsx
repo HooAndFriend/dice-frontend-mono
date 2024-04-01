@@ -34,12 +34,17 @@ const UserPage = () => {
     lastLoginEndDate: new Date().toLocaleDateString(),
     nickname: '',
     type: [],
-    page: 0,
-    pageSize: 10,
   })
 
   const { data, error, isLoading, mutate } = useSWR('/v1/user', async (url) => {
-    const { createdStartDate, createdEndDate, lastLoginStartDate, lastLoginEndDate, nickname, type, page, pageSize } = query
+    const {
+      createdStartDate,
+      createdEndDate,
+      lastLoginStartDate,
+      lastLoginEndDate,
+      nickname,
+      type,
+    } = query
 
     const params = {
       ...(createdStartDate !== null && { createdStartDate }),
@@ -52,8 +57,6 @@ const UserPage = () => {
       }),
       ...(nickname !== null && { nickname }),
       ...(type !== null && { type }),
-      ...(page !== null && { page }),
-      pageSize
     }
 
     return Get<GetUserListResponse>(url, {
@@ -81,10 +84,6 @@ const UserPage = () => {
     // query.type = types;
     mutate()
   }
-  const handlePage = (page: number) => {
-    query.page = page;
-    mutate();
-  }
 
   if (isLoading || !data) return <div></div>
 
@@ -96,7 +95,6 @@ const UserPage = () => {
       count={data.data.count}
       userData={data.data.data}
       handleSearch={handleSearch}
-      handlePage={handlePage}
     />
   )
 }

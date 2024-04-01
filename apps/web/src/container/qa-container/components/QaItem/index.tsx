@@ -10,13 +10,16 @@ import QaUserButton from "../QaUserButton";
 
 interface PropsType {
   item: IssueInfo;
+  qaId: number;
   handleOpenQa: (id: number) => void;
 }
 
-const QaItem = ({ item, handleOpenQa }: PropsType) => {
+const QaItem = ({ item, handleOpenQa, qaId }: PropsType) => {
   return (
     <div
-      className="px-4 w-full hover:bg-blue-50 h-[100px] py-2 border-b border-solid border-[#EBEBEC]"
+      className={`px-4 w-full ${
+        qaId === item.id ? "bg-blue-50" : ""
+      } hover:bg-blue-50 h-[100px] py-2 border-b border-solid border-[#EBEBEC]`}
       onClick={() => handleOpenQa(item.id)}
     >
       <div className="flex w-full h-[30px] font-spoqa font-medium text-lg">

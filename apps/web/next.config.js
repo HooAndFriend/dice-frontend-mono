@@ -2,6 +2,9 @@
 module.exports = {
   transpilePackages: ["@repo/ui"],
   distDir: "dist",
+  images: {
+    domains: ["125.133.34.224"],
+  },
   output: process.env.NODE_ENV === "development" ? "standalone" : "export",
   async rewrites() {
     return [

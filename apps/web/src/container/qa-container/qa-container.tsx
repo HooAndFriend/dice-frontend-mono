@@ -138,7 +138,11 @@ const QaContainerView = ({
         </div>
         {open && (
           <div className="w-1/2 mt-[123px] h-[564px] rounded-[20px] bg-white shadow-md border-[#EBEBEC] p-5 overflow-y-auto">
-            <QaCard qaId={qaId} handleClose={() => setOpen(false)} />
+            <QaCard
+              qaId={qaId}
+              handleClose={() => setOpen(false)}
+              refetch={refetch}
+            />
           </div>
         )}
         {saveOpen && (

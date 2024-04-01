@@ -32,9 +32,10 @@ import { useDialog } from "@/src/context/DialogContext";
 interface PropsType {
   qaId: number;
   handleClose: () => void;
+  refetch: () => void;
 }
 
-const QaCard = ({ qaId, handleClose }: PropsType) => {
+const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
   const [comment, setComment] = useState<string>("");
   const [currentArg, setCurrentArg] = useState<
     "title" | "asIs" | "toBe" | "memo"
@@ -134,6 +135,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     {
       onSuccess: () => {
         handleClose();
+        handleRefetch();
       },
       onError: (error) => {
         handleOpen({

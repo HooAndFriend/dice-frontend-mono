@@ -1,20 +1,20 @@
 "use client";
 
-// ** React Imports
-import {useState} from "react";
-
 // ** Next Imports
-import CustomInput from "@/src/components/Input/CustomInput";
 import Image from "next/image";
+
+// ** Mutation Imports
 import useSWRMutation from "swr/mutation";
+
+// ** Service Imports
 import {Post} from "@/src/repository";
-import {
-  CreateTicketSettingParams,
-  CreateTicketSettingResponse,
-} from "@/src/type/ticket";
+
+// ** Type Imports
+import {CreateTicketSettingResponse} from "@/src/type/ticket";
+
+// ** Recoil Imports
 import {useRecoilValue} from "recoil";
 import {AuthState} from "@/src/app";
-import useInput from "@/src/hooks/useInput";
 
 const TicketTypeAddItem = () => {
   const {accessToken} = useRecoilValue(AuthState);

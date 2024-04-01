@@ -3,13 +3,11 @@ import TicketSettingItem from "@/src/components/Ticket/TicketSettingItem";
 import TicketTypeAddItem from "@/src/components/Ticket/TicketTypeAddItem";
 
 // ** Service Imports
-import {Get, Patch} from "@/src/repository";
-import useSWR from "swr";
 
 // ** Type Imports
 import {SettingListInfo} from "@/src/type/ticket";
 
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 interface PropsType {
   data: SettingListInfo[];
@@ -35,7 +33,9 @@ const SettingContainerView = ({
     setSettingItems(newItems);
   };
 
-  const handleReset = () => {};
+  const handleReset = () => {
+    console.log("Reset");
+  };
 
   return (
     <div>

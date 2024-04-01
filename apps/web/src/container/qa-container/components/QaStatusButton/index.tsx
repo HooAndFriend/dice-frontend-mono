@@ -73,6 +73,7 @@ const QaStatusButton = ({ status, qaId, refetch }: PropsType) => {
       onSuccess: () => {
         setOpen(false);
         mutate("/v1/qa");
+        mutate(`/v1/qa/${qaId}`);
         refetch && refetch();
       },
       onError: (error) => {

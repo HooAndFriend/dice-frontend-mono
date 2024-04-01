@@ -45,7 +45,7 @@ const TeamPopoverView = ({
     <>
       <div>
         <div onClick={handleOpen}>
-          <ProfileBox image="/images/profile.jpg" alt="profile" />
+          <ProfileBox image={user.profile} alt="profile" />
         </div>
         {open && (
           <>

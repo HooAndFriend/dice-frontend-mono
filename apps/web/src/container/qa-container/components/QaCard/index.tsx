@@ -102,6 +102,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
+            "workspace-code": uuid,
           },
         }
       ),
@@ -129,7 +130,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
       await Delete<CommonResponse<void>>(url, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          "workspace-code": `${uuid}`,
+          "workspace-code": uuid,
         },
       }),
     {
@@ -156,7 +157,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
       await Delete<CommonResponse<void>>(url + arg, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          "workspace-code": `${uuid}`,
+          "workspace-code": uuid,
         },
       }),
     {
@@ -189,7 +190,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "workspace-code": `${uuid}`,
+            "workspace-code": uuid,
           },
         }
       );
@@ -219,7 +220,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
       Get<GetIssueResponse>(url, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          "Workspace-code": `${uuid}`,
+          "workspace-code": uuid,
         },
       }),
     {
@@ -239,7 +240,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
     Get<GetCommentListResponse>(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Workspace-code": `${uuid}`,
+        "workspace-code": uuid,
       },
     })
   );

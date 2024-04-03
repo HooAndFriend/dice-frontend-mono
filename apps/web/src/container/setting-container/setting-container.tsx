@@ -7,7 +7,7 @@ import TicketTypeAddItem from "@/src/components/Ticket/TicketTypeAddItem";
 // ** Type Imports
 import {SettingListInfo} from "@/src/type/ticket";
 
-import {useState} from "react";
+import {useRef, useState} from "react";
 
 interface PropsType {
   data: SettingListInfo[];
@@ -26,35 +26,43 @@ const SettingContainerView = ({
   handleTicketDelete,
 }: PropsType) => {
   const [settingItems, setSettingItems] = useState<SettingListInfo[]>(data);
+  const ref = useRef([]);
 
-  const handleUpdate = (index: number, updatedItem: SettingListInfo) => {
+  const onUpdate = (index: number, updatedItem: SettingListInfo) => {
     const newItems = [...settingItems];
     newItems[index] = updatedItem;
     setSettingItems(newItems);
   };
 
+  const handleUpdate = () => {
+    settingItems.forEach(item =>
+      handleTicketSetting(item.id, item.color, item.type, item.description)
+    );
+  };
+
   const handleReset = () => {
-    console.log("Reset");
+    data.forEach((item, index) => {
+      ref.current[index].handleReset(item);
+    });
   };
 
   return (
     <div>
       <div className="mt-6 overflow-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8">
-        {data
-          ? data.map((item, index) => (
-              <>
-                <TicketSettingItem
-                  key={item.id}
-                  item={item}
-                  onUpdate={updatedItem => {
-                    handleUpdate(index, updatedItem);
-                  }}
-                  handleTicketDelete={handleTicketDelete}
-                />
-                <hr className="my-[25px]" />
-              </>
-            ))
-          : null}
+        {data.map((item, index) => (
+          <>
+            <TicketSettingItem
+              key={item.id}
+              item={item}
+              onUpdate={updatedItem => {
+                onUpdate(index, updatedItem);
+              }}
+              handleTicketDelete={handleTicketDelete}
+              ref={element => (ref.current[index] = element)}
+            />
+            <hr className="my-[25px]" />
+          </>
+        ))}
 
         <TicketTypeAddItem />
       </div>
@@ -66,16 +74,7 @@ const SettingContainerView = ({
           RESET
         </button>
         <button
-          onClick={() => {
-            settingItems.forEach((item, index) =>
-              handleTicketSetting(
-                item.id,
-                item.color,
-                item.type,
-                item.description
-              )
-            );
-          }}
+          onClick={handleUpdate}
           className="w-[275px] h-[55px] bg-[#623AD6] text-white rounded-[15px] ml-4"
         >
           UPDATE

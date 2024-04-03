@@ -12,7 +12,7 @@ import {useRecoilValue} from "recoil";
 import {AuthState, WorkspaceState} from "@/src/app";
 
 // ** Type Imports
-import {GetTicketListResponse, SettingListInfo} from "@/src/type/ticket";
+import {GetTicketListResponse} from "@/src/type/ticket";
 import {useEffect} from "react";
 
 const SettingConatiner = () => {
@@ -73,7 +73,7 @@ const SettingConatiner = () => {
 
   useEffect(() => {
     mutate();
-  }, []);
+  }, [data]);
 
   if (isLoading) return null;
 

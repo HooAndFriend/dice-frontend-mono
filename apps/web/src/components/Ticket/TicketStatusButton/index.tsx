@@ -1,52 +1,133 @@
-import { TicketStatus } from "@/src/type/component";
+"use client";
+
+// ** React Imports
+import { useState, useRef, useEffect } from "react";
+
+// ** Type Imports
+import { EpicStatus } from "@/src/type/epic";
+import { CommonResponse } from "@/src/type/common";
+
+// ** Utils Imports
+import { getStateBoxColor } from "@/src/utils/color";
+
+// ** Service Imports
+import useSWRMutation from "swr/mutation";
+import { Put } from "@/src/repository";
+import { mutate } from "swr";
+
+// ** Context Imports
+import { useDialog } from "@/src/context/DialogContext";
 
 interface PropsType {
-  status: TicketStatus;
-  width?: string;
-  height?: string;
-  borderRadius?: string;
+  ticketId: number;
+  status: EpicStatus;
+  refetch?: () => void;
 }
 
-const getButtonColor = (status: TicketStatus) => {
-  switch (status) {
-    case "REOPEN":
-      return "bg-[#FFDBD5]";
-    case "FINISH":
-      return "bg-[#CAE0F4]";
-    case "DOING":
-      return "bg-[#F7E5A9]";
-    default:
-      return "bg-black";
-  }
-};
+const statusList: EpicStatus[] = [
+  "WAITING",
+  "DOING",
+  "DONE",
+  "COMPLETE",
+  "HOLD",
+  "REOPEN",
+  "NOTHING",
+];
 
-const getTextColor = (status: TicketStatus) => {
-  switch (status) {
-    case "REOPEN":
-      return "text-[#F13333]";
-    case "FINISH":
-      return "text-[#143AE1]";
-    case "DOING":
-      return "text-[#977C23]";
-    default:
-      return "text-black";
-  }
-};
+const TicketStatusButton = ({ status, ticketId, refetch }: PropsType) => {
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-const TicketStatusButton = ({
-  status,
-  width = "85px",
-  height = "30px",
-  borderRadius = "6px",
-}: PropsType) => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  const { handleOpen: handleModalOpen } = useDialog();
+
+  const handleOpen = () => {
+    setOpen((c) => !c);
+  };
+
+  const handleStatus = (status: EpicStatus) => {
+    updateTicketStatus.trigger(status);
+  };
+
+  const updateTicketStatus = useSWRMutation(
+    "/v1/ticket/status",
+    async (url: string, { arg }: { arg: EpicStatus }) =>
+      await Put<CommonResponse<void>>(url, { status: arg, ticketId }),
+    {
+      onSuccess: () => {
+        setOpen(false);
+        mutate("/v1/epic");
+
+        refetch && refetch();
+      },
+      onError: (error) => {
+        handleModalOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
+  useEffect(() => {
+    const clickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        handleOpen();
+      }
+    };
+
+    document.addEventListener("mousedown", clickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", clickOutside);
+    };
+  }, []);
+
   return (
-    <button
-      className={`${getButtonColor(status)} ${getTextColor(
-        status,
-      )} w-[${width}] h-[${height}] rounded-[${borderRadius}]`}
-    >
-      {status}
-    </button>
+    <div className="relative z-4">
+      <button
+        className="w-[84px] h-[30px] rounded-[6px] flex justify-center text-[12px] items-center text-white font-spoqa"
+        style={{ backgroundColor: getStateBoxColor(status) }}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleOpen();
+        }}
+      >
+        {status}
+      </button>
+      {open && (
+        <div
+          className="absolute w-[150px] h-[150px] bg-slate-50 top-[50px] left-0 rounded-lg overflow-y-auto z-10"
+          ref={dropdownRef}
+        >
+          {statusList
+            .filter((item) => item !== status)
+            .map((item) => (
+              <div
+                className="w-full h-[30px] py-2 px-4 hover:bg-slate-200"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleStatus(item);
+                }}
+                key={item}
+              >
+                <button
+                  className={`p-2 h-[100%] rounded-[30px] flex justify-center items-center text-white font-spoqa font-bold text-[10px]`}
+                  style={{ backgroundColor: getStateBoxColor(item) }}
+                >
+                  {item}
+                </button>
+              </div>
+            ))}
+        </div>
+      )}
+    </div>
   );
 };
 

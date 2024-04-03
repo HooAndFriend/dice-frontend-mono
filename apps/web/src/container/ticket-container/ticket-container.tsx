@@ -1,6 +1,6 @@
 import TicketCard from "@/src/components/Ticket/TicketCard";
 import TicketTable from "@/src/components/Ticket/TicketTable";
-import TicketSearchCard from "./components/TicketSearchCard";
+import TicketSearchCard from "../../components/Ticket/TicketSearchCard";
 
 interface PropsType {
   ticketId: number;

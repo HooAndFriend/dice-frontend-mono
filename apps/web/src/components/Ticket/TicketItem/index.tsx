@@ -2,6 +2,9 @@
 import ProfileBox from "@/src/components/ProfileBox";
 import { EpicTicketInfo } from "@/src/type/epic";
 import dayjs from "dayjs";
+import TicketUserButton from "../TicketUserButton";
+import TicketStatusButton from "../TicketStatusButton";
+import TicketDatePicker from "../TicketDatePicker";
 
 interface PropsType {
   data: EpicTicketInfo;
@@ -21,21 +24,20 @@ const TicketItem = ({ handleClick = (id: number) => {}, data }: PropsType) => {
         <h1>{`${data.code} ${data.name}`}</h1>
       </div>
       <div className="flex w-[10%] items-center justify-center">
-        <div className="w-[84px] h-[40px] rounded-[6px] flex justify-center items-center bg-[#CAE0F4]">
-          {data.status}
-        </div>
+        <TicketStatusButton ticketId={data.id} status={data.status} />
       </div>
       <div className="flex w-[10%] items-center justify-center">
-        <img
-          src={data.worker.profile}
-          width={30}
-          height={30}
-          alt="worker"
-          className={`w-[30px] h-[30px] rounded-full border-2 border-[#EBEBEC] mr-[10px]`}
+        <TicketUserButton
+          profile={data.worker.profile}
+          type="user"
+          ticketId={data.id}
         />
       </div>
       <div className="flex w-[20%] items-center justify-center">
-        <h1>{data.dueDate ? dayjs(data.dueDate).format("YYYY-MM-DD") : "-"}</h1>
+        <TicketDatePicker
+          ticketId={data.id}
+          value={dayjs(data.dueDate).format("YYYY-MM-DD")}
+        />
       </div>
       <div className="flex w-[20%] items-center justify-center">
         <h1>

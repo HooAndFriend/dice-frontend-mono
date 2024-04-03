@@ -21,13 +21,8 @@ const EpicConatiner = () => {
   const { uuid } = useRecoilValue(WorkspaceState);
   const { accessToken } = useRecoilValue(AuthState);
 
-  const { data, error, isLoading } = useSWR("/v1/ticket/epic", async (url) =>
-    Get<GetEpicListResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "workspace-code": uuid,
-      },
-    })
+  const { data, error, isLoading } = useSWR("/v1/epic", async (url) =>
+    Get<GetEpicListResponse>(url)
   );
 
   if (isLoading) return;

@@ -1,5 +1,16 @@
+// ** Type Imports
 import { CommonResponse } from "@/src/type/common";
-import axios, { AxiosRequestConfig } from "axios";
+
+// ** Axios Imports
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
+
+// ** Recoil Imports
+import {
+  AuthStateType,
+  TeamStateType,
+  UserStateType,
+  WorkspaceStateType,
+} from "../app";
 
 export const client = axios.create({
   baseURL: "/api",
@@ -7,7 +18,7 @@ export const client = axios.create({
 
 export const Get = async <T>(
   url: string,
-  config?: AxiosRequestConfig,
+  config?: AxiosRequestConfig
 ): Promise<CommonResponse<T>> => {
   const response = await client.get(url, config);
 
@@ -17,7 +28,7 @@ export const Get = async <T>(
 export const Post = async <T>(
   url: string,
   data?: any,
-  config?: AxiosRequestConfig,
+  config?: AxiosRequestConfig
 ): Promise<CommonResponse<T>> => {
   const response = await client.post(url, data, config);
 
@@ -27,7 +38,7 @@ export const Post = async <T>(
 export const Put = async <T>(
   url: string,
   data?: any,
-  config?: AxiosRequestConfig,
+  config?: AxiosRequestConfig
 ): Promise<CommonResponse<T>> => {
   const response = await client.put(url, data, config);
 
@@ -37,7 +48,7 @@ export const Put = async <T>(
 export const Patch = async <T>(
   url: string,
   data?: any,
-  config?: AxiosRequestConfig,
+  config?: AxiosRequestConfig
 ): Promise<CommonResponse<T>> => {
   const response = await client.patch(url, data, config);
 
@@ -46,7 +57,7 @@ export const Patch = async <T>(
 
 export const Delete = async <T>(
   url: string,
-  config?: AxiosRequestConfig,
+  config?: AxiosRequestConfig
 ): Promise<CommonResponse<T>> => {
   const response = await client.delete(url, config);
 
@@ -54,9 +65,30 @@ export const Delete = async <T>(
 };
 
 client.interceptors.request.use((config) => {
+  const recoilValue: {
+    authState: AuthStateType;
+    userState: UserStateType;
+    workspaceState: WorkspaceStateType;
+    teamState: TeamStateType;
+  } = JSON.parse(localStorage.getItem("recoil-persist"));
+
+  if (recoilValue) {
+    config.headers["Authorization"] =
+      `Bearer ${recoilValue.authState.accessToken}`;
+    config.headers["workspace-code"] = recoilValue.workspaceState.uuid;
+    config.headers["team-code"] = recoilValue.teamState.uuid;
+  }
+
   return config;
 });
 
-client.interceptors.response.use((res) => {
-  return res;
-});
+client.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const err = error as AxiosError;
+
+    return Promise.reject(error);
+  }
+);

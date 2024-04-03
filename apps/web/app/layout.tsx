@@ -22,11 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SwrProvider>
-          <RocoilRootProvider>
+        <RocoilRootProvider>
+          <SwrProvider>
             <DialogProvider>{children}</DialogProvider>
-          </RocoilRootProvider>
-        </SwrProvider>
+          </SwrProvider>
+        </RocoilRootProvider>
       </body>
     </html>
   );

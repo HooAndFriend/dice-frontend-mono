@@ -1,9 +1,17 @@
 "use client";
 
-import { SWRConfig } from "swr";
+// ** SWR Config
+import { Middleware, SWRConfig, SWRHook } from "swr";
 
 const SwrProvider = ({ children }: { children: React.ReactNode }) => {
-  return <SWRConfig>{children}</SWRConfig>;
+  const myMiddleware: Middleware = (useSWRNext: SWRHook) => {
+    return (key, fetcher, config) => {
+      const swr = useSWRNext(key, fetcher, config);
+
+      return swr;
+    };
+  };
+  return <SWRConfig value={{ use: [myMiddleware] }}>{children}</SWRConfig>;
 };
 
 export default SwrProvider;

@@ -283,10 +283,10 @@ const QaCardView = ({
         FILE <span className="text-sm font-spoqa text-darkGray">(MAX:4)</span>
       </div>
       <div className="flex items-center">
-        {data.file.length < 4 && (
+        {data.qaFile.length < 4 && (
           <QaFileUploader qaId={data.id} refetch={refetch} />
         )}
-        {data.file.map((item) => (
+        {data.qaFile.map((item) => (
           <div className="relative w-[40px] h-[40px] mr-4">
             <img
               src={item.url}

@@ -58,7 +58,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
     title: "",
     admin: { email: "", nickname: "", profile: "" },
     worker: { email: "", nickname: "", profile: "" },
-    file: [{ id: 0, url: "" }],
+    qaFile: [],
     asIs: "",
     toBe: "",
     memo: "",

@@ -42,12 +42,10 @@ export interface IssueInfo {
     nickname: string;
     profile: string;
   };
-  file: [
-    {
-      id: number;
-      url: string;
-    },
-  ];
+  qaFile: {
+    id: number;
+    url: string;
+  }[];
   asIs: string;
   toBe: string;
   memo: string;

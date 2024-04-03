@@ -1,13 +1,19 @@
+// ** Next Imports
+import Image from "next/image";
+
 // ** Component Imports
-import ProfileBox from "@/src/components/ProfileBox";
-import { EpicTicketInfo } from "@/src/type/epic";
-import dayjs from "dayjs";
 import TicketUserButton from "../TicketUserButton";
 import TicketStatusButton from "../TicketStatusButton";
 import TicketDatePicker from "../TicketDatePicker";
 
+// ** Utils Imports
+import dayjs from "dayjs";
+
+// ** Type Imports
+import { TicketInfo } from "@/src/type/ticket";
+
 interface PropsType {
-  data: EpicTicketInfo;
+  data: TicketInfo;
   handleClick?: (id: number) => void;
 }
 
@@ -28,7 +34,7 @@ const TicketItem = ({ handleClick = (id: number) => {}, data }: PropsType) => {
       </div>
       <div className="flex w-[10%] items-center justify-center">
         <TicketUserButton
-          profile={data.worker.profile}
+          profile={data.worker?.profile}
           type="user"
           ticketId={data.id}
         />

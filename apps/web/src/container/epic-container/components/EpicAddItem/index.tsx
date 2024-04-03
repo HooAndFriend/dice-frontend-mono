@@ -26,26 +26,13 @@ const EpicAddItem = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
 
-  const { uuid } = useRecoilValue(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
-
   const { handleOpen: handleModalOpen } = useDialog();
 
   const handleOpen = () => setOpen((c) => !c);
 
   const saveEpic = useSWRMutation(
     "/v1/ticket/epic",
-    async (url: string) =>
-      await Post<CommonResponse<void>>(
-        url,
-        { name },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "workspace-code": uuid,
-          },
-        }
-      ),
+    async (url: string) => await Post<CommonResponse<void>>(url, { name }),
     {
       onSuccess: () => {
         setOpen(false);

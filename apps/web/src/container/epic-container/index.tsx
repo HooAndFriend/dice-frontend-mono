@@ -3,10 +3,6 @@
 // ** Component Imports
 import EpicContainerView from "./epic-container";
 
-// ** Recoil Imports
-import { AuthState, WorkspaceState } from "@/src/app";
-import { useRecoilValue } from "recoil";
-
 // ** Service Imports
 import useSWR from "swr";
 import { Get } from "@/src/repository";
@@ -17,9 +13,6 @@ import { useState } from "react";
 
 const EpicConatiner = () => {
   const [word, setWord] = useState<string>("");
-
-  const { uuid } = useRecoilValue(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
 
   const { data, error, isLoading } = useSWR("/v1/epic", async (url) =>
     Get<GetEpicListResponse>(url)

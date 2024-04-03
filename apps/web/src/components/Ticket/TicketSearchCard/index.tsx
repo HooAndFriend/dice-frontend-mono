@@ -2,8 +2,8 @@
 import CustomSearch from "@/src/components/Input/CustomSearch";
 
 interface PropsType {
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TicketSearchCard = ({ value, onChange }: PropsType) => {

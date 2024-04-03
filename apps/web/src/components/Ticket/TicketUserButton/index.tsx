@@ -57,6 +57,7 @@ const TicketUserButton = ({ profile, ticketId, type }: PropsType) => {
     {
       onSuccess: () => {
         mutate("/v1/epic");
+        mutate("/v1/ticket");
         setOpen(false);
       },
       onError: (error) => {
@@ -103,7 +104,7 @@ const TicketUserButton = ({ profile, ticketId, type }: PropsType) => {
       >
         <Image
           className="rounded-full border border-[#EBEBEC]"
-          src={profile}
+          src={profile ? profile : "/images/dice.png"}
           alt="profile"
           width={30}
           height={30}

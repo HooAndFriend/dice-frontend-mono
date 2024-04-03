@@ -81,6 +81,7 @@ const TeamPopover = () => {
     mutate("/v1/workspace-user/team");
     mutate("/v1/qa");
     mutate("/v1/epic");
+    mutate("/v1/ticket");
   };
 
   const handleLogout = () => {

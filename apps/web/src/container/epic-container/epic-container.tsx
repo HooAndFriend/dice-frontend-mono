@@ -22,7 +22,7 @@ const EpicContainerView = ({
     <div className="w-full">
       <EpicSearchCard value={word} onChange={handleWord} />
       <div className="mt-8">
-        <h1 className="pl-4 font-bold text-md">Total Ticket : {epicCount}</h1>
+        <h1 className="pl-4 font-bold text-md">Total Epic : {epicCount}</h1>
       </div>
       <EpicTable
         epicData={epicData.filter((item) => item.name.includes(word))}

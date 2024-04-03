@@ -29,6 +29,7 @@ const TicketConatiner = () => {
       ticketId={ticketId}
       setTicketId={setTicketId}
       data={data.data.data}
+      ticketCount={data.data.count}
       word={word}
       handleWord={(e) => setWord(e.target.value)}
     />

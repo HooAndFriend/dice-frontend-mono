@@ -10,6 +10,7 @@ interface PropsType {
   ticketId: number;
   data: TicketInfo[];
   word: string;
+  ticketCount: number;
   setTicketId: (id: number) => void;
   handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -18,6 +19,7 @@ const TicketContainerView = ({
   ticketId,
   data,
   word,
+  ticketCount,
   setTicketId,
   handleWord,
 }: PropsType) => {
@@ -25,7 +27,7 @@ const TicketContainerView = ({
     <div className="w-full">
       <TicketSearchCard value={word} onChange={handleWord} />
       <div className="mt-8">
-        <h1 className="pl-4 font-bold text-md">총 4건</h1>
+        <h1 className="pl-4 font-bold text-md">Total Ticket : {ticketCount}</h1>
       </div>
       <div className={`${ticketId !== 0 && "flex"}`}>
         <div style={{ width: ticketId !== 0 ? "65%" : "100%" }}>

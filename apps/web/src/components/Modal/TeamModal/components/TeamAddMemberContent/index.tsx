@@ -15,6 +15,7 @@ import { InviteTeamUserParam } from "@/src/type/team";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
+import { mutate } from "swr";
 
 interface PropsType {
   open: boolean;
@@ -44,6 +45,7 @@ const TeamAddMemberContent = ({ open, setOpen }: PropsType) => {
     {
       onSuccess: () => {
         setOpen(false);
+        mutate("/v1/team-user/user");
       },
       onError: (error) => {
         handleOpen({
@@ -54,7 +56,7 @@ const TeamAddMemberContent = ({ open, setOpen }: PropsType) => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   return (

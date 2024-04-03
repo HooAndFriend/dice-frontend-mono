@@ -32,9 +32,10 @@ import { useDialog } from "@/src/context/DialogContext";
 interface PropsType {
   qaId: number;
   handleClose: () => void;
+  refetch: () => void;
 }
 
-const QaCard = ({ qaId, handleClose }: PropsType) => {
+const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
   const [comment, setComment] = useState<string>("");
   const [currentArg, setCurrentArg] = useState<
     "title" | "asIs" | "toBe" | "memo"
@@ -101,6 +102,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
+            "workspace-code": uuid,
           },
         }
       ),
@@ -128,12 +130,13 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
       await Delete<CommonResponse<void>>(url, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          "workspace-code": `${uuid}`,
+          "workspace-code": uuid,
         },
       }),
     {
       onSuccess: () => {
         handleClose();
+        handleRefetch();
       },
       onError: (error) => {
         handleOpen({
@@ -154,7 +157,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
       await Delete<CommonResponse<void>>(url + arg, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          "workspace-code": `${uuid}`,
+          "workspace-code": uuid,
         },
       }),
     {
@@ -187,7 +190,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "workspace-code": `${uuid}`,
+            "workspace-code": uuid,
           },
         }
       );
@@ -217,7 +220,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
       Get<GetIssueResponse>(url, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          "Workspace-code": `${uuid}`,
+          "workspace-code": uuid,
         },
       }),
     {
@@ -237,7 +240,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     Get<GetCommentListResponse>(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Workspace-code": `${uuid}`,
+        "workspace-code": uuid,
       },
     })
   );

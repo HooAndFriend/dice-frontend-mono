@@ -19,6 +19,7 @@ import { useDialog } from "@/src/context/DialogContext";
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useEffect } from "react";
 
 const UserSettingContent = () => {
   const { data, setData, handleInput } = useInput<UserInfo>({
@@ -32,12 +33,14 @@ const UserSettingContent = () => {
 
   const { handleOpen } = useDialog();
 
-  const { error, isLoading } = useSWR("/v1/user", async (url) =>
+  const {
+    error,
+    isLoading,
+    data: userData,
+  } = useSWR("/v1/user", async (url) =>
     Get<GetUserInfoResponse>(url, {
       headers: { Authorization: `Bearer ${accessToken}` },
-    }).then((res) => {
-      setData(res.data);
-    }),
+    })
   );
 
   const updateUser = useSWRMutation(
@@ -51,7 +54,7 @@ const UserSettingContent = () => {
         },
         {
           headers: { Authorization: `Bearer ${accessToken}` },
-        },
+        }
       ),
     {
       onSuccess: ({ data: responseData }) => {
@@ -71,14 +74,24 @@ const UserSettingContent = () => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const handleImage = (profile: string) => {
     setData((cur) => ({ ...cur, profile }));
   };
 
-  if (isLoading) return null;
+  useEffect(() => {
+    if (isLoading) return;
+
+    if (error) return;
+
+    setData(userData.data);
+  }, [userData]);
+
+  if (isLoading) return;
+
+  if (error) return;
 
   return (
     <div>

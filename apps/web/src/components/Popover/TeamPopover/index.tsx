@@ -45,7 +45,7 @@ const TeamPopover = () => {
   const { data, error, isLoading } = useSWR("/v1/team-user", async (url) =>
     Get<GetUserTeamListResponse>(url, {
       headers: { Authorization: `Bearer ${authState.accessToken}` },
-    }),
+    })
   );
 
   const handleOpen = () => setOpen((cur) => !cur);
@@ -79,6 +79,7 @@ const TeamPopover = () => {
     });
 
     mutate("/v1/workspace-user/team");
+    mutate("/v1/qa");
   };
 
   const handleLogout = () => {
@@ -108,6 +109,8 @@ const TeamPopover = () => {
       handleUpdateTeam={handleUpdateTeam}
       handleLogout={handleLogout}
       data={data.data.data}
+      teamState={teamState}
+      profile={teamState.profile}
     />
   );
 };

@@ -56,7 +56,7 @@ const QaCardView = ({
   handleUpdateQa,
 }: PropsType) => {
   return (
-    <div>
+    <div className="overflow-x-hidden overflow-y-auto">
       <div className="h-[40px] flex items-center justify-between">
         <div className="flex items-center text-lg font-medium font-spoqa">
           <h1 className="mr-4">{data.code}</h1>

@@ -13,9 +13,6 @@ import useInput from "@/src/hooks/useInput";
 import { SaveQaParam } from "@/src/type/qa";
 import { CommonResponse } from "@/src/type/common";
 
-// ** Component Imports
-import CustomInput from "../../Input/CustomInput";
-
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
 import { Post } from "@/src/repository";
@@ -40,6 +37,8 @@ const QaSaveModal = ({
   cancelButtonRef,
   refetch,
 }: PropsType) => {
+  const [button, setButton] = useState<boolean>(false);
+
   const { data, handleInput, handleInit } = useInput<SaveQaParam>({
     title: "",
   });
@@ -71,12 +70,15 @@ const QaSaveModal = ({
           buttonText: "Close",
           type: "alert",
         });
+        setButton(false);
       },
-    },
+    }
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      if (button) return;
+      setButton(true);
       saveQa.trigger();
     }
   };

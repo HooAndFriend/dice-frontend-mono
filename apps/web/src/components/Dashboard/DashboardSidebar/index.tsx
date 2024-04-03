@@ -1,6 +1,6 @@
 "use client";
 // ** Next Imports
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 // ** React Imports
 import { useEffect, useMemo, useState } from "react";
@@ -25,12 +25,13 @@ const DashboardSidebard = () => {
   const [sidbarMenuList, setSidbarMenuList] = useState([]);
 
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     setPath(
       pathname.split("/")[2]
         ? `/dashboard/${pathname.split("/")[2]}`
-        : "/dashboard",
+        : "/dashboard"
     );
   }, [pathname]);
 
@@ -51,7 +52,7 @@ const DashboardSidebard = () => {
       },
       ,
       ...MenuList.filter((item) =>
-        workspaceFunction.find((_) => _.function === item.name),
+        workspaceFunction.find((_) => _.function === item.name)
       ),
     ].map((item) => {
       if (item.link === path) {
@@ -62,6 +63,20 @@ const DashboardSidebard = () => {
 
     setSidbarMenuList(arr);
   }, [workspaceFunction, path]);
+
+  useEffect(() => {
+    if (pathname.split("/")[2] === "qa") {
+      if (!workspaceFunction.find((_) => _.function === "QA")) {
+        router.push("/dashboard");
+      }
+    }
+
+    if (pathname.split("/")[2] === "epic") {
+      if (!workspaceFunction.find((_) => _.function === "TICKET")) {
+        router.push("/dashboard");
+      }
+    }
+  }, [workspaceFunction]);
 
   return (
     <div className="w-[70px] border-r-2 border-[#EBEBEC]">

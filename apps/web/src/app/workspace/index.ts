@@ -9,7 +9,7 @@ import { persistStorageAtom } from "../util";
 import { WorksapceFunction } from "@/src/type/workspace";
 import { RoleType } from "@/src/type/common";
 
-interface WorksapceStateType {
+export interface WorkspaceStateType {
   id: number;
   name: string;
   profile: string;
@@ -18,7 +18,7 @@ interface WorksapceStateType {
   workspaceFunction: WorksapceFunction[];
 }
 
-export const workspaceInitState: WorksapceStateType = {
+export const workspaceInitState: WorkspaceStateType = {
   id: 0,
   name: "",
   profile: "",
@@ -27,7 +27,7 @@ export const workspaceInitState: WorksapceStateType = {
   workspaceFunction: [],
 };
 
-export const WorkspaceState = atom<WorksapceStateType>({
+export const WorkspaceState = atom<WorkspaceStateType>({
   key: "workspaceState",
   default: workspaceInitState,
   effects_UNSTABLE: [persistStorageAtom],

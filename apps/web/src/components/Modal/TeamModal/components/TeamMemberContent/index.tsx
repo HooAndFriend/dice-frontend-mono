@@ -35,36 +35,8 @@ const TeamMemberContent = ({ handleOpen }: PropsType) => {
         Authorization: `Bearer ${accessToken}`,
         "team-code": uuid,
       },
-    }),
+    })
   );
-
-  const handleTeamUserRole = async (teamUserId: number, role: RoleType) => {
-    await Patch<CommonResponse<void>>(
-      "/v1/team-user",
-      {
-        teamUserId,
-        role,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "team-code": uuid,
-        },
-      },
-    )
-      .then((res) => {
-        mutate("/v1/team-user/user");
-      })
-      .catch((error) => {
-        handleDialogOpen({
-          title: "Error",
-          message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-      });
-  };
 
   if (isLoading) return;
 
@@ -105,7 +77,7 @@ const TeamMemberContent = ({ handleOpen }: PropsType) => {
           AddMember
         </div>
       </div>
-      <div className="h-[420px] w-full overflow-y-auto">
+      <div className="h-[420px] w-full overflow-y-auto overflow-x-hidden">
         {data.data.data.map((item) => (
           <TeamMemberBox
             key={item.id}

@@ -7,11 +7,11 @@ import { useEffect, useRef, useState } from "react";
 import WorkspacePopoverView from "./workspace-popover";
 
 // ** Recoil Imports
-import { AuthState, TeamState, WorkspaceState } from "@/src/app";
+import { AuthState, TeamState, UserState, WorkspaceState } from "@/src/app";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 // ** Service Imports
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { Get } from "@/src/repository";
 
 // ** Type Imports
@@ -25,15 +25,18 @@ const WorkspacePopover = () => {
   const { id, uuid, name } = useRecoilValue(TeamState);
   const { accessToken } = useRecoilValue(AuthState);
 
-  const { data, error, isLoading, mutate } = useSWR(
-    "/v1/workspace-user/team",
-    async (url) =>
-      Get<GetWorkspaceListResponse>(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "team-code": id === 0 ? "personal" : uuid,
-        },
-      }),
+  const {
+    data,
+    error,
+    isLoading,
+    mutate: handleRefetch,
+  } = useSWR("/v1/workspace-user/team", async (url) =>
+    Get<GetWorkspaceListResponse>(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "team-code": id === 0 ? "personal" : uuid,
+      },
+    })
   );
 
   const cancelButtonRef = useRef(null);
@@ -50,10 +53,12 @@ const WorkspacePopover = () => {
       workspaceFunction: item.workspace.workspaceFunction,
       role: item.role,
     });
+
+    mutate("/v1/qa");
   };
 
   useEffect(() => {
-    mutate();
+    handleRefetch();
   }, [id]);
 
   if (isLoading) return;
@@ -71,7 +76,8 @@ const WorkspacePopover = () => {
       setModalOpen={setModalOpen}
       handleModalOpen={handleModalOpen}
       handleUpdateWorkspace={handleUpdateWorkspace}
-      teamName={name}
+      workspace={workspaceState}
+      profile={workspaceState.profile}
     />
   );
 };

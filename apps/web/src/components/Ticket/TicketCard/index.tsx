@@ -1,4 +1,4 @@
-import CustomInput from "../../Input/custom-input";
+import CustomInput from "../../Input/CustomInput";
 import TicketComment from "../TicketComment";
 import TicketStatusButton from "../TicketStatusButton";
 

@@ -1,51 +1,95 @@
 "use client";
 
-import QaContainerView from "./qa-container";
-import { useEffect, useState } from "react";
+// ** React Imports
+import { useEffect, useRef, useState } from "react";
 
+// ** Service Imports
 import { Get } from "@/src/repository";
 import useSWR from "swr";
-import { GetIssueListResponse } from "@/src/type/qa";
+
+// ** Recoil Imports
 import { useRecoilValue } from "recoil";
 import { AuthState, WorkspaceState } from "@/src/app";
 
+// ** Type Imports
+import { GetIssueListResponse, QaQuery } from "@/src/type/qa";
+import { EpicStatus } from "@/src/type/epic";
+
+// ** Utils Imports
+import useInput from "@/src/hooks/useInput";
+
+// ** Component Imports
+import QaContainerView from "./qa-container";
+
 const QaContainer = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [detail, setDetail] = useState<boolean>(false);
-  const [qaId, setQaId] = useState<number>();
+  const [saveOpen, setSaveOpen] = useState<boolean>(false);
 
-  const { uuid } = useRecoilValue(WorkspaceState);
+  const [status, setStatus] = useState<EpicStatus>("");
+
+  const [qaId, setQaId] = useState<number>(0);
+
+  const cancelButtonRef = useRef();
+
   const { accessToken } = useRecoilValue(AuthState);
+  const { uuid } = useRecoilValue(WorkspaceState);
 
-  const handleCreateIssueOpen = () => {
-    setDetail(false);
-    setOpen((cur) => !cur);
-  };
+  const {
+    data: query,
+    handleInput,
+    handleSelect,
+  } = useInput<QaQuery>({ type: "title", value: "" });
 
-  const handleIssueDetailOpen = (id) => {
-    setOpen(false);
-    setDetail((cur) => !cur);
+  const handleOpenQa = (id: number) => {
     setQaId(id);
+    setOpen(true);
   };
 
-  const { data, error, isLoading } = useSWR("/v1/qa?status=ALL", async (url) =>
-    Get<GetIssueListResponse>(url, {
+  const { data, error, isLoading, mutate } = useSWR("/v1/qa", async (url) => {
+    const params = {};
+
+    if (status !== "") {
+      params[status] = status;
+    }
+
+    if (query.value !== "") {
+      params[query.type] = query.value;
+    }
+
+    return Get<GetIssueListResponse>(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Workspace-code": `${uuid}`,
+        "Workspace-code": uuid,
       },
-    })
-  );
+      params,
+    });
+  });
+
+  useEffect(() => {
+    mutate();
+  }, [query, status]);
+
   if (isLoading) return null;
+
+  if (error) return;
 
   return (
     <QaContainerView
-      openCreateIssue={open}
-      openIssueDetail={detail}
-      handleCreateIssueOpen={handleCreateIssueOpen}
-      handleIssueDetailOpen={handleIssueDetailOpen}
+      open={open}
+      status={status}
+      data={data.data.data}
+      count={data.data.count}
       qaId={qaId}
-      data={data.data.qa}
+      query={query}
+      handleSelect={handleSelect}
+      handleInput={handleInput}
+      setStatus={setStatus}
+      handleOpenQa={handleOpenQa}
+      cancelButtonRef={cancelButtonRef}
+      saveOpen={saveOpen}
+      setSaveOpen={setSaveOpen}
+      refetch={mutate}
+      setOpen={setOpen}
     />
   );
 };

@@ -1,5 +1,5 @@
-import {stringTo2048} from "aws-sdk/clients/customerprofiles";
-import {CommonResponse} from "../common";
+import { stringTo2048 } from "aws-sdk/clients/customerprofiles";
+import { CommonResponse } from "../common";
 
 export interface CreateIssueParams {
   adminId: string;
@@ -20,21 +20,23 @@ export interface CreateIssueResponse extends Response {
 }
 
 export interface GetIssueListResponse extends CommonResponse {
-  qa: IssueInfo[];
+  data: IssueInfo[];
   count: number;
 }
+
+export interface GetIssueResponse extends CommonResponse, IssueInfo {}
 
 export interface IssueInfo {
   id: number;
   number: string;
-  status: string;
+  status: EpicStatus;
   title: string;
-  admin: {
+  admin?: {
     email: string;
     nickname: string;
     profile: string;
   };
-  worker: {
+  worker?: {
     email: string;
     nickname: string;
     profile: string;
@@ -58,13 +60,14 @@ export interface GetCommentListResponse extends CommonResponse {
 }
 
 export interface CommentInfo {
-  commentId: number;
+  id: number;
   content: string;
   createdDate: string;
   modifiedDate: string;
   user: {
     profile: string;
     nickname: string;
+    email: string;
   };
 }
 
@@ -76,4 +79,14 @@ export interface AddCommentParams {
 export interface AddCommentResponse extends Response {
   statusCode: number;
   message: string;
+}
+
+export interface QaQuery {
+  type: string;
+  value: string;
+}
+
+export interface SaveQaParam {
+  title: string;
+  number: string;
 }

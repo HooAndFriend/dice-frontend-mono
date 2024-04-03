@@ -1,43 +1,58 @@
 "use client";
 
-// ** React Imports
-import { useState } from "react";
-
 // ** Next Imports
-import CustomInput from "@/src/components/Input/custom-input";
 import Image from "next/image";
 
-const TicketTypeAddItem = () => {
-  const [open, setOpen] = useState<boolean>(false);
+// ** Mutation Imports
+import useSWRMutation from "swr/mutation";
 
-  const handleOpen = () => {
-    // setOpen((c) => !c);
+// ** Service Imports
+import {Post} from "@/src/repository";
+
+// ** Type Imports
+import {CreateTicketSettingResponse} from "@/src/type/ticket";
+
+// ** Recoil Imports
+import {useRecoilValue} from "recoil";
+import {AuthState} from "@/src/app";
+
+const TicketTypeAddItem = () => {
+  const {accessToken} = useRecoilValue(AuthState);
+
+  const addTicketSetting = useSWRMutation(
+    "/v1/ticket/setting",
+    async (url: string) =>
+      await Post<CreateTicketSettingResponse>(
+        url,
+        {
+          color: "",
+          type: "",
+          description: "",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+        .then(res => {
+          alert("등록되었습니다");
+        })
+        .catch(error => {
+          console.log(error);
+        })
+  );
+
+  const handleAdd = () => {
+    addTicketSetting.trigger();
   };
 
   return (
     <div className="w-full h-[75px] flex items-center">
-      {open ? (
-        <>
-          <div className="mr-8 w-[24px] h-[24px] bg-green-300 rounded-lg" />
-          <CustomInput placeholder="Enter Type Name" />
-          <div className="ml-4">
-            <Image
-              onClick={handleOpen}
-              src={"/svg/add-black-box.svg"}
-              alt="black-box"
-              width={36}
-              height={36}
-            />
-          </div>
-        </>
-      ) : (
-        <div onClick={handleOpen} className="flex items-center w-full h-full">
-          <Image src="/svg/add-box.svg" width={36} height={36} alt="add-box" />
-          <h1 className="text-[#DDDDDD] text-[16px] font-bold ml-4">
-            Add Type
-          </h1>
-        </div>
-      )}
+      <div onClick={handleAdd} className="flex items-center w-full h-full">
+        <Image src="/svg/add-box.svg" width={36} height={36} alt="add-box" />
+        <h1 className="text-[#DDDDDD] text-[16px] font-bold ml-4">Add Type</h1>
+      </div>
     </div>
   );
 };

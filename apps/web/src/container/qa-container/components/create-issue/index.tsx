@@ -1,26 +1,37 @@
 "use client";
 
-import {useRecoilValue} from "recoil";
+// ** Recoil Imports
+import { AuthState, UserState } from "@/src/app";
+import { useRecoilValue } from "recoil";
+
+// ** Compoent Imports
 import CreateIssueView from "./create-issue";
-import {AuthState, UserState} from "@/src/app";
-import useInput from "@/src/hooks/useInput";
-import {CreateIssueParams, CreateIssueResponse} from "@/src/type/qa";
-import {useDialog} from "@/src/context/DialogContext";
+
+// ** Type Imports
+import { CreateIssueParams, CreateIssueResponse } from "@/src/type/qa";
+
+// ** Context Imports
+import { useDialog } from "@/src/context/DialogContext";
+
+// ** Service Imports
 import useSWRMutation from "swr/mutation";
-import {Post} from "@/src/repository";
-import {useState} from "react";
-import {storage} from "@/src/config/firebaseConfig";
-import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
+import { Post } from "@/src/repository";
+
+// ** Utils Imports
+import useInput from "@/src/hooks/useInput";
+import { storage } from "@/src/config/firebaseConfig";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 interface PropsType {}
 
 const CreateIssue = ({}: PropsType) => {
-  const {email, nickname} = useRecoilValue(UserState);
-  const {accessToken} = useRecoilValue(AuthState);
-  const {data: createIssue, handleInput} = useInput<CreateIssueParams>({
+  const { email, nickname } = useRecoilValue(UserState);
+  const { accessToken } = useRecoilValue(AuthState);
+
+  const { data: createIssue, handleInput } = useInput<CreateIssueParams>({
     adminId: email,
     workerId: email,
-    number: "ISSUE-01", // 임시로 1번으로 지정
+    number: "ISSUE-01",
     title: "",
     asIs: "",
     toBe: "",
@@ -32,20 +43,19 @@ const CreateIssue = ({}: PropsType) => {
     ],
   });
 
-  const {handleOpen} = useDialog();
+  const { handleOpen } = useDialog();
 
   const handleUpload = (fileUrl: File) => {
     const timestamp = new Date();
     const imageRef = ref(storage, `images/issue_${timestamp.getTime()}`);
-    uploadBytes(imageRef, fileUrl).then(snapshot => {
-      getDownloadURL(snapshot.ref).then(downUrl => {
+    uploadBytes(imageRef, fileUrl).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((downUrl) => {
         createIssue.fileurls[0].url = downUrl;
       });
     });
   };
 
   const handleAdd = () => {
-    console.log(createIssue);
     if (createIssue.title === "") {
       handleOpen({
         title: "Error",
@@ -82,8 +92,6 @@ const CreateIssue = ({}: PropsType) => {
       return;
     }
 
-    console.log(createIssue);
-    console.log(accessToken);
     addIssue.trigger();
   };
 
@@ -105,7 +113,7 @@ const CreateIssue = ({}: PropsType) => {
       onSuccess: () => {
         alert("등록이 완료되었습니다");
       },
-      onError: error => {
+      onError: (error) => {
         console.log(error + "등록 실패");
       },
     }

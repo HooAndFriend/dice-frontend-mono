@@ -13,7 +13,11 @@ const QnaPageView = ({}: PropsType) => {
       <QnaSearchBox />
       <div className="h-[730px] w-full bg-white rounded-[10px] py-4 px-8 mt-4">
         <h1 className="mb-8 font-bold">문의 목록(30명)</h1>
-        <CustomTable headerData={headerData} bodyData={bodyData} />
+        <CustomTable
+          headerData={headerData}
+          bodyData={bodyData}
+          disabledClick
+        />
         <div className="flex justify-end w-full">
           <TablePagination />
         </div>

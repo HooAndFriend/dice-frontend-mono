@@ -35,7 +35,7 @@ const LoginPageView = ({
                 height="18px"
               />
               <input
-                className="w-[280px] h-full pl-3"
+                className="w-[280px] h-full pl-3 focus:outline-none"
                 placeholder="이메일"
                 value={data.email}
                 name="email"
@@ -52,7 +52,7 @@ const LoginPageView = ({
                 height="18px"
               />
               <input
-                className="w-[280px] h-full pl-3"
+                className="w-[280px] h-full pl-3 focus:outline-none border-none focus:ring-0 focus:border-none"
                 placeholder="비밀번호"
                 value={data.password}
                 name="password"

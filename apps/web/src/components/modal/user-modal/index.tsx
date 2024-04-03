@@ -3,9 +3,13 @@ import { useState } from "react";
 
 // ** Component Imports
 import UserModalView from "./user-modal";
+
+// ** Context Imports
 import { DialogProvider } from "@/src/context/DialogContext";
-import { useRecoilValue } from "recoil";
+
+// ** Recoil Imports
 import { UserState } from "@/src/app";
+import { useRecoilValue } from "recoil";
 
 interface PropsType {
   open: boolean;

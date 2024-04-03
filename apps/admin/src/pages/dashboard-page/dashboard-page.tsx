@@ -10,7 +10,7 @@ interface PropsType {}
 const DashboardPageView = ({}: PropsType) => {
   return (
     <div className="p-4">
-      <div className="flex items-end">
+      <div className="flex items-end px-4">
         <h1 className="font-bold text-[24px]">오늘의 운영 현황</h1>
         <p className="text-[#656565] text-[14px] ml-4">
           Today Date {dayjs().format('YYYY-MM-DD')}
@@ -47,7 +47,11 @@ const DashboardPageView = ({}: PropsType) => {
         </div>
         <div className="h-[400px] w-2/4 bg-white rounded-[10px] p-4 mx-4">
           <h1 className="text-[19px] font-bold">일자별 요약</h1>
-          <CustomTable headerData={headerData} bodyData={bodyData} />
+          <CustomTable
+            headerData={headerData}
+            bodyData={bodyData}
+            disabledClick
+          />
         </div>
       </div>
       <div className="flex w-full mt-[20px]">
@@ -55,11 +59,19 @@ const DashboardPageView = ({}: PropsType) => {
           <h1 className="text-[19px] font-bold">
             신규 등록 워크스페이스 (3건)
           </h1>
-          <CustomTable headerData={headerData} bodyData={bodyData} />
+          <CustomTable
+            headerData={headerData}
+            bodyData={bodyData}
+            disabledClick
+          />
         </div>
         <div className="h-[400px] w-2/4 bg-white rounded-[10px] p-4 mx-4">
           <h1 className="text-[19px] font-bold">미답변 1:1 문의 (4명)</h1>
-          <CustomTable headerData={headerData} bodyData={bodyData} />
+          <CustomTable
+            headerData={headerData}
+            bodyData={bodyData}
+            disabledClick
+          />
         </div>
       </div>
     </div>

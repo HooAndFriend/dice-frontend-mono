@@ -10,7 +10,6 @@ import { useState, useRef } from "react";
 import TeamPopoverView from "./team-popover";
 
 // ** Recoil Imports
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   AuthState,
   TeamState,
@@ -21,6 +20,7 @@ import {
   userInitState,
   workspaceInitState,
 } from "@/src/app";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 // ** Type Imports
 import { GetUserTeamListResponse, TeamUserInfo } from "@/src/type/team";
@@ -36,18 +36,16 @@ const TeamPopover = () => {
 
   const router = useRouter();
 
-  const { accessToken } = useRecoilValue(AuthState);
-  const user = useRecoilValue(UserState);
-  const setAuthState = useSetRecoilState(AuthState);
-  const setUserState = useSetRecoilState(UserState);
+  const [userState, setUserState] = useRecoilState(UserState);
   const setWorkspaceState = useSetRecoilState(WorkspaceState);
   const [teamState, setTeamState] = useRecoilState(TeamState);
+  const [authState, setAuthState] = useRecoilState(AuthState);
 
   const cancelButtonRef = useRef(null);
 
   const { data, error, isLoading } = useSWR("/v1/team-user", async (url) =>
     Get<GetUserTeamListResponse>(url, {
-      headers: { Authorization: `Bearer ${accessToken}` },
+      headers: { Authorization: `Bearer ${authState.accessToken}` },
     })
   );
 
@@ -87,12 +85,14 @@ const TeamPopover = () => {
 
   if (isLoading) return null;
 
+  if (error) return;
+
   return (
     <TeamPopoverView
       open={open}
       teamName={teamState.name}
       id={teamState.id}
-      user={user}
+      user={userState}
       userModalOpen={userModalOpen}
       modalTeamOpen={teamModalOpen}
       cancelButtonRef={cancelButtonRef}

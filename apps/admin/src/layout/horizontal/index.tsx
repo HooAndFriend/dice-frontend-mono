@@ -1,5 +1,5 @@
 // ** Router Imports
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 // ** Component Imports
 import { MenuList } from '@/src/components/MenuList'
@@ -18,13 +18,15 @@ const HorizontalHeader = () => {
   return (
     <div className="w-full h-[70px] bg-white flex items-center justify-between px-8">
       <div className="flex items-center">
-        <img
-          src="/images/logo.png"
-          width="100px"
-          height="30px"
-          alt="logo"
-          className="mr-12"
-        />
+        <Link to="/dashboard">
+          <img
+            src="/images/logo.png"
+            width="100px"
+            height="30px"
+            alt="logo"
+            className="mr-12"
+          />
+        </Link>
         {MenuList.map((item) => (
           <MenuDropDown
             name={item.name}

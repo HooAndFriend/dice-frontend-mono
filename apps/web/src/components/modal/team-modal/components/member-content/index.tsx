@@ -3,8 +3,8 @@ import useSWR, { mutate } from "swr";
 import { Get, Patch, Delete } from "@/src/repository";
 
 // ** Recoil Imports
-import { useRecoilValue } from "recoil";
 import { AuthState, TeamState } from "@/src/app";
+import { useRecoilValue } from "recoil";
 
 // ** Component Imports
 import MemberContentView from "./member-content";
@@ -85,6 +85,8 @@ const MemberContent = ({ handleOpen }: PropsType) => {
   };
 
   if (isLoading) return;
+
+  if (error) return;
 
   return (
     <MemberContentView

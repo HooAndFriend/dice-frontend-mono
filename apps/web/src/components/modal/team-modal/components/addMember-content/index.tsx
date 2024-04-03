@@ -1,6 +1,6 @@
 // ** Recoil Imports
-import { useRecoilValue } from "recoil";
 import { AuthState, TeamState } from "@/src/app";
+import { useRecoilValue } from "recoil";
 
 // ** Component Imports
 import AddMemberContentView from "./addMember-content";
@@ -30,8 +30,8 @@ const AddMemberContent = ({ open, setOpen }: PropsType) => {
     role: "VIEWER",
   });
 
-  const { accessToken } = useRecoilValue(AuthState);
   const { uuid } = useRecoilValue(TeamState);
+  const { accessToken } = useRecoilValue(AuthState);
 
   const { handleOpen } = useDialog();
 

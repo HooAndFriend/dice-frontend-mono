@@ -4,7 +4,6 @@ import TeamContentView from "./team-content";
 // ** Recoil Imports
 import { AuthState } from "@/src/app";
 import { useRecoilValue } from "recoil";
-
 // ** Service Imports
 import useSWR from "swr";
 import { Get } from "@/src/repository";

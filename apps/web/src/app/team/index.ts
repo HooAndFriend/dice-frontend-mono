@@ -1,5 +1,11 @@
-import { atom } from "recoil";
-import { persistAtom } from "../util";
+// ** React Imports
+import { useEffect, useState } from "react";
+
+// ** Recoil Imports
+import { atom, useRecoilState } from "recoil";
+import { persistStorageAtom } from "../util";
+
+// ** Type Imports
 import { RoleType } from "@/src/type/common";
 
 interface TeamStateType {
@@ -21,5 +27,5 @@ export const teamInitState: TeamStateType = {
 export const TeamState = atom<TeamStateType>({
   key: "teamState",
   default: teamInitState,
-  effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistStorageAtom],
 });

@@ -1,18 +1,24 @@
 // ** Recoil Imports
+import { AuthState, WorkspaceState } from "@/src/app";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { AuthState, TeamState, WorkspaceState } from "@/src/app";
 
 // ** Component Imports
 import SettingContentView from "./setting-content";
-import useSWR, { mutate } from "swr";
+
+// ** Type Imports
 import {
   GetWorkspaceInfoResponse,
   WorkspaceDetailInfo,
 } from "@/src/type/workspace";
-import { Get, Put } from "@/src/repository";
 import useInput from "@/src/hooks/useInput";
-import useSWRMutation from "swr/mutation";
 import { CommonResponse } from "@/src/type/common";
+
+// ** Service Imports
+import { Get, Put } from "@/src/repository";
+import useSWRMutation from "swr/mutation";
+import useSWR, { mutate } from "swr";
+
+// ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 
 const SettingContent = () => {
@@ -23,8 +29,8 @@ const SettingContent = () => {
     comment: "",
   });
 
+  const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState);
   const { accessToken } = useRecoilValue(AuthState);
-  const [workspace, setWorkspace] = useRecoilState(WorkspaceState);
 
   const { handleOpen } = useDialog();
 
@@ -32,7 +38,7 @@ const SettingContent = () => {
     Get<GetWorkspaceInfoResponse>(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "workspace-code": workspace.uuid,
+        "workspace-code": workspaceState.uuid,
       },
     }).then((res) => {
       setData(res.data);
@@ -52,7 +58,7 @@ const SettingContent = () => {
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "team-code": workspace.uuid,
+            "team-code": workspaceState.uuid,
           },
         }
       ),
@@ -60,7 +66,7 @@ const SettingContent = () => {
       onSuccess: () => {
         mutate("/v1/workspace/home");
 
-        setWorkspace((cur) => ({
+        setWorkspaceState((cur) => ({
           ...cur,
           profile: data.profile,
           name: data.name,
@@ -80,6 +86,8 @@ const SettingContent = () => {
   );
 
   if (isLoading) return;
+
+  if (error) return;
 
   return (
     <SettingContentView

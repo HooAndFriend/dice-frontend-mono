@@ -8,7 +8,9 @@ const TableHeader = ({ data }: PropsType) => {
   return (
     <div className="w-full bg-[#F6F6F6] flex items-center h-[45px] rounded-tl-log rounded-tr-lg">
       {data.map((item) => (
-        <div className={`pl-4 w-[${item.size}]`}>{item.name}</div>
+        <div className={`pl-4`} style={{ width: item.size }}>
+          {item.name}
+        </div>
       ))}
     </div>
   )

@@ -26,7 +26,11 @@ const FaqPageView = ({}: PropsType) => {
             </button>
           </div>
         </div>
-        <CustomTable headerData={headerData} bodyData={bodyData} />
+        <CustomTable
+          headerData={headerData}
+          bodyData={bodyData}
+          disabledClick
+        />
         <div className="flex justify-end w-full">
           <TablePagination />
         </div>

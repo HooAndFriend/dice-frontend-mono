@@ -21,9 +21,9 @@ const WorkspacePopover = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid, id } = useRecoilValue(TeamState);
   const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState);
+  const { id, uuid } = useRecoilValue(TeamState);
+  const { accessToken } = useRecoilValue(AuthState);
 
   const { data, error, isLoading } = useSWR(
     "/v1/workspace-user/team",
@@ -53,6 +53,8 @@ const WorkspacePopover = () => {
   };
 
   if (isLoading) return;
+
+  if (error) return;
 
   return (
     <WorkspacePopoverView

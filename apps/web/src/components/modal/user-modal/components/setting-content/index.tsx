@@ -4,7 +4,6 @@ import { Get, Put } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Recoil Imports
-import { useRecoilValue, useSetRecoilState } from "recoil";
 import { AuthState, UserState } from "@/src/app";
 
 // ** Component Imports
@@ -19,6 +18,7 @@ import { useDialog } from "@/src/context/DialogContext";
 
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const SettingContent = () => {
   const { data, setData, handleInput } = useInput<UserInfo>({
@@ -26,8 +26,9 @@ const SettingContent = () => {
     nickname: "",
     profile: "",
   });
-  const { accessToken } = useRecoilValue(AuthState);
+
   const setUserState = useSetRecoilState(UserState);
+  const { accessToken } = useRecoilValue(AuthState);
 
   const { handleOpen } = useDialog();
 

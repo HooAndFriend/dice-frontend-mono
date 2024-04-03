@@ -29,8 +29,8 @@ const SettingContent = () => {
     description: "",
   });
 
+  const [teamState, setTeamState] = useRecoilState(TeamState);
   const { accessToken } = useRecoilValue(AuthState);
-  const [team, setTeam] = useRecoilState(TeamState);
 
   const { handleOpen } = useDialog();
 
@@ -38,7 +38,7 @@ const SettingContent = () => {
     Get<GetTeamResponse>(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "team-code": team.uuid,
+        "team-code": teamState.uuid,
       },
     }).then((res) => {
       setData(res.data);
@@ -58,14 +58,14 @@ const SettingContent = () => {
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "team-code": team.uuid,
+            "team-code": teamState.uuid,
           },
         }
       ),
     {
       onSuccess: () => {
         mutate("/v1/team");
-        setTeam((cur) => ({
+        setTeamState((cur) => ({
           ...cur,
           profile: data.profile,
           name: data.name,
@@ -85,6 +85,8 @@ const SettingContent = () => {
   );
 
   if (isLoading) return null;
+
+  if (error) return;
 
   return (
     <SettingContentView

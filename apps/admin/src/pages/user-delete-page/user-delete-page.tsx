@@ -1,23 +1,45 @@
+// ** React Imports
+import { useRef, useState } from 'react'
+
 // ** Component Imports
 import CustomTable from '@/src/components/Table'
 import TablePagination from '@/src/components/Table/TablePagination'
 import TitleBox from '@/src/components/TitleBox'
 import UserSearchBox from '@/src/components/SearchBox/UserSearchBox'
+import UserDeleteModal from '@/src/components/Modal/UserDeleteModal'
 
 interface PropsType {}
 
 const UserDeletePageView = ({}: PropsType) => {
+  const [open, setOpen] = useState<boolean>(false)
+
+  const cancelButtonRef = useRef(null)
+
+  const handleOpen = () => setOpen((c) => !c)
+
   return (
     <div className="w-full px-4 mt-4">
       <TitleBox title="사용자 관리 / 탈퇴회원 조회" text="탈퇴회원 조회" />
       <UserSearchBox />
       <div className="h-[730px] w-full bg-white rounded-[10px] py-4 px-8 mt-4">
         <h1 className="mb-8 font-bold">탈퇴회원 목록(30명)</h1>
-        <CustomTable headerData={headerData} bodyData={bodyData} />
+        <CustomTable
+          headerData={headerData}
+          bodyData={bodyData}
+          disabledClick={false}
+          handleClick={handleOpen}
+        />
         <div className="flex justify-end w-full">
           <TablePagination />
         </div>
       </div>
+      {open && (
+        <UserDeleteModal
+          open={open}
+          setOpen={setOpen}
+          cancelButtonRef={cancelButtonRef}
+        />
+      )}
     </div>
   )
 }

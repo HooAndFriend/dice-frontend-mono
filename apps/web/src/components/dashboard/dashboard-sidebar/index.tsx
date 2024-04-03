@@ -11,12 +11,15 @@ import { MenuList } from "@/src/constants/menu";
 import DashboardIcon from "@/public/svg/dashboard.svg";
 
 // ** Recoil Imports
-import { useRecoilValue } from "recoil";
 import { WorkspaceState } from "@/src/app";
+import { useRecoilValue } from "recoil";
+
+// ** Utils Imports
 import { isUndefined } from "loadsh";
 
 const DashboardSidebard = () => {
   const { workspaceFunction } = useRecoilValue(WorkspaceState);
+
   const pathname = usePathname();
 
   const path = useMemo(

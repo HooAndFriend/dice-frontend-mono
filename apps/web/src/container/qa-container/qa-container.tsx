@@ -137,7 +137,7 @@ const QaContainerView = ({
           </div>
         </div>
         {open && (
-          <div className="w-1/2 mt-[123px] h-[564px] rounded-[20px] bg-white shadow-md border-[#EBEBEC] p-5 overflow-y-auto">
+          <div className="w-1/2 mt-[123px] h-[564px] rounded-[20px] bg-white shadow-md border-[#EBEBEC] py-[20px] px-[24px] overflow-y-auto">
             <QaCard
               qaId={qaId}
               handleClose={() => setOpen(false)}

@@ -59,7 +59,7 @@ const QaCardView = ({
     <div className="overflow-x-hidden overflow-y-auto">
       <div className="h-[40px] flex items-center justify-between">
         <div className="flex items-center text-lg font-medium font-spoqa">
-          <h1 className="mr-4">{data.code}</h1>
+          <h1 className="mr-4 text-[18px] font-bold">{data.code}</h1>
           {role !== "VIEWER" && (
             <p
               className="text-[12px] text-gray-500 cursor-pointer underline"
@@ -81,7 +81,7 @@ const QaCardView = ({
       {mode.title === "view" ? (
         <div className="h-[50px] flex justify-between mt-[15px] font-spoqa">
           <div
-            className="flex items-center text-xl font-bold"
+            className="flex items-center text-[20px] font-bold"
             onDoubleClick={() => {
               if (role === "VIEWER") return;
               setMode({ ...mode, title: "edit" });
@@ -130,7 +130,9 @@ const QaCardView = ({
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
       <div className="flex h-5 mt-5">
         <div className="flex items-center">
-          <div className="font-spoqa mr-[80px] font-medium">Admin</div>
+          <div className="font-spoqa mr-[80px] font-medium text-[16px]">
+            Admin
+          </div>
           <QaUserButton
             profile={data.admin ? data.admin.profile : "/dice.png"}
             nickname={data.admin ? data.admin.nickname : ""}
@@ -141,7 +143,9 @@ const QaCardView = ({
           />
         </div>
         <div className="flex items-center">
-          <div className="font-spoqa mx-[80px] font-medium">Worker</div>
+          <div className="font-spoqa mx-[80px] font-medium text-[16px]">
+            Worker
+          </div>
           <QaUserButton
             profile={data.worker.profile}
             nickname={data.worker.nickname}
@@ -154,17 +158,23 @@ const QaCardView = ({
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
       <div className="h-[20px] flex mt-5 ">
-        <div className="font-spoqa font-medium mr-[80px]">regDate</div>
-        <div className="font-spoqa font-normal text-darkGray tracking-[1px]">
+        <div className="font-spoqa font-medium mr-[80px] text-[16px]">
+          regDate
+        </div>
+        <div className="font-spoqa font-normal text-darkGray tracking-[1px] text-[16px]">
           {dayjs(data.createdDate).format("YYYY-MM-DD")}
         </div>
-        <div className="font-spoqa font-medium mx-[80px]">modDate</div>
-        <div className="font-spoqa font-normal text-darkGray tracking-[1px]">
+        <div className="font-spoqa font-medium mx-[80px] text-[16px]">
+          modDate
+        </div>
+        <div className="font-spoqa font-normal text-darkGray tracking-[1px] text-[16px]">
           {dayjs(data.modifiedDate).format("YYYY-MM-DD")}
         </div>
       </div>
       <div className="h-[20px] flex mt-5 ">
-        <div className="font-spoqa font-medium mr-[60px]">due date</div>
+        <div className="font-spoqa font-medium mr-[60px] text-[16px]">
+          due date
+        </div>
         <div className="font-spoqa font-normal text-darkGray tracking-[1px]">
           <QaDatePicker
             value={dayjs(data.dueDate).format("YYYY-MM-DD")}
@@ -173,7 +183,7 @@ const QaCardView = ({
         </div>
       </div>
       <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
-      <div className="mt-5 mb-[14px]">As-Is</div>
+      <div className="mt-5 mb-[14px] text-[16px]">As-Is</div>
       {mode.asIs === "view" ? (
         <div
           dangerouslySetInnerHTML={{ __html: data.asIs }}
@@ -209,7 +219,7 @@ const QaCardView = ({
         </div>
       )}
 
-      <div className="mt-5 mb-[14px]">To-Be</div>
+      <div className="mt-5 mb-[14px] text-[16px]">To-Be</div>
       {mode.toBe === "view" ? (
         <div
           dangerouslySetInnerHTML={{ __html: data.toBe }}
@@ -244,7 +254,7 @@ const QaCardView = ({
           </div>
         </div>
       )}
-      <div className="mt-5 mb-[14px]">Memo</div>
+      <div className="mt-5 mb-[14px] text-[16px]">Memo</div>
       {mode.memo === "view" ? (
         <div
           dangerouslySetInnerHTML={{ __html: data.memo }}
@@ -279,7 +289,7 @@ const QaCardView = ({
           </div>
         </div>
       )}
-      <div className="mt-5 mb-[14px]">
+      <div className="mt-5 mb-[14px] text-[16px]">
         FILE <span className="text-sm font-spoqa text-darkGray">(MAX:4)</span>
       </div>
       <div className="flex items-center">

@@ -8,11 +8,12 @@ import { persistStorageAtom } from "../util";
 // ** Type Imports
 import { RoleType } from "@/src/type/common";
 
-interface TeamStateType {
+export interface TeamStateType {
   id: number;
   name: string;
   profile: string;
   uuid: string;
+  isPersonal: boolean;
   role: RoleType;
 }
 
@@ -21,6 +22,7 @@ export const teamInitState: TeamStateType = {
   name: "",
   profile: "",
   uuid: "",
+  isPersonal: true,
   role: "",
 };
 

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { atom, useRecoilState } from "recoil";
 import { persistStorageAtom } from "../util";
 
-interface AuthStateType {
+export interface AuthStateType {
   accessToken: string;
   refreshToken: string;
 }

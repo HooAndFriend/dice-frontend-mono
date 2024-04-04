@@ -1,7 +1,7 @@
 "use client";
 
 // ** React Imports
-import { Fragment } from "react";
+import { Fragment, KeyboardEvent, useState } from "react";
 
 // ** ui Imports
 import { Dialog, Transition } from "@headlessui/react";
@@ -13,19 +13,12 @@ import useInput from "@/src/hooks/useInput";
 import { SaveQaParam } from "@/src/type/qa";
 import { CommonResponse } from "@/src/type/common";
 
-// ** Component Imports
-import CustomInput from "../../Input/CustomInput";
-
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
 import { Post } from "@/src/repository";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
-
-// ** Recoil Imports
-import { AuthState, WorkspaceState } from "@/src/app";
-import { useRecoilValue } from "recoil";
 
 interface PropsType {
   open: boolean;
@@ -40,25 +33,17 @@ const QaSaveModal = ({
   cancelButtonRef,
   refetch,
 }: PropsType) => {
+  const [button, setButton] = useState<boolean>(false);
+
   const { data, handleInput, handleInit } = useInput<SaveQaParam>({
     title: "",
-    number: "",
   });
-
-  const { uuid } = useRecoilValue(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
 
   const { handleOpen } = useDialog();
 
   const saveQa = useSWRMutation(
     "/v1/qa/simple",
-    async (url: string) =>
-      await Post<CommonResponse<void>>(url, data, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "workspace-code": uuid,
-        },
-      }),
+    async (url: string) => await Post<CommonResponse<void>>(url, data),
     {
       onSuccess: ({ data }) => {
         setOpen(false);
@@ -72,9 +57,18 @@ const QaSaveModal = ({
           buttonText: "Close",
           type: "alert",
         });
+        setButton(false);
       },
     }
   );
+
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      if (button) return;
+      setButton(true);
+      saveQa.trigger();
+    }
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -117,20 +111,15 @@ const QaSaveModal = ({
                       X
                     </h1>
                   </div>
-                  <div className="flex w-full mt-5">
+                  <div className="flex items-center w-full mt-5">
                     <h1 className="w-1/5 mr-5">Qa Name</h1>
-                    <CustomInput
+                    <input
+                      type="text"
                       value={data.title}
                       name="title"
                       onChange={handleInput}
-                    />
-                  </div>
-                  <div className="flex w-full mt-5">
-                    <h1 className="w-1/5 mr-5">Qa Number</h1>
-                    <CustomInput
-                      value={data.number}
-                      name="number"
-                      onChange={handleInput}
+                      onKeyDown={handleEnter}
+                      className="w-[400px] h-[40px] border-solid border-1 border-[#EFEFEF] rounded-[8px] pl-4 focus:outline-none"
                     />
                   </div>
                   <div className="flex justify-end mt-5">

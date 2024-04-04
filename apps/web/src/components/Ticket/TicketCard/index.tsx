@@ -18,12 +18,12 @@ const TicketCard = () => {
       </div>
       <div className="flex items-center justify-between mt-[30px]">
         <h1>상세보기</h1>
-        <TicketStatusButton
+        {/* <TicketStatusButton
           status="REOPEN"
-          width="85px"
-          height="30px"
-          borderRadius="6px"
-        />
+          // width="85px"
+          // height="30px"
+          // borderRadius="6px"
+        /> */}
       </div>
       <hr className="my-[20px]" />
       <div className="flex items-center">

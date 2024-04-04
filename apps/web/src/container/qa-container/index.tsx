@@ -49,7 +49,7 @@ const QaContainer = () => {
     const params = {};
 
     if (status !== "") {
-      params[status] = status;
+      params["status"] = status;
     }
 
     if (query.value !== "") {
@@ -57,10 +57,6 @@ const QaContainer = () => {
     }
 
     return Get<GetIssueListResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Workspace-code": uuid,
-      },
       params,
     });
   });

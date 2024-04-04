@@ -1,17 +1,29 @@
+// ** Component Imports
+import { Dayjs } from "dayjs";
 import DashboardCalendar from "./dashboard-calendar";
 import DashboardCard from "./dashboard-card";
 import DashboardChart from "./dashboard-chart";
 
-interface PropsType {}
+// ** Type Imports
+import { Dates } from "@/src/type/common";
 
-const DashboardContainerView = ({}: PropsType) => {
+interface PropsType {
+  name: string;
+  dates: Dates;
+}
+
+const getDateString = (date: Dayjs) => {};
+
+const DashboardContainerView = ({ name, dates }: PropsType) => {
   return (
     <div className="flex justify-center p-5">
       <div>
         <div className="flex items-center justify-between">
-          <h1 className="text-[32px] font-bold">HooAndFriend</h1>
+          <h1 className="text-[32px] font-bold">{name}</h1>
           <h1 className="text-[20px] text-[#676767]">
-            Feb 20, 2023 ~ Sep 24, 2024
+            {`${dates.startDate.format(
+              "MMM DD, YYYY",
+            )} ~ ${dates.endDate.format("MMM DD, YYYY")}`}
           </h1>
         </div>
         <div className="flex space-x-4">

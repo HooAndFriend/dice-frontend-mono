@@ -2,48 +2,47 @@
 import { IssueInfo } from "@/src/type/qa";
 
 // ** Utils Imports
-import { getStateBoxColor } from "@/src/utils/color";
 import dayjs from "dayjs";
+
+// ** Component Imports
+import QaStatusButton from "../QaStatusButton";
+import QaUserButton from "../QaUserButton";
 
 interface PropsType {
   item: IssueInfo;
+  qaId: number;
   handleOpenQa: (id: number) => void;
 }
 
-const QaItem = ({ item, handleOpenQa }: PropsType) => {
+const QaItem = ({ item, handleOpenQa, qaId }: PropsType) => {
   return (
-    <div className="hover:bg-blue-50">
-      <div onClick={() => handleOpenQa(item.id)} className="h-[125px] m-6">
-        <div className="w-full h-[30px] flex mb-[5px]">
-          <div className="flex items-center mr-5">{item.number}</div>
-          {dayjs().diff(dayjs(item.createdDate), "hour") <= 24 && (
-            <div className="bg-[#F13333] w-[67px] h-[30px] rounded-[10px] text-white flex items-center justify-center font-spoqa text-base text-center">
-              NEW
-            </div>
-          )}
-        </div>
-        <div className="w-full h-[30px] font-spoqa font-medium text-lg mb-[15px]">
-          {item.title}
-        </div>
-        <div className="w-full h-[45px] flex justify-between items-center">
-          <div className="flex items-center">
-            <img
-              className="rounded-full border border-[#EBEBEC] mr-[10px] "
-              src={item.admin.profile}
-              width={30}
-              height={30}
-            />
-            <div className="font-spoqa">{item.admin.nickname}</div>
+    <div
+      className={`px-4 w-full ${
+        qaId === item.id ? "bg-blue-50" : ""
+      } hover:bg-blue-50 h-[100px] py-2 border-b border-solid border-[#EBEBEC]`}
+      onClick={() => handleOpenQa(item.id)}
+    >
+      <div className="flex w-full h-[30px] font-spoqa font-medium text-lg">
+        <h1 className="font-bold">[{item.code}]</h1>
+        <h1 className="ml-2 mr-4">{item.title}</h1>
+        {dayjs().diff(dayjs(item.createdDate), "hour") <= 24 && (
+          <div className="bg-[#F13333] w-[67px] h-[30px] rounded-[10px] text-white flex items-center justify-center font-spoqa text-base text-center">
+            NEW
           </div>
-          <button
-            className={`w-[120px] h-[45px] rounded-[30px] flex justify-center items-center text-white font-spoqa font-bold`}
-            style={{ backgroundColor: getStateBoxColor(item.status) }}
-          >
-            {item.status}
-          </button>
-        </div>
+        )}
       </div>
-      <div className="h-[1px] bg-[#EBEBEC] mx-6"></div>
+      <div className="w-full h-[45px] flex justify-between items-end mb-2">
+        <div className="flex items-center">
+          <QaUserButton
+            profile={item.worker.profile}
+            nickname={item.worker.nickname}
+            type="user"
+            qaId={item.id}
+          />
+          <h1 className="ml-8">{item.dueDate}</h1>
+        </div>
+        <QaStatusButton status={item.status} qaId={item.id} />
+      </div>
     </div>
   );
 };

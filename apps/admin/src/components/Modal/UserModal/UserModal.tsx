@@ -6,13 +6,45 @@ import { Dialog, Transition } from '@headlessui/react'
 import CustomTable from '../../Table'
 import TablePagination from '../../Table/TablePagination'
 
+// ** Type Imports
+import { UserInfo, UserTeam, UserWorkspace } from '@/src/type/user'
+import { formatDate } from '@/src/pages/user-page'
+
 interface PropsType {
   open: boolean
+  userData: UserInfo
+  teamData: UserTeam[]
+  workspaceData: UserWorkspace[]
+  teamCount: number
+  workspaceCount: number
   cancelButtonRef: any
   setOpen: (open: boolean) => void
 }
 
-const UserModalView = ({ open, cancelButtonRef, setOpen }: PropsType) => {
+const UserModalView = ({
+  open,
+  userData,
+  teamData,
+  workspaceData,
+  teamCount,
+  workspaceCount,
+  cancelButtonRef,
+  setOpen,
+}: PropsType) => {
+  const TeamBodyData = teamData.map((team) => [
+    {name: team.team.name, size: '30%'},
+    {name: team.role, size: '20%'},
+    {name: team.invitedId, size: '20%'},
+    {name: formatDate(team.createdDate), size: '30%'}
+  ]);
+
+  const WorkspaceBodyData = workspaceData.map((workspace) => [
+    {name: workspace.workspace.name, size: '30%'},
+    {name: workspace.role, size: '20%'},
+    {name: workspace.invitedId, size: '20%'},
+    {name: formatDate(workspace.createdDate), size: '30%'}
+  ])
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -58,21 +90,21 @@ const UserModalView = ({ open, cancelButtonRef, setOpen }: PropsType) => {
                     <div className="flex items-center">
                       <div className="w-full h-[20px] flex items-center">
                         <h1 className="w-[100px] px-4 font-bold">닉네임</h1>
-                        <h1 className="text-[#696374]">babting</h1>
+                        <h1 className="text-[#696374]">{userData.nickname}</h1>
                       </div>
                       <div className="w-full h-[20px] flex items-center">
                         <h1 className="w-[100px] px-4 font-bold">이메일</h1>
-                        <h1 className="text-[#696374]">dlrkdls997@naver.com</h1>
+                        <h1 className="text-[#696374]">{userData.email}</h1>
                       </div>
                     </div>
                     <div className="flex items-center mt-[20px]">
                       <div className="w-full h-[20px] flex items-center">
                         <h1 className="w-[100px] px-4 font-bold">가입구분</h1>
-                        <h1 className="text-[#696374]">Google</h1>
+                        <h1 className="text-[#696374]">{userData.type}</h1>
                       </div>
                       <div className="w-full h-[20px] flex items-center">
                         <h1 className="w-[100px] px-4 font-bold">가입일</h1>
-                        <h1 className="text-[#696374]">2024-02-02 14:35:35</h1>
+                        <h1 className="text-[#696374]">{formatDate(userData.createdDate)}</h1>
                       </div>
                     </div>
                     <div className="flex items-center mt-[20px]">
@@ -80,31 +112,31 @@ const UserModalView = ({ open, cancelButtonRef, setOpen }: PropsType) => {
                         <h1 className="w-[100px] px-4 font-bold">
                           최근 로그인
                         </h1>
-                        <h1 className="text-[#696374]">2024-02-02 14:35:35</h1>
-                      </div>
-                    </div>
-                    <div className="w-full mt-[20px] px-4">
-                      <h1 className="font-bold mb-[12px]">ㅁ 소속 팀 수</h1>
-                      <CustomTable
-                        headerData={headerData}
-                        bodyData={bodyData}
-                        disabledClick
-                      />
-                      <div className="flex justify-end w-full">
-                        <TablePagination />
+                        <h1 className="text-[#696374]">{formatDate(userData.lastLoginDate)}</h1>
                       </div>
                     </div>
                     <div className="w-full mt-[20px] px-4">
                       <h1 className="font-bold mb-[12px]">
-                        ㅁ 소속 워크스페이스 수
+                        ㅁ 소속 팀 수 ( {teamCount} )
                       </h1>
                       <CustomTable
-                        headerData={headerWorkspaceData}
-                        bodyData={bodyData}
+                        headerData={headerData}
+                        bodyData={TeamBodyData}
                         disabledClick
                       />
                       <div className="flex justify-end w-full">
-                        <TablePagination />
+                      </div>
+                    </div>
+                    <div className="w-full mt-[20px] px-4">
+                      <h1 className="font-bold mb-[12px]">
+                        ㅁ 소속 워크스페이스 수 ( {workspaceCount} )
+                      </h1>
+                      <CustomTable
+                        headerData={headerWorkspaceData}
+                        bodyData={WorkspaceBodyData}
+                        disabledClick
+                      />
+                      <div className="flex justify-end w-full">
                       </div>
                     </div>
                     <div className="flex justify-end w-full mt-[20px]">

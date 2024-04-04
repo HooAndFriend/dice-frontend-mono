@@ -1,5 +1,6 @@
 import { stringTo2048 } from "aws-sdk/clients/customerprofiles";
 import { CommonResponse } from "../common";
+import { EpicStatus } from "../epic";
 
 export interface CreateIssueParams {
   adminId: string;
@@ -28,7 +29,7 @@ export interface GetIssueResponse extends CommonResponse, IssueInfo {}
 
 export interface IssueInfo {
   id: number;
-  number: string;
+  code: string;
   status: EpicStatus;
   title: string;
   admin?: {
@@ -41,15 +42,14 @@ export interface IssueInfo {
     nickname: string;
     profile: string;
   };
-  file: [
-    {
-      id: number;
-      url: string;
-    },
-  ];
+  qaFile: {
+    id: number;
+    url: string;
+  }[];
   asIs: string;
   toBe: string;
   memo: string;
+  dueDate: string;
   createdDate: string;
   modifiedDate: string;
 }
@@ -88,5 +88,4 @@ export interface QaQuery {
 
 export interface SaveQaParam {
   title: string;
-  number: string;
 }

@@ -1,39 +1,61 @@
+// ** Next Imports
+import Image from "next/image";
+
 // ** Component Imports
-import ProfileBox from "@/src/components/ProfileBox";
+import TicketUserButton from "../TicketUserButton";
+import TicketStatusButton from "../TicketStatusButton";
+import TicketDatePicker from "../TicketDatePicker";
+
+// ** Utils Imports
+import dayjs from "dayjs";
+
+// ** Type Imports
+import { TicketInfo } from "@/src/type/ticket";
 
 interface PropsType {
-  id: number;
+  data: TicketInfo;
   handleClick?: (id: number) => void;
 }
 
-const TicketItem = ({ handleClick = (id: number) => {}, id }: PropsType) => {
+const TicketItem = ({ handleClick = (id: number) => {}, data }: PropsType) => {
   return (
     <div
       className="flex h-[60px] hover:bg-slate-400 rounded-lg"
-      onClick={() => handleClick(id)}
+      onClick={() => handleClick(data.id)}
     >
       <div className="flex w-[10%] items-center justify-center">
         <div className="w-[24px] h-[24px] bg-green-300 rounded-lg"></div>
       </div>
-      <div className="flex w-[40%] items-center justify-center">
-        <h1>DICE-3 게시판</h1>
+      <div className="flex w-[40%] items-center">
+        <h1>{`${data.code} ${data.name}`}</h1>
       </div>
       <div className="flex w-[10%] items-center justify-center">
-        <div className="w-[84px] h-[40px] rounded-[6px] flex justify-center items-center bg-[#CAE0F4]">
-          완료
-        </div>
+        <TicketStatusButton ticketId={data.id} status={data.status} />
       </div>
       <div className="flex w-[10%] items-center justify-center">
-        <ProfileBox image="/images/dice.png" alt="worker" />
+        <TicketUserButton
+          profile={data.worker?.profile}
+          type="user"
+          ticketId={data.id}
+        />
       </div>
       <div className="flex w-[20%] items-center justify-center">
-        <h1>2023-11-19</h1>
+        <TicketDatePicker
+          ticketId={data.id}
+          value={dayjs(data.dueDate).format("YYYY-MM-DD")}
+        />
       </div>
       <div className="flex w-[20%] items-center justify-center">
-        <h1>2023-11-19</h1>
+        <h1>
+          {data.completeDate
+            ? dayjs(data.completeDate).format("YYYY-MM-DD")
+            : "-"}
+        </h1>
       </div>
       <div className="flex w-[20%] items-center justify-center">
-        <h1>-</h1>
+        <h1>
+          {data.reopenDate ? dayjs(data.reopenDate).format("YYYY-MM-DD") : "-"}
+        </h1>
       </div>
     </div>
   );

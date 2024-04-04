@@ -15,19 +15,19 @@ import { Post } from "@/src/repository";
 import { useDialog } from "@/src/context/DialogContext";
 
 interface PropsType {
-  qaId: number;
+  ticketId: number;
   refetch: () => void;
 }
 
-const TicketFileUploader = ({ qaId, refetch }: PropsType) => {
+const TicketFileUploader = ({ ticketId, refetch }: PropsType) => {
   const { handleOpen } = useDialog();
 
   const inputRef = useRef<HTMLInputElement | any>(null);
 
   const saveQaFile = useSWRMutation(
-    "/v1/qa/file",
+    "/v1/ticket/file",
     async (url: string, { arg }: { arg: string }) =>
-      await Post<CommonResponse<void>>(url, { url: arg, qaId }),
+      await Post<CommonResponse<void>>(url, { file: arg, ticketId }),
     {
       onSuccess: () => {
         refetch();

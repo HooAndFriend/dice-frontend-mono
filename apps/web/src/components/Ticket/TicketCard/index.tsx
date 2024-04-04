@@ -75,7 +75,11 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
 
   const { handleOpen } = useDialog();
 
-  const { error, isLoading } = useSWR(
+  const {
+    error,
+    isLoading,
+    mutate: ticketRefetch,
+  } = useSWR(
     `/v1/ticket/${ticketId}`,
     async (url) => Get<GetTicketResponse>(url),
     {
@@ -139,6 +143,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       handleClose={handleClose}
       handleSaveTicketComment={saveTicketComment.trigger}
       handleCommentEnter={handleCommentEnter}
+      ticketRefetch={ticketRefetch}
       commentRefetch={commentRefetch}
     />
   );

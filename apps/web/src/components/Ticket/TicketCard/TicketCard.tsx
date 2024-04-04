@@ -7,6 +7,7 @@ import TicketComment from "../TicketComment";
 import TicketStatusButton from "../TicketStatusButton";
 import QuillEditor from "../../QuillEditor";
 import TicketDatePicker from "../TicketDatePicker";
+import TicketFileUploader from "../TicketFileUploader";
 
 // ** Type Imports
 import { TicketEditMode, TicketInfo } from "@/src/type/ticket";
@@ -28,6 +29,7 @@ interface PropsType {
   setData: (data: TicketInfo) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   commentRefetch: () => void;
+  ticketRefetch: () => void;
   handleClose: () => void;
   handleSaveTicketComment: () => void;
 }
@@ -44,6 +46,7 @@ const TicketCardView = ({
   setMode,
   handleClose,
   commentRefetch,
+  ticketRefetch,
   handleSaveTicketComment,
   handleCommentEnter,
 }: PropsType) => {
@@ -56,7 +59,7 @@ const TicketCardView = ({
             Delete
           </p>
           <h1
-            className="text-[24px] font-bold cursor-pointer"
+            className="text-[24px] font-bold cursor-pointer ml-4"
             onClick={handleClose}
           >
             X
@@ -103,7 +106,6 @@ const TicketCardView = ({
       </div>
       <div className="flex items-center mt-1">
         <h1 className="w-[110px]">DueDate</h1>
-
         {mode.dueDate === "view" ? (
           <h3
             onDoubleClick={() => {
@@ -204,7 +206,26 @@ const TicketCardView = ({
         </div>
       )}
       <h1 className="my-4">File</h1>
-      <div className="w-[40px] h-[40px] bg-green-300 rounded-lg"></div>
+      <div className="flex items-center">
+        {data.ticketFile.length < 4 && (
+          <TicketFileUploader ticketId={data.id} refetch={ticketRefetch} />
+        )}
+        {data.ticketFile.map((item) => (
+          <div className="relative w-[40px] h-[40px] mr-4">
+            <img
+              src={item.url}
+              alt="Description"
+              className="absolute inset-0 w-full h-full rounded-[6px] bg-[#D9E0FF]"
+            />
+            <h1
+              className="absolute px-2 py-1 m-1 text-xs leading-none text-white bg-black rounded-full cursor-pointer -right-2 -top-2"
+              // onClick={() => handleDeleteQaFile(item.id)}
+            >
+              X
+            </h1>
+          </div>
+        ))}
+      </div>
       <hr className="my-[20px]" />
       <div className="flex mt-5">
         <input

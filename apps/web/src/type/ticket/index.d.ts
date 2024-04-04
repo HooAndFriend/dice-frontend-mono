@@ -21,7 +21,7 @@ export interface TicketInfo {
   dueDate: Date;
   completeDate: Date;
   reopenDate: Date;
-  ticketFile: { id: number; path: string }[];
+  ticketFile: { id: number; url: string }[];
   workspace: {
     id: 3;
   };

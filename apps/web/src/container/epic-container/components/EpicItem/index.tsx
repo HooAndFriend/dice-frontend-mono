@@ -11,6 +11,7 @@ import { useMemo, useState } from "react";
 import { EpicInfo } from "@/src/type/epic";
 import TicketItem from "@/src/components/Ticket/TicketItem";
 import TicketHeader from "@/src/components/Ticket/TicketHeader";
+import TicketAddItem from "@/src/components/Ticket/TicketAddItem";
 
 interface PropsType {
   item: EpicInfo;
@@ -46,17 +47,15 @@ const EpicItem = ({ item }: PropsType) => {
         <h4 className="ml-2">
           ({item.doneTicketCount}/{item.ticket.length})
         </h4>
-        {item.ticket.length > 0 && (
-          <div className="ml-auto">
-            <Image
-              src={open ? "/svg/arrow-up.svg" : "/svg/arrow-down.svg"}
-              alt="arrow"
-              width={24}
-              height={24}
-              onClick={handleOpen}
-            />
-          </div>
-        )}
+        <div className="ml-auto">
+          <Image
+            src={open ? "/svg/arrow-up.svg" : "/svg/arrow-down.svg"}
+            alt="arrow"
+            width={24}
+            height={24}
+            onClick={handleOpen}
+          />
+        </div>
       </div>
       {open && (
         <div>
@@ -64,8 +63,10 @@ const EpicItem = ({ item }: PropsType) => {
           {item.ticket.map((item) => (
             <TicketItem handleClick={() => {}} data={item} key={item.id} />
           ))}
+          <TicketAddItem epicId={item.id} />
         </div>
       )}
+
       <hr className="bg-[#EBEBEC]" />
     </div>
   );

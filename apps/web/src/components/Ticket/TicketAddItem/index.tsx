@@ -20,7 +20,11 @@ import { Post } from "@/src/repository";
 import { CommonResponse } from "@/src/type/common";
 import { mutate } from "swr";
 
-const TicketAddItem = () => {
+interface PropsType {
+  epicId?: number;
+}
+
+const TicketAddItem = ({ epicId }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
 
@@ -28,7 +32,7 @@ const TicketAddItem = () => {
 
   const { handleOpen: handleModalOpen } = useDialog();
 
-  const saveTicket = useSWRMutation(
+  const saveSimpleTicket = useSWRMutation(
     "/v1/ticket/simple",
     async (url: string) => await Post<CommonResponse<void>>(url, { name }),
     {
@@ -36,6 +40,30 @@ const TicketAddItem = () => {
         setOpen(false);
         setName("");
         mutate("/v1/ticket");
+        mutate("/v1/epic");
+      },
+      onError: (error) => {
+        handleModalOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
+  const saveTicketWithEpic = useSWRMutation(
+    "/v1/ticket",
+    async (url: string) =>
+      await Post<CommonResponse<void>>(url, { name, epicId }),
+    {
+      onSuccess: () => {
+        setOpen(false);
+        setName("");
+        mutate("/v1/ticket");
+        mutate("/v1/epic");
       },
       onError: (error) => {
         handleModalOpen({
@@ -61,7 +89,12 @@ const TicketAddItem = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <div className="ml-4" onClick={saveTicket.trigger}>
+          <div
+            className="ml-4"
+            onClick={
+              epicId ? saveTicketWithEpic.trigger : saveSimpleTicket.trigger
+            }
+          >
             <Image
               onClick={handleOpen}
               src={"/svg/add-black-box.svg"}

@@ -4,25 +4,25 @@
 import SettingContainerView from "./setting-container";
 
 // ** Service Imports
-import {Delete, Get, Patch} from "@/src/repository";
+import { Delete, Get, Patch } from "@/src/repository";
 import useSWR from "swr";
 
 // ** Recoil Imports
-import {useRecoilValue} from "recoil";
-import {AuthState, WorkspaceState} from "@/src/app";
+import { useRecoilValue } from "recoil";
+import { AuthState, WorkspaceState } from "@/src/app";
 
 // ** Type Imports
-import {GetTicketListResponse} from "@/src/type/ticket";
-import {useEffect} from "react";
+import { GetTicketSettingListResponse } from "@/src/type/ticket";
+import { useEffect } from "react";
 
 const SettingConatiner = () => {
-  const {accessToken} = useRecoilValue(AuthState);
-  const {uuid} = useRecoilValue(WorkspaceState);
+  const { accessToken } = useRecoilValue(AuthState);
+  const { uuid } = useRecoilValue(WorkspaceState);
 
-  const {data, error, isLoading, mutate} = useSWR(
+  const { data, error, isLoading, mutate } = useSWR(
     "/v1/ticket/setting",
-    async url => {
-      return await Get<GetTicketListResponse>(url, {
+    async (url) => {
+      return await Get<GetTicketSettingListResponse>(url, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Workspace-code": uuid,
@@ -52,10 +52,10 @@ const SettingConatiner = () => {
         },
       }
     )
-      .then(res => {
+      .then((res) => {
         mutate();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -66,7 +66,7 @@ const SettingConatiner = () => {
         Authorization: `Bearer ${accessToken}`,
         "Workspace-code": uuid,
       },
-    }).then(res => {
+    }).then((res) => {
       mutate();
     });
   };

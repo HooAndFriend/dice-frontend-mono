@@ -30,7 +30,7 @@ export interface TicketInfo {
     id: number;
   };
 }
-export interface GetTicketListResponse extends Response {
+export interface GetTicketSettingListResponse extends Response {
   data: SettingListInfo[];
   count: number;
 }

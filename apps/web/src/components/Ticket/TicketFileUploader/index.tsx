@@ -24,7 +24,7 @@ const TicketFileUploader = ({ ticketId, refetch }: PropsType) => {
 
   const inputRef = useRef<HTMLInputElement | any>(null);
 
-  const saveQaFile = useSWRMutation(
+  const saveTicketFile = useSWRMutation(
     "/v1/ticket/file",
     async (url: string, { arg }: { arg: string }) =>
       await Post<CommonResponse<void>>(url, { file: arg, ticketId }),
@@ -76,7 +76,7 @@ const TicketFileUploader = ({ ticketId, refetch }: PropsType) => {
         if (err) {
           return;
         }
-        saveQaFile.trigger(data.Location);
+        saveTicketFile.trigger(data.Location);
       });
     }
   };

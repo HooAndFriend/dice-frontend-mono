@@ -7,11 +7,11 @@ import QaCardView from "./QaCard";
 
 // ** Service Imports
 import useSWR, { mutate } from "swr";
-import { Delete, Get, Patch, Post, Put } from "@/src/repository";
+import { Delete, Get, Patch, Post } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Recoil Imports
-import { AuthState, WorkspaceState } from "@/src/app";
+import { WorkspaceState } from "@/src/app";
 import { useRecoilValue } from "recoil";
 
 // ** Utils Imports
@@ -67,8 +67,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
     dueDate: null,
   });
 
-  const { uuid, role } = useRecoilValue(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
+  const { role } = useRecoilValue(WorkspaceState);
 
   const { handleOpen } = useDialog();
 
@@ -96,16 +95,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
   const addComment = useSWRMutation(
     "/v1/qa/comment",
     async (url: string) =>
-      await Post<AddCommentResponse>(
-        url,
-        { content: comment, qaId },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "workspace-code": uuid,
-          },
-        }
-      ),
+      await Post<AddCommentResponse>(url, { content: comment, qaId }),
     {
       onSuccess: () => {
         setComment("");
@@ -126,13 +116,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
   // ** Qa 삭제
   const deleteQa = useSWRMutation(
     `/v1/qa/${qaId}`,
-    async (url: string) =>
-      await Delete<CommonResponse<void>>(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "workspace-code": uuid,
-        },
-      }),
+    async (url: string) => await Delete<CommonResponse<void>>(url),
     {
       onSuccess: () => {
         handleClose();
@@ -154,12 +138,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
   const deleteQaFile = useSWRMutation(
     "/v1/qa/file/",
     async (url: string, { arg }: { arg: number }) =>
-      await Delete<CommonResponse<void>>(url + arg, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "workspace-code": uuid,
-        },
-      }),
+      await Delete<CommonResponse<void>>(url + arg),
     {
       onSuccess: () => {
         refetch();
@@ -184,16 +163,11 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
       { arg }: { arg: "title" | "asIs" | "toBe" | "memo" }
     ) => {
       setCurrentArg(arg);
-      return await Patch<CommonResponse<void>>(
-        url,
-        { qaId, value: issueData[arg], type: arg },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "workspace-code": uuid,
-          },
-        }
-      );
+      return await Patch<CommonResponse<void>>(url, {
+        qaId,
+        value: issueData[arg],
+        type: arg,
+      });
     },
     {
       onSuccess: () => {
@@ -216,13 +190,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
   // ** QA 정보 조회
   const { isLoading: issueLoading, mutate: refetch } = useSWR(
     `/v1/qa/${qaId}`,
-    async (url) =>
-      Get<GetIssueResponse>(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "workspace-code": uuid,
-        },
-      }),
+    async (url) => Get<GetIssueResponse>(url),
     {
       onSuccess: (res) => {
         setIssueData(res.data);
@@ -237,12 +205,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
     isLoading: commentLoading,
     mutate: commentRefetch,
   } = useSWR(`/v1/qa/comment/${qaId}`, async (url) =>
-    Get<GetCommentListResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "workspace-code": uuid,
-      },
-    })
+    Get<GetCommentListResponse>(url)
   );
 
   const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {

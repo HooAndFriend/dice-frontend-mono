@@ -61,10 +61,6 @@ const QaUserButton = ({
     mutate: refetch,
   } = useSWR("/v1/workspace-user/search", async (url) =>
     Get<GetSearchWorkspaceUserListResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Workspace-code": uuid,
-      },
       params: { name },
     })
   );
@@ -72,16 +68,7 @@ const QaUserButton = ({
   const updateQaUser = useSWRMutation(
     "v1/qa/user",
     async (url: string, { arg }: { arg: number }) =>
-      await Put<CommonResponse<void>>(
-        url,
-        { qaId, type, userId: arg },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "workspace-code": `${uuid}`,
-          },
-        }
-      ),
+      await Put<CommonResponse<void>>(url, { qaId, type, userId: arg }),
     {
       onSuccess: () => {
         mutate("/v1/qa");

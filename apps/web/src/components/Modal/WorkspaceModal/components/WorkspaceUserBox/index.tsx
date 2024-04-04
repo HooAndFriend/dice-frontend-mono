@@ -37,43 +37,9 @@ const WorkspaceUserBox = ({
   const updateWorkspaceRole = useSWRMutation(
     "/v1/workspace-user",
     async (url: string, { arg }: { arg: RoleType }) =>
-      await Put<CommonResponse<void>>(
-        url,
-        {
-          id,
-          role: arg,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "workspace-code": uuid,
-          },
-        },
-      ),
-    {
-      onSuccess: ({ data }) => {
-        mutate("/v1/workspace-user");
-      },
-      onError: (error) => {
-        handleOpen({
-          title: "Error",
-          message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-      },
-    },
-  );
-
-  const removeWorkspaceUser = useSWRMutation(
-    `/v1/workspace-user/${id}`,
-    async (url: string) =>
-      await Delete<CommonResponse<void>>(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "workspace-code": uuid,
-        },
+      await Put<CommonResponse<void>>(url, {
+        id,
+        role: arg,
       }),
     {
       onSuccess: ({ data }) => {
@@ -88,7 +54,26 @@ const WorkspaceUserBox = ({
           type: "alert",
         });
       },
-    },
+    }
+  );
+
+  const removeWorkspaceUser = useSWRMutation(
+    `/v1/workspace-user/${id}`,
+    async (url: string) => await Delete<CommonResponse<void>>(url),
+    {
+      onSuccess: ({ data }) => {
+        mutate("/v1/workspace-user");
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
   );
 
   return (

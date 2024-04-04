@@ -21,12 +21,7 @@ const WorkspaceMemberContent = ({ handleOpen }: PropsType) => {
   const { accessToken } = useRecoilValue(AuthState);
 
   const { data, error, isLoading } = useSWR("/v1/workspace-user", async (url) =>
-    Get<GetWorkspaceUserListResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "workspace-code": uuid,
-      },
-    }),
+    Get<GetWorkspaceUserListResponse>(url)
   );
 
   if (isLoading) return;

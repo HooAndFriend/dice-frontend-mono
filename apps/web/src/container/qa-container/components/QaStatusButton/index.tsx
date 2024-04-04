@@ -59,16 +59,7 @@ const QaStatusButton = ({ status, qaId, refetch }: PropsType) => {
   const updateQaStatus = useSWRMutation(
     "/v1/qa/status",
     async (url: string, { arg }: { arg: EpicStatus }) =>
-      await Put<CommonResponse<void>>(
-        url,
-        { status: arg, qaId },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "workspace-code": uuid,
-          },
-        }
-      ),
+      await Put<CommonResponse<void>>(url, { status: arg, qaId }),
     {
       onSuccess: () => {
         setOpen(false);

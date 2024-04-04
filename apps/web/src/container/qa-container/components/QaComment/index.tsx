@@ -41,13 +41,7 @@ const QaComment = ({ data, commentRefetch }: PropsType) => {
 
   const deleteComment = useSWRMutation(
     `/v1/qa/comment/${data.id}`,
-    async (url: string) =>
-      await Delete<CommonResponse<void>>(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "workspace-code": `${uuid}`,
-        },
-      }),
+    async (url: string) => await Delete<CommonResponse<void>>(url),
     {
       onSuccess: () => {
         commentRefetch();
@@ -61,25 +55,16 @@ const QaComment = ({ data, commentRefetch }: PropsType) => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const updateComment = useSWRMutation(
     "/v1/qa/comment",
     async (url: string) =>
-      await Put<CommonResponse<void>>(
-        url,
-        {
-          commentId: data.id,
-          content,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "workspace-code": `${uuid}`,
-          },
-        },
-      ),
+      await Put<CommonResponse<void>>(url, {
+        commentId: data.id,
+        content,
+      }),
     {
       onSuccess: () => {
         commentRefetch();
@@ -94,7 +79,7 @@ const QaComment = ({ data, commentRefetch }: PropsType) => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   return (

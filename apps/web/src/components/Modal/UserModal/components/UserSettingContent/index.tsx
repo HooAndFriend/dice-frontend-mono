@@ -1,10 +1,15 @@
+// ** React Imports
+
+import { useEffect } from "react";
+
 // ** Swr Imports
 import useSWR, { mutate } from "swr";
 import { Get, Put } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Recoil Imports
-import { AuthState, UserState } from "@/src/app";
+import { UserState } from "@/src/app";
+import { useSetRecoilState } from "recoil";
 
 // ** Component Imports
 import { ImageUploader } from "@/src/components/ImageUploader";
@@ -18,8 +23,6 @@ import { useDialog } from "@/src/context/DialogContext";
 
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { useEffect } from "react";
 
 const UserSettingContent = () => {
   const { data, setData, handleInput } = useInput<UserInfo>({
@@ -29,7 +32,6 @@ const UserSettingContent = () => {
   });
 
   const setUserState = useSetRecoilState(UserState);
-  const { accessToken } = useRecoilValue(AuthState);
 
   const { handleOpen } = useDialog();
 
@@ -37,25 +39,15 @@ const UserSettingContent = () => {
     error,
     isLoading,
     data: userData,
-  } = useSWR("/v1/user", async (url) =>
-    Get<GetUserInfoResponse>(url, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    })
-  );
+  } = useSWR("/v1/user", async (url) => Get<GetUserInfoResponse>(url));
 
   const updateUser = useSWRMutation(
     "/v1/user",
     async (url: string) =>
-      await Put<CommonResponse<void>>(
-        url,
-        {
-          nickname: data.nickname,
-          profile: data.profile,
-        },
-        {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }
-      ),
+      await Put<CommonResponse<void>>(url, {
+        nickname: data.nickname,
+        profile: data.profile,
+      }),
     {
       onSuccess: ({ data: responseData }) => {
         mutate("/v1/user");

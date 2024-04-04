@@ -31,12 +31,7 @@ const WorkspacePopover = () => {
     isLoading,
     mutate: handleRefetch,
   } = useSWR("/v1/workspace-user/team", async (url) =>
-    Get<GetWorkspaceListResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "team-code": id === 0 ? "personal" : uuid,
-      },
-    })
+    Get<GetWorkspaceListResponse>(url)
   );
 
   const cancelButtonRef = useRef(null);

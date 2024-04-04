@@ -44,13 +44,7 @@ const SaveWorkspaceContainer = () => {
 
   const saveWorkspace = useSWRMutation(
     "/v1/workspace",
-    async (url: string) =>
-      await Post<CommonResponse<void>>(url, data, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "team-code": uuid,
-        },
-      }),
+    async (url: string) => await Post<CommonResponse<void>>(url, data),
     {
       onSuccess: ({ data }) => {
         router.push("/dashboard");
@@ -64,7 +58,7 @@ const SaveWorkspaceContainer = () => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const handleImage = (profile: string) => {

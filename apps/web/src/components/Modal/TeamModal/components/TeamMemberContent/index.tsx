@@ -1,9 +1,9 @@
 // ** Swr Imports
-import useSWR, { mutate } from "swr";
-import { Get, Patch } from "@/src/repository";
+import useSWR from "swr";
+import { Get } from "@/src/repository";
 
 // ** Recoil Imports
-import { AuthState, TeamState } from "@/src/app";
+import { TeamState } from "@/src/app";
 import { useRecoilValue } from "recoil";
 
 // ** Component Imports
@@ -11,31 +11,19 @@ import TeamMemberBox from "../TeamMemberBox";
 
 // ** Type Imports
 import { GetTeamUserListResponse } from "@/src/type/team";
-import { CommonResponse, RoleType } from "@/src/type/common";
 
 // ** Utils Imports
 import { CopyToClipboard } from "react-copy-to-clipboard";
-
-// ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
 
 interface PropsType {
   handleOpen: () => void;
 }
 
 const TeamMemberContent = ({ handleOpen }: PropsType) => {
-  const { accessToken } = useRecoilValue(AuthState);
   const { uuid, role } = useRecoilValue(TeamState);
 
-  const { handleOpen: handleDialogOpen } = useDialog();
-
   const { data, error, isLoading } = useSWR("/v1/team-user/user", async (url) =>
-    Get<GetTeamUserListResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "team-code": uuid,
-      },
-    })
+    Get<GetTeamUserListResponse>(url)
   );
 
   if (isLoading) return;

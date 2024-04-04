@@ -30,30 +30,15 @@ const WorkspaceAddFunctionContent = () => {
 
   const { data, error, isLoading, mutate } = useSWR(
     "/v1/workspace-function/function",
-    async (url) =>
-      Get<GetWorkspaceFunctionListResponse>(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "workspace-code": uuid,
-        },
-      })
+    async (url) => Get<GetWorkspaceFunctionListResponse>(url)
   );
 
   const removeWorkspaceFunction = useSWRMutation(
     "/v1/workspace-function",
     async (url: string, { arg }: { arg: WorksapceFunctionType }) =>
-      await Put<CommonResponse<void>>(
-        url,
-        {
-          function: arg,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "workspace-code": uuid,
-          },
-        }
-      ),
+      await Put<CommonResponse<void>>(url, {
+        function: arg,
+      }),
     {
       onSuccess: () => {
         mutate();
@@ -73,18 +58,9 @@ const WorkspaceAddFunctionContent = () => {
   const addWorkspaceFunction = useSWRMutation(
     "/v1/workspace-function",
     async (url: string, { arg }: { arg: WorksapceFunctionType }) =>
-      await Post<CommonResponse<void>>(
-        url,
-        {
-          function: arg,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "workspace-code": uuid,
-          },
-        }
-      ),
+      await Post<CommonResponse<void>>(url, {
+        function: arg,
+      }),
     {
       onSuccess: () => {
         mutate();

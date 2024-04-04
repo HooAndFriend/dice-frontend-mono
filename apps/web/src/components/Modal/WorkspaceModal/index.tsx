@@ -32,12 +32,7 @@ const WorkspaceModal = ({ open, setOpen, cancelButtonRef }: PropsType) => {
   const { profile, name, uuid } = useRecoilValue(WorkspaceState);
 
   const { data, error, isLoading } = useSWR("/v1/workspace-user", async (url) =>
-    Get<GetWorkspaceUserListResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "workspace-code": uuid,
-      },
-    }),
+    Get<GetWorkspaceUserListResponse>(url)
   );
 
   if (isLoading) return;

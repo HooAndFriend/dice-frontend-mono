@@ -57,10 +57,6 @@ const QaContainer = () => {
     }
 
     return Get<GetIssueListResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Workspace-code": uuid,
-      },
       params,
     });
   });

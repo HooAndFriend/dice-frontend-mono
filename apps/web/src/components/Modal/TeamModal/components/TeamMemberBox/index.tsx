@@ -4,10 +4,6 @@ import { useDialog } from "@/src/context/DialogContext";
 // ** Type Imports
 import { CommonResponse, RoleType } from "@/src/type/common";
 
-// ** Recoil Imports
-import { AuthState, TeamState } from "@/src/app";
-import { useRecoilValue } from "recoil";
-
 // ** Service Imports
 import { mutate } from "swr";
 import { Delete, Patch } from "@/src/repository";
@@ -30,27 +26,15 @@ const TeamMemberBox = ({
   userRole,
   id,
 }: PropsType) => {
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid } = useRecoilValue(TeamState);
-
   const { handleOpen } = useDialog();
 
   const updateTeamRole = useSWRMutation(
     "/v1/team-user",
     async (url: string, { arg }: { arg: RoleType }) =>
-      await Patch<CommonResponse<void>>(
-        url,
-        {
-          teamUserId: id,
-          role: arg,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "team-code": uuid,
-          },
-        }
-      ),
+      await Patch<CommonResponse<void>>(url, {
+        teamUserId: id,
+        role: arg,
+      }),
     {
       onSuccess: ({ data }) => {
         mutate("/v1/team-user/user");
@@ -69,13 +53,7 @@ const TeamMemberBox = ({
 
   const removeTeamUser = useSWRMutation(
     `/v1/team-user/${id}`,
-    async (url: string) =>
-      await Delete<CommonResponse<void>>(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "team-code": uuid,
-        },
-      }),
+    async (url: string) => await Delete<CommonResponse<void>>(url),
     {
       onSuccess: ({ data }) => {
         mutate("/v1/team-user/user");

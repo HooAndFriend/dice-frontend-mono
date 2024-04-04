@@ -28,16 +28,7 @@ const QaDatePicker = ({ value, qaId }: PropsType) => {
   const updateQa = useSWRMutation(
     "v1/qa/dueDate",
     async (url: string, { arg }: { arg: string }) =>
-      await Put<CommonResponse<void>>(
-        url,
-        { qaId, dueDate: arg },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "workspace-code": `${uuid}`,
-          },
-        },
-      ),
+      await Put<CommonResponse<void>>(url, { qaId, dueDate: arg }),
     {
       onSuccess: () => {
         mutate("/v1/qa");
@@ -52,7 +43,7 @@ const QaDatePicker = ({ value, qaId }: PropsType) => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {

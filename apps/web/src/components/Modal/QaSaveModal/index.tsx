@@ -20,10 +20,6 @@ import { Post } from "@/src/repository";
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 
-// ** Recoil Imports
-import { AuthState, WorkspaceState } from "@/src/app";
-import { useRecoilValue } from "recoil";
-
 interface PropsType {
   open: boolean;
   cancelButtonRef: any;
@@ -43,20 +39,11 @@ const QaSaveModal = ({
     title: "",
   });
 
-  const { uuid } = useRecoilValue(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
-
   const { handleOpen } = useDialog();
 
   const saveQa = useSWRMutation(
     "/v1/qa/simple",
-    async (url: string) =>
-      await Post<CommonResponse<void>>(url, data, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "workspace-code": uuid,
-        },
-      }),
+    async (url: string) => await Post<CommonResponse<void>>(url, data),
     {
       onSuccess: ({ data }) => {
         setOpen(false);

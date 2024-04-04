@@ -2,10 +2,6 @@
 import { Get } from "@/src/repository";
 import useSWR from "swr";
 
-// ** Recoil Imports
-import { AuthState } from "@/src/app";
-import { useRecoilValue } from "recoil";
-
 // ** Type Imports
 import { GetUserWorkspaceListResponse } from "@/src/type/workspace";
 
@@ -13,14 +9,9 @@ import { GetUserWorkspaceListResponse } from "@/src/type/workspace";
 import UserProfileBox from "../UserProfileBox";
 
 const UserWorkspaceContent = () => {
-  const { accessToken } = useRecoilValue(AuthState);
-
   const { data, error, isLoading } = useSWR(
     "/v1/workspace-user/my",
-    async (url) =>
-      Get<GetUserWorkspaceListResponse>(url, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      }),
+    async (url) => Get<GetUserWorkspaceListResponse>(url)
   );
 
   if (isLoading) return;

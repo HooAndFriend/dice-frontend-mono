@@ -1,7 +1,3 @@
-// ** Recoil Imports
-import { AuthState, TeamState } from "@/src/app";
-import { useRecoilValue } from "recoil";
-
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
 
@@ -28,20 +24,11 @@ const TeamAddMemberContent = ({ open, setOpen }: PropsType) => {
     role: "VIEWER",
   });
 
-  const { uuid } = useRecoilValue(TeamState);
-  const { accessToken } = useRecoilValue(AuthState);
-
   const { handleOpen } = useDialog();
 
   const inviteTeamUser = useSWRMutation(
     "/v1/team-user",
-    async (url: string) =>
-      await Post<CommonResponse<void>>(url, data, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "team-code": uuid,
-        },
-      }),
+    async (url: string) => await Post<CommonResponse<void>>(url, data),
     {
       onSuccess: () => {
         setOpen(false);

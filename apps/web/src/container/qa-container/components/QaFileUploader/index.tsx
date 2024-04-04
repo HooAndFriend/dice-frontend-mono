@@ -34,16 +34,7 @@ export const QaFileUploader = ({ qaId, refetch }: PropsType) => {
   const saveQaFile = useSWRMutation(
     "/v1/qa/file",
     async (url: string, { arg }: { arg: string }) =>
-      await Post<CommonResponse<void>>(
-        url,
-        { url: arg, qaId },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "workspace-code": uuid,
-          },
-        },
-      ),
+      await Post<CommonResponse<void>>(url, { url: arg, qaId }),
     {
       onSuccess: () => {
         refetch();
@@ -57,7 +48,7 @@ export const QaFileUploader = ({ qaId, refetch }: PropsType) => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const clearInput = () => {

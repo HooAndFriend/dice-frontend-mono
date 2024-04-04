@@ -1,10 +1,6 @@
 // ** Component Imports
 import UserProfileBox from "../UserProfileBox";
 
-// ** Recoil Imports
-import { AuthState } from "@/src/app";
-import { useRecoilValue } from "recoil";
-
 // ** Service Imports
 import useSWR from "swr";
 import { Get } from "@/src/repository";
@@ -13,12 +9,8 @@ import { Get } from "@/src/repository";
 import { GetUserTeamListResponse } from "@/src/type/team";
 
 const UserTeamContent = () => {
-  const { accessToken } = useRecoilValue(AuthState);
-
   const { data, error, isLoading } = useSWR("/v1/team-user", async (url) =>
-    Get<GetUserTeamListResponse>(url, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    }),
+    Get<GetUserTeamListResponse>(url)
   );
 
   if (isLoading) return;

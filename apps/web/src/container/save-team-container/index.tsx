@@ -43,10 +43,7 @@ const SaveTeamContainer = () => {
 
   const saveTeam = useSWRMutation(
     "/v1/team",
-    async (url: string) =>
-      await Post<CommonResponse<void>>(url, data, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      }),
+    async (url: string) => await Post<CommonResponse<void>>(url, data),
     {
       onSuccess: ({ data }) => {
         router.push("/dashboard");
@@ -60,7 +57,7 @@ const SaveTeamContainer = () => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const handleImage = (profile: string) => {

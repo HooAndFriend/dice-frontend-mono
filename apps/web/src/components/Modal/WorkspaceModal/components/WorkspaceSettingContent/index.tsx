@@ -42,31 +42,17 @@ const WorkspaceSettingContent = () => {
     isLoading,
     data: workspaceData,
   } = useSWR("/v1/workspace/home", async (url) =>
-    Get<GetWorkspaceInfoResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "workspace-code": workspaceState.uuid,
-      },
-    }),
+    Get<GetWorkspaceInfoResponse>(url)
   );
 
   const updateWorkspace = useSWRMutation(
     "/v1/workspace",
     async (url: string) =>
-      await Put<CommonResponse<void>>(
-        url,
-        {
-          name: data.name,
-          comment: data.comment,
-          profile: data.profile,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "team-code": workspaceState.uuid,
-          },
-        },
-      ),
+      await Put<CommonResponse<void>>(url, {
+        name: data.name,
+        comment: data.comment,
+        profile: data.profile,
+      }),
     {
       onSuccess: () => {
         mutate("/v1/workspace/home");
@@ -87,7 +73,7 @@ const WorkspaceSettingContent = () => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const handleImage = (profile: string) => {

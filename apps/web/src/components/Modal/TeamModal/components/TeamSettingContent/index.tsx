@@ -30,17 +30,11 @@ const TeamSettingContent = () => {
   });
 
   const [teamState, setTeamState] = useRecoilState(TeamState);
-  const { accessToken } = useRecoilValue(AuthState);
 
   const { handleOpen } = useDialog();
 
   const { error, isLoading } = useSWR("/v1/team", async (url) =>
-    Get<GetTeamResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "team-code": teamState.uuid,
-      },
-    }).then((res) => {
+    Get<GetTeamResponse>(url).then((res) => {
       setData(res.data);
     })
   );
@@ -48,20 +42,11 @@ const TeamSettingContent = () => {
   const updateTeam = useSWRMutation(
     "/v1/team",
     async (url: string) =>
-      await Put<CommonResponse<void>>(
-        url,
-        {
-          name: data.name,
-          description: data.description,
-          profile: data.profile,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "team-code": teamState.uuid,
-          },
-        }
-      ),
+      await Put<CommonResponse<void>>(url, {
+        name: data.name,
+        description: data.description,
+        profile: data.profile,
+      }),
     {
       onSuccess: () => {
         mutate("/v1/team");

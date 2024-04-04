@@ -57,7 +57,7 @@ const TicketComment = ({ data, commentRefetch }: PropsType) => {
   );
 
   const updateComment = useSWRMutation(
-    "/v1/qa/comment",
+    "/v1/ticket/comment",
     async (url: string) =>
       await Patch<CommonResponse<void>>(url, {
         commentId: data.id,

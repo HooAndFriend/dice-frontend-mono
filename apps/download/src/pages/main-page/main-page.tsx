@@ -30,10 +30,10 @@ export default MainPageView
 
 const Background = styled.div`
   width: 100%;
-  height: 3771px;
+  height: 3271px;
   background-color: #fafafb;
   display: grid;
-  grid-template-rows: 740px 970px 631px 1077px 20px 250px 83px;
+  grid-template-rows: 740px 770px 631px 777px 20px 250px 83px;
   grid-template-columns: 100%;
 `
 

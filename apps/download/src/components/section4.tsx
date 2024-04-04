@@ -1,25 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const choices = [
-  {
-    title: '대시보드',
-    description: '소속 멤버, 업무 진행도 \n 나의 하루 업무 관리',
-  },
-  {
-    title: '워크스페이스 설정',
-    description: '프로젝트 별로 구분된\n팀원 및 일정, 업무 관리',
-  },
-  {
-    title: '티켓 발급',
-    description: '업무 단위별 티켓 발급 및\n티켓별 일정 관리',
-  },
-  {
-    title: '이슈 관리',
-    description: '이슈 내용, 내용, 담당자 및\n이슈별 상태값 관리',
-  },
-]
-
 const Section4 = () => {
   return (
     <Container>
@@ -31,15 +12,44 @@ const Section4 = () => {
         </Text>
         <ContentWrapper>
           <ChoiceBoxContainer>
-            {choices.map((choice, index) => (
-              <ChoiceBox key={index}>
-                <Choose />
-                <TextContainer>
-                  <MainText>{choice.title}</MainText>
-                  <SubText>{choice.description}</SubText>
-                </TextContainer>
-              </ChoiceBox>
-            ))}
+            <ChoiceBox>
+              <Choose />
+              <TextContainer>
+                <MainText>대시보드</MainText>
+                <SubText>
+                  소속 멤버, 업무 진행도
+                  <br /> 나의 하루 업무 관리
+                </SubText>
+              </TextContainer>
+            </ChoiceBox>
+            <ChoiceBox>
+              <Choose />
+              <TextContainer>
+                <MainText>워크스페이스 설정</MainText>
+                <SubText>
+                  프로젝트 별로 구분된
+                  <br /> 팀원 및 일정, 업무 관리
+                </SubText>
+              </TextContainer>
+            </ChoiceBox>
+            <ChoiceBox>
+              <Choose />
+              <TextContainer>
+                <MainText>티켓 발급</MainText>
+                <SubText>
+                  업무 단위별 티켓 발급 및<br /> 티켓별 일정 관리
+                </SubText>
+              </TextContainer>
+            </ChoiceBox>
+            <ChoiceBox>
+              <Choose />
+              <TextContainer>
+                <MainText>이슈 관리</MainText>
+                <SubText>
+                  이슈 내용, 내용, 담당자 및<br /> 이슈별 상태값 관리
+                </SubText>
+              </TextContainer>
+            </ChoiceBox>
           </ChoiceBoxContainer>
           <Noimg src="/images/noimage.png" alt="noimg" />
         </ContentWrapper>
@@ -60,7 +70,7 @@ const Container = styled.section`
 const TextWrapper = styled.div`
   width: 90%;
   margin-bottom: 20px;
-  margin-top: 10vh;
+  margin-top: 5vh;
 
   flex-direction: space-between;
 `
@@ -73,6 +83,9 @@ const Text = styled.p`
 
 const ContentWrapper = styled.div`
   display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 `
 
 const TextHighlight = styled.span`
@@ -81,13 +94,16 @@ const TextHighlight = styled.span`
 
 const ChoiceBoxContainer = styled.div`
   display: flex;
-  height: 70vh;
-
-  margin-top: 15vh;
-  margin-left: 5%;
-
+  height: 60%;
+  width: 25%;
+  margin-top: 100px;
   background-color: #f5f5f5;
   flex-direction: column;
+
+  @media (max-width: 1075px) {
+    font-size: 12px;
+    height: 80%;
+  }
 `
 const ChoiceBox = styled.div`
   display: flex;
@@ -113,10 +129,14 @@ const TextContainer = styled.div`
 `
 
 const MainText = styled.div`
-  font-size: 25px;
+  font-size: 22px;
   color: #623ad6;
   font-weight: bold;
   padding: 5%;
+
+  @media (max-width: 1075px) {
+    font-size: 16px;
+  }
 `
 
 const SubText = styled.div`
@@ -124,11 +144,19 @@ const SubText = styled.div`
   font-weight: medium;
   padding: 0% 5% 5% 5%;
   font-size: 17px;
+
+  @media (max-width: 1075px) {
+    font-size: 12px;
+  }
 `
 const Noimg = styled.img`
-  width: 70%;
-  height: 70vh;
+  width: 60%;
+  height: 60%;
   display: flex;
+  margin-top: 100px;
   margin-left: 2%;
-  margin-top: 15vh;
+
+  @media (max-width: 1075px) {
+    height: 80%;
+  }
 `

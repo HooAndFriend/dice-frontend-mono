@@ -19,8 +19,8 @@ const Section3 = () => {
               <br />팀 구성
             </MainText>
             <TeamList>
-              <li>함께 프로젝트를 진행하는 팀원 관리</li>
-              <li>워크스페이스별 참여 팀원 분류</li>
+              <SubText>함께 프로젝트를 진행하는 팀원 관리</SubText>
+              <SubText>워크스페이스별 참여 팀원 분류</SubText>
             </TeamList>
           </TextBox>
           <TextBox>
@@ -30,8 +30,8 @@ const Section3 = () => {
               To Do 관리
             </MainText>
             <TeamList>
-              <li>해야 할 업무에 대한 티켓 발급</li>
-              <li>티켓별 담당자 지정</li>
+              <SubText>해야 할 업무에 대한 티켓 발급</SubText>
+              <SubText>티켓별 담당자 지정</SubText>
             </TeamList>
           </TextBox>
           <TextBox>
@@ -41,8 +41,8 @@ const Section3 = () => {
               일정 관리
             </MainText>
             <TeamList>
-              <li>티켓별 일정 산정</li>
-              <li>일정 단위의 스프린트 관리</li>
+              <SubText>티켓별 일정 산정</SubText>
+              <SubText>일정 단위의 스프린트 관리</SubText>
             </TeamList>
           </TextBox>
           <TextBox>
@@ -52,8 +52,8 @@ const Section3 = () => {
               오류케이스 관리
             </MainText>
             <TeamList>
-              <li>함께 프로젝트를 진행하는 팀원 관리</li>
-              <li>워크스페이스별 참여 팀원 분류</li>
+              <SubText>함께 프로젝트를 진행하는 팀원 관리</SubText>
+              <SubText>워크스페이스별 참여 팀원 분류</SubText>
             </TeamList>
           </TextBox>
         </TextBoxContainer>
@@ -88,7 +88,7 @@ const TextHighlight = styled.span`
 `
 
 const TimeLineWrapper = styled.div`
-  width: 90%;
+  width: 85%;
   margin-top: 5%;
 `
 
@@ -120,4 +120,8 @@ const TeamList = styled.ul`
   margin-top: 10px;
   margin-left: 20px;
   list-style-type: disc;
+`
+
+const SubText = styled.li`
+  font-size: 14px;
 `

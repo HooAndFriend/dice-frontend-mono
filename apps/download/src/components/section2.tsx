@@ -53,14 +53,14 @@ const TextWrapper = styled.div`
 
 const Text = styled.span`
   font-weight: 500;
-  font-size: 50px;
+  font-size: 40px;
 
   @media (max-width: 1429px) {
-    font-size: 40px;
+    font-size: 30px;
   }
 
   @media (max-width: 947px) {
-    font-size: 30px;
+    font-size: 25px;
   }
 `
 
@@ -69,12 +69,12 @@ const TextHighlight = styled.span`
 `
 
 const Description = styled.span`
-  font-size: 28px;
+  font-size: 25px;
   padding-top: 80px;
   font-weight: 500;
 
   @media (max-width: 1429px) {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   @media (max-width: 947px) {
@@ -89,8 +89,8 @@ const Boxes = styled.div`
 const Box = styled.div`
   background-color: #fff;
   margin-left: 20px;
-  width: 250px;
-  height: 290px;
+  width: 35vh;
+  height: 40vh;
   box-shadow: 0px 0px 15px 0px #d8d8d8;
 
   @media (max-width: 1245px) {

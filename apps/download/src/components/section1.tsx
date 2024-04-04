@@ -16,7 +16,7 @@ const Section1 = () => {
         <DownloadButton>프로젝트 관리하러 가기</DownloadButton>
       </ContentWrapper>
       <div>
-        <OverlayImage src="/images/group.png" alt="로고" />
+        <OverlayImage src="/images/noimage.png" alt="로고" />
       </div>
     </Container>
   )
@@ -65,12 +65,11 @@ const Text = styled.span`
 
 const OverlayImage = styled.img`
   position: absolute;
-  top: 100%;
-  left: 55%;
-  transform: translate(-50%, -60%);
-  width: 70%;
-  max-width: 1280px;
-  max-height: 640px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(50%);
+  width: 120vh;
+  height: 60vh;
   z-index: 1;
 `
 

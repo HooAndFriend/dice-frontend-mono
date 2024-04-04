@@ -55,9 +55,9 @@ const TicketCardView = ({
   handleUpdateTicket,
 }: PropsType) => {
   return (
-    <div className="mt-6 h-[530px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8 overflow-x-hidden">
+    <div className="mt-6 h-[530px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
       <div className="flex items-center justify-between">
-        <h1>{data.code}</h1>
+        <h1 className="text-[18px] font-bold">{data.code}</h1>
         <div className="flex items-center">
           <p className="text-[12px] text-gray-500 cursor-pointer underline">
             Delete
@@ -77,12 +77,12 @@ const TicketCardView = ({
               if (role === "VIEWER") return;
               setMode({ ...mode, name: "edit" });
             }}
-            className="h-full cursor-pointer min-w-1/2"
+            className="h-full cursor-pointer min-w-1/2 text-[16px]"
           >
             {data.name}
           </h1>
         ) : (
-          <div className="flex items-center w-full">
+          <div className="flex items-center w-full font-bold">
             <input
               type="text"
               value={data.name}
@@ -111,46 +111,54 @@ const TicketCardView = ({
       <hr className="my-[20px]" />
       <div className="flex items-center">
         <div className="w-[110px]">
-          <h1>Type</h1>
+          <h1 className="text-[16px]">Type</h1>
         </div>
         <div className="flex items-center">
-          <h3>SCREEN</h3>
+          <h3 className="text-[16px]">Screen</h3>
         </div>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center mt-[20px]">
         <div className="w-[110px]">
-          <h1>Admin</h1>
+          <h1 className="text-[16px]">Admin</h1>
         </div>
         <div className="flex items-center">
-          <h3>{data.admin ? data.admin.nickname : "-"}</h3>
+          <h3 className="text-[16px]">
+            {data.admin ? data.admin.nickname : "-"}
+          </h3>
         </div>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center mt-[20px]">
         <div className="w-[110px]">
-          <h1>Worker</h1>
+          <h1 className="text-[16px]">Worker</h1>
         </div>
         <div className="flex items-center">
-          <h3>{data.worker ? data.worker.nickname : "-"}</h3>
+          <h3 className="text-[16px]">
+            {data.worker ? data.worker.nickname : "-"}
+          </h3>
         </div>
       </div>
       <hr className="my-[20px]" />
       <div className="flex items-center">
-        <h1 className="w-[110px]">RegDate</h1>
-        <h3>{dayjs(data.createdDate).format("YYYY-MM-DD HH:mm:ss")}</h3>
+        <h1 className="w-[110px] text-[16px]">RegDate</h1>
+        <h3 className="text-[16px]">
+          {dayjs(data.createdDate).format("YYYY-MM-DD HH:mm:ss")}
+        </h3>
       </div>
-      <div className="flex items-center mt-1">
-        <h1 className="w-[110px]">ModDate</h1>
-        <h3>{dayjs(data.modifiedDate).format("YYYY-MM-DD HH:mm:ss")}</h3>
+      <div className="flex items-center mt-[20px]">
+        <h1 className="w-[110px] text-[16px]">ModDate</h1>
+        <h3 className="text-[16px]">
+          {dayjs(data.modifiedDate).format("YYYY-MM-DD HH:mm:ss")}
+        </h3>
       </div>
-      <div className="flex items-center mt-1">
-        <h1 className="w-[110px]">DueDate</h1>
+      <div className="flex items-center mt-[20px]">
+        <h1 className="w-[110px] text-[16px]">DueDate</h1>
         {mode.dueDate === "view" ? (
           <h3
             onDoubleClick={() => {
               if (role === "VIEWER") return;
               setMode({ ...mode, dueDate: "edit" });
             }}
-            className="cursor-pointer "
+            className="cursor-pointer text-[16px]"
           >
             {data.dueDate ? dayjs(data.modifiedDate).format("YYYY-MM-DD") : "-"}
           </h3>
@@ -161,19 +169,19 @@ const TicketCardView = ({
           />
         )}
       </div>
-      <div className="flex items-center mt-1">
-        <h1 className="w-[110px]">ComDate</h1>
-        <h3>
+      <div className="flex items-center mt-[20px]">
+        <h1 className="w-[110px] text-[16px]">ComDate</h1>
+        <h3 className="text-[16px]">
           {data.completeDate
             ? dayjs(data.completeDate).format("YYYY-MM-DD HH:mm:ss")
             : "-"}
         </h3>
       </div>
       <hr className="my-[20px]" />
-      <h1 className="mb-4">Story Point</h1>
+      <h1 className="mb-4 text-[16px]">Story Point</h1>
       {mode.storypoint === "view" ? (
         <div
-          className="h-[40px] rounded-[10px] border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4 cursor-pointer"
+          className="h-[40px] rounded-[10px] border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4 cursor-pointer text-[16px]"
           onDoubleClick={() => {
             if (role === "VIEWER") return;
             setMode({ ...mode, storypoint: "edit" });
@@ -208,11 +216,11 @@ const TicketCardView = ({
           </div>
         </div>
       )}
-      <h1 className="my-4">Content</h1>
+      <h1 className="my-4 text-[16px]">Content</h1>
       {mode.content === "view" ? (
         <div
           dangerouslySetInnerHTML={{ __html: data.content }}
-          className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto"
+          className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto text-[16px]"
           onDoubleClick={() => {
             if (role === "VIEWER") return;
             setMode({ ...mode, content: "edit" });
@@ -243,7 +251,7 @@ const TicketCardView = ({
           </div>
         </div>
       )}
-      <h1 className="my-4">File</h1>
+      <h1 className="my-4 text-[16px]">File</h1>
       <div className="flex items-center">
         {data.ticketFile.length < 4 && (
           <TicketFileUploader ticketId={data.id} refetch={ticketRefetch} />

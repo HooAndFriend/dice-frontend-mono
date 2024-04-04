@@ -135,7 +135,6 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       },
     }
   );
-
   const saveTicketComment = useSWRMutation(
     "/v1/ticket/comment",
     async (url: string) =>

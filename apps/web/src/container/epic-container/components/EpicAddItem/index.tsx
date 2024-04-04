@@ -31,7 +31,7 @@ const EpicAddItem = () => {
   const handleOpen = () => setOpen((c) => !c);
 
   const saveEpic = useSWRMutation(
-    "/v1/ticket/epic",
+    "/v1/epic",
     async (url: string) => await Post<CommonResponse<void>>(url, { name }),
     {
       onSuccess: () => {

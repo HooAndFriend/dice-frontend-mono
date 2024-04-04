@@ -24,10 +24,10 @@ const TicketItem = ({ handleClick, data }: PropsType) => {
       onClick={() => handleClick(data.id)}
     >
       <div className="flex w-[10%] items-center justify-center">
-        <div className="w-[24px] h-[24px] bg-green-300 rounded-lg"></div>
+        <div className="w-[24px] h-[24px] bg-green-300 rounded-lg" />
       </div>
       <div className="flex w-[40%] items-center">
-        <h1>{`${data.code} ${data.name}`}</h1>
+        <h1 className="text-[16px]">{`${data.code} ${data.name}`}</h1>
       </div>
       <div className="flex w-[10%] items-center justify-center">
         <TicketStatusButton ticketId={data.id} status={data.status} />
@@ -46,14 +46,14 @@ const TicketItem = ({ handleClick, data }: PropsType) => {
         />
       </div>
       <div className="flex w-[20%] items-center justify-center">
-        <h1>
+        <h1 className="text-[16px]">
           {data.completeDate
             ? dayjs(data.completeDate).format("YYYY-MM-DD")
             : "-"}
         </h1>
       </div>
       <div className="flex w-[20%] items-center justify-center">
-        <h1>
+        <h1 className="text-[16px]">
           {data.reopenDate ? dayjs(data.reopenDate).format("YYYY-MM-DD") : "-"}
         </h1>
       </div>

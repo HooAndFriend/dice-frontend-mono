@@ -19,6 +19,7 @@ import { CommentInfo } from "@/src/type/qa";
 
 // ** Utils Imports
 import dayjs from "dayjs";
+import Image from "next/image";
 
 interface PropsType {
   data: CommentInfo;
@@ -80,21 +81,20 @@ const TicketComment = ({ data, commentRefetch }: PropsType) => {
     }
   );
 
-  console.log(data);
-
   return (
     <div className="w-full mb-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <img
+          <Image
             className="rounded-full border border-lightGray mr-[10px]"
             src={data.user.profile}
+            alt="profile"
             width={30}
             height={30}
           />
           <div className="flex font-spoqa">
-            <div className="mr-[10px]">{data.user.nickname}</div>
-            <div className="flex items-center text-xs text-darkGray">
+            <div className="mr-[10px] text-[16px]">{data.user.nickname}</div>
+            <div className="flex items-center text-[12px] text-darkGray">
               {dayjs(data.createdDate).format("YYYY-MM-DD HH:mm:ss")}
             </div>
             {email === data.user.email && (
@@ -117,7 +117,7 @@ const TicketComment = ({ data, commentRefetch }: PropsType) => {
         </div>
       </div>
       {mode === "view" ? (
-        <div className="ml-[41px] mt-[9px]">{data.content}</div>
+        <div className="ml-[41px] mt-[9px] text-[16px]">{data.content}</div>
       ) : (
         <div className="ml-[41px] mt-5">
           <input

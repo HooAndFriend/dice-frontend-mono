@@ -84,7 +84,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     isLoading,
     mutate: ticketRefetch,
   } = useSWR(
-    `/v1/ticket/${ticketId}`,
+    `/v1/ticket/detail/${ticketId}`,
     async (url) => Get<GetTicketResponse>(url),
     {
       onSuccess: (res) => {

@@ -56,9 +56,6 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     completeDate: null,
     reopenDate: null,
     ticketFile: [],
-    workspace: {
-      id: 3,
-    },
     epic: {
       id: 0,
       name: "",
@@ -73,6 +70,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       nickname: "",
       profile: "",
     },
+    ticketSetting: null,
   });
 
   const { role } = useRecoilValue(WorkspaceState);
@@ -122,7 +120,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
         setMode((c) => ({ ...c, [currentArg]: "view" }));
         mutate("/v1/epic");
         mutate("/v1/ticket");
-        mutate(`/v1/ticket/${ticketId}`);
+        mutate(`/v1/ticket/detail/${ticketId}`);
       },
       onError: (error) => {
         handleOpen({

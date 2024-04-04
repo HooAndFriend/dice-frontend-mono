@@ -22,8 +22,10 @@ export interface TicketInfo {
   completeDate: Date;
   reopenDate: Date;
   ticketFile: { id: number; url: string }[];
-  workspace: {
-    id: 3;
+  ticketSetting: {
+    id: number;
+    type: string;
+    color: string;
   };
   epic: {
     id: number;

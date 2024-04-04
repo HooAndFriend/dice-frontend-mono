@@ -25,7 +25,7 @@ const TicketDatePicker = ({ value, ticketId }: PropsType) => {
       onSuccess: () => {
         mutate("/v1/epic");
         mutate("/v1/ticket");
-        mutate(`/v1/ticket/${ticketId}`);
+        mutate(`/v1/ticket/detail/${ticketId}`);
       },
       onError: (error) => {
         handleOpen({

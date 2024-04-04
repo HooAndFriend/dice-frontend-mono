@@ -8,6 +8,8 @@ import TicketStatusButton from "../TicketStatusButton";
 import QuillEditor from "../../QuillEditor";
 import TicketDatePicker from "../TicketDatePicker";
 import TicketFileUploader from "../TicketFileUploader";
+import TicketUserButton from "../TicketUserButton";
+import TicketSettingButton from "../TicketSettingButton";
 
 // ** Type Imports
 import { TicketEditMode, TicketInfo } from "@/src/type/ticket";
@@ -16,7 +18,6 @@ import { CommentInfo } from "@/src/type/qa";
 
 // ** Utils Imports
 import dayjs from "dayjs";
-import TicketUserButton from "../TicketUserButton";
 
 interface PropsType {
   data: TicketInfo;
@@ -58,7 +59,10 @@ const TicketCardView = ({
   return (
     <div className="mt-6 h-[530px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
       <div className="flex items-center justify-between">
-        <h1 className="text-[18px] font-bold">{data.code}</h1>
+        <div className="flex items-center">
+          <TicketSettingButton data={data} isText={false} />
+          <h1 className="ml-4 text-[18px] font-bold">{data.code}</h1>
+        </div>
         <div className="flex items-center">
           <p className="text-[12px] text-gray-500 cursor-pointer underline">
             Delete
@@ -115,7 +119,7 @@ const TicketCardView = ({
           <h1 className="text-[16px]">Type</h1>
         </div>
         <div className="flex items-center">
-          <h3 className="text-[16px]">Screen</h3>
+          <TicketSettingButton data={data} isText />
         </div>
       </div>
       <div className="flex items-center mt-[20px]">

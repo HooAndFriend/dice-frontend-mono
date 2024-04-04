@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 
 // ** Type Imports
 import { TicketInfo } from "@/src/type/ticket";
+import TicketSettingButton from "../TicketSettingButton";
 
 interface PropsType {
   data: TicketInfo;
@@ -24,7 +25,7 @@ const TicketItem = ({ handleClick, data }: PropsType) => {
       onClick={() => handleClick(data.id)}
     >
       <div className="flex w-[10%] items-center justify-center">
-        <div className="w-[24px] h-[24px] bg-green-300 rounded-lg" />
+        <TicketSettingButton data={data} isText={false} />
       </div>
       <div className="flex w-[40%] items-center">
         <h1 className="text-[16px]">{`${data.code} ${data.name}`}</h1>

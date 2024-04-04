@@ -1,33 +1,46 @@
+// ** React Imports
+import { KeyboardEvent } from "react";
+
 // ** Components Imports
 import CustomInput from "../../Input/CustomInput";
 import TicketComment from "../TicketComment";
+import TicketStatusButton from "../TicketStatusButton";
+import QuillEditor from "../../QuillEditor";
+import TicketDatePicker from "../TicketDatePicker";
 
 // ** Type Imports
 import { TicketEditMode, TicketInfo } from "@/src/type/ticket";
-import TicketStatusButton from "../TicketStatusButton";
-import dayjs from "dayjs";
-import QuillEditor from "../../QuillEditor";
 import { RoleType } from "@/src/type/common";
-import TicketDatePicker from "../TicketDatePicker";
+
+// ** Utils Imports
+import dayjs from "dayjs";
 
 interface PropsType {
   data: TicketInfo;
   mode: TicketEditMode;
   role: RoleType;
+  comment: string;
+  handleComment: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCommentEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
   setMode: (mode: TicketEditMode) => void;
   setData: (data: TicketInfo) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleClose: () => void;
+  handleSaveTicketComment: () => void;
 }
 
 const TicketCardView = ({
   data,
   role,
   mode,
+  comment,
+  handleComment,
   onChange,
   setData,
   setMode,
   handleClose,
+  handleSaveTicketComment,
+  handleCommentEnter,
 }: PropsType) => {
   return (
     <div className="mt-6 h-[530px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8 overflow-x-hidden">
@@ -37,12 +50,12 @@ const TicketCardView = ({
           <p className="text-[12px] text-gray-500 cursor-pointer underline">
             Delete
           </p>
-          {/* <h1
+          <h1
             className="text-[24px] font-bold cursor-pointer"
             onClick={handleClose}
           >
             X
-          </h1> */}
+          </h1>
         </div>
       </div>
       <div className="flex items-center justify-between mt-[30px]">
@@ -191,13 +204,13 @@ const TicketCardView = ({
       <div className="flex mt-5">
         <input
           id="content"
-          // onChange={handleComment}
-          // value={comment}
+          onChange={handleComment}
+          value={comment}
           className="px-4 w-full border border-lightGray rounded-[10px] mr-[10px]"
-          // onKeyDown={handleCommentEnter}
+          onKeyDown={handleCommentEnter}
         />
         <div
-          // onClick={handleAddComment}
+          onClick={handleSaveTicketComment}
           className="w-[40px] h-[40px] bg-black text-white rounded-[10px] flex justify-center items-center"
         >
           <img src="/images/plus.png" width={24} height={24} />

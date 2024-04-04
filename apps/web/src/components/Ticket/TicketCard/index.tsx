@@ -1,11 +1,11 @@
 // ** React Imports
-import { useState } from "react";
+import { KeyboardEvent, useState } from "react";
 
 // ** Componet imports
 import TicketCardView from "./TicketCard";
 
 // ** Service Imports
-import { Get } from "@/src/repository";
+import { Get, Post } from "@/src/repository";
 import useSWR from "swr";
 
 // ** Type Imports
@@ -21,6 +21,9 @@ import useInput from "@/src/hooks/useInput";
 // ** Recoil Imports
 import { useRecoilValue } from "recoil";
 import { WorkspaceState } from "@/src/app";
+import useSWRMutation from "swr/mutation";
+import { CommonResponse } from "@/src/type/common";
+import { useDialog } from "@/src/context/DialogContext";
 
 interface PropsType {
   ticketId: number;
@@ -28,6 +31,7 @@ interface PropsType {
 }
 
 const TicketCard = ({ ticketId, handleClose }: PropsType) => {
+  const [comment, setComment] = useState<string>("");
   const [mode, setMode] = useState<TicketEditMode>({
     content: "view",
     storypoint: "view",
@@ -68,6 +72,8 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
 
   const { role } = useRecoilValue(WorkspaceState);
 
+  const { handleOpen } = useDialog();
+
   const { error, isLoading } = useSWR(
     `/v1/ticket/${ticketId}`,
     async (url) => Get<GetTicketResponse>(url),
@@ -78,6 +84,32 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     }
   );
 
+  const saveTicketComment = useSWRMutation(
+    "/v1/ticket/comment",
+    async (url: string) =>
+      await Post<CommonResponse<void>>(url, { content: comment, ticketId }),
+    {
+      onSuccess: () => {
+        setComment("");
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
+  const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      saveTicketComment.trigger();
+    }
+  };
+
   if (error) return;
 
   if (isLoading) return;
@@ -87,10 +119,14 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       data={data}
       mode={mode}
       role={role}
+      comment={comment}
+      handleComment={(e) => setComment(e.target.value)}
       onChange={handleInput}
       setData={setData}
       setMode={setMode}
       handleClose={handleClose}
+      handleSaveTicketComment={saveTicketComment.trigger}
+      handleCommentEnter={handleCommentEnter}
     />
   );
 };

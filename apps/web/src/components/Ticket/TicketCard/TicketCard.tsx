@@ -11,6 +11,7 @@ import TicketDatePicker from "../TicketDatePicker";
 // ** Type Imports
 import { TicketEditMode, TicketInfo } from "@/src/type/ticket";
 import { RoleType } from "@/src/type/common";
+import { CommentInfo } from "@/src/type/qa";
 
 // ** Utils Imports
 import dayjs from "dayjs";
@@ -20,11 +21,13 @@ interface PropsType {
   mode: TicketEditMode;
   role: RoleType;
   comment: string;
+  commentData: CommentInfo[];
   handleComment: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleCommentEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
   setMode: (mode: TicketEditMode) => void;
   setData: (data: TicketInfo) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  commentRefetch: () => void;
   handleClose: () => void;
   handleSaveTicketComment: () => void;
 }
@@ -34,11 +37,13 @@ const TicketCardView = ({
   role,
   mode,
   comment,
+  commentData,
   handleComment,
   onChange,
   setData,
   setMode,
   handleClose,
+  commentRefetch,
   handleSaveTicketComment,
   handleCommentEnter,
 }: PropsType) => {
@@ -216,8 +221,15 @@ const TicketCardView = ({
           <img src="/images/plus.png" width={24} height={24} />
         </div>
       </div>
-      <TicketComment />
-      <TicketComment />
+      <div className="mt-9">
+        {commentData.map((item) => (
+          <TicketComment
+            key={item.id}
+            data={item}
+            commentRefetch={commentRefetch}
+          />
+        ))}
+      </div>
     </div>
   );
 };

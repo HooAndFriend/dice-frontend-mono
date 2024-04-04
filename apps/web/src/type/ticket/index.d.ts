@@ -1,5 +1,6 @@
 import { CommonResponse, RoleType } from "../common";
 import { EpicStatus } from "../epic";
+import { CommentInfo } from "../qa";
 
 export interface GetTicketListResponse extends CommonResponse {
   count: number;
@@ -41,6 +42,11 @@ export interface TicketInfo {
 }
 export interface GetTicketSettingListResponse extends Response {
   data: SettingListInfo[];
+  count: number;
+}
+
+export interface GetTicketCommentListResponse extends Response {
+  data: CommentInfo[];
   count: number;
 }
 

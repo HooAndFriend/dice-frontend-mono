@@ -10,6 +10,7 @@ import useSWR from "swr";
 
 // ** Type Imports
 import {
+  GetTicketCommentListResponse,
   GetTicketResponse,
   TicketEditMode,
   TicketInfo,
@@ -84,6 +85,15 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     }
   );
 
+  const {
+    data: commentData,
+    error: commentError,
+    isLoading: commentLoading,
+    mutate: commentRefetch,
+  } = useSWR(`/v1/ticket/comment/${ticketId}`, async (url) =>
+    Get<GetTicketCommentListResponse>(url)
+  );
+
   const saveTicketComment = useSWRMutation(
     "/v1/ticket/comment",
     async (url: string) =>
@@ -91,6 +101,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     {
       onSuccess: () => {
         setComment("");
+        commentRefetch();
       },
       onError: (error) => {
         handleOpen({
@@ -110,9 +121,9 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     }
   };
 
-  if (error) return;
+  if (error | commentError) return;
 
-  if (isLoading) return;
+  if (isLoading || commentLoading) return;
 
   return (
     <TicketCardView
@@ -120,6 +131,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       mode={mode}
       role={role}
       comment={comment}
+      commentData={commentData.data.data}
       handleComment={(e) => setComment(e.target.value)}
       onChange={handleInput}
       setData={setData}
@@ -127,6 +139,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       handleClose={handleClose}
       handleSaveTicketComment={saveTicketComment.trigger}
       handleCommentEnter={handleCommentEnter}
+      commentRefetch={commentRefetch}
     />
   );
 };

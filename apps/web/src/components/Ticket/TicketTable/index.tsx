@@ -14,9 +14,14 @@ interface PropsType {
 const TicketTable = ({ handleClick, data }: PropsType) => {
   return (
     <div className="mt-6 h-[530px] overflow-auto w-full bg-white rounded-[20px] shadow-md p-4">
-      <TicketHeader />
+      <TicketHeader isEpic={false} />
       {data.map((item) => (
-        <TicketItem handleClick={handleClick} data={item} key={item.id} />
+        <TicketItem
+          handleClick={handleClick}
+          data={item}
+          key={item.id}
+          isEpic={false}
+        />
       ))}
       <TicketAddItem />
     </div>

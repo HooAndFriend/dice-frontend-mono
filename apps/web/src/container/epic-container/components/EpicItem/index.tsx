@@ -59,9 +59,14 @@ const EpicItem = ({ item }: PropsType) => {
       </div>
       {open && (
         <div>
-          <TicketHeader />
+          <TicketHeader isEpic />
           {item.ticket.map((item) => (
-            <TicketItem handleClick={() => {}} data={item} key={item.id} />
+            <TicketItem
+              handleClick={() => {}}
+              data={item}
+              key={item.id}
+              isEpic
+            />
           ))}
           <TicketAddItem epicId={item.id} />
         </div>

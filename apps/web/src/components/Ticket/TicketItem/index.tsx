@@ -12,13 +12,15 @@ import dayjs from "dayjs";
 // ** Type Imports
 import { TicketInfo } from "@/src/type/ticket";
 import TicketSettingButton from "../TicketSettingButton";
+import TicketEpicButton from "../TicketEpicButton";
 
 interface PropsType {
   data: TicketInfo;
+  isEpic: boolean;
   handleClick: (id: number) => void;
 }
 
-const TicketItem = ({ handleClick, data }: PropsType) => {
+const TicketItem = ({ handleClick, data, isEpic }: PropsType) => {
   return (
     <div
       className="flex h-[60px] hover:bg-slate-400 rounded-lg"
@@ -30,9 +32,11 @@ const TicketItem = ({ handleClick, data }: PropsType) => {
       <div className="flex w-[40%] items-center">
         <h1 className="text-[16px]">{`${data.code} ${data.name}`}</h1>
       </div>
-      <div className="flex w-[10%] items-center justify-center">
-        <TicketStatusButton ticketId={data.id} status={data.status} />
-      </div>
+      {!isEpic && (
+        <div className="flex w-[10%] items-center justify-center">
+          <TicketEpicButton data={data} />
+        </div>
+      )}
       <div className="flex w-[10%] items-center justify-center">
         <TicketUserButton
           profile={data.worker?.profile}
@@ -47,7 +51,7 @@ const TicketItem = ({ handleClick, data }: PropsType) => {
           value={dayjs(data.dueDate).format("YYYY-MM-DD")}
         />
       </div>
-      <div className="flex w-[20%] items-center justify-center">
+      {/* <div className="flex w-[20%] items-center justify-center">
         <h1 className="text-[16px]">
           {data.completeDate
             ? dayjs(data.completeDate).format("YYYY-MM-DD")
@@ -58,6 +62,9 @@ const TicketItem = ({ handleClick, data }: PropsType) => {
         <h1 className="text-[16px]">
           {data.reopenDate ? dayjs(data.reopenDate).format("YYYY-MM-DD") : "-"}
         </h1>
+      </div> */}
+      <div className="flex w-[10%] items-center justify-center">
+        <TicketStatusButton ticketId={data.id} status={data.status} />
       </div>
     </div>
   );

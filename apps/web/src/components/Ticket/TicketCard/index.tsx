@@ -5,7 +5,7 @@ import { KeyboardEvent, useState } from "react";
 import TicketCardView from "./TicketCard";
 
 // ** Service Imports
-import { Get, Post } from "@/src/repository";
+import { Delete, Get, Post } from "@/src/repository";
 import useSWR from "swr";
 
 // ** Type Imports
@@ -119,6 +119,26 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     }
   );
 
+  const deleteTicketFile = useSWRMutation(
+    "/v1/ticket/file/",
+    async (url: string, { arg }: { arg: number }) =>
+      await Delete<CommonResponse<void>>(url + arg),
+    {
+      onSuccess: () => {
+        ticketRefetch();
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
   const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       saveTicketComment.trigger();
@@ -145,6 +165,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       handleCommentEnter={handleCommentEnter}
       ticketRefetch={ticketRefetch}
       commentRefetch={commentRefetch}
+      handleDeleteTicketFile={deleteTicketFile.trigger}
     />
   );
 };

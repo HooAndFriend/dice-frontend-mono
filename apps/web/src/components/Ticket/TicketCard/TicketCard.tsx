@@ -32,6 +32,7 @@ interface PropsType {
   ticketRefetch: () => void;
   handleClose: () => void;
   handleSaveTicketComment: () => void;
+  handleDeleteTicketFile: (id: number) => void;
 }
 
 const TicketCardView = ({
@@ -49,6 +50,7 @@ const TicketCardView = ({
   ticketRefetch,
   handleSaveTicketComment,
   handleCommentEnter,
+  handleDeleteTicketFile,
 }: PropsType) => {
   return (
     <div className="mt-6 h-[530px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8 overflow-x-hidden">
@@ -219,7 +221,7 @@ const TicketCardView = ({
             />
             <h1
               className="absolute px-2 py-1 m-1 text-xs leading-none text-white bg-black rounded-full cursor-pointer -right-2 -top-2"
-              // onClick={() => handleDeleteQaFile(item.id)}
+              onClick={() => handleDeleteTicketFile(item.id)}
             >
               X
             </h1>

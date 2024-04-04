@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      flowbite:
+        specifier: ^2.3.0
+        version: 2.3.0
     devDependencies:
       prettier:
         specifier: ^3.1.0
@@ -11966,6 +11970,7 @@ packages:
     resolution: {integrity: sha512-U+wLL8InpfRalWrr+0SuhWgGt10M4OyAk6G8xCYo2rwpiHtxZkWiFpjei0vO463ghW8LPCdhqQxXlMy2qicAEw==}
     deprecated: This is a typosquat on the popular Lodash package. This is not maintained nor is the original Lodash package.
     dev: false
+    bundledDependencies: false
 
   /locate-path@3.0.0:
     resolution: {integrity: sha512-7AO748wWnIhNqAuaty2ZWHkQHRSNfPVIsPIfwEOWO22AmaoVrWavlOcMR5nzTLNYvp36X220/maaRsrec1G65A==}

@@ -33,6 +33,7 @@ interface PropsType {
   handleClose: () => void;
   handleSaveTicketComment: () => void;
   handleDeleteTicketFile: (id: number) => void;
+  handleUpdateTicket: (value: "content" | "name" | "storypoint") => void;
 }
 
 const TicketCardView = ({
@@ -51,6 +52,7 @@ const TicketCardView = ({
   handleSaveTicketComment,
   handleCommentEnter,
   handleDeleteTicketFile,
+  handleUpdateTicket,
 }: PropsType) => {
   return (
     <div className="mt-6 h-[530px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8 overflow-x-hidden">
@@ -69,7 +71,41 @@ const TicketCardView = ({
         </div>
       </div>
       <div className="flex items-center justify-between mt-[30px]">
-        <h1>{data.name}</h1>
+        {mode.name === "view" ? (
+          <h1
+            onDoubleClick={() => {
+              if (role === "VIEWER") return;
+              setMode({ ...mode, name: "edit" });
+            }}
+            className="h-full cursor-pointer min-w-1/2"
+          >
+            {data.name}
+          </h1>
+        ) : (
+          <div className="flex items-center w-full">
+            <input
+              type="text"
+              value={data.name}
+              name="name"
+              onChange={onChange}
+              className="w-full h-[40px] border border-[#EBEBEC] rounded-[10px] px-4"
+            />
+            <div className="flex items-center mx-2">
+              <button
+                className="w-[30px] h-[30px] bg-[#623AD6] text-white rounded-[8px] flex items-center justify-center mr-2"
+                onClick={() => handleUpdateTicket("name")}
+              >
+                V
+              </button>
+              <button
+                className="w-[30px] h-[30px] rounded-[8px] flex items-center justify-center"
+                onClickCapture={() => setMode({ ...mode, name: "view" })}
+              >
+                X
+              </button>
+            </div>
+          </div>
+        )}
         <TicketStatusButton status={data.status} ticketId={data.id} />
       </div>
       <hr className="my-[20px]" />
@@ -159,7 +195,7 @@ const TicketCardView = ({
           <div className="flex items-center mt-2">
             <button
               className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
-              // onClick={() => handleUpdateQa("asIs")}
+              onClick={() => handleUpdateTicket("storypoint")}
             >
               save
             </button>
@@ -194,7 +230,7 @@ const TicketCardView = ({
           <div className="flex items-center mt-2">
             <button
               className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
-              // onClick={() => handleUpdateQa("asIs")}
+              onClick={() => handleUpdateTicket("content")}
             >
               save
             </button>

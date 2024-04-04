@@ -5,8 +5,8 @@ import { KeyboardEvent, useState } from "react";
 import TicketCardView from "./TicketCard";
 
 // ** Service Imports
-import { Delete, Get, Post } from "@/src/repository";
-import useSWR from "swr";
+import { Delete, Get, Patch, Post } from "@/src/repository";
+import useSWR, { mutate } from "swr";
 
 // ** Type Imports
 import {
@@ -33,10 +33,14 @@ interface PropsType {
 
 const TicketCard = ({ ticketId, handleClose }: PropsType) => {
   const [comment, setComment] = useState<string>("");
+  const [currentArg, setCurrentArg] = useState<
+    "content" | "name" | "storypoint"
+  >("name");
   const [mode, setMode] = useState<TicketEditMode>({
     content: "view",
     storypoint: "view",
     dueDate: "view",
+    name: "view",
   });
 
   const { data, handleInput, setData } = useInput<TicketInfo>({
@@ -96,6 +100,40 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     mutate: commentRefetch,
   } = useSWR(`/v1/ticket/comment/${ticketId}`, async (url) =>
     Get<GetTicketCommentListResponse>(url)
+  );
+
+  // ** QA 수정
+  const updateTicket = useSWRMutation(
+    "/v1/ticket",
+    async (
+      url: string,
+      { arg }: { arg: "content" | "name" | "storypoint" }
+    ) => {
+      setCurrentArg(arg);
+      return await Patch<CommonResponse<void>>(url, {
+        ticketId,
+        value: data[arg],
+        type: arg,
+        storypoint: Number(data.storypoint),
+      });
+    },
+    {
+      onSuccess: () => {
+        setMode((c) => ({ ...c, [currentArg]: "view" }));
+        mutate("/v1/epic");
+        mutate("/v1/ticket");
+        mutate(`/v1/ticket/${ticketId}`);
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
   );
 
   const saveTicketComment = useSWRMutation(
@@ -166,6 +204,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       ticketRefetch={ticketRefetch}
       commentRefetch={commentRefetch}
       handleDeleteTicketFile={deleteTicketFile.trigger}
+      handleUpdateTicket={updateTicket.trigger}
     />
   );
 };

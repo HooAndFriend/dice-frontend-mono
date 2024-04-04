@@ -75,7 +75,9 @@ const SettingConatiner = () => {
     mutate();
   }, [data]);
 
-  if (isLoading) return null;
+  if (isLoading) return;
+
+  if (error) return;
 
   return (
     <SettingContainerView

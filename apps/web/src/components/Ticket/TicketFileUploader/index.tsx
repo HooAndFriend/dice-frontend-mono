@@ -19,7 +19,7 @@ interface PropsType {
   refetch: () => void;
 }
 
-export const QaFileUploader = ({ qaId, refetch }: PropsType) => {
+const TicketFileUploader = ({ qaId, refetch }: PropsType) => {
   const { handleOpen } = useDialog();
 
   const inputRef = useRef<HTMLInputElement | any>(null);
@@ -103,3 +103,5 @@ export const QaFileUploader = ({ qaId, refetch }: PropsType) => {
     </div>
   );
 };
+
+export default TicketFileUploader;

@@ -1,33 +1,42 @@
 import { CommonResponse, RoleType } from "../common";
+import { EpicStatus } from "../epic";
 
 export interface GetTicketListResponse extends CommonResponse {
   count: number;
   data: TicketInfo[];
 }
 
+export interface GetTicketResponse extends CommonResponse, TicketInfo {}
+
 export interface TicketInfo {
+  createdDate: Date;
+  modifiedDate: Date;
   id: number;
   name: string;
-  status: "NOTHING";
+  status: EpicStatus;
+  content: string;
   code: string;
-  dueDate: string;
-  completeDate: string;
-  reopenDate: string;
+  storypoint: number;
+  dueDate: Date;
+  completeDate: Date;
+  reopenDate: Date;
+  ticketFile: { id: number; path: string }[];
   workspace: {
-    id: number;
+    id: 3;
   };
-  worker: {
+  epic: {
     id: number;
-    nickname: string;
-    profile: string;
+    name: string;
   };
   admin: {
     id: number;
     nickname: string;
     profile: string;
   };
-  epic: {
+  worker: {
     id: number;
+    nickname: string;
+    profile: string;
   };
 }
 export interface GetTicketSettingListResponse extends Response {
@@ -46,6 +55,12 @@ export interface SettingListInfo {
   admin: {
     id: number;
   };
+}
+
+export interface TicketEditMode {
+  content: "view" | "edit";
+  storypoint: "view" | "edit";
+  dueDate: "view" | "edit";
 }
 
 export interface SettingQuery {

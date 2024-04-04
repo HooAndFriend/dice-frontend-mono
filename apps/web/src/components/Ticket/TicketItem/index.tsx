@@ -14,10 +14,10 @@ import { TicketInfo } from "@/src/type/ticket";
 
 interface PropsType {
   data: TicketInfo;
-  handleClick?: (id: number) => void;
+  handleClick: (id: number) => void;
 }
 
-const TicketItem = ({ handleClick = (id: number) => {}, data }: PropsType) => {
+const TicketItem = ({ handleClick, data }: PropsType) => {
   return (
     <div
       className="flex h-[60px] hover:bg-slate-400 rounded-lg"

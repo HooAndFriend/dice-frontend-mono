@@ -38,7 +38,10 @@ const TicketContainerView = ({
         </div>
         {ticketId !== 0 && (
           <div className="w-[35%] pl-8">
-            <TicketCard />
+            <TicketCard
+              ticketId={ticketId}
+              handleClose={() => setTicketId(0)}
+            />
           </div>
         )}
       </div>

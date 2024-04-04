@@ -3,8 +3,9 @@ interface PropsType {
   width?: string;
   height?: string;
   borderRadius?: string;
-  value?: string;
+  value?: string | number;
   name?: string;
+  type?: "text" | "number";
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
@@ -18,13 +19,15 @@ const CustomInput = ({
   name,
   onChange,
   onKeyDown,
+  type,
 }: PropsType) => {
   return (
     <div
       className={`w-[${width}] h-[${height}] rounded-[${borderRadius}] border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4`}
     >
       <input
-        className={`w-[${width}] placeholder-[#EBEBEC] focus:outline-none`}
+        className={`w-full placeholder-[#EBEBEC] focus:outline-none border-none h-full`}
+        type={type ? type : "text"}
         placeholder={placeholder ? placeholder : ""}
         value={value}
         name={name}

@@ -20,10 +20,18 @@ import { Get, Put } from "@/src/repository";
 interface PropsType {
   profile: string;
   ticketId: number;
+  nickname?: string;
+  isNickname?: boolean;
   type: "user" | "admin";
 }
 
-const TicketUserButton = ({ profile, ticketId, type }: PropsType) => {
+const TicketUserButton = ({
+  profile,
+  ticketId,
+  type,
+  isNickname,
+  nickname,
+}: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
 
@@ -109,6 +117,9 @@ const TicketUserButton = ({ profile, ticketId, type }: PropsType) => {
           width={30}
           height={30}
         />
+        {isNickname && (
+          <div className="ml-2 font-spoqa font-[16px]">{nickname}</div>
+        )}
       </div>
       {open && (
         <div

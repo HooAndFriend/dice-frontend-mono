@@ -37,6 +37,7 @@ const TicketItem = ({ handleClick, data }: PropsType) => {
           profile={data.worker?.profile}
           type="user"
           ticketId={data.id}
+          isNickname={false}
         />
       </div>
       <div className="flex w-[20%] items-center justify-center">

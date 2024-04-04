@@ -16,6 +16,7 @@ import { CommentInfo } from "@/src/type/qa";
 
 // ** Utils Imports
 import dayjs from "dayjs";
+import TicketUserButton from "../TicketUserButton";
 
 interface PropsType {
   data: TicketInfo;
@@ -123,7 +124,13 @@ const TicketCardView = ({
         </div>
         <div className="flex items-center">
           <h3 className="text-[16px]">
-            {data.admin ? data.admin.nickname : "-"}
+            <TicketUserButton
+              profile={data.admin ? data.admin.profile : "/dice.png"}
+              ticketId={data.id}
+              nickname={data.admin ? data.admin.nickname : "-"}
+              type="user"
+              isNickname={true}
+            />
           </h3>
         </div>
       </div>
@@ -132,9 +139,13 @@ const TicketCardView = ({
           <h1 className="text-[16px]">Worker</h1>
         </div>
         <div className="flex items-center">
-          <h3 className="text-[16px]">
-            {data.worker ? data.worker.nickname : "-"}
-          </h3>
+          <TicketUserButton
+            profile={data.worker ? data.worker.profile : "/dice.png"}
+            ticketId={data.id}
+            nickname={data.worker ? data.worker.nickname : "-"}
+            type="user"
+            isNickname={true}
+          />
         </div>
       </div>
       <hr className="my-[20px]" />

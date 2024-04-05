@@ -1,4 +1,4 @@
-export interface GetAdminList extends Response {
+export interface GetAdminListResponse extends Response {
   data: AdminInfo[]
   count: number
 }

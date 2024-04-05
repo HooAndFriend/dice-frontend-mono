@@ -10,11 +10,10 @@ import { TableItemType } from '@/src/type/component'
 
 interface PropsType {
   data: AdminInfo[]
-  slicingPhone: (phoneNum: string) => string
   formatDate: (date: string) => string
 }
 
-const AdminPageView = ({ data, slicingPhone, formatDate }: PropsType) => {
+const AdminPageView = ({ data, formatDate }: PropsType) => {
   console.log(data)
 
   const bodyData: TableItemType[][] = data.map((element, index) => [
@@ -22,7 +21,7 @@ const AdminPageView = ({ data, slicingPhone, formatDate }: PropsType) => {
     { name: element.role, size: '15%' },
     { name: element.nickname, size: '15%' },
     { name: element.email, size: '20%' },
-    { name: slicingPhone(element.phone), size: '15%' },
+    { name: element.phone, size: '15%' },
     { name: formatDate(element.createdDate), size: '15%' },
     { name: '2024-01-01 23:10:12', size: '15%' },
   ])
@@ -62,4 +61,34 @@ const headerData = [
   { name: '연락처', size: '15%' },
   { name: '등록일', size: '15%' },
   { name: '수정일', size: '15%' },
+]
+
+const bodyData = [
+  [
+    { name: '1', size: '5%' },
+    { name: '시스템 관리자', size: '15%' },
+    { name: '이가인', size: '15%' },
+    { name: 'pino@naver.com', size: '20%' },
+    { name: '010-6305-7848', size: '15%' },
+    { name: '2024-01-01 23:10:12', size: '15%' },
+    { name: '2024-01-01 23:10:12', size: '15%' },
+  ],
+  [
+    { name: '1', size: '5%' },
+    { name: '시스템 관리자', size: '15%' },
+    { name: '이가인', size: '15%' },
+    { name: 'pino@naver.com', size: '20%' },
+    { name: '010-6305-7848', size: '15%' },
+    { name: '2024-01-01 23:10:12', size: '15%' },
+    { name: '2024-01-01 23:10:12', size: '15%' },
+  ],
+  [
+    { name: '1', size: '5%' },
+    { name: '시스템 관리자', size: '15%' },
+    { name: '이가인', size: '15%' },
+    { name: 'pino@naver.com', size: '20%' },
+    { name: '010-6305-7848', size: '15%' },
+    { name: '2024-01-01 23:10:12', size: '15%' },
+    { name: '2024-01-01 23:10:12', size: '15%' },
+  ],
 ]

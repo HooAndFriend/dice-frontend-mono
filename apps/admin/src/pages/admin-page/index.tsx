@@ -10,7 +10,7 @@ import { useRecoilValue } from 'recoil'
 import { AuthState } from '@/src/app/index'
 
 // ** Type Imports
-import { GetAdminList } from '@/src/type/admin'
+import { GetAdminListResponse } from '@/src/type/admin'
 
 // ** React Imports
 import { useEffect } from 'react'
@@ -18,32 +18,15 @@ import { useEffect } from 'react'
 const AdminPage = () => {
   const { accessToken } = useRecoilValue(AuthState)
 
-  const { data, error, isLoading, mutate } = useSWR(
-    '/v1/admin',
-    async (url: string) => {
-      return await Get<GetAdminList>(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-    },
-  )
-
-  if (isLoading) return null
-
-  useEffect(() => {
-    mutate()
-  }, [data])
-
-  const slicingPhone = (phoneNum) => {
-    return (
-      phoneNum.slice(0, 3) +
-      '-' +
-      phoneNum.slice(3, 7) +
-      '-' +
-      phoneNum.slice(7)
-    )
-  }
+  const { data, isLoading, error } = useSWR('/v1/admin', async (url) => {
+    const response = await Get<GetAdminListResponse>(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    return response
+  })
+  if (isLoading) return []
 
   const formatDate = (date) => {
     const d = new Date(date)
@@ -55,13 +38,7 @@ const AdminPage = () => {
     ).slice(-2)}`
   }
 
-  return (
-    <AdminPageView
-      data={data?.data.data}
-      slicingPhone={slicingPhone}
-      formatDate={formatDate}
-    />
-  )
+  return <AdminPageView data={data?.data.data} formatDate={formatDate} />
 }
 
 export default AdminPage

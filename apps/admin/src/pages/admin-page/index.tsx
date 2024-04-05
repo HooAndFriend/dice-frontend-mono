@@ -18,15 +18,23 @@ import { useEffect } from 'react'
 const AdminPage = () => {
   const { accessToken } = useRecoilValue(AuthState)
 
-  const { data, isLoading, error } = useSWR('/v1/admin', async (url) => {
-    const response = await Get<GetAdminListResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-    return response
-  })
-  if (isLoading) return []
+  const { data, error, isLoading, mutate } = useSWR(
+    '/v1/admin',
+    async (url) => {
+      return await Get<GetAdminListResponse>(url, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+    },
+  )
+
+  useEffect(() => {
+    mutate()
+  }, [data])
+
+  if (isLoading) return null
+  if (!data) return null
 
   const formatDate = (date) => {
     const d = new Date(date)
@@ -38,7 +46,7 @@ const AdminPage = () => {
     ).slice(-2)}`
   }
 
-  return <AdminPageView data={data?.data.data} formatDate={formatDate} />
+  return <AdminPageView data={data.data.data} formatDate={formatDate} />
 }
 
 export default AdminPage

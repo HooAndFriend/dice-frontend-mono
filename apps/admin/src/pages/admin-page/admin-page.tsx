@@ -14,15 +14,15 @@ interface PropsType {
 }
 
 const AdminPageView = ({ data, formatDate }: PropsType) => {
-  // const bodyData: TableItemType[][] = data.map((element, index) => [
-  //   { name: (index + 1).toString(), size: '5%' },
-  //   { name: element.role, size: '15%' },
-  //   { name: element.nickname, size: '15%' },
-  //   { name: element.email, size: '20%' },
-  //   { name: element.phone, size: '15%' },
-  //   { name: formatDate(element.createdDate), size: '15%' },
-  //   { name: '2024-01-01 23:10:12', size: '15%' },
-  // ])
+  const bodyData: TableItemType[][] = data.map((element, index) => [
+    { name: (index + 1).toString(), size: '5%' },
+    { name: element.role, size: '15%' },
+    { name: element.nickname, size: '15%' },
+    { name: element.email, size: '20%' },
+    { name: element.phone, size: '15%' },
+    { name: formatDate(element.createdDate), size: '15%' },
+    { name: '2024-01-01 23:10:12', size: '15%' },
+  ])
   return (
     <div className="w-full px-4 mt-4">
       <TitleBox title="고객센터 관리 / 관리자 목록" text="관리자 목록" />

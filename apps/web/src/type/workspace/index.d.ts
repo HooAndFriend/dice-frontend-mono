@@ -1,4 +1,5 @@
 import { RoleType, CommonResponse } from "../common";
+import { EpicStatus } from "../epic";
 
 export interface SaveWorkspaceParam {
   name: string;
@@ -57,6 +58,10 @@ export interface GetTodayTaskCountResponse extends CommonResponse, TaskCount {}
 export interface GetDoneTaskCountResponse extends CommonResponse, TaskCount {}
 
 export interface GetTaskProgressResponse extends CommonResponse, TaskProgress {}
+export interface GetTaskListResponse extends CommonResponse {
+  count: number;
+  data: Task[];
+}
 
 export interface WorkspaceUserDetailInfo {
   id: number;
@@ -144,4 +149,12 @@ export interface TaskCount {
 export interface TaskProgress {
   todayProgress: 39.130434782608695;
   yesterdayProgress: 11.11111111111111;
+}
+
+export interface Task {
+  createdDate: Date;
+  id: number;
+  code: string;
+  status: EpicStatus;
+  title: string;
 }

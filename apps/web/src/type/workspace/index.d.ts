@@ -63,6 +63,11 @@ export interface GetTaskListResponse extends CommonResponse {
   data: Task[];
 }
 
+export interface GetDateTaskListResponse extends CommonResponse {
+  count: number;
+  data: DateTask[];
+}
+
 export interface WorkspaceUserDetailInfo {
   id: number;
   role: RoleType;
@@ -157,4 +162,12 @@ export interface Task {
   code: string;
   status: EpicStatus;
   title: string;
+}
+
+export interface DateTask {
+  id: number;
+  name: string;
+  dueDate: Date;
+  type: string;
+  createdDate: Date;
 }

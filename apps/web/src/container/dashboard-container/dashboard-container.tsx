@@ -100,7 +100,7 @@ const DashboardContainerView = ({
         </div>
         <div className="flex space-x-4">
           <DashboardChart />
-          <DashboardCalendar width="1140px" height="400px" />
+          <DashboardCalendar />
         </div>
       </div>
     </div>

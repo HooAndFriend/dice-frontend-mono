@@ -6,15 +6,26 @@ import DashboardChart from "./dashboard-chart";
 
 // ** Type Imports
 import { Dates } from "@/src/type/common";
+import { WorkspaceUserCount } from "@/src/type/user";
+import { TaskCount, TaskProgress } from "@/src/type/workspace";
 
 interface PropsType {
   name: string;
   dates: Dates;
+  workspaceUserCount: WorkspaceUserCount;
+  doneTaskData: TaskCount;
+  todayTaskData: TaskCount;
+  progressData: TaskProgress;
 }
 
-const getDateString = (date: Dayjs) => {};
-
-const DashboardContainerView = ({ name, dates }: PropsType) => {
+const DashboardContainerView = ({
+  name,
+  dates,
+  todayTaskData,
+  doneTaskData,
+  workspaceUserCount,
+  progressData,
+}: PropsType) => {
   return (
     <div className="flex justify-center p-5">
       <div>
@@ -22,7 +33,7 @@ const DashboardContainerView = ({ name, dates }: PropsType) => {
           <h1 className="text-[32px] font-bold">{name}</h1>
           <h1 className="text-[20px] text-[#676767]">
             {`${dates.startDate.format(
-              "MMM DD, YYYY",
+              "MMM DD, YYYY"
             )} ~ ${dates.endDate.format("MMM DD, YYYY")}`}
           </h1>
         </div>
@@ -33,8 +44,16 @@ const DashboardContainerView = ({ name, dates }: PropsType) => {
             color="#F4F4FA"
             icon="/svg/dashboard-user.svg"
             title="Member"
-            text="25명"
-            value={10}
+            text={`${workspaceUserCount.worksapceUserCount}명`}
+            value={
+              workspaceUserCount.worksapceUserCount === 0 ||
+              workspaceUserCount.yesterDayworksapceUserCount === 0
+                ? 0
+                : ((workspaceUserCount.worksapceUserCount -
+                    workspaceUserCount.yesterDayworksapceUserCount) /
+                    workspaceUserCount.yesterDayworksapceUserCount) *
+                  100
+            }
           />
           <DashboardCard
             width="380px"
@@ -42,9 +61,15 @@ const DashboardContainerView = ({ name, dates }: PropsType) => {
             // color="#ECF6FF"
             color="#F4F4FA"
             icon="/svg/dashboard-task.svg"
-            title="Total Tasks"
-            text="25건"
-            value={-20}
+            title="Today Tasks"
+            text={`${todayTaskData.count}건`}
+            value={
+              todayTaskData.count === 0 || todayTaskData.yesterdayCount === 0
+                ? 0
+                : ((todayTaskData.count - todayTaskData.yesterdayCount) /
+                    todayTaskData.yesterdayCount) *
+                  100
+            }
           />
           <DashboardCard
             width="380px"
@@ -53,8 +78,14 @@ const DashboardContainerView = ({ name, dates }: PropsType) => {
             color="#F4F4FA"
             icon="/svg/dashboard-task-2.svg"
             title="Compoleted Tasks"
-            text="25건"
-            value={40}
+            text={`${doneTaskData.count}건`}
+            value={
+              doneTaskData.count === 0 || doneTaskData.yesterdayCount === 0
+                ? 0
+                : ((doneTaskData.count - doneTaskData.yesterdayCount) /
+                    doneTaskData.yesterdayCount) *
+                  100
+            }
           />
           <DashboardCard
             width="380px"
@@ -63,8 +94,8 @@ const DashboardContainerView = ({ name, dates }: PropsType) => {
             color="#F4F4FA"
             icon="/svg/dashboard-progress.svg"
             title="Progress"
-            text="75%"
-            value={-40}
+            text={`${Math.round(progressData.todayProgress * 10) / 10}%`}
+            value={Math.round(progressData.yesterdayProgress * 10) / 10}
           />
         </div>
         <div className="flex space-x-4">

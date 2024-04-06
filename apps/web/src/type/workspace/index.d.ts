@@ -52,6 +52,12 @@ export interface GetSearchWorkspaceUserListResponse extends CommonResponse {
   data: WorkspaceUser[];
 }
 
+export interface GetTodayTaskCountResponse extends CommonResponse, TaskCount {}
+
+export interface GetDoneTaskCountResponse extends CommonResponse, TaskCount {}
+
+export interface GetTaskProgressResponse extends CommonResponse, TaskProgress {}
+
 export interface WorkspaceUserDetailInfo {
   id: number;
   role: RoleType;
@@ -128,4 +134,14 @@ export interface WorkspaceInfo {
 export interface WorkspaceFunction {
   function: WorksapceFunctionType;
   isUse: boolean;
+}
+
+export interface TaskCount {
+  count: number;
+  yesterdayCount: number;
+}
+
+export interface TaskProgress {
+  todayProgress: 39.130434782608695;
+  yesterdayProgress: 11.11111111111111;
 }

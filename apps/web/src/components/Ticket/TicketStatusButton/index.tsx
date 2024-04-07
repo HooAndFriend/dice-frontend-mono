@@ -108,25 +108,32 @@ const TicketStatusButton = ({ status, ticketId, refetch }: PropsType) => {
           className="absolute w-[150px] h-[150px] bg-slate-50 top-[50px] left-0 rounded-lg overflow-y-auto z-10"
           ref={dropdownRef}
         >
-          {statusList
-            .filter((item) => item !== status)
-            .map((item) => (
+          {statusList.map((item) => (
+            <div className="flex items-center justify-center px-[5px] py-[8px]">
               <div
-                className="w-full h-[30px] py-2 px-4 hover:bg-slate-200"
+                className="w-[168px] cursor-pointer h-[32px] py-[10px] rounded-[8px] px-[8px] flex items-center"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleStatus(item);
                 }}
                 key={item}
+                style={{
+                  backgroundColor: status === item ? "#F4F4FA" : "white",
+                }}
               >
-                <button
-                  className={`p-2 h-[100%] rounded-[30px] flex justify-center items-center text-white font-spoqa font-bold text-[10px]`}
+                <div
+                  className="w-[12px] h-[12px] rounded-[3px]"
                   style={{ backgroundColor: getStateBoxColor(item) }}
+                />
+                <p
+                  className="text-[12px] ml-[13px]"
+                  style={{ color: status === item ? "black" : "#ACACAC" }}
                 >
                   {item}
-                </button>
+                </p>
               </div>
-            ))}
+            </div>
+          ))}
         </div>
       )}
     </div>

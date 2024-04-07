@@ -105,7 +105,7 @@ const TicketStatusButton = ({ status, ticketId, refetch }: PropsType) => {
       </button>
       {open && (
         <div
-          className="absolute w-[150px] h-[150px] bg-slate-50 top-[50px] left-0 rounded-lg overflow-y-auto z-10"
+          className="absolute w-[184px] h-[230px] top-[50px] right-0 bg-white shadow-lg rounded-lg overflow-y-auto z-30"
           ref={dropdownRef}
         >
           {statusList.map((item) => (

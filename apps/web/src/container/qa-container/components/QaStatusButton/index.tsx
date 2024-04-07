@@ -15,10 +15,6 @@ import useSWRMutation from "swr/mutation";
 import { Put } from "@/src/repository";
 import { mutate } from "swr";
 
-// ** Recoil Imports
-import { AuthState, WorkspaceState } from "@/src/app";
-import { useRecoilValue } from "recoil";
-
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 
@@ -43,9 +39,6 @@ const QaStatusButton = ({ status, qaId, refetch }: PropsType) => {
 
   const [open, setOpen] = useState<boolean>(false);
 
-  const { uuid } = useRecoilValue(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
-
   const { handleOpen: handleModalOpen } = useDialog();
 
   const handleOpen = () => {
@@ -68,7 +61,6 @@ const QaStatusButton = ({ status, qaId, refetch }: PropsType) => {
         refetch && refetch();
       },
       onError: (error) => {
-        console.log(error);
         handleModalOpen({
           title: "Error",
           message: error.response.data.message,

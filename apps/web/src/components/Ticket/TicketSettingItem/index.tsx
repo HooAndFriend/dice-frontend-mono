@@ -1,11 +1,11 @@
 // ** Component Imports
-import {SettingListInfo} from "@/src/type/ticket";
+import { SettingListInfo } from "@/src/type/ticket";
 
 // ** Component Imports
 import CustomInput from "../../Input/CustomInput";
 import useInput from "@/src/hooks/useInput";
 
-import {forwardRef, useEffect, useImperativeHandle, useState} from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import Image from "next/image";
 
 interface PropsType {
@@ -15,17 +15,17 @@ interface PropsType {
 }
 
 const TicketSettingItem = forwardRef(
-  ({item, onUpdate, handleTicketDelete}: PropsType, ref) => {
-    const {data, handleInput, setData} = useInput({
+  ({ item, onUpdate, handleTicketDelete }: PropsType, ref) => {
+    const { data, handleInput, setData } = useInput({
       id: item.id,
       color: item.color,
       type: item.type,
       description: item.description,
       admin: {
-        id: item.admin.id,
+        id: item.admin?.id,
       },
       workspace: {
-        id: item.workspace.id,
+        id: item.workspace?.id,
       },
     });
 

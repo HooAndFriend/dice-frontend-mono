@@ -1,4 +1,6 @@
 "use client";
+// ** Next Imports
+import Image from "next/image";
 
 // ** React Imports
 import { useEffect, useRef, useState, ChangeEvent } from "react";
@@ -10,10 +12,6 @@ import { useDialog } from "@/src/context/DialogContext";
 import { CommonResponse } from "@/src/type/common";
 import { GetSearchWorkspaceUserListResponse } from "@/src/type/workspace";
 
-// ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
-
 // ** Swr Imports
 import useSWR, { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
@@ -22,6 +20,7 @@ import { Get, Put } from "@/src/repository";
 interface PropsType {
   profile: string;
   nickname: string;
+  email: string;
   width?: string | number;
   height?: string | number;
   qaId: number;
@@ -31,6 +30,7 @@ interface PropsType {
 const QaUserButton = ({
   profile,
   nickname,
+  email,
   width,
   height,
   qaId,
@@ -40,9 +40,6 @@ const QaUserButton = ({
   const [name, setName] = useState<string>("");
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid } = useRecoilValue(WorkspaceState);
 
   const { handleOpen: handleDialogOpen } = useDialog();
 
@@ -127,32 +124,41 @@ const QaUserButton = ({
       </div>
       {open && (
         <div
-          className="absolute w-[200px] h-[150px] bg-slate-200 top-[50px] left-0 rounded-lg overflow-y-auto z-10"
+          className="absolute w-[222px] h-[158px] bg-white shadow-lg top-[50px] left-0 rounded-lg overflow-y-auto z-10 overflow-x-hidden"
           ref={dropdownRef}
         >
           <div className="flex items-center justify-center w-full px-2 py-2">
             <input
               type="text"
-              className="w-full h-8 rounded-md"
+              className="w-full h-8 border-none focus:outline-none"
               value={name}
               onChange={handleName}
+              placeholder="Search.."
             />
           </div>
-          {data.data.data.map((item) => (
-            <div
-              className="flex items-center px-4 py-2 mt-2 hover:bg-slate-300"
-              key={item.id}
-              onClick={() => updateQaUser.trigger(item.teamUser.user.id)}
-            >
-              <img
-                className="rounded-full border border-[#EBEBEC] mr-[10px] "
-                src={item.teamUser.user.profile}
-                width={30}
-                height={30}
-              />
-              <div className="font-spoqa">{item.teamUser.user.nickname}</div>
-            </div>
-          ))}
+          <hr className="w-full" />
+          <div className="px-[8px] py-[8px]">
+            {data.data.data.map((item) => (
+              <div
+                className="flex w-[206px] h-[32px] items-center rounded-[8px] cursor-pointer"
+                key={item.id}
+                onClick={() => updateQaUser.trigger(item.teamUser.user.id)}
+                style={{
+                  backgroundColor:
+                    item.teamUser.user.email === email ? "#F4F4FA" : "white",
+                }}
+              >
+                <Image
+                  className="rounded-full border border-[#EBEBEC] mr-[10px]"
+                  alt="profile"
+                  src={item.teamUser.user.profile}
+                  width={20}
+                  height={20}
+                />
+                <p className="text-[12px]">{item.teamUser.user.nickname}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

@@ -36,6 +36,7 @@ const QaItem = ({ item, handleOpenQa, qaId }: PropsType) => {
           <QaUserButton
             profile={item.worker.profile}
             nickname={item.worker.nickname}
+            email={item.worker.email}
             type="user"
             qaId={item.id}
           />

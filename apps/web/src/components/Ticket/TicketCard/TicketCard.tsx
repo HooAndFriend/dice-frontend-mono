@@ -132,6 +132,7 @@ const TicketCardView = ({
               profile={data.admin ? data.admin.profile : "/dice.png"}
               ticketId={data.id}
               nickname={data.admin ? data.admin.nickname : "-"}
+              userId={data.admin ? data.admin.id : 0}
               type="user"
               isNickname={true}
             />
@@ -147,6 +148,7 @@ const TicketCardView = ({
             profile={data.worker ? data.worker.profile : "/dice.png"}
             ticketId={data.id}
             nickname={data.worker ? data.worker.nickname : "-"}
+            userId={data.worker ? data.worker.id : 0}
             type="user"
             isNickname={true}
           />

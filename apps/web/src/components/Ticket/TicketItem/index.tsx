@@ -40,6 +40,8 @@ const TicketItem = ({ handleClick, data, isEpic }: PropsType) => {
       <div className="flex w-[10%] items-center justify-center">
         <TicketUserButton
           profile={data.worker?.profile}
+          nickname={data.worker?.nickname}
+          userId={data.worker?.id}
           type="user"
           ticketId={data.id}
           isNickname={false}

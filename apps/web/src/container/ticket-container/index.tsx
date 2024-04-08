@@ -19,6 +19,7 @@ import { GetTicketListResponse } from "@/src/type/ticket";
 const TicketConatiner = () => {
   const [word, setWord] = useState<string>("");
   const [ticketId, setTicketId] = useState<number>(0);
+  const [mode, setMode] = useState<"list" | "kanban">("list");
 
   const [enabled, setEnabled] = useState<boolean>(false);
 
@@ -45,12 +46,14 @@ const TicketConatiner = () => {
   return (
     <TicketContainerView
       ticketId={ticketId}
-      setTicketId={setTicketId}
       data={data.data.data}
       ticketCount={data.data.count}
       word={word}
+      mode={mode}
       handleWord={(e) => setWord(e.target.value)}
       onDragEnd={onDragEnd}
+      setMode={setMode}
+      setTicketId={setTicketId}
     />
   );
 };

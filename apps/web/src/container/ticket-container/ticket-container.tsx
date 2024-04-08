@@ -6,6 +6,9 @@ import TicketSearchCard from "../../components/Ticket/TicketSearchCard";
 // ** Type Imports
 import { TicketInfo } from "@/src/type/ticket";
 
+// ** Utils Imports
+import { DropResult } from "react-beautiful-dnd";
+
 interface PropsType {
   ticketId: number;
   data: TicketInfo[];
@@ -13,6 +16,7 @@ interface PropsType {
   ticketCount: number;
   setTicketId: (id: number) => void;
   handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onDragEnd: ({ source, destination }: DropResult) => void;
 }
 
 const TicketContainerView = ({
@@ -22,6 +26,7 @@ const TicketContainerView = ({
   ticketCount,
   setTicketId,
   handleWord,
+  onDragEnd,
 }: PropsType) => {
   return (
     <div className="w-full">
@@ -34,6 +39,7 @@ const TicketContainerView = ({
           <TicketTable
             handleClick={setTicketId}
             data={data.filter((item) => item.name.includes(word))}
+            onDragEnd={onDragEnd}
           />
         </div>
         {ticketId !== 0 && (

@@ -1,4 +1,6 @@
 "use client";
+// ** React Imports
+import { useEffect, useState } from "react";
 
 // ** Component Imports
 import EpicContainerView from "./epic-container";
@@ -7,20 +9,35 @@ import EpicContainerView from "./epic-container";
 import useSWR from "swr";
 import { Get } from "@/src/repository";
 
+// ** Utils Imports
+import { DropResult } from "react-beautiful-dnd";
+
 // ** Type Imports
 import { GetEpicListResponse } from "@/src/type/epic";
-import { useState } from "react";
 
 const EpicConatiner = () => {
   const [word, setWord] = useState<string>("");
+  const [enabled, setEnabled] = useState<boolean>(false);
 
   const { data, error, isLoading } = useSWR("/v1/epic", async (url) =>
     Get<GetEpicListResponse>(url)
   );
 
-  if (isLoading) return;
+  const onDragEnd = ({ source, destination }: DropResult) => {
+    console.log(">>> source", source);
+    console.log(">>> destination", destination);
+  };
 
-  if (error) return;
+  useEffect(() => {
+    const animation = requestAnimationFrame(() => setEnabled(true));
+
+    return () => {
+      cancelAnimationFrame(animation);
+      setEnabled(false);
+    };
+  }, []);
+
+  if (isLoading || error || !enabled) return;
 
   return (
     <EpicContainerView
@@ -28,6 +45,7 @@ const EpicConatiner = () => {
       epicCount={data.data.count}
       word={word}
       handleWord={(e) => setWord(e.target.value)}
+      onDragEnd={onDragEnd}
     />
   );
 };

@@ -3,15 +3,23 @@
 import Image from "next/image";
 
 // ** React Imports
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 // ** Component Imports
-
-// ** Type Imports
-import { EpicInfo } from "@/src/type/epic";
 import TicketItem from "@/src/components/Ticket/TicketItem";
 import TicketHeader from "@/src/components/Ticket/TicketHeader";
 import TicketAddItem from "@/src/components/Ticket/TicketAddItem";
+
+// ** Type Imports
+import { EpicInfo } from "@/src/type/epic";
+
+// ** Utils Imports
+import {
+  DragDropContext,
+  Draggable,
+  DropResult,
+  Droppable,
+} from "react-beautiful-dnd";
 
 interface PropsType {
   item: EpicInfo;
@@ -19,6 +27,7 @@ interface PropsType {
 
 const EpicItem = ({ item }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [enabled, setEnabled] = useState<boolean>(false);
 
   const handleOpen = () => setOpen((c) => !c);
 
@@ -30,6 +39,22 @@ const EpicItem = ({ item }: PropsType) => {
 
     return `${(item.doneTicketCount / item.ticket.length) * 100}%`;
   }, [item]);
+
+  const onDragEnd = ({ source, destination }: DropResult) => {
+    console.log(">>> source", source);
+    console.log(">>> destination", destination);
+  };
+
+  useEffect(() => {
+    const animation = requestAnimationFrame(() => setEnabled(true));
+
+    return () => {
+      cancelAnimationFrame(animation);
+      setEnabled(false);
+    };
+  }, []);
+
+  if (!enabled) return;
 
   return (
     <div>
@@ -60,14 +85,37 @@ const EpicItem = ({ item }: PropsType) => {
       {open && (
         <div>
           <TicketHeader isEpic />
-          {item.ticket.map((item) => (
-            <TicketItem
-              handleClick={() => {}}
-              data={item}
-              key={item.id}
-              isEpic
-            />
-          ))}
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="droppable">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  {item.ticket.map((item) => (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id.toString()}
+                      index={item.id}
+                    >
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <TicketItem
+                            handleClick={() => {}}
+                            data={item}
+                            key={item.id}
+                            isEpic
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
           <TicketAddItem epicId={item.id} />
         </div>
       )}

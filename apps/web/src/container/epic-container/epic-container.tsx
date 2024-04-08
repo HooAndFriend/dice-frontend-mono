@@ -1,6 +1,9 @@
 // ** Component Imports
 import EpicTable from "@/src/container/epic-container/components/EpicTable";
 
+// ** Utils Imports
+import { DropResult } from "react-beautiful-dnd";
+
 // ** Type Imports
 import { EpicInfo } from "@/src/type/epic";
 import EpicSearchCard from "./components/EpicSearchCard";
@@ -10,6 +13,7 @@ interface PropsType {
   epicData: EpicInfo[];
   epicCount: number;
   handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onDragEnd: ({ source, destination }: DropResult) => void;
 }
 
 const EpicContainerView = ({
@@ -17,6 +21,7 @@ const EpicContainerView = ({
   epicCount,
   word,
   handleWord,
+  onDragEnd,
 }: PropsType) => {
   return (
     <div className="w-full">
@@ -26,6 +31,7 @@ const EpicContainerView = ({
       </div>
       <EpicTable
         epicData={epicData.filter((item) => item.name.includes(word))}
+        onDragEnd={onDragEnd}
       />
     </div>
   );

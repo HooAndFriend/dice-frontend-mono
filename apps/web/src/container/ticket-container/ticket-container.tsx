@@ -12,6 +12,7 @@ import { TicketInfo } from "@/src/type/ticket";
 // ** Utils Imports
 import { DropResult } from "react-beautiful-dnd";
 import TicketViewToggleButton from "@/src/components/Ticket/TicketViewToggleButton";
+import TicketKanbanBoard from "@/src/components/Ticket/TicketKanbanBoard";
 
 interface PropsType {
   ticketId: number;
@@ -45,11 +46,18 @@ const TicketContainerView = ({
       </div>
       <div className={`${ticketId !== 0 && "flex"}`}>
         <div style={{ width: ticketId !== 0 ? "65%" : "100%" }}>
-          <TicketTable
-            handleClick={setTicketId}
-            data={data.filter((item) => item.name.includes(word))}
-            onDragEnd={onDragEnd}
-          />
+          {mode === "list" ? (
+            <TicketTable
+              handleClick={setTicketId}
+              data={data.filter((item) => item.name.includes(word))}
+              onDragEnd={onDragEnd}
+            />
+          ) : (
+            <TicketKanbanBoard
+              handleClick={setTicketId}
+              data={data.filter((item) => item.name.includes(word))}
+            />
+          )}
         </div>
         {ticketId !== 0 && (
           <div className="w-[35%] pl-8">

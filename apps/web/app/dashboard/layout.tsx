@@ -11,7 +11,7 @@ const DashboardRayout = ({
     <div className="flex flex-col w-full h-screen">
       <DashboardHeader />
       <div
-        className="flex flex-1 w-full h-calc(100vh - 70px"
+        className="flex flex-1 w-full h-calc(100vh - 70px)"
         style={{ maxHeight: `calc(100% - 70px)` }}
       >
         <DashboardSidebar />

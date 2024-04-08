@@ -11,6 +11,7 @@ import { TicketInfo } from "@/src/type/ticket";
 
 // ** Utils Imports
 import { DropResult } from "react-beautiful-dnd";
+import TicketViewToggleButton from "@/src/components/Ticket/TicketViewToggleButton";
 
 interface PropsType {
   ticketId: number;
@@ -40,44 +41,7 @@ const TicketContainerView = ({
       <TicketSearchCard value={word} onChange={handleWord} />
       <div className="flex items-center justify-between mt-8">
         <h1 className="pl-4 font-bold text-md">Total Ticket : {ticketCount}</h1>
-        <div className="w-[100px] bg-white h-[50px] rounded-[30px] border-1 border-solid border-[#EBEBEC] flex items-center justify-between">
-          <div
-            className="w-[50px] h-[50px] rounded-full flex items-center justify-center cursor-pointer"
-            onClick={() => setMode("kanban")}
-            style={{
-              backgroundColor: mode === "kanban" ? "black" : "white",
-            }}
-          >
-            <Image
-              src={
-                mode === "kanban"
-                  ? "/svg/ticket/board-list-white.svg"
-                  : "/svg/ticket/board-list-black.svg"
-              }
-              alt="icon"
-              width={24}
-              height={24}
-            />
-          </div>
-          <div
-            className="w-[50px] h-[50px] rounded-full flex items-center justify-center cursor-pointer"
-            onClick={() => setMode("list")}
-            style={{
-              backgroundColor: mode === "list" ? "black" : "white",
-            }}
-          >
-            <Image
-              src={
-                mode === "list"
-                  ? "/svg/ticket/ticket-list-white.svg"
-                  : "/svg/ticket/ticket-list-black.svg"
-              }
-              alt="icon"
-              width={24}
-              height={24}
-            />
-          </div>
-        </div>
+        <TicketViewToggleButton mode={mode} setMode={setMode} />
       </div>
       <div className={`${ticketId !== 0 && "flex"}`}>
         <div style={{ width: ticketId !== 0 ? "65%" : "100%" }}>

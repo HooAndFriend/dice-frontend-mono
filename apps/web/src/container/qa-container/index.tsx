@@ -7,16 +7,13 @@ import { useEffect, useRef, useState } from "react";
 import { Get } from "@/src/repository";
 import useSWR from "swr";
 
-// ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
-
 // ** Type Imports
 import { GetIssueListResponse, QaQuery } from "@/src/type/qa";
 import { EpicStatus } from "@/src/type/epic";
 
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
+import { DropResult } from "react-beautiful-dnd";
 
 // ** Component Imports
 import QaContainerView from "./qa-container";
@@ -29,10 +26,9 @@ const QaContainer = () => {
 
   const [qaId, setQaId] = useState<number>(0);
 
-  const cancelButtonRef = useRef();
+  const [enabled, setEnabled] = useState<boolean>(false);
 
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid } = useRecoilValue(WorkspaceState);
+  const cancelButtonRef = useRef();
 
   const {
     data: query,
@@ -61,13 +57,25 @@ const QaContainer = () => {
     });
   });
 
+  const onDragEnd = ({ source, destination }: DropResult) => {
+    console.log(">>> source", source);
+    console.log(">>> destination", destination);
+  };
+
   useEffect(() => {
     mutate();
   }, [query, status]);
 
-  if (isLoading) return null;
+  useEffect(() => {
+    const animation = requestAnimationFrame(() => setEnabled(true));
 
-  if (error) return;
+    return () => {
+      cancelAnimationFrame(animation);
+      setEnabled(false);
+    };
+  }, []);
+
+  if (isLoading || error || !enabled) return null;
 
   return (
     <QaContainerView
@@ -86,6 +94,7 @@ const QaContainer = () => {
       setSaveOpen={setSaveOpen}
       refetch={mutate}
       setOpen={setOpen}
+      onDragEnd={onDragEnd}
     />
   );
 };

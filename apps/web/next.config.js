@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+  reactStrictMode: false,
+  swcMinify: true,
   transpilePackages: ["@repo/ui"],
   distDir: "dist",
   images: {

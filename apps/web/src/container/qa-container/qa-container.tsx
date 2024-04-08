@@ -10,6 +10,14 @@ import QaSaveModal from "@/src/components/Modal/QaSaveModal";
 import { IssueInfo, QaQuery } from "@/src/type/qa";
 import { EpicStatus } from "@/src/type/epic";
 
+// ** Utils Imports
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
+
 interface PropsType {
   open: boolean;
   saveOpen: boolean;
@@ -26,6 +34,7 @@ interface PropsType {
   setOpen: (value: boolean) => void;
   setSaveOpen: (value: boolean) => void;
   refetch: () => void;
+  onDragEnd: ({ source, destination }: DropResult) => void;
 }
 
 const SelectItem = [
@@ -51,10 +60,10 @@ const QaContainerView = ({
   setOpen,
   cancelButtonRef,
   refetch,
+  onDragEnd,
 }: PropsType) => {
   return (
     <div className="w-full bg-[#FAFAFB] p-5">
-      {/* 오른쪽 내용 */}
       <div className="font-mosk font-bold text-[32px]">QA</div>
       <div className="w-full h-[100px] shadow-md border-[#EBEBEC] rounded-[20px] bg-white mt-[30px] flex items-center">
         <div className="font-spoqa text-base font-bold ml-[25px] mr-[33px] text-center">
@@ -126,14 +135,37 @@ const QaContainerView = ({
             </div>
           </div>
           <div className="w-full py-5 h-[564px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC] overflow-y-auto overflow-x-hidden">
-            {data.map((item) => (
-              <QaItem
-                item={item}
-                key={item.id}
-                handleOpenQa={handleOpenQa}
-                qaId={qaId}
-              />
-            ))}
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="droppable">
+                {(provided) => (
+                  <div ref={provided.innerRef} {...provided.droppableProps}>
+                    {data.map((item) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id.toString()}
+                        index={item.id}
+                      >
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <QaItem
+                              item={item}
+                              key={item.id}
+                              handleOpenQa={handleOpenQa}
+                              qaId={qaId}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
           </div>
         </div>
         {open && (

@@ -5,7 +5,12 @@ module.exports = {
   transpilePackages: ["@repo/ui"],
   distDir: "dist",
   images: {
-    domains: ["125.133.34.224", "firebasestorage.googleapis.com"],
+    domains: [
+      "125.133.34.224",
+      "firebasestorage.googleapis.com",
+      "web.hi-dice.com",
+      "hi-dice.com",
+    ],
   },
   output: process.env.NODE_ENV === "development" ? "standalone" : "export",
   async rewrites() {

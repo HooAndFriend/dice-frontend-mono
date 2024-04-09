@@ -19,9 +19,6 @@ interface PropsType {
 }
 
 const QaDatePicker = ({ value, qaId }: PropsType) => {
-  const { uuid } = useRecoilValue(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
-
   const { handleOpen } = useDialog();
 
   // ** QA 수정

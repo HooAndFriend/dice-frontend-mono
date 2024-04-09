@@ -5,7 +5,7 @@ import { CommonResponse, RoleType } from "@/src/type/common";
 import { useDialog } from "@/src/context/DialogContext";
 
 // ** Recoil Imports
-import { AuthState, TeamState, WorkspaceState } from "@/src/app";
+import { WorkspaceState } from "@/src/app";
 import { useRecoilValue } from "recoil";
 
 // ** Service Imports
@@ -26,11 +26,9 @@ const WorkspaceUserBox = ({
   nickname,
   email,
   role,
-
   profile,
 }: PropsType) => {
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid, role: userRole } = useRecoilValue(WorkspaceState);
+  const { role: userRole } = useRecoilValue(WorkspaceState);
 
   const { handleOpen } = useDialog();
 

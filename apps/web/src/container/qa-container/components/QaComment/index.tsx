@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 // ** Recoil Imports
-import { AuthState, UserState, WorkspaceState } from "@/src/app";
+import { UserState } from "@/src/app";
 import { useRecoilValue } from "recoil";
 
 // ** Context Imports
@@ -30,8 +30,6 @@ const QaComment = ({ data, commentRefetch }: PropsType) => {
   const [content, setContent] = useState<string>(data.content);
   const [mode, setMode] = useState<"view" | "edit">("view");
 
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid } = useRecoilValue(WorkspaceState);
   const { email } = useRecoilValue(UserState);
 
   const { handleOpen } = useDialog();

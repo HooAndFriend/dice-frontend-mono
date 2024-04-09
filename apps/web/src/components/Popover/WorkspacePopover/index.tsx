@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import WorkspacePopoverView from "./workspace-popover";
 
 // ** Recoil Imports
-import { AuthState, TeamState, UserState, WorkspaceState } from "@/src/app";
+import { TeamState, WorkspaceState } from "@/src/app";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 // ** Service Imports
@@ -22,8 +22,7 @@ const WorkspacePopover = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState);
-  const { id, uuid, name } = useRecoilValue(TeamState);
-  const { accessToken } = useRecoilValue(AuthState);
+  const { id } = useRecoilValue(TeamState);
 
   const {
     data,

@@ -50,7 +50,7 @@ const TicketDatePicker = ({ value, ticketId }: PropsType) => {
           type="date"
           value={value}
           onChange={handleOnChange}
-          className="h-[20px] border-none"
+          className="h-[20px] border-none bg-none"
         />
       ) : (
         "-"

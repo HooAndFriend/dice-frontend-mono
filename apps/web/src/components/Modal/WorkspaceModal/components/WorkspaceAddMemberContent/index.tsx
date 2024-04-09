@@ -1,10 +1,6 @@
 // ** React Imports
 import { useState } from "react";
 
-// ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
-
 // ** Service Imports
 import useSWR from "swr";
 import { Get, Post } from "@/src/repository";
@@ -31,9 +27,6 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
   const [inviteUserList, setInvietUserList] = useState<WorkspaceInviteUser[]>(
     []
   );
-
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid } = useRecoilValue(WorkspaceState);
 
   const { handleOpen } = useDialog();
 

@@ -8,18 +8,11 @@ import WorkspaceUserBox from "../WorkspaceUserBox";
 // ** Type Imports
 import { GetWorkspaceUserListResponse } from "@/src/type/workspace";
 
-// ** Recoil Imports
-import { AuthState, WorkspaceState } from "@/src/app";
-import { useRecoilValue } from "recoil";
-
 interface PropsType {
   handleOpen: () => void;
 }
 
 const WorkspaceMemberContent = ({ handleOpen }: PropsType) => {
-  const { uuid } = useRecoilValue(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
-
   const { data, error, isLoading } = useSWR("/v1/workspace-user", async (url) =>
     Get<GetWorkspaceUserListResponse>(url)
   );

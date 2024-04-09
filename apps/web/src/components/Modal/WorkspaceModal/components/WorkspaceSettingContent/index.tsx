@@ -1,6 +1,6 @@
 // ** Recoil Imports
-import { AuthState, WorkspaceState } from "@/src/app";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { WorkspaceState } from "@/src/app";
+import { useSetRecoilState } from "recoil";
 
 // ** Component Imports
 import { ImageUploader } from "@/src/components/ImageUploader";
@@ -32,8 +32,7 @@ const WorkspaceSettingContent = () => {
     comment: "",
   });
 
-  const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
+  const setWorkspaceState = useSetRecoilState(WorkspaceState);
 
   const { handleOpen } = useDialog();
 

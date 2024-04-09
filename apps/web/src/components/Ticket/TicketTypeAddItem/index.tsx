@@ -7,38 +7,24 @@ import Image from "next/image";
 import useSWRMutation from "swr/mutation";
 
 // ** Service Imports
-import {Post} from "@/src/repository";
+import { Post } from "@/src/repository";
 
 // ** Type Imports
-import {CreateTicketSettingResponse} from "@/src/type/ticket";
-
-// ** Recoil Imports
-import {useRecoilValue} from "recoil";
-import {AuthState} from "@/src/app";
+import { CreateTicketSettingResponse } from "@/src/type/ticket";
 
 const TicketTypeAddItem = () => {
-  const {accessToken} = useRecoilValue(AuthState);
-
   const addTicketSetting = useSWRMutation(
     "/v1/ticket/setting",
     async (url: string) =>
-      await Post<CreateTicketSettingResponse>(
-        url,
-        {
-          color: "",
-          type: "",
-          description: "",
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
-        .then(res => {
+      await Post<CreateTicketSettingResponse>(url, {
+        color: "",
+        type: "",
+        description: "",
+      })
+        .then((res) => {
           alert("등록되었습니다");
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         })
   );

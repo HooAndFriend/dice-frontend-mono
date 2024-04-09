@@ -8,7 +8,7 @@ import WorkspaceModalView from "./workspace-modal";
 
 // ** Recoil Imports
 import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
+import { WorkspaceState } from "@/src/app";
 
 // ** Service Imports
 import useSWR from "swr";
@@ -28,7 +28,6 @@ const WorkspaceModal = ({ open, setOpen, cancelButtonRef }: PropsType) => {
 
   const [addOpen, setAddOpen] = useState<boolean>(false);
 
-  const { accessToken } = useRecoilValue(AuthState);
   const { profile, name, uuid } = useRecoilValue(WorkspaceState);
 
   const { data, error, isLoading } = useSWR("/v1/workspace-user", async (url) =>

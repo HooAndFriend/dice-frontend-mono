@@ -7,27 +7,15 @@ import SettingContainerView from "./setting-container";
 import { Delete, Get, Patch } from "@/src/repository";
 import useSWR from "swr";
 
-// ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
-
 // ** Type Imports
 import { GetTicketSettingListResponse } from "@/src/type/ticket";
 import { useEffect } from "react";
 
 const SettingConatiner = () => {
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid } = useRecoilValue(WorkspaceState);
-
   const { data, error, isLoading, mutate } = useSWR(
     "/v1/ticket/setting",
     async (url) => {
-      return await Get<GetTicketSettingListResponse>(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Workspace-code": uuid,
-        },
-      });
+      return await Get<GetTicketSettingListResponse>(url);
     }
   );
 
@@ -37,21 +25,12 @@ const SettingConatiner = () => {
     type: string,
     description: string
   ) => {
-    await Patch(
-      "/v1/ticket/setting",
-      {
-        settingId,
-        color,
-        type,
-        description,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Workspace-code": uuid,
-        },
-      }
-    )
+    await Patch("/v1/ticket/setting", {
+      settingId,
+      color,
+      type,
+      description,
+    })
       .then((res) => {
         mutate();
       })
@@ -61,12 +40,7 @@ const SettingConatiner = () => {
   };
 
   const handleTicketDelete = async (id: number) => {
-    await Delete(`/v1/ticket/setting/${id}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Workspace-code": uuid,
-      },
-    }).then((res) => {
+    await Delete(`/v1/ticket/setting/${id}`).then((res) => {
       mutate();
     });
   };

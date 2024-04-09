@@ -1,6 +1,6 @@
 // ** Recoil Imports
 import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
+import { WorkspaceState } from "@/src/app";
 
 // ** Service Imports
 import useSWR from "swr";
@@ -23,8 +23,7 @@ import { useState } from "react";
 const WorkspaceAddFunctionContent = () => {
   const [word, setWord] = useState<string>("");
 
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid, role } = useRecoilValue(WorkspaceState);
+  const { role } = useRecoilValue(WorkspaceState);
 
   const { handleOpen } = useDialog();
 

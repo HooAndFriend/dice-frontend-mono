@@ -1,4 +1,5 @@
 // ** React Imports
+import Image from "next/image";
 import { ChangeEvent } from "react";
 
 interface PropsType {
@@ -68,7 +69,7 @@ const ImageUploaderView = ({
             className="w-[104px] h-[104px] rounded-[20px] bg-purple-200 absolute"
           />
           <div className="w-[25px] h-[25px] bg-[#EBEBEC] rounded-[5px] absolute top-[85px] left-[85px] flex justify-center items-center">
-            <img src="/svg/edit.svg" alt="edit" width={15} height={15} />
+            <Image src="/svg/edit.svg" alt="edit" width={15} height={15} />
           </div>
         </div>
       )}

@@ -8,6 +8,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import SettingContent from "./components/UserSettingContent";
 import TeamContent from "./components/UserTeamContent";
 import WorkspaceContent from "./components/UserWorkspaceContent";
+import Image from "next/image";
 
 interface PropsType {
   open: boolean;
@@ -66,7 +67,7 @@ const UserModalView = ({
                         User Setting
                       </div>
                       <div onClick={() => setOpen(false)}>
-                        <img
+                        <Image
                           alt="X"
                           src="/svg/XButton.svg"
                           width={32}
@@ -93,7 +94,7 @@ const UserModalView = ({
                                 : "bg-main text-white"
                             }`}
                           >
-                            <img
+                            <Image
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 0
@@ -114,7 +115,7 @@ const UserModalView = ({
                                 : "bg-main text-white"
                             }`}
                           >
-                            <img
+                            <Image
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 1 ? "/svg/team.svg" : "/svg/teamW.svg"
@@ -133,7 +134,7 @@ const UserModalView = ({
                                 : "bg-main text-white"
                             }`}
                           >
-                            <img
+                            <Image
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 2

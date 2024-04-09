@@ -1,3 +1,6 @@
+// ** Next Imports
+import Image from "next/image";
+
 // ** React Imports
 import { Fragment } from "react";
 
@@ -71,7 +74,7 @@ const TeamModalView = ({
                         Team Setting
                       </div>
                       <div>
-                        <img
+                        <Image
                           alt="X"
                           src="/svg/XButton.svg"
                           width={32}
@@ -87,7 +90,6 @@ const TeamModalView = ({
                           alt="Sample Image"
                           className="w-[91px] h-[91px] object-cover rounded-full mt-[52px]"
                         />
-
                         <div className="mt-[21px] font-spoqa font-bold text-[25px] text-white">
                           {name}
                         </div>
@@ -100,7 +102,7 @@ const TeamModalView = ({
                                 : "bg-main text-white"
                             }`}
                           >
-                            <img
+                            <Image
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 0
@@ -121,7 +123,7 @@ const TeamModalView = ({
                                 : "bg-main text-white"
                             }`}
                           >
-                            <img
+                            <Image
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 1 ? "/svg/team.svg" : "/svg/teamW.svg"
@@ -140,7 +142,7 @@ const TeamModalView = ({
                                 : "bg-main text-white"
                             }`}
                           >
-                            <img
+                            <Image
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 2

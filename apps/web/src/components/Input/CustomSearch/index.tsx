@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface PropsType {
   value?: string;
   name?: string;
@@ -14,7 +16,12 @@ const CustomSearch = ({ value, onChange, name }: PropsType) => {
         name={name}
         onChange={onChange}
       />
-      <img src="/svg/searchIcon.svg" width={24} height={24} />
+      <Image
+        src="/svg/searchIcon.svg"
+        width={24}
+        height={24}
+        alt="search icon"
+      />
     </div>
   );
 };

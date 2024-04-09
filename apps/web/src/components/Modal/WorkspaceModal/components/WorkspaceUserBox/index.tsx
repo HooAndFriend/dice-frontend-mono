@@ -12,6 +12,7 @@ import { useRecoilValue } from "recoil";
 import { mutate } from "swr";
 import { Delete, Patch, Put } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
+import Image from "next/image";
 
 interface PropsType {
   id: number;
@@ -77,7 +78,7 @@ const WorkspaceUserBox = ({
   return (
     <div className="mb-[21px] w-[726px] h-20 border-[#EBEBEC] border shadow-md rounded-[15px] flex items-center justify-between">
       <div className="flex">
-        <img
+        <Image
           src={profile}
           alt="Sample Image"
           width={45}
@@ -116,8 +117,9 @@ const WorkspaceUserBox = ({
               ADMIN
             </option>
           </select>
-          <img
+          <Image
             src="/svg/boldX.svg"
+            alt="delete"
             width={24}
             height={24}
             className="cursor-pointer"

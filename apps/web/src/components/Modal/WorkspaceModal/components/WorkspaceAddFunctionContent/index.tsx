@@ -19,6 +19,7 @@ import { CommonResponse } from "@/src/type/common";
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 import { useState } from "react";
+import Image from "next/image";
 
 const WorkspaceAddFunctionContent = () => {
   const [word, setWord] = useState<string>("");
@@ -87,9 +88,10 @@ const WorkspaceAddFunctionContent = () => {
           value={word}
           onChange={(e) => setWord(e.target.value)}
         />
-        <img
+        <Image
           className="mr-[15px]"
           src="/svg/searchIcon.svg"
+          alt="searchIcon"
           width={24}
           height={24}
         />
@@ -107,7 +109,8 @@ const WorkspaceAddFunctionContent = () => {
               >
                 {item.function}
                 {role === "ADMIN" && (
-                  <img
+                  <Image
+                    alt="trashcanIcon"
                     className="mr-[13px] cursor-pointer"
                     src="/svg/trashcanIcon.svg"
                     width={15}
@@ -146,7 +149,8 @@ const WorkspaceAddFunctionContent = () => {
                     className="w-[97px] h-9 border border-[#EBEBEC] rounded-[50px] flex items-center font-spoqa font-bold text-base justify-center mr-[18px] cursor-pointer"
                     onClick={() => addWorkspaceFunction.trigger(item.function)}
                   >
-                    <img
+                    <Image
+                      alt="edit_plus"
                       className="mr-2"
                       src="/svg/edit_plus.svg"
                       width={24}

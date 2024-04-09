@@ -1,3 +1,6 @@
+// ** Next Imports
+import Image from "next/image";
+
 // ** Swr Imports
 import useSWR from "swr";
 import { Get } from "@/src/repository";
@@ -56,7 +59,8 @@ const TeamMemberContent = ({ handleOpen }: PropsType) => {
           onClick={handleOpen}
           className="flex items-center justify-center font-bold font-spoqa font-base"
         >
-          <img
+          <Image
+            alt="addMember"
             className="mr-[10px]"
             src="/svg/addMember.svg"
             width={24}

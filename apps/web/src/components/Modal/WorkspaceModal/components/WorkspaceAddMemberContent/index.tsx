@@ -15,6 +15,7 @@ import {
   WorkspaceInviteUser,
 } from "@/src/type/workspace";
 import { CommonResponse, RoleType } from "@/src/type/common";
+import Image from "next/image";
 
 interface PropsType {
   open: boolean;
@@ -89,8 +90,9 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
             <div className="h-full border border-[#EBEBEC] rounded-[10px] px-4 flex items-center">
               {inviteUserList.map((item) => (
                 <div className="p-2 bg-[#F4F4FA] h-[29px] rounded-lg flex items-center mr-[10px]">
-                  <img
+                  <Image
                     className="mx-2 rounded-full"
+                    alt="profile"
                     src={item.user.profile}
                     width={17}
                     height={17}
@@ -98,7 +100,8 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
                   <div className="h-[29px] font-spoqa text-xs flex items-center">
                     {item.user.nickname}
                   </div>
-                  <img
+                  <Image
+                    alt="boldX"
                     className="ml-2 cursor-pointer"
                     src="/svg/boldX.svg"
                     width={13}

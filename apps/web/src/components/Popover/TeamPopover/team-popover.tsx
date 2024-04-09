@@ -10,6 +10,7 @@ import TeamBox from "./component/team-box";
 // ** Type Imports
 import { TeamUserInfo } from "@/src/type/team";
 import { TeamStateType } from "@/src/app";
+import Image from "next/image";
 
 interface PropsType {
   open: boolean;
@@ -59,20 +60,22 @@ const TeamPopoverView = ({
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-bold">{teamState.name}</h3>
                 <div className="flex items-center">
-                  <img
+                  <Image
                     src="/images/settings.png"
-                    width="18px"
-                    height="18px"
+                    alt="setting"
+                    width={18}
+                    height={18}
                     className="mr-1"
                   />
                   <h4 className="mr-3 text-sm" onClick={handleModalOpen}>
                     Setting
                   </h4>
                   <div className="flex" onClick={handleLogout}>
-                    <img
+                    <Image
                       src="/images/logout.png"
-                      width="18px"
-                      height="18px"
+                      width={18}
+                      height={18}
+                      alt="logout"
                       className="mr-1"
                     />
                     <h3 className="mr-1 text-sm">Logout</h3>
@@ -93,12 +96,12 @@ const TeamPopoverView = ({
                 ))}
                 <Link href="/save-team">
                   <div className="flex items-center mt-5">
-                    <img
+                    <Image
                       className="border rounded-[10px] mr-3"
                       src="/images/plus.png"
                       alt="profile"
-                      width="30px"
-                      height="30px"
+                      width={30}
+                      height={30}
                     />
                     <h4 className="text-[#EBEBEC]">Add Team</h4>
                   </div>

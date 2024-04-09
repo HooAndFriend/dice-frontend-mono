@@ -1,5 +1,7 @@
+// ** Next Imports
+import Image from "next/image";
+
 // ** Component Imports
-import WorkspaceModal from "@/src/components/Modal/WorkspaceModal";
 import ProfileBox from "../../ProfileBox";
 import UserModal from "@/src/components/Modal/UserModal";
 
@@ -30,10 +32,11 @@ const UserPopoverView = ({
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold">DICE</h3>
             <div className="flex items-center" onClick={handleModalOpen}>
-              <img
+              <Image
+                alt="setting"
                 src="/images/settings.png"
-                width="18px"
-                height="18px"
+                width={18}
+                height={18}
                 className="mr-1"
               />
               <h4 className="mr-1 text-sm">Setting</h4>
@@ -41,32 +44,32 @@ const UserPopoverView = ({
           </div>
           <hr className="mt-3" />
           <div className="flex items-center mt-5">
-            <img
+            <Image
               className="border rounded-[10px] mr-3"
               src="/images/profile.jpg"
               alt="profile"
-              width="30px"
-              height="30px"
+              width={30}
+              height={30}
             />
             <h4>HooAndFriend</h4>
           </div>
           <div className="flex items-center mt-5">
-            <img
+            <Image
               className="border rounded-[10px] mr-3"
               src="/images/profile.jpg"
               alt="profile"
-              width="30px"
-              height="30px"
+              width={30}
+              height={30}
             />
             <h4>HooAndFriend</h4>
           </div>
           <div className="flex items-center mt-5">
-            <img
+            <Image
               className="border rounded-[10px] mr-3"
               src="/images/plus.png"
               alt="profile"
-              width="30px"
-              height="30px"
+              width={30}
+              height={30}
             />
             <h4 className="text-[#EBEBEC]">Add Workspace</h4>
           </div>

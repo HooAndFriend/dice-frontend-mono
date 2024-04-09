@@ -2,6 +2,7 @@
 
 // ** Next Imports
 import Link from "next/link";
+import Image from "next/image";
 
 // ** React Imports
 import { useEffect, useState } from "react";
@@ -24,10 +25,10 @@ const DashboardHeader = () => {
   return (
     <div className="h-[64px] border-b-2 border-[#EBEBEC] flex items-center justify-between">
       <Link href="/dashboard">
-        <img
+        <Image
           src="/images/logo.png"
-          width="110px"
-          height="30px"
+          width={110}
+          height={30}
           alt="logo"
           className="ml-[30px]"
         />

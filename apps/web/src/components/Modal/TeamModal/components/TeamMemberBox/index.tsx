@@ -1,3 +1,6 @@
+// ** Next Imports
+import Image from "next/image";
+
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 
@@ -73,7 +76,7 @@ const TeamMemberBox = ({
   return (
     <div className="mb-[21px] w-[full] h-20 border-[#EBEBEC] border shadow-md rounded-[15px] flex items-center justify-between">
       <div className="flex">
-        <img
+        <Image
           src={profile}
           alt="Sample Image"
           width={45}
@@ -104,8 +107,9 @@ const TeamMemberBox = ({
           </option>
         </select>
         {userRole === "ADMIN" && (
-          <img
+          <Image
             src="/svg/boldX.svg"
+            alt="delete"
             width={24}
             height={24}
             className="cursor-pointer"

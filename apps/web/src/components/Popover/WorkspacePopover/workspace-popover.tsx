@@ -9,6 +9,7 @@ import WorkspaceModal from "@/src/components/Modal/WorkspaceModal";
 import ProfileBox from "../../ProfileBox";
 import WorkspaceBox from "./component/workspace-box";
 import { WorkspaceStateType } from "@/src/app";
+import Image from "next/image";
 
 interface PropsType {
   open: boolean;
@@ -49,10 +50,11 @@ const WorkspacePopoverView = ({
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold">{workspace.name}</h3>
               <div className="flex items-center" onClick={handleModalOpen}>
-                <img
+                <Image
                   src="/images/settings.png"
-                  width="18px"
-                  height="18px"
+                  alt="setting"
+                  width={18}
+                  height={18}
                   className="mr-1"
                 />
                 <h4 className="mr-1 text-sm">Setting</h4>
@@ -74,12 +76,12 @@ const WorkspacePopoverView = ({
               ))}
               <Link href="/save-workspace">
                 <div className="flex items-center mt-5">
-                  <img
+                  <Image
                     className="border rounded-[10px] mr-3"
                     src="/images/plus.png"
                     alt="profile"
-                    width="30px"
-                    height="30px"
+                    width={30}
+                    height={30}
                   />
                   <h4 className="text-[#EBEBEC]">Add Workspace</h4>
                 </div>

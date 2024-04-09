@@ -17,6 +17,7 @@ import {
   Droppable,
   DropResult,
 } from "react-beautiful-dnd";
+import Image from "next/image";
 
 interface PropsType {
   open: boolean;
@@ -124,7 +125,12 @@ const QaContainerView = ({
                 // onClick={handleCreateIssueOpen}
                 className="w-[120px] h-[50px] rounded-[30px] flex items-center bg-white border border-[#EBEBEC] justify-center ml-8"
               >
-                <img src="/images/Add_To_Queue.png" width={24} height={24} />
+                <Image
+                  src="/images/Add_To_Queue.png"
+                  width={24}
+                  height={24}
+                  alt="add"
+                />
                 <div
                   className="font-spoqa font-bold text-center ml-[5px]"
                   onClick={() => setSaveOpen(true)}

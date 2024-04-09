@@ -18,6 +18,7 @@ import { CommentInfo } from "@/src/type/qa";
 
 // ** Utils Imports
 import dayjs from "dayjs";
+import Image from "next/image";
 
 interface PropsType {
   data: TicketInfo;
@@ -302,7 +303,7 @@ const TicketCardView = ({
           onClick={handleSaveTicketComment}
           className="w-[40px] h-[40px] bg-black text-white rounded-[10px] flex justify-center items-center"
         >
-          <img src="/images/plus.png" width={24} height={24} />
+          <Image src="/images/plus.png" width={24} height={24} alt="plus" />
         </div>
       </div>
       <div className="mt-9">

@@ -7,13 +7,21 @@ import AdminSearchBox from '@/src/components/SearchBox/AdminSearchBox'
 // ** Type Imports
 import { AdminInfo } from '@/src/type/admin'
 import { TableItemType } from '@/src/type/component'
+import CreateAdminModal from '@/src/components/Modal/CreateAdminModal'
 
 interface PropsType {
   data: AdminInfo[]
+  isOpen: Boolean
   formatDate: (date: string) => string
+  handleCreateAdmin: () => void
 }
 
-const AdminPageView = ({ data, formatDate }: PropsType) => {
+const AdminPageView = ({
+  data,
+  isOpen,
+  formatDate,
+  handleCreateAdmin,
+}: PropsType) => {
   const bodyData: TableItemType[][] = data.map((element, index) => [
     { name: (index + 1).toString(), size: '5%' },
     { name: element.role, size: '15%' },
@@ -24,28 +32,36 @@ const AdminPageView = ({ data, formatDate }: PropsType) => {
     { name: '2024-01-01 23:10:12', size: '15%' },
   ])
   return (
-    <div className="w-full px-4 mt-4">
-      <TitleBox title="고객센터 관리 / 관리자 목록" text="관리자 목록" />
-      <AdminSearchBox />
-      <div className="h-[730px] w-full bg-white rounded-[10px] py-4 px-8 mt-4">
-        <div className="flex items-center justify-between">
-          <h1 className="mb-8 font-bold">관리자 목록(30명)</h1>
-          <div>
-            <button className="w-[160px] h-[36px] bg-[#623AD6] rounded-[8px] text-white">
-              관리자 등록
-            </button>
+    <>
+      {isOpen ? (
+        <CreateAdminModal handleCreateAdmin={handleCreateAdmin} />
+      ) : null}
+      <div className="w-full px-4 mt-4">
+        <TitleBox title="고객센터 관리 / 관리자 목록" text="관리자 목록" />
+        <AdminSearchBox />
+        <div className="h-[730px] w-full bg-white rounded-[10px] py-4 px-8 mt-4">
+          <div className="flex items-center justify-between">
+            <h1 className="mb-8 font-bold">관리자 목록({data.length})</h1>
+            <div>
+              <button
+                onClick={handleCreateAdmin}
+                className="w-[160px] h-[36px] bg-[#623AD6] rounded-[8px] text-white"
+              >
+                관리자 등록
+              </button>
+            </div>
+          </div>
+          <CustomTable
+            headerData={headerData}
+            bodyData={bodyData}
+            disabledClick
+          />
+          <div className="flex justify-end w-full">
+            <TablePagination />
           </div>
         </div>
-        <CustomTable
-          headerData={headerData}
-          bodyData={bodyData}
-          disabledClick
-        />
-        <div className="flex justify-end w-full">
-          <TablePagination />
-        </div>
       </div>
-    </div>
+    </>
   )
 }
 

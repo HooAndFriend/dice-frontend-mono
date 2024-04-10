@@ -13,10 +13,11 @@ import { AuthState } from '@/src/app/index'
 import { GetAdminListResponse } from '@/src/type/admin'
 
 // ** React Imports
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const AdminPage = () => {
   const { accessToken } = useRecoilValue(AuthState)
+  const [isOpen, setIsOpen] = useState(false)
 
   const { data, error, isLoading, mutate } = useSWR(
     '/v1/admin',
@@ -36,6 +37,11 @@ const AdminPage = () => {
   if (isLoading) return null
   if (!data) return null
 
+  const handleCreateAdmin = () => {
+    setIsOpen(!isOpen)
+    console.log(isOpen)
+  }
+
   const formatDate = (date) => {
     const d = new Date(date)
     return `${d.getFullYear()}-${('0' + (d.getMonth() + 1)).slice(-2)}-${(
@@ -46,7 +52,14 @@ const AdminPage = () => {
     ).slice(-2)}`
   }
 
-  return <AdminPageView data={data.data.data} formatDate={formatDate} />
+  return (
+    <AdminPageView
+      data={data.data.data}
+      isOpen={isOpen}
+      handleCreateAdmin={handleCreateAdmin}
+      formatDate={formatDate}
+    />
+  )
 }
 
 export default AdminPage

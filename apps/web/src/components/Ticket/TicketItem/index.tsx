@@ -17,10 +17,26 @@ import TicketEpicButton from "../TicketEpicButton";
 interface PropsType {
   data: TicketInfo;
   isEpic: boolean;
+  word: string;
   handleClick: (id: number) => void;
 }
 
-const TicketItem = ({ handleClick, data, isEpic }: PropsType) => {
+const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
+  const highlightFirstMatch = (text: string, word: string) => {
+    const index = text.toLowerCase().indexOf(word.toLowerCase());
+    if (index === -1) return text;
+    const before = text.slice(0, index);
+    const match = text.slice(index, index + word.length);
+    const after = text.slice(index + word.length);
+    return (
+      <>
+        {before}
+        <mark>{match}</mark>
+        {after}
+      </>
+    );
+  };
+
   return (
     <div
       className="flex h-[60px] hover:bg-slate-400 rounded-lg"
@@ -30,7 +46,9 @@ const TicketItem = ({ handleClick, data, isEpic }: PropsType) => {
         <TicketSettingButton data={data} isText={false} />
       </div>
       <div className="flex w-[40%] items-center">
-        <h1 className="text-[16px]">{`${data.code} ${data.name}`}</h1>
+        <h1 className="text-[16px]">
+          {highlightFirstMatch(`${data.code} ${data.name}`, word)}
+        </h1>
       </div>
       {!isEpic && (
         <div className="flex w-[10%] items-center justify-center">

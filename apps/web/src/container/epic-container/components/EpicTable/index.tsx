@@ -15,11 +15,12 @@ import {
 
 interface PropsType {
   epicData: EpicInfo[];
+  word: string;
   handleClick: (id: number) => void;
   onDragEnd: ({ source, destination }: DropResult) => void;
 }
 
-const EpicTable = ({ epicData, onDragEnd, handleClick }: PropsType) => {
+const EpicTable = ({ epicData, word, onDragEnd, handleClick }: PropsType) => {
   return (
     <div className="mt-6 h-[700px] overflow-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8">
       <DragDropContext onDragEnd={onDragEnd}>
@@ -41,6 +42,7 @@ const EpicTable = ({ epicData, onDragEnd, handleClick }: PropsType) => {
                       <EpicItem
                         key={item.id}
                         item={item}
+                        word={word}
                         handleClick={handleClick}
                       />
                     </div>

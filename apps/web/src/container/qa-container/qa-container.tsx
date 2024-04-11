@@ -1,13 +1,16 @@
+// ** Next Imports
+import Image from "next/image";
+
 // ** Component Imports
-import CustomSelect from "@/src/components/Input/CustomSelect";
 import QaCard from "./components/QaCard";
 import CustomSearch from "@/src/components/Input/CustomSearch";
 import StatusItem from "./components/StatusItem";
 import QaItem from "./components/QaItem";
 import QaSaveModal from "@/src/components/Modal/QaSaveModal";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 // ** Type Imports
-import { IssueInfo, QaQuery } from "@/src/type/qa";
+import { IssueInfo } from "@/src/type/qa";
 import { EpicStatus } from "@/src/type/epic";
 
 // ** Utils Imports
@@ -17,8 +20,6 @@ import {
   Droppable,
   DropResult,
 } from "react-beautiful-dnd";
-import Image from "next/image";
-import CustomImage from "@/src/components/Image/CustomImage";
 
 interface PropsType {
   open: boolean;
@@ -26,11 +27,9 @@ interface PropsType {
   qaId: number;
   data: IssueInfo[];
   status: EpicStatus;
-  query: QaQuery;
-  count: number;
+  word: string;
   cancelButtonRef: any;
-  handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setWord: (value: string) => void;
   handleOpenQa: (id: number) => void;
   setStatus: (status: EpicStatus) => void;
   setOpen: (value: boolean) => void;
@@ -39,24 +38,15 @@ interface PropsType {
   onDragEnd: ({ source, destination }: DropResult) => void;
 }
 
-const SelectItem = [
-  { value: "title", label: "Title" },
-  { value: "qaId", label: "Qa Id" },
-  { value: "adminNickname", label: "Admin" },
-  { value: "workerNickname", label: "Worker" },
-];
-
 const QaContainerView = ({
   data,
   qaId,
   status,
   open,
-  query,
+  word,
+  setWord,
   setStatus,
   handleOpenQa,
-  handleSelect,
-  handleInput,
-  count,
   saveOpen,
   setSaveOpen,
   setOpen,
@@ -68,26 +58,20 @@ const QaContainerView = ({
     <div className="w-full bg-[#FAFAFB] p-5">
       <div className="font-mosk font-bold text-[32px]">QA</div>
       <div className="w-full h-[100px] shadow-md border-[#EBEBEC] rounded-[20px] bg-white mt-[30px] flex items-center">
-        <div className="font-spoqa text-base font-bold ml-[25px] mr-[33px] text-center">
-          Title
-        </div>
-        <CustomSelect
-          option="title"
-          item={SelectItem}
-          value={query.type}
-          name="type"
-          setValue={handleSelect}
-        />
         <div className="font-spoqa text-base font-bold ml-[50px] mr-[29px] text-center">
           Search
         </div>
-        <CustomSearch value={query.value} onChange={handleInput} name="value" />
+        <CustomSearch
+          value={word}
+          onChange={(e) => setWord(e.target.value)}
+          name="value"
+        />
       </div>
       <div className="flex justify-between w-full">
         <div className={`${open ? "w-1/2" : "w-full"} pr-5`}>
           <div className="h-[50px] w-full flex justify-between items-center mt-[43px] mb-[30px]">
             <div className="text-lg font-medium text-center font-spoqa">
-              Total {count}건
+              Total {data.length}건
             </div>
             <div className="flex items-center">
               <div className="flex items-center h-6 w-[406px] justify-between font-spoqa text-[#EBEBEC]">
@@ -159,6 +143,7 @@ const QaContainerView = ({
                             {...provided.dragHandleProps}
                           >
                             <QaItem
+                              word={word}
                               item={item}
                               key={item.id}
                               handleOpenQa={handleOpenQa}

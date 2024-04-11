@@ -11,10 +11,26 @@ import QaUserButton from "../QaUserButton";
 interface PropsType {
   item: IssueInfo;
   qaId: number;
+  word: string;
   handleOpenQa: (id: number) => void;
 }
 
-const QaItem = ({ item, handleOpenQa, qaId }: PropsType) => {
+const QaItem = ({ item, handleOpenQa, word, qaId }: PropsType) => {
+  const highlightFirstMatch = (text: string, word: string) => {
+    const index = text.toLowerCase().indexOf(word.toLowerCase());
+    if (index === -1) return text;
+    const before = text.slice(0, index);
+    const match = text.slice(index, index + word.length);
+    const after = text.slice(index + word.length);
+    return (
+      <>
+        {before}
+        <mark>{match}</mark>
+        {after}
+      </>
+    );
+  };
+
   return (
     <div
       className={`px-4 w-full ${
@@ -24,7 +40,7 @@ const QaItem = ({ item, handleOpenQa, qaId }: PropsType) => {
     >
       <div className="flex w-full h-[30px] font-spoqa font-medium text-lg">
         <h1 className="font-bold">[{item.code}]</h1>
-        <h1 className="ml-2 mr-4">{item.title}</h1>
+        <h1 className="ml-2 mr-4">{highlightFirstMatch(item.title, word)}</h1>
         {dayjs().diff(dayjs(item.createdDate), "hour") <= 24 && (
           <div className="bg-[#F13333] w-[67px] h-[30px] rounded-[10px] text-white flex items-center justify-center font-spoqa text-base text-center">
             NEW

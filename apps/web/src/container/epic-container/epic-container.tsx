@@ -37,6 +37,7 @@ const EpicContainerView = ({
       <div className={`${ticketId !== 0 && "flex"}`}>
         <div style={{ width: ticketId !== 0 ? "65%" : "100%" }}>
           <EpicTable
+            word={word}
             handleClick={setTicketId}
             epicData={epicData.filter((item) => item.name.includes(word))}
             onDragEnd={onDragEnd}

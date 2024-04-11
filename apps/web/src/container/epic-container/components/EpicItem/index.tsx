@@ -33,10 +33,11 @@ import { mutate } from "swr";
 
 interface PropsType {
   item: EpicInfo;
+  word: string;
   handleClick: (id: number) => void;
 }
 
-const EpicItem = ({ item, handleClick }: PropsType) => {
+const EpicItem = ({ item, handleClick, word }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
   const [enabled, setEnabled] = useState<boolean>(false);
 
@@ -140,6 +141,7 @@ const EpicItem = ({ item, handleClick }: PropsType) => {
                         >
                           <TicketItem
                             handleClick={handleClick}
+                            word={word}
                             data={item}
                             key={item.id}
                             isEpic

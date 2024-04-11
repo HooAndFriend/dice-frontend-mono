@@ -49,6 +49,7 @@ const TicketContainerView = ({
           {mode === "list" ? (
             <TicketTable
               handleClick={setTicketId}
+              word={word}
               data={data.filter((item) => item.name.includes(word))}
               onDragEnd={onDragEnd}
             />

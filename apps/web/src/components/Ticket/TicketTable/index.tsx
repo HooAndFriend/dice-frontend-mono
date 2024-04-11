@@ -16,11 +16,12 @@ import {
 
 interface PropsType {
   data: TicketInfo[];
+  word: string;
   handleClick?: (id: number) => void;
   onDragEnd: ({ source, destination }: DropResult) => void;
 }
 
-const TicketTable = ({ handleClick, data, onDragEnd }: PropsType) => {
+const TicketTable = ({ word, handleClick, data, onDragEnd }: PropsType) => {
   return (
     <div className="mt-6 h-[700px] overflow-auto w-full bg-white rounded-[20px] shadow-md p-4">
       <TicketHeader isEpic={false} />
@@ -42,6 +43,7 @@ const TicketTable = ({ handleClick, data, onDragEnd }: PropsType) => {
                     >
                       <TicketItem
                         handleClick={handleClick}
+                        word={word}
                         data={item}
                         key={item.id}
                         isEpic={false}

@@ -7,12 +7,17 @@ const CreateWorkspaceContainerView = ({}: PropsType) => {
   return (
     <div className="w-full h-screen bg-[#FAFAFB] flex items-center justify-center font-spoqa">
       <div className="w-[330px] h-[513px]">
-        <CustomImage
+        {/* <CustomImage
           className="m-auto"
           src="/images/workspaceLogo.png"
           alt="workspaceLogo"
           width={192}
           height={192}
+        /> */}
+        <img
+          className="m-auto w-[192px] h-[192px]"
+          src="/images/workspaceLogo.png"
+          alt="workspaceLogo"
         />
         <div className="mt-[40px]">
           <label className="font-medium">name</label>

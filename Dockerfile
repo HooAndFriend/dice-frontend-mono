@@ -13,7 +13,6 @@ RUN pnpm install
 
 FROM base AS build
 
-
 WORKDIR /app
 
 COPY . .
@@ -30,7 +29,7 @@ FROM nginx:alpine AS nginx
 
 
 COPY --from=build /app /usr/share/nginx/html
-COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
+COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 RUN apk add nodejs npm
 

@@ -2,4 +2,4 @@
 
 nginx -g "daemon off;" &
 
-cd /usr/share/nginx/html/apps/www && npm run start
+cd /usr/share/nginx/html/apps/web && npm run start

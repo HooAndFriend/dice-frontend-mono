@@ -86,7 +86,7 @@ const TicketCardView = ({
             }}
             className="h-full cursor-pointer min-w-1/2 text-[16px]"
           >
-            {data.name}
+            {data.name.length === 0 ? "-" : data.name}
           </h1>
         ) : (
           <div className="flex items-center w-full font-bold">

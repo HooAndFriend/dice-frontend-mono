@@ -89,7 +89,7 @@ const QaCardView = ({
               setMode({ ...mode, title: "edit" });
             }}
           >
-            {data.title}
+            {data.title.length === 0 ? "-" : data.title}
           </div>
           <QaStatusButton
             qaId={data.id}

@@ -9,9 +9,11 @@ import { useEffect, useMemo, useState } from "react";
 import TicketItem from "@/src/components/Ticket/TicketItem";
 import TicketHeader from "@/src/components/Ticket/TicketHeader";
 import TicketAddItem from "@/src/components/Ticket/TicketAddItem";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 // ** Type Imports
 import { EpicInfo } from "@/src/type/epic";
+import { CommonResponse } from "@/src/type/common";
 
 // ** Utils Imports
 import {
@@ -20,7 +22,14 @@ import {
   DropResult,
   Droppable,
 } from "react-beautiful-dnd";
-import CustomImage from "@/src/components/Image/CustomImage";
+
+// ** Context Imports
+import { useDialog } from "@/src/context/DialogContext";
+
+// ** Service Imports
+import { Patch } from "@/src/repository";
+import useSWRMutation from "swr/mutation";
+import { mutate } from "swr";
 
 interface PropsType {
   item: EpicInfo;
@@ -33,6 +42,8 @@ const EpicItem = ({ item, handleClick }: PropsType) => {
 
   const handleOpen = () => setOpen((c) => !c);
 
+  const { handleOpen: handleDialogOpen } = useDialog();
+
   const epicProgress = useMemo(() => {
     if (item.doneTicketCount === 0) {
       if (item.ticket.length === 0) return "0%";
@@ -42,9 +53,33 @@ const EpicItem = ({ item, handleClick }: PropsType) => {
     return `${(item.doneTicketCount / item.ticket.length) * 100}%`;
   }, [item]);
 
+  const updateOrder = useSWRMutation(
+    "/v1/ticket/order",
+    async (
+      url: string,
+      { arg }: { arg: { ticketId: number; targetTicketId: number } }
+    ) => await Patch<CommonResponse<void>>(url, arg),
+    {
+      onSuccess: ({ data }) => {
+        mutate("/v1/epic");
+      },
+      onError: (error) => {
+        handleDialogOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
   const onDragEnd = ({ source, destination }: DropResult) => {
-    console.log(">>> source", source);
-    console.log(">>> destination", destination);
+    updateOrder.trigger({
+      ticketId: source.index,
+      targetTicketId: destination.index,
+    });
   };
 
   useEffect(() => {

@@ -20,10 +20,12 @@ import { CommonResponse } from "@/src/type/common";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
+import { WorkspaceUser } from "@/src/type/workspace";
 
 const TicketConatiner = () => {
   const [word, setWord] = useState<string>("");
   const [ticketId, setTicketId] = useState<number>(0);
+  const [checkedList, setCheckedList] = useState<WorkspaceUser[]>([]);
   const [mode, setMode] = useState<"list" | "kanban">("list");
 
   const [enabled, setEnabled] = useState<boolean>(false);
@@ -84,9 +86,11 @@ const TicketConatiner = () => {
       ticketCount={data.data.count}
       word={word}
       mode={mode}
+      checkedList={checkedList}
       handleWord={(e) => setWord(e.target.value)}
       onDragEnd={onDragEnd}
       setMode={setMode}
+      setCheckedList={setCheckedList}
       setTicketId={setTicketId}
     />
   );

@@ -8,6 +8,7 @@ import TicketSearchCard from "../../components/Ticket/TicketSearchCard";
 
 // ** Type Imports
 import { TicketInfo } from "@/src/type/ticket";
+import { WorkspaceUser } from "@/src/type/workspace";
 
 // ** Utils Imports
 import { DropResult } from "react-beautiful-dnd";
@@ -20,6 +21,8 @@ interface PropsType {
   word: string;
   ticketCount: number;
   mode: "list" | "kanban";
+  checkedList: WorkspaceUser[];
+  setCheckedList: (list: WorkspaceUser[]) => void;
   setMode: (mode: "list" | "kanban") => void;
   setTicketId: (id: number) => void;
   handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -36,10 +39,17 @@ const TicketContainerView = ({
   handleWord,
   onDragEnd,
   setMode,
+  checkedList,
+  setCheckedList,
 }: PropsType) => {
   return (
     <div className="w-full">
-      <TicketSearchCard value={word} onChange={handleWord} />
+      <TicketSearchCard
+        value={word}
+        onChange={handleWord}
+        checkedList={checkedList}
+        setCheckedList={setCheckedList}
+      />
       <div className="flex items-center justify-between mt-8">
         <h1 className="pl-4 font-bold text-md">Total Ticket : {ticketCount}</h1>
         <TicketViewToggleButton mode={mode} setMode={setMode} />
@@ -50,7 +60,15 @@ const TicketContainerView = ({
             <TicketTable
               handleClick={setTicketId}
               word={word}
-              data={data.filter((item) => item.name.includes(word))}
+              data={data
+                .filter((item) => item.name.includes(word))
+                .filter((item) =>
+                  checkedList.length === 0
+                    ? true
+                    : checkedList.some(
+                        (_) => _.teamUser.user.id === item.worker?.id
+                      )
+                )}
               onDragEnd={onDragEnd}
             />
           ) : (

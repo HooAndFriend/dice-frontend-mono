@@ -1,12 +1,21 @@
 // ** Component Imports
 import CustomSearch from "@/src/components/Input/CustomSearch";
+import UserSelectBox from "../../UserSelectBox";
+import { WorkspaceUser } from "@/src/type/workspace";
 
 interface PropsType {
   value: string;
+  checkedList: WorkspaceUser[];
+  setCheckedList: (checkedList: WorkspaceUser[]) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const TicketSearchCard = ({ value, onChange }: PropsType) => {
+const TicketSearchCard = ({
+  value,
+  onChange,
+  checkedList,
+  setCheckedList,
+}: PropsType) => {
   return (
     <div>
       <div>
@@ -17,6 +26,12 @@ const TicketSearchCard = ({ value, onChange }: PropsType) => {
           Search
         </div>
         <CustomSearch value={value} onChange={onChange} />
+        <div className="ml-8">
+          <UserSelectBox
+            checkedList={checkedList}
+            setCheckedList={setCheckedList}
+          />
+        </div>
       </div>
     </div>
   );

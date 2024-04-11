@@ -22,7 +22,7 @@ interface PropsType {
 
 const TicketTable = ({ handleClick, data, onDragEnd }: PropsType) => {
   return (
-    <div className="mt-6 h-[530px] overflow-auto w-full bg-white rounded-[20px] shadow-md p-4">
+    <div className="mt-6 h-[700px] overflow-auto w-full bg-white rounded-[20px] shadow-md p-4">
       <TicketHeader isEpic={false} />
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">

@@ -20,7 +20,7 @@ interface PropsType {
 
 const EpicTable = ({ epicData, onDragEnd }: PropsType) => {
   return (
-    <div className="mt-6 h-[530px] overflow-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8">
+    <div className="mt-6 h-[700px] overflow-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8">
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided) => (

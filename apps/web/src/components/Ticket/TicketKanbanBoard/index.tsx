@@ -22,7 +22,7 @@ const StatusList: EpicStatus[] = [
 
 const TicketKanbanBoard = ({ data, handleClick }: PropsType) => {
   return (
-    <div className="h-[530px] overflow-scroll mt-6 p-4 flex w-full">
+    <div className="h-[700px] overflow-scroll mt-6 p-4 flex w-full">
       {StatusList.map((item) => (
         <div>
           <TicketKanbanItem

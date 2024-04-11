@@ -21,6 +21,7 @@ import QaContainerView from "./qa-container";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
+import { WorkspaceUser } from "@/src/type/workspace";
 
 const QaContainer = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -31,6 +32,8 @@ const QaContainer = () => {
   const [status, setStatus] = useState<EpicStatus>("");
 
   const [qaId, setQaId] = useState<number>(0);
+
+  const [checkedList, setCheckedList] = useState<WorkspaceUser[]>([]);
 
   const [enabled, setEnabled] = useState<boolean>(false);
 
@@ -92,17 +95,26 @@ const QaContainer = () => {
 
   if (isLoading || error || !enabled) return null;
 
+  console.log(data.data.data);
+
   return (
     <QaContainerView
       open={open}
       status={status}
       data={data.data.data
         .filter((item) => item.title.includes(word))
-        .filter((item) => (status === "" ? true : item.status === status))}
+        .filter((item) => (status === "" ? true : item.status === status))
+        .filter((item) =>
+          checkedList.length === 0
+            ? true
+            : checkedList.some((_) => _.teamUser.user.id === item.worker?.id)
+        )}
       qaId={qaId}
       word={word}
+      checkedList={checkedList}
       setWord={setWord}
       setStatus={setStatus}
+      setCheckedList={setCheckedList}
       handleOpenQa={handleOpenQa}
       cancelButtonRef={cancelButtonRef}
       saveOpen={saveOpen}

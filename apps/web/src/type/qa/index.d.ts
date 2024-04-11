@@ -33,11 +33,13 @@ export interface IssueInfo {
   status: EpicStatus;
   title: string;
   admin?: {
+    id: number;
     email: string;
     nickname: string;
     profile: string;
   };
   worker?: {
+    id: number;
     email: string;
     nickname: string;
     profile: string;

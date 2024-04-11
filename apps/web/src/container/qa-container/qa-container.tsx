@@ -20,6 +20,8 @@ import {
   Droppable,
   DropResult,
 } from "react-beautiful-dnd";
+import { WorkspaceUser } from "@/src/type/workspace";
+import UserSelectBox from "@/src/components/UserSelectBox";
 
 interface PropsType {
   open: boolean;
@@ -29,6 +31,8 @@ interface PropsType {
   status: EpicStatus;
   word: string;
   cancelButtonRef: any;
+  checkedList: WorkspaceUser[];
+  setCheckedList: (list: WorkspaceUser[]) => void;
   setWord: (value: string) => void;
   handleOpenQa: (id: number) => void;
   setStatus: (status: EpicStatus) => void;
@@ -44,6 +48,8 @@ const QaContainerView = ({
   status,
   open,
   word,
+  checkedList,
+  setCheckedList,
   setWord,
   setStatus,
   handleOpenQa,
@@ -66,6 +72,12 @@ const QaContainerView = ({
           onChange={(e) => setWord(e.target.value)}
           name="value"
         />
+        <div className="ml-8">
+          <UserSelectBox
+            checkedList={checkedList}
+            setCheckedList={setCheckedList}
+          />
+        </div>
       </div>
       <div className="flex justify-between w-full">
         <div className={`${open ? "w-1/2" : "w-full"} pr-5`}>

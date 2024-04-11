@@ -131,7 +131,7 @@ const TicketCardView = ({
         <div className="flex items-center">
           <h3 className="text-[16px]">
             <TicketUserButton
-              profile={data.admin ? data.admin.profile : "/dice.png"}
+              profile={data.admin ? data.admin.profile : "/images/dice.png"}
               ticketId={data.id}
               nickname={data.admin ? data.admin.nickname : "-"}
               userId={data.admin ? data.admin.id : 0}
@@ -147,7 +147,7 @@ const TicketCardView = ({
         </div>
         <div className="flex items-center">
           <TicketUserButton
-            profile={data.worker ? data.worker.profile : "/dice.png"}
+            profile={data.worker ? data.worker.profile : "/images/dice.png"}
             ticketId={data.id}
             nickname={data.worker ? data.worker.nickname : "-"}
             userId={data.worker ? data.worker.id : 0}

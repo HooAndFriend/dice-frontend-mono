@@ -136,7 +136,7 @@ const QaCardView = ({
             Admin
           </div>
           <QaUserButton
-            profile={data.admin ? data.admin.profile : "/dice.png"}
+            profile={data.admin ? data.admin.profile : "/images/dice.png"}
             nickname={data.admin ? data.admin.nickname : ""}
             email={data.admin ? data.admin.email : ""}
             width={20}
@@ -150,8 +150,8 @@ const QaCardView = ({
             Worker
           </div>
           <QaUserButton
-            profile={data.worker.profile}
-            nickname={data.worker.nickname}
+            profile={data.worker ? data.worker.profile : "/images/dice.png"}
+            nickname={data.worker ? data.worker.nickname : ""}
             email={data.worker ? data.worker.email : ""}
             width={20}
             height={20}

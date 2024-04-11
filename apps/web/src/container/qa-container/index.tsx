@@ -6,11 +6,12 @@ import { useEffect, useRef, useState } from "react";
 // ** Service Imports
 import { Get, Patch } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 
 // ** Type Imports
 import { GetIssueListResponse, QaQuery } from "@/src/type/qa";
 import { EpicStatus } from "@/src/type/epic";
+import { CommonResponse } from "@/src/type/common";
 
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
@@ -21,7 +22,6 @@ import QaContainerView from "./qa-container";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
-import { CommonResponse } from "@/src/type/common";
 
 const QaContainer = () => {
   const [open, setOpen] = useState<boolean>(false);

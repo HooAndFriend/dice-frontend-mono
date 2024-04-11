@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 import TicketContainerView from "./ticket-container";
 
 // ** Service Imports
-import { Get } from "@/src/repository";
+import { Get, Patch } from "@/src/repository";
+import useSWRMutation from "swr/mutation";
 import useSWR from "swr";
 
 // ** Utils Imports
@@ -15,6 +16,10 @@ import { DropResult } from "react-beautiful-dnd";
 
 // ** Type Imports
 import { GetTicketListResponse } from "@/src/type/ticket";
+import { CommonResponse } from "@/src/type/common";
+
+// ** Context Imports
+import { useDialog } from "@/src/context/DialogContext";
 
 const TicketConatiner = () => {
   const [word, setWord] = useState<string>("");
@@ -23,13 +28,42 @@ const TicketConatiner = () => {
 
   const [enabled, setEnabled] = useState<boolean>(false);
 
-  const { data, error, isLoading } = useSWR("/v1/ticket", async (url) =>
-    Get<GetTicketListResponse>(url)
+  const { handleOpen } = useDialog();
+
+  const {
+    data,
+    error,
+    isLoading,
+    mutate: handleTicketRefetch,
+  } = useSWR("/v1/ticket", async (url) => Get<GetTicketListResponse>(url));
+
+  const updateOrder = useSWRMutation(
+    "/v1/ticket/order",
+    async (
+      url: string,
+      { arg }: { arg: { ticketId: number; targetTicketId: number } }
+    ) => await Patch<CommonResponse<void>>(url, arg),
+    {
+      onSuccess: ({ data }) => {
+        handleTicketRefetch();
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
   );
 
   const onDragEnd = ({ source, destination }: DropResult) => {
-    console.log(">>> source", source);
-    console.log(">>> destination", destination);
+    updateOrder.trigger({
+      ticketId: source.index,
+      targetTicketId: destination.index,
+    });
   };
 
   useEffect(() => {

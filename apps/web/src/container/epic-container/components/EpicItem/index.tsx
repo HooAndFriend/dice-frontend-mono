@@ -24,9 +24,10 @@ import CustomImage from "@/src/components/Image/CustomImage";
 
 interface PropsType {
   item: EpicInfo;
+  handleClick: (id: number) => void;
 }
 
-const EpicItem = ({ item }: PropsType) => {
+const EpicItem = ({ item, handleClick }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
   const [enabled, setEnabled] = useState<boolean>(false);
 
@@ -103,7 +104,7 @@ const EpicItem = ({ item }: PropsType) => {
                           {...provided.dragHandleProps}
                         >
                           <TicketItem
-                            handleClick={() => {}}
+                            handleClick={handleClick}
                             data={item}
                             key={item.id}
                             isEpic

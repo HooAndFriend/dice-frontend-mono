@@ -17,6 +17,7 @@ import { GetEpicListResponse } from "@/src/type/epic";
 
 const EpicConatiner = () => {
   const [word, setWord] = useState<string>("");
+  const [ticketId, setTicketId] = useState<number>(0);
   const [enabled, setEnabled] = useState<boolean>(false);
 
   const { data, error, isLoading } = useSWR("/v1/epic", async (url) =>
@@ -44,6 +45,8 @@ const EpicConatiner = () => {
       epicData={data.data.data}
       epicCount={data.data.count}
       word={word}
+      ticketId={ticketId}
+      setTicketId={setTicketId}
       handleWord={(e) => setWord(e.target.value)}
       onDragEnd={onDragEnd}
     />

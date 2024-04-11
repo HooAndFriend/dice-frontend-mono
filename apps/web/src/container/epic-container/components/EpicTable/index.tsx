@@ -15,10 +15,11 @@ import {
 
 interface PropsType {
   epicData: EpicInfo[];
+  handleClick: (id: number) => void;
   onDragEnd: ({ source, destination }: DropResult) => void;
 }
 
-const EpicTable = ({ epicData, onDragEnd }: PropsType) => {
+const EpicTable = ({ epicData, onDragEnd, handleClick }: PropsType) => {
   return (
     <div className="mt-6 h-[700px] overflow-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8">
       <DragDropContext onDragEnd={onDragEnd}>
@@ -37,7 +38,11 @@ const EpicTable = ({ epicData, onDragEnd }: PropsType) => {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <EpicItem key={item.id} item={item} />
+                      <EpicItem
+                        key={item.id}
+                        item={item}
+                        handleClick={handleClick}
+                      />
                     </div>
                   )}
                 </Draggable>

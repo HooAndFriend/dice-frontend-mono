@@ -4,8 +4,9 @@
 import { useEffect, useRef, useState } from "react";
 
 // ** Service Imports
-import { Get } from "@/src/repository";
-import useSWR from "swr";
+import { Get, Patch } from "@/src/repository";
+import useSWRMutation from "swr/mutation";
+import useSWR, { mutate } from "swr";
 
 // ** Type Imports
 import { GetIssueListResponse, QaQuery } from "@/src/type/qa";
@@ -17,6 +18,10 @@ import { DropResult } from "react-beautiful-dnd";
 
 // ** Component Imports
 import QaContainerView from "./qa-container";
+
+// ** Context Imports
+import { useDialog } from "@/src/context/DialogContext";
+import { CommonResponse } from "@/src/type/common";
 
 const QaContainer = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -30,6 +35,8 @@ const QaContainer = () => {
 
   const cancelButtonRef = useRef();
 
+  const { handleOpen } = useDialog();
+
   const {
     data: query,
     handleInput,
@@ -41,7 +48,12 @@ const QaContainer = () => {
     setOpen(true);
   };
 
-  const { data, error, isLoading, mutate } = useSWR("/v1/qa", async (url) => {
+  const {
+    data,
+    error,
+    isLoading,
+    mutate: handleRqRefetch,
+  } = useSWR("/v1/qa", async (url) => {
     const params = {};
 
     if (status !== "") {
@@ -57,13 +69,37 @@ const QaContainer = () => {
     });
   });
 
+  const updateOrder = useSWRMutation(
+    "/v1/qa/order",
+    async (
+      url: string,
+      { arg }: { arg: { qaId: number; targetQaId: number } }
+    ) => await Patch<CommonResponse<void>>(url, arg),
+    {
+      onSuccess: ({ data }) => {
+        handleRqRefetch();
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
   const onDragEnd = ({ source, destination }: DropResult) => {
-    console.log(">>> source", source);
-    console.log(">>> destination", destination);
+    updateOrder.trigger({
+      qaId: source.index,
+      targetQaId: destination.index,
+    });
   };
 
   useEffect(() => {
-    mutate();
+    handleRqRefetch();
   }, [query, status]);
 
   useEffect(() => {
@@ -92,7 +128,7 @@ const QaContainer = () => {
       cancelButtonRef={cancelButtonRef}
       saveOpen={saveOpen}
       setSaveOpen={setSaveOpen}
-      refetch={mutate}
+      refetch={handleRqRefetch}
       setOpen={setOpen}
       onDragEnd={onDragEnd}
     />

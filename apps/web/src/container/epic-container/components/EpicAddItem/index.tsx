@@ -17,6 +17,7 @@ import { CommonResponse } from "@/src/type/common";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 const EpicAddItem = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -59,7 +60,7 @@ const EpicAddItem = () => {
             onChange={(e) => setName(e.target.value)}
           />
           <div className="ml-4 cursor-pointer" onClick={saveEpic.trigger}>
-            <Image
+            <CustomImage
               src={"/svg/add-black-box.svg"}
               alt="black-box"
               width={36}
@@ -69,7 +70,12 @@ const EpicAddItem = () => {
         </>
       ) : (
         <div onClick={handleOpen} className="flex items-center w-full h-full">
-          <Image src="/svg/add-box.svg" width={36} height={36} alt="add-box" />
+          <CustomImage
+            src="/svg/add-box.svg"
+            width={36}
+            height={36}
+            alt="add-box"
+          />
           <h1 className="text-[#DDDDDD] text-[16px] font-bold ml-4">
             Add Epic
           </h1>

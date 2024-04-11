@@ -20,6 +20,7 @@ import { CommentInfo } from "@/src/type/qa";
 // ** Utils Imports
 import dayjs from "dayjs";
 import Image from "next/image";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 interface PropsType {
   data: CommentInfo;
@@ -85,7 +86,7 @@ const QaComment = ({ data, commentRefetch }: PropsType) => {
     <div className="w-full mb-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <Image
+          <CustomImage
             className="rounded-full border border-lightGray mr-[10px]"
             alt="profile"
             src={data.user.profile}

@@ -16,6 +16,7 @@ import { QaCardEditMode, RoleType } from "@/src/type/common";
 // ** Utils Imports
 import dayjs from "dayjs";
 import Image from "next/image";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 interface PropsType {
   data: IssueInfo;
@@ -328,7 +329,12 @@ const QaCardView = ({
           onClick={handleAddComment}
           className="w-[40px] h-[40px] bg-black text-white rounded-[10px] flex justify-center items-center"
         >
-          <Image src="/images/plus.png" width={24} height={24} alt="plus" />
+          <CustomImage
+            src="/images/plus.png"
+            width={24}
+            height={24}
+            alt="plus"
+          />
         </div>
       </div>
       <div className="mt-9">

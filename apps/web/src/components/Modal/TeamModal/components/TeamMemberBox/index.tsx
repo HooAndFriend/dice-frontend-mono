@@ -11,6 +11,7 @@ import { CommonResponse, RoleType } from "@/src/type/common";
 import { mutate } from "swr";
 import { Delete, Patch } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 interface PropsType {
   id: number;
@@ -76,7 +77,7 @@ const TeamMemberBox = ({
   return (
     <div className="mb-[21px] w-[full] h-20 border-[#EBEBEC] border shadow-md rounded-[15px] flex items-center justify-between">
       <div className="flex">
-        <Image
+        <CustomImage
           src={profile}
           alt="Sample Image"
           width={45}
@@ -107,7 +108,7 @@ const TeamMemberBox = ({
           </option>
         </select>
         {userRole === "ADMIN" && (
-          <Image
+          <CustomImage
             src="/svg/boldX.svg"
             alt="delete"
             width={24}

@@ -17,6 +17,7 @@ import { GetTeamUserListResponse } from "@/src/type/team";
 
 // ** Utils Imports
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 interface PropsType {
   handleOpen: () => void;
@@ -59,7 +60,7 @@ const TeamMemberContent = ({ handleOpen }: PropsType) => {
           onClick={handleOpen}
           className="flex items-center justify-center font-bold font-spoqa font-base"
         >
-          <Image
+          <CustomImage
             alt="addMember"
             className="mr-[10px]"
             src="/svg/addMember.svg"

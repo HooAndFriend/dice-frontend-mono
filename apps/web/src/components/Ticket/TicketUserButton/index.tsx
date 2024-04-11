@@ -16,6 +16,7 @@ import { GetSearchWorkspaceUserListResponse } from "@/src/type/workspace";
 import useSWR, { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
 import { Get, Put } from "@/src/repository";
+import CustomImage from "../../Image/CustomImage";
 
 interface PropsType {
   profile: string;
@@ -112,7 +113,7 @@ const TicketUserButton = ({
           handleOpen();
         }}
       >
-        <Image
+        <CustomImage
           className="rounded-full border border-[#EBEBEC]"
           src={profile ? profile : "/images/dice.png"}
           alt="profile"
@@ -149,7 +150,7 @@ const TicketUserButton = ({
                     item.teamUser.user.id === userId ? "#F4F4FA" : "white",
                 }}
               >
-                <Image
+                <CustomImage
                   className="rounded-full border border-[#EBEBEC] mr-[10px]"
                   alt="profile"
                   src={item.teamUser.user.profile}

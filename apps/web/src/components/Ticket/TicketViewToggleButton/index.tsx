@@ -1,5 +1,6 @@
 // ** Next Imports
 import Image from "next/image";
+import CustomImage from "../../Image/CustomImage";
 
 interface PropsType {
   mode: "kanban" | "list";
@@ -16,7 +17,7 @@ const TicketViewToggleButton = ({ mode, setMode }: PropsType) => {
           backgroundColor: mode === "kanban" ? "black" : "white",
         }}
       >
-        <Image
+        <CustomImage
           src={
             mode === "kanban"
               ? "/svg/ticket/board-list-white.svg"
@@ -34,7 +35,7 @@ const TicketViewToggleButton = ({ mode, setMode }: PropsType) => {
           backgroundColor: mode === "list" ? "black" : "white",
         }}
       >
-        <Image
+        <CustomImage
           src={
             mode === "list"
               ? "/svg/ticket/ticket-list-white.svg"

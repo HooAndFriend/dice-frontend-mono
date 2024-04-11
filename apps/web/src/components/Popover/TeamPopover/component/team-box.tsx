@@ -1,4 +1,5 @@
 // ** Next Imports
+import CustomImage from "@/src/components/Image/CustomImage";
 import Image from "next/image";
 
 interface PropsType {
@@ -12,7 +13,7 @@ interface PropsType {
 const TeamBox = ({ profile, name, onClick, teamUuid, uuid }: PropsType) => {
   return (
     <div className="flex items-center mt-5" onClick={onClick}>
-      <Image
+      <CustomImage
         className="border rounded-[10px] mr-3"
         src={profile}
         alt="profile"

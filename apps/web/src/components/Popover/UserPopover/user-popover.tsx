@@ -4,6 +4,7 @@ import Image from "next/image";
 // ** Component Imports
 import ProfileBox from "../../ProfileBox";
 import UserModal from "@/src/components/Modal/UserModal";
+import CustomImage from "../../Image/CustomImage";
 
 interface PropsType {
   open: boolean;
@@ -32,7 +33,7 @@ const UserPopoverView = ({
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold">DICE</h3>
             <div className="flex items-center" onClick={handleModalOpen}>
-              <Image
+              <CustomImage
                 alt="setting"
                 src="/images/settings.png"
                 width={18}
@@ -44,7 +45,7 @@ const UserPopoverView = ({
           </div>
           <hr className="mt-3" />
           <div className="flex items-center mt-5">
-            <Image
+            <CustomImage
               className="border rounded-[10px] mr-3"
               src="/images/profile.jpg"
               alt="profile"
@@ -54,7 +55,7 @@ const UserPopoverView = ({
             <h4>HooAndFriend</h4>
           </div>
           <div className="flex items-center mt-5">
-            <Image
+            <CustomImage
               className="border rounded-[10px] mr-3"
               src="/images/profile.jpg"
               alt="profile"
@@ -64,7 +65,7 @@ const UserPopoverView = ({
             <h4>HooAndFriend</h4>
           </div>
           <div className="flex items-center mt-5">
-            <Image
+            <CustomImage
               className="border rounded-[10px] mr-3"
               src="/images/plus.png"
               alt="profile"

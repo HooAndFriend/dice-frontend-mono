@@ -13,6 +13,7 @@ import { useRecoilValue } from "recoil";
 
 // ** Component Imports
 import TeamPopover from "@/src/components/Popover/TeamPopover";
+import CustomImage from "../../Image/CustomImage";
 
 const DashboardHeader = () => {
   const [name, setName] = useState<string>("");
@@ -25,7 +26,7 @@ const DashboardHeader = () => {
   return (
     <div className="h-[64px] border-b-2 border-[#EBEBEC] flex items-center justify-between">
       <Link href="/dashboard">
-        <Image
+        <CustomImage
           src="/images/logo.png"
           width={110}
           height={30}

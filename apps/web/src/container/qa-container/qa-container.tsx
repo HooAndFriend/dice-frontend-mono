@@ -18,6 +18,7 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 import Image from "next/image";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 interface PropsType {
   open: boolean;
@@ -125,7 +126,7 @@ const QaContainerView = ({
                 // onClick={handleCreateIssueOpen}
                 className="w-[120px] h-[50px] rounded-[30px] flex items-center bg-white border border-[#EBEBEC] justify-center ml-8"
               >
-                <Image
+                <CustomImage
                   src="/images/Add_To_Queue.png"
                   width={24}
                   height={24}

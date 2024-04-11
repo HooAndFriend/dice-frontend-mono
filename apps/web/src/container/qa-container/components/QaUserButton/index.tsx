@@ -16,6 +16,7 @@ import { GetSearchWorkspaceUserListResponse } from "@/src/type/workspace";
 import useSWR, { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
 import { Get, Put } from "@/src/repository";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 interface PropsType {
   profile: string;
@@ -148,7 +149,7 @@ const QaUserButton = ({
                     item.teamUser.user.email === email ? "#F4F4FA" : "white",
                 }}
               >
-                <Image
+                <CustomImage
                   className="rounded-full border border-[#EBEBEC] mr-[10px]"
                   alt="profile"
                   src={item.teamUser.user.profile}

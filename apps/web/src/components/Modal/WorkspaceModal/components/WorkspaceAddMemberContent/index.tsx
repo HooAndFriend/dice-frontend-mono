@@ -16,6 +16,7 @@ import {
 } from "@/src/type/workspace";
 import { CommonResponse, RoleType } from "@/src/type/common";
 import Image from "next/image";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 interface PropsType {
   open: boolean;
@@ -90,7 +91,7 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
             <div className="h-full border border-[#EBEBEC] rounded-[10px] px-4 flex items-center">
               {inviteUserList.map((item) => (
                 <div className="p-2 bg-[#F4F4FA] h-[29px] rounded-lg flex items-center mr-[10px]">
-                  <Image
+                  <CustomImage
                     className="mx-2 rounded-full"
                     alt="profile"
                     src={item.user.profile}
@@ -100,7 +101,7 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
                   <div className="h-[29px] font-spoqa text-xs flex items-center">
                     {item.user.nickname}
                   </div>
-                  <Image
+                  <CustomImage
                     alt="boldX"
                     className="ml-2 cursor-pointer"
                     src="/svg/boldX.svg"

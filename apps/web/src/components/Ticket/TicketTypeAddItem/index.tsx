@@ -11,6 +11,7 @@ import { Post } from "@/src/repository";
 
 // ** Type Imports
 import { CreateTicketSettingResponse } from "@/src/type/ticket";
+import CustomImage from "../../Image/CustomImage";
 
 const TicketTypeAddItem = () => {
   const addTicketSetting = useSWRMutation(
@@ -36,7 +37,12 @@ const TicketTypeAddItem = () => {
   return (
     <div className="w-full h-[75px] flex items-center">
       <div onClick={handleAdd} className="flex items-center w-full h-full">
-        <Image src="/svg/add-box.svg" width={36} height={36} alt="add-box" />
+        <CustomImage
+          src="/svg/add-box.svg"
+          width={36}
+          height={36}
+          alt="add-box"
+        />
         <h1 className="text-[#DDDDDD] text-[16px] font-bold ml-4">Add Type</h1>
       </div>
     </div>

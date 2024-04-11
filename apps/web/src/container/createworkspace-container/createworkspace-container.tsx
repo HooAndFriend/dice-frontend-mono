@@ -1,3 +1,4 @@
+import CustomImage from "@/src/components/Image/CustomImage";
 import Image from "next/image";
 
 interface PropsType {}
@@ -6,7 +7,7 @@ const CreateWorkspaceContainerView = ({}: PropsType) => {
   return (
     <div className="w-full h-screen bg-[#FAFAFB] flex items-center justify-center font-spoqa">
       <div className="w-[330px] h-[513px]">
-        <Image
+        <CustomImage
           className="m-auto"
           src="/images/workspaceLogo.png"
           alt="workspaceLogo"

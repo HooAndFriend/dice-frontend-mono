@@ -19,6 +19,7 @@ import { Post } from "@/src/repository";
 // ** Type Imports
 import { CommonResponse } from "@/src/type/common";
 import { mutate } from "swr";
+import CustomImage from "../../Image/CustomImage";
 
 interface PropsType {
   epicId?: number;
@@ -95,7 +96,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
               epicId ? saveTicketWithEpic.trigger : saveSimpleTicket.trigger
             }
           >
-            <Image
+            <CustomImage
               onClick={handleOpen}
               src={"/svg/add-black-box.svg"}
               alt="black-box"
@@ -106,7 +107,12 @@ const TicketAddItem = ({ epicId }: PropsType) => {
         </>
       ) : (
         <div onClick={handleOpen} className="flex items-center w-full h-full">
-          <Image src="/svg/add-box.svg" width={36} height={36} alt="add-box" />
+          <CustomImage
+            src="/svg/add-box.svg"
+            width={36}
+            height={36}
+            alt="add-box"
+          />
           <h1 className="text-[#DDDDDD] text-[16px] font-bold ml-4">
             Add Ticket
           </h1>

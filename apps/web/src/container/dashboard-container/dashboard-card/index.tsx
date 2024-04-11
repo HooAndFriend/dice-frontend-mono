@@ -1,4 +1,5 @@
 // ** Next Imports
+import CustomImage from "@/src/components/Image/CustomImage";
 import Image from "next/image";
 
 interface PropsType {
@@ -29,7 +30,7 @@ const DashboardCard = ({
       <div
         className={`w-[60px] h-[60px] bg-[${color}] rounded-full flex justify-center items-center`}
       >
-        <Image src={icon} alt="title" width={30} height={30} />
+        <CustomImage src={icon} alt="title" width={30} height={30} />
       </div>
       <div className="mt-6">
         <h1 className="text-[32px] font-bold">{text}</h1>
@@ -44,7 +45,7 @@ const DashboardCard = ({
           </div>
         ) : (
           <div className="flex">
-            <Image
+            <CustomImage
               src={`${
                 value >= 0 ? "/svg/dashboard-up.svg" : "/svg/dashboard-down.svg"
               }`}

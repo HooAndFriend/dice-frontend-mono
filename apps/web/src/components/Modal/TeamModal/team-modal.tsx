@@ -12,6 +12,7 @@ import SettingContent from "./components/TeamSettingContent";
 import MemberContent from "./components/TeamMemberContent";
 import TeamWorkSpaceContent from "./components/TeamWorkspaceContent";
 import AddMemberContent from "./components/TeamAddMemberContent";
+import CustomImage from "../../Image/CustomImage";
 
 interface PropsType {
   open: boolean;
@@ -74,7 +75,7 @@ const TeamModalView = ({
                         Team Setting
                       </div>
                       <div>
-                        <Image
+                        <CustomImage
                           alt="X"
                           src="/svg/XButton.svg"
                           width={32}
@@ -102,7 +103,7 @@ const TeamModalView = ({
                                 : "bg-main text-white"
                             }`}
                           >
-                            <Image
+                            <CustomImage
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 0
@@ -123,7 +124,7 @@ const TeamModalView = ({
                                 : "bg-main text-white"
                             }`}
                           >
-                            <Image
+                            <CustomImage
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 1 ? "/svg/team.svg" : "/svg/teamW.svg"
@@ -142,7 +143,7 @@ const TeamModalView = ({
                                 : "bg-main text-white"
                             }`}
                           >
-                            <Image
+                            <CustomImage
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 2

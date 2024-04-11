@@ -20,6 +20,7 @@ import {
   DropResult,
   Droppable,
 } from "react-beautiful-dnd";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 interface PropsType {
   item: EpicInfo;
@@ -73,7 +74,7 @@ const EpicItem = ({ item }: PropsType) => {
           ({item.doneTicketCount}/{item.ticket.length})
         </h4>
         <div className="ml-auto">
-          <Image
+          <CustomImage
             src={open ? "/svg/arrow-up.svg" : "/svg/arrow-down.svg"}
             alt="arrow"
             width={24}

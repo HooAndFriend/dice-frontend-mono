@@ -18,57 +18,74 @@ const CreateAdminModalView = ({ handleCreateAdmin }: PropsType) => {
             height={24}
           />
         </div>
-        <div className="w-full flex-row ">
-          <div className="flex w-[559px] h-[57px] m-auto">
-            <p className="mr-4 font-semibold text-sm">
+        <div className="w-full flex-row">
+          <div className="flex w-[559px] h-[57px] m-auto mt-5">
+            <p className="w-[76px] h-5 mt-[10px] mr-4 font-semibold text-sm">
               이름
+              <span className="text-sm font-semibold text-[#EA5C5D]">*</span>
+            </p>
+            <div className="h-full">
+              <input
+                type="text"
+                placeholder="이름 입력"
+                className="w-[479px] h-[40px] bg-[#F8F8F8] border-solid border-1 border-[#EFEFEF] rounded-[8px]"
+              />
+              <p className="text-[#EA5C5D] text-[11px] mt-2">
+                이름을 입력해주세요.
+              </p>
+            </div>
+          </div>
+          <div className="flex w-[559px] h-[57px] m-auto mt-6">
+            <p className="w-[76px] h-5 mt-[10px] mr-4 font-semibold text-sm">
+              이메일
               <span className="text-sm font-semibold text-[#EA5C5D]">*</span>
             </p>
             <div>
               <input
                 type="text"
-                placeholder="이름"
+                placeholder="이메일 입력"
                 className="w-[479px] h-[40px] bg-[#F8F8F8] border-solid border-1 border-[#EFEFEF] rounded-[8px]"
               />
-              <p className="text-[#EA5C5D] text-[11px]">이름을 입력해주세요.</p>
+              <p className="text-[#EA5C5D] text-[11px] mt-2">
+                이메일을 입력해주세요.
+              </p>
             </div>
           </div>
-          <div className="flex w-[559px] h-[57px] m-auto">
-            <p className="mr-4 font-semibold text-sm">
-              이름
+          <div className="flex w-[559px] h-[57px] m-auto  mt-6">
+            <p className="w-[76px] h-5 mt-[10px] mr-4 font-semibold text-sm">
+              연락처
               <span className="text-sm font-semibold text-[#EA5C5D]">*</span>
             </p>
             <div>
               <input
                 type="text"
-                placeholder="이름"
+                placeholder="연락처 입력"
                 className="w-[479px] h-[40px] bg-[#F8F8F8] border-solid border-1 border-[#EFEFEF] rounded-[8px]"
               />
-              <p className="text-[#EA5C5D] text-[11px]">이름을 입력해주세요.</p>
+              <p className="text-[#EA5C5D] text-[11px] mt-2">
+                연락처를 입력해주세요.
+              </p>
             </div>
           </div>
-          <div className="flex w-[559px] h-[57px] m-auto">
-            <p className="mr-4 font-semibold text-sm">
-              이름
+          <div className="flex w-[559px] h-[57px] m-auto mt-6">
+            <p className="w-[76px] h-5 mt-[10px] mr-4 font-semibold text-sm">
+              권한
               <span className="text-sm font-semibold text-[#EA5C5D]">*</span>
             </p>
             <div>
-              <input
-                type="text"
-                placeholder="이름"
-                className="w-[479px] h-[40px] bg-[#F8F8F8] border-solid border-1 border-[#EFEFEF] rounded-[8px]"
-              />
-              <p className="text-[#EA5C5D] text-[11px]">이름을 입력해주세요.</p>
+              <select className="w-[479px] h-[40px] bg-[#F8F8F8] border-solid border-1 border-[#EFEFEF] rounded-[8px]">
+                <option>--권한선택--</option>
+                <option>MASTER</option>
+              </select>
             </div>
           </div>
-          <div className="flex w-[559px] h-[57px] m-auto">
-            <p className="mr-4 font-semibold text-sm">
-              이름
-              <span className="text-sm font-semibold text-[#EA5C5D]">*</span>
-            </p>
-            <div>
-              <CustomSelect option="--권한--" />
-              <p className="text-[#EA5C5D] text-[11px]">이름을 입력해주세요.</p>
+          <hr />
+          <div className="flex justify-between px-5 pt-5">
+            <div className="w-[58px] h-10 bg-[#EFEFEF] text-[#696374] rounded-lg flex justify-center items-center font-semibold">
+              취소
+            </div>
+            <div className="w-[58px] h-10 bg-[#623AD6] text-white rounded-lg  flex justify-center items-center font-semibold">
+              등록
             </div>
           </div>
         </div>

@@ -1,5 +1,3 @@
-import CustomSelect from '../../CustomInput/CustomSelect'
-
 interface PropsType {
   handleCreateAdmin: () => void
 }
@@ -81,9 +79,12 @@ const CreateAdminModalView = ({ handleCreateAdmin }: PropsType) => {
           </div>
           <hr />
           <div className="flex justify-between px-5 pt-5">
-            <div className="w-[58px] h-10 bg-[#EFEFEF] text-[#696374] rounded-lg flex justify-center items-center font-semibold">
+            <button
+              type="reset"
+              className="w-[58px] h-10 bg-[#EFEFEF] text-[#696374] rounded-lg flex justify-center items-center font-semibold"
+            >
               취소
-            </div>
+            </button>
             <div className="w-[58px] h-10 bg-[#623AD6] text-white rounded-lg  flex justify-center items-center font-semibold">
               등록
             </div>

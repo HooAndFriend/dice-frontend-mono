@@ -5,6 +5,7 @@ export interface GetAdminListResponse extends Response {
 
 export interface AdminInfo {
   createdDate: string
+  modifiedDate: string
   id: number
   email: string
   role: string

@@ -24,12 +24,11 @@ const AdminPageView = ({
 }: PropsType) => {
   const bodyData: TableItemType[][] = data.map((element, index) => [
     { name: (index + 1).toString(), size: '5%' },
-    { name: element.role, size: '15%' },
-    { name: element.nickname, size: '15%' },
+    { name: element.role, size: '20%' },
+    { name: element.nickname, size: '20%' },
     { name: element.email, size: '20%' },
-    { name: element.phone, size: '15%' },
-    { name: formatDate(element.createdDate), size: '15%' },
-    { name: '2024-01-01 23:10:12', size: '15%' },
+    { name: element.phone, size: '20%' },
+    { name: formatDate(element.modifiedDate), size: '15%' },
   ])
   return (
     <>
@@ -69,12 +68,11 @@ export default AdminPageView
 
 const headerData = [
   { name: '번호', size: '5%' },
-  { name: '권한', size: '15%' },
-  { name: '이름', size: '15%' },
+  { name: '권한', size: '20%' },
+  { name: '이름', size: '20%' },
   { name: '이메일', size: '20%' },
-  { name: '연락처', size: '15%' },
-  { name: '등록일', size: '15%' },
-  { name: '수정일', size: '15%' },
+  { name: '연락처', size: '20%' },
+  { name: '수정일시', size: '15%' },
 ]
 
 const bodyData = [

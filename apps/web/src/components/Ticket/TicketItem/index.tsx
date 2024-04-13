@@ -46,9 +46,8 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
         <TicketSettingButton data={data} isText={false} />
       </div>
       <div className="flex w-[40%] items-center">
-        <h1 className="text-[16px]">
-          {highlightFirstMatch(`${data.code} ${data.name}`, word)}
-        </h1>
+        <h1 className="text-[16px] font-bold mr-4">{data.code}</h1>
+        <h1 className="text-[16px]">{highlightFirstMatch(data.name, word)}</h1>
       </div>
       {!isEpic && (
         <div className="flex w-[10%] items-center justify-center">

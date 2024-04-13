@@ -98,7 +98,8 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
     <div>
       <div className="w-full h-[75px] flex items-center">
         <div className="w-[24px] h-[24px] bg-green-300 rounded-lg"></div>
-        <h1 className="ml-8 w-[300px]">{item.code + " " + item.name}</h1>
+        <h1 className="ml-8 font-bold text-[16px] mr-4">{item.code}</h1>
+        <h1 className="w-[300px] text-[16px]">{item.name}</h1>
         <div className="ml-8 w-[370px] bg-gray-200 rounded-full h-[24px] dark:bg-gray-700 flex items-center">
           <div
             className={`bg-blue-600 h-[24px] rounded-lg`}

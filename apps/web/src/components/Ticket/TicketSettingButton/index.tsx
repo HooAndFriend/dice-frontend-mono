@@ -8,6 +8,7 @@ import { Put } from "@/src/repository";
 import useSWR, { mutate } from "swr";
 import { CommonResponse } from "@/src/type/common";
 import { useDialog } from "@/src/context/DialogContext";
+import Tooltip from "../../Tooltip";
 
 interface PropsType {
   data: TicketInfo;
@@ -89,14 +90,16 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
           handleOpen();
         }}
       >
-        {data.ticketSetting ? (
-          <div
-            className="w-[24px] h-[24px] rounded-lg"
-            style={{ backgroundColor: data.ticketSetting.color }}
-          />
-        ) : (
-          <div className="w-[24px] h-[24px] bg-green-300 rounded-lg" />
-        )}
+        <Tooltip text={data.ticketSetting ? data.ticketSetting.type : ""}>
+          {data.ticketSetting ? (
+            <div
+              className="w-[24px] h-[24px] rounded-lg"
+              style={{ backgroundColor: data.ticketSetting.color }}
+            />
+          ) : (
+            <div className="w-[24px] h-[24px] bg-green-300 rounded-lg" />
+          )}
+        </Tooltip>
         {isText && (
           <h3 className="text-[16px] ml-4">
             {data.ticketSetting ? data.ticketSetting.type : "-"}

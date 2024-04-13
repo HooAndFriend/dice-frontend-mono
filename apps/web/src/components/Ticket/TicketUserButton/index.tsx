@@ -17,6 +17,7 @@ import useSWR, { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
 import { Get, Put } from "@/src/repository";
 import CustomImage from "../../Image/CustomImage";
+import Tooltip from "../../Tooltip";
 
 interface PropsType {
   profile: string;
@@ -113,13 +114,16 @@ const TicketUserButton = ({
           handleOpen();
         }}
       >
-        <CustomImage
-          className="rounded-full border border-[#EBEBEC]"
-          src={profile ? profile : "/images/dice.png"}
-          alt="profile"
-          width={30}
-          height={30}
-        />
+        <Tooltip text={nickname}>
+          <CustomImage
+            className="rounded-full border border-[#EBEBEC]"
+            src={profile ? profile : "/images/dice.png"}
+            alt="profile"
+            width={30}
+            height={30}
+          />
+        </Tooltip>
+
         {isNickname && (
           <div className="ml-2 font-spoqa font-[16px]">{nickname}</div>
         )}

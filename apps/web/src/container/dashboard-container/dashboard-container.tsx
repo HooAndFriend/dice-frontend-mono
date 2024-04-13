@@ -77,7 +77,7 @@ const DashboardContainerView = ({
             // color="#FAEBFF"
             color="#F4F4FA"
             icon="/svg/dashboard-task-2.svg"
-            title="Compoleted Tasks"
+            title="Completed Tasks"
             text={`${doneTaskData.count}건`}
             value={
               doneTaskData.count === 0 || doneTaskData.yesterdayCount === 0

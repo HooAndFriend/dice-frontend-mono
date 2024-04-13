@@ -25,6 +25,7 @@ import { WorkspaceState } from "@/src/app";
 import useSWRMutation from "swr/mutation";
 import { CommonResponse } from "@/src/type/common";
 import { useDialog } from "@/src/context/DialogContext";
+import TicketCardSkeletonView from "./TicketCardSkeleton";
 
 interface PropsType {
   ticketId: number;
@@ -180,9 +181,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     }
   };
 
-  if (error | commentError) return;
-
-  if (isLoading || commentLoading) return;
+  if (isLoading || commentLoading) return <TicketCardSkeletonView />;
 
   return (
     <TicketCardView

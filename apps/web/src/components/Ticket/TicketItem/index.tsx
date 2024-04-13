@@ -65,7 +65,7 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
         />
       </div>
       <div className="flex w-[20%] items-center justify-center">
-        <p>{dayjs(data.dueDate).format("YYYY-MM-DD")}</p>
+        <p>{data.dueDate ? dayjs(data.dueDate).format("YYYY-MM-DD") : "-"}</p>
         {/* <TicketDatePicker
           ticketId={data.id}
           value={dayjs(data.dueDate).format("YYYY-MM-DD")}

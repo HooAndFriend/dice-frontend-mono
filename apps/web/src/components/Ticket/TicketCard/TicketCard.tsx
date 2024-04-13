@@ -171,22 +171,10 @@ const TicketCardView = ({
       </div>
       <div className="flex items-center mt-[20px]">
         <h1 className="w-[110px] text-[16px]">DueDate</h1>
-        {mode.dueDate === "view" ? (
-          <h3
-            onDoubleClick={() => {
-              if (role === "VIEWER") return;
-              setMode({ ...mode, dueDate: "edit" });
-            }}
-            className="cursor-pointer text-[16px]"
-          >
-            {data.dueDate ? dayjs(data.modifiedDate).format("YYYY-MM-DD") : "-"}
-          </h3>
-        ) : (
-          <TicketDatePicker
-            ticketId={data.id}
-            value={dayjs(data.dueDate).format("YYYY-MM-DD")}
-          />
-        )}
+        <TicketDatePicker
+          ticketId={data.id}
+          value={dayjs(data.dueDate).format("YYYY-MM-DD")}
+        />
       </div>
       <div className="flex items-center mt-[20px]">
         <h1 className="w-[110px] text-[16px]">ComDate</h1>

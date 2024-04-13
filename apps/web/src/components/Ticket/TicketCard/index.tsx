@@ -40,7 +40,6 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
   const [mode, setMode] = useState<TicketEditMode>({
     content: "view",
     storypoint: "view",
-    dueDate: "view",
     name: "view",
   });
 

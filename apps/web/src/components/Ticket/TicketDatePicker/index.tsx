@@ -8,6 +8,8 @@ import { CommonResponse } from "@/src/type/common";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
+import { useState } from "react";
+import CustomImage from "../../Image/CustomImage";
 
 interface PropsType {
   value: string;
@@ -15,7 +17,10 @@ interface PropsType {
 }
 
 const TicketDatePicker = ({ value, ticketId }: PropsType) => {
-  const { handleOpen } = useDialog();
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleOpen = () => setOpen((c) => !c);
+  const { handleOpen: handleDialogOpen } = useDialog();
 
   const updateTicket = useSWRMutation(
     "v1/ticket/dueDate",
@@ -26,9 +31,10 @@ const TicketDatePicker = ({ value, ticketId }: PropsType) => {
         mutate("/v1/epic");
         mutate("/v1/ticket");
         mutate(`/v1/ticket/detail/${ticketId}`);
+        handleOpen();
       },
       onError: (error) => {
-        handleOpen({
+        handleDialogOpen({
           title: "Error",
           message: error.response.data.message,
           logLevel: "warn",
@@ -45,15 +51,27 @@ const TicketDatePicker = ({ value, ticketId }: PropsType) => {
 
   return (
     <div>
-      {value ? (
+      {open ? (
         <input
           type="date"
           value={value}
           onChange={handleOnChange}
-          className="h-[20px] border-none bg-none"
+          className="h-[40px] w-[240px] border-none bg-none"
         />
       ) : (
-        "-"
+        <div
+          className="flex items-center px-[16px] h-[40px] bg-[#F2F4F6] rounded-[5px] w-[240px] justify-between"
+          onDoubleClick={handleOpen}
+        >
+          <p>{value ? value : "-"}</p>
+          <CustomImage
+            width={24}
+            height={24}
+            src="/svg/calendar.svg"
+            className=""
+            alt="calendar"
+          />
+        </div>
       )}
     </div>
   );

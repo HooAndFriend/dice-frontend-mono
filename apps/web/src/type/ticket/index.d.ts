@@ -68,7 +68,6 @@ export interface SettingListInfo {
 export interface TicketEditMode {
   content: "view" | "edit";
   storypoint: "view" | "edit";
-  dueDate: "view" | "edit";
   name: "view" | "edit";
 }
 

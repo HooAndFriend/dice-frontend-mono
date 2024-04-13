@@ -173,7 +173,7 @@ const TicketCardView = ({
         <h1 className="w-[110px] text-[16px]">DueDate</h1>
         <TicketDatePicker
           ticketId={data.id}
-          value={dayjs(data.dueDate).format("YYYY-MM-DD")}
+          value={data.dueDate ? dayjs(data.dueDate).format("YYYY-MM-DD") : ""}
         />
       </div>
       <div className="flex items-center mt-[20px]">

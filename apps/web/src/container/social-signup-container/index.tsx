@@ -100,6 +100,7 @@ const SocialSignupContainer = () => {
           name: data.team.name,
           profile: data.team.profile,
           uuid: data.team.uuid,
+          isPersonal: true,
           role: "ADMIN",
         });
 
@@ -122,7 +123,7 @@ const SocialSignupContainer = () => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {

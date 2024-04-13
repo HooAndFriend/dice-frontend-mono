@@ -1,7 +1,7 @@
 import { atom } from 'recoil'
 import { persistAtom } from '../util'
 
-interface AuthStateProps {
+export interface AuthStateProps {
   accessToken: string
   refreshToken: string
 }

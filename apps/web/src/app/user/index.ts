@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { atom, useRecoilState } from "recoil";
 import { persistStorageAtom } from "../util";
 
-interface UserStateType {
+export interface UserStateType {
   email: string;
   nickname: string;
   profile: string;

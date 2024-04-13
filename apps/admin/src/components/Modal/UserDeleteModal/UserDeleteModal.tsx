@@ -4,13 +4,23 @@ import { Fragment } from 'react'
 // ** ui Imports
 import { Dialog, Transition } from '@headlessui/react'
 
+// ** Type Imports
+import { DeleteUserInfo } from '@/src/type/user-delete'
+import { formatDate } from '@/src/pages/user-page'
+
 interface PropsType {
   open: boolean
+  userData: DeleteUserInfo
   cancelButtonRef: any
   setOpen: (open: boolean) => void
 }
 
-const UserDeleteModalView = ({ open, cancelButtonRef, setOpen }: PropsType) => {
+const UserDeleteModalView = ({
+  open,
+  userData,
+  cancelButtonRef,
+  setOpen,
+}: PropsType) => {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -55,23 +65,27 @@ const UserDeleteModalView = ({ open, cancelButtonRef, setOpen }: PropsType) => {
                   <div className="w-full p-4">
                     <div className="w-full h-[20px] flex items-center">
                       <h1 className="w-[100px] px-4 font-bold">닉네임</h1>
-                      <h1 className="text-[#696374]">babting</h1>
+                      <h1 className="text-[#696374]">{userData.nickname}</h1>
                     </div>
                     <div className="w-full h-[20px] flex items-center mt-[20px]">
                       <h1 className="w-[100px] px-4 font-bold">이메일</h1>
-                      <h1 className="text-[#696374]">dlrkdls997@naver.com</h1>
+                      <h1 className="text-[#696374]">{userData.email}</h1>
                     </div>
                     <div className="w-full h-[20px] flex items-center mt-[20px]">
                       <h1 className="w-[100px] px-4 font-bold">가입구분</h1>
-                      <h1 className="text-[#696374]">Google</h1>
+                      <h1 className="text-[#696374]">{userData.type}</h1>
                     </div>
                     <div className="w-full h-[20px] flex items-center mt-[20px]">
                       <h1 className="w-[100px] px-4 font-bold">가입일</h1>
-                      <h1 className="text-[#696374]">2024-02-02 14:35:35</h1>
+                      <h1 className="text-[#696374]">
+                        {formatDate(userData.createdDate)}
+                      </h1>
                     </div>
                     <div className="w-full h-[20px] flex items-center mt-[20px]">
                       <h1 className="w-[100px] px-4 font-bold">탈퇴일</h1>
-                      <h1 className="text-[#696374]">2024-02-02 14:35:35</h1>
+                      <h1 className="text-[#696374]">
+                        {formatDate(userData.deletedDate)}
+                      </h1>
                     </div>
                     <div className="w-full h-[20px] flex items-center mt-[20px]">
                       <h1 className="w-[100px] px-4 font-bold">탈퇴사유</h1>

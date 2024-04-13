@@ -1,4 +1,5 @@
 import { CommonResponse, RoleType } from "../common";
+import { WorksapceFunction } from "../workspace";
 
 export interface GetUserTeamListResponse extends CommonResponse {
   count: number;
@@ -21,7 +22,14 @@ export interface GetTeamUserListResponse extends CommonResponse {
 export interface TeamUserInfo {
   id: number;
   role: RoleType;
-  team: { name: string; profile: string; id: number; uuid: string };
+  team: {
+    name: string;
+    profile: string;
+    id: number;
+    uuid: string;
+    isPersonal: boolean;
+    workspace: TeamWorkspaceInfo[];
+  };
 }
 
 export interface TeamInfo {
@@ -30,6 +38,15 @@ export interface TeamInfo {
   profile: string;
   uuid: string;
   description: string;
+}
+
+export interface TeamWorkspaceInfo {
+  id: number;
+  name: string;
+  profile: string;
+  uuid: string;
+  workspaceUser: { id: number; role: RoleType }[];
+  workspaceFunction: WorksapceFunction[];
 }
 
 export interface TeamUserInfo {

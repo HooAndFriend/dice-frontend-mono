@@ -2,7 +2,7 @@ import { atom } from 'recoil'
 import { persistAtom } from '../util'
 import { RoleType } from '@/src/type/common'
 
-interface AdminStateProps {
+export interface AdminStateProps {
   email: string
   nickname: string
   profile: string

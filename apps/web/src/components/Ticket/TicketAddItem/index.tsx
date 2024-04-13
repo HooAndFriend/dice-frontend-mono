@@ -1,17 +1,125 @@
 "use client";
 
+// ** Next Imports
+import Image from "next/image";
+
 // ** React Imports
 import { useState } from "react";
 
 // ** Component Imports
-import TicketAddItemView from "./TicketAddItem";
+import CustomInput from "@/src/components/Input/CustomInput";
 
-const TicketAddItem = () => {
+// ** Context Imports
+import { useDialog } from "@/src/context/DialogContext";
+
+// ** Service Imports
+import useSWRMutation from "swr/mutation";
+import { Post } from "@/src/repository";
+
+// ** Type Imports
+import { CommonResponse } from "@/src/type/common";
+import { mutate } from "swr";
+import CustomImage from "../../Image/CustomImage";
+
+interface PropsType {
+  epicId?: number;
+}
+
+const TicketAddItem = ({ epicId }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [name, setName] = useState<string>("");
 
   const handleOpen = () => setOpen((c) => !c);
 
-  return <TicketAddItemView open={open} handleOpen={handleOpen} />;
+  const { handleOpen: handleModalOpen } = useDialog();
+
+  const saveSimpleTicket = useSWRMutation(
+    "/v1/ticket/simple",
+    async (url: string) => await Post<CommonResponse<void>>(url, { name }),
+    {
+      onSuccess: () => {
+        setOpen(false);
+        setName("");
+        mutate("/v1/ticket");
+        mutate("/v1/epic");
+      },
+      onError: (error) => {
+        handleModalOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
+  const saveTicketWithEpic = useSWRMutation(
+    "/v1/ticket",
+    async (url: string) =>
+      await Post<CommonResponse<void>>(url, { name, epicId }),
+    {
+      onSuccess: () => {
+        setOpen(false);
+        setName("");
+        mutate("/v1/ticket");
+        mutate("/v1/epic");
+      },
+      onError: (error) => {
+        handleModalOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
+  return (
+    <div className="pl-8 w-full h-[75px] flex items-center">
+      {open ? (
+        <>
+          <div className="mr-8 w-[24px] h-[24px] bg-green-300 rounded-lg" />
+          <CustomInput
+            placeholder="Enter Epic Name"
+            borderRadius="8px"
+            height="36px"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <div
+            className="ml-4"
+            onClick={
+              epicId ? saveTicketWithEpic.trigger : saveSimpleTicket.trigger
+            }
+          >
+            <CustomImage
+              onClick={handleOpen}
+              src={"/svg/add-black-box.svg"}
+              alt="black-box"
+              width={36}
+              height={36}
+            />
+          </div>
+        </>
+      ) : (
+        <div onClick={handleOpen} className="flex items-center w-full h-full">
+          <CustomImage
+            src="/svg/add-box.svg"
+            width={36}
+            height={36}
+            alt="add-box"
+          />
+          <h1 className="text-[#DDDDDD] text-[16px] font-bold ml-4">
+            Add Ticket
+          </h1>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default TicketAddItem;

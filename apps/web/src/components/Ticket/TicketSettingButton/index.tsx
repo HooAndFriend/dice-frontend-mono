@@ -1,0 +1,129 @@
+// ** Type Imports
+import { Get, Patch } from "@/src/repository";
+import { GetTicketSettingListResponse, TicketInfo } from "@/src/type/ticket";
+import { useEffect, useRef, useState } from "react";
+// ** Service Imports
+import useSWRMutation from "swr/mutation";
+import { Put } from "@/src/repository";
+import useSWR, { mutate } from "swr";
+import { CommonResponse } from "@/src/type/common";
+import { useDialog } from "@/src/context/DialogContext";
+
+interface PropsType {
+  data: TicketInfo;
+  isText: boolean;
+}
+
+const TicketSettingButton = ({ data, isText }: PropsType) => {
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  const [open, setOpen] = useState<boolean>(false);
+
+  const { handleOpen: handleModalOpen } = useDialog();
+
+  const handleOpen = () => {
+    setOpen((c) => !c);
+  };
+
+  const {
+    data: settingData,
+    error,
+    isLoading,
+  } = useSWR("/v1/ticket/setting", async (url) =>
+    Get<GetTicketSettingListResponse>(url)
+  );
+
+  const updateTicketSetting = useSWRMutation(
+    "/v1/ticket/ticket-setting",
+    async (url: string, { arg }: { arg: number }) =>
+      await Patch<CommonResponse<void>>(url, {
+        ticketId: data.id,
+        settingId: arg,
+      }),
+    {
+      onSuccess: () => {
+        setOpen(false);
+        mutate("/v1/epic");
+        mutate("/v1/ticket");
+        mutate(`/v1/ticket/detail/${data.id}`);
+      },
+      onError: (error) => {
+        handleModalOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
+  useEffect(() => {
+    const clickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        handleOpen();
+      }
+    };
+
+    document.addEventListener("mousedown", clickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", clickOutside);
+    };
+  }, []);
+
+  if (isLoading) return;
+
+  if (error) return;
+
+  return (
+    <div className="relative z-4">
+      <div
+        className="flex items-center cursor-pointer"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleOpen();
+        }}
+      >
+        {data.ticketSetting ? (
+          <div
+            className="w-[24px] h-[24px] rounded-lg"
+            style={{ backgroundColor: data.ticketSetting.color }}
+          />
+        ) : (
+          <div className="w-[24px] h-[24px] bg-green-300 rounded-lg" />
+        )}
+        {isText && (
+          <h3 className="text-[16px] ml-4">
+            {data.ticketSetting ? data.ticketSetting.type : "-"}
+          </h3>
+        )}
+      </div>
+      {open && (
+        <div
+          className="absolute p-[8px] bg-slate-50 w-[184px] h-[184px] top-[40px] left-0 rounded-[10px] overflow-y-auto z-10 overflow-x-hidden"
+          ref={dropdownRef}
+        >
+          {settingData.data.data.map((item) => (
+            <div
+              className="w-[168px] h-[32px] hover:bg-[#F4F4FA] rounded-[8px] p-[8px] flex items-center cursor-pointer"
+              onClick={() => updateTicketSetting.trigger(item.id)}
+            >
+              <div
+                className="w-[20px] h-[20px] rounded-[6px]"
+                style={{ backgroundColor: item.color }}
+              />
+              <h3 className="text-[14px] ml-[12px]">{item.type}</h3>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default TicketSettingButton;

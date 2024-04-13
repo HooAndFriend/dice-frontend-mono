@@ -1,46 +1,73 @@
 "use client";
+// ** React Imports
+import { useState, KeyboardEvent, useEffect } from "react";
 
 // ** Component Imports
 import QaCardView from "./QaCard";
 
 // ** Service Imports
 import useSWR, { mutate } from "swr";
-import { Delete, Get, Post } from "@/src/repository";
+import { Delete, Get, Patch, Post } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Recoil Imports
-import { AuthState, UserState, WorkspaceState } from "@/src/app";
+import { WorkspaceState } from "@/src/app";
 import { useRecoilValue } from "recoil";
 
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
+import { CommonResponse, QaCardEditMode } from "@/src/type/common";
 import {
-  AddCommentParams,
   AddCommentResponse,
   GetCommentListResponse,
-  GetIssueListResponse,
   GetIssueResponse,
+  IssueInfo,
 } from "@/src/type/qa";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
-import { useState } from "react";
 
 interface PropsType {
   qaId: number;
   handleClose: () => void;
+  refetch: () => void;
 }
 
-const QaCard = ({ qaId, handleClose }: PropsType) => {
+const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
   const [comment, setComment] = useState<string>("");
-  const [mode, setMode] = useState<"view" | "edit">("view");
+  const [currentArg, setCurrentArg] = useState<
+    "title" | "asIs" | "toBe" | "memo"
+  >("title");
+  const [mode, setMode] = useState<QaCardEditMode>({
+    asIs: "view",
+    toBe: "view",
+    memo: "view",
+    title: "view",
+  });
 
-  const { uuid, role } = useRecoilValue(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
-  const { email } = useRecoilValue(UserState);
+  const {
+    data: issueData,
+    handleInput,
+    setData: setIssueData,
+  } = useInput<IssueInfo>({
+    id: 0,
+    code: "",
+    status: "",
+    title: "",
+    admin: { id: 0, email: "", nickname: "", profile: "" },
+    worker: { id: 0, email: "", nickname: "", profile: "" },
+    qaFile: [],
+    asIs: "",
+    toBe: "",
+    memo: "",
+    createdDate: "",
+    modifiedDate: "",
+    dueDate: null,
+  });
+
+  const { role } = useRecoilValue(WorkspaceState);
 
   const { handleOpen } = useDialog();
 
@@ -48,9 +75,7 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     setComment(e.target.value);
   };
 
-  const handleEdit = () => setMode("edit");
-
-  const handleAdd = () => {
+  const handleAddComment = () => {
     if (comment === "") {
       handleOpen({
         title: "Error",
@@ -66,23 +91,15 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     addComment.trigger();
   };
 
-  //댓글 등록
+  //** 댓글 등록
   const addComment = useSWRMutation(
     "/v1/qa/comment",
     async (url: string) =>
-      await Post<AddCommentResponse>(
-        url,
-        { content: comment, qaId },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      ),
+      await Post<AddCommentResponse>(url, { content: comment, qaId }),
     {
       onSuccess: () => {
         setComment("");
-        mutate("/v1/qa/comment");
+        commentRefetch();
       },
       onError: (error) => {
         handleOpen({
@@ -96,18 +113,14 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     }
   );
 
+  // ** Qa 삭제
   const deleteQa = useSWRMutation(
     `/v1/qa/${qaId}`,
-    async (url: string) =>
-      await Delete<CommonResponse<void>>(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "workspace-code": `${uuid}`,
-        },
-      }),
+    async (url: string) => await Delete<CommonResponse<void>>(url),
     {
       onSuccess: () => {
         handleClose();
+        handleRefetch();
       },
       onError: (error) => {
         handleOpen({
@@ -121,52 +134,113 @@ const QaCard = ({ qaId, handleClose }: PropsType) => {
     }
   );
 
-  const {
-    data: issueData,
-    error: issueError,
-    isLoading: issueLoading,
-  } = useSWR(`/v1/qa/${qaId}`, async (url) =>
-    Get<GetIssueResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Workspace-code": `${uuid}`,
+  // ** QA File 삭제
+  const deleteQaFile = useSWRMutation(
+    "/v1/qa/file/",
+    async (url: string, { arg }: { arg: number }) =>
+      await Delete<CommonResponse<void>>(url + arg),
+    {
+      onSuccess: () => {
+        refetch();
       },
-    })
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
   );
 
-  //댓글 확인
+  // ** QA 수정
+  const updateQa = useSWRMutation(
+    "v1/qa",
+    async (
+      url: string,
+      { arg }: { arg: "title" | "asIs" | "toBe" | "memo" }
+    ) => {
+      setCurrentArg(arg);
+      return await Patch<CommonResponse<void>>(url, {
+        qaId,
+        value: issueData[arg],
+        type: arg,
+      });
+    },
+    {
+      onSuccess: () => {
+        setMode((c) => ({ ...c, [currentArg]: "view" }));
+        mutate("/v1/qa");
+        mutate(`/v1/qa/${qaId}`);
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
+  // ** QA 정보 조회
+  const { isLoading: issueLoading, mutate: refetch } = useSWR(
+    `/v1/qa/${qaId}`,
+    async (url) => Get<GetIssueResponse>(url),
+    {
+      onSuccess: (res) => {
+        setIssueData(res.data);
+      },
+    }
+  );
+
+  // ** 댓글 리스트 조회
   const {
     data: commentData,
     error: commentError,
     isLoading: commentLoading,
+    mutate: commentRefetch,
   } = useSWR(`/v1/qa/comment/${qaId}`, async (url) =>
-    Get<GetCommentListResponse>(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Workspace-code": `${uuid}`,
-      },
-    })
+    Get<GetCommentListResponse>(url)
   );
 
-  if (issueLoading && commentLoading) return null;
+  const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      addComment.trigger();
+    }
+  };
 
-  if (!commentData) {
-    return null;
-  }
+  useEffect(() => {
+    setMode({ asIs: "view", toBe: "view", memo: "view", title: "view" });
+  }, [qaId]);
+
+  if (issueLoading && commentLoading) return;
+
+  if (!commentData) return;
 
   return (
     <QaCardView
-      data={issueData.data}
+      data={issueData}
       commentData={commentData.data.data}
       comment={comment}
       role={role}
       mode={mode}
-      email={email}
       handleComment={handleComment}
-      handleAdd={handleAdd}
+      handleAddComment={handleAddComment}
       deleteQa={deleteQa.trigger}
       handleClose={handleClose}
-      handleEdit={handleEdit}
+      handleInput={handleInput}
+      handleCommentEnter={handleCommentEnter}
+      handleDeleteQaFile={deleteQaFile.trigger}
+      refetch={refetch}
+      commentRefetch={commentRefetch}
+      setMode={setMode}
+      setIssueData={setIssueData}
+      handleUpdateQa={updateQa.trigger}
     />
   );
 };

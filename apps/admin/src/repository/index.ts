@@ -1,5 +1,6 @@
 import { CommonResponse } from '@/src/type/common'
 import axios, { AxiosRequestConfig } from 'axios'
+import { AuthStateProps } from '../app/auth'
 
 export const client = axios.create({
   baseURL: import.meta.env.VITE_SERVER_URL + '/api',
@@ -54,6 +55,19 @@ export const Delete = async <T>(
 }
 
 client.interceptors.request.use((config) => {
+  const val = localStorage.getItem('recoil-persist')
+  const recoilValue: {
+    authState: AuthStateProps
+  } = val
+    ? JSON.parse(val)
+    : { authState: { accessToken: '', refreshToken: '' } }
+
+  if (recoilValue) {
+    config.headers[
+      'Authorization'
+    ] = `Bearer ${recoilValue.authState.accessToken}`
+  }
+
   return config
 })
 

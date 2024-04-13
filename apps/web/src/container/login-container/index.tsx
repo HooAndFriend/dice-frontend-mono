@@ -70,6 +70,7 @@ const LoginContainer = () => {
           name: data.team.name,
           profile: data.team.profile,
           uuid: data.team.uuid,
+          isPersonal: true,
           role: "ADMIN",
         });
 
@@ -92,7 +93,7 @@ const LoginContainer = () => {
           type: "alert",
         });
       },
-    }
+    },
   );
 
   const socialLogin = useSWRMutation(
@@ -116,6 +117,7 @@ const LoginContainer = () => {
           name: data.team.name,
           profile: data.team.profile,
           uuid: data.team.uuid,
+          isPersonal: true,
           role: "ADMIN",
         });
 
@@ -137,7 +139,7 @@ const LoginContainer = () => {
           const uuid = searchParams.get("uuid");
           if (uuid) {
             router.push(
-              `/social-signup?token=${arg.token}&type=${arg.type}&uuid=${uuid}`
+              `/social-signup?token=${arg.token}&type=${arg.type}&uuid=${uuid}`,
             );
 
             return;
@@ -148,7 +150,7 @@ const LoginContainer = () => {
 
         return;
       },
-    }
+    },
   );
 
   const handleSignup = () => {

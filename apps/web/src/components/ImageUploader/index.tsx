@@ -15,6 +15,7 @@ interface PropsType {
   borderColor?: string;
   borderWidth?: string;
   borderRadius?: string | number;
+  mode?: "write" | "edit";
   setPath: (e: string) => void;
 }
 export const ImageUploader = ({
@@ -26,6 +27,7 @@ export const ImageUploader = ({
   height,
   borderColor,
   borderWidth,
+  mode,
 }: PropsType) => {
   const inputRef = useRef<HTMLInputElement | any>(null);
 
@@ -59,7 +61,6 @@ export const ImageUploader = ({
       };
       s3.upload(params, (err, data) => {
         if (err) {
-          console.error(3, err);
           return;
         }
         setPath(data.Location);
@@ -85,6 +86,7 @@ export const ImageUploader = ({
       height={height}
       borderColor={borderColor}
       borderWidth={borderWidth}
+      mode={mode}
     />
   );
 };

@@ -13,3 +13,17 @@ export interface AdminInfo {
   nickname: string
   profile: string
 }
+
+export interface CreateAdminParams {
+  email: string
+  phone: string
+  password: string
+  role: string
+  nickname: string
+  profile: string
+}
+
+export interface CreateAdminResponse extends Response {
+  statusCode: number
+  message: string
+}

@@ -1,8 +1,18 @@
+import { ChangeEvent } from 'react'
+
 interface PropsType {
   handleCreateAdmin: () => void
+  handleInput: (e: ChangeEvent<HTMLInputElement>) => void
+  handleSelect: (e: ChangeEvent<HTMLSelectElement>) => void
+  addAdmin: () => void
 }
 
-const CreateAdminModalView = ({ handleCreateAdmin }: PropsType) => {
+const CreateAdminModalView = ({
+  handleCreateAdmin,
+  handleInput,
+  addAdmin,
+  handleSelect,
+}: PropsType) => {
   return (
     <div className="w-full h-screen bg-[#00000080] absolute flex justify-center items-center top-0">
       <div className="w-[600px] h-[461px] bg-white rounded-xl">
@@ -26,6 +36,8 @@ const CreateAdminModalView = ({ handleCreateAdmin }: PropsType) => {
               <input
                 type="text"
                 placeholder="이름 입력"
+                name="nickname"
+                onChange={handleInput}
                 className="w-[479px] h-[40px] bg-[#F8F8F8] border-solid border-1 border-[#EFEFEF] rounded-[8px]"
               />
               <p className="text-[#EA5C5D] text-[11px] mt-2">
@@ -41,7 +53,9 @@ const CreateAdminModalView = ({ handleCreateAdmin }: PropsType) => {
             <div>
               <input
                 type="text"
+                onChange={handleInput}
                 placeholder="이메일 입력"
+                name="email"
                 className="w-[479px] h-[40px] bg-[#F8F8F8] border-solid border-1 border-[#EFEFEF] rounded-[8px]"
               />
               <p className="text-[#EA5C5D] text-[11px] mt-2">
@@ -56,8 +70,10 @@ const CreateAdminModalView = ({ handleCreateAdmin }: PropsType) => {
             </p>
             <div>
               <input
-                type="text"
+                type="number"
+                onChange={handleInput}
                 placeholder="연락처 입력"
+                name="phone"
                 className="w-[479px] h-[40px] bg-[#F8F8F8] border-solid border-1 border-[#EFEFEF] rounded-[8px]"
               />
               <p className="text-[#EA5C5D] text-[11px] mt-2">
@@ -71,9 +87,17 @@ const CreateAdminModalView = ({ handleCreateAdmin }: PropsType) => {
               <span className="text-sm font-semibold text-[#EA5C5D]">*</span>
             </p>
             <div>
-              <select className="w-[479px] h-[40px] bg-[#F8F8F8] border-solid border-1 border-[#EFEFEF] rounded-[8px]">
-                <option>--권한선택--</option>
-                <option>MASTER</option>
+              <select
+                onChange={handleSelect}
+                name="role"
+                className="w-[479px] h-[40px] bg-[#F8F8F8] border-solid border-1 border-[#EFEFEF] rounded-[8px]"
+              >
+                <option value="" disabled selected>
+                  --권한선택--
+                </option>
+                <option value="시스템 관리자">시스템 관리자</option>
+                <option value="서비스 관리자">서비스 관리자</option>
+                <option value="일반 관리자">일반 관리자</option>
               </select>
             </div>
           </div>
@@ -85,7 +109,10 @@ const CreateAdminModalView = ({ handleCreateAdmin }: PropsType) => {
             >
               취소
             </button>
-            <div className="w-[58px] h-10 bg-[#623AD6] text-white rounded-lg  flex justify-center items-center font-semibold">
+            <div
+              onClick={addAdmin}
+              className="w-[58px] h-10 bg-[#623AD6] text-white rounded-lg  flex justify-center items-center font-semibold"
+            >
               등록
             </div>
           </div>

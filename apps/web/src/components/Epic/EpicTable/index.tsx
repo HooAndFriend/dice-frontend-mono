@@ -3,7 +3,7 @@ import EpicItem from "../EpicItem";
 import EpicAddItem from "../EpicAddItem";
 
 // ** Type Imports
-import { EpicInfo } from "@/src/type/epic";
+import { EpicInfo, SelectContent } from "@/src/type/epic";
 
 // ** Utils Imports
 import {
@@ -16,7 +16,7 @@ import {
 interface PropsType {
   epicData: EpicInfo[];
   word: string;
-  handleClick: (id: number) => void;
+  handleClick: (value: SelectContent) => void;
   onDragEnd: ({ source, destination }: DropResult) => void;
 }
 

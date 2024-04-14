@@ -14,7 +14,7 @@ import useSWRMutation from "swr/mutation";
 import { DropResult } from "react-beautiful-dnd";
 
 // ** Type Imports
-import { GetEpicListResponse } from "@/src/type/epic";
+import { GetEpicListResponse, SelectContent } from "@/src/type/epic";
 import { CommonResponse } from "@/src/type/common";
 
 // ** Context Imports
@@ -22,7 +22,10 @@ import { useDialog } from "@/src/context/DialogContext";
 
 const EpicConatiner = () => {
   const [word, setWord] = useState<string>("");
-  const [ticketId, setTicketId] = useState<number>(0);
+  const [selectContent, setSelectContent] = useState<SelectContent>({
+    id: 0,
+    type: "EPIC",
+  });
   const [enabled, setEnabled] = useState<boolean>(false);
 
   const { handleOpen } = useDialog();
@@ -76,8 +79,8 @@ const EpicConatiner = () => {
       epicData={data.data.data}
       epicCount={data.data.count}
       word={word}
-      ticketId={ticketId}
-      setTicketId={setTicketId}
+      selectContent={selectContent}
+      setSelectContent={setSelectContent}
       handleWord={(e) => setWord(e.target.value)}
       onDragEnd={onDragEnd}
     />

@@ -1,6 +1,4 @@
 "use client";
-// ** Next Imports
-import Image from "next/image";
 
 // ** React Imports
 import { useEffect, useMemo, useState } from "react";
@@ -12,7 +10,7 @@ import TicketAddItem from "@/src/components/Ticket/TicketAddItem";
 import CustomImage from "@/src/components/Image/CustomImage";
 
 // ** Type Imports
-import { EpicInfo } from "@/src/type/epic";
+import { EpicInfo, SelectContent } from "@/src/type/epic";
 import { CommonResponse } from "@/src/type/common";
 
 // ** Utils Imports
@@ -34,7 +32,7 @@ import { mutate } from "swr";
 interface PropsType {
   item: EpicInfo;
   word: string;
-  handleClick: (id: number) => void;
+  handleClick: (value: SelectContent) => void;
 }
 
 const EpicItem = ({ item, handleClick, word }: PropsType) => {
@@ -96,7 +94,10 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
 
   return (
     <div>
-      <div className="w-full h-[75px] flex items-center">
+      <div
+        className="w-full h-[75px] flex items-center cursor-pointer"
+        onClick={() => handleClick({ id: item.id, type: "EPIC" })}
+      >
         <div className="w-[24px] h-[24px] bg-green-300 rounded-lg"></div>
         <h1 className="ml-8 font-bold text-[16px] mr-4">{item.code}</h1>
         <h1 className="w-[300px] text-[16px]">{item.name}</h1>
@@ -141,7 +142,9 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
                           {...provided.dragHandleProps}
                         >
                           <TicketItem
-                            handleClick={handleClick}
+                            handleClick={(id: number) =>
+                              handleClick({ id, type: "TICKET" })
+                            }
                             word={word}
                             data={item}
                             key={item.id}

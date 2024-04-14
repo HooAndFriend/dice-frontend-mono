@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 // ** React Imports
-import { useState } from "react";
+import { KeyboardEvent, useState } from "react";
 
 // ** Component Imports
 import CustomInput from "@/src/components/Input/CustomInput";
@@ -47,6 +47,12 @@ const EpicAddItem = () => {
     }
   );
 
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      saveEpic.trigger();
+    }
+  };
+
   return (
     <div className="w-full h-[75px] flex items-center">
       {open ? (
@@ -58,6 +64,7 @@ const EpicAddItem = () => {
             height="36px"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            onKeyDown={handleEnter}
           />
           <div className="ml-4 cursor-pointer" onClick={saveEpic.trigger}>
             <CustomImage

@@ -1,12 +1,12 @@
 // ** Component Imports
-import EpicTable from "@/src/container/epic-container/components/EpicTable";
+import EpicTable from "@/src/components/Epic/EpicTable";
 
 // ** Utils Imports
 import { DropResult } from "react-beautiful-dnd";
 
 // ** Type Imports
 import { EpicInfo } from "@/src/type/epic";
-import EpicSearchCard from "./components/EpicSearchCard";
+import EpicSearchCard from "../../components/Epic/EpicSearchCard";
 import TicketCard from "@/src/components/Ticket/TicketCard";
 
 interface PropsType {

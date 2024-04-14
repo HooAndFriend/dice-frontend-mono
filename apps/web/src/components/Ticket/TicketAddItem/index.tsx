@@ -4,7 +4,7 @@
 import Image from "next/image";
 
 // ** React Imports
-import { useState } from "react";
+import { KeyboardEvent, useState } from "react";
 
 // ** Component Imports
 import CustomInput from "@/src/components/Input/CustomInput";
@@ -78,6 +78,18 @@ const TicketAddItem = ({ epicId }: PropsType) => {
     }
   );
 
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      if (epicId) {
+        saveTicketWithEpic.trigger();
+
+        return;
+      }
+
+      saveSimpleTicket.trigger();
+    }
+  };
+
   return (
     <div className="pl-8 w-full h-[75px] flex items-center">
       {open ? (
@@ -89,6 +101,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
             height="36px"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            onKeyDown={handleEnter}
           />
           <div
             className="ml-4"

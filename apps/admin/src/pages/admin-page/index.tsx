@@ -26,10 +26,6 @@ const AdminPage = () => {
     },
   )
 
-  useEffect(() => {
-    mutate()
-  }, [data])
-
   if (isLoading) return null
   if (!data) return null
 

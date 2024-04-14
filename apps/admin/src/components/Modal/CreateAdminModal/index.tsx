@@ -85,14 +85,12 @@ const CreateAdminModal = ({ handleCreateAdmin }: PropsType) => {
     createAdmin.trigger()
   }
   return (
-    <DialogProvider>
-      <CreateAdminModalView
-        handleSelect={handleSelect}
-        addAdmin={addAdmin}
-        handleInput={handleInput}
-        handleCreateAdmin={handleCreateAdmin}
-      />
-    </DialogProvider>
+    <CreateAdminModalView
+      handleSelect={handleSelect}
+      addAdmin={addAdmin}
+      handleInput={handleInput}
+      handleCreateAdmin={handleCreateAdmin}
+    />
   )
 }
 

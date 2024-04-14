@@ -8,6 +8,7 @@ import AdminSearchBox from '@/src/components/SearchBox/AdminSearchBox'
 import { AdminInfo } from '@/src/type/admin'
 import { TableItemType } from '@/src/type/component'
 import CreateAdminModal from '@/src/components/Modal/CreateAdminModal'
+import dayjs from 'dayjs'
 
 interface PropsType {
   data: AdminInfo[]
@@ -28,7 +29,10 @@ const AdminPageView = ({
     { name: element.nickname, size: '20%' },
     { name: element.email, size: '20%' },
     { name: element.phone, size: '20%' },
-    { name: formatDate(element.modifiedDate), size: '15%' },
+    {
+      name: dayjs(element.modifiedDate).format('YYYY-MM-DD HH:MM:ss'),
+      size: '15%',
+    },
   ])
   return (
     <>

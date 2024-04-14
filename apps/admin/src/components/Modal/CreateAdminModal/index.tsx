@@ -14,7 +14,7 @@ const CreateAdminModal = ({ handleCreateAdmin }: PropsType) => {
   const { data, handleInput, handleSelect } = useInput<CreateAdminParams>({
     email: '',
     phone: '',
-    password: '',
+    password: '11',
     role: '',
     nickname: '',
     profile: '',

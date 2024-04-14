@@ -22,11 +22,7 @@ const AdminPage = () => {
   const { data, error, isLoading, mutate } = useSWR(
     '/v1/admin',
     async (url) => {
-      return await Get<GetAdminListResponse>(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
+      return await Get<GetAdminListResponse>(url)
     },
   )
 
@@ -39,7 +35,6 @@ const AdminPage = () => {
 
   const handleCreateAdmin = () => {
     setIsOpen(!isOpen)
-    console.log(isOpen)
   }
 
   const formatDate = (date) => {

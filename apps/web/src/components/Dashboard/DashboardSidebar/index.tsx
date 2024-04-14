@@ -89,11 +89,6 @@ const DashboardSidebard = () => {
           ))}
         </div>
       </div>
-      <div className="flex h-1/5">
-        <div className="flex items-end justify-center flex-grow pb-3">
-          <WorkspacePopover />
-        </div>
-      </div>
     </div>
   );
 };

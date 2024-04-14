@@ -17,8 +17,7 @@ interface PropsType {
   modalOpen: boolean;
   cancelButtonRef: any;
   data: WorkspaceInfo[];
-  id: number;
-  profile: string;
+
   workspace: WorkspaceStateType;
   setModalOpen: (value: boolean) => void;
   handleModalOpen: () => void;
@@ -34,45 +33,37 @@ const WorkspacePopoverView = ({
   handleOpen,
   setModalOpen,
   data,
-  id,
-  profile,
   workspace,
   handleUpdateWorkspace,
 }: PropsType) => {
   return (
     <div>
-      <div onClick={handleOpen}>
-        <ProfileBox image={profile} alt="profile" />
+      <div onClick={handleOpen} className="flex items-center cursor-pointer">
+        <h1 className="text-[32px] font-bold">{workspace.name}</h1>
+        <CustomImage
+          src="/svg/arrow-down.svg"
+          width={30}
+          height={30}
+          alt="down"
+          className="ml-2"
+        />
       </div>
       {open && (
         <>
           <div onClick={handleOpen} className="fixed inset-0 z-10" />
-          <div className="popover p-5 rounded-[20px] w-[350px] h-[250px] absolute bg-white shadow-md p- -translate-y-full translate-x-20 z-10">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-bold">{workspace.name}</h3>
-              <div className="flex items-center" onClick={handleModalOpen}>
-                <CustomImage
-                  src="/images/settings.png"
-                  alt="setting"
-                  width={18}
-                  height={18}
-                  className="mr-1"
-                />
-                <h4 className="mr-1 text-sm">Setting</h4>
-              </div>
-            </div>
-            <hr className="mt-3" />
-            <div className="mt-2 w-[350px] h-[150px] overflow-y-scroll">
+          <div className="popover px-4 rounded-[20px] w-[300px] h-[200px] absolute bg-white shadow-md z-10">
+            <div className="mt-2">
               {data.map((item) => (
                 <WorkspaceBox
                   key={item.id}
-                  id={id}
+                  id={workspace.id}
                   workspaceId={item.id}
                   profile={item.workspace.profile}
                   name={item.workspace.name}
                   onClick={() => {
                     handleUpdateWorkspace(item);
                   }}
+                  handleModalOpen={handleModalOpen}
                 />
               ))}
               <Link href="/save-workspace">

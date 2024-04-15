@@ -10,6 +10,8 @@ export async function requestNotificationPermission() {
 
 export async function getFirebaseToken() {
   try {
+    if (!messaging) return "";
+
     const fcmToken = await getToken(messaging, {
       vapidKey: process.env.NEXT_PUBLIC_VAPID_KEY,
     });

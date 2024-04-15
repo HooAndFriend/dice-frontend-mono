@@ -30,7 +30,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "../../html/www/types/**/*.ts",
-    "dist/types/**/*.ts"
+    "dist/types/**/*.ts",
+    "public/firebase-messaging-sw.js"
   ],
   "exclude": ["node_modules"]
 }

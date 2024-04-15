@@ -1,7 +1,7 @@
 "use client";
 
 // ** React Imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // ** Recoil Imports
 import { useRecoilValue } from "recoil";
@@ -25,6 +25,7 @@ import {
   GetTaskProgressResponse,
   GetTodayTaskCountResponse,
 } from "@/src/type/workspace";
+import { requestNotificationPermission } from "@/src/utils/firebase-push";
 
 const DashboardContainer = () => {
   const [dates, setDates] = useState<Dates>({
@@ -52,6 +53,10 @@ const DashboardContainer = () => {
     "/v1/workspace/task/progress",
     (url) => Get<GetTaskProgressResponse>(url)
   );
+
+  useEffect(() => {
+    requestNotificationPermission();
+  }, []);
 
   if (
     isLoading ||

@@ -32,6 +32,7 @@ const SocialSignupContainer = () => {
     nickname: "",
     token: "",
     type: "",
+    fcmToken: "",
   });
 
   const setUserState = useSetRecoilState(UserState);
@@ -123,7 +124,7 @@ const SocialSignupContainer = () => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {

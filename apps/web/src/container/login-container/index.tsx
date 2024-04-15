@@ -4,7 +4,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 
 // ** React Imports
-import { KeyboardEvent } from "react";
+import { KeyboardEvent, useEffect } from "react";
 
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
@@ -32,11 +32,17 @@ import {
 
 // ** Dialog Imports
 import { useDialog } from "../../context/DialogContext";
+import { requestNotificationPermission } from "@/src/utils/firebase-push";
 
 const LoginContainer = () => {
-  const { data: loginUser, handleInput } = useInput<DiceLoginParma>({
+  const {
+    data: loginUser,
+    handleInput,
+    setData,
+  } = useInput<DiceLoginParma>({
     email: "",
     password: "",
+    fcmToken: "",
   });
 
   const setUserState = useSetRecoilState(UserState);
@@ -93,13 +99,16 @@ const LoginContainer = () => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const socialLogin = useSWRMutation(
     "/v1/auth/social",
     async (url: string, { arg }: { arg: SocialLoginParams }) =>
-      await Post<DiceSocialLoginResponse>(url, arg),
+      await Post<DiceSocialLoginResponse>(url, {
+        ...arg,
+        fcmToken: loginUser.fcmToken,
+      }),
     {
       onSuccess: ({ data }: any) => {
         setAuthState({
@@ -139,7 +148,7 @@ const LoginContainer = () => {
           const uuid = searchParams.get("uuid");
           if (uuid) {
             router.push(
-              `/social-signup?token=${arg.token}&type=${arg.type}&uuid=${uuid}`,
+              `/social-signup?token=${arg.token}&type=${arg.type}&uuid=${uuid}`
             );
 
             return;
@@ -150,7 +159,7 @@ const LoginContainer = () => {
 
         return;
       },
-    },
+    }
   );
 
   const handleSignup = () => {
@@ -177,6 +186,12 @@ const LoginContainer = () => {
       login.trigger();
     }
   };
+
+  useEffect(() => {
+    requestNotificationPermission().then((fcmToken) => {
+      setData((c) => ({ ...c, fcmToken }));
+    });
+  }, []);
 
   return (
     <LoginContainerView

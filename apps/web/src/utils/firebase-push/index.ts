@@ -4,7 +4,7 @@ import { getToken, onMessage } from "firebase/messaging";
 export async function requestNotificationPermission() {
   const permission = await Notification.requestPermission();
   if (permission === "granted") {
-    await getFirebaseToken();
+    return await getFirebaseToken();
   }
 }
 
@@ -22,7 +22,7 @@ export async function getFirebaseToken() {
         });
       });
 
-      return;
+      return fcmToken;
     }
 
     requestNotificationPermission();

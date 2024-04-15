@@ -16,8 +16,5 @@
   "packageManager": "pnpm@8.9.0",
   "engines": {
     "node": ">=18"
-  },
-  "dependencies": {
-    "flowbite": "^2.3.0"
   }
 }

@@ -20,6 +20,7 @@ import LoginContainerView from "./login-container";
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
 import { firebaseLogin } from "@/src/utils/firebase-auth";
+import { requestNotificationPermission } from "@/src/utils/firebase-push";
 
 // ** Type Imports
 import {
@@ -32,7 +33,6 @@ import {
 
 // ** Dialog Imports
 import { useDialog } from "../../context/DialogContext";
-import { requestNotificationPermission } from "@/src/utils/firebase-push";
 
 const LoginContainer = () => {
   const {

@@ -6,10 +6,10 @@ importScripts(
 );
 
 firebase.initializeApp({
-  apiKey: process.env.NEXT_PUBLIC_API_KEY,
-  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_APP_ID,
+  apiKey: "AIzaSyBjHpYykXfglKuHedA625gKrEQsHtPiLgQ",
+  projectId: "fcm-test-4a789",
+  messagingSenderId: "661055039703",
+  appId: "1:661055039703:web:15908d793c8c51f277a892",
 });
 
 const messaging = firebase.messaging();

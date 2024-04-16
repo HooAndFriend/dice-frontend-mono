@@ -16,9 +16,9 @@ const messaging = firebase.messaging();
 
 // 백그라운드 상태에서 메시지 수신
 messaging.onBackgroundMessage(function (payload) {
-  // 여기에 알림 메시지 처리 코드를 추가
+  alert("백그라운드 메시지 수신");
   console.log(
     "[firebase-messaging-sw.js] Received background message ",
-    payload
+    payload.notification
   );
 });

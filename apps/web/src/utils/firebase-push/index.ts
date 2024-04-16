@@ -22,9 +22,7 @@ export async function getFirebaseToken() {
         onMessage(messaging, (payload) => {
           console.log("Foreground Message received. ", payload);
 
-          new Notification(payload.notification?.title ?? "Default Title", {
-            body: payload.notification?.body,
-          });
+          alert("Message received. " + payload.notification.title);
         });
 
         return fcmToken;

@@ -63,7 +63,8 @@ export const ImageUploader = ({
         if (err) {
           return;
         }
-        setPath(data.Location);
+
+        setPath(process.env.NEXT_PUBLIC_MINIO_HOST + data.Key);
       });
     }
   };

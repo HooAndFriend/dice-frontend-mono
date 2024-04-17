@@ -76,7 +76,7 @@ export const QaFileUploader = ({ qaId, refetch }: PropsType) => {
         if (err) {
           return;
         }
-        saveQaFile.trigger(data.Location);
+        saveQaFile.trigger(process.env.NEXT_PUBLIC_MINIO_HOST + data.Key);
       });
     }
   };

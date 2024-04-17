@@ -76,7 +76,7 @@ const TicketFileUploader = ({ ticketId, refetch }: PropsType) => {
         if (err) {
           return;
         }
-        saveTicketFile.trigger(data.Location);
+        saveTicketFile.trigger(process.env.NEXT_PUBLIC_MINIO_HOST + data.Key);
       });
     }
   };

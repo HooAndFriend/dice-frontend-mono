@@ -19,14 +19,6 @@ module.exports = {
         source: "/api/:path*",
         destination: process.env.NEXT_PUBLIC_SERVER_URL + "/api/:path*",
       },
-      {
-        source: "/dice-dev/:path*",
-        destination:
-          process.env.NEXT_PUBLIC_MINIO_ENDPOINT +
-          "/" +
-          process.env.NEXT_PUBLIC_MINIO_BUCKET +
-          "/:path*",
-      },
     ];
   },
   webpack: (config) => {

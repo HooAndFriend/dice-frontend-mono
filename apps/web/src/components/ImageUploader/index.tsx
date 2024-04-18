@@ -1,11 +1,18 @@
 // ** React Imports
 import { ChangeEvent, useEffect, useRef } from "react";
 
-// ** Aws Imports
-import AWS from "aws-sdk";
-
 // ** Component Imports
 import ImageUploaderView from "./image-uploader";
+
+// ** Context Imports
+import { useDialog } from "@/src/context/DialogContext";
+
+// ** Service Imports
+import { Post } from "@/src/repository";
+import useSWRMutation from "swr/mutation";
+
+// ** Type Imports
+import { UploadFileResponse } from "@/src/type/component";
 
 interface PropsType {
   image: string;
@@ -31,6 +38,8 @@ export const ImageUploader = ({
 }: PropsType) => {
   const inputRef = useRef<HTMLInputElement | any>(null);
 
+  const { handleOpen } = useDialog();
+
   const clearInput = () => {
     if (inputRef.current) {
       inputRef.current.value = null;
@@ -47,29 +56,32 @@ export const ImageUploader = ({
     const file = e.target.files?.[0];
 
     if (file) {
-      const s3 = new AWS.S3({
-        accessKeyId: process.env.NEXT_PUBLIC_MINIO_ACCESS_KEY,
-        secretAccessKey: process.env.NEXT_PUBLIC_MINIO_SECRET_KEY,
-        endpoint: process.env.NEXT_PUBLIC_MINIO_ENDPOINT,
-        s3ForcePathStyle: true,
-        signatureVersion: "v4",
-      });
-      const params = {
-        Bucket: process.env.NEXT_PUBLIC_MINIO_BUCKET_NAME,
-        Key: file.name,
-        Body: file,
-      };
-      s3.upload(params, (err, data) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
+      const formData = new FormData();
+      formData.append("file", file);
 
-        console.log(process.env.NEXT_PUBLIC_MINIO_HOST + data.Key);
-        setPath(process.env.NEXT_PUBLIC_MINIO_HOST + data.Key);
-      });
+      uploadFile.trigger(formData);
     }
   };
+
+  const uploadFile = useSWRMutation(
+    "/file/v1/upload",
+    async (url: string, { arg }: { arg: FormData }) =>
+      await Post<UploadFileResponse>(url, arg),
+    {
+      onSuccess: ({ data }) => {
+        setPath(data.url);
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
 
   useEffect(() => {
     if (image === "") {

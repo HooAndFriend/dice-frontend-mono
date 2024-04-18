@@ -28,6 +28,7 @@ interface PropsType {
 const TicketAddItem = ({ epicId }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
+  const [button, setButton] = useState<boolean>(false);
 
   const handleOpen = () => setOpen((c) => !c);
 
@@ -51,6 +52,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
           buttonText: "Close",
           type: "alert",
         });
+        setButton(false);
       },
     }
   );
@@ -74,12 +76,15 @@ const TicketAddItem = ({ epicId }: PropsType) => {
           buttonText: "Close",
           type: "alert",
         });
+        setButton(false);
       },
     }
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      if (button) return;
+      setButton(true);
       if (epicId) {
         saveTicketWithEpic.trigger();
 

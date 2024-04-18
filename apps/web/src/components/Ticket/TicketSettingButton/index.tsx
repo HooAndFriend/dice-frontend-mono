@@ -93,9 +93,11 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
         <Tooltip text={data.ticketSetting ? data.ticketSetting.type : ""}>
           {data.ticketSetting ? (
             <div
-              className="w-[24px] h-[24px] rounded-lg"
+              className="w-[24px] h-[24px] rounded-lg flex items-center justify-center"
               style={{ backgroundColor: data.ticketSetting.color }}
-            />
+            >
+              {data.ticketSetting.type.slice(0, 1)}
+            </div>
           ) : (
             <div className="w-[24px] h-[24px] bg-green-300 rounded-lg" />
           )}

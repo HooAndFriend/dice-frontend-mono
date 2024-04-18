@@ -21,6 +21,7 @@ import CustomImage from "@/src/components/Image/CustomImage";
 
 const EpicAddItem = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const [button, setButton] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
 
   const { handleOpen: handleModalOpen } = useDialog();
@@ -43,12 +44,15 @@ const EpicAddItem = () => {
           buttonText: "Close",
           type: "alert",
         });
+        setButton(false);
       },
     }
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      if (button) return;
+      setButton(true);
       saveEpic.trigger();
     }
   };

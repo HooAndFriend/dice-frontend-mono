@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { AuthStateProps } from '../app/auth'
 
 export const client = axios.create({
-  baseURL: import.meta.env.VITE_SERVER_URL + '/api',
+  baseURL: import.meta.env.VITE_SERVER_URL + '/api/admin',
 })
 
 export const Get = async <T>(

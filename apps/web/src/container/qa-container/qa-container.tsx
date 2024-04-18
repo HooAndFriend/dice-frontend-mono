@@ -62,7 +62,6 @@ const QaContainerView = ({
 }: PropsType) => {
   return (
     <div className="w-full bg-[#FAFAFB] p-5">
-      <div className="font-mosk font-bold text-[32px]">QA</div>
       <div className="w-full h-[100px] shadow-md border-[#EBEBEC] rounded-[20px] bg-white mt-[30px] flex items-center">
         <div className="font-spoqa text-base font-bold ml-[50px] mr-[29px] text-center">
           Search

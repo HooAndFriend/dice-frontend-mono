@@ -119,8 +119,8 @@ const QaContainerView = ({
                 />
               </div>
               <div
-                // onClick={handleCreateIssueOpen}
-                className="w-[120px] h-[50px] rounded-[30px] flex items-center bg-white border border-[#EBEBEC] justify-center ml-8"
+                onClick={() => setSaveOpen(true)}
+                className="w-[120px] h-[50px] rounded-[30px] flex items-center bg-white border border-[#EBEBEC] justify-center ml-8 cursor-pointer"
               >
                 <CustomImage
                   src="/images/Add_To_Queue.png"
@@ -128,10 +128,7 @@ const QaContainerView = ({
                   height={24}
                   alt="add"
                 />
-                <div
-                  className="font-spoqa font-bold text-center ml-[5px]"
-                  onClick={() => setSaveOpen(true)}
-                >
+                <div className="font-spoqa font-bold text-center ml-[5px]">
                   Add
                 </div>
               </div>

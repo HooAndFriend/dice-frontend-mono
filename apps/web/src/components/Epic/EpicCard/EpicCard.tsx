@@ -16,6 +16,7 @@ interface PropsType {
   setMode(mode: EpicEditMode): void;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleUpdateName: () => void;
+  handleDeleteEpic: () => void;
 }
 
 const EpicCardView = ({
@@ -26,6 +27,7 @@ const EpicCardView = ({
   onChange,
   handleClose,
   handleUpdateName,
+  handleDeleteEpic,
 }: PropsType) => {
   return (
     <div className="mt-6 h-[700px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
@@ -34,7 +36,10 @@ const EpicCardView = ({
           <h1 className="text-[18px] font-bold">{data.code}</h1>
         </div>
         <div className="flex items-center">
-          <p className="text-[12px] text-gray-500 cursor-pointer underline">
+          <p
+            className="text-[12px] text-gray-500 cursor-pointer underline"
+            onClick={handleDeleteEpic}
+          >
             Delete
           </p>
           <h1

@@ -87,6 +87,28 @@ const EpicCard = ({ epicId, handleClose }: PropsType) => {
     }
   );
 
+  const deleteEpic = useSWRMutation(
+    "/v1/epic/",
+    async (url: string) => {
+      return await Delete<CommonResponse<void>>(url + epicId);
+    },
+    {
+      onSuccess: () => {
+        mutate("/v1/epic");
+        handleClose();
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
   if (isLoading) return <EpicCardSkeleton />;
 
   return (
@@ -98,6 +120,7 @@ const EpicCard = ({ epicId, handleClose }: PropsType) => {
       onChange={handleInput}
       handleClose={handleClose}
       handleUpdateName={updateEpic.trigger}
+      handleDeleteEpic={deleteEpic.trigger}
     />
   );
 };

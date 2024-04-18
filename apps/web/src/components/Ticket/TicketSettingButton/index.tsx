@@ -1,13 +1,19 @@
+// ** React Imports
+import { useState, useEffect, useRef } from "react";
+
 // ** Type Imports
 import { Get, Patch } from "@/src/repository";
+import { CommonResponse } from "@/src/type/common";
 import { GetTicketSettingListResponse, TicketInfo } from "@/src/type/ticket";
-import { useEffect, useRef, useState } from "react";
+
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
-import { Put } from "@/src/repository";
 import useSWR, { mutate } from "swr";
-import { CommonResponse } from "@/src/type/common";
+
+// ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
+
+// ** Component Imports
 import Tooltip from "../../Tooltip";
 
 interface PropsType {

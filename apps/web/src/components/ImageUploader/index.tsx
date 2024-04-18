@@ -61,9 +61,11 @@ export const ImageUploader = ({
       };
       s3.upload(params, (err, data) => {
         if (err) {
+          console.log(err);
           return;
         }
 
+        console.log(process.env.NEXT_PUBLIC_MINIO_HOST + data.Key);
         setPath(process.env.NEXT_PUBLIC_MINIO_HOST + data.Key);
       });
     }

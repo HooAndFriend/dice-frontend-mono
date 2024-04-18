@@ -13,7 +13,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        spoqa: ["Spoqa Han Sans Neo", "sans-serif"],
+        spoqa: ["SpoqaHanSansNeo-Regular", "sans-serif"],
         mosk: ["Mosk", "sans-serif"],
       },
       boxShadow: {

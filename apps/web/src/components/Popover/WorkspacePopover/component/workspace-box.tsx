@@ -19,7 +19,10 @@ const WorkspaceBox = ({
   handleModalOpen,
 }: PropsType) => {
   return (
-    <div className="flex items-center justify-between mt-5" onClick={onClick}>
+    <div
+      className="flex items-center justify-between mt-5"
+      onClick={id === workspaceId ? () => {} : onClick}
+    >
       <div className="flex items-center">
         <CustomImage
           className="border rounded-[10px] mr-3"

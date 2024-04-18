@@ -96,7 +96,10 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
     <div>
       <div
         className="w-full h-[75px] flex items-center cursor-pointer"
-        onClick={() => handleClick({ id: item.id, type: "EPIC" })}
+        onClick={() => {
+          handleClick({ id: item.id, type: "EPIC" });
+          handleOpen();
+        }}
       >
         <div className="w-[24px] h-[24px] bg-green-300 rounded-lg"></div>
         <h1 className="ml-8 font-bold text-[16px] mr-4">{item.code}</h1>
@@ -118,7 +121,6 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
             alt="arrow"
             width={24}
             height={24}
-            onClick={handleOpen}
           />
         </div>
       </div>
@@ -162,7 +164,6 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
           <TicketAddItem epicId={item.id} />
         </div>
       )}
-
       <hr className="bg-[#EBEBEC]" />
     </div>
   );

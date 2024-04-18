@@ -6,6 +6,7 @@ import Link from "next/link";
 // ** Component Imports
 import CustomImage from "../../Image/CustomImage";
 import UserPopover from "../../Popover/UserPopover";
+import NotificationPopover from "../../Popover/NotificationPopover";
 
 const DashboardHeader = () => {
   return (
@@ -20,6 +21,7 @@ const DashboardHeader = () => {
         />
       </Link>
       <div className="flex items-center mr-[30px]">
+        <NotificationPopover />
         <UserPopover />
       </div>
     </div>

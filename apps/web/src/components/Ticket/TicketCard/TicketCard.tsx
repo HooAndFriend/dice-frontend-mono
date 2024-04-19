@@ -27,6 +27,7 @@ interface PropsType {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   ticketRefetch: () => void;
   handleClose: () => void;
+  handleDeleteTicket: (id: number) => void;
   handleDeleteTicketFile: (id: number) => void;
   handleUpdateTicket: (value: "content" | "name" | "storypoint") => void;
 }
@@ -42,6 +43,7 @@ const TicketCardView = ({
   setMode,
   handleClose,
   ticketRefetch,
+  handleDeleteTicket,
   handleDeleteTicketFile,
   handleUpdateTicket,
 }: PropsType) => {
@@ -53,7 +55,10 @@ const TicketCardView = ({
           <h1 className="ml-4 text-[18px] font-bold">{data.code}</h1>
         </div>
         <div className="flex items-center">
-          <p className="text-[12px] text-gray-500 cursor-pointer underline">
+          <p
+            className="text-[12px] text-gray-500 cursor-pointer underline"
+            onClick={() => handleDeleteTicket(data.id)}
+          >
             Delete
           </p>
           <h1

@@ -145,6 +145,30 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     }
   );
 
+  const deleteTicket = useSWRMutation(
+    "/v1/ticket/",
+    async (url: string, { arg }: { arg: number }) =>
+      await Delete<CommonResponse<void>>(url + arg),
+    {
+      onSuccess: () => {
+        ticketRefetch();
+        handleClose();
+        mutate("/v1/epic");
+        mutate("/v1/ticket");
+        mutate(`/v1/ticket/detail/${ticketId}`);
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
   if (isLoading) return <TicketCardSkeletonView />;
 
   return (
@@ -159,6 +183,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       setMode={setMode}
       handleClose={handleClose}
       ticketRefetch={ticketRefetch}
+      handleDeleteTicket={deleteTicket.trigger}
       handleDeleteTicketFile={deleteTicketFile.trigger}
       handleUpdateTicket={updateTicket.trigger}
     />

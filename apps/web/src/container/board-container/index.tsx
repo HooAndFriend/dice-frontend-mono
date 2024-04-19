@@ -1,4 +1,8 @@
 "use client";
+
+// ** Next Imports
+import { useSearchParams } from "next/navigation";
+
 // ** React Imports
 import { useState } from "react";
 
@@ -8,6 +12,7 @@ import BoardContainerView from "./board-container";
 // ** Type Imports
 import { OutputData } from "@editorjs/editorjs";
 import { CommonResponse } from "@/src/type/common";
+import { GetBoardResponse } from "@/src/type/board";
 
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
@@ -16,15 +21,12 @@ import { Get, Put } from "@/src/repository";
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 import useSWR from "swr";
-import { GetBoardResponse } from "@/src/type/board";
 
-interface PropsType {
-  boardId: number;
-}
-
-const BoardContainer = ({ boardId }: PropsType) => {
+const BoardContainer = () => {
   const [content, setContent] = useState<OutputData>();
   const [readOnly, setReadOnly] = useState<boolean>(true);
+
+  const { get } = useSearchParams();
 
   const { handleOpen } = useDialog();
 
@@ -33,7 +35,7 @@ const BoardContainer = ({ boardId }: PropsType) => {
   };
 
   const { mutate } = useSWR(
-    `/v1/board/${boardId}`,
+    `/v1/board/${get("boardId")}`,
     async (url) => {
       return Get<GetBoardResponse>(url);
     },
@@ -48,7 +50,7 @@ const BoardContainer = ({ boardId }: PropsType) => {
     "/v1/board",
     async (url: string) =>
       await Put<CommonResponse<void>>(url, {
-        boardId,
+        boardId: Number(get("boardId")),
         title: "Hello",
         content: JSON.stringify(content),
       }),

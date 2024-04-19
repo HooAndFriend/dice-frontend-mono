@@ -1,5 +1,7 @@
+import BoardContainer from "@/src/container/board-container";
+
 const BoardPage = () => {
-  return <div>Board Dashboard</div>;
+  return <BoardContainer />;
 };
 
 export default BoardPage;

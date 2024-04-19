@@ -1,6 +1,6 @@
 // ** Next Imports
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 // ** React Imports
 import { useState } from "react";
@@ -18,7 +18,7 @@ interface PropsType {
 const BoardMenuItem = ({ data }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const path = usePathname();
+  const { get } = useSearchParams();
 
   return (
     <div>
@@ -40,10 +40,10 @@ const BoardMenuItem = ({ data }: PropsType) => {
         {data.children.length > 0 ? (
           <p className="ml-2">{data.title}</p>
         ) : (
-          <Link href={`/dashboard/board/${data.id}`}>
+          <Link href={`/dashboard/board?boardId=${data.id}`}>
             <p
               className={`ml-2 ${
-                path.split("/")[3] === String(data.id) && "text-blue-500"
+                get("boardId") === String(data.id) && "text-blue-500"
               }`}
             >
               {data.title}
@@ -58,10 +58,10 @@ const BoardMenuItem = ({ data }: PropsType) => {
               <div className="w-[12px] h-[12px] pl-1 pt-1">
                 <div className="w-[5px] h-[5px] bg-black rounded-full" />
               </div>
-              <Link href={`/dashboard/board/${_.id}`}>
+              <Link href={`/dashboard/board?boardId=${_.id}`}>
                 <p
                   className={`ml-2 ${
-                    path.split("/")[3] === String(_.id) && "text-blue-500"
+                    get("boardId") === String(_.id) && "text-blue-500"
                   }`}
                 >
                   {data.title}

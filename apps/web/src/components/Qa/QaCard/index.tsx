@@ -32,6 +32,7 @@ interface PropsType {
 }
 
 const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
+  const [subType, setSubType] = useState<"comment" | "history">("comment");
   const [currentArg, setCurrentArg] = useState<
     "title" | "asIs" | "toBe" | "memo"
   >("title");
@@ -162,6 +163,8 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
       data={issueData}
       role={role}
       mode={mode}
+      subType={subType}
+      setSubType={setSubType}
       deleteQa={deleteQa.trigger}
       handleClose={handleClose}
       handleInput={handleInput}

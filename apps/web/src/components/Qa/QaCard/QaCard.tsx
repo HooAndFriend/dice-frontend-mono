@@ -15,11 +15,14 @@ import { QaCardEditMode, RoleType } from "@/src/type/common";
 
 // ** Utils Imports
 import dayjs from "dayjs";
+import QaHistory from "../QaHistory";
 
 interface PropsType {
   data: IssueInfo;
   role: RoleType;
   mode: QaCardEditMode;
+  subType: "comment" | "history";
+  setSubType: (type: "comment" | "history") => void;
   deleteQa: () => void;
   handleUpdateQa: (type: "title" | "asIs" | "toBe" | "memo") => void;
   handleClose: () => void;
@@ -32,12 +35,13 @@ interface PropsType {
 
 const QaCardView = ({
   data,
-
+  subType,
   role,
   mode,
   handleClose,
   handleInput,
   refetch,
+  setSubType,
   handleDeleteQaFile,
   setIssueData,
   setMode,
@@ -303,8 +307,34 @@ const QaCardView = ({
           </div>
         ))}
       </div>
-      <div className="h-[1px] bg-[#EBEBEC] mt-[20px]" />
-      <QaComment qaId={data.id} />
+      <hr className="my-[20px]" />
+      <div className="flex items-center">
+        <button
+          className="text-[12px] px-2 h-[30px] rounded-lg mr-2"
+          style={{
+            backgroundColor: subType === "comment" ? "#623AD6" : "white",
+            color: subType === "comment" ? "white" : "#623AD6",
+          }}
+          onClick={() => setSubType("comment")}
+        >
+          comment
+        </button>
+        <button
+          className="text-[12px] px-2 h-[30px] rounded-lg"
+          style={{
+            backgroundColor: subType === "history" ? "#623AD6" : "white",
+            color: subType === "history" ? "white" : "#623AD6",
+          }}
+          onClick={() => setSubType("history")}
+        >
+          history
+        </button>
+      </div>
+      {subType === "comment" ? (
+        <QaComment qaId={data.id} />
+      ) : (
+        <QaHistory qaId={data.id} />
+      )}
     </div>
   );
 };

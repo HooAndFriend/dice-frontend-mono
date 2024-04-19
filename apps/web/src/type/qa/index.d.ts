@@ -25,7 +25,31 @@ export interface GetIssueListResponse extends CommonResponse {
   count: number;
 }
 
+export interface GetQaHistoryListResponse extends CommonResponse {
+  data: QaHistory[];
+  count: number;
+}
+
 export interface GetIssueResponse extends CommonResponse, IssueInfo {}
+
+export interface QaHistory {
+  createdDate: "2024-04-18T11:55:13.350Z";
+  id: string;
+  qaId: number;
+  username: string;
+  subUsername: string;
+  type:
+    | "DUE_DATE"
+    | "STATUS"
+    | "WORKER"
+    | "ADMIN"
+    | "CONTENT"
+    | "UPLOAD_FILE"
+    | "DELETE_FILE";
+  after: string;
+  before: string;
+  log: string;
+}
 
 export interface IssueInfo {
   id: number;

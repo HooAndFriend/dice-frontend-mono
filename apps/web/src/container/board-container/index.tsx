@@ -11,12 +11,18 @@ import { CommonResponse } from "@/src/type/common";
 
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
-import { Put } from "@/src/repository";
+import { Get, Put } from "@/src/repository";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
+import useSWR from "swr";
+import { GetBoardResponse } from "@/src/type/board";
 
-const BoardContainer = () => {
+interface PropsType {
+  boardId: number;
+}
+
+const BoardContainer = ({ boardId }: PropsType) => {
   const [content, setContent] = useState<OutputData>();
   const [readOnly, setReadOnly] = useState<boolean>(true);
 
@@ -26,11 +32,23 @@ const BoardContainer = () => {
     updateBoard.trigger();
   };
 
+  const { mutate } = useSWR(
+    `/v1/board/${boardId}`,
+    async (url) => {
+      return Get<GetBoardResponse>(url);
+    },
+    {
+      onSuccess: ({ data }) => {
+        setContent(JSON.parse(data.content));
+      },
+    }
+  );
+
   const updateBoard = useSWRMutation(
     "/v1/board",
     async (url: string) =>
       await Put<CommonResponse<void>>(url, {
-        boardId: 10,
+        boardId,
         title: "Hello",
         content: JSON.stringify(content),
       }),
@@ -50,7 +68,6 @@ const BoardContainer = () => {
     }
   );
 
-  return <h1></h1>;
   return (
     <BoardContainerView
       content={content}

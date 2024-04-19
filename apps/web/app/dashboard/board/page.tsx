@@ -1,8 +1,5 @@
-// ** Component Imports
-import BoardContainer from "@/src/container/board-container";
-
 const BoardPage = () => {
-  return <BoardContainer />;
+  return <div>Board Dashboard</div>;
 };
 
 export default BoardPage;

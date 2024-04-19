@@ -34,6 +34,7 @@ const EpicAddItem = () => {
     {
       onSuccess: () => {
         setOpen(false);
+        setButton(false);
         setName("");
       },
       onError: (error) => {

@@ -2,28 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, SpoqaHanSansNeo-Regular, sans-serif;
+}
+
 @font-face {
-  font-family: 'SpoqaHanSansNeo-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff')
-    format('woff');
+  font-family: "SpoqaHanSansNeo-Regular";
+  src: url("/fonts/SpoqaHanSansNeo-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
-  font-family: 'Mosk';
-  src: url('https://db.onlinewebfonts.com/t/70a0b55fecea9a9200992a7f05f57d79.woff')
-    format('woff');
+  font-family: "SpoqaHanSansNeo-Bold";
+  src: url("/fonts/SpoqaHanSansNeo-Bold.ttf");
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: "SpoqaHanSansNeo-Medium";
+  src: url("/fonts/SpoqaHanSansNeo-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SpoqaHanSansNeo-Light";
+  src: url("/fonts/SpoqaHanSansNeo-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SpoqaHanSansNeo-Thin";
+  src: url("/fonts/SpoqaHanSansNeo-Thin.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Mosk";
+  src: url("https://db.onlinewebfonts.com/t/70a0b55fecea9a9200992a7f05f57d79.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NanumPen";
+  font-weight: 200;
+  src: url("/fonts/NanumPen.ttf") format("truetype");
 }
 
 #select1 {
   appearance: none;
-  background: url('../public/svg/selectArrow.svg') no-repeat right 15px center;
+  background: url("../public/svg/selectArrow.svg") no-repeat right 15px center;
 }
 
 #select2 {
   appearance: none;
-  background: url('../public/svg/selectArrow2.svg') no-repeat right 9.28px
+  background: url("../public/svg/selectArrow2.svg") no-repeat right 9.28px
     center;
 }

@@ -95,8 +95,6 @@ const QaContainer = () => {
 
   if (isLoading || error || !enabled) return null;
 
-  console.log(data.data.data);
-
   return (
     <QaContainerView
       open={open}

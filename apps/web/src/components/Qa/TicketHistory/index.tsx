@@ -1,7 +1,12 @@
+// ** Services Imports
 import { Get } from "@/src/repository";
-import { GetTicketHistoryListResponse } from "@/src/type/ticket";
 import useSWR from "swr";
+
+// ** Components Imports
 import TicketHistoryItem from "../QaHistoryItem";
+
+// ** Type Imports
+import { GetQaHistoryListResponse } from "@/src/type/qa";
 
 interface PropsType {
   ticketId: number;
@@ -14,7 +19,7 @@ const TicketHistory = ({ ticketId }: PropsType) => {
     isLoading,
     mutate: commentRefetch,
   } = useSWR(`/log/v1/ticket-history-log/${ticketId}`, async (url) =>
-    Get<GetTicketHistoryListResponse>(url)
+    Get<GetQaHistoryListResponse>(url)
   );
 
   if (isLoading) return;

@@ -50,6 +50,7 @@ const BoardContainer = () => {
     }
   );
 
+  return <h1></h1>;
   return (
     <BoardContainerView
       content={content}

@@ -1,33 +1,46 @@
-import EditorJS from "@editorjs/editorjs";
-import { useEffect, useMemo, useRef } from "react";
+// ** Component Imports
+import CustomImage from "@/src/components/Image/CustomImage";
+
+// ** Utils Imports
+import dayjs from "dayjs";
+import dynamic from "next/dynamic";
 
 interface PropsType {}
 
+const DiceEditor = dynamic(() => import("@/src/components/DiceEditor"), {
+  ssr: false,
+});
+
 const EditorContainerView = ({}: PropsType) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const editor = useMemo(
-    () =>
-      new EditorJS({
-        holder: "editorjs",
-      }),
-    []
-  );
-
-  useEffect(() => {
-    return () => {
-      if (editor && editor.destroy) {
-        editor.destroy();
-      }
-    };
-  }, []);
-
   return (
-    <div className="w-full bg-[#FAFAFB] p-5">
-      <div
-        ref={ref}
-        className="w-[500px] h-[500px] bg-blue-200"
-        id="editorjs"
-      ></div>
+    <div className="w-full h-full p-4 bg-white">
+      <div className="flex items-center justify-between">
+        <h1 className="font-bold text-[18px]">회의록 / 2024-04-01</h1>
+        <div className="flex items-center">
+          <button className="w-[80px] rounded-[5px]  h-[30px] bg-slate-300">
+            EDIT
+          </button>
+          <button className="w-[80px] rounded-[5px] ml-2 h-[30px] bg-slate-300">
+            ADD
+          </button>
+        </div>
+      </div>
+      <div className="flex items-center mt-4">
+        <CustomImage
+          src="/images/dice.png"
+          width={30}
+          height={30}
+          alt="profile"
+        />
+        <div className="ml-4">
+          <h1 className="text-gray-500 text-[14px] ">
+            {dayjs().format("YYYY-MM-DD HH:mm:ss")}
+          </h1>
+        </div>
+      </div>
+      <div className="w-full overflow-y-hidden">
+        <DiceEditor />
+      </div>
     </div>
   );
 };

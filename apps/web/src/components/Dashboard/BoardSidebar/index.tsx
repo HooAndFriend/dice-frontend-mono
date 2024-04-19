@@ -1,7 +1,5 @@
 "use client";
 
-import CustomImage from "../../Image/CustomImage";
-
 const BoardSidebar = () => {
   return (
     <div className="w-[200px] bg-white border-r-2 border-[#EBEBEC] px-4 py-2">
@@ -12,7 +10,7 @@ const BoardSidebar = () => {
       <div className="mt-4">
         {data.map((item) =>
           item.children.length > 0 ? (
-            <div>
+            <div key={item.id}>
               <div className="flex items-center mb-2" key={item.id}>
                 <div className="w-[5px] h-[5px] rounded-full bg-black mr-4" />
                 <p>{item.name}</p>

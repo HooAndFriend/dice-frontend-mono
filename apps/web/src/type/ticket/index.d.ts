@@ -9,6 +9,11 @@ export interface GetTicketListResponse extends CommonResponse {
 
 export interface GetTicketResponse extends CommonResponse, TicketInfo {}
 
+export interface GetTicketHistoryListResponse extends CommonResponse {
+  count: number;
+  data: TicketHistory[];
+}
+
 export interface TicketInfo {
   createdDate: Date;
   modifiedDate: Date;
@@ -63,6 +68,25 @@ export interface SettingListInfo {
   admin: {
     id: number;
   };
+}
+
+export interface TicketHistory {
+  createdDate: Date;
+  id: number;
+  ticketId: number;
+  username: string;
+  subUsername: string;
+  type:
+    | "DUE_DATE"
+    | "STATUS"
+    | "WORKER"
+    | "ADMIN"
+    | "CONTENT"
+    | "UPLOAD_FILE"
+    | "DELETE_FILE";
+  after: string;
+  before: string;
+  log: string;
 }
 
 export interface TicketEditMode {

@@ -14,6 +14,7 @@ import { RoleType } from "@/src/type/common";
 // ** Utils Imports
 import dayjs from "dayjs";
 import TicketComment from "../TicketComment";
+import TicketHistory from "../TicketHistory";
 
 interface PropsType {
   data: TicketInfo;
@@ -291,7 +292,7 @@ const TicketCardView = ({
       {subType === "comment" ? (
         <TicketComment ticketId={data.id} />
       ) : (
-        <TicketComment ticketId={data.id} />
+        <TicketHistory ticketId={data.id} />
       )}
     </div>
   );

@@ -1,4 +1,3 @@
-"use client";
 // ** React Imports
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 
@@ -56,6 +55,7 @@ const TicketComment = ({ ticketId }: PropsType) => {
   } = useSWR(`/v1/ticket/comment/${ticketId}`, async (url) =>
     Get<GetTicketCommentListResponse>(url)
   );
+
   const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       saveTicketComment.trigger();

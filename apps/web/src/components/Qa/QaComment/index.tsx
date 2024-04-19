@@ -1,74 +1,74 @@
 "use client";
 // ** React Imports
-import { useState } from "react";
-
-// ** Recoil Imports
-import { UserState } from "@/src/app";
-import { useRecoilValue } from "recoil";
+import { KeyboardEvent, useState } from "react";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 
 // ** Service Imports
-import { Delete, Put } from "@/src/repository";
+import { Get, Post } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
+import useSWR from "swr";
+
+// ** Component Imports
+import CustomImage from "@/src/components/Image/CustomImage";
+import QaCommentItem from "../QaCommentItem";
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
-import { CommentInfo } from "@/src/type/qa";
-
-// ** Utils Imports
-import dayjs from "dayjs";
-import Image from "next/image";
-import CustomImage from "@/src/components/Image/CustomImage";
+import { AddCommentResponse, GetCommentListResponse } from "@/src/type/qa";
 
 interface PropsType {
-  data: CommentInfo;
-  commentRefetch: () => void;
+  qaId: number;
 }
 
-const QaComment = ({ data, commentRefetch }: PropsType) => {
-  const [content, setContent] = useState<string>(data.content);
-  const [mode, setMode] = useState<"view" | "edit">("view");
-
-  const { email } = useRecoilValue(UserState);
+const QaComment = ({ qaId }: PropsType) => {
+  const [comment, setComment] = useState<string>("");
 
   const { handleOpen } = useDialog();
 
-  const handleComment = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setContent(e.target.value);
+  const handleComment = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setComment(e.target.value);
+
+  const {
+    data,
+    error,
+    isLoading,
+    mutate: commentRefetch,
+  } = useSWR(`/v1/qa/comment/${qaId}`, async (url) =>
+    Get<GetCommentListResponse>(url)
+  );
+
+  const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      addComment.trigger();
+    }
   };
 
-  const deleteComment = useSWRMutation(
-    `/v1/qa/comment/${data.id}`,
-    async (url: string) => await Delete<CommonResponse<void>>(url),
-    {
-      onSuccess: () => {
-        commentRefetch();
-      },
-      onError: (error) => {
-        handleOpen({
-          title: "Error",
-          message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-      },
-    }
-  );
+  const handleAddComment = () => {
+    if (comment === "") {
+      handleOpen({
+        title: "Error",
+        message: "Enter Comment",
+        logLevel: "warn",
+        buttonText: "Close",
+        type: "alert",
+      });
 
-  const updateComment = useSWRMutation(
+      return;
+    }
+
+    addComment.trigger();
+  };
+
+  //** 댓글 등록
+  const addComment = useSWRMutation(
     "/v1/qa/comment",
     async (url: string) =>
-      await Put<CommonResponse<void>>(url, {
-        commentId: data.id,
-        content,
-      }),
+      await Post<AddCommentResponse>(url, { content: comment, qaId }),
     {
       onSuccess: () => {
+        setComment("");
         commentRefetch();
-        setMode("view");
       },
       onError: (error) => {
         handleOpen({
@@ -82,67 +82,39 @@ const QaComment = ({ data, commentRefetch }: PropsType) => {
     }
   );
 
+  if (isLoading) return;
+
   return (
-    <div className="w-full mb-5">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
+    <div>
+      <div className="flex mt-5">
+        <input
+          id="content"
+          onChange={handleComment}
+          value={comment}
+          className="px-4 w-full border border-lightGray rounded-[10px] mr-[10px]"
+          onKeyDown={handleCommentEnter}
+        />
+        <div
+          onClick={handleAddComment}
+          className="w-[40px] h-[40px] bg-black text-white rounded-[10px] flex justify-center items-center"
+        >
           <CustomImage
-            className="rounded-full border border-lightGray mr-[10px]"
-            alt="profile"
-            src={data.user.profile}
-            width={30}
-            height={30}
+            src="/images/plus.png"
+            width={24}
+            height={24}
+            alt="plus"
           />
-          <div className="flex font-spoqa">
-            <div className="mr-[10px] text-[16px]">{data.user.nickname}</div>
-            <div className="flex items-center text-darkGray text-[12px]">
-              {dayjs(data.createdDate).format("YYYY-MM-DD HH:mm:ss")}
-            </div>
-            {email === data.user.email && (
-              <>
-                <div
-                  className="flex items-center ml-4 mr-2 text-xs text-darkGray"
-                  onClick={() => setMode("edit")}
-                >
-                  edit
-                </div>
-                <div
-                  className="flex items-center text-xs cursor-pointer text-darkGray"
-                  onClick={deleteComment.trigger}
-                >
-                  delete
-                </div>
-              </>
-            )}
-          </div>
         </div>
       </div>
-      {mode === "view" ? (
-        <div className="ml-[41px] mt-[9px] text-[16px]">{data.content}</div>
-      ) : (
-        <div className="ml-[41px] mt-5">
-          <input
-            id="content"
-            onChange={handleComment}
-            value={content}
-            className="px-4 h-[40px] w-full border border-lightGray rounded-[10px] mr-[10px]"
+      <div className="mt-9">
+        {data.data.data.map((item) => (
+          <QaCommentItem
+            key={item.id}
+            data={item}
+            commentRefetch={commentRefetch}
           />
-          <div className="flex items-center mt-4">
-            <button
-              className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
-              onClick={updateComment.trigger}
-            >
-              save
-            </button>
-            <button
-              className="w-[60px] h-[30px] flex items-center justify-center rounded-[8px]"
-              onClickCapture={() => setMode("view")}
-            >
-              cancel
-            </button>
-          </div>
-        </div>
-      )}
+        ))}
+      </div>
     </div>
   );
 };

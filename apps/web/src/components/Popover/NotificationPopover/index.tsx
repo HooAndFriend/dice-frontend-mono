@@ -4,30 +4,28 @@
 import { useRouter } from "next/navigation";
 
 // ** React Imports
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 // ** Component Imports
-
-// ** Recoil Imports
-import { useRecoilState, useSetRecoilState } from "recoil";
-import {
-  AuthState,
-  TeamState,
-  UserState,
-  WorkspaceState,
-  authInitState,
-  teamInitState,
-  userInitState,
-  workspaceInitState,
-} from "@/src/app";
 import CustomImage from "../../Image/CustomImage";
-import dayjs from "dayjs";
 import NotificationItem from "./NotificationItem";
+
+// ** Service Imports
+import { Get } from "@/src/repository";
+import useSWR from "swr";
 
 const NotificationPopover = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOpen = () => setOpen((cur) => !cur);
+
+  // const { error, isLoading, data } = useSWR("/push/v1", async (url) =>
+  //   Get<any>(url)
+  // );
+
+  // if (isLoading) return <div>Loading...</div>;
+
+  // console.log(data);
 
   return (
     <div>

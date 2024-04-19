@@ -24,4 +24,11 @@ export const MenuList = [
     icon: QaIcon,
     isClicked: false,
   },
+  {
+    id: 3,
+    name: "BOARD",
+    link: "/dashboard/board",
+    icon: TicketIcon,
+    isClicked: false,
+  },
 ];

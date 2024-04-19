@@ -1,14 +1,22 @@
 // ** React Imports
+import { useState } from "react";
 
 // ** Componet imports
 import EpicCardView from "./EpicCard";
+import EpicCardSkeleton from "./EpicCardSkeleton";
 
 // ** Service Imports
-import { Delete, Get, Patch, Post } from "@/src/repository";
+import { Delete, Get, Patch } from "@/src/repository";
 import useSWR, { mutate } from "swr";
+import useSWRMutation from "swr/mutation";
 
 // ** Type Imports
-import { GetTicketResponse } from "@/src/type/ticket";
+import { CommonResponse } from "@/src/type/common";
+import {
+  EpicDetail,
+  EpicEditMode,
+  GetEpicDetailResponse,
+} from "@/src/type/epic";
 
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
@@ -16,15 +24,8 @@ import useInput from "@/src/hooks/useInput";
 // ** Recoil Imports
 import { useRecoilValue } from "recoil";
 import { WorkspaceState } from "@/src/app";
-import {
-  EpicDetail,
-  EpicEditMode,
-  GetEpicDetailResponse,
-} from "@/src/type/epic";
-import { useState } from "react";
-import EpicCardSkeleton from "./EpicCardSkeleton";
-import useSWRMutation from "swr/mutation";
-import { CommonResponse } from "@/src/type/common";
+
+// ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 
 interface PropsType {
@@ -37,12 +38,13 @@ const EpicCard = ({ epicId, handleClose }: PropsType) => {
     name: "view",
     content: "view",
   });
+  const [currentArg, setCurrentArg] = useState<"content" | "name">("name");
 
   const { data, setData, handleInput } = useInput<EpicDetail>({
     id: 0,
     name: "",
     code: "",
-    dueDate: null,
+    content: "",
     ticket: [],
     admin: null,
   });
@@ -63,15 +65,17 @@ const EpicCard = ({ epicId, handleClose }: PropsType) => {
 
   const updateEpic = useSWRMutation(
     "/v1/epic",
-    async (url: string) => {
+    async (url: string, { arg }: { arg: "name" | "content" }) => {
+      setCurrentArg(arg);
       return await Patch<CommonResponse<void>>(url, {
         epicId,
         name: data.name,
+        content: data.content,
       });
     },
     {
       onSuccess: () => {
-        setMode({ ...mode, name: "view" });
+        setMode((c) => ({ ...c, [currentArg]: "view" }));
         mutate("/v1/epic");
         mutate(`/v1/epic/${epicId}`);
       },
@@ -117,9 +121,10 @@ const EpicCard = ({ epicId, handleClose }: PropsType) => {
       setMode={setMode}
       role={role}
       data={data}
+      setData={setData}
       onChange={handleInput}
       handleClose={handleClose}
-      handleUpdateName={updateEpic.trigger}
+      handleUpdateEpic={updateEpic.trigger}
       handleDeleteEpic={deleteEpic.trigger}
     />
   );

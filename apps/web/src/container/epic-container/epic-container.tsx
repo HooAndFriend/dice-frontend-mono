@@ -48,7 +48,7 @@ const EpicContainerView = ({
           <div className="w-[35%] pl-8">
             <EpicCard
               epicId={selectContent.id}
-              handleClose={() => setSelectContent({ id: 0, type: "TICKET" })}
+              handleClose={() => setSelectContent({ id: 0, type: "EPIC" })}
             />
           </div>
         )}

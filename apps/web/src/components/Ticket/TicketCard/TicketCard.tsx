@@ -1,9 +1,5 @@
-// ** React Imports
-import { KeyboardEvent } from "react";
-
 // ** Components Imports
 import CustomInput from "../../Input/CustomInput";
-import TicketComment from "../TicketComment";
 import TicketStatusButton from "../TicketStatusButton";
 import QuillEditor from "../../QuillEditor";
 import TicketDatePicker from "../TicketDatePicker";
@@ -14,28 +10,22 @@ import TicketSettingButton from "../TicketSettingButton";
 // ** Type Imports
 import { TicketEditMode, TicketInfo } from "@/src/type/ticket";
 import { RoleType } from "@/src/type/common";
-import { CommentInfo } from "@/src/type/qa";
 
 // ** Utils Imports
 import dayjs from "dayjs";
-import Image from "next/image";
-import CustomImage from "../../Image/CustomImage";
+import TicketComment from "../TicketComment";
 
 interface PropsType {
   data: TicketInfo;
   mode: TicketEditMode;
   role: RoleType;
-  comment: string;
-  commentData: CommentInfo[];
-  handleComment: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleCommentEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
+  subType: "comment" | "history";
+  setSubType: (type: "comment" | "history") => void;
   setMode: (mode: TicketEditMode) => void;
   setData: (data: TicketInfo) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  commentRefetch: () => void;
   ticketRefetch: () => void;
   handleClose: () => void;
-  handleSaveTicketComment: () => void;
   handleDeleteTicketFile: (id: number) => void;
   handleUpdateTicket: (value: "content" | "name" | "storypoint") => void;
 }
@@ -44,17 +34,13 @@ const TicketCardView = ({
   data,
   role,
   mode,
-  comment,
-  commentData,
-  handleComment,
+  subType,
+  setSubType,
   onChange,
   setData,
   setMode,
   handleClose,
-  commentRefetch,
   ticketRefetch,
-  handleSaveTicketComment,
-  handleCommentEnter,
   handleDeleteTicketFile,
   handleUpdateTicket,
 }: PropsType) => {
@@ -280,35 +266,33 @@ const TicketCardView = ({
         ))}
       </div>
       <hr className="my-[20px]" />
-      <div className="flex mt-5">
-        <input
-          id="content"
-          onChange={handleComment}
-          value={comment}
-          className="px-4 w-full border border-lightGray rounded-[10px] mr-[10px]"
-          onKeyDown={handleCommentEnter}
-        />
-        <div
-          onClick={handleSaveTicketComment}
-          className="w-[40px] h-[40px] bg-black text-white rounded-[10px] flex justify-center items-center"
+      <div className="flex items-center">
+        <button
+          className="text-[12px] px-2 h-[30px] rounded-lg mr-2"
+          style={{
+            backgroundColor: subType === "comment" ? "#623AD6" : "white",
+            color: subType === "comment" ? "white" : "#623AD6",
+          }}
+          onClick={() => setSubType("comment")}
         >
-          <CustomImage
-            src="/images/plus.png"
-            width={24}
-            height={24}
-            alt="plus"
-          />
-        </div>
+          comment
+        </button>
+        <button
+          className="text-[12px] px-2 h-[30px] rounded-lg"
+          style={{
+            backgroundColor: subType === "history" ? "#623AD6" : "white",
+            color: subType === "history" ? "white" : "#623AD6",
+          }}
+          onClick={() => setSubType("history")}
+        >
+          history
+        </button>
       </div>
-      <div className="mt-9">
-        {commentData.map((item) => (
-          <TicketComment
-            key={item.id}
-            data={item}
-            commentRefetch={commentRefetch}
-          />
-        ))}
-      </div>
+      {subType === "comment" ? (
+        <TicketComment ticketId={data.id} />
+      ) : (
+        <TicketComment ticketId={data.id} />
+      )}
     </div>
   );
 };

@@ -12,6 +12,8 @@ import WorkspaceAddMemberContent from "./components/WorkspaceAddMemberContent";
 
 // ** Type Imports
 import { WorkspaceUserDetailInfo } from "@/src/type/workspace";
+import Image from "next/image";
+import CustomImage from "../../Image/CustomImage";
 
 interface PropsType {
   open: boolean;
@@ -76,7 +78,7 @@ const WorkspaceModalView = ({
                         Workspace Setting
                       </div>
                       <div onClick={() => setOpen(false)}>
-                        <img
+                        <CustomImage
                           alt="X"
                           src="/svg/XButton.svg"
                           width={32}
@@ -96,11 +98,13 @@ const WorkspaceModalView = ({
                         </div>
                         <div className="w-[187px] h-[29.926px] mt-[60px] flex relative">
                           {data.slice(0, 3).map((item) => (
-                            <img
+                            <CustomImage
                               src={item.teamUser.user.profile}
                               key={item.id}
                               alt="Sample Image"
                               className="w-[29.204px] h-[29.926px] rounded-full"
+                              width={29}
+                              height={29}
                             />
                           ))}
                           <img
@@ -118,7 +122,7 @@ const WorkspaceModalView = ({
                                 : "bg-main text-white"
                             }`}
                           >
-                            <img
+                            <CustomImage
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 0
@@ -139,7 +143,7 @@ const WorkspaceModalView = ({
                                 : "bg-main text-white"
                             }`}
                           >
-                            <img
+                            <CustomImage
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 1 ? "/svg/team.svg" : "/svg/teamW.svg"
@@ -158,7 +162,7 @@ const WorkspaceModalView = ({
                                 : "bg-main text-white"
                             }`}
                           >
-                            <img
+                            <CustomImage
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 2

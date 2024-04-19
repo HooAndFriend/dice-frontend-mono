@@ -1,101 +1,206 @@
-import CustomInput from "../../Input/CustomInput";
-import TicketComment from "../TicketComment";
-import TicketStatusButton from "../TicketStatusButton";
+// ** React Imports
+import { KeyboardEvent, useState } from "react";
 
-const TicketCard = () => {
+// ** Componet imports
+import TicketCardView from "./TicketCard";
+
+// ** Service Imports
+import { Delete, Get, Patch, Post } from "@/src/repository";
+import useSWR, { mutate } from "swr";
+
+// ** Type Imports
+import {
+  GetTicketCommentListResponse,
+  GetTicketResponse,
+  TicketEditMode,
+  TicketInfo,
+} from "@/src/type/ticket";
+
+// ** Utils Imports
+import useInput from "@/src/hooks/useInput";
+
+// ** Recoil Imports
+import { useRecoilValue } from "recoil";
+import { WorkspaceState } from "@/src/app";
+import useSWRMutation from "swr/mutation";
+import { CommonResponse } from "@/src/type/common";
+import { useDialog } from "@/src/context/DialogContext";
+import TicketCardSkeletonView from "./TicketCardSkeleton";
+
+interface PropsType {
+  ticketId: number;
+  handleClose: () => void;
+}
+
+const TicketCard = ({ ticketId, handleClose }: PropsType) => {
+  const [comment, setComment] = useState<string>("");
+  const [currentArg, setCurrentArg] = useState<
+    "content" | "name" | "storypoint"
+  >("name");
+  const [mode, setMode] = useState<TicketEditMode>({
+    content: "view",
+    storypoint: "view",
+    name: "view",
+  });
+
+  const { data, handleInput, setData } = useInput<TicketInfo>({
+    createdDate: null,
+    modifiedDate: null,
+    id: 0,
+    name: "",
+    status: "",
+    content: "",
+    code: "",
+    storypoint: 0,
+    dueDate: null,
+    completeDate: null,
+    reopenDate: null,
+    ticketFile: [],
+    epic: {
+      id: 0,
+      name: "",
+    },
+    admin: {
+      id: 0,
+      nickname: "",
+      profile: "",
+    },
+    worker: {
+      id: 0,
+      nickname: "",
+      profile: "",
+    },
+    ticketSetting: null,
+  });
+
+  const { role } = useRecoilValue(WorkspaceState);
+
+  const { handleOpen } = useDialog();
+
+  const {
+    error,
+    isLoading,
+    mutate: ticketRefetch,
+  } = useSWR(
+    `/v1/ticket/detail/${ticketId}`,
+    async (url) => Get<GetTicketResponse>(url),
+    {
+      onSuccess: (res) => {
+        setData(res.data);
+      },
+    }
+  );
+
+  const {
+    data: commentData,
+    error: commentError,
+    isLoading: commentLoading,
+    mutate: commentRefetch,
+  } = useSWR(`/v1/ticket/comment/${ticketId}`, async (url) =>
+    Get<GetTicketCommentListResponse>(url)
+  );
+
+  // ** QA 수정
+  const updateTicket = useSWRMutation(
+    "/v1/ticket",
+    async (
+      url: string,
+      { arg }: { arg: "content" | "name" | "storypoint" }
+    ) => {
+      setCurrentArg(arg);
+      return await Patch<CommonResponse<void>>(url, {
+        ticketId,
+        value: data[arg],
+        type: arg,
+        storypoint: Number(data.storypoint),
+      });
+    },
+    {
+      onSuccess: () => {
+        setMode((c) => ({ ...c, [currentArg]: "view" }));
+        mutate("/v1/epic");
+        mutate("/v1/ticket");
+        mutate(`/v1/ticket/detail/${ticketId}`);
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+  const saveTicketComment = useSWRMutation(
+    "/v1/ticket/comment",
+    async (url: string) =>
+      await Post<CommonResponse<void>>(url, { content: comment, ticketId }),
+    {
+      onSuccess: () => {
+        setComment("");
+        commentRefetch();
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
+  const deleteTicketFile = useSWRMutation(
+    "/v1/ticket/file/",
+    async (url: string, { arg }: { arg: number }) =>
+      await Delete<CommonResponse<void>>(url + arg),
+    {
+      onSuccess: () => {
+        ticketRefetch();
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
+  const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      saveTicketComment.trigger();
+    }
+  };
+
+  if (isLoading || commentLoading) return <TicketCardSkeletonView />;
+
   return (
-    <div className="mt-6 h-[530px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8">
-      <div className="flex items-center justify-between">
-        <h1>DICE-3-게시판</h1>
-        <div className="flex items-center">
-          <button className="w-[110px] h-[40px] rounded-[30px] border-solid border-2 border-[#EBEBEC]">
-            EDIT
-          </button>
-          <button className="w-[110px] h-[40px] rounded-[30px] bg-black text-white ml-4">
-            DELETE
-          </button>
-        </div>
-      </div>
-      <div className="flex items-center justify-between mt-[30px]">
-        <h1>상세보기</h1>
-        {/* <TicketStatusButton
-          status="REOPEN"
-          // width="85px"
-          // height="30px"
-          // borderRadius="6px"
-        /> */}
-      </div>
-      <hr className="my-[20px]" />
-      <div className="flex items-center">
-        <div className="w-[110px]">
-          <h1>Type</h1>
-        </div>
-        <div className="flex items-center">
-          <h3>SCREEN</h3>
-        </div>
-      </div>
-      <div className="flex items-center">
-        <div className="w-[110px]">
-          <h1>Admin</h1>
-        </div>
-        <div className="flex items-center">
-          <h3>이가인</h3>
-        </div>
-      </div>
-      <div className="flex items-center">
-        <div className="w-[110px]">
-          <h1>Worker</h1>
-        </div>
-        <div className="flex items-center">
-          <h3>김인후</h3>
-        </div>
-      </div>
-      <hr className="my-[20px]" />
-      <div className="flex items-center">
-        <div className="w-[110px]">
-          <h1>RegDate</h1>
-        </div>
-        <div className="flex items-center w-[110px]">
-          <h3>2024-01-25</h3>
-        </div>
-        <div className="w-[110px]">
-          <h1>ModDate</h1>
-        </div>
-        <div className="flex items-center w-[110px]">
-          <h3>2024-01-25</h3>
-        </div>
-      </div>
-      <div className="flex items-center">
-        <div className="w-[110px]">
-          <h1>DueDate</h1>
-        </div>
-        <div className="flex items-center w-[110px]">
-          <h3>2024-01-25</h3>
-        </div>
-        <div className="w-[110px]">
-          <h1>ComDate</h1>
-        </div>
-        <div className="flex items-center w-[110px]">
-          <h3>2024-01-25</h3>
-        </div>
-      </div>
-      <hr className="my-[20px]" />
-      <h1 className="mb-4">Story Point</h1>
-      <CustomInput width="480px" height="40px" borderRadius="10px" />
-      <h1 className="my-4">Content</h1>
-      <CustomInput width="480px" height="80px" borderRadius="10px" />
-      <h1 className="my-4">File</h1>
-      <div className="w-[40px] h-[40px] bg-green-300 rounded-lg"></div>
-      <hr className="my-[20px]" />
-      <div className="flex items-center">
-        <CustomInput width="438px" height="40px" borderRadius="10px" />
-        <div className="ml-4 w-[40px] h-[40px] rounded-[10px] bg-black text-white flex items-center justify-center">
-          +
-        </div>
-      </div>
-      <TicketComment />
-      <TicketComment />
-    </div>
+    <TicketCardView
+      data={data}
+      mode={mode}
+      role={role}
+      comment={comment}
+      commentData={commentData.data.data}
+      handleComment={(e) => setComment(e.target.value)}
+      onChange={handleInput}
+      setData={setData}
+      setMode={setMode}
+      handleClose={handleClose}
+      handleSaveTicketComment={saveTicketComment.trigger}
+      handleCommentEnter={handleCommentEnter}
+      ticketRefetch={ticketRefetch}
+      commentRefetch={commentRefetch}
+      handleDeleteTicketFile={deleteTicketFile.trigger}
+      handleUpdateTicket={updateTicket.trigger}
+    />
   );
 };
 

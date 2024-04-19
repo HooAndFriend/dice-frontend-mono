@@ -1,3 +1,6 @@
+// ** Next Imports
+import Image from "next/image";
+
 // ** Swr Imports
 import useSWR from "swr";
 import { Get } from "@/src/repository";
@@ -14,6 +17,7 @@ import { GetTeamUserListResponse } from "@/src/type/team";
 
 // ** Utils Imports
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 interface PropsType {
   handleOpen: () => void;
@@ -56,7 +60,8 @@ const TeamMemberContent = ({ handleOpen }: PropsType) => {
           onClick={handleOpen}
           className="flex items-center justify-center font-bold font-spoqa font-base"
         >
-          <img
+          <CustomImage
+            alt="addMember"
             className="mr-[10px]"
             src="/svg/addMember.svg"
             width={24}

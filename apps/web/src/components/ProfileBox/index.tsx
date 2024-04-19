@@ -1,4 +1,5 @@
 import Image from "next/image";
+import CustomImage from "../Image/CustomImage";
 
 interface PropsType {
   image: string;
@@ -11,7 +12,7 @@ const ProfileBox = ({ image, alt, width, height }: PropsType) => {
   return (
     <div>
       {image ? (
-        <Image
+        <CustomImage
           src={image}
           width={width ? width : 30}
           height={height ? height : 30}
@@ -21,7 +22,7 @@ const ProfileBox = ({ image, alt, width, height }: PropsType) => {
           }] rounded-full border-2 border-[#EBEBEC] mr-[10px]`}
         />
       ) : (
-        <Image
+        <CustomImage
           src="/images/dice.png"
           width={width ? width : 30}
           height={height ? height : 30}

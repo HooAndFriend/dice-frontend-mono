@@ -1,22 +1,33 @@
 // ** Component Imports
-import EpicTable from "@/src/container/epic-container/components/EpicTable";
+import EpicTable from "@/src/components/Epic/EpicTable";
+import EpicSearchCard from "../../components/Epic/EpicSearchCard";
+import EpicCard from "@/src/components/Epic/EpicCard";
+import TicketCard from "@/src/components/Ticket/TicketCard";
+
+// ** Utils Imports
+import { DropResult } from "react-beautiful-dnd";
 
 // ** Type Imports
-import { EpicInfo } from "@/src/type/epic";
-import EpicSearchCard from "./components/EpicSearchCard";
+import { EpicInfo, SelectContent } from "@/src/type/epic";
 
 interface PropsType {
   word: string;
   epicData: EpicInfo[];
   epicCount: number;
+  selectContent: SelectContent;
+  setSelectContent: (value: SelectContent) => void;
   handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onDragEnd: ({ source, destination }: DropResult) => void;
 }
 
 const EpicContainerView = ({
   epicData,
   epicCount,
   word,
+  selectContent,
+  setSelectContent,
   handleWord,
+  onDragEnd,
 }: PropsType) => {
   return (
     <div className="w-full">
@@ -24,9 +35,32 @@ const EpicContainerView = ({
       <div className="mt-8">
         <h1 className="pl-4 font-bold text-md">Total Epic : {epicCount}</h1>
       </div>
-      <EpicTable
-        epicData={epicData.filter((item) => item.name.includes(word))}
-      />
+      <div className={`${selectContent.id !== 0 && "flex"}`}>
+        <div style={{ width: selectContent.id !== 0 ? "65%" : "100%" }}>
+          <EpicTable
+            word={word}
+            handleClick={setSelectContent}
+            epicData={epicData.filter((item) => item.name.includes(word))}
+            onDragEnd={onDragEnd}
+          />
+        </div>
+        {selectContent.id !== 0 && selectContent.type === "EPIC" && (
+          <div className="w-[35%] pl-8">
+            <EpicCard
+              epicId={selectContent.id}
+              handleClose={() => setSelectContent({ id: 0, type: "TICKET" })}
+            />
+          </div>
+        )}
+        {selectContent.id !== 0 && selectContent.type === "TICKET" && (
+          <div className="w-[35%] pl-8">
+            <TicketCard
+              ticketId={selectContent.id}
+              handleClose={() => setSelectContent({ id: 0, type: "TICKET" })}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

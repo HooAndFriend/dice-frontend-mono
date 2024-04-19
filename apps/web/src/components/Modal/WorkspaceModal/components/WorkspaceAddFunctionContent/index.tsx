@@ -1,6 +1,6 @@
 // ** Recoil Imports
 import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
+import { WorkspaceState } from "@/src/app";
 
 // ** Service Imports
 import useSWR from "swr";
@@ -19,12 +19,13 @@ import { CommonResponse } from "@/src/type/common";
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 import { useState } from "react";
+import Image from "next/image";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 const WorkspaceAddFunctionContent = () => {
   const [word, setWord] = useState<string>("");
 
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid, role } = useRecoilValue(WorkspaceState);
+  const { role } = useRecoilValue(WorkspaceState);
 
   const { handleOpen } = useDialog();
 
@@ -88,9 +89,10 @@ const WorkspaceAddFunctionContent = () => {
           value={word}
           onChange={(e) => setWord(e.target.value)}
         />
-        <img
+        <CustomImage
           className="mr-[15px]"
           src="/svg/searchIcon.svg"
+          alt="searchIcon"
           width={24}
           height={24}
         />
@@ -108,7 +110,8 @@ const WorkspaceAddFunctionContent = () => {
               >
                 {item.function}
                 {role === "ADMIN" && (
-                  <img
+                  <CustomImage
+                    alt="trashcanIcon"
                     className="mr-[13px] cursor-pointer"
                     src="/svg/trashcanIcon.svg"
                     width={15}
@@ -147,7 +150,8 @@ const WorkspaceAddFunctionContent = () => {
                     className="w-[97px] h-9 border border-[#EBEBEC] rounded-[50px] flex items-center font-spoqa font-bold text-base justify-center mr-[18px] cursor-pointer"
                     onClick={() => addWorkspaceFunction.trigger(item.function)}
                   >
-                    <img
+                    <CustomImage
+                      alt="edit_plus"
                       className="mr-2"
                       src="/svg/edit_plus.svg"
                       width={24}

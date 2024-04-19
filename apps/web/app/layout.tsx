@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "HI-DICE",
   description: "HI-DICE",
   icons: {
-    // icon: "/ico/favicon.ico",
+    icon: "/ico/favicon.ico",
   },
 };
 

@@ -6,6 +6,8 @@ export interface GetEpicListResponse extends CommonResponse {
   data: EpicInfo[];
 }
 
+export interface GetEpicDetailResponse extends CommonResponse, EpicDetail {}
+
 export interface EpicInfo {
   id: number;
   code: string;
@@ -24,3 +26,33 @@ export type EpicStatus =
   | "REOPEN"
   | "HOLD"
   | "NOTHING";
+
+export interface EpicEditMode {
+  name: "view" | "edit";
+  content: "view" | "edit";
+}
+
+export interface EpicDetail {
+  id: number;
+  name: string;
+  code: string;
+  dueDate: Date;
+  ticket: EpicChildTicket[];
+  admin: {
+    id: number;
+    nickname: string;
+    profile: string;
+  };
+}
+
+export interface EpicChildTicket {
+  id: number;
+  name: string;
+  status: EpicStatus;
+  code: string;
+}
+
+export interface SelectContent {
+  id: number;
+  type: "TICKET" | "EPIC";
+}

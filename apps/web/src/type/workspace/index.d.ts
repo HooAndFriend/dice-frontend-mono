@@ -1,4 +1,5 @@
 import { RoleType, CommonResponse } from "../common";
+import { EpicStatus } from "../epic";
 
 export interface SaveWorkspaceParam {
   name: string;
@@ -50,6 +51,21 @@ export interface GetWorkspaceUserInviteListResponse extends CommonResponse {
 export interface GetSearchWorkspaceUserListResponse extends CommonResponse {
   count: number;
   data: WorkspaceUser[];
+}
+
+export interface GetTodayTaskCountResponse extends CommonResponse, TaskCount {}
+
+export interface GetDoneTaskCountResponse extends CommonResponse, TaskCount {}
+
+export interface GetTaskProgressResponse extends CommonResponse, TaskProgress {}
+export interface GetTaskListResponse extends CommonResponse {
+  count: number;
+  data: Task[];
+}
+
+export interface GetDateTaskListResponse extends CommonResponse {
+  count: number;
+  data: DateTask[];
 }
 
 export interface WorkspaceUserDetailInfo {
@@ -128,4 +144,30 @@ export interface WorkspaceInfo {
 export interface WorkspaceFunction {
   function: WorksapceFunctionType;
   isUse: boolean;
+}
+
+export interface TaskCount {
+  count: number;
+  yesterdayCount: number;
+}
+
+export interface TaskProgress {
+  todayProgress: 39.130434782608695;
+  yesterdayProgress: 11.11111111111111;
+}
+
+export interface Task {
+  createdDate: Date;
+  id: number;
+  code: string;
+  status: EpicStatus;
+  title: string;
+}
+
+export interface DateTask {
+  id: number;
+  name: string;
+  dueDate: Date;
+  type: string;
+  createdDate: Date;
 }

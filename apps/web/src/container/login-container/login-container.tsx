@@ -3,6 +3,8 @@ import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Type Imports
 import { DiceLoginParma, SocialType } from "@/src/type/auth";
+import Image from "next/image";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 interface PropsType {
   loginUser: DiceLoginParma;
@@ -26,13 +28,18 @@ const LoginContainerView = ({
       <div className="bg-white w-[900px] h-[613px] rounded-2xl flex shadow-md">
         <div className="w-1/2 h-full  bg-[#F6F8FF] rounded-tl-2xl rounded-bl-2xl flex">
           <div className="w-[89px] h-[27px] ml-[34px] mt-[45px] flex items-center">
-            <img src="/images/dice2.png" alt="leftTop" width={19} height={17} />
+            <CustomImage
+              src="/images/dice2.png"
+              alt="leftTop"
+              width={19}
+              height={17}
+            />
             <div className="ml-1 text-xl font-medium text-main font-open">
               HIDICE
             </div>
           </div>
           <div className="flex items-end justify-end w-[270px] h-[240px] mt-[332px] ml-[21px]">
-            <img
+            <CustomImage
               src="/images/dice.png"
               alt="My Image"
               width={270}
@@ -104,7 +111,7 @@ const LoginContainerView = ({
                 className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
                 onClick={() => handleSocialLogin("MICROSOFT")}
               >
-                <img
+                <CustomImage
                   src="/images/microsoft.png"
                   alt="Microsoft"
                   width={24}
@@ -115,7 +122,7 @@ const LoginContainerView = ({
                 className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
                 onClick={() => handleSocialLogin("GOOGLE")}
               >
-                <img
+                <CustomImage
                   src="/images/google.png"
                   alt="google"
                   width={24}
@@ -126,7 +133,7 @@ const LoginContainerView = ({
                 className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
                 // onClick={() => handleSocialLogin("APPLE")}
               >
-                <img
+                <CustomImage
                   src="/images/apple.png"
                   alt="apple"
                   width={28}
@@ -137,7 +144,7 @@ const LoginContainerView = ({
                 className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
                 onClick={() => handleSocialLogin("GITHUB")}
               >
-                <img
+                <CustomImage
                   src="/images/github.png"
                   alt="github"
                   width={28}
@@ -148,7 +155,7 @@ const LoginContainerView = ({
                 className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
                 onClick={() => handleSocialLogin("TWITTER")}
               >
-                <img
+                <CustomImage
                   src="/images/twitter.png"
                   alt="twitter"
                   width={24}

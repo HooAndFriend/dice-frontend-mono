@@ -4,6 +4,7 @@ import { WorksapceFunction } from "../workspace";
 export interface DiceLoginParma {
   email: string;
   password: string;
+  fcmToken: string;
 }
 
 export interface SocialLoginParams {
@@ -15,6 +16,7 @@ export interface DiceSignupParams {
   email: string;
   password: string;
   nickname: string;
+  fcmToken: string;
 }
 
 export interface SocialSignupParams {
@@ -22,6 +24,7 @@ export interface SocialSignupParams {
   token: string;
   email: string;
   nickname: string;
+  fcmToken: string;
 }
 
 export type SocialType =

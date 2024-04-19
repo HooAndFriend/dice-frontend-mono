@@ -1,33 +1,88 @@
 "use client";
+// ** React Imports
+import { useEffect, useState } from "react";
 
 // ** Component Imports
 import EpicContainerView from "./epic-container";
 
 // ** Service Imports
-import useSWR from "swr";
-import { Get } from "@/src/repository";
+import useSWR, { mutate } from "swr";
+import { Get, Patch } from "@/src/repository";
+import useSWRMutation from "swr/mutation";
+
+// ** Utils Imports
+import { DropResult } from "react-beautiful-dnd";
 
 // ** Type Imports
-import { GetEpicListResponse } from "@/src/type/epic";
-import { useState } from "react";
+import { GetEpicListResponse, SelectContent } from "@/src/type/epic";
+import { CommonResponse } from "@/src/type/common";
+
+// ** Context Imports
+import { useDialog } from "@/src/context/DialogContext";
 
 const EpicConatiner = () => {
   const [word, setWord] = useState<string>("");
+  const [selectContent, setSelectContent] = useState<SelectContent>({
+    id: 0,
+    type: "EPIC",
+  });
+  const [enabled, setEnabled] = useState<boolean>(false);
+
+  const { handleOpen } = useDialog();
 
   const { data, error, isLoading } = useSWR("/v1/epic", async (url) =>
     Get<GetEpicListResponse>(url)
   );
 
-  if (isLoading) return;
+  const updateEpicOrder = useSWRMutation(
+    "/v1/epic/order",
+    async (
+      url: string,
+      { arg }: { arg: { epicId: number; targetEpicId: number } }
+    ) => await Patch<CommonResponse<void>>(url, arg),
+    {
+      onSuccess: ({ data }) => {
+        mutate("/v1/epic");
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
 
-  if (error) return;
+  const onDragEnd = ({ source, destination }: DropResult) => {
+    updateEpicOrder.trigger({
+      epicId: source.index,
+      targetEpicId: destination.index,
+    });
+  };
+
+  useEffect(() => {
+    const animation = requestAnimationFrame(() => setEnabled(true));
+
+    return () => {
+      cancelAnimationFrame(animation);
+      setEnabled(false);
+    };
+  }, []);
+
+  if (isLoading || error || !enabled) return;
 
   return (
     <EpicContainerView
       epicData={data.data.data}
       epicCount={data.data.count}
       word={word}
+      selectContent={selectContent}
+      setSelectContent={setSelectContent}
       handleWord={(e) => setWord(e.target.value)}
+      onDragEnd={onDragEnd}
     />
   );
 };

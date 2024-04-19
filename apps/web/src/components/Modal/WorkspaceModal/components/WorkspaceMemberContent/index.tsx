@@ -8,18 +8,11 @@ import WorkspaceUserBox from "../WorkspaceUserBox";
 // ** Type Imports
 import { GetWorkspaceUserListResponse } from "@/src/type/workspace";
 
-// ** Recoil Imports
-import { AuthState, WorkspaceState } from "@/src/app";
-import { useRecoilValue } from "recoil";
-
 interface PropsType {
   handleOpen: () => void;
 }
 
 const WorkspaceMemberContent = ({ handleOpen }: PropsType) => {
-  const { uuid } = useRecoilValue(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
-
   const { data, error, isLoading } = useSWR("/v1/workspace-user", async (url) =>
     Get<GetWorkspaceUserListResponse>(url)
   );
@@ -34,7 +27,7 @@ const WorkspaceMemberContent = ({ handleOpen }: PropsType) => {
         <img className="mr-[10px]" src="/svg/addMember.svg" alt="addMember" />
         <div className="text-base font-bold font-spoqa">Add Member</div>
       </div>
-      <div className="w-full h-[562px] mt-[29px]">
+      <div className="w-full h-[562px] mt-[29px] overflow-y-auto overflow-x-hidden">
         {data.data.data.map((item) => (
           <WorkspaceUserBox
             key={item.id}

@@ -22,7 +22,7 @@ const TicketMenuItem = ({ link, icon: Icon, isClicked, name }: PropsType) => {
           </div>
         </div>
         <div className="w-[70%]">
-          <h1>{name}</h1>
+          <h1 className={`text-${isClicked ? "white" : "black"}`}>{name}</h1>
         </div>
       </div>
     </Link>

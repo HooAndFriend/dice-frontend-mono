@@ -5,13 +5,15 @@ import { CommonResponse, RoleType } from "@/src/type/common";
 import { useDialog } from "@/src/context/DialogContext";
 
 // ** Recoil Imports
-import { AuthState, TeamState, WorkspaceState } from "@/src/app";
+import { WorkspaceState } from "@/src/app";
 import { useRecoilValue } from "recoil";
 
 // ** Service Imports
 import { mutate } from "swr";
 import { Delete, Patch, Put } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
+import Image from "next/image";
+import CustomImage from "@/src/components/Image/CustomImage";
 
 interface PropsType {
   id: number;
@@ -26,11 +28,9 @@ const WorkspaceUserBox = ({
   nickname,
   email,
   role,
-
   profile,
 }: PropsType) => {
-  const { accessToken } = useRecoilValue(AuthState);
-  const { uuid, role: userRole } = useRecoilValue(WorkspaceState);
+  const { role: userRole } = useRecoilValue(WorkspaceState);
 
   const { handleOpen } = useDialog();
 
@@ -79,7 +79,7 @@ const WorkspaceUserBox = ({
   return (
     <div className="mb-[21px] w-[726px] h-20 border-[#EBEBEC] border shadow-md rounded-[15px] flex items-center justify-between">
       <div className="flex">
-        <img
+        <CustomImage
           src={profile}
           alt="Sample Image"
           width={45}
@@ -118,8 +118,9 @@ const WorkspaceUserBox = ({
               ADMIN
             </option>
           </select>
-          <img
+          <CustomImage
             src="/svg/boldX.svg"
+            alt="delete"
             width={24}
             height={24}
             className="cursor-pointer"

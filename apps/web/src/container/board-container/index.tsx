@@ -4,7 +4,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 
 // ** React Imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // ** Component Imports
 import BoardContainerView from "./board-container";
@@ -21,6 +21,8 @@ import { Delete, Get, Put } from "@/src/repository";
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 import useSWR, { mutate } from "swr";
+
+// ** Utils Imports
 import useInput from "@/src/hooks/useInput";
 
 const BoardContainer = () => {
@@ -112,6 +114,10 @@ const BoardContainer = () => {
       },
     }
   );
+
+  useEffect(() => {
+    setReadOnly(true);
+  }, [get("boardId")]);
 
   if (!get("boardId") || !board) return null;
 

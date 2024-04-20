@@ -13,6 +13,7 @@ interface PropsType {
   readOnly: boolean;
   setReadOnly: (readOnly: boolean) => void;
   handleSave: () => void;
+  handleDelete: () => void;
   setContent: (content: OutputData) => void;
 }
 
@@ -26,13 +27,17 @@ const EditorContainerView = ({
   setReadOnly,
   setContent,
   handleSave,
+  handleDelete,
 }: PropsType) => {
   return (
     <div className="w-full h-full p-4 bg-white">
       <div className="flex items-center justify-between">
         <h1 className="font-bold text-[18px]">회의록 / 2024-04-01</h1>
         <div className="flex items-center">
-          <button className="w-[80px] rounded-[5px]  h-[30px] bg-slate-300">
+          <button
+            className="w-[80px] rounded-[5px]  h-[30px] bg-slate-300"
+            onClick={handleDelete}
+          >
             DELETE
           </button>
           <button

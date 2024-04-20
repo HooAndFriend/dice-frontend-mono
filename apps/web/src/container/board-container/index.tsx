@@ -1,7 +1,7 @@
 "use client";
 
 // ** Next Imports
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // ** React Imports
 import { useState } from "react";
@@ -16,17 +16,18 @@ import { GetBoardResponse } from "@/src/type/board";
 
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
-import { Get, Put } from "@/src/repository";
+import { Delete, Get, Put } from "@/src/repository";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 
 const BoardContainer = () => {
   const [content, setContent] = useState<OutputData>();
   const [readOnly, setReadOnly] = useState<boolean>(true);
 
   const { get } = useSearchParams();
+  const router = useRouter();
 
   const { handleOpen } = useDialog();
 
@@ -34,7 +35,7 @@ const BoardContainer = () => {
     updateBoard.trigger();
   };
 
-  const { mutate } = useSWR(
+  const { mutate: boardRefetch } = useSWR(
     `/v1/board/${get("boardId")}`,
     async (url) => {
       return Get<GetBoardResponse>(url);
@@ -70,6 +71,27 @@ const BoardContainer = () => {
     }
   );
 
+  const deleteBoard = useSWRMutation(
+    "/v1/board/",
+    async (url: string) =>
+      await Delete<CommonResponse<void>>(url + get("boardId")),
+    {
+      onSuccess: ({ data }) => {
+        router.push("/dashboard/board");
+        mutate("/v1/board");
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
   return (
     <BoardContainerView
       content={content}
@@ -77,6 +99,7 @@ const BoardContainer = () => {
       setReadOnly={setReadOnly}
       setContent={setContent}
       handleSave={handleSave}
+      handleDelete={deleteBoard.trigger}
     />
   );
 };

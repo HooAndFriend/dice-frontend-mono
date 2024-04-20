@@ -11,6 +11,8 @@ import dayjs from "dayjs";
 interface PropsType {
   content: OutputData;
   readOnly: boolean;
+  title: string;
+  setTitle: (title: string) => void;
   setReadOnly: (readOnly: boolean) => void;
   handleSave: () => void;
   handleDelete: () => void;
@@ -24,6 +26,8 @@ const DiceEditor = dynamic(() => import("@/src/components/DiceEditor"), {
 const EditorContainerView = ({
   content,
   readOnly,
+  title,
+  setTitle,
   setReadOnly,
   setContent,
   handleSave,
@@ -60,6 +64,15 @@ const EditorContainerView = ({
             {dayjs().format("YYYY-MM-DD HH:mm:ss")}
           </h1>
         </div>
+      </div>
+      <div className="w-full mt-8">
+        <input
+          type="text"
+          placeholder="Enter Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="h-[40px] w-[600px] border-none"
+        />
       </div>
       <div className="w-full overflow-y-hidden">
         <DiceEditor

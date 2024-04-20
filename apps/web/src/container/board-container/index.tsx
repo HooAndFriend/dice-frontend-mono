@@ -23,6 +23,7 @@ import { useDialog } from "@/src/context/DialogContext";
 import useSWR, { mutate } from "swr";
 
 const BoardContainer = () => {
+  const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<OutputData>();
   const [readOnly, setReadOnly] = useState<boolean>(true);
 
@@ -38,10 +39,12 @@ const BoardContainer = () => {
   const { mutate: boardRefetch } = useSWR(
     `/v1/board/${get("boardId")}`,
     async (url) => {
+      if (!get("boardId")) return;
       return Get<GetBoardResponse>(url);
     },
     {
       onSuccess: ({ data }) => {
+        setTitle(data.title);
         setContent(JSON.parse(data.content));
       },
     }
@@ -49,12 +52,13 @@ const BoardContainer = () => {
 
   const updateBoard = useSWRMutation(
     "/v1/board",
-    async (url: string) =>
-      await Put<CommonResponse<void>>(url, {
+    async (url: string) => {
+      return await Put<CommonResponse<void>>(url, {
         boardId: Number(get("boardId")),
-        title: "Hello",
+        title,
         content: JSON.stringify(content),
-      }),
+      });
+    },
     {
       onSuccess: ({ data }) => {
         setReadOnly(true);
@@ -96,6 +100,8 @@ const BoardContainer = () => {
     <BoardContainerView
       content={content}
       readOnly={readOnly}
+      title={title}
+      setTitle={setTitle}
       setReadOnly={setReadOnly}
       setContent={setContent}
       handleSave={handleSave}

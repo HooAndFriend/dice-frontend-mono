@@ -24,4 +24,6 @@ export interface BoardDetail {
   modifiedId: string;
   orderId: number;
   title: string;
+  children: BoardDetail[];
+  parent: BoardDetail;
 }

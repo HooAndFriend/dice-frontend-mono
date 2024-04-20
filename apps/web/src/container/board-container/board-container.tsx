@@ -7,12 +7,13 @@ import { OutputData } from "@editorjs/editorjs";
 
 // ** Utils Imports
 import dayjs from "dayjs";
+import { BoardDetail } from "@/src/type/board";
 
 interface PropsType {
   content: OutputData;
   readOnly: boolean;
-  title: string;
-  setTitle: (title: string) => void;
+  board: BoardDetail;
+  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setReadOnly: (readOnly: boolean) => void;
   handleSave: () => void;
   handleDelete: () => void;
@@ -26,8 +27,8 @@ const DiceEditor = dynamic(() => import("@/src/components/DiceEditor"), {
 const EditorContainerView = ({
   content,
   readOnly,
-  title,
-  setTitle,
+  board,
+  handleInput,
   setReadOnly,
   setContent,
   handleSave,
@@ -36,7 +37,11 @@ const EditorContainerView = ({
   return (
     <div className="w-full h-full p-4 bg-white">
       <div className="flex items-center justify-between">
-        <h1 className="font-bold text-[18px]">회의록 / 2024-04-01</h1>
+        <h1 className="font-bold text-[18px]">
+          {board.parent
+            ? `${board.parent.title} / ${board.title}`
+            : board.title}
+        </h1>
         <div className="flex items-center">
           <button
             className="w-[80px] rounded-[5px]  h-[30px] bg-slate-300"
@@ -69,8 +74,9 @@ const EditorContainerView = ({
         <input
           type="text"
           placeholder="Enter Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={board.title}
+          onChange={handleInput}
+          name="title"
           className="h-[40px] w-[600px] border-none"
         />
       </div>

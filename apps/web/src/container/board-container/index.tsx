@@ -12,7 +12,7 @@ import BoardContainerView from "./board-container";
 // ** Type Imports
 import { OutputData } from "@editorjs/editorjs";
 import { CommonResponse } from "@/src/type/common";
-import { GetBoardResponse } from "@/src/type/board";
+import { BoardDetail, GetBoardResponse } from "@/src/type/board";
 
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
@@ -21,9 +21,26 @@ import { Delete, Get, Put } from "@/src/repository";
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 import useSWR, { mutate } from "swr";
+import useInput from "@/src/hooks/useInput";
 
 const BoardContainer = () => {
-  const [title, setTitle] = useState<string>("");
+  const {
+    data: board,
+    handleInput,
+    setData: setBoard,
+  } = useInput<BoardDetail>({
+    content: "",
+    title: "",
+    createdDate: null,
+    createdId: "",
+    id: 0,
+    isDeleted: false,
+    modifiedDate: null,
+    modifiedId: "",
+    orderId: 0,
+    children: [],
+    parent: null,
+  });
   const [content, setContent] = useState<OutputData>();
   const [readOnly, setReadOnly] = useState<boolean>(true);
 
@@ -44,7 +61,7 @@ const BoardContainer = () => {
     },
     {
       onSuccess: ({ data }) => {
-        setTitle(data.title);
+        setBoard(data);
         setContent(JSON.parse(data.content));
       },
     }
@@ -55,7 +72,7 @@ const BoardContainer = () => {
     async (url: string) => {
       return await Put<CommonResponse<void>>(url, {
         boardId: Number(get("boardId")),
-        title,
+        title: board.title,
         content: JSON.stringify(content),
       });
     },
@@ -96,12 +113,14 @@ const BoardContainer = () => {
     }
   );
 
+  if (!get("boardId") || !board) return null;
+
   return (
     <BoardContainerView
       content={content}
       readOnly={readOnly}
-      title={title}
-      setTitle={setTitle}
+      board={board}
+      handleInput={handleInput}
       setReadOnly={setReadOnly}
       setContent={setContent}
       handleSave={handleSave}

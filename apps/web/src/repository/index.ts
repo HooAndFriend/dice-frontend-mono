@@ -88,55 +88,6 @@ client.interceptors.response.use(
   },
   async (error) => {
     const err = error as AxiosError;
-    if (err.response.status === 401) {
-      const data = err.response.data as {
-        statusCode: number;
-        message: string;
-        error: string;
-      };
-      if (data.statusCode === 401) {
-        location.href = "/";
-
-        return;
-
-        const recoilValue: {
-          authState: AuthStateType;
-          userState: UserStateType;
-          workspaceState: WorkspaceStateType;
-          teamState: TeamStateType;
-        } = JSON.parse(localStorage.getItem("recoil-persist"));
-
-        if (!recoilValue) {
-          location.href = "/";
-          return Promise.reject(error);
-        }
-
-        const { data } = (await Post("/v1/auth/reissue", {
-          refreshToken: recoilValue.authState.refreshToken,
-        })) as CommonResponse<{ accessToken: string }>;
-
-        localStorage.setItem(
-          "recoil-persist",
-          JSON.stringify({
-            authState: {
-              ...recoilValue.authState,
-              accessToken: data.accessToken,
-            },
-            userState: recoilValue.userState,
-            workspaceState: recoilValue.workspaceState,
-            teamState: recoilValue.teamState,
-          })
-        );
-
-        const originalResponse = await client.request({
-          headers: {
-            Authorization: `Bearer ${data.accessToken}`,
-          },
-        });
-
-        return originalResponse.data.data;
-      }
-    }
 
     return Promise.reject(error);
   }

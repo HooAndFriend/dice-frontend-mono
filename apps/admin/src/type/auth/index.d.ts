@@ -22,3 +22,7 @@ export interface LoginResponse {
     refreshToken: string
   }
 }
+
+export interface ReissueResponse extends Response {
+  accessToken: string
+}

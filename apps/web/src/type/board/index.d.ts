@@ -26,4 +26,9 @@ export interface BoardDetail {
   title: string;
   children: BoardDetail[];
   parent: BoardDetail;
+  createdUser: {
+    id: number;
+    profile: string;
+    nickname: string;
+  };
 }

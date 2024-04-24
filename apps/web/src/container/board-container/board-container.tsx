@@ -59,13 +59,14 @@ const EditorContainerView = ({
       </div>
       <div className="flex items-center mt-4">
         <CustomImage
-          src="/images/dice.png"
+          src={board.createdUser.profile}
           width={30}
           height={30}
           alt="profile"
         />
         <div className="ml-4">
-          <h1 className="text-gray-500 text-[14px] ">
+          <h1 className="text-[14px] ">{board.createdUser.nickname}</h1>
+          <h1 className="text-gray-500 text-[12px] ">
             {dayjs().format("YYYY-MM-DD HH:mm:ss")}
           </h1>
         </div>

@@ -43,7 +43,13 @@ const BoardContainer = () => {
     orderId: 0,
     children: [],
     parent: null,
+    createdUser: {
+      id: 0,
+      profile: "",
+      nickname: "",
+    },
   });
+
   const [content, setContent] = useState<OutputData>();
   const [readOnly, setReadOnly] = useState<boolean>(true);
 

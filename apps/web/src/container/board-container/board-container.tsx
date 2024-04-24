@@ -82,6 +82,7 @@ const EditorContainerView = ({
       </div>
       <div className="w-full overflow-y-hidden">
         <DiceEditor
+          boardId={board.id}
           content={content}
           setContent={setContent}
           readOnly={readOnly}

@@ -24,6 +24,7 @@ import useSWR, { mutate } from "swr";
 
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
+import IndexContainerView from "./index-container";
 
 const BoardContainer = () => {
   const {
@@ -119,7 +120,7 @@ const BoardContainer = () => {
     setReadOnly(true);
   }, [get("boardId")]);
 
-  if (!get("boardId") || !board) return null;
+  if (!get("boardId") || !board) return <IndexContainerView />;
 
   return (
     <BoardContainerView

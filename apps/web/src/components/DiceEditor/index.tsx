@@ -7,17 +7,18 @@ import { tools } from "./constants";
 import "./editor.css";
 
 interface PropsType {
+  boardId: number;
   content: OutputData;
   readOnly: boolean;
   setContent: (content: OutputData) => void;
 }
 
-const DiceEditor = ({ content, setContent, readOnly }: PropsType) => {
+const DiceEditor = ({ boardId, content, setContent, readOnly }: PropsType) => {
   const ref = useRef<HTMLDivElement>(null);
   const editor = useMemo(
     () =>
       new EditorJS({
-        holder: "editorjs",
+        holder: `editorjs-${boardId}`,
         tools,
         readOnly,
         minHeight: 30,
@@ -31,7 +32,7 @@ const DiceEditor = ({ content, setContent, readOnly }: PropsType) => {
             });
         },
       }),
-    [readOnly]
+    [readOnly, boardId]
   );
 
   useEffect(() => {
@@ -40,13 +41,13 @@ const DiceEditor = ({ content, setContent, readOnly }: PropsType) => {
         editor.destroy();
       }
     };
-  }, []);
+  }, [readOnly, boardId]);
 
   return (
     <div
       ref={ref}
       className="w-full h-[750px] p-4 overflow-x-hidden overflow-y-scroll"
-      id="editorjs"
+      id={`editorjs-${boardId}`}
     />
   );
 };

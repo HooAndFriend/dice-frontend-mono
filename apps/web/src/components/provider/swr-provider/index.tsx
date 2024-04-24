@@ -34,7 +34,7 @@ const SwrProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         use: [myMiddleware],
         onError: async (error, key) => {
-          if (error.response.status === 401) {
+          if (error?.response?.status === 401) {
             const mutex = new Mutex();
             await mutex.waitForUnlock();
 

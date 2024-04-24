@@ -8,7 +8,10 @@ import { Delete, Get, Patch } from "@/src/repository";
 import useSWR from "swr";
 
 // ** Type Imports
-import { GetTicketSettingListResponse } from "@/src/type/ticket";
+import {
+  GetTicketSettingListResponse,
+  SettingListInfo,
+} from "@/src/type/ticket";
 import { useEffect } from "react";
 
 const SettingConatiner = () => {
@@ -19,17 +22,13 @@ const SettingConatiner = () => {
     }
   );
 
-  const handleTicketSetting = async (
-    settingId: number,
-    color: string,
-    type: string,
-    description: string
-  ) => {
+  const handleTicketSetting = async (data: SettingListInfo) => {
     await Patch("/v1/ticket/setting", {
-      settingId,
-      color,
-      type,
-      description,
+      settingId: data.id,
+      color: data.color,
+      textColor: data.textColor,
+      type: data.type,
+      description: data.description,
     })
       .then((res) => {
         mutate();

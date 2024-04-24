@@ -60,6 +60,7 @@ export interface GetTicketCommentListResponse extends Response {
 export interface SettingListInfo {
   id: number;
   color: string;
+  textColor: string;
   type: string;
   description: string;
   workspace: {

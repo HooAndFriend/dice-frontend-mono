@@ -37,11 +37,22 @@ const EditorContainerView = ({
   return (
     <div className="w-full h-full p-4 bg-white">
       <div className="flex items-center justify-between">
-        <h1 className="font-bold text-[18px]">
-          {board.parent
-            ? `${board.parent.title} / ${board.title}`
-            : board.title}
-        </h1>
+        {readOnly ? (
+          <h1 className="font-bold text-[18px]">
+            {board.parent
+              ? `${board.parent.title} / ${board.title}`
+              : board.title}
+          </h1>
+        ) : (
+          <input
+            type="text"
+            placeholder="Enter Title"
+            value={board.title}
+            onChange={handleInput}
+            name="title"
+            className="h-[40px] w-[600px] border-none"
+          />
+        )}
         <div className="flex items-center">
           <button
             className="w-[80px] rounded-[5px]  h-[30px] bg-slate-300"
@@ -71,16 +82,7 @@ const EditorContainerView = ({
           </h1>
         </div>
       </div>
-      <div className="w-full mt-8">
-        <input
-          type="text"
-          placeholder="Enter Title"
-          value={board.title}
-          onChange={handleInput}
-          name="title"
-          className="h-[40px] w-[600px] border-none"
-        />
-      </div>
+
       <div className="w-full overflow-y-hidden">
         <DiceEditor
           boardId={board.id}

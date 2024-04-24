@@ -46,7 +46,7 @@ const DiceEditor = ({ boardId, content, setContent, readOnly }: PropsType) => {
   return (
     <div
       ref={ref}
-      className="w-full h-[750px] p-4 overflow-x-hidden overflow-y-scroll"
+      className="w-full h-[750px] py-4 px-16 overflow-x-hidden overflow-y-scroll"
       id={`editorjs-${boardId}`}
     />
   );

@@ -5,6 +5,7 @@ import { ChangeEvent, KeyboardEvent } from "react";
 import { DiceLoginParma, SocialType } from "@/src/type/auth";
 import Image from "next/image";
 import CustomImage from "@/src/components/Image/CustomImage";
+import CustomInput from "@/src/components/Input/CustomInput";
 
 interface PropsType {
   loginUser: DiceLoginParma;
@@ -25,8 +26,8 @@ const LoginContainerView = ({
 }: PropsType) => {
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
-      <div className="bg-white w-[900px] h-[613px] rounded-2xl flex shadow-md">
-        <div className="w-1/2 h-full  bg-[#F6F8FF] rounded-tl-2xl rounded-bl-2xl flex">
+      <div className="bg-white w-[900px] h-[613px] flex shadow-md rounded-[20px]">
+        <div className="w-[449px] h-full  bg-[#F6F8FF] flex">
           <div className="w-[89px] h-[27px] ml-[34px] mt-[45px] flex items-center">
             <CustomImage
               src="/images/dice2.png"
@@ -47,20 +48,20 @@ const LoginContainerView = ({
             />
           </div>
         </div>
-        <div className="flex items-center justify-center w-1/2 h-full">
+        <div className="flex justify-center w-[451px] h-full">
           <div className="w-[330px] h-[409px]">
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-[102px]">
               <div className="w-full">
                 <label
-                  htmlFor="first_name"
-                  className="block mb-[14px] text-base font-medium text-gray-900 dark:text-black font-spoqa"
+                  htmlFor="email"
+                  className="block mb-[14px] text-base font-medium text-gray-900 dark:text-black text-[16px] line-height-[24px]"
                 >
                   Email
                 </label>
                 <input
+                  id="email"
                   type="text"
-                  id="first_name"
-                  className="font-normal font-spoqa border h-[50px] text-gray-900 text-base p-4 rounded-lg block w-full border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+                  className="border h-[50px] text-[16px] text-gray-900 text-base p-[15px] rounded-[10px] block w-full border-[#EBEBEC] placeholder-[#DDDDDD] dark:text-black bg-white"
                   placeholder="Enter Your Email"
                   onChange={handleInput}
                   name="email"
@@ -70,17 +71,17 @@ const LoginContainerView = ({
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="w-full mt-5">
+              <div className="w-full mt-[20px]">
                 <label
-                  htmlFor="first_name"
-                  className="font-spoqa block mb-[14px] text-base font-medium text-gray-900 dark:text-black"
+                  htmlFor="password"
+                  className="block mb-[14px] text-base font-medium text-gray-900 dark:text-black text-[16px] line-height-[24px]"
                 >
                   Password
                 </label>
                 <input
                   type="password"
-                  id="first_name"
-                  className="font-normal font-spoqa border h-[50px] text-gray-900 text-base p-4 rounded-lg block w-full border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+                  id="password"
+                  className="border h-[50px] text-[16px] text-gray-900 text-base p-[15px] rounded-[10px] block w-full border-[#EBEBEC] placeholder-[#DDDDDD] dark:text-black bg-white"
                   placeholder="Enter Your Password"
                   onChange={handleInput}
                   name="password"
@@ -93,18 +94,18 @@ const LoginContainerView = ({
             <div className="flex justify-center">
               <div className="w-full mt-12">
                 <button
-                  className="w-full bg-main text-white rounded-xl h-[55px] text-lg font-bold font-spoqa"
+                  className="w-full bg-main text-white rounded-[15px] h-[55px] text-[18px] font-san-bold"
                   onClick={handleLogin}
                 >
                   LOGIN
                 </button>
+                <div
+                  className="flex justify-end text-[14px] underline w-full text-[#676767] mt-[15px] cursor-pointer"
+                  onClick={handleSignup}
+                >
+                  HIDICE Signup
+                </div>
               </div>
-            </div>
-            <div
-              className="flex justify-end text-sm underline w-full text-[#676767] mt-4 mr-12 font-spoqa font-medium cursor-pointer"
-              onClick={handleSignup}
-            >
-              HIDICE Signup
             </div>
             <div className="w-full flex justify-between m-auto mt-[46px]">
               <div

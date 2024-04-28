@@ -51,7 +51,9 @@ const TicketContainerView = ({
         setCheckedList={setCheckedList}
       />
       <div className="flex items-center justify-between mt-8">
-        <h1 className="pl-4 font-bold text-md">Total Ticket : {ticketCount}</h1>
+        <h1 className="text-[18px] font-san-medium">
+          Total Ticket : {ticketCount}
+        </h1>
         <TicketViewToggleButton mode={mode} setMode={setMode} />
       </div>
       <div className={`${ticketId !== 0 && "flex"}`}>

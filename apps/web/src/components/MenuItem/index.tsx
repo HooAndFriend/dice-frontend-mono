@@ -10,11 +10,11 @@ interface PropsType {
 const MenuItem = ({ link, icon: Icon, isClicked }: PropsType) => {
   return (
     <Link href={link}>
-      <div className="py-3">
+      <div className="mt-[15px]">
         <div
           className={`${
             isClicked ? "bg-[#623AD6]" : ""
-          } rounded-lg w-[40px] h-[40px] flex justify-center items-center`}
+          } rounded-[10px] w-[40px] h-[40px] flex justify-center items-center`}
         >
           <Icon className="" />
         </div>

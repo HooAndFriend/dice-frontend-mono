@@ -28,11 +28,12 @@ const UserPopoverView = ({
 }: PropsType) => {
   return (
     <div>
-      <div onClick={handleOpen}>
+      <div onClick={handleOpen} className="flex items-center cursor-pointer">
         <ProfileBox
           image={userState.profile ? userState.profile : "/images/dice.png"}
           alt="profile"
         />
+        <h1 className="text-[16px]">{userState.nickname}</h1>
       </div>
       {open && (
         <>

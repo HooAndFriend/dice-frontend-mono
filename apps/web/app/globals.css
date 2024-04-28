@@ -8,6 +8,22 @@ body {
   font-family: -apple-system, SpoqaHanSansNeo-Regular, sans-serif;
 }
 
+.font-medium {
+  font-family: "SpoqaHanSansNeo-Medium", sans-serif;
+}
+
+.font-san-bold {
+  font-family: "SpoqaHanSansNeo-Bold", sans-serif;
+}
+
+.font-san-light {
+  font-family: "SpoqaHanSansNeo-Light", sans-serif;
+}
+
+.font-san-thin {
+  font-family: "SpoqaHanSansNeo-Thin", sans-serif;
+}
+
 @font-face {
   font-family: "SpoqaHanSansNeo-Regular";
   src: url("/fonts/SpoqaHanSansNeo-Regular.ttf");

@@ -21,15 +21,15 @@ const SocialSignupContainerView = ({
 }: PropsType) => {
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
-      <div className="bg-white w-[660px] h-[500px] rounded-2xl shadow-md">
-        <div className="flex justify-center font-spoqa text-[40px] font-bold mt-20">
+      <div className="bg-white w-[660px] h-[495px] rounded-[20px] shadow-md">
+        <div className="flex justify-center text-[40px] font-san-bold mt-[80px]">
           Signup
         </div>
         <div>
           <div className="flex mt-[60px] w-[540px] h-[50px] items-center m-auto">
             <label
               htmlFor="NickName"
-              className="text-base font-medium text-black font-spoqa mr-[32px]"
+              className="text-[16px] text-black font-san-medium mr-[32px]"
             >
               NickName
               <span className="ml-1 text-base font-medium text-[#F45050] font-spoqa">
@@ -39,7 +39,7 @@ const SocialSignupContainerView = ({
             <input
               type="text"
               id="NickName"
-              className="font-normal font-spoqa border h-[50px] w-[420px] text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+              className="border h-[50px] w-[420px] text-gray-900 text-base p-[15px] rounded-[10px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
               placeholder="Enter Your NickName"
               name="nickname"
               value={signupUser.nickname}
@@ -50,7 +50,7 @@ const SocialSignupContainerView = ({
           <div className="flex mt-[30px] w-[540px] h-[50px] items-center m-auto">
             <label
               htmlFor="NickName"
-              className="text-base font-medium text-black font-spoqa mr-[60px]"
+              className="text-base font-san-medium text-black text-[16px] mr-[65px]"
             >
               Email
               <span className="ml-1 text-base font-medium text-[#F45050] font-spoqa">
@@ -71,13 +71,13 @@ const SocialSignupContainerView = ({
           </div>
           <div className="w-[540px] h-[55px] flex m-auto mt-[50px] justify-between">
             <button
-              className="h-full w-[257px] bg-[#EBEBEC] rounded-[15px] text-white font-spoqa font-bold"
+              className="h-full w-[257px] bg-[#EBEBEC] rounded-[15px] text-white text-[18px] font-san-bold"
               onClick={handleCancel}
             >
               CANCEL
             </button>
             <button
-              className="h-full w-[257px] bg-main rounded-[15px] text-white font-spoqa font-bold"
+              className="h-full w-[257px] bg-main rounded-[15px] text-white text-[18px] font-san-bold"
               onClick={handleJoin}
             >
               JOIN

@@ -1,6 +1,6 @@
 # Dice Project Mono Repo
 
-Dice Project의 Frontend Monorepository 입니다..
+Dice Project의 Frontend Monorepository 입니다.
 
 ### Version
 

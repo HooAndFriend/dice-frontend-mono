@@ -102,7 +102,7 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
         }}
       >
         <div className="w-[24px] h-[24px] bg-green-300 rounded-[6px]" />
-        <h1 className="ml-[20px] font-san-bold text-[16px]">
+        <h1 className="ml-[20px] font-san-bold text-[16px] w-[300px] overflow-hidden whitespace-nowrap text-overflow-ellipsis">
           {`${item.code}  ${item.name}`}
         </h1>
         <div className="ml-[20px] w-[370px] bg-[#F4F4FA] border-[1px] border-[#EBEBEC] rounded-[6px] h-[24px] dark:bg-gray-700 flex items-center">
@@ -114,7 +114,12 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
           />
         </div>
         <h4 className="ml-[20px] text-[16px] font-san-medium">
-          {(item.doneTicketCount / item.ticket.length) * 100} %
+          {item.doneTicketCount === 0
+            ? 0
+            : ((item.doneTicketCount / item.ticket.length) * 100).toFixed(
+                2
+              )}{" "}
+          %
         </h4>
         <h4 className="ml-[20px] text-[16px] font-san-medium text-[#676767]">
           ({item.doneTicketCount}/{item.ticket.length})

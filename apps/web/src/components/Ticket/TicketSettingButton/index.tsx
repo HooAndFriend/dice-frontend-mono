@@ -100,7 +100,10 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
           {data.ticketSetting ? (
             <div
               className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
-              style={{ backgroundColor: data.ticketSetting.color }}
+              style={{
+                backgroundColor: data.ticketSetting.color,
+                color: data.ticketSetting.textColor,
+              }}
             >
               {data.ticketSetting.type.slice(0, 1)}
             </div>

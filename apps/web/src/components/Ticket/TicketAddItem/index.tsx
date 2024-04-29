@@ -81,6 +81,12 @@ const TicketAddItem = ({ epicId }: PropsType) => {
     }
   );
 
+  const handleClose = () => {
+    setOpen(false);
+    setName("");
+    setButton(false);
+  };
+
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (button) return;
@@ -92,6 +98,10 @@ const TicketAddItem = ({ epicId }: PropsType) => {
       }
 
       saveSimpleTicket.trigger();
+    }
+
+    if (e.key === "Escape") {
+      handleClose();
     }
   };
 
@@ -121,6 +131,9 @@ const TicketAddItem = ({ epicId }: PropsType) => {
               width={36}
               height={36}
             />
+          </div>
+          <div className="ml-4 cursor-pointer" onClick={handleClose}>
+            <h1 className="font-bold text-[24px]">X</h1>
           </div>
         </>
       ) : (

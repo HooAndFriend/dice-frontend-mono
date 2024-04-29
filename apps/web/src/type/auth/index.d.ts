@@ -123,3 +123,7 @@ export interface DiceSocialSignupResponse extends Response {
     workspace: LoginWorksapceResponse[];
   };
 }
+
+export interface ReissueResponse extends Response {
+  accessToken: string;
+}

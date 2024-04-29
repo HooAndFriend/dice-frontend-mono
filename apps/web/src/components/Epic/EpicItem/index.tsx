@@ -95,24 +95,28 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
   return (
     <div>
       <div
-        className="w-full h-[75px] flex items-center cursor-pointer"
+        className="w-full h-[74px] py-[25px] flex items-center cursor-pointer"
         onClick={() => {
           handleClick({ id: item.id, type: "EPIC" });
           handleOpen();
         }}
       >
-        <div className="w-[24px] h-[24px] bg-green-300 rounded-lg"></div>
-        <h1 className="ml-8 font-bold text-[16px] mr-4">{item.code}</h1>
-        <h1 className="w-[300px] text-[16px]">{item.name}</h1>
-        <div className="ml-8 w-[370px] bg-gray-200 rounded-full h-[24px] dark:bg-gray-700 flex items-center">
+        <div className="w-[24px] h-[24px] bg-green-300 rounded-[6px]" />
+        <h1 className="ml-[20px] font-san-bold text-[16px]">
+          {`${item.code}  ${item.name}`}
+        </h1>
+        <div className="ml-[20px] w-[370px] bg-[#F4F4FA] border-[1px] border-[#EBEBEC] rounded-[6px] h-[24px] dark:bg-gray-700 flex items-center">
           <div
-            className={`bg-blue-600 h-[24px] rounded-lg`}
+            className={`bg-[#623AD6] h-[22px] rounded-[5px] border-[1px] border-[#EBEBEC]`}
             style={{
               width: epicProgress,
             }}
           />
         </div>
-        <h4 className="ml-2">
+        <h4 className="ml-[20px] text-[16px] font-san-medium">
+          {(item.doneTicketCount / item.ticket.length) * 100} %
+        </h4>
+        <h4 className="ml-[20px] text-[16px] font-san-medium text-[#676767]">
           ({item.doneTicketCount}/{item.ticket.length})
         </h4>
         <div className="ml-auto">

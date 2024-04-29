@@ -1,4 +1,3 @@
-// ** Component Imports
 import BoardContainer from "@/src/container/board-container";
 
 const BoardPage = () => {

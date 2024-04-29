@@ -12,10 +12,11 @@ interface PropsType {
   data: EpicDetail;
   mode: EpicEditMode;
   role: RoleType;
+  setData: (value: EpicDetail) => void;
   handleClose: () => void;
   setMode(mode: EpicEditMode): void;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleUpdateName: () => void;
+  handleUpdateEpic: (type: "content" | "name") => void;
   handleDeleteEpic: () => void;
 }
 
@@ -25,12 +26,13 @@ const EpicCardView = ({
   role,
   setMode,
   onChange,
+  setData,
   handleClose,
-  handleUpdateName,
+  handleUpdateEpic,
   handleDeleteEpic,
 }: PropsType) => {
   return (
-    <div className="mt-6 h-[700px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
+    <div className="h-[564px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <h1 className="text-[18px] font-bold">{data.code}</h1>
@@ -73,7 +75,7 @@ const EpicCardView = ({
             <div className="flex items-center mx-2">
               <button
                 className="w-[30px] h-[30px] bg-[#623AD6] text-white rounded-[8px] flex items-center justify-center mr-2"
-                onClick={() => handleUpdateName()}
+                onClick={() => handleUpdateEpic("name")}
               >
                 V
               </button>
@@ -90,27 +92,26 @@ const EpicCardView = ({
       <h1 className="my-4 text-[16px]">Content</h1>
       {mode.content === "view" ? (
         <div
-          dangerouslySetInnerHTML={{ __html: "" }}
+          dangerouslySetInnerHTML={{ __html: data.content }}
           className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto text-[16px]"
           onDoubleClick={() => {
             if (role === "VIEWER") return;
-            // setMode({ ...mode, content: "edit" });
+            setMode({ ...mode, content: "edit" });
           }}
         />
       ) : (
         <div>
           <QuillEditor
-            value={""}
-            onChange={
-              (value: string) => {}
-              // setData({ ...data, content: value } as TicketInfo)
-            }
+            value={data.content}
+            onChange={(value: string) => {
+              setData({ ...data, content: value } as EpicDetail);
+            }}
             name="asIs"
           />
           <div className="flex items-center mt-2">
             <button
               className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
-              // onClick={() => handleUpdateTicket("content")}
+              onClick={() => handleUpdateEpic("content")}
             >
               save
             </button>

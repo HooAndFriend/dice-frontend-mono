@@ -365,6 +365,9 @@ importers:
       apexcharts:
         specifier: ^3.46.0
         version: 3.46.0
+      async-mutex:
+        specifier: ^0.4.0
+        version: 0.4.1
       aws-sdk:
         specifier: ^2.1555.0
         version: 2.1555.0

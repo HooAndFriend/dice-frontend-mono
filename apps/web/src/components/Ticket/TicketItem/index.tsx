@@ -39,7 +39,7 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
 
   return (
     <div
-      className="flex h-[60px] hover:bg-slate-400 rounded-lg"
+      className="flex h-[80px] py-[24px] hover:bg-slate-400 rounded-lg"
       onClick={() => handleClick(data.id)}
     >
       <div className="flex w-[10%] items-center justify-center">
@@ -47,7 +47,7 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
       </div>
       <div className="flex w-[40%] items-center">
         <h1
-          className={`text-[16px] font-bold mr-4 ${
+          className={`text-[16px] mr-4 ${
             data.status === "DONE" && "line-through"
           } ${data.status === "REOPEN" && "text-red-300"}`}
         >

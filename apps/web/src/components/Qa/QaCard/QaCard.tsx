@@ -1,5 +1,5 @@
 // ** React Imports
-import { ChangeEvent, KeyboardEvent } from "react";
+import { ChangeEvent } from "react";
 
 // ** Component Imports
 import QaComment from "../QaComment";
@@ -10,48 +10,39 @@ import { QaFileUploader } from "../QaFileUploader";
 import QaDatePicker from "../QaDatePicker";
 
 // ** Type Imports
-import { CommentInfo, IssueInfo } from "@/src/type/qa";
+import { IssueInfo } from "@/src/type/qa";
 import { QaCardEditMode, RoleType } from "@/src/type/common";
 
 // ** Utils Imports
 import dayjs from "dayjs";
-import Image from "next/image";
-import CustomImage from "@/src/components/Image/CustomImage";
+import QaHistory from "../QaHistory";
 
 interface PropsType {
   data: IssueInfo;
-  commentData: CommentInfo[];
-  comment: string;
   role: RoleType;
   mode: QaCardEditMode;
+  subType: "comment" | "history";
+  setSubType: (type: "comment" | "history") => void;
   deleteQa: () => void;
   handleUpdateQa: (type: "title" | "asIs" | "toBe" | "memo") => void;
-  handleComment: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleAddComment: () => void;
   handleClose: () => void;
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleCommentEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
   refetch: () => void;
   handleDeleteQaFile: (fileId: number) => void;
-  commentRefetch: () => void;
   setIssueData: (value: IssueInfo) => void;
   setMode: (value: QaCardEditMode) => void;
 }
 
 const QaCardView = ({
   data,
-  commentData,
-  comment,
+  subType,
   role,
   mode,
-  handleComment,
-  handleAddComment,
   handleClose,
   handleInput,
-  handleCommentEnter,
   refetch,
+  setSubType,
   handleDeleteQaFile,
-  commentRefetch,
   setIssueData,
   setMode,
   deleteQa,
@@ -316,36 +307,34 @@ const QaCardView = ({
           </div>
         ))}
       </div>
-      <div className="h-[1px] bg-[#EBEBEC] mt-[20px]" />
-      <div className="flex mt-5">
-        <input
-          id="content"
-          onChange={handleComment}
-          value={comment}
-          className="px-4 w-full border border-lightGray rounded-[10px] mr-[10px]"
-          onKeyDown={handleCommentEnter}
-        />
-        <div
-          onClick={handleAddComment}
-          className="w-[40px] h-[40px] bg-black text-white rounded-[10px] flex justify-center items-center"
+      <hr className="my-[20px]" />
+      <div className="flex items-center">
+        <button
+          className="text-[12px] px-2 h-[30px] rounded-lg mr-2"
+          style={{
+            backgroundColor: subType === "comment" ? "#623AD6" : "white",
+            color: subType === "comment" ? "white" : "#623AD6",
+          }}
+          onClick={() => setSubType("comment")}
         >
-          <CustomImage
-            src="/images/plus.png"
-            width={24}
-            height={24}
-            alt="plus"
-          />
-        </div>
+          comment
+        </button>
+        <button
+          className="text-[12px] px-2 h-[30px] rounded-lg"
+          style={{
+            backgroundColor: subType === "history" ? "#623AD6" : "white",
+            color: subType === "history" ? "white" : "#623AD6",
+          }}
+          onClick={() => setSubType("history")}
+        >
+          history
+        </button>
       </div>
-      <div className="mt-9">
-        {commentData.map((item) => (
-          <QaComment
-            key={item.id}
-            data={item}
-            commentRefetch={commentRefetch}
-          />
-        ))}
-      </div>
+      {subType === "comment" ? (
+        <QaComment qaId={data.id} />
+      ) : (
+        <QaHistory qaId={data.id} />
+      )}
     </div>
   );
 };

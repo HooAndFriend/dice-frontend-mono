@@ -34,6 +34,7 @@
     "@reduxjs/toolkit": "^2.0.1",
     "@repo/ui": "workspace:*",
     "apexcharts": "^3.46.0",
+    "async-mutex": "^0.4.0",
     "aws-sdk": "^2.1555.0",
     "axios": "^1.6.5",
     "dayjs": "^1.11.10",

@@ -33,8 +33,7 @@ const EpicAddItem = () => {
     async (url: string) => await Post<CommonResponse<void>>(url, { name }),
     {
       onSuccess: () => {
-        setOpen(false);
-        setName("");
+        handleClose();
       },
       onError: (error) => {
         handleModalOpen({
@@ -49,11 +48,21 @@ const EpicAddItem = () => {
     }
   );
 
+  const handleClose = () => {
+    setOpen(false);
+    setName("");
+    setButton(false);
+  };
+
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (button) return;
       setButton(true);
       saveEpic.trigger();
+    }
+
+    if (e.key === "Escape") {
+      handleClose();
     }
   };
 
@@ -61,7 +70,7 @@ const EpicAddItem = () => {
     <div className="w-full h-[75px] flex items-center">
       {open ? (
         <>
-          <div className="mr-8 w-[24px] h-[24px] bg-green-300 rounded-lg" />
+          <div className="mr-8 w-[24px] h-[24px]" />
           <CustomInput
             placeholder="Enter Epic Name"
             borderRadius="8px"
@@ -77,6 +86,9 @@ const EpicAddItem = () => {
               width={36}
               height={36}
             />
+          </div>
+          <div className="ml-4 cursor-pointer" onClick={handleClose}>
+            <h1 className="font-bold text-[24px]">X</h1>
           </div>
         </>
       ) : (

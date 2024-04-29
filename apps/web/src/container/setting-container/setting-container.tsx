@@ -5,18 +5,13 @@ import TicketTypeAddItem from "@/src/components/Ticket/TicketTypeAddItem";
 // ** Service Imports
 
 // ** Type Imports
-import {SettingListInfo} from "@/src/type/ticket";
+import { SettingListInfo } from "@/src/type/ticket";
 
-import {useRef, useState} from "react";
+import { useRef, useState } from "react";
 
 interface PropsType {
   data: SettingListInfo[];
-  handleTicketSetting: (
-    settingId: number,
-    color: string,
-    type: string,
-    description: string
-  ) => void;
+  handleTicketSetting: (data: SettingListInfo) => void;
   handleTicketDelete: (id: number) => void;
 }
 
@@ -35,9 +30,7 @@ const SettingContainerView = ({
   };
 
   const handleUpdate = () => {
-    settingItems.forEach(item =>
-      handleTicketSetting(item.id, item.color, item.type, item.description)
-    );
+    settingItems.forEach((item) => handleTicketSetting(item));
   };
 
   const handleReset = () => {
@@ -54,16 +47,15 @@ const SettingContainerView = ({
             <TicketSettingItem
               key={item.id}
               item={item}
-              onUpdate={updatedItem => {
+              onUpdate={(updatedItem) => {
                 onUpdate(index, updatedItem);
               }}
               handleTicketDelete={handleTicketDelete}
-              ref={element => (ref.current[index] = element)}
+              ref={(element) => (ref.current[index] = element)}
             />
             <hr className="my-[25px]" />
           </>
         ))}
-
         <TicketTypeAddItem />
       </div>
       <div className="flex justify-end mt-[40px]">

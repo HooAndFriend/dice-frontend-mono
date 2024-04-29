@@ -12,7 +12,6 @@ export interface EpicInfo {
   id: number;
   code: string;
   name: string;
-  dueDate: Date;
   doneTicketCount: number;
   ticket: TicketInfo[];
 }
@@ -36,7 +35,7 @@ export interface EpicDetail {
   id: number;
   name: string;
   code: string;
-  dueDate: Date;
+  content: string;
   ticket: EpicChildTicket[];
   admin: {
     id: number;

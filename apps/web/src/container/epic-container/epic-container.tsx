@@ -32,7 +32,7 @@ const EpicContainerView = ({
   return (
     <div className="w-full">
       <EpicSearchCard value={word} onChange={handleWord} />
-      <div className="mt-8">
+      <div className="mt-[56px] mb-[44px]">
         <h1 className="pl-4 font-bold text-md">Total Epic : {epicCount}</h1>
       </div>
       <div className={`${selectContent.id !== 0 && "flex"}`}>
@@ -45,10 +45,10 @@ const EpicContainerView = ({
           />
         </div>
         {selectContent.id !== 0 && selectContent.type === "EPIC" && (
-          <div className="w-[35%] pl-8">
+          <div className="w-[35%] ml-[30px]">
             <EpicCard
               epicId={selectContent.id}
-              handleClose={() => setSelectContent({ id: 0, type: "TICKET" })}
+              handleClose={() => setSelectContent({ id: 0, type: "EPIC" })}
             />
           </div>
         )}

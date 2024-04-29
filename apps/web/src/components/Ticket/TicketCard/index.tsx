@@ -1,20 +1,21 @@
 // ** React Imports
-import { KeyboardEvent, useState } from "react";
+import { useState } from "react";
 
 // ** Componet imports
 import TicketCardView from "./TicketCard";
+import TicketCardSkeletonView from "./TicketCardSkeleton";
 
 // ** Service Imports
-import { Delete, Get, Patch, Post } from "@/src/repository";
+import { Delete, Get, Patch } from "@/src/repository";
 import useSWR, { mutate } from "swr";
 
 // ** Type Imports
 import {
-  GetTicketCommentListResponse,
   GetTicketResponse,
   TicketEditMode,
   TicketInfo,
 } from "@/src/type/ticket";
+import { CommonResponse } from "@/src/type/common";
 
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
@@ -23,9 +24,9 @@ import useInput from "@/src/hooks/useInput";
 import { useRecoilValue } from "recoil";
 import { WorkspaceState } from "@/src/app";
 import useSWRMutation from "swr/mutation";
-import { CommonResponse } from "@/src/type/common";
+
+// ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
-import TicketCardSkeletonView from "./TicketCardSkeleton";
 
 interface PropsType {
   ticketId: number;
@@ -33,7 +34,7 @@ interface PropsType {
 }
 
 const TicketCard = ({ ticketId, handleClose }: PropsType) => {
-  const [comment, setComment] = useState<string>("");
+  const [subType, setSubType] = useState<"comment" | "history">("comment");
   const [currentArg, setCurrentArg] = useState<
     "content" | "name" | "storypoint"
   >("name");
@@ -91,16 +92,6 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     }
   );
 
-  const {
-    data: commentData,
-    error: commentError,
-    isLoading: commentLoading,
-    mutate: commentRefetch,
-  } = useSWR(`/v1/ticket/comment/${ticketId}`, async (url) =>
-    Get<GetTicketCommentListResponse>(url)
-  );
-
-  // ** QA 수정
   const updateTicket = useSWRMutation(
     "/v1/ticket",
     async (
@@ -121,26 +112,6 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
         mutate("/v1/epic");
         mutate("/v1/ticket");
         mutate(`/v1/ticket/detail/${ticketId}`);
-      },
-      onError: (error) => {
-        handleOpen({
-          title: "Error",
-          message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-      },
-    }
-  );
-  const saveTicketComment = useSWRMutation(
-    "/v1/ticket/comment",
-    async (url: string) =>
-      await Post<CommonResponse<void>>(url, { content: comment, ticketId }),
-    {
-      onSuccess: () => {
-        setComment("");
-        commentRefetch();
       },
       onError: (error) => {
         handleOpen({
@@ -174,30 +145,45 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     }
   );
 
-  const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      saveTicketComment.trigger();
+  const deleteTicket = useSWRMutation(
+    "/v1/ticket/",
+    async (url: string, { arg }: { arg: number }) =>
+      await Delete<CommonResponse<void>>(url + arg),
+    {
+      onSuccess: () => {
+        ticketRefetch();
+        handleClose();
+        mutate("/v1/epic");
+        mutate("/v1/ticket");
+        mutate(`/v1/ticket/detail/${ticketId}`);
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
     }
-  };
+  );
 
-  if (isLoading || commentLoading) return <TicketCardSkeletonView />;
+  if (isLoading) return <TicketCardSkeletonView />;
 
   return (
     <TicketCardView
       data={data}
       mode={mode}
       role={role}
-      comment={comment}
-      commentData={commentData.data.data}
-      handleComment={(e) => setComment(e.target.value)}
+      subType={subType}
+      setSubType={setSubType}
       onChange={handleInput}
       setData={setData}
       setMode={setMode}
       handleClose={handleClose}
-      handleSaveTicketComment={saveTicketComment.trigger}
-      handleCommentEnter={handleCommentEnter}
       ticketRefetch={ticketRefetch}
-      commentRefetch={commentRefetch}
+      handleDeleteTicket={deleteTicket.trigger}
       handleDeleteTicketFile={deleteTicketFile.trigger}
       handleUpdateTicket={updateTicket.trigger}
     />

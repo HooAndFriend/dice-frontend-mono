@@ -13,7 +13,10 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 
 // ** Type Imports
-import { GetNotificationListResponse } from "@/src/type/notification";
+import {
+  GetNotificationListResponse,
+  Notification,
+} from "@/src/type/notification";
 import { CommonResponse } from "@/src/type/common";
 
 // ** Context Imports
@@ -50,6 +53,9 @@ const NotificationPopover = () => {
     }
   );
 
+  const newNotificationCount = (data: Notification[]) =>
+    data.reduce((acc, cur) => (cur.status === "READ" ? acc : acc + 1), 0);
+
   if (isLoading) return <div>Loading...</div>;
 
   return (
@@ -65,12 +71,14 @@ const NotificationPopover = () => {
             height={25}
             alt="notification"
           />
-          {!isLoading && data.data.count && (
+          {!isLoading && newNotificationCount(data.data.data) > 0 && (
             <div
               style={{ position: "absolute", top: -5, left: 15 }}
               className="w-[15px] h-[15px] rounded-full bg-red-600 flex items-center justify-center"
             >
-              <h1 className="text-white text-[12px]">{data.data.count}</h1>
+              <h1 className="text-white text-[12px]">
+                {newNotificationCount(data.data.data)}
+              </h1>
             </div>
           )}
         </div>

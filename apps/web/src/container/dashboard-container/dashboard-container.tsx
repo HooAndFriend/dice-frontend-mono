@@ -1,5 +1,4 @@
 // ** Component Imports
-import { Dayjs } from "dayjs";
 import DashboardCalendar from "./dashboard-calendar";
 import DashboardCard from "./dashboard-card";
 import DashboardChart from "./dashboard-chart";
@@ -8,7 +7,6 @@ import DashboardChart from "./dashboard-chart";
 import { Dates } from "@/src/type/common";
 import { WorkspaceUserCount } from "@/src/type/user";
 import { TaskCount, TaskProgress } from "@/src/type/workspace";
-import WorkspacePopover from "@/src/components/Popover/WorkspacePopover";
 
 interface PropsType {
   name: string;
@@ -31,8 +29,7 @@ const DashboardContainerView = ({
     <div className="flex justify-center p-5">
       <div>
         <div className="flex items-center justify-between">
-          <WorkspacePopover />
-
+          <h1 className="text-[32px] font-bold">{name}</h1>
           <h1 className="text-[20px] text-[#676767]">
             {`${dates.startDate.format(
               "MMM DD, YYYY"

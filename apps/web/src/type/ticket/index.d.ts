@@ -31,6 +31,7 @@ export interface TicketInfo {
     id: number;
     type: string;
     color: string;
+    textColor: string;
   };
   epic: {
     id: number;

@@ -38,14 +38,17 @@ const WorkspacePopoverView = ({
 }: PropsType) => {
   return (
     <div>
-      <div onClick={handleOpen} className="flex items-center cursor-pointer">
-        <h1 className="text-[32px] font-bold">{workspace.name}</h1>
+      <div
+        onClick={handleOpen}
+        className="flex items-center cursor-pointer ml-[64px]"
+      >
+        <h1 className="text-[18px] font-bold">workspace</h1>
         <CustomImage
           src="/svg/arrow-down.svg"
-          width={30}
-          height={30}
+          width={18}
+          height={18}
           alt="down"
-          className="ml-2"
+          className="ml-1"
         />
       </div>
       {open && (

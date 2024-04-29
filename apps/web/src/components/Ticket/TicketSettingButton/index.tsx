@@ -128,9 +128,11 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
               onClick={() => updateTicketSetting.trigger(item.id)}
             >
               <div
-                className="w-[20px] h-[20px] rounded-[6px]"
-                style={{ backgroundColor: item.color }}
-              />
+                className="w-[20px] h-[20px] rounded-[6px] flex items-center justify-center text-[12px]"
+                style={{ backgroundColor: item.color, color: item.textColor }}
+              >
+                {data.ticketSetting.type.slice(0, 1)}
+              </div>
               <h3 className="text-[14px] ml-[12px]">{item.type}</h3>
             </div>
           ))}

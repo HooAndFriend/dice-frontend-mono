@@ -31,6 +31,7 @@ const SignupContainer = () => {
     email: "",
     password: "",
     nickname: "",
+    fcmToken: "",
   });
 
   const [passwordCheck, setPasswordCheck] = useState<string>("");
@@ -150,7 +151,7 @@ const SignupContainer = () => {
           type: "alert",
         });
       },
-    },
+    }
   );
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {

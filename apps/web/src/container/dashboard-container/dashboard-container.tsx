@@ -8,6 +8,7 @@ import DashboardChart from "./dashboard-chart";
 import { Dates } from "@/src/type/common";
 import { WorkspaceUserCount } from "@/src/type/user";
 import { TaskCount, TaskProgress } from "@/src/type/workspace";
+import WorkspacePopover from "@/src/components/Popover/WorkspacePopover";
 
 interface PropsType {
   name: string;
@@ -30,7 +31,8 @@ const DashboardContainerView = ({
     <div className="flex justify-center p-5">
       <div>
         <div className="flex items-center justify-between">
-          <h1 className="text-[32px] font-bold">{name}</h1>
+          <WorkspacePopover />
+
           <h1 className="text-[20px] text-[#676767]">
             {`${dates.startDate.format(
               "MMM DD, YYYY"
@@ -77,7 +79,7 @@ const DashboardContainerView = ({
             // color="#FAEBFF"
             color="#F4F4FA"
             icon="/svg/dashboard-task-2.svg"
-            title="Compoleted Tasks"
+            title="Completed Tasks"
             text={`${doneTaskData.count}건`}
             value={
               doneTaskData.count === 0 || doneTaskData.yesterdayCount === 0

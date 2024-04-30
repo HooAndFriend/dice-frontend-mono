@@ -1,11 +1,9 @@
 // ** React Imports
 import { ChangeEvent, useEffect, useRef } from "react";
 
-// ** Aws Imports
-import AWS from "aws-sdk";
-
 // ** Type Imports
 import { CommonResponse } from "@/src/type/common";
+import { UploadFileResponse } from "@/src/type/component";
 
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
@@ -60,26 +58,32 @@ const TicketFileUploader = ({ ticketId, refetch }: PropsType) => {
     const file = e.target.files?.[0];
 
     if (file) {
-      const s3 = new AWS.S3({
-        accessKeyId: process.env.NEXT_PUBLIC_MINIO_ACCESS_KEY,
-        secretAccessKey: process.env.NEXT_PUBLIC_MINIO_SECRET_KEY,
-        endpoint: process.env.NEXT_PUBLIC_MINIO_ENDPOINT,
-        s3ForcePathStyle: true,
-        signatureVersion: "v4",
-      });
-      const params = {
-        Bucket: process.env.NEXT_PUBLIC_MINIO_BUCKET_NAME,
-        Key: file.name,
-        Body: file,
-      };
-      s3.upload(params, (err, data) => {
-        if (err) {
-          return;
-        }
-        saveTicketFile.trigger(data.Location);
-      });
+      const formData = new FormData();
+      formData.append("file", file);
+
+      uploadFile.trigger(formData);
     }
   };
+
+  const uploadFile = useSWRMutation(
+    "/file/v1/upload",
+    async (url: string, { arg }: { arg: FormData }) =>
+      await Post<UploadFileResponse>(url, arg),
+    {
+      onSuccess: ({ data }) => {
+        saveTicketFile.trigger(data.url);
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
 
   useEffect(() => {
     clearInput();

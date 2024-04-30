@@ -1,6 +1,6 @@
 // ** Recoil Imports
 import { WorkspaceState } from "@/src/app";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 // ** Component Imports
 import { ImageUploader } from "@/src/components/ImageUploader";
@@ -33,15 +33,18 @@ const WorkspaceSettingContent = () => {
   });
 
   const setWorkspaceState = useSetRecoilState(WorkspaceState);
+  const { uuid, name } = useRecoilValue(WorkspaceState);
 
   const { handleOpen } = useDialog();
 
-  const {
-    error,
-    isLoading,
-    data: workspaceData,
-  } = useSWR("/v1/workspace/home", async (url) =>
-    Get<GetWorkspaceInfoResponse>(url)
+  const { error, isLoading } = useSWR(
+    "/v1/workspace/home",
+    async (url) => Get<GetWorkspaceInfoResponse>(url),
+    {
+      onSuccess: (res) => {
+        setData(res.data);
+      },
+    }
   );
 
   const updateWorkspace = useSWRMutation(
@@ -79,29 +82,21 @@ const WorkspaceSettingContent = () => {
     setData((cur) => ({ ...cur, profile }));
   };
 
-  useEffect(() => {
-    if (isLoading) return;
-
-    if (error) return;
-
-    setData(workspaceData.data);
-  }, [workspaceData]);
-
-  if (isLoading) return;
-
-  if (error) return;
-
   return (
     <div>
       <label className="text-xl font-bold font-spoqa">Profile</label>
-      <ImageUploader image={data.profile} mode="edit" setPath={handleImage} />
+      <ImageUploader
+        image={isLoading ? "" : data.profile}
+        mode="edit"
+        setPath={handleImage}
+      />
       <div className="mt-6">
         <label className="text-xl font-bold font-spoqa">Workspace Name</label>
         <input
           id="workspace name"
           placeholder="Enter Your Nickname"
           className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
-          value={data.name}
+          value={isLoading ? "" : data.name}
           onChange={handleInput}
           name="name"
         />
@@ -111,7 +106,7 @@ const WorkspaceSettingContent = () => {
         <input
           id="description"
           className="text-left mt-[14px] font-normal font-spoqa border h-[175px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
-          value={data.comment}
+          value={isLoading ? "" : data.comment}
           onChange={handleInput}
           name="comment"
         />

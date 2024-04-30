@@ -2,10 +2,10 @@
 import Image from "next/image";
 
 // ** Component Imports
-import QaCard from "./components/QaCard";
+import QaCard from "../../components/Qa/QaCard";
 import CustomSearch from "@/src/components/Input/CustomSearch";
-import StatusItem from "./components/StatusItem";
-import QaItem from "./components/QaItem";
+import StatusItem from "../../components/Qa/StatusItem";
+import QaItem from "../../components/Qa/QaItem";
 import QaSaveModal from "@/src/components/Modal/QaSaveModal";
 import CustomImage from "@/src/components/Image/CustomImage";
 
@@ -62,7 +62,6 @@ const QaContainerView = ({
 }: PropsType) => {
   return (
     <div className="w-full bg-[#FAFAFB] p-5">
-      <div className="font-mosk font-bold text-[32px]">QA</div>
       <div className="w-full h-[100px] shadow-md border-[#EBEBEC] rounded-[20px] bg-white mt-[30px] flex items-center">
         <div className="font-spoqa text-base font-bold ml-[50px] mr-[29px] text-center">
           Search
@@ -119,8 +118,8 @@ const QaContainerView = ({
                 />
               </div>
               <div
-                // onClick={handleCreateIssueOpen}
-                className="w-[120px] h-[50px] rounded-[30px] flex items-center bg-white border border-[#EBEBEC] justify-center ml-8"
+                onClick={() => setSaveOpen(true)}
+                className="w-[120px] h-[50px] rounded-[30px] flex items-center bg-white border border-[#EBEBEC] justify-center ml-8 cursor-pointer"
               >
                 <CustomImage
                   src="/images/Add_To_Queue.png"
@@ -128,10 +127,7 @@ const QaContainerView = ({
                   height={24}
                   alt="add"
                 />
-                <div
-                  className="font-spoqa font-bold text-center ml-[5px]"
-                  onClick={() => setSaveOpen(true)}
-                >
+                <div className="font-spoqa font-bold text-center ml-[5px]">
                   Add
                 </div>
               </div>

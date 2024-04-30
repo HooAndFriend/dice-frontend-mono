@@ -1,13 +1,20 @@
+// ** React Imports
+import { useState, useEffect, useRef } from "react";
+
 // ** Type Imports
 import { Get, Patch } from "@/src/repository";
+import { CommonResponse } from "@/src/type/common";
 import { GetTicketSettingListResponse, TicketInfo } from "@/src/type/ticket";
-import { useEffect, useRef, useState } from "react";
+
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
-import { Put } from "@/src/repository";
 import useSWR, { mutate } from "swr";
-import { CommonResponse } from "@/src/type/common";
+
+// ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
+
+// ** Component Imports
+import Tooltip from "../../Tooltip";
 
 interface PropsType {
   data: TicketInfo;
@@ -89,14 +96,18 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
           handleOpen();
         }}
       >
-        {data.ticketSetting ? (
-          <div
-            className="w-[24px] h-[24px] rounded-lg"
-            style={{ backgroundColor: data.ticketSetting.color }}
-          />
-        ) : (
-          <div className="w-[24px] h-[24px] bg-green-300 rounded-lg" />
-        )}
+        <Tooltip text={data.ticketSetting ? data.ticketSetting.type : ""}>
+          {data.ticketSetting ? (
+            <div
+              className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
+              style={{ backgroundColor: data.ticketSetting.color }}
+            >
+              {data.ticketSetting.type.slice(0, 1)}
+            </div>
+          ) : (
+            <div className="w-[24px] h-[24px] bg-green-300 rounded-lg" />
+          )}
+        </Tooltip>
         {isText && (
           <h3 className="text-[16px] ml-4">
             {data.ticketSetting ? data.ticketSetting.type : "-"}

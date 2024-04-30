@@ -1,8 +1,5 @@
 "use client";
 
-// ** Next Imports
-import { useRouter } from "next/navigation";
-
 // ** React Imports
 import { useState, useRef } from "react";
 
@@ -10,16 +7,8 @@ import { useState, useRef } from "react";
 import TeamPopoverView from "./team-popover";
 
 // ** Recoil Imports
-import {
-  AuthState,
-  TeamState,
-  UserState,
-  WorkspaceState,
-  authInitState,
-  userInitState,
-  workspaceInitState,
-} from "@/src/app";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { AuthState, TeamState, WorkspaceState } from "@/src/app";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 // ** Type Imports
 import { GetUserTeamListResponse, TeamUserInfo } from "@/src/type/team";
@@ -31,14 +20,10 @@ import { Get } from "@/src/repository";
 const TeamPopover = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [teamModalOpen, setTeamModalOpen] = useState<boolean>(false);
-  const [userModalOpen, setUserModalOpen] = useState<boolean>(false);
 
-  const router = useRouter();
-
-  const [userState, setUserState] = useRecoilState(UserState);
   const setWorkspaceState = useSetRecoilState(WorkspaceState);
   const [teamState, setTeamState] = useRecoilState(TeamState);
-  const [authState, setAuthState] = useRecoilState(AuthState);
+  const authState = useRecoilValue(AuthState);
 
   const cancelButtonRef = useRef(null);
 
@@ -50,12 +35,6 @@ const TeamPopover = () => {
 
   const handleOpen = () => setOpen((cur) => !cur);
   const handleModalOpen = () => {
-    if (teamState.isPersonal) {
-      setUserModalOpen(true);
-
-      return;
-    }
-
     setTeamModalOpen(true);
   };
 
@@ -84,14 +63,6 @@ const TeamPopover = () => {
     mutate("/v1/ticket");
   };
 
-  const handleLogout = () => {
-    setAuthState(authInitState);
-    setUserState(userInitState);
-    setWorkspaceState(workspaceInitState);
-
-    router.push("/");
-  };
-
   if (isLoading) return null;
 
   if (error) return;
@@ -100,18 +71,13 @@ const TeamPopover = () => {
     <TeamPopoverView
       open={open}
       uuid={teamState.uuid}
-      user={userState}
-      userModalOpen={userModalOpen}
       modalTeamOpen={teamModalOpen}
       cancelButtonRef={cancelButtonRef}
       setTeamModalOpen={setTeamModalOpen}
-      setUserModalOpen={setUserModalOpen}
       handleModalOpen={handleModalOpen}
       handleOpen={handleOpen}
       handleUpdateTeam={handleUpdateTeam}
-      handleLogout={handleLogout}
       data={data.data.data}
-      teamState={teamState}
       profile={teamState.profile}
     />
   );

@@ -10,6 +10,7 @@ module.exports = {
       "firebasestorage.googleapis.com",
       "web.hi-dice.com",
       "hi-dice.com",
+      "file.hi-dice.com",
     ],
   },
   output: process.env.NODE_ENV === "development" ? "standalone" : "export",

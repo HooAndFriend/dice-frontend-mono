@@ -39,15 +39,26 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
 
   return (
     <div
-      className="flex h-[60px] hover:bg-slate-400 rounded-lg"
+      className="flex h-[80px] py-[24px] hover:bg-slate-400 rounded-lg"
       onClick={() => handleClick(data.id)}
     >
       <div className="flex w-[10%] items-center justify-center">
         <TicketSettingButton data={data} isText={false} />
       </div>
       <div className="flex w-[40%] items-center">
-        <h1 className="text-[16px]">
-          {highlightFirstMatch(`${data.code} ${data.name}`, word)}
+        <h1
+          className={`text-[16px] mr-4 ${
+            data.status === "DONE" && "line-through"
+          } ${data.status === "REOPEN" && "text-red-300"}`}
+        >
+          {data.code}
+        </h1>
+        <h1
+          className={`text-[16px] ${data.status === "DONE" && "line-through"} ${
+            data.status === "REOPEN" && "text-red-300"
+          }`}
+        >
+          {highlightFirstMatch(data.name, word)}
         </h1>
       </div>
       {!isEpic && (
@@ -66,10 +77,11 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
         />
       </div>
       <div className="flex w-[20%] items-center justify-center">
-        <TicketDatePicker
+        <p>{data.dueDate ? dayjs(data.dueDate).format("YYYY-MM-DD") : "-"}</p>
+        {/* <TicketDatePicker
           ticketId={data.id}
           value={dayjs(data.dueDate).format("YYYY-MM-DD")}
-        />
+        /> */}
       </div>
       {/* <div className="flex w-[20%] items-center justify-center">
         <h1 className="text-[16px]">

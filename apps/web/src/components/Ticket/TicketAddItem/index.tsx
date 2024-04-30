@@ -4,7 +4,7 @@
 import Image from "next/image";
 
 // ** React Imports
-import { useState } from "react";
+import { KeyboardEvent, useState } from "react";
 
 // ** Component Imports
 import CustomInput from "@/src/components/Input/CustomInput";
@@ -28,6 +28,7 @@ interface PropsType {
 const TicketAddItem = ({ epicId }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
+  const [button, setButton] = useState<boolean>(false);
 
   const handleOpen = () => setOpen((c) => !c);
 
@@ -51,6 +52,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
           buttonText: "Close",
           type: "alert",
         });
+        setButton(false);
       },
     }
   );
@@ -74,9 +76,34 @@ const TicketAddItem = ({ epicId }: PropsType) => {
           buttonText: "Close",
           type: "alert",
         });
+        setButton(false);
       },
     }
   );
+
+  const handleClose = () => {
+    setOpen(false);
+    setName("");
+    setButton(false);
+  };
+
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      if (button) return;
+      setButton(true);
+      if (epicId) {
+        saveTicketWithEpic.trigger();
+
+        return;
+      }
+
+      saveSimpleTicket.trigger();
+    }
+
+    if (e.key === "Escape") {
+      handleClose();
+    }
+  };
 
   return (
     <div className="pl-8 w-full h-[75px] flex items-center">
@@ -89,6 +116,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
             height="36px"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            onKeyDown={handleEnter}
           />
           <div
             className="ml-4"
@@ -103,6 +131,9 @@ const TicketAddItem = ({ epicId }: PropsType) => {
               width={36}
               height={36}
             />
+          </div>
+          <div className="ml-4 cursor-pointer" onClick={handleClose}>
+            <h1 className="font-bold text-[24px]">X</h1>
           </div>
         </>
       ) : (

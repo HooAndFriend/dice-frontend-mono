@@ -17,6 +17,7 @@ import { useRecoilValue } from "recoil";
 
 // ** Utils Imports
 import { isUndefined } from "loadsh";
+import TeamPopover from "../../Popover/TeamPopover";
 
 const DashboardSidebard = () => {
   const { workspaceFunction } = useRecoilValue(WorkspaceState);
@@ -82,14 +83,10 @@ const DashboardSidebard = () => {
     <div className="w-[70px] border-r-2 border-[#EBEBEC]">
       <div className="flex justify-center h-4/5">
         <div>
+          <TeamPopover />
           {sidbarMenuList.map((item) => (
             <MenuItem {...item} key={item.id} />
           ))}
-        </div>
-      </div>
-      <div className="flex h-1/5">
-        <div className="flex items-end justify-center flex-grow pb-3">
-          <WorkspacePopover />
         </div>
       </div>
     </div>

@@ -62,7 +62,6 @@ const WorkspacePopover = () => {
   return (
     <WorkspacePopoverView
       open={open}
-      id={workspaceState.id}
       data={data.data.data}
       handleOpen={handleOpen}
       modalOpen={modalOpen}
@@ -71,7 +70,6 @@ const WorkspacePopover = () => {
       handleModalOpen={handleModalOpen}
       handleUpdateWorkspace={handleUpdateWorkspace}
       workspace={workspaceState}
-      profile={workspaceState.profile}
     />
   );
 };

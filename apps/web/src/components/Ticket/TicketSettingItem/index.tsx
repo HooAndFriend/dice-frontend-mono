@@ -17,9 +17,10 @@ interface PropsType {
 
 const TicketSettingItem = forwardRef(
   ({ item, onUpdate, handleTicketDelete }: PropsType, ref) => {
-    const { data, handleInput, setData } = useInput({
+    const { data, handleInput, setData } = useInput<SettingListInfo>({
       id: item.id,
       color: item.color,
+      textColor: item.textColor,
       type: item.type,
       description: item.description,
       admin: {
@@ -49,6 +50,15 @@ const TicketSettingItem = forwardRef(
             <input
               name="color"
               value={data.color}
+              onChange={handleInput}
+              type="color"
+              className="appearance-none border-none bg-transparent w-[40px] h-[40px] rounded-lg"
+            />
+          </div>
+          <div className="flex items-center justify-center ml-8">
+            <input
+              name="textColor"
+              value={data.textColor}
               onChange={handleInput}
               type="color"
               className="appearance-none border-none bg-transparent w-[40px] h-[40px] rounded-lg"

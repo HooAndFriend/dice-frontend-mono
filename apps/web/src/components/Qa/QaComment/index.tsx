@@ -23,6 +23,7 @@ interface PropsType {
 
 const QaComment = ({ qaId }: PropsType) => {
   const [comment, setComment] = useState<string>("");
+  const [button, setButton] = useState<boolean>(false);
 
   const { handleOpen } = useDialog();
 
@@ -40,6 +41,20 @@ const QaComment = ({ qaId }: PropsType) => {
 
   const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      if (comment === "") {
+        handleOpen({
+          title: "Error",
+          message: "Enter Comment",
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+
+        return;
+      }
+
+      if (button) return;
+      setButton(true);
       addComment.trigger();
     }
   };
@@ -67,6 +82,7 @@ const QaComment = ({ qaId }: PropsType) => {
       await Post<AddCommentResponse>(url, { content: comment, qaId }),
     {
       onSuccess: () => {
+        setButton(false);
         setComment("");
         commentRefetch();
       },
@@ -78,6 +94,7 @@ const QaComment = ({ qaId }: PropsType) => {
           buttonText: "Close",
           type: "alert",
         });
+        setButton(false);
       },
     }
   );

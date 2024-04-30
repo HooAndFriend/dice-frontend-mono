@@ -39,6 +39,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
     async (url: string) => await Post<CommonResponse<void>>(url, { name }),
     {
       onSuccess: () => {
+        setButton(false);
         setOpen(false);
         setName("");
         mutate("/v1/ticket");
@@ -63,6 +64,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
       await Post<CommonResponse<void>>(url, { name, epicId }),
     {
       onSuccess: () => {
+        setButton(false);
         setOpen(false);
         setName("");
         mutate("/v1/ticket");

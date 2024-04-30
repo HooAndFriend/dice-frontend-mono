@@ -13,6 +13,10 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 
+// ** Recoil Imports
+import { WorkspaceState } from "@/src/app";
+import { useRecoilValue } from "recoil";
+
 interface PropsType {
   epicData: EpicInfo[];
   word: string;
@@ -21,6 +25,8 @@ interface PropsType {
 }
 
 const EpicTable = ({ epicData, word, onDragEnd, handleClick }: PropsType) => {
+  const { role } = useRecoilValue(WorkspaceState);
+
   return (
     <div className="h-[564px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md px-[24px]">
       <DragDropContext onDragEnd={onDragEnd}>
@@ -54,7 +60,7 @@ const EpicTable = ({ epicData, word, onDragEnd, handleClick }: PropsType) => {
           )}
         </Droppable>
       </DragDropContext>
-      <EpicAddItem />
+      {role !== "VIEWER" && <EpicAddItem />}
     </div>
   );
 };

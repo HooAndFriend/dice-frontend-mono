@@ -1,17 +1,16 @@
+// ** Provider Imports
+import { Dialog, Transition } from "@headlessui/react"
 // ** React Imports
 import { Fragment } from 'react';
 
-// ** Provider Imports
-import { Dialog, Transition } from "@headlessui/react"
-
 interface PropsType {
   open: boolean
-  title: string
   cancelButtonRef: any
-  setOpen: (oopen: boolean) => void
+  setOpen: (open: boolean) => void
+  handleCreate: (title: string) => void
 }
 
-const VersionModalView = ({ open, title, cancelButtonRef, setOpen }) => {
+const VersionDetailModalView = ({ open, cancelButtonRef, setOpen, handleCreate }) => {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -45,7 +44,7 @@ const VersionModalView = ({ open, title, cancelButtonRef, setOpen }) => {
               <Dialog.Panel className="relative overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl">
                 <div className="w-[600px] h-[520px] rounded-[12px] overflow-y-auto">
                   <div className="w-full h-[64px] bg-[#623AD6] flex items-center justify-between px-4">
-                    <h1 className="text-white">{title}</h1>
+                    <h1 className="text-white">버전 등록</h1>
                     <h1
                       className="font-bold text-white cursor-pointer"
                       onClick={() => setOpen(false)}
@@ -66,62 +65,42 @@ const VersionModalView = ({ open, title, cancelButtonRef, setOpen }) => {
                     </div>
                     <div className="flex items-center mt-[40px]">
                       <div className="w-full h-[20px] flex items-center">
-                        <h1 className="w-[120px] px-4 font-bold">구분
-                          <span className="text-[#FF0000]">*</span>
-                        </h1>
-                        <div className="flex items-center">
-                          <label><input type="radio" name="type" className="mx-2" defaultChecked />Window</label>
-                          <label><input type="radio" name="type" className="mx-2" />Mac</label>
-
-                        </div>
+                        <h1 className="w-[120px] px-4 font-bold">구분</h1>
+                        <h1 className="text-[#696374]">Mac</h1>
                       </div>
                     </div>
                     <div className="flex items-center mt-[40px]">
                       <div className="w-full h-[20px] flex items-center">
-                        <h1 className="w-[120px] px-4 font-bold">버전명
-                          <span className="text-[#FF0000]">*</span>
-                        </h1>
-                        <input
-                          name="version-name"
-                          type="text"
-                          placeholder="버전명을 입력해 주세요"
-                          className="w-[440px] h-[20] bg-[#F8F8F8] border-solid border-1 border-[#EFEFEF] rounded-[8px]"
-                        />
+                        <h1 className="w-[120px] px-4 font-bold">버전명</h1>
+                        <h1 className="text-[#696374]">1.0 version</h1>
                       </div>
                     </div>
                     <div className="flex items-center mt-[40px]">
                       <div className="w-full h-[20px] flex items-center">
-                        <h1 className="w-[120px] px-4 font-bold">프로그램
-                          <span className="text-[#FF0000]">*</span>
-                        </h1>
-                        <label
-                          htmlFor="input-file"
-                          className="w-[100px] h-[40px] bg-[#623AD6] rounded-[8px] text-white grid place-items-center font-bold "
-                        >첨부파일</label>
-                        <input
-                          id="input-file"
-                          type="file"
-                          style={{ display: "none" }}
-                        />
+                        <h1 className="w-[120px] px-4 font-bold">프로그램</h1>
+                        <a href="/README.md" download={true}>HIDICE_v1.0_exe</a>
                       </div>
                     </div>
                     <div className="flex items-center mt-[40px]">
                       <div className="w-full h-[100px] flex">
                         <h1 className="w-[120px] px-4 flex font-bold">메모</h1>
-                        <textarea
-                          name="memo"
-                          style={{ resize: 'none' }}
-                          placeholder="메모 내용을 입력해 주세요"
-                          className="w-[440px] h-[100px] bg-[#F8F8F8] border-solid border-1 border-[#EFEFEF] rounded-[8px]"
-                        />
+                        <p>기능 오류 해결 후 재업로드</p>
                       </div>
                     </div>
-                    <div className="flex justify-end mt-[40px]">
+                    <div className="flex justify-between items-center mt-[40px]">
+                      <button
+                        className="w-[60px] h-[40px] bg-[#D20000] rounded-[8px] text-white font-bold"
+                      >
+                        삭제
+                      </button>
                       <button
                         className="w-[60px] h-[40px] bg-[#623AD6] rounded-[8px] text-white font-bold"
-                        onClick={() => setOpen(false)}
+                        onClick={() => {
+                          setOpen(false)
+                          handleCreate("버전 수정")
+                        }}
                       >
-                        저장
+                        수정
                       </button>
                     </div>
                   </div>
@@ -135,4 +114,4 @@ const VersionModalView = ({ open, title, cancelButtonRef, setOpen }) => {
   )
 }
 
-export default VersionModalView
+export default VersionDetailModalView

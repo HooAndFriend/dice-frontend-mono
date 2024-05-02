@@ -1,6 +1,8 @@
-import { Dialog, Transition } from "@headlessui/react"
-import { NONAME } from "dns";
+// ** React Imports
 import { Fragment } from 'react';
+
+// ** Provider Imports
+import { Dialog, Transition } from "@headlessui/react"
 
 interface PropsType {
   open: boolean
@@ -9,7 +11,7 @@ interface PropsType {
   setOpen: (oopen: boolean) => void
 }
 
-const ProgramModalView = ({ open, cancelButtonRef, setOpen }) => {
+const VersionModalView = ({ open, cancelButtonRef, setOpen }) => {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -133,4 +135,4 @@ const ProgramModalView = ({ open, cancelButtonRef, setOpen }) => {
   )
 }
 
-export default ProgramModalView
+export default VersionModalView

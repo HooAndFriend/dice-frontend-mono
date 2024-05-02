@@ -5,17 +5,17 @@ import { useRef, useState } from 'react'
 import CustomTable from '@/src/components/Table'
 import TablePagination from '@/src/components/Table/TablePagination'
 import TitleBox from '@/src/components/TitleBox'
-import ProgramModal from '@/src/components/Modal/ProgramModal'
+import ProgramModal from '@/src/components/Modal/ProgramModal/VersionModal'
 
-interface PropsType {}
+interface PropsType { }
 
 
-const ProgramPageView = ({}: PropsType) => {
+const ProgramPageView = ({ }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
-  
+
   const cancelButtonRef = useRef(null)
   const handleOpen = () => setOpen((c) => !c)
-  
+
   return (
     <div className="w-full px-4 mt-4">
       <TitleBox title="운영 관리 / 프로그램 버전" text="프로그램 버전" />

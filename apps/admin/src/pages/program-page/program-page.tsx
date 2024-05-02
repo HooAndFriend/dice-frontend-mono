@@ -17,6 +17,7 @@ const ProgramPageView = ({ }: PropsType) => {
   const [title, setTitle] = useState<string>('')
 
   const cancelButtonRef = useRef(null)
+
   const handleCreate = (title: string) => {
     setCreate((c) => !c)
     setTitle(title);

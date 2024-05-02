@@ -2,21 +2,19 @@ import { TableItemType } from '@/src/type/component'
 
 interface PropsType {
   data: TableItemType[]
-  userId?: number
+  id?: number
   disabledClick: boolean
   handleClick?: (id: number) => void
 }
 
-const TableItem = ({ data, disabledClick, userId, handleClick }: PropsType) => {
+const TableItem = ({ data, disabledClick, id, handleClick }: PropsType) => {
   return (
     <div
-      className={`w-full flex items-center h-[45px] ${
-        !disabledClick && 'hover:bg-slate-400'
-      }`}
+      className={`w-full flex items-center h-[45px] ${!disabledClick && 'hover:bg-slate-400'}`}
       onClick={() => {
         if (!disabledClick && handleClick) {
-          if (userId !== undefined) {
-            handleClick(userId) // 사용자 ID를 handleClick 콜백에 전달
+          if (id !== undefined) {
+            handleClick(id) // 선택된 ID를 handleClick 콜백에 전달
           } else {
             handleClick(1)
           }

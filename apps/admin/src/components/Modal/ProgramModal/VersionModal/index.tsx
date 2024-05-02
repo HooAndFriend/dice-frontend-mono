@@ -1,5 +1,8 @@
+// ** Provider Imports
 import { DialogProvider } from "@/src/context/DialogContext"
-import ProgramModalView from "./ProgramModal"
+
+// ** Component Imports
+import VersionModalView from "./VersionModal"
 
 
 interface PropsType {
@@ -8,12 +11,11 @@ interface PropsType {
   setOpen: (open: boolean) => void
 }
 
-const ProgramModal = ({open, cancelButtonRef, setOpen}: PropsType) : JSX.Element => {
-  console.log("open ProgramModal")
+const VersionModal = ({ open, cancelButtonRef, setOpen }: PropsType): JSX.Element => {
 
   return (
     <DialogProvider>
-      <ProgramModalView
+      <VersionModalView
         open={open}
         cancelButtonRef={cancelButtonRef}
         setOpen={setOpen}
@@ -24,4 +26,4 @@ const ProgramModal = ({open, cancelButtonRef, setOpen}: PropsType) : JSX.Element
 }
 
 
-export default ProgramModal
+export default VersionModal

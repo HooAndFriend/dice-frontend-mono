@@ -7,24 +7,19 @@ import Link from "next/link";
 import CustomImage from "../../Image/CustomImage";
 import UserPopover from "../../Popover/UserPopover";
 import NotificationPopover from "../../Popover/NotificationPopover";
-import WorkspacePopover from "../../Popover/WorkspacePopover";
 
 const DashboardHeader = () => {
   return (
     <div className="h-[70px] border-b-2 border-[#EBEBEC] flex items-center justify-between">
-      <div className="flex items-center">
-        <Link href="/dashboard">
-          <CustomImage
-            src="/images/logo.png"
-            width={110}
-            height={30}
-            alt="logo"
-            className="ml-[30px]"
-          />
-        </Link>
-        <WorkspacePopover />
-      </div>
-
+      <Link href="/dashboard">
+        <CustomImage
+          src="/images/logo.png"
+          width={110}
+          height={30}
+          alt="logo"
+          className="ml-[30px]"
+        />
+      </Link>
       <div className="flex items-center mr-[30px]">
         <NotificationPopover />
         <UserPopover />

@@ -8,12 +8,10 @@ import StatusItem from "../../components/Qa/StatusItem";
 import QaItem from "../../components/Qa/QaItem";
 import QaSaveModal from "@/src/components/Modal/QaSaveModal";
 import CustomImage from "@/src/components/Image/CustomImage";
-import UserSelectBox from "@/src/components/UserSelectBox";
 
 // ** Type Imports
 import { IssueInfo } from "@/src/type/qa";
 import { EpicStatus } from "@/src/type/epic";
-import { RoleType } from "@/src/type/common";
 
 // ** Utils Imports
 import {
@@ -23,12 +21,12 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 import { WorkspaceUser } from "@/src/type/workspace";
+import UserSelectBox from "@/src/components/UserSelectBox";
 
 interface PropsType {
   open: boolean;
   saveOpen: boolean;
   qaId: number;
-  role: RoleType;
   data: IssueInfo[];
   status: EpicStatus;
   word: string;
@@ -47,7 +45,6 @@ interface PropsType {
 const QaContainerView = ({
   data,
   qaId,
-  role,
   status,
   open,
   word,
@@ -120,22 +117,20 @@ const QaContainerView = ({
                   value="COMPLETE"
                 />
               </div>
-              {role !== "VIEWER" && (
-                <div
-                  onClick={() => setSaveOpen(true)}
-                  className="w-[120px] h-[50px] rounded-[30px] flex items-center bg-white border border-[#EBEBEC] justify-center ml-8 cursor-pointer"
-                >
-                  <CustomImage
-                    src="/images/Add_To_Queue.png"
-                    width={24}
-                    height={24}
-                    alt="add"
-                  />
-                  <div className="font-spoqa font-bold text-center ml-[5px]">
-                    Add
-                  </div>
+              <div
+                onClick={() => setSaveOpen(true)}
+                className="w-[120px] h-[50px] rounded-[30px] flex items-center bg-white border border-[#EBEBEC] justify-center ml-8 cursor-pointer"
+              >
+                <CustomImage
+                  src="/images/Add_To_Queue.png"
+                  width={24}
+                  height={24}
+                  alt="add"
+                />
+                <div className="font-spoqa font-bold text-center ml-[5px]">
+                  Add
                 </div>
-              )}
+              </div>
             </div>
           </div>
           <div className="w-full py-5 h-[564px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC] overflow-y-auto overflow-x-hidden">

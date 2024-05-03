@@ -22,8 +22,6 @@ import QaContainerView from "./qa-container";
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 import { WorkspaceUser } from "@/src/type/workspace";
-import { useRecoilValue } from "recoil";
-import { WorkspaceState } from "@/src/app";
 
 const QaContainer = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -40,8 +38,6 @@ const QaContainer = () => {
   const [enabled, setEnabled] = useState<boolean>(false);
 
   const cancelButtonRef = useRef();
-
-  const { role } = useRecoilValue(WorkspaceState);
 
   const { handleOpen } = useDialog();
 
@@ -113,7 +109,6 @@ const QaContainer = () => {
         )}
       qaId={qaId}
       word={word}
-      role={role}
       checkedList={checkedList}
       setWord={setWord}
       setStatus={setStatus}

@@ -23,7 +23,6 @@ interface PropsType {
 
 const TicketComment = ({ ticketId }: PropsType) => {
   const [comment, setComment] = useState<string>("");
-  const [button, setButton] = useState<boolean>(false);
 
   const { handleOpen } = useDialog();
 
@@ -33,7 +32,6 @@ const TicketComment = ({ ticketId }: PropsType) => {
       await Post<CommonResponse<void>>(url, { content: comment, ticketId }),
     {
       onSuccess: () => {
-        setButton(false);
         setComment("");
         commentRefetch();
       },
@@ -45,7 +43,6 @@ const TicketComment = ({ ticketId }: PropsType) => {
           buttonText: "Close",
           type: "alert",
         });
-        setButton(false);
       },
     }
   );
@@ -59,38 +56,8 @@ const TicketComment = ({ ticketId }: PropsType) => {
     Get<GetTicketCommentListResponse>(url)
   );
 
-  const handleSaveTicketComment = () => {
-    if (comment === "") {
-      handleOpen({
-        title: "Error",
-        message: "Enter Comment",
-        logLevel: "warn",
-        buttonText: "Close",
-        type: "alert",
-      });
-
-      return;
-    }
-
-    saveTicketComment.trigger();
-  };
-
   const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      if (comment === "") {
-        handleOpen({
-          title: "Error",
-          message: "Enter Comment",
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-
-        return;
-      }
-
-      if (button) return;
-      setButton(true);
       saveTicketComment.trigger();
     }
   };
@@ -111,7 +78,7 @@ const TicketComment = ({ ticketId }: PropsType) => {
           onKeyDown={handleCommentEnter}
         />
         <div
-          onClick={handleSaveTicketComment}
+          onClick={saveTicketComment.trigger}
           className="w-[40px] h-[40px] bg-black text-white rounded-[10px] flex justify-center items-center"
         >
           <CustomImage

@@ -1,7 +1,3 @@
-// ** Recoil Imports
-import { WorkspaceState } from "@/src/app";
-import { useRecoilValue } from "recoil";
-
 // ** Component Imports
 import TicketAddItem from "../TicketAddItem";
 import TicketHeader from "../TicketHeader";
@@ -26,8 +22,6 @@ interface PropsType {
 }
 
 const TicketTable = ({ word, handleClick, data, onDragEnd }: PropsType) => {
-  const { role } = useRecoilValue(WorkspaceState);
-
   return (
     <div className="mt-[44px] h-[564px] overflow-auto w-full bg-white rounded-[20px] shadow-md p-[24px]s">
       <TicketHeader isEpic={false} />
@@ -63,7 +57,7 @@ const TicketTable = ({ word, handleClick, data, onDragEnd }: PropsType) => {
           )}
         </Droppable>
       </DragDropContext>
-      {role !== "VIEWER" && <TicketAddItem />}
+      <TicketAddItem />
     </div>
   );
 };

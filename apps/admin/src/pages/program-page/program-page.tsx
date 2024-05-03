@@ -17,7 +17,7 @@ const ProgramPageView = ({ }: PropsType) => {
   const [title, setTitle] = useState<string>('')
 
   const cancelButtonRef = useRef(null)
-  const handleCreat = (title: string) => {
+  const handleCreate = (title: string) => {
     setCreate((c) => !c)
     setTitle(title);
   }
@@ -34,7 +34,7 @@ const ProgramPageView = ({ }: PropsType) => {
         <div className="flex items-center justify-between">
           <h1 className="mb-8 font-bold">프로그램 버전 목록(30건)</h1>
           <div>
-            <button className="w-[160px] h-[36px] bg-[#623AD6] rounded-[8px] text-white" onClick={() => handleCreat("버전 생성")}>
+            <button className="w-[160px] h-[36px] bg-[#623AD6] rounded-[8px] text-white" onClick={() => handleCreate("버전 생성")}>
               버전 등록
             </button>
           </div>
@@ -61,7 +61,7 @@ const ProgramPageView = ({ }: PropsType) => {
         <VersionDetailModal
           open={open}
           setOpen={setOpen}
-          handleCreate={handleCreat}
+          handleCreate={handleCreate}
           cancelButtonRef={cancelButtonRef}
         />
       )}

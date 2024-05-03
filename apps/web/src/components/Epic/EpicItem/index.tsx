@@ -114,7 +114,7 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
           />
         </div>
         <h4 className="ml-[20px] text-[16px] font-san-medium">
-          {((item.doneTicketCount / item.ticket.length) * 100).toFixed(2)} %
+          {(item.doneTicketCount / item.ticket.length) * 100} %
         </h4>
         <h4 className="ml-[20px] text-[16px] font-san-medium text-[#676767]">
           ({item.doneTicketCount}/{item.ticket.length})

@@ -33,7 +33,6 @@ const EpicAddItem = () => {
     async (url: string) => await Post<CommonResponse<void>>(url, { name }),
     {
       onSuccess: () => {
-        setButton(true);
         handleClose();
       },
       onError: (error) => {

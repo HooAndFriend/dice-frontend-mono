@@ -17,7 +17,6 @@ const ProgramPageView = ({ }: PropsType) => {
   const [title, setTitle] = useState<string>('')
 
   const cancelButtonRef = useRef(null)
-
   const handleCreate = (title: string) => {
     setCreate((c) => !c)
     setTitle(title);
@@ -63,7 +62,6 @@ const ProgramPageView = ({ }: PropsType) => {
           open={open}
           setOpen={setOpen}
           handleCreate={handleCreate}
-
           cancelButtonRef={cancelButtonRef}
         />
       )}

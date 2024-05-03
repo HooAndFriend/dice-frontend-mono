@@ -29,10 +29,6 @@ import { Patch } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 import { mutate } from "swr";
 
-// ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { WorkspaceState } from "@/src/app";
-
 interface PropsType {
   item: EpicInfo;
   word: string;
@@ -46,8 +42,6 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
   const handleOpen = () => setOpen((c) => !c);
 
   const { handleOpen: handleDialogOpen } = useDialog();
-
-  const { role } = useRecoilValue(WorkspaceState);
 
   const epicProgress = useMemo(() => {
     if (item.doneTicketCount === 0) {
@@ -176,7 +170,7 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
               )}
             </Droppable>
           </DragDropContext>
-          {role !== "VIEWER" && <TicketAddItem epicId={item.id} />}
+          <TicketAddItem epicId={item.id} />
         </div>
       )}
       <hr className="bg-[#EBEBEC]" />

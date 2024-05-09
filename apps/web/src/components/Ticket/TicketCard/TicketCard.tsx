@@ -15,13 +15,18 @@ import { RoleType } from "@/src/type/common";
 import dayjs from "dayjs";
 import TicketComment from "../TicketComment";
 import TicketHistory from "../TicketHistory";
+import ImagePreview from "../../ImagePreview";
 
 interface PropsType {
   data: TicketInfo;
   mode: TicketEditMode;
   role: RoleType;
   subType: "comment" | "history";
+  selectImage: string;
+  previewOpen: boolean;
+  cancelButtonRef: any;
   setSubType: (type: "comment" | "history") => void;
+  setPreviewOpen: (open: boolean) => void;
   setMode: (mode: TicketEditMode) => void;
   setData: (data: TicketInfo) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -30,6 +35,7 @@ interface PropsType {
   handleDeleteTicket: (id: number) => void;
   handleDeleteTicketFile: (id: number) => void;
   handleUpdateTicket: (value: "content" | "name" | "storypoint") => void;
+  handlePreviewOpen: (image: string) => void;
 }
 
 const TicketCardView = ({
@@ -37,15 +43,20 @@ const TicketCardView = ({
   role,
   mode,
   subType,
+  selectImage,
+  previewOpen,
+  cancelButtonRef,
   setSubType,
   onChange,
   setData,
   setMode,
+  setPreviewOpen,
   handleClose,
   ticketRefetch,
   handleDeleteTicket,
   handleDeleteTicketFile,
   handleUpdateTicket,
+  handlePreviewOpen,
 }: PropsType) => {
   return (
     <div className="mt-[44px] h-[564px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
@@ -256,11 +267,14 @@ const TicketCardView = ({
           <TicketFileUploader ticketId={data.id} refetch={ticketRefetch} />
         )}
         {data.ticketFile.map((item) => (
-          <div className="relative w-[40px] h-[40px] mr-4">
+          <div
+            className="relative w-[40px] h-[40px] mr-4"
+            onClick={() => handlePreviewOpen(item.url)}
+          >
             <img
               src={item.url}
               alt="Description"
-              className="absolute inset-0 w-full h-full rounded-[6px] bg-[#D9E0FF]"
+              className="absolute inset-0 w-full h-full rounded-[6px] bg-[#D9E0FF] cursor-pointer"
             />
             <h1
               className="absolute px-2 py-1 m-1 text-xs leading-none text-white bg-black rounded-full cursor-pointer -right-2 -top-2"
@@ -298,6 +312,14 @@ const TicketCardView = ({
         <TicketComment ticketId={data.id} />
       ) : (
         <TicketHistory ticketId={data.id} />
+      )}
+      {previewOpen && (
+        <ImagePreview
+          open={previewOpen}
+          setOpen={setPreviewOpen}
+          image={selectImage}
+          cancelButtonRef={cancelButtonRef}
+        />
       )}
     </div>
   );

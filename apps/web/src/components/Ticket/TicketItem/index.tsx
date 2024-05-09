@@ -42,7 +42,7 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
       className="flex h-[80px] py-[24px] hover:bg-slate-400 rounded-lg"
       onClick={() => handleClick(data.id)}
     >
-      <div className="flex w-[10%] items-center justify-center">
+      <div className="flex w-[10%] items-center pl-[48px]">
         <TicketSettingButton data={data} isText={false} />
       </div>
       <div className="flex w-[40%] items-center">

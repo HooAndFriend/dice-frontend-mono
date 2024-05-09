@@ -108,7 +108,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
   };
 
   return (
-    <div className="pl-8 w-full h-[75px] flex items-center">
+    <div className="w-full h-[75px] flex items-center ml-[48px]">
       {open ? (
         <>
           <div className="mr-8 w-[24px] h-[24px] bg-green-300 rounded-lg" />

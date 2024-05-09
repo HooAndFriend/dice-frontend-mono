@@ -29,7 +29,7 @@ const TicketTable = ({ word, handleClick, data, onDragEnd }: PropsType) => {
   const { role } = useRecoilValue(WorkspaceState);
 
   return (
-    <div className="mt-[44px] h-[564px] overflow-auto w-full bg-white rounded-[20px] shadow-md p-[24px]s">
+    <div className="mt-[44px] h-[564px] overflow-auto w-full bg-white rounded-[20px] shadow-md p-[24px]">
       <TicketHeader isEpic={false} />
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">

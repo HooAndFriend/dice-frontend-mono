@@ -8,12 +8,24 @@ export interface GetEpicListResponse extends CommonResponse {
 
 export interface GetEpicDetailResponse extends CommonResponse, EpicDetail {}
 
+export interface GetEpicListResponse extends CommonResponse {
+  data: Epic[];
+  count: number;
+}
+
 export interface EpicInfo {
   id: number;
   code: string;
   name: string;
   doneTicketCount: number;
   ticket: TicketInfo[];
+}
+
+export interface Epic {
+  id: number;
+  name: string;
+  orderId: number;
+  code: string;
 }
 
 export type EpicStatus =

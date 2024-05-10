@@ -78,24 +78,8 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
       </div>
       <div className="flex w-[20%] items-center justify-center">
         <p>{data.dueDate ? dayjs(data.dueDate).format("YYYY-MM-DD") : "-"}</p>
-        {/* <TicketDatePicker
-          ticketId={data.id}
-          value={dayjs(data.dueDate).format("YYYY-MM-DD")}
-        /> */}
       </div>
-      {/* <div className="flex w-[20%] items-center justify-center">
-        <h1 className="text-[16px]">
-          {data.completeDate
-            ? dayjs(data.completeDate).format("YYYY-MM-DD")
-            : "-"}
-        </h1>
-      </div>
-      <div className="flex w-[20%] items-center justify-center">
-        <h1 className="text-[16px]">
-          {data.reopenDate ? dayjs(data.reopenDate).format("YYYY-MM-DD") : "-"}
-        </h1>
-      </div> */}
-      <div className="flex w-[10%] items-center justify-center">
+      <div className="flex items-center">
         <TicketStatusButton ticketId={data.id} status={data.status} />
       </div>
     </div>

@@ -8,7 +8,7 @@ export interface GetEpicListResponse extends CommonResponse {
 
 export interface GetEpicDetailResponse extends CommonResponse, EpicDetail {}
 
-export interface GetEpicListResponse extends CommonResponse {
+export interface GetEpicSimpleListResponse extends CommonResponse {
   data: Epic[];
   count: number;
 }

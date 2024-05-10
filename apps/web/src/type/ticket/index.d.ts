@@ -28,10 +28,9 @@ export interface TicketInfo {
   reopenDate: Date;
   ticketFile: { id: number; url: string }[];
   ticketSetting: {
-    id: number;
-    type: string;
-    color: string;
-    textColor: string;
+    id: 13;
+    type: TicketSettingType;
+    name: "FUNC";
   };
   epic: {
     id: number;
@@ -60,9 +59,8 @@ export interface GetTicketCommentListResponse extends Response {
 
 export interface SettingListInfo {
   id: number;
-  color: string;
-  textColor: string;
-  type: string;
+  name: string;
+  type: TicketSettingType;
   description: string;
   workspace: {
     id: number;
@@ -113,3 +111,13 @@ export interface CreateTicketSettingResponse extends Response {
   statusCode: number;
   message: string;
 }
+
+export type TicketSettingType =
+  | "RED"
+  | "BLUE"
+  | "GREEN"
+  | "YELLOW"
+  | "PURPLE"
+  | "BLACK"
+  | "PINK"
+  | "OTHER";

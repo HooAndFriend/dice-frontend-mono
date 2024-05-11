@@ -62,12 +62,6 @@ export interface SettingListInfo {
   name: string;
   type: TicketSettingType;
   description: string;
-  workspace: {
-    id: number;
-  };
-  admin: {
-    id: number;
-  };
 }
 
 export interface TicketHistory {

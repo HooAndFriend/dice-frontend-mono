@@ -1,22 +1,37 @@
 // ** Component Imports
-import CustomImage from "@/src/components/Image/CustomImage";
 import TicketSettingAddItem from "@/src/components/Ticket/TicketSettingAddItem";
 import TicketSettingItem from "@/src/components/Ticket/TicketSettingItem";
 
 // ** Type Imports
-import { SettingListInfo } from "@/src/type/ticket";
+import { SettingListInfo, TicketSettingType } from "@/src/type/ticket";
 
 interface PropsType {
   data: SettingListInfo[];
+  handleData: (
+    id: number,
+    value: string | TicketSettingType,
+    type: "name" | "type" | "description"
+  ) => void;
+  updateTicketSetting: () => void;
+  refetch: () => void;
 }
 
-const SettingContainerView = ({ data }: PropsType) => {
+const SettingContainerView = ({
+  data,
+  handleData,
+  updateTicketSetting,
+  refetch,
+}: PropsType) => {
   return (
     <div>
       <div className="mt-6 overflow-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8">
         {data.map((item) => (
           <>
-            <TicketSettingItem key={item.id} item={item} />
+            <TicketSettingItem
+              key={item.id}
+              item={item}
+              handleData={handleData}
+            />
             <hr className="my-[25px]" />
           </>
         ))}
@@ -26,13 +41,13 @@ const SettingContainerView = ({ data }: PropsType) => {
       </div>
       <div className="flex justify-end mt-[40px]">
         <button
-          // onClick={handleReset}
+          onClick={refetch}
           className="w-[275px] h-[55px] text-[#623AD6] border-[#623AD6] rounded-[15px] bg-white border-solid border-[2px]"
         >
           RESET
         </button>
         <button
-          // onClick={handleUpdate}
+          onClick={updateTicketSetting}
           className="w-[275px] h-[55px] bg-[#623AD6] text-white rounded-[15px] ml-4"
         >
           UPDATE

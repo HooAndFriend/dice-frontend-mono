@@ -1,9 +1,6 @@
 // ** Component Imports
 import { SettingListInfo, TicketSettingType } from "@/src/type/ticket";
 
-// ** Utils Imports
-import useInput from "@/src/hooks/useInput";
-
 // ** Component Imports
 import CustomInput from "../../Input/CustomInput";
 import CustomImage from "../../Image/CustomImage";
@@ -22,26 +19,18 @@ import { CommonResponse } from "@/src/type/common";
 
 interface PropsType {
   item: SettingListInfo;
+  handleData: (
+    id: number,
+    value: string | TicketSettingType,
+    type: "name" | "type" | "description"
+  ) => void;
 }
 
-const TicketSettingItem = ({ item }: PropsType) => {
-  const { data, handleInput, setData } = useInput<SettingListInfo>({
-    id: item.id,
-    name: item.name,
-    type: item.type,
-    description: item.description,
-    admin: {
-      id: item.admin?.id,
-    },
-    workspace: {
-      id: item.workspace?.id,
-    },
-  });
-
+const TicketSettingItem = ({ item, handleData }: PropsType) => {
   const { handleOpen } = useDialog();
 
   const setType = (type: TicketSettingType) => {
-    setData((c) => ({ ...c, type }));
+    handleData(item.id, type, "type");
   };
 
   const deleteSettingType = useSWRMutation(
@@ -67,13 +56,12 @@ const TicketSettingItem = ({ item }: PropsType) => {
     <div className="flex items-center justify-between">
       <div className="flex h-[60px] items-center">
         <div className="flex items-center justify-center">
-          <TicketSettingTypeButton type={data.type} setType={setType} />
+          <TicketSettingTypeButton type={item.type} setType={setType} />
         </div>
         <div className="px-8">
           <CustomInput
-            name="name"
-            value={data.name}
-            onChange={handleInput}
+            value={item.name}
+            onChange={(e) => handleData(item.id, e.target.value, "name")}
             width="165px"
             height="50px"
             borderRadius="10px"
@@ -81,9 +69,8 @@ const TicketSettingItem = ({ item }: PropsType) => {
         </div>
         <div>
           <CustomInput
-            name="description"
-            value={data.description}
-            onChange={handleInput}
+            value={item.description}
+            onChange={(e) => handleData(item.id, e.target.value, "description")}
             width="600px"
             height="50px"
             borderRadius="10px"

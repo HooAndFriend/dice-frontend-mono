@@ -22,19 +22,15 @@ const CustomInput = ({
   type,
 }: PropsType) => {
   return (
-    <div
-      className={`w-[${width}] h-[${height}] rounded-[${borderRadius}] border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4`}
-    >
-      <input
-        className={`w-full placeholder-[#EBEBEC] focus:outline-none border-none h-full`}
-        type={type ? type : "text"}
-        placeholder={placeholder ? placeholder : ""}
-        value={value}
-        name={name}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-      />
-    </div>
+    <input
+      className={`w-[${width}] h-[${height}] rounded-[${borderRadius}] border border-[#EBEBEC] px-4 flex items-center placeholder-[#EBEBEC] focus:outline-none`}
+      type={type ? type : "text"}
+      placeholder={placeholder ? placeholder : ""}
+      value={value}
+      name={name}
+      onChange={onChange}
+      onKeyDown={onKeyDown}
+    />
   );
 };
 

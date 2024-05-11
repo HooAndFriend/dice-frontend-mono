@@ -32,22 +32,19 @@ const QaItem = ({ item, handleOpenQa, word, qaId }: PropsType) => {
   };
 
   return (
-    <div
-      className={`px-4 w-full ${
-        qaId === item.id ? "bg-blue-50" : ""
-      } hover:bg-blue-50 h-[100px] py-2 border-b border-solid border-[#EBEBEC]`}
-      onClick={() => handleOpenQa(item.id)}
-    >
-      <div className="flex w-full h-[30px] font-spoqa font-medium text-lg">
-        <h1 className="font-bold">[{item.code}]</h1>
-        <h1 className="ml-2 mr-4">{highlightFirstMatch(item.title, word)}</h1>
+    <div className="w-full" onClick={() => handleOpenQa(item.id)}>
+      <div className="flex items-center w-full">
+        <h1 className="text-[16px]">{item.code}</h1>
         {dayjs().diff(dayjs(item.createdDate), "hour") <= 24 && (
-          <div className="bg-[#F13333] w-[67px] h-[30px] rounded-[10px] text-white flex items-center justify-center font-spoqa text-base text-center">
+          <div className="bg-[#F13333] ml-[20px] w-[67px] h-[30px] rounded-[10px] text-white flex items-center justify-center">
             NEW
           </div>
         )}
       </div>
-      <div className="w-full h-[45px] flex justify-between items-end mb-2">
+      <h1 className="mt-[5px] text-[18px] font-san-medium">
+        {highlightFirstMatch(item.title, word)}
+      </h1>
+      <div className="w-full h-[45px] flex justify-between items-end mt-[15px]">
         <div className="flex items-center">
           <QaUserButton
             profile={item.worker.profile}

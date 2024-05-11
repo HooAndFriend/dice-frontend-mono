@@ -1,6 +1,6 @@
 // ** Component Imports
+import CustomImage from "@/src/components/Image/CustomImage";
 import TicketSettingItem from "@/src/components/Ticket/TicketSettingItem";
-import TicketTypeAddItem from "@/src/components/Ticket/TicketTypeAddItem";
 
 // ** Service Imports
 
@@ -56,7 +56,19 @@ const SettingContainerView = ({
             <hr className="my-[25px]" />
           </>
         ))}
-        <TicketTypeAddItem />
+        <div className="w-full h-[75px] flex items-center">
+          <div className="flex items-center w-full h-full">
+            <CustomImage
+              src="/svg/add-box.svg"
+              width={36}
+              height={36}
+              alt="add-box"
+            />
+            <h1 className="text-[#DDDDDD] text-[16px] font-bold ml-4">
+              Add Type
+            </h1>
+          </div>
+        </div>
       </div>
       <div className="flex justify-end mt-[40px]">
         <button

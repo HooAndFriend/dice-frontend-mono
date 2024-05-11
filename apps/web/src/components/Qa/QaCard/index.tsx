@@ -1,6 +1,6 @@
 "use client";
 // ** React Imports
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // ** Component Imports
 import QaCardView from "./QaCard";
@@ -32,6 +32,9 @@ interface PropsType {
 }
 
 const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
+  const [selectImage, setSelectImage] = useState<string>("");
+  const [previewOpen, setPreviewOpen] = useState<boolean>(false);
+
   const [subType, setSubType] = useState<"comment" | "history">("comment");
   const [currentArg, setCurrentArg] = useState<
     "title" | "asIs" | "toBe" | "memo"
@@ -42,6 +45,8 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
     memo: "view",
     title: "view",
   });
+
+  const cancelButtonRef = useRef(null);
 
   const {
     data: issueData,
@@ -66,6 +71,11 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
   const { role } = useRecoilValue(WorkspaceState);
 
   const { handleOpen } = useDialog();
+
+  const handlePreviewOpen = (image: string) => {
+    setSelectImage(image);
+    setPreviewOpen(true);
+  };
 
   // ** Qa 삭제
   const deleteQa = useSWRMutation(
@@ -163,6 +173,9 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
       data={issueData}
       role={role}
       mode={mode}
+      selectImage={selectImage}
+      previewOpen={previewOpen}
+      cancelButtonRef={cancelButtonRef}
       subType={subType}
       setSubType={setSubType}
       deleteQa={deleteQa.trigger}
@@ -171,8 +184,10 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
       handleDeleteQaFile={deleteQaFile.trigger}
       refetch={refetch}
       setMode={setMode}
+      setPreviewOpen={setPreviewOpen}
       setIssueData={setIssueData}
       handleUpdateQa={updateQa.trigger}
+      handlePreviewOpen={handlePreviewOpen}
     />
   );
 };

@@ -1,13 +1,12 @@
 "use client";
 
-// ** Next Imports
-import Image from "next/image";
-
 // ** React Imports
 import { KeyboardEvent, useState } from "react";
 
 // ** Component Imports
 import CustomInput from "@/src/components/Input/CustomInput";
+import CustomImage from "../../Image/CustomImage";
+import EpicSelect from "../../Epic/EpicSelect";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
@@ -15,11 +14,10 @@ import { useDialog } from "@/src/context/DialogContext";
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
 import { Post } from "@/src/repository";
+import { mutate } from "swr";
 
 // ** Type Imports
 import { CommonResponse } from "@/src/type/common";
-import { mutate } from "swr";
-import CustomImage from "../../Image/CustomImage";
 
 interface PropsType {
   epicId?: number;
@@ -29,6 +27,8 @@ const TicketAddItem = ({ epicId }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [button, setButton] = useState<boolean>(false);
+
+  const [selectEpicId, setSelectEpicId] = useState<string>("");
 
   const handleOpen = () => setOpen((c) => !c);
 
@@ -108,14 +108,20 @@ const TicketAddItem = ({ epicId }: PropsType) => {
   };
 
   return (
-    <div className="pl-8 w-full h-[75px] flex items-center">
+    <div className="w-full h-[75px] flex items-center ml-[48px]">
       {open ? (
         <>
           <div className="mr-8 w-[24px] h-[24px] bg-green-300 rounded-lg" />
+          <div className="mr-[15px]">
+            <EpicSelect
+              selectEpicId={selectEpicId}
+              setSelectEpicId={setSelectEpicId}
+            />
+          </div>
           <CustomInput
-            placeholder="Enter Epic Name"
+            placeholder="Enter Ticket Name"
             borderRadius="8px"
-            height="36px"
+            height="40px"
             value={name}
             onChange={(e) => setName(e.target.value)}
             onKeyDown={handleEnter}

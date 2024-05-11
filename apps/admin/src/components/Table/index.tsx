@@ -6,7 +6,7 @@ interface PropsType {
   headerData: TableHeaderType[]
   bodyData: TableItemType[][]
   disabledClick: boolean
-  userIds?: number[] // 사용자 조회에서 사용
+  ids?: number[]
   handleClick?: (id: number) => void
 }
 
@@ -14,10 +14,10 @@ const CustomTable = ({
   headerData,
   bodyData,
   disabledClick,
-  userIds,
+  ids,
   handleClick,
 }: PropsType) => {
-  const userIdList = userIds || []
+  const idList = ids || []
   const filteredBodyData = bodyData.map((data) => {
     const filteredData: TableItemType[] = []
     data.forEach((item) => {
@@ -35,7 +35,7 @@ const CustomTable = ({
         <TableItem
           key={index}
           data={item}
-          userId={userIdList[index]}
+          id={idList[index]}
           disabledClick={disabledClick}
           handleClick={handleClick}
         />

@@ -1,72 +1,53 @@
 // ** Component Imports
+import TicketSettingAddItem from "@/src/components/Ticket/TicketSettingAddItem";
 import TicketSettingItem from "@/src/components/Ticket/TicketSettingItem";
-import TicketTypeAddItem from "@/src/components/Ticket/TicketTypeAddItem";
-
-// ** Service Imports
 
 // ** Type Imports
-import { SettingListInfo } from "@/src/type/ticket";
-
-import { useRef, useState } from "react";
+import { SettingListInfo, TicketSettingType } from "@/src/type/ticket";
 
 interface PropsType {
   data: SettingListInfo[];
-  handleTicketSetting: (data: SettingListInfo) => void;
-  handleTicketDelete: (id: number) => void;
+  handleData: (
+    id: number,
+    value: string | TicketSettingType,
+    type: "name" | "type" | "description"
+  ) => void;
+  updateTicketSetting: () => void;
+  refetch: () => void;
 }
 
 const SettingContainerView = ({
   data,
-  handleTicketSetting,
-  handleTicketDelete,
+  handleData,
+  updateTicketSetting,
+  refetch,
 }: PropsType) => {
-  const [settingItems, setSettingItems] = useState<SettingListInfo[]>(data);
-  const ref = useRef([]);
-
-  const onUpdate = (index: number, updatedItem: SettingListInfo) => {
-    const newItems = [...settingItems];
-    newItems[index] = updatedItem;
-    setSettingItems(newItems);
-  };
-
-  const handleUpdate = () => {
-    settingItems.forEach((item) => handleTicketSetting(item));
-  };
-
-  const handleReset = () => {
-    data.forEach((item, index) => {
-      ref.current[index].handleReset(item);
-    });
-  };
-
   return (
     <div>
       <div className="mt-6 overflow-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8">
-        {data.map((item, index) => (
+        {data.map((item) => (
           <>
             <TicketSettingItem
               key={item.id}
               item={item}
-              onUpdate={(updatedItem) => {
-                onUpdate(index, updatedItem);
-              }}
-              handleTicketDelete={handleTicketDelete}
-              ref={(element) => (ref.current[index] = element)}
+              handleData={handleData}
             />
             <hr className="my-[25px]" />
           </>
         ))}
-        <TicketTypeAddItem />
+        <div className="w-full h-[75px] flex items-center">
+          <TicketSettingAddItem />
+        </div>
       </div>
       <div className="flex justify-end mt-[40px]">
         <button
-          onClick={handleReset}
+          onClick={refetch}
           className="w-[275px] h-[55px] text-[#623AD6] border-[#623AD6] rounded-[15px] bg-white border-solid border-[2px]"
         >
           RESET
         </button>
         <button
-          onClick={handleUpdate}
+          onClick={updateTicketSetting}
           className="w-[275px] h-[55px] bg-[#623AD6] text-white rounded-[15px] ml-4"
         >
           UPDATE

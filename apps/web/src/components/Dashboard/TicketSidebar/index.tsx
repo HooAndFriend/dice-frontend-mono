@@ -32,13 +32,13 @@ const TicketSidebar = () => {
           icon: TicketIcon,
           isClicked: false,
         },
-        {
-          id: 3,
-          name: "Sprint",
-          link: "/dashboard/epic/sprint",
-          icon: SprintIcon,
-          isClicked: false,
-        },
+        // {
+        //   id: 3,
+        //   name: "Sprint",
+        //   link: "/dashboard/epic/sprint",
+        //   icon: SprintIcon,
+        //   isClicked: false,
+        // },
         {
           id: 4,
           name: "Setting",

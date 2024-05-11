@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 // ** Componet imports
 import TicketCardView from "./TicketCard";
@@ -35,6 +35,11 @@ interface PropsType {
 
 const TicketCard = ({ ticketId, handleClose }: PropsType) => {
   const [subType, setSubType] = useState<"comment" | "history">("comment");
+  const [selectImage, setSelectImage] = useState<string>("");
+  const [previewOpen, setPreviewOpen] = useState<boolean>(false);
+
+  const cancelButtonRef = useRef(null);
+
   const [currentArg, setCurrentArg] = useState<
     "content" | "name" | "storypoint"
   >("name");
@@ -77,6 +82,11 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
   const { role } = useRecoilValue(WorkspaceState);
 
   const { handleOpen } = useDialog();
+
+  const handlePreviewOpen = (image: string) => {
+    setSelectImage(image);
+    setPreviewOpen(true);
+  };
 
   const {
     error,
@@ -177,10 +187,15 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       mode={mode}
       role={role}
       subType={subType}
+      selectImage={selectImage}
+      previewOpen={previewOpen}
+      cancelButtonRef={cancelButtonRef}
       setSubType={setSubType}
       onChange={handleInput}
       setData={setData}
       setMode={setMode}
+      setPreviewOpen={setPreviewOpen}
+      handlePreviewOpen={handlePreviewOpen}
       handleClose={handleClose}
       ticketRefetch={ticketRefetch}
       handleDeleteTicket={deleteTicket.trigger}

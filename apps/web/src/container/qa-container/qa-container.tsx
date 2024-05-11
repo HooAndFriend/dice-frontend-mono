@@ -138,7 +138,7 @@ const QaContainerView = ({
               )}
             </div>
           </div>
-          <div className="w-full py-5 h-[564px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC] overflow-y-auto overflow-x-hidden">
+          <div className="w-full p-[24px] h-[564px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC] overflow-y-auto overflow-x-hidden">
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="droppable">
                 {(provided) => (
@@ -162,6 +162,7 @@ const QaContainerView = ({
                               handleOpenQa={handleOpenQa}
                               qaId={qaId}
                             />
+                            <div className="w-full h-[1px] my-[24px] bg-[#EBEBEC]" />
                           </div>
                         )}
                       </Draggable>

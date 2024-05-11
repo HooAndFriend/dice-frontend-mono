@@ -1,101 +1,92 @@
 // ** Component Imports
-import { SettingListInfo } from "@/src/type/ticket";
+import { SettingListInfo, TicketSettingType } from "@/src/type/ticket";
 
 // ** Component Imports
 import CustomInput from "../../Input/CustomInput";
-import useInput from "@/src/hooks/useInput";
-
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import Image from "next/image";
 import CustomImage from "../../Image/CustomImage";
+import TicketSettingTypeButton from "../TicketSettingTypeButton";
+
+// ** Context Imports
+import { useDialog } from "@/src/context/DialogContext";
+
+// ** Service Imports
+import useSWRMutation from "swr/mutation";
+import { Delete } from "@/src/repository";
+import { mutate } from "swr";
+
+// ** Type Imports
+import { CommonResponse } from "@/src/type/common";
 
 interface PropsType {
   item: SettingListInfo;
-  onUpdate: (updatedItem: SettingListInfo) => void;
-  handleTicketDelete: (id: number) => void;
+  handleData: (
+    id: number,
+    value: string | TicketSettingType,
+    type: "name" | "type" | "description"
+  ) => void;
 }
 
-const TicketSettingItem = forwardRef(
-  ({ item, onUpdate, handleTicketDelete }: PropsType, ref) => {
-    const { data, handleInput, setData } = useInput<SettingListInfo>({
-      id: item.id,
-      color: item.color,
-      textColor: item.textColor,
-      type: item.type,
-      description: item.description,
-      admin: {
-        id: item.admin?.id,
+const TicketSettingItem = ({ item, handleData }: PropsType) => {
+  const { handleOpen } = useDialog();
+
+  const setType = (type: TicketSettingType) => {
+    handleData(item.id, type, "type");
+  };
+
+  const deleteSettingType = useSWRMutation(
+    `/v1/ticket/setting/${item.id}`,
+    async (url: string) => await Delete<CommonResponse<void>>(url),
+    {
+      onSuccess: () => {
+        mutate("/v1/ticket/setting");
       },
-      workspace: {
-        id: item.workspace?.id,
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
       },
-    });
+    }
+  );
 
-    const handleReset = () => {
-      setData(item);
-    };
-
-    useImperativeHandle(ref, () => ({
-      handleReset: handleReset,
-    }));
-
-    useEffect(() => {
-      onUpdate(data);
-    }, [data, item]);
-
-    return (
-      <div className="flex items-center justify-between">
-        <div className="flex h-[60px] items-center">
-          <div className="flex items-center justify-center">
-            <input
-              name="color"
-              value={data.color}
-              onChange={handleInput}
-              type="color"
-              className="appearance-none border-none bg-transparent w-[40px] h-[40px] rounded-lg"
-            />
-          </div>
-          <div className="flex items-center justify-center ml-8">
-            <input
-              name="textColor"
-              value={data.textColor}
-              onChange={handleInput}
-              type="color"
-              className="appearance-none border-none bg-transparent w-[40px] h-[40px] rounded-lg"
-            />
-          </div>
-          <div className="px-8">
-            <CustomInput
-              name="type"
-              value={data.type}
-              onChange={handleInput}
-              width="150px"
-              height="50px"
-              borderRadius="10px"
-            />
-          </div>
-          <div>
-            <CustomInput
-              name="description"
-              value={data.description}
-              onChange={handleInput}
-              width="1000px"
-              height="50px"
-              borderRadius="10px"
-            />
-          </div>
+  return (
+    <div className="flex items-center justify-between">
+      <div className="flex h-[60px] items-center">
+        <div className="flex items-center justify-center">
+          <TicketSettingTypeButton type={item.type} setType={setType} />
         </div>
-        <div onClick={() => handleTicketDelete(item.id)} className="ml-4">
-          <CustomImage
-            src={"/svg/boldX.svg"}
-            alt="black-box"
-            width={36}
-            height={36}
+        <div className="px-8">
+          <CustomInput
+            value={item.name}
+            onChange={(e) => handleData(item.id, e.target.value, "name")}
+            width="165px"
+            height="50px"
+            borderRadius="10px"
+          />
+        </div>
+        <div>
+          <CustomInput
+            value={item.description}
+            onChange={(e) => handleData(item.id, e.target.value, "description")}
+            width="600px"
+            height="50px"
+            borderRadius="10px"
           />
         </div>
       </div>
-    );
-  }
-);
+      <div onClick={() => deleteSettingType.trigger()} className="ml-4">
+        <CustomImage
+          src={"/svg/boldX.svg"}
+          alt="black-box"
+          width={36}
+          height={36}
+        />
+      </div>
+    </div>
+  );
+};
 
 export default TicketSettingItem;

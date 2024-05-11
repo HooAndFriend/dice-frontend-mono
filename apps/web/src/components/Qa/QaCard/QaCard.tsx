@@ -16,12 +16,17 @@ import { QaCardEditMode, RoleType } from "@/src/type/common";
 // ** Utils Imports
 import dayjs from "dayjs";
 import QaHistory from "../QaHistory";
+import ImagePreview from "../../ImagePreview";
 
 interface PropsType {
   data: IssueInfo;
   role: RoleType;
   mode: QaCardEditMode;
   subType: "comment" | "history";
+  selectImage: string;
+  previewOpen: boolean;
+  cancelButtonRef: any;
+  setPreviewOpen: (open: boolean) => void;
   setSubType: (type: "comment" | "history") => void;
   deleteQa: () => void;
   handleUpdateQa: (type: "title" | "asIs" | "toBe" | "memo") => void;
@@ -31,6 +36,7 @@ interface PropsType {
   handleDeleteQaFile: (fileId: number) => void;
   setIssueData: (value: IssueInfo) => void;
   setMode: (value: QaCardEditMode) => void;
+  handlePreviewOpen: (image: string) => void;
 }
 
 const QaCardView = ({
@@ -38,6 +44,9 @@ const QaCardView = ({
   subType,
   role,
   mode,
+  cancelButtonRef,
+  selectImage,
+  previewOpen,
   handleClose,
   handleInput,
   refetch,
@@ -45,6 +54,8 @@ const QaCardView = ({
   handleDeleteQaFile,
   setIssueData,
   setMode,
+  setPreviewOpen,
+  handlePreviewOpen,
   deleteQa,
   handleUpdateQa,
 }: PropsType) => {
@@ -292,7 +303,10 @@ const QaCardView = ({
           <QaFileUploader qaId={data.id} refetch={refetch} />
         )}
         {data.qaFile.map((item) => (
-          <div className="relative w-[40px] h-[40px] mr-4">
+          <div
+            className="relative w-[40px] h-[40px] mr-4 cursor-pointer"
+            onClick={() => handlePreviewOpen(item.url)}
+          >
             <img
               src={item.url}
               alt="Description"
@@ -334,6 +348,14 @@ const QaCardView = ({
         <QaComment qaId={data.id} />
       ) : (
         <QaHistory qaId={data.id} />
+      )}
+      {previewOpen && (
+        <ImagePreview
+          cancelButtonRef={cancelButtonRef}
+          open={previewOpen}
+          image={selectImage}
+          setOpen={setPreviewOpen}
+        />
       )}
     </div>
   );

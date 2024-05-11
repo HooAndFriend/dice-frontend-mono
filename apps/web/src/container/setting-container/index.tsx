@@ -1,62 +1,77 @@
 "use client";
+// ** React Imports
+import { useState } from "react";
 
 // ** Component Imports
 import SettingContainerView from "./setting-container";
 
 // ** Service Imports
-import { Delete, Get, Patch } from "@/src/repository";
+import { Get, Patch } from "@/src/repository";
 import useSWR from "swr";
+import useSWRMutation from "swr/mutation";
 
 // ** Type Imports
 import {
   GetTicketSettingListResponse,
   SettingListInfo,
+  TicketSettingType,
 } from "@/src/type/ticket";
-import { useEffect } from "react";
+import { CommonResponse } from "@/src/type/common";
+
+// ** Context Imports
+import { useDialog } from "@/src/context/DialogContext";
 
 const SettingConatiner = () => {
-  const { data, error, isLoading, mutate } = useSWR(
+  const [data, setData] = useState<SettingListInfo[]>([]);
+
+  const { handleOpen } = useDialog();
+
+  const { mutate } = useSWR(
     "/v1/ticket/setting",
     async (url) => {
       return await Get<GetTicketSettingListResponse>(url);
+    },
+    { onSuccess: (data) => setData(data.data.data) }
+  );
+
+  const updateTicketSetting = useSWRMutation(
+    "/v1/ticket/setting",
+    async (url: string) =>
+      await Patch<CommonResponse<void>>(url, {
+        data: data.map((item) => ({ ...item, settingId: item.id })),
+      }),
+    {
+      onSuccess: () => {
+        mutate();
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
     }
   );
 
-  const handleTicketSetting = async (data: SettingListInfo) => {
-    await Patch("/v1/ticket/setting", {
-      settingId: data.id,
-      color: data.color,
-      textColor: data.textColor,
-      type: data.type,
-      description: data.description,
-    })
-      .then((res) => {
-        mutate();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const handleData = (
+    id: number,
+    value: string | TicketSettingType,
+    type: "name" | "type" | "description"
+  ) => {
+    setData((cur) =>
+      cur.map((item) => (item.id === id ? { ...item, [type]: value } : item))
+    );
   };
-
-  const handleTicketDelete = async (id: number) => {
-    await Delete(`/v1/ticket/setting/${id}`).then((res) => {
-      mutate();
-    });
-  };
-
-  useEffect(() => {
-    mutate();
-  }, [data]);
-
-  if (isLoading) return;
-
-  if (error) return;
 
   return (
     <SettingContainerView
-      handleTicketDelete={handleTicketDelete}
-      handleTicketSetting={handleTicketSetting}
-      data={data.data.data}
+      data={data}
+      handleData={handleData}
+      updateTicketSetting={updateTicketSetting.trigger}
+      refetch={mutate}
     />
   );
 };

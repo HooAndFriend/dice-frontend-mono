@@ -5,17 +5,27 @@ import { useRef, useState } from 'react'
 import CustomTable from '@/src/components/Table'
 import TablePagination from '@/src/components/Table/TablePagination'
 import TitleBox from '@/src/components/TitleBox'
-import ProgramModal from '@/src/components/Modal/ProgramModal'
+import VersionModal from '@/src/components/Modal/ProgramModal/VersionModal'
+import VersionDetailModal from '@/src/components/Modal/ProgramModal/VersionDetailModal'
 
 interface PropsType {}
 
-
 const ProgramPageView = ({}: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
-  
+  const [create, setCreate] = useState<boolean>(false)
+  const [title, setTitle] = useState<string>('')
+
   const cancelButtonRef = useRef(null)
+  const handleCreate = (title: string) => {
+    setCreate((c) => !c)
+    setTitle(title)
+  }
   const handleOpen = () => setOpen((c) => !c)
-  
+
+  const handleItemClick = (id: number) => {
+    handleOpen()
+  }
+
   return (
     <div className="w-full px-4 mt-4">
       <TitleBox title="운영 관리 / 프로그램 버전" text="프로그램 버전" />
@@ -23,7 +33,10 @@ const ProgramPageView = ({}: PropsType) => {
         <div className="flex items-center justify-between">
           <h1 className="mb-8 font-bold">프로그램 버전 목록(30건)</h1>
           <div>
-            <button className="w-[160px] h-[36px] bg-[#623AD6] rounded-[8px] text-white" onClick={handleOpen}>
+            <button
+              className="w-[160px] h-[36px] bg-[#623AD6] rounded-[8px] text-white"
+              onClick={() => handleCreate('버전 생성')}
+            >
               버전 등록
             </button>
           </div>
@@ -31,16 +44,26 @@ const ProgramPageView = ({}: PropsType) => {
         <CustomTable
           headerData={headerData}
           bodyData={bodyData}
-          disabledClick
+          disabledClick={false}
+          handleClick={handleItemClick}
         />
         <div className="flex justify-end w-full">
           <TablePagination />
         </div>
       </div>
+      {create && (
+        <VersionModal
+          open={create}
+          setOpen={setCreate}
+          title={title}
+          cancelButtonRef={cancelButtonRef}
+        />
+      )}
       {open && (
-        <ProgramModal
+        <VersionDetailModal
           open={open}
           setOpen={setOpen}
+          handleCreate={handleCreate}
           cancelButtonRef={cancelButtonRef}
         />
       )}

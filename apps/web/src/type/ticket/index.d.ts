@@ -29,9 +29,8 @@ export interface TicketInfo {
   ticketFile: { id: number; url: string }[];
   ticketSetting: {
     id: number;
-    type: string;
-    color: string;
-    textColor: string;
+    type: TicketSettingType;
+    name: string;
   };
   epic: {
     id: number;
@@ -60,16 +59,9 @@ export interface GetTicketCommentListResponse extends Response {
 
 export interface SettingListInfo {
   id: number;
-  color: string;
-  textColor: string;
-  type: string;
+  name: string;
+  type: TicketSettingType;
   description: string;
-  workspace: {
-    id: number;
-  };
-  admin: {
-    id: number;
-  };
 }
 
 export interface TicketHistory {
@@ -112,4 +104,20 @@ export interface CreateTicketSettingParams {
 export interface CreateTicketSettingResponse extends Response {
   statusCode: number;
   message: string;
+}
+
+export type TicketSettingType =
+  | "RED"
+  | "BLUE"
+  | "GREEN"
+  | "YELLOW"
+  | "PURPLE"
+  | "BLACK"
+  | "PINK"
+  | "OTHER";
+
+export interface TicketSettingSaveProps {
+  name: string;
+  description: string;
+  type: TicketSettingType;
 }

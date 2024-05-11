@@ -15,6 +15,8 @@ import { useDialog } from "@/src/context/DialogContext";
 
 // ** Component Imports
 import Tooltip from "../../Tooltip";
+import CustomImage from "../../Image/CustomImage";
+import { getTicketSettingImage } from "@/src/utils/ticket-setting";
 
 interface PropsType {
   data: TicketInfo;
@@ -101,11 +103,16 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
             <div
               className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
               style={{
-                backgroundColor: data.ticketSetting.color,
-                color: data.ticketSetting.textColor,
+                backgroundColor: getTicketSettingImage(data.ticketSetting.type)
+                  .color,
               }}
             >
-              {data.ticketSetting ? data.ticketSetting.type.slice(0, 1) : ""}
+              <CustomImage
+                src={getTicketSettingImage(data.ticketSetting.type).url}
+                alt="ticket_setting"
+                width={16}
+                height={16}
+              />
             </div>
           ) : (
             <div className="w-[24px] h-[24px] bg-green-300 rounded-lg" />
@@ -119,7 +126,7 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
       </div>
       {open && (
         <div
-          className="absolute p-[8px] bg-slate-50 w-[184px] h-[184px] top-[40px] left-0 rounded-[10px] overflow-y-auto z-10 overflow-x-hidden"
+          className="absolute p-[8px] bg-[#F8FAFC] w-[184px] h-[184px] top-[40px] left-0 rounded-[10px] overflow-y-auto z-10 overflow-x-hidden"
           ref={dropdownRef}
         >
           {settingData.data.data.map((item) => (
@@ -128,12 +135,19 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
               onClick={() => updateTicketSetting.trigger(item.id)}
             >
               <div
-                className="w-[20px] h-[20px] rounded-[6px] flex items-center justify-center text-[12px]"
-                style={{ backgroundColor: item.color, color: item.textColor }}
+                className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
+                style={{
+                  backgroundColor: getTicketSettingImage(item.type).color,
+                }}
               >
-                {data.ticketSetting ? data.ticketSetting.type.slice(0, 1) : ""}
+                <CustomImage
+                  src={getTicketSettingImage(item.type).url}
+                  alt="ticket_setting"
+                  width={16}
+                  height={16}
+                />
               </div>
-              <h3 className="text-[14px] ml-[12px]">{item.type}</h3>
+              <h3 className="text-[14px] ml-[12px]">{item.name}</h3>
             </div>
           ))}
         </div>

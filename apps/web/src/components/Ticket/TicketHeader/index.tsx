@@ -22,13 +22,7 @@ const TicketHeader = ({ isEpic }: PropsType) => {
       <div className="flex w-[20%] items-center justify-center">
         <h1>DueDate</h1>
       </div>
-      {/* <div className="flex w-[20%] items-center justify-center">
-        <h1>EndDate</h1>
-      </div>
-      <div className="flex w-[20%] items-center justify-center">
-        <h1>ReopenDate</h1>
-      </div> */}
-      <div className="flex w-[10%] items-center justify-center">
+      <div className="flex items-center justify-center">
         <h1>Status</h1>
       </div>
     </div>

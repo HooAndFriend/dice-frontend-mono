@@ -69,7 +69,7 @@ const UserPageView = ({
           headerData={headerData}
           bodyData={bodyData}
           disabledClick={false}
-          userIds={userData.map(user => user.id)}
+          ids={userData.map(user => user.id)}
           handleClick={handleItemClick}
         />
         <div className="flex justify-end w-full">

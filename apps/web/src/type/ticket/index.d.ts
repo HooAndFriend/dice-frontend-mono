@@ -121,3 +121,9 @@ export type TicketSettingType =
   | "BLACK"
   | "PINK"
   | "OTHER";
+
+export interface TicketSettingSaveProps {
+  name: string;
+  description: string;
+  type: TicketSettingType;
+}

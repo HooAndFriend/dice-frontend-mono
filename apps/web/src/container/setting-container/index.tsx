@@ -8,57 +8,19 @@ import { Delete, Get, Patch } from "@/src/repository";
 import useSWR from "swr";
 
 // ** Type Imports
-import {
-  GetTicketSettingListResponse,
-  SettingListInfo,
-} from "@/src/type/ticket";
-import { useEffect } from "react";
+import { GetTicketSettingListResponse } from "@/src/type/ticket";
 
 const SettingConatiner = () => {
-  const { data, error, isLoading, mutate } = useSWR(
+  const { data, error, isLoading } = useSWR(
     "/v1/ticket/setting",
     async (url) => {
       return await Get<GetTicketSettingListResponse>(url);
     }
   );
 
-  const handleTicketSetting = async (data: SettingListInfo) => {
-    await Patch("/v1/ticket/setting", {
-      settingId: data.id,
-      color: data.color,
-      textColor: data.textColor,
-      type: data.type,
-      description: data.description,
-    })
-      .then((res) => {
-        mutate();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  if (isLoading || error) return;
 
-  const handleTicketDelete = async (id: number) => {
-    await Delete(`/v1/ticket/setting/${id}`).then((res) => {
-      mutate();
-    });
-  };
-
-  useEffect(() => {
-    mutate();
-  }, [data]);
-
-  if (isLoading) return;
-
-  if (error) return;
-
-  return (
-    <SettingContainerView
-      handleTicketDelete={handleTicketDelete}
-      handleTicketSetting={handleTicketSetting}
-      data={data.data.data}
-    />
-  );
+  return <SettingContainerView data={data.data.data} />;
 };
 
 export default SettingConatiner;

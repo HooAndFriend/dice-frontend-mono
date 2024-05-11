@@ -1,6 +1,10 @@
 // ** Type Imports
 import { QaHistory, QaHistoryType } from "@/src/type/qa";
+
+// ** Component Imports
 import CustomImage from "../../Image/CustomImage";
+
+// ** Utils Imports
 import dayjs from "dayjs";
 
 interface PropsType {

@@ -109,7 +109,7 @@ const QaUserButton = ({
   return (
     <div className="relative">
       <div
-        className="flex items-center"
+        className="flex items-center cursor-pointer"
         onClick={(e) => {
           e.stopPropagation();
           handleOpen();

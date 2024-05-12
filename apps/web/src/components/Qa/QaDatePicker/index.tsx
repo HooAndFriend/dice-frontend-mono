@@ -12,6 +12,8 @@ import { CommonResponse } from "@/src/type/common";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
+import CustomImage from "../../Image/CustomImage";
+import { useState } from "react";
 
 interface PropsType {
   value: string;
@@ -19,7 +21,11 @@ interface PropsType {
 }
 
 const QaDatePicker = ({ value, qaId }: PropsType) => {
-  const { handleOpen } = useDialog();
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleOpen = () => setOpen((c) => !c);
+
+  const { handleOpen: handleDialogOpen } = useDialog();
 
   // ** QA 수정
   const updateQa = useSWRMutation(
@@ -32,7 +38,7 @@ const QaDatePicker = ({ value, qaId }: PropsType) => {
         mutate(`/v1/qa/${qaId}`);
       },
       onError: (error) => {
-        handleOpen({
+        handleDialogOpen({
           title: "Error",
           message: error.response.data.message,
           logLevel: "warn",
@@ -48,12 +54,30 @@ const QaDatePicker = ({ value, qaId }: PropsType) => {
   };
 
   return (
-    <input
-      type="date"
-      value={value}
-      onChange={handleOnChange}
-      className="h-[20px] border-none"
-    />
+    <div>
+      {open ? (
+        <input
+          type="date"
+          value={value}
+          onChange={handleOnChange}
+          className="h-[40px] w-[240px] border-none bg-none"
+        />
+      ) : (
+        <div
+          className="flex items-center px-[16px] h-[40px] bg-[#F2F4F6] rounded-[5px] w-[240px] justify-between cursor-pointer"
+          onDoubleClick={handleOpen}
+        >
+          <p>{value ? value : "-"}</p>
+          <CustomImage
+            width={24}
+            height={24}
+            src="/svg/calendar.svg"
+            className=""
+            alt="calendar"
+          />
+        </div>
+      )}
+    </div>
   );
 };
 

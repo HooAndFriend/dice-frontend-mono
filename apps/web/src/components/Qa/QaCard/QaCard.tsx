@@ -63,7 +63,7 @@ const QaCardView = ({
     <div className="overflow-x-hidden overflow-y-auto">
       <div className="h-[40px] flex items-center justify-between">
         <div className="flex items-center text-lg font-medium font-spoqa">
-          <h1 className="mr-4 text-[18px] font-bold">{data.code}</h1>
+          <h1 className="mr-4 text-[18px] font-san-medium">{data.code}</h1>
           {role !== "VIEWER" && (
             <p
               className="text-[12px] text-gray-500 cursor-pointer underline"
@@ -83,9 +83,9 @@ const QaCardView = ({
         </div>
       </div>
       {mode.title === "view" ? (
-        <div className="h-[50px] flex justify-between mt-[15px] font-spoqa cursor-pointer">
+        <div className="h-[50px] flex justify-between mt-[40px] cursor-pointer">
           <div
-            className="flex items-center text-[20px] font-bold"
+            className="flex items-center text-[20px] font-san-bold"
             onDoubleClick={() => {
               if (role === "VIEWER") return;
               setMode({ ...mode, title: "edit" });
@@ -100,7 +100,7 @@ const QaCardView = ({
           />
         </div>
       ) : (
-        <div className="h-[50px] flex justify-between mt-[15px] font-spoqa">
+        <div className="h-[50px] flex justify-between mt-[40px]">
           <div className="flex items-center w-full">
             <input
               type="text"
@@ -131,10 +131,10 @@ const QaCardView = ({
           />
         </div>
       )}
-      <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
-      <div className="flex h-5 mt-5">
+      <div className="h-[1px] bg-[#EBEBEC] mt-[33px]" />
+      <div className="flex h-5 my-[20px]">
         <div className="flex items-center">
-          <div className="font-spoqa mr-[80px] font-medium text-[16px]">
+          <div className="font-spoqa mr-[80px] font-san-medium text-[16px]">
             Admin
           </div>
           <QaUserButton
@@ -148,7 +148,7 @@ const QaCardView = ({
           />
         </div>
         <div className="flex items-center">
-          <div className="font-spoqa mx-[80px] font-medium text-[16px]">
+          <div className="font-spoqa mx-[80px] font-san-medium text-[16px]">
             Worker
           </div>
           <QaUserButton
@@ -162,15 +162,15 @@ const QaCardView = ({
           />
         </div>
       </div>
-      <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
-      <div className="h-[20px] flex mt-5 ">
-        <div className="font-spoqa font-medium mr-[80px] text-[16px]">
+      <div className="h-[1px] bg-[#EBEBEC] mt-[20px]" />
+      <div className="h-[20px] flex mt-[20px] ">
+        <div className="font-spoqa font-san-medium mr-[80px] text-[16px]">
           regDate
         </div>
         <div className="font-spoqa font-normal text-darkGray tracking-[1px] text-[16px]">
           {dayjs(data.createdDate).format("YYYY-MM-DD")}
         </div>
-        <div className="font-spoqa font-medium mx-[80px] text-[16px]">
+        <div className="font-spoqa font-san-medium mx-[80px] text-[16px]">
           modDate
         </div>
         <div className="font-spoqa font-normal text-darkGray tracking-[1px] text-[16px]">
@@ -178,7 +178,7 @@ const QaCardView = ({
         </div>
       </div>
       <div className="h-[20px] flex mt-5 ">
-        <div className="font-spoqa font-medium mr-[60px] text-[16px]">
+        <div className="font-spoqa font-san-medium mr-[60px] text-[16px]">
           due date
         </div>
         <div className="font-spoqa font-normal text-darkGray tracking-[1px] cursor-pointer">
@@ -188,8 +188,8 @@ const QaCardView = ({
           />
         </div>
       </div>
-      <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
-      <div className="mt-5 mb-[14px] text-[16px]">As-Is</div>
+      <div className="h-[1px] bg-[#EBEBEC] mt-[20px]" />
+      <div className="mt-5 mb-[14px] font-san-medium text-[16px]">As-Is</div>
       <QaEditor
         mode={mode.asIs}
         data={data}
@@ -198,7 +198,7 @@ const QaCardView = ({
         setMode={(value: "edit" | "view") => setMode({ ...mode, asIs: value })}
         handleUpdateQa={handleUpdateQa}
       />
-      <div className="mt-5 mb-[14px] text-[16px]">To-Be</div>
+      <div className="mt-5 mb-[14px] font-san-medium text-[16px]">To-Be</div>
       <QaEditor
         mode={mode.toBe}
         data={data}
@@ -207,7 +207,7 @@ const QaCardView = ({
         setMode={(value: "edit" | "view") => setMode({ ...mode, toBe: value })}
         handleUpdateQa={handleUpdateQa}
       />
-      <div className="mt-5 mb-[14px] text-[16px]">Memo</div>
+      <div className="mt-5 mb-[14px] font-san-medium text-[16px]">Memo</div>
       <QaEditor
         mode={mode.memo}
         data={data}
@@ -216,7 +216,7 @@ const QaCardView = ({
         setMode={(value: "edit" | "view") => setMode({ ...mode, memo: value })}
         handleUpdateQa={handleUpdateQa}
       />
-      <div className="mt-5 mb-[14px] text-[16px]">
+      <div className="mt-5 mb-[14px] text-[16px] font-san-medium">
         FILE <span className="text-sm font-spoqa text-darkGray">(MAX:4)</span>
       </div>
       <div className="flex items-center">

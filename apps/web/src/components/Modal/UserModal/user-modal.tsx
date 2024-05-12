@@ -61,12 +61,10 @@ const UserModalView = ({
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl">
-                <div className="flex w-full items-center justify-center bg-[#FAFAFB] ">
-                  <div className="bg-white w-[1192px] h-[769px] rounded-2xl shadow-md">
-                    <div className="mt-[45px] ml-[60px] w-[1072px] h-[38px] flex justify-between">
-                      <div className="font-mosk font-bold text-[32px]">
-                        User Setting
-                      </div>
+                <div className="flex items-center justify-center bg-[#FAFAFB] ">
+                  <div className="bg-white w-[1192px] h-[769px] rounded-[20px] shadow-md px-[45px] py-[60px]">
+                    <div className="w-[1072px] h-[38px] flex justify-between">
+                      <div className="font-mosk text-[32px]">User Setting</div>
                       <div onClick={() => setOpen(false)}>
                         <CustomImage
                           alt="X"
@@ -76,20 +74,20 @@ const UserModalView = ({
                         />
                       </div>
                     </div>
-                    <div className="flex w-[1072px] h-[601px] ml-[60px] mt-10 justify-between">
-                      <div className="bg-main w-[274px] h-[601px] rounded-tr-[20px] rounded-b-[20px] flex flex-col items-center">
+                    <div className="flex w-[1072px] h-[601px] pt-[40px] justify-between">
+                      <div className="bg-main w-[274px] h-full rounded-tr-[20px] rounded-b-[20px] flex flex-col items-center">
                         <img
                           src={profile}
                           alt="Sample Image"
                           className="w-[91px] h-[91px] object-cover rounded-full mt-[52px]"
                         />
-                        <div className="mt-[21px] font-spoqa font-bold text-[25px] text-white">
+                        <div className="mt-[20px] font-san-bold text-[24px] text-white">
                           {nickname}
                         </div>
                         <div className="mt-[57px]">
                           <div
                             onClick={() => setTab(0)}
-                            className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-base font-bold font-spoqa ${
+                            className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-[16px] font-san-bold cursor-pointer ${
                               tab === 0
                                 ? "text-main bg-white"
                                 : "bg-main text-white"
@@ -110,7 +108,7 @@ const UserModalView = ({
                           </div>
                           <div
                             onClick={() => setTab(1)}
-                            className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-base font-bold font-spoqa ${
+                            className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-[16px] font-san-bold cursor-pointer ${
                               tab === 1
                                 ? "text-main bg-white"
                                 : "bg-main text-white"
@@ -129,7 +127,7 @@ const UserModalView = ({
                           </div>
                           <div
                             onClick={() => setTab(2)}
-                            className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-base font-bold font-spoqa ${
+                            className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-[16px] font-san-bold cursor-pointer ${
                               tab === 2
                                 ? "text-main bg-white"
                                 : "bg-main text-white"

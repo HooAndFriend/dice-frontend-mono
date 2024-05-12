@@ -92,7 +92,7 @@ const TeamMemberBox = ({
       <div className="flex mr-[15px]">
         <select
           id="select1"
-          className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center"
+          className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] mr-[15px] pl-[15px] flex items-center cursor-pointer"
           disabled={userRole !== "ADMIN"}
           value={role}
           onChange={(e) => updateTeamRole.trigger(e.target.value as RoleType)}

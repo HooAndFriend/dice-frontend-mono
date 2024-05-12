@@ -79,10 +79,10 @@ const TeamSettingContent = () => {
 
   return (
     <div>
-      <label className="text-xl font-bold font-spoqa">Profile</label>
+      <label className="text-[18px] font-san-bold">Profile</label>
       <ImageUploader image={data.profile} setPath={handleImage} mode="edit" />
       <div className="mt-5">
-        <label className="text-base font-bold font-spoqa">Team Name</label>
+        <label className="text-[18px] font-san-bold">Team Name</label>
         <input
           id="nickname"
           placeholder="Enter Your Nickname"
@@ -93,7 +93,7 @@ const TeamSettingContent = () => {
         />
       </div>
       <div className="mt-[30px]">
-        <label className="text-base font-bold font-spoqa">description</label>
+        <label className="text-[18px] font-san-bold">description</label>
         <input
           id="description"
           className="mt-[14px] font-normal font-spoqa border h-[175px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
@@ -103,7 +103,7 @@ const TeamSettingContent = () => {
         />
       </div>
       <button
-        className="m-auto mt-[40px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white font-spoqa font-bold text-lg"
+        className="m-auto mt-[40px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white text-[16px] font-san-bold"
         onClick={updateTeam.trigger}
       >
         Update

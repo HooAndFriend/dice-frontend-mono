@@ -38,7 +38,7 @@ const TeamPopoverView = ({
   return (
     <>
       <div>
-        <div className="py-3">
+        <div className="py-3 cursor-pointer">
           <div
             className={`rounded-lg w-[40px] h-[40px] flex justify-center items-center`}
             onClick={handleOpen}

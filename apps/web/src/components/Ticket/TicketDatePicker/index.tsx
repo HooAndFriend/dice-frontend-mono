@@ -60,7 +60,7 @@ const TicketDatePicker = ({ value, ticketId }: PropsType) => {
         />
       ) : (
         <div
-          className="flex items-center px-[16px] h-[40px] bg-[#F2F4F6] rounded-[5px] w-[240px] justify-between"
+          className="flex items-center px-[16px] h-[40px] bg-[#F2F4F6] rounded-[5px] w-[240px] justify-between cursor-pointer"
           onDoubleClick={handleOpen}
         >
           <p>{value ? value : "-"}</p>

@@ -70,6 +70,7 @@ const TicketUserButton = ({
       onSuccess: () => {
         mutate("/v1/epic");
         mutate("/v1/ticket");
+        mutate(`/v1/ticket/detail/${ticketId}`);
         setOpen(false);
       },
       onError: (error) => {

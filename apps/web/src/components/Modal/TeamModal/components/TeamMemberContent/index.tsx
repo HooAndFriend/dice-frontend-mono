@@ -36,9 +36,7 @@ const TeamMemberContent = ({ handleOpen }: PropsType) => {
 
   return (
     <div>
-      <div className="font-bold text-xl mb-[14px] font-spoqa">
-        Invite Member
-      </div>
+      <div className="mb-[14px] text-[18px] font-san-bold">Invite Member</div>
       <div className="flex w-full">
         <input
           className="w-[611px] h-[50px] border border-[#EBEBEC] rounded-[10px] p-[15px] mr-[15px]"
@@ -55,10 +53,10 @@ const TeamMemberContent = ({ handleOpen }: PropsType) => {
         </CopyToClipboard>
       </div>
       <div className="mt-[31px] flex w-full h-[23px] justify-between mb-[14px]">
-        <div className="text-lg font-bold font-spoqa">Member</div>
+        <div className="text-[18px] font-san-bold">Member</div>
         <div
           onClick={handleOpen}
-          className="flex items-center justify-center font-bold font-spoqa font-base"
+          className="flex items-center justify-center font-bold cursor-pointer font-spoqa font-base"
         >
           <CustomImage
             alt="addMember"
@@ -67,7 +65,7 @@ const TeamMemberContent = ({ handleOpen }: PropsType) => {
             width={24}
             height={24}
           />
-          AddMember
+          Add Member
         </div>
       </div>
       <div className="h-[420px] w-full overflow-y-auto overflow-x-hidden">

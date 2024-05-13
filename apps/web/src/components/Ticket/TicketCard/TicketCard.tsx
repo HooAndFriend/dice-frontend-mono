@@ -230,7 +230,7 @@ const TicketCardView = ({
       {mode.content === "view" ? (
         <div
           dangerouslySetInnerHTML={{ __html: data.content }}
-          className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto text-[16px]"
+          className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto text-[16px] cursor-pointer"
           onDoubleClick={() => {
             if (role === "VIEWER") return;
             setMode({ ...mode, content: "edit" });

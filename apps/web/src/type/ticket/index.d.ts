@@ -66,22 +66,29 @@ export interface SettingListInfo {
 
 export interface TicketHistory {
   createdDate: Date;
-  id: number;
+  id: string;
   ticketId: number;
-  username: string;
-  subUsername: string;
-  type:
-    | "DUE_DATE"
-    | "STATUS"
-    | "WORKER"
-    | "ADMIN"
-    | "CONTENT"
-    | "UPLOAD_FILE"
-    | "DELETE_FILE";
-  after: string;
-  before: string;
+  email: string;
+  type: TicketHistoryType;
   log: string;
+  user: {
+    email: string;
+    nickname: string;
+    profile: string;
+  };
 }
+
+export type TicketHistoryType =
+  | "DUE_DATE"
+  | "STATUS"
+  | "WORKER"
+  | "ADMIN"
+  | "CONTENT"
+  | "UPLOAD_FILE"
+  | "DELETE_FILE"
+  | "CREATE"
+  | "TITLE"
+  | "SP";
 
 export interface TicketEditMode {
   content: "view" | "edit";

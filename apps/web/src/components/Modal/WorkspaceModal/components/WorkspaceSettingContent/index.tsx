@@ -33,7 +33,6 @@ const WorkspaceSettingContent = () => {
   });
 
   const setWorkspaceState = useSetRecoilState(WorkspaceState);
-  const { uuid, name } = useRecoilValue(WorkspaceState);
 
   const { handleOpen } = useDialog();
 
@@ -84,14 +83,14 @@ const WorkspaceSettingContent = () => {
 
   return (
     <div>
-      <label className="text-xl font-bold font-spoqa">Profile</label>
+      <label className="text-[18px] font-san-bold">Profile</label>
       <ImageUploader
         image={isLoading ? "" : data.profile}
         mode="edit"
         setPath={handleImage}
       />
       <div className="mt-6">
-        <label className="text-xl font-bold font-spoqa">Workspace Name</label>
+        <label className="text-[18px] font-san-bold">Workspace Name</label>
         <input
           id="workspace name"
           placeholder="Enter Your Nickname"
@@ -102,7 +101,7 @@ const WorkspaceSettingContent = () => {
         />
       </div>
       <div className="mt-[30px]">
-        <label className="text-xl font-bold font-spoqa">description</label>
+        <label className="text-[18px] font-san-bold">description</label>
         <input
           id="description"
           className="text-left mt-[14px] font-normal font-spoqa border h-[175px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
@@ -112,7 +111,7 @@ const WorkspaceSettingContent = () => {
         />
       </div>
       <button
-        className="m-auto mt-[30px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white font-spoqa font-bold text-lg"
+        className="m-auto mt-[30px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white text-[18px] font-san-bold"
         onClick={updateWorkspace.trigger}
       >
         Update

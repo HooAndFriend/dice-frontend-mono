@@ -98,7 +98,7 @@ const WorkspaceAddFunctionContent = () => {
         />
       </div>
       <div className="w-full mt-[33px]">
-        <div className="text-base font-spoqa">Already Have</div>
+        <div className="text-[18px] font-san-bold">Already Have</div>
         <div className="mt-[13px] w-full h-10 flex items-center">
           {data.data.data
             .filter((item) => item.isUse)
@@ -126,7 +126,7 @@ const WorkspaceAddFunctionContent = () => {
         </div>
       </div>
       <div className="w-[750px] mt-[42px]">
-        <div className="text-base font-spoqa">More Functions</div>
+        <div className="text-[18px] font-san-bold">More Functions</div>
         <div className="w-[750px] mt-3 ml-[6px] flex flex-wrap">
           {data.data.data
             .filter((item) => !item.isUse)

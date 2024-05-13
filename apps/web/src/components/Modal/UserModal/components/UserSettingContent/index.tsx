@@ -87,10 +87,10 @@ const UserSettingContent = () => {
 
   return (
     <div>
-      <label className="text-xl font-bold font-spoqa">Profile</label>
+      <label className="text-[20px] font-san-bold">Profile</label>
       <ImageUploader mode="edit" image={data.profile} setPath={handleImage} />
       <div className="mt-5">
-        <label className="text-base font-bold font-spoqa">Nickname</label>
+        <label className="text-[20px] font-san-bold">Nickname</label>
         <input
           id="nickname"
           placeholder="Enter Your Nickname"
@@ -101,7 +101,7 @@ const UserSettingContent = () => {
         />
       </div>
       <div className="mt-5">
-        <label className="text-base font-bold font-spoqa">Email</label>
+        <label className="text-[20px] font-san-bold">Email</label>
         <input
           id="email"
           placeholder="Enter Your Email"
@@ -112,7 +112,7 @@ const UserSettingContent = () => {
         />
       </div>
       <button
-        className="m-auto mt-[93px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white font-spoqa font-bold text-lg"
+        className="m-auto mt-[40px] w-[280px] h-[55px] bg-main ml-[202px] rounded-[15px] text-white font-san-bold text-[18px]"
         onClick={updateUser.trigger}
       >
         Update

@@ -5,9 +5,11 @@ import { ChangeEvent } from "react";
 import QaComment from "../QaComment";
 import QaStatusButton from "../QaStatusButton";
 import QaUserButton from "../QaUserButton";
-import QuillEditor from "@/src/components/QuillEditor";
 import { QaFileUploader } from "../QaFileUploader";
 import QaDatePicker from "../QaDatePicker";
+import QaHistory from "../QaHistory";
+import ImagePreview from "../../ImagePreview";
+import QaEditor from "../QaEditor";
 
 // ** Type Imports
 import { IssueInfo } from "@/src/type/qa";
@@ -15,8 +17,6 @@ import { QaCardEditMode, RoleType } from "@/src/type/common";
 
 // ** Utils Imports
 import dayjs from "dayjs";
-import QaHistory from "../QaHistory";
-import ImagePreview from "../../ImagePreview";
 
 interface PropsType {
   data: IssueInfo;
@@ -63,7 +63,7 @@ const QaCardView = ({
     <div className="overflow-x-hidden overflow-y-auto">
       <div className="h-[40px] flex items-center justify-between">
         <div className="flex items-center text-lg font-medium font-spoqa">
-          <h1 className="mr-4 text-[18px] font-bold">{data.code}</h1>
+          <h1 className="mr-4 text-[18px] font-san-medium">{data.code}</h1>
           {role !== "VIEWER" && (
             <p
               className="text-[12px] text-gray-500 cursor-pointer underline"
@@ -83,9 +83,9 @@ const QaCardView = ({
         </div>
       </div>
       {mode.title === "view" ? (
-        <div className="h-[50px] flex justify-between mt-[15px] font-spoqa">
+        <div className="h-[50px] flex justify-between mt-[40px] cursor-pointer">
           <div
-            className="flex items-center text-[20px] font-bold"
+            className="flex items-center text-[20px] font-san-bold"
             onDoubleClick={() => {
               if (role === "VIEWER") return;
               setMode({ ...mode, title: "edit" });
@@ -100,7 +100,7 @@ const QaCardView = ({
           />
         </div>
       ) : (
-        <div className="h-[50px] flex justify-between mt-[15px] font-spoqa">
+        <div className="h-[50px] flex justify-between mt-[40px]">
           <div className="flex items-center w-full">
             <input
               type="text"
@@ -131,10 +131,10 @@ const QaCardView = ({
           />
         </div>
       )}
-      <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
-      <div className="flex h-5 mt-5">
+      <div className="h-[1px] bg-[#EBEBEC] mt-[33px]" />
+      <div className="flex h-5 my-[20px]">
         <div className="flex items-center">
-          <div className="font-spoqa mr-[80px] font-medium text-[16px]">
+          <div className="font-spoqa mr-[80px] font-san-medium text-[16px]">
             Admin
           </div>
           <QaUserButton
@@ -148,7 +148,7 @@ const QaCardView = ({
           />
         </div>
         <div className="flex items-center">
-          <div className="font-spoqa mx-[80px] font-medium text-[16px]">
+          <div className="font-spoqa mx-[80px] font-san-medium text-[16px]">
             Worker
           </div>
           <QaUserButton
@@ -162,15 +162,15 @@ const QaCardView = ({
           />
         </div>
       </div>
-      <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
-      <div className="h-[20px] flex mt-5 ">
-        <div className="font-spoqa font-medium mr-[80px] text-[16px]">
+      <div className="h-[1px] bg-[#EBEBEC] mt-[20px]" />
+      <div className="h-[20px] flex mt-[20px] ">
+        <div className="font-spoqa font-san-medium mr-[80px] text-[16px]">
           regDate
         </div>
         <div className="font-spoqa font-normal text-darkGray tracking-[1px] text-[16px]">
           {dayjs(data.createdDate).format("YYYY-MM-DD")}
         </div>
-        <div className="font-spoqa font-medium mx-[80px] text-[16px]">
+        <div className="font-spoqa font-san-medium mx-[80px] text-[16px]">
           modDate
         </div>
         <div className="font-spoqa font-normal text-darkGray tracking-[1px] text-[16px]">
@@ -178,124 +178,45 @@ const QaCardView = ({
         </div>
       </div>
       <div className="h-[20px] flex mt-5 ">
-        <div className="font-spoqa font-medium mr-[60px] text-[16px]">
+        <div className="font-spoqa font-san-medium mr-[60px] text-[16px]">
           due date
         </div>
-        <div className="font-spoqa font-normal text-darkGray tracking-[1px]">
+        <div className="font-spoqa font-normal text-darkGray tracking-[1px] cursor-pointer">
           <QaDatePicker
             value={dayjs(data.dueDate).format("YYYY-MM-DD")}
             qaId={data.id}
           />
         </div>
       </div>
-      <div className="h-[1px] bg-[#EBEBEC] mt-[20px]"></div>
-      <div className="mt-5 mb-[14px] text-[16px]">As-Is</div>
-      {mode.asIs === "view" ? (
-        <div
-          dangerouslySetInnerHTML={{ __html: data.asIs }}
-          className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto"
-          onDoubleClick={() => {
-            if (role === "VIEWER") return;
-            setMode({ ...mode, asIs: "edit" });
-          }}
-        />
-      ) : (
-        <div>
-          <QuillEditor
-            value={data.asIs}
-            onChange={(value: string) =>
-              setIssueData({ ...data, asIs: value } as IssueInfo)
-            }
-            name="asIs"
-          />
-          <div className="flex items-center mt-2">
-            <button
-              className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
-              onClick={() => handleUpdateQa("asIs")}
-            >
-              save
-            </button>
-            <button
-              className="w-[60px] h-[30px] flex items-center justify-center rounded-[8px]"
-              onClickCapture={() => setMode({ ...mode, asIs: "view" })}
-            >
-              cancel
-            </button>
-          </div>
-        </div>
-      )}
-
-      <div className="mt-5 mb-[14px] text-[16px]">To-Be</div>
-      {mode.toBe === "view" ? (
-        <div
-          dangerouslySetInnerHTML={{ __html: data.toBe }}
-          className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto"
-          onDoubleClick={() => {
-            if (role === "VIEWER") return;
-            setMode({ ...mode, toBe: "edit" });
-          }}
-        />
-      ) : (
-        <div>
-          <QuillEditor
-            value={data.toBe}
-            onChange={(value: string) =>
-              setIssueData({ ...data, toBe: value } as IssueInfo)
-            }
-            name="toBe"
-          />
-          <div className="flex items-center mt-2">
-            <button
-              className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
-              onClick={() => handleUpdateQa("toBe")}
-            >
-              save
-            </button>
-            <button
-              className="w-[60px] h-[30px] flex items-center justify-center rounded-[8px]"
-              onClickCapture={() => setMode({ ...mode, toBe: "view" })}
-            >
-              cancel
-            </button>
-          </div>
-        </div>
-      )}
-      <div className="mt-5 mb-[14px] text-[16px]">Memo</div>
-      {mode.memo === "view" ? (
-        <div
-          dangerouslySetInnerHTML={{ __html: data.memo }}
-          className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto"
-          onDoubleClick={() => {
-            if (role === "VIEWER") return;
-            setMode({ ...mode, memo: "edit" });
-          }}
-        />
-      ) : (
-        <div>
-          <QuillEditor
-            value={data.memo}
-            onChange={(value: string) =>
-              setIssueData({ ...data, memo: value } as IssueInfo)
-            }
-            name="memo"
-          />
-          <div className="flex items-center mt-2">
-            <button
-              className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
-              onClick={() => handleUpdateQa("memo")}
-            >
-              save
-            </button>
-            <button
-              className="w-[60px] h-[30px] flex items-center justify-center rounded-[8px]"
-              onClickCapture={() => setMode({ ...mode, memo: "view" })}
-            >
-              cancel
-            </button>
-          </div>
-        </div>
-      )}
-      <div className="mt-5 mb-[14px] text-[16px]">
+      <div className="h-[1px] bg-[#EBEBEC] mt-[20px]" />
+      <div className="mt-5 mb-[14px] font-san-medium text-[16px]">As-Is</div>
+      <QaEditor
+        mode={mode.asIs}
+        data={data}
+        type="asIs"
+        setData={setIssueData}
+        setMode={(value: "edit" | "view") => setMode({ ...mode, asIs: value })}
+        handleUpdateQa={handleUpdateQa}
+      />
+      <div className="mt-5 mb-[14px] font-san-medium text-[16px]">To-Be</div>
+      <QaEditor
+        mode={mode.toBe}
+        data={data}
+        type="toBe"
+        setData={setIssueData}
+        setMode={(value: "edit" | "view") => setMode({ ...mode, toBe: value })}
+        handleUpdateQa={handleUpdateQa}
+      />
+      <div className="mt-5 mb-[14px] font-san-medium text-[16px]">Memo</div>
+      <QaEditor
+        mode={mode.memo}
+        data={data}
+        type="memo"
+        setData={setIssueData}
+        setMode={(value: "edit" | "view") => setMode({ ...mode, memo: value })}
+        handleUpdateQa={handleUpdateQa}
+      />
+      <div className="mt-5 mb-[14px] text-[16px] font-san-medium">
         FILE <span className="text-sm font-spoqa text-darkGray">(MAX:4)</span>
       </div>
       <div className="flex items-center">

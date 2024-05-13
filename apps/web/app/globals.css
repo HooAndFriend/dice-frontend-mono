@@ -24,6 +24,10 @@ body {
   font-family: "SpoqaHanSansNeo-Thin", sans-serif;
 }
 
+.font-mosk {
+  font-family: "Mosk", sans-serif;
+}
+
 @font-face {
   font-family: "SpoqaHanSansNeo-Regular";
   src: url("/fonts/SpoqaHanSansNeo-Regular.ttf");

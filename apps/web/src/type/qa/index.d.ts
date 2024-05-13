@@ -33,23 +33,33 @@ export interface GetQaHistoryListResponse extends CommonResponse {
 export interface GetIssueResponse extends CommonResponse, IssueInfo {}
 
 export interface QaHistory {
-  createdDate: "2024-04-18T11:55:13.350Z";
+  createdDate: Date;
   id: string;
   qaId: number;
-  username: string;
-  subUsername: string;
-  type:
-    | "DUE_DATE"
-    | "STATUS"
-    | "WORKER"
-    | "ADMIN"
-    | "CONTENT"
-    | "UPLOAD_FILE"
-    | "DELETE_FILE";
-  after: string;
-  before: string;
+  email: string;
+  type: QaHistoryType;
   log: string;
+  user: {
+    email: string;
+    nickname: string;
+    profile: string;
+  };
 }
+
+export type QaHistoryType =
+  | "DUE_DATE"
+  | "STATUS"
+  | "WORKER"
+  | "ADMIN"
+  | "CONTENT"
+  | "UPLOAD_FILE"
+  | "DELETE_FILE"
+  | "CREATE"
+  | "TITLE"
+  | "SP"
+  | "MEMO"
+  | "ASIS"
+  | "TOBE";
 
 export interface IssueInfo {
   id: number;

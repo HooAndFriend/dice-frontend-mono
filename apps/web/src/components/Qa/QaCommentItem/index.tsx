@@ -102,7 +102,7 @@ const QaCommentItem = ({ data, commentRefetch }: PropsType) => {
             {email === data.user.email && (
               <>
                 <div
-                  className="flex items-center ml-4 mr-2 text-xs text-darkGray"
+                  className="flex items-center ml-4 mr-2 text-xs cursor-pointer text-darkGray"
                   onClick={() => setMode("edit")}
                 >
                   edit

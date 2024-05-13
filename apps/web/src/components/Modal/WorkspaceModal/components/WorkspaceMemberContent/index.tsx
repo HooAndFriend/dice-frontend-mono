@@ -23,9 +23,12 @@ const WorkspaceMemberContent = ({ handleOpen }: PropsType) => {
 
   return (
     <div>
-      <div onClick={handleOpen} className="flex justify-end w-full h-6">
+      <div
+        onClick={handleOpen}
+        className="flex justify-end w-full h-6 cursor-pointer"
+      >
         <img className="mr-[10px]" src="/svg/addMember.svg" alt="addMember" />
-        <div className="text-base font-bold font-spoqa">Add Member</div>
+        <div className="text-[18px] font-san-bold">Add Member</div>
       </div>
       <div className="w-full h-[562px] mt-[29px] overflow-y-auto overflow-x-hidden">
         {data.data.data.map((item) => (

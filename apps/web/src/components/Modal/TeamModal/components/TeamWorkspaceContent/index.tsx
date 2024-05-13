@@ -20,7 +20,7 @@ const TeamWorkSpaceContent = () => {
 
   return (
     <div className="w-full h-full">
-      <h1 className="mb-5 text-2xl font-bold">Workspace List</h1>
+      <h1 className="mb-5 text-[18px] font-san-bold">Workspace List</h1>
       <div className="grid grid-cols-2 gap-6">
         {data.data.data.map((item) => (
           <TeamWorkspaceBox

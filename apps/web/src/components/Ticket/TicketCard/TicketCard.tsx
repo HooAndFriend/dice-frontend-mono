@@ -138,7 +138,7 @@ const TicketCardView = ({
               ticketId={data.id}
               nickname={data.admin ? data.admin.nickname : "-"}
               userId={data.admin ? data.admin.id : 0}
-              type="user"
+              type="admin"
               isNickname={true}
             />
           </h3>

@@ -1,7 +1,13 @@
 "use client";
 
 // ** React Imports
-import { useEffect, useMemo, useState } from "react";
+import {
+  MouseEvent,
+  MouseEventHandler,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 // ** Component Imports
 import TicketItem from "@/src/components/Ticket/TicketItem";
@@ -11,7 +17,7 @@ import CustomImage from "@/src/components/Image/CustomImage";
 
 // ** Type Imports
 import { EpicInfo, SelectContent } from "@/src/type/epic";
-import { CommonResponse } from "@/src/type/common";
+import { CommonResponse, NoneType } from "@/src/type/common";
 
 // ** Utils Imports
 import {
@@ -104,7 +110,6 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
         className="w-full h-[74px] py-[25px] flex items-center cursor-pointer"
         onClick={() => {
           handleClick({ id: item.id, type: "EPIC" });
-          handleOpen();
         }}
       >
         <h1 className="ml-[20px] font-san-bold text-[16px] w-[300px] overflow-hidden whitespace-nowrap text-overflow-ellipsis">
@@ -135,6 +140,10 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
             alt="arrow"
             width={24}
             height={24}
+            onClick={(e: NoneType) => {
+              e.stopPropagation();
+              handleOpen();
+            }}
           />
         </div>
       </div>

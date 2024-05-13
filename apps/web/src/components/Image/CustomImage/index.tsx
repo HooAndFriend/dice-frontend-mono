@@ -1,4 +1,6 @@
+import { NoneType } from "@/src/type/common";
 import Image from "next/image";
+import { MouseEvent } from "react";
 
 interface PropsType {
   width: number;
@@ -6,7 +8,7 @@ interface PropsType {
   alt: string;
   src: string;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e: NoneType) => void;
 }
 
 const CustomImage = ({
@@ -24,7 +26,7 @@ const CustomImage = ({
       height={height}
       className={className}
       src={src}
-      onClick={onClick ? onClick : () => {}}
+      onClick={onClick}
     />
   ) : (
     <img
@@ -33,7 +35,7 @@ const CustomImage = ({
       height={height}
       className={className}
       src={src}
-      onClick={onClick ? onClick : () => {}}
+      onClick={onClick}
     />
   );
 };

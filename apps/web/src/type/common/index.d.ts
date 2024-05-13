@@ -14,6 +14,8 @@ export interface Dates {
   endDate: Dayjs;
 }
 
+export type NoneType = any;
+
 export type RoleType = "ADMIN" | "VIEWER" | "WRITEER" | "";
 
 export interface QaCardEditMode {

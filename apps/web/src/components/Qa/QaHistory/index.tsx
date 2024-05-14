@@ -7,6 +7,7 @@ import { GetQaHistoryListResponse } from "@/src/type/qa";
 
 // ** Component Imports
 import QaHistoryItem from "../QaHistoryItem";
+import QaHistorySkeleton from "./QaHistorySkeleton";
 
 interface PropsType {
   qaId: number;
@@ -18,13 +19,15 @@ const QaHistory = ({ qaId }: PropsType) => {
     async (url) => Get<GetQaHistoryListResponse>(url)
   );
 
-  if (isLoading) return;
-
   return (
     <div className="mt-2">
-      {data.data.data.map((item) => (
-        <QaHistoryItem key={item.id} data={item} />
-      ))}
+      {isLoading ? (
+        <QaHistorySkeleton />
+      ) : (
+        data.data.data.map((item) => (
+          <QaHistoryItem key={item.id} data={item} />
+        ))
+      )}
     </div>
   );
 };

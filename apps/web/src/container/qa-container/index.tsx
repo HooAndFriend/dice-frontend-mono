@@ -103,14 +103,21 @@ const QaContainer = () => {
     <QaContainerView
       open={open}
       status={status}
-      data={data.data.data
-        .filter((item) => item.title.includes(word))
-        .filter((item) => (status === "" ? true : item.status === status))
-        .filter((item) =>
-          checkedList.length === 0
-            ? true
-            : checkedList.some((_) => _.teamUser.user.id === item.worker?.id)
-        )}
+      isLoading={isLoading}
+      data={
+        isLoading
+          ? []
+          : data.data.data
+              .filter((item) => item.title.includes(word))
+              .filter((item) => (status === "" ? true : item.status === status))
+              .filter((item) =>
+                checkedList.length === 0
+                  ? true
+                  : checkedList.some(
+                      (_) => _.teamUser.user.id === item.worker?.id
+                    )
+              )
+      }
       qaId={qaId}
       word={word}
       role={role}

@@ -23,6 +23,7 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 import { WorkspaceUser } from "@/src/type/workspace";
+import QaSkeleton from "./QaSkeleton";
 
 interface PropsType {
   open: boolean;
@@ -34,6 +35,7 @@ interface PropsType {
   word: string;
   cancelButtonRef: any;
   checkedList: WorkspaceUser[];
+  isLoading: boolean;
   setCheckedList: (list: WorkspaceUser[]) => void;
   setWord: (value: string) => void;
   handleOpenQa: (id: number) => void;
@@ -50,6 +52,7 @@ const QaContainerView = ({
   role,
   status,
   open,
+  isLoading,
   word,
   checkedList,
   setCheckedList,
@@ -139,39 +142,43 @@ const QaContainerView = ({
             </div>
           </div>
           <div className="w-full p-[24px] h-[564px] rounded-[20px] bg-white mr-10 shadow-md border-[#EBEBEC] overflow-y-auto overflow-x-hidden">
-            <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="droppable">
-                {(provided) => (
-                  <div ref={provided.innerRef} {...provided.droppableProps}>
-                    {data.map((item) => (
-                      <Draggable
-                        key={item.id}
-                        draggableId={item.id.toString()}
-                        index={item.id}
-                      >
-                        {(provided) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                          >
-                            <QaItem
-                              word={word}
-                              item={item}
-                              key={item.id}
-                              handleOpenQa={handleOpenQa}
-                              qaId={qaId}
-                            />
-                            <div className="w-full h-[1px] my-[24px] bg-[#EBEBEC]" />
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </DragDropContext>
+            {isLoading ? (
+              <QaSkeleton />
+            ) : (
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="droppable">
+                  {(provided) => (
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                      {data.map((item) => (
+                        <Draggable
+                          key={item.id}
+                          draggableId={item.id.toString()}
+                          index={item.id}
+                        >
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <QaItem
+                                word={word}
+                                item={item}
+                                key={item.id}
+                                handleOpenQa={handleOpenQa}
+                                qaId={qaId}
+                              />
+                              <div className="w-full h-[1px] my-[24px] bg-[#EBEBEC]" />
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
+            )}
           </div>
         </div>
         {open && (

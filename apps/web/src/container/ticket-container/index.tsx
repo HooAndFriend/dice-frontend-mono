@@ -77,13 +77,13 @@ const TicketConatiner = () => {
     };
   }, []);
 
-  if (isLoading || error || !enabled) return;
+  if (error || !enabled) return;
 
   return (
     <TicketContainerView
       ticketId={ticketId}
-      data={data.data.data}
-      ticketCount={data.data.count}
+      data={isLoading ? [] : data.data.data}
+      ticketCount={isLoading ? 0 : data.data.count}
       word={word}
       mode={mode}
       checkedList={checkedList}
@@ -92,6 +92,7 @@ const TicketConatiner = () => {
       setMode={setMode}
       setCheckedList={setCheckedList}
       setTicketId={setTicketId}
+      isLoading={isLoading}
     />
   );
 };

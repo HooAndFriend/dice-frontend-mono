@@ -14,12 +14,14 @@ import { WorkspaceUser } from "@/src/type/workspace";
 import { DropResult } from "react-beautiful-dnd";
 import TicketViewToggleButton from "@/src/components/Ticket/TicketViewToggleButton";
 import TicketKanbanBoard from "@/src/components/Ticket/TicketKanbanBoard";
+import TicketTableSkeleton from "@/src/components/Ticket/TicketTable/TicketTableSkeleton";
 
 interface PropsType {
   ticketId: number;
   data: TicketInfo[];
   word: string;
   ticketCount: number;
+  isLoading: boolean;
   mode: "list" | "kanban";
   checkedList: WorkspaceUser[];
   setCheckedList: (list: WorkspaceUser[]) => void;
@@ -34,6 +36,7 @@ const TicketContainerView = ({
   data,
   word,
   mode,
+  isLoading,
   ticketCount,
   setTicketId,
   handleWord,
@@ -59,20 +62,24 @@ const TicketContainerView = ({
       <div className={`${ticketId !== 0 && "flex"}`}>
         <div style={{ width: ticketId !== 0 ? "65%" : "100%" }}>
           {mode === "list" ? (
-            <TicketTable
-              handleClick={setTicketId}
-              word={word}
-              data={data
-                .filter((item) => item.name.includes(word))
-                .filter((item) =>
-                  checkedList.length === 0
-                    ? true
-                    : checkedList.some(
-                        (_) => _.teamUser.user.id === item.worker?.id
-                      )
-                )}
-              onDragEnd={onDragEnd}
-            />
+            isLoading ? (
+              <TicketTableSkeleton />
+            ) : (
+              <TicketTable
+                handleClick={setTicketId}
+                word={word}
+                data={data
+                  .filter((item) => item.name.includes(word))
+                  .filter((item) =>
+                    checkedList.length === 0
+                      ? true
+                      : checkedList.some(
+                          (_) => _.teamUser.user.id === item.worker?.id
+                        )
+                  )}
+                onDragEnd={onDragEnd}
+              />
+            )
           ) : (
             <TicketKanbanBoard
               handleClick={setTicketId}

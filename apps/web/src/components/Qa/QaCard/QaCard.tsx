@@ -177,7 +177,7 @@ const QaCardView = ({
           {dayjs(data.modifiedDate).format("YYYY-MM-DD")}
         </div>
       </div>
-      <div className="h-[20px] flex mt-5 ">
+      <div className="h-[40px] flex mt-5 items-center">
         <div className="font-spoqa font-san-medium mr-[60px] text-[16px]">
           due date
         </div>

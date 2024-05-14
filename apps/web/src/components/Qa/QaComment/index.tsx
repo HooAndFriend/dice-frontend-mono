@@ -16,6 +16,7 @@ import QaCommentItem from "../QaCommentItem";
 
 // ** Type Imports
 import { AddCommentResponse, GetCommentListResponse } from "@/src/type/qa";
+import QaCommentSkeleton from "./QaCommentSkeleton";
 
 interface PropsType {
   qaId: number;
@@ -99,8 +100,6 @@ const QaComment = ({ qaId }: PropsType) => {
     }
   );
 
-  if (isLoading) return;
-
   return (
     <div>
       <div className="flex mt-5">
@@ -124,13 +123,17 @@ const QaComment = ({ qaId }: PropsType) => {
         </div>
       </div>
       <div className="mt-9">
-        {data.data.data.map((item) => (
-          <QaCommentItem
-            key={item.id}
-            data={item}
-            commentRefetch={commentRefetch}
-          />
-        ))}
+        {isLoading ? (
+          <QaCommentSkeleton />
+        ) : (
+          data.data.data.map((item) => (
+            <QaCommentItem
+              key={item.id}
+              data={item}
+              commentRefetch={commentRefetch}
+            />
+          ))
+        )}
       </div>
     </div>
   );

@@ -42,12 +42,14 @@ const TicketHistoryItem = ({ data }: PropsType) => {
           <CustomImage
             className="rounded-full border border-lightGray mr-[10px]"
             alt="profile"
-            src={data.user.profile}
+            src={data?.user?.profile || "/image/dice.png"}
             width={30}
             height={30}
           />
           <div className="flex font-spoqa">
-            <div className="mr-[10px] text-[16px]">{data.user.nickname}</div>
+            <div className="mr-[10px] text-[16px]">
+              {data?.user?.nickname || ""}
+            </div>
             <div className="flex items-center text-darkGray text-[12px]">
               {dayjs(data.createdDate).format("YYYY-MM-DD HH:mm:ss")}
             </div>
@@ -58,7 +60,7 @@ const TicketHistoryItem = ({ data }: PropsType) => {
         {getLogText(data.type)}
       </div>
       {data.type !== "CREATE" && (
-        <div className="ml-[41px] mt-[9px] text-[16px] bg-[#F3F3F3] px-[11px] py-[9px] rounded-[5px] text-[#404040] text-[14px]">
+        <div className="ml-[41px] mt-[9px] bg-[#F3F3F3] px-[11px] py-[9px] rounded-[5px] text-[#404040] text-[14px]">
           {data.log}
         </div>
       )}

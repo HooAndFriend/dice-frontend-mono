@@ -9,11 +9,13 @@ import { DropResult } from "react-beautiful-dnd";
 
 // ** Type Imports
 import { EpicInfo, SelectContent } from "@/src/type/epic";
+import EpicTableSkeleton from "@/src/components/Epic/EpicTable/EpicTableSkeleton";
 
 interface PropsType {
   word: string;
   epicData: EpicInfo[];
   epicCount: number;
+  isLoading: boolean;
   selectContent: SelectContent;
   setSelectContent: (value: SelectContent) => void;
   handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -22,6 +24,7 @@ interface PropsType {
 
 const EpicContainerView = ({
   epicData,
+  isLoading,
   epicCount,
   word,
   selectContent,
@@ -37,12 +40,16 @@ const EpicContainerView = ({
       </div>
       <div className={`${selectContent.id !== 0 && "flex"}`}>
         <div style={{ width: selectContent.id !== 0 ? "65%" : "100%" }}>
-          <EpicTable
-            word={word}
-            handleClick={setSelectContent}
-            epicData={epicData.filter((item) => item.name.includes(word))}
-            onDragEnd={onDragEnd}
-          />
+          {isLoading ? (
+            <EpicTableSkeleton />
+          ) : (
+            <EpicTable
+              word={word}
+              handleClick={setSelectContent}
+              epicData={epicData.filter((item) => item.name.includes(word))}
+              onDragEnd={onDragEnd}
+            />
+          )}
         </div>
         {selectContent.id !== 0 && selectContent.type === "EPIC" && (
           <div className="w-[35%] ml-[30px]">

@@ -72,17 +72,18 @@ const EpicConatiner = () => {
     };
   }, []);
 
-  if (isLoading || error || !enabled) return;
+  if (error || !enabled) return;
 
   return (
     <EpicContainerView
-      epicData={data.data.data}
-      epicCount={data.data.count}
+      epicData={isLoading ? [] : data.data.data}
+      epicCount={isLoading ? 0 : data.data.count}
       word={word}
       selectContent={selectContent}
       setSelectContent={setSelectContent}
       handleWord={(e) => setWord(e.target.value)}
       onDragEnd={onDragEnd}
+      isLoading={isLoading}
     />
   );
 };

@@ -7,6 +7,7 @@ import TicketKanbanItem from "../TicketKanbanItem";
 
 interface PropsType {
   data: TicketInfo[];
+  isLoading: boolean;
   handleClick?: (id: number) => void;
 }
 
@@ -20,7 +21,7 @@ const StatusList: EpicStatus[] = [
   "NOTHING",
 ];
 
-const TicketKanbanBoard = ({ data, handleClick }: PropsType) => {
+const TicketKanbanBoard = ({ data, handleClick, isLoading }: PropsType) => {
   return (
     <div className="h-[700px] overflow-scroll mt-6 p-4 flex w-full">
       {StatusList.map((item) => (
@@ -30,6 +31,7 @@ const TicketKanbanBoard = ({ data, handleClick }: PropsType) => {
             handleClick={handleClick}
             status={item}
             key={item}
+            isLoading={isLoading}
           />
         </div>
       ))}

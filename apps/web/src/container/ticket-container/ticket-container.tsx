@@ -15,6 +15,7 @@ import { DropResult } from "react-beautiful-dnd";
 import TicketViewToggleButton from "@/src/components/Ticket/TicketViewToggleButton";
 import TicketKanbanBoard from "@/src/components/Ticket/TicketKanbanBoard";
 import TicketTableSkeleton from "@/src/components/Ticket/TicketTable/TicketTableSkeleton";
+import TicketKanbanBoardSkeleton from "@/src/components/Ticket/TicketKanbanBoard/TicketKanbanBoardSkeleton";
 
 interface PropsType {
   ticketId: number;
@@ -84,6 +85,7 @@ const TicketContainerView = ({
             <TicketKanbanBoard
               handleClick={setTicketId}
               data={data.filter((item) => item.name.includes(word))}
+              isLoading={isLoading}
             />
           )}
         </div>

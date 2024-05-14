@@ -16,6 +16,7 @@ import { GetTicketCommentListResponse } from "@/src/type/ticket";
 // ** Components Imports
 import CustomImage from "../../Image/CustomImage";
 import TicketCommentItem from "../TicketCommentItem";
+import TicketCommentSkeleton from "./TicketCommentSkeleton";
 
 interface PropsType {
   ticketId: number;
@@ -98,8 +99,6 @@ const TicketComment = ({ ticketId }: PropsType) => {
   const handleComment = (e: ChangeEvent<HTMLInputElement>) =>
     setComment(e.target.value);
 
-  if (commentLoading) return;
-
   return (
     <div>
       <div className="flex mt-5">
@@ -123,13 +122,17 @@ const TicketComment = ({ ticketId }: PropsType) => {
         </div>
       </div>
       <div className="mt-9">
-        {commentData.data.data.map((item) => (
-          <TicketCommentItem
-            key={item.id}
-            data={item}
-            commentRefetch={commentRefetch}
-          />
-        ))}
+        {commentLoading ? (
+          <TicketCommentSkeleton />
+        ) : (
+          commentData.data.data.map((item) => (
+            <TicketCommentItem
+              key={item.id}
+              data={item}
+              commentRefetch={commentRefetch}
+            />
+          ))
+        )}
       </div>
     </div>
   );

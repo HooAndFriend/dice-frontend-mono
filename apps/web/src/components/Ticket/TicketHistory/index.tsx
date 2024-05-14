@@ -2,6 +2,7 @@ import { Get } from "@/src/repository";
 import { GetTicketHistoryListResponse } from "@/src/type/ticket";
 import useSWR from "swr";
 import TicketHistoryItem from "../TicketHistoryItem";
+import TicketHistorySkeleton from "./TicketHistorySkeleton";
 
 interface PropsType {
   ticketId: number;
@@ -21,9 +22,13 @@ const TicketHistory = ({ ticketId }: PropsType) => {
 
   return (
     <div className="mt-2">
-      {data.data.data.map((item) => (
-        <TicketHistoryItem key={item.id} data={item} />
-      ))}
+      {isLoading ? (
+        <TicketHistorySkeleton />
+      ) : (
+        data.data.data.map((item) => (
+          <TicketHistoryItem key={item.id} data={item} />
+        ))
+      )}
     </div>
   );
 };

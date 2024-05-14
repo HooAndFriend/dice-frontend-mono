@@ -26,7 +26,7 @@ const SettingConatiner = () => {
 
   const { handleOpen } = useDialog();
 
-  const { mutate } = useSWR(
+  const { mutate, isLoading } = useSWR(
     "/v1/ticket/setting",
     async (url) => {
       return await Get<GetTicketSettingListResponse>(url);
@@ -72,6 +72,7 @@ const SettingConatiner = () => {
       handleData={handleData}
       updateTicketSetting={updateTicketSetting.trigger}
       refetch={mutate}
+      isLoading={isLoading}
     />
   );
 };

@@ -4,9 +4,11 @@ import TicketSettingItem from "@/src/components/Ticket/TicketSettingItem";
 
 // ** Type Imports
 import { SettingListInfo, TicketSettingType } from "@/src/type/ticket";
+import TicketSettingSkeleton from "./TicketSettingSkeleton";
 
 interface PropsType {
   data: SettingListInfo[];
+  isLoading: boolean;
   handleData: (
     id: number,
     value: string | TicketSettingType,
@@ -18,6 +20,7 @@ interface PropsType {
 
 const SettingContainerView = ({
   data,
+  isLoading,
   handleData,
   updateTicketSetting,
   refetch,
@@ -25,16 +28,20 @@ const SettingContainerView = ({
   return (
     <div>
       <div className="mt-6 overflow-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8">
-        {data.map((item) => (
-          <>
-            <TicketSettingItem
-              key={item.id}
-              item={item}
-              handleData={handleData}
-            />
-            <hr className="my-[25px]" />
-          </>
-        ))}
+        {isLoading ? (
+          <TicketSettingSkeleton />
+        ) : (
+          data.map((item) => (
+            <>
+              <TicketSettingItem
+                key={item.id}
+                item={item}
+                handleData={handleData}
+              />
+              <hr className="my-[25px]" />
+            </>
+          ))
+        )}
         <div className="w-full h-[75px] flex items-center">
           <TicketSettingAddItem />
         </div>

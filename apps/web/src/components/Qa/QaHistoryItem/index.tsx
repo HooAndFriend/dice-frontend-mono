@@ -48,12 +48,14 @@ const QaHistoryItem = ({ data }: PropsType) => {
           <CustomImage
             className="rounded-full border border-lightGray mr-[10px]"
             alt="profile"
-            src={data.user.profile}
+            src={data?.user?.profile || "/image/dice.png"}
             width={30}
             height={30}
           />
           <div className="flex font-spoqa">
-            <div className="mr-[10px] text-[16px]">{data.user.nickname}</div>
+            <div className="mr-[10px] text-[16px]">
+              {data?.user?.nickname || ""}
+            </div>
             <div className="flex items-center text-darkGray text-[12px]">
               {dayjs(data.createdDate).format("YYYY-MM-DD HH:mm:ss")}
             </div>

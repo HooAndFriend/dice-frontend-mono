@@ -21,10 +21,13 @@ import { CommonResponse } from "@/src/type/common";
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 import { WorkspaceUser } from "@/src/type/workspace";
+import { EpicStatus } from "@/src/type/epic";
 
 const TicketConatiner = () => {
   const [word, setWord] = useState<string>("");
   const [selectEpicIds, setSelectEpicIds] = useState<number[]>([]);
+  const [selectStatus, setSelectStatus] = useState<EpicStatus[]>([]);
+
   const [ticketId, setTicketId] = useState<number>(0);
   const [checkedList, setCheckedList] = useState<WorkspaceUser[]>([]);
   const [mode, setMode] = useState<"list" | "kanban">("list");
@@ -70,6 +73,14 @@ const TicketConatiner = () => {
     }
   };
 
+  const handleStatusSelectFilter = (status: EpicStatus) => {
+    if (selectStatus.includes(status)) {
+      setSelectStatus((c) => c.filter((s) => s !== status));
+    } else {
+      setSelectStatus((c) => [...c, status]);
+    }
+  };
+
   const onDragEnd = ({ source, destination }: DropResult) => {
     updateOrder.trigger({
       ticketId: source.index,
@@ -91,12 +102,14 @@ const TicketConatiner = () => {
   return (
     <TicketContainerView
       ticketId={ticketId}
+      selectStatus={selectStatus}
       selectEpicIds={selectEpicIds}
       data={isLoading ? [] : data.data.data}
       ticketCount={isLoading ? 0 : data.data.count}
       word={word}
       mode={mode}
       checkedList={checkedList}
+      handleStatusSelectFilter={handleStatusSelectFilter}
       handleEpicSelectFilter={handleEpicSelectFilter}
       handleWord={(e) => setWord(e.target.value)}
       onDragEnd={onDragEnd}

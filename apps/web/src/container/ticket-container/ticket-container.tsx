@@ -16,6 +16,7 @@ import TicketViewToggleButton from "@/src/components/Ticket/TicketViewToggleButt
 import TicketKanbanBoard from "@/src/components/Ticket/TicketKanbanBoard";
 import TicketTableSkeleton from "@/src/components/Ticket/TicketTable/TicketTableSkeleton";
 import TicketKanbanBoardSkeleton from "@/src/components/Ticket/TicketKanbanBoard/TicketKanbanBoardSkeleton";
+import { EpicStatus } from "@/src/type/epic";
 
 interface PropsType {
   ticketId: number;
@@ -26,6 +27,8 @@ interface PropsType {
   selectEpicIds: number[];
   mode: "list" | "kanban";
   checkedList: WorkspaceUser[];
+  selectStatus: EpicStatus[];
+  handleStatusSelectFilter: (status: EpicStatus) => void;
   handleEpicSelectFilter: (epicId: number) => void;
   setCheckedList: (list: WorkspaceUser[]) => void;
   setMode: (mode: "list" | "kanban") => void;
@@ -39,6 +42,7 @@ const TicketContainerView = ({
   data,
   word,
   mode,
+  selectStatus,
   selectEpicIds,
   isLoading,
   ticketCount,
@@ -48,13 +52,16 @@ const TicketContainerView = ({
   setMode,
   checkedList,
   setCheckedList,
+  handleStatusSelectFilter,
   handleEpicSelectFilter,
 }: PropsType) => {
   return (
     <div className="w-full">
       <TicketSearchCard
         value={word}
+        selectStatus={selectStatus}
         selectEpicIds={selectEpicIds}
+        handleStatusSelectFilter={handleStatusSelectFilter}
         handleEpicSelectFilter={handleEpicSelectFilter}
         onChange={handleWord}
         checkedList={checkedList}
@@ -83,6 +90,16 @@ const TicketContainerView = ({
                       : checkedList.some(
                           (_) => _.teamUser.user.id === item.worker?.id
                         )
+                  )
+                  .filter((item) =>
+                    selectEpicIds.length === 0
+                      ? true
+                      : selectEpicIds.includes(item.epic?.id)
+                  )
+                  .filter((item) =>
+                    selectStatus.length === 0
+                      ? true
+                      : selectStatus.includes(item.status)
                   )}
                 onDragEnd={onDragEnd}
               />

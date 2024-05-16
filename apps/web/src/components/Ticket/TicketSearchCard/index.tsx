@@ -6,12 +6,15 @@ import CustomSelect from "../../Input/CustomSelect";
 import EpicSelectFilter from "../../Epic/EpicSelectFilter";
 import { EpicStatus } from "@/src/type/epic";
 import TicketStatusSelectFilter from "../TicketStatusSelectFilter";
+import TicketTypeSelectFilter from "../TicketTypeSelectFilter";
 
 interface PropsType {
   value: string;
   checkedList: WorkspaceUser[];
-  selectEpicIds: number[];
-  selectStatus: EpicStatus[];
+  selectedEpicIds: number[];
+  selectedStatus: EpicStatus[];
+  selectedTypeIds: number[];
+  handleTypeSelectFilter: (typeId: number) => void;
   handleStatusSelectFilter: (status: EpicStatus) => void;
   handleEpicSelectFilter: (epicId: number) => void;
   setCheckedList: (checkedList: WorkspaceUser[]) => void;
@@ -20,8 +23,10 @@ interface PropsType {
 
 const TicketSearchCard = ({
   value,
-  selectEpicIds,
-  selectStatus,
+  selectedEpicIds,
+  selectedStatus,
+  selectedTypeIds,
+  handleTypeSelectFilter,
   handleStatusSelectFilter,
   handleEpicSelectFilter,
   onChange,
@@ -33,12 +38,16 @@ const TicketSearchCard = ({
       <div className="mt-6 h-[90px] w-full bg-white rounded-[20px] shadow-md p-4 flex items-center">
         <CustomSearch value={value} onChange={onChange} />
         <EpicSelectFilter
-          selectdIds={selectEpicIds}
+          selectdIds={selectedEpicIds}
           handleEpicSelectFilter={handleEpicSelectFilter}
         />
         <TicketStatusSelectFilter
-          selectedStatus={selectStatus}
+          selectedStatus={selectedStatus}
           handleEpicSelectFilter={handleStatusSelectFilter}
+        />
+        <TicketTypeSelectFilter
+          selectedTypeIds={selectedTypeIds}
+          handleTypeSelectFilter={handleTypeSelectFilter}
         />
         <div className="ml-8">
           <UserSelectBox

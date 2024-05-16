@@ -9,14 +9,13 @@ import TicketSearchCard from "../../components/Ticket/TicketSearchCard";
 // ** Type Imports
 import { TicketInfo } from "@/src/type/ticket";
 import { WorkspaceUser } from "@/src/type/workspace";
+import { EpicStatus } from "@/src/type/epic";
 
 // ** Utils Imports
 import { DropResult } from "react-beautiful-dnd";
 import TicketViewToggleButton from "@/src/components/Ticket/TicketViewToggleButton";
 import TicketKanbanBoard from "@/src/components/Ticket/TicketKanbanBoard";
 import TicketTableSkeleton from "@/src/components/Ticket/TicketTable/TicketTableSkeleton";
-import TicketKanbanBoardSkeleton from "@/src/components/Ticket/TicketKanbanBoard/TicketKanbanBoardSkeleton";
-import { EpicStatus } from "@/src/type/epic";
 
 interface PropsType {
   ticketId: number;
@@ -24,10 +23,12 @@ interface PropsType {
   word: string;
   ticketCount: number;
   isLoading: boolean;
-  selectEpicIds: number[];
   mode: "list" | "kanban";
   checkedList: WorkspaceUser[];
-  selectStatus: EpicStatus[];
+  selectedEpicIds: number[];
+  selectedStatus: EpicStatus[];
+  selectedTypeIds: number[];
+  handleTypeSelectFilter: (typeId: number) => void;
   handleStatusSelectFilter: (status: EpicStatus) => void;
   handleEpicSelectFilter: (epicId: number) => void;
   setCheckedList: (list: WorkspaceUser[]) => void;
@@ -42,8 +43,9 @@ const TicketContainerView = ({
   data,
   word,
   mode,
-  selectStatus,
-  selectEpicIds,
+  selectedStatus,
+  selectedEpicIds,
+  selectedTypeIds,
   isLoading,
   ticketCount,
   setTicketId,
@@ -52,6 +54,7 @@ const TicketContainerView = ({
   setMode,
   checkedList,
   setCheckedList,
+  handleTypeSelectFilter,
   handleStatusSelectFilter,
   handleEpicSelectFilter,
 }: PropsType) => {
@@ -59,8 +62,10 @@ const TicketContainerView = ({
     <div className="w-full">
       <TicketSearchCard
         value={word}
-        selectStatus={selectStatus}
-        selectEpicIds={selectEpicIds}
+        selectedStatus={selectedStatus}
+        selectedEpicIds={selectedEpicIds}
+        selectedTypeIds={selectedTypeIds}
+        handleTypeSelectFilter={handleTypeSelectFilter}
         handleStatusSelectFilter={handleStatusSelectFilter}
         handleEpicSelectFilter={handleEpicSelectFilter}
         onChange={handleWord}
@@ -92,14 +97,19 @@ const TicketContainerView = ({
                         )
                   )
                   .filter((item) =>
-                    selectEpicIds.length === 0
+                    selectedEpicIds.length === 0
                       ? true
-                      : selectEpicIds.includes(item.epic?.id)
+                      : selectedEpicIds.includes(item.epic?.id)
                   )
                   .filter((item) =>
-                    selectStatus.length === 0
+                    selectedStatus.length === 0
                       ? true
-                      : selectStatus.includes(item.status)
+                      : selectedStatus.includes(item.status)
+                  )
+                  .filter((item) =>
+                    selectedTypeIds.length === 0
+                      ? true
+                      : selectedTypeIds.includes(item.ticketSetting?.id)
                   )}
                 onDragEnd={onDragEnd}
               />

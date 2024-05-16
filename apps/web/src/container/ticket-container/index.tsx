@@ -25,8 +25,9 @@ import { EpicStatus } from "@/src/type/epic";
 
 const TicketConatiner = () => {
   const [word, setWord] = useState<string>("");
-  const [selectEpicIds, setSelectEpicIds] = useState<number[]>([]);
-  const [selectStatus, setSelectStatus] = useState<EpicStatus[]>([]);
+  const [selectedEpicIds, setSelectedEpicIds] = useState<number[]>([]);
+  const [selectedStatus, setSelectedStatus] = useState<EpicStatus[]>([]);
+  const [selectedTypeIds, setSelectedTypeIds] = useState<number[]>([]);
 
   const [ticketId, setTicketId] = useState<number>(0);
   const [checkedList, setCheckedList] = useState<WorkspaceUser[]>([]);
@@ -66,18 +67,26 @@ const TicketConatiner = () => {
   );
 
   const handleEpicSelectFilter = (epicId: number) => {
-    if (selectEpicIds.includes(epicId)) {
-      setSelectEpicIds((c) => c.filter((id) => id !== epicId));
+    if (selectedEpicIds.includes(epicId)) {
+      setSelectedEpicIds((c) => c.filter((id) => id !== epicId));
     } else {
-      setSelectEpicIds((c) => [...c, epicId]);
+      setSelectedEpicIds((c) => [...c, epicId]);
     }
   };
 
   const handleStatusSelectFilter = (status: EpicStatus) => {
-    if (selectStatus.includes(status)) {
-      setSelectStatus((c) => c.filter((s) => s !== status));
+    if (selectedStatus.includes(status)) {
+      setSelectedStatus((c) => c.filter((s) => s !== status));
     } else {
-      setSelectStatus((c) => [...c, status]);
+      setSelectedStatus((c) => [...c, status]);
+    }
+  };
+
+  const handleTypeSelectFilter = (typeId: number) => {
+    if (selectedTypeIds.includes(typeId)) {
+      setSelectedTypeIds((c) => c.filter((id) => id !== typeId));
+    } else {
+      setSelectedTypeIds((c) => [...c, typeId]);
     }
   };
 
@@ -102,13 +111,15 @@ const TicketConatiner = () => {
   return (
     <TicketContainerView
       ticketId={ticketId}
-      selectStatus={selectStatus}
-      selectEpicIds={selectEpicIds}
+      selectedStatus={selectedStatus}
+      selectedTypeIds={selectedTypeIds}
+      selectedEpicIds={selectedEpicIds}
       data={isLoading ? [] : data.data.data}
       ticketCount={isLoading ? 0 : data.data.count}
       word={word}
       mode={mode}
       checkedList={checkedList}
+      handleTypeSelectFilter={handleTypeSelectFilter}
       handleStatusSelectFilter={handleStatusSelectFilter}
       handleEpicSelectFilter={handleEpicSelectFilter}
       handleWord={(e) => setWord(e.target.value)}

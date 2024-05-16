@@ -23,8 +23,10 @@ interface PropsType {
   word: string;
   ticketCount: number;
   isLoading: boolean;
+  selectEpicIds: number[];
   mode: "list" | "kanban";
   checkedList: WorkspaceUser[];
+  handleEpicSelectFilter: (epicId: number) => void;
   setCheckedList: (list: WorkspaceUser[]) => void;
   setMode: (mode: "list" | "kanban") => void;
   setTicketId: (id: number) => void;
@@ -37,6 +39,7 @@ const TicketContainerView = ({
   data,
   word,
   mode,
+  selectEpicIds,
   isLoading,
   ticketCount,
   setTicketId,
@@ -45,11 +48,14 @@ const TicketContainerView = ({
   setMode,
   checkedList,
   setCheckedList,
+  handleEpicSelectFilter,
 }: PropsType) => {
   return (
     <div className="w-full">
       <TicketSearchCard
         value={word}
+        selectEpicIds={selectEpicIds}
+        handleEpicSelectFilter={handleEpicSelectFilter}
         onChange={handleWord}
         checkedList={checkedList}
         setCheckedList={setCheckedList}

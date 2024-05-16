@@ -24,6 +24,7 @@ import { WorkspaceUser } from "@/src/type/workspace";
 
 const TicketConatiner = () => {
   const [word, setWord] = useState<string>("");
+  const [selectEpicIds, setSelectEpicIds] = useState<number[]>([]);
   const [ticketId, setTicketId] = useState<number>(0);
   const [checkedList, setCheckedList] = useState<WorkspaceUser[]>([]);
   const [mode, setMode] = useState<"list" | "kanban">("list");
@@ -61,6 +62,14 @@ const TicketConatiner = () => {
     }
   );
 
+  const handleEpicSelectFilter = (epicId: number) => {
+    if (selectEpicIds.includes(epicId)) {
+      setSelectEpicIds((c) => c.filter((id) => id !== epicId));
+    } else {
+      setSelectEpicIds((c) => [...c, epicId]);
+    }
+  };
+
   const onDragEnd = ({ source, destination }: DropResult) => {
     updateOrder.trigger({
       ticketId: source.index,
@@ -82,11 +91,13 @@ const TicketConatiner = () => {
   return (
     <TicketContainerView
       ticketId={ticketId}
+      selectEpicIds={selectEpicIds}
       data={isLoading ? [] : data.data.data}
       ticketCount={isLoading ? 0 : data.data.count}
       word={word}
       mode={mode}
       checkedList={checkedList}
+      handleEpicSelectFilter={handleEpicSelectFilter}
       handleWord={(e) => setWord(e.target.value)}
       onDragEnd={onDragEnd}
       setMode={setMode}

@@ -18,6 +18,9 @@ import { mutate } from "swr";
 
 // ** Type Imports
 import { CommonResponse } from "@/src/type/common";
+import { TicketSettingType } from "@/src/type/ticket";
+import TicketSettingTypeButton from "../TicketSettingTypeButton";
+import TicketSelectSettingButton from "../TicketSelectSettingButton";
 
 interface PropsType {
   epicId?: number;
@@ -26,42 +29,26 @@ interface PropsType {
 const TicketAddItem = ({ epicId }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
+
   const [button, setButton] = useState<boolean>(false);
 
-  const [selectEpicId, setSelectEpicId] = useState<string>("");
+  const [selectTypeId, setSelectTypeId] = useState<number>(0);
+  const [selectEpicId, setSelectEpicId] = useState<string>(
+    epicId ? epicId.toString() : ""
+  );
 
   const handleOpen = () => setOpen((c) => !c);
 
   const { handleOpen: handleModalOpen } = useDialog();
 
-  const saveSimpleTicket = useSWRMutation(
-    "/v1/ticket/simple",
-    async (url: string) => await Post<CommonResponse<void>>(url, { name }),
-    {
-      onSuccess: () => {
-        setButton(false);
-        setOpen(false);
-        setName("");
-        mutate("/v1/ticket");
-        mutate("/v1/epic");
-      },
-      onError: (error) => {
-        handleModalOpen({
-          title: "Error",
-          message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-        setButton(false);
-      },
-    }
-  );
-
-  const saveTicketWithEpic = useSWRMutation(
+  const saveTicket = useSWRMutation(
     "/v1/ticket",
     async (url: string) =>
-      await Post<CommonResponse<void>>(url, { name, epicId }),
+      await Post<CommonResponse<void>>(url, {
+        name,
+        epicId: Number(selectEpicId),
+        settingId: selectTypeId,
+      }),
     {
       onSuccess: () => {
         setButton(false);
@@ -93,13 +80,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
     if (e.key === "Enter") {
       if (button) return;
       setButton(true);
-      if (epicId) {
-        saveTicketWithEpic.trigger();
-
-        return;
-      }
-
-      saveSimpleTicket.trigger();
+      saveTicket.trigger();
     }
 
     if (e.key === "Escape") {
@@ -108,11 +89,14 @@ const TicketAddItem = ({ epicId }: PropsType) => {
   };
 
   return (
-    <div className="w-full h-[75px] flex items-center ml-[48px]">
+    <div className="w-[90%] h-[75px] flex items-center ml-[48px]">
       {open ? (
         <>
-          <div className="mr-8 w-[24px] h-[24px] bg-green-300 rounded-lg" />
-          <div className="mr-[15px]">
+          <TicketSelectSettingButton
+            selectTypeId={selectTypeId}
+            setSelectTypeId={setSelectTypeId}
+          />
+          <div className="mx-[15px]">
             <EpicSelect
               selectEpicId={selectEpicId}
               setSelectEpicId={setSelectEpicId}
@@ -126,12 +110,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
             onChange={(e) => setName(e.target.value)}
             onKeyDown={handleEnter}
           />
-          <div
-            className="ml-4"
-            onClick={
-              epicId ? saveTicketWithEpic.trigger : saveSimpleTicket.trigger
-            }
-          >
+          <div className="ml-4" onClick={saveTicket.trigger}>
             <CustomImage
               onClick={handleOpen}
               src={"/svg/add-black-box.svg"}

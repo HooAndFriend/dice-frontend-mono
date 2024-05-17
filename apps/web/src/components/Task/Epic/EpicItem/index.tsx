@@ -112,29 +112,35 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
           handleClick({ id: item.id, type: "EPIC" });
         }}
       >
-        <h1 className="ml-[20px] font-san-bold text-[16px] w-[300px] overflow-hidden whitespace-nowrap text-overflow-ellipsis">
-          {`${item.code}  ${item.name}`}
-        </h1>
-        <div className="ml-[20px] w-[370px] bg-[#F4F4FA] border-[1px] border-[#EBEBEC] rounded-[6px] h-[24px] dark:bg-gray-700 flex items-center">
-          <div
-            className={`bg-[#623AD6] h-[22px] rounded-[5px] border-[1px] border-[#EBEBEC]`}
-            style={{
-              width: epicProgress,
-            }}
-          />
+        <div className="w-[30%]">
+          <h1 className=" font-san-bold text-[16px] overflow-hidden whitespace-nowrap text-overflow-ellipsis">
+            {`${item.code}  ${item.name}`}
+          </h1>
         </div>
-        <h4 className="ml-[20px] text-[16px] font-san-medium">
-          {item.doneTicketCount === 0
-            ? 0
-            : ((item.doneTicketCount / item.ticket.length) * 100).toFixed(
-                2
-              )}{" "}
-          %
-        </h4>
-        <h4 className="ml-[20px] text-[16px] font-san-medium text-[#676767]">
-          ({item.doneTicketCount}/{item.ticket.length})
-        </h4>
-        <div className="ml-auto">
+        <div className="w-[30%]">
+          <div className="w-full bg-[#F4F4FA] border-[1px] border-[#EBEBEC] rounded-[6px] h-[24px] dark:bg-gray-700 flex items-center">
+            <div
+              className={`bg-[#623AD6] h-[22px] rounded-[5px] border-[1px] border-[#EBEBEC]`}
+              style={{
+                width: epicProgress,
+              }}
+            />
+          </div>
+        </div>
+        <div className="w-[10%] justify-center flex">
+          <h4 className="text-[16px] font-san-medium">
+            {item.doneTicketCount === 0
+              ? 0
+              : ((item.doneTicketCount / item.ticket.length) * 100).toFixed(
+                  2
+                )}{" "}
+            %
+          </h4>
+        </div>
+        <div className="flex w-[30%] justify-between">
+          <h4 className="ml-[20px] text-[16px] font-san-medium text-[#676767]">
+            ({item.doneTicketCount}/{item.ticket.length})
+          </h4>
           <CustomImage
             src={open ? "/svg/arrow-up.svg" : "/svg/arrow-down.svg"}
             alt="arrow"

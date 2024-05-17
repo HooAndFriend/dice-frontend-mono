@@ -39,7 +39,7 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
 
   return (
     <div
-      className="flex h-[80px] py-[24px] hover:bg-slate-400 rounded-lg"
+      className="flex h-[80px] py-[24px] w-full hover:bg-slate-400 rounded-lg"
       onClick={() => handleClick(data.id)}
     >
       <div className="flex w-[10%] items-center justify-center">

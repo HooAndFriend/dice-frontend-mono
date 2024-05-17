@@ -1,6 +1,4 @@
 "use client";
-// ** Next Imports
-import Image from "next/image";
 
 // ** React Imports
 import { KeyboardEvent, useState } from "react";
@@ -71,7 +69,6 @@ const EpicAddItem = () => {
     <div className="w-full h-[75px] flex items-center">
       {open ? (
         <>
-          <div className="mr-8 w-[24px] h-[24px]" />
           <CustomInput
             placeholder="Enter Epic Name"
             borderRadius="8px"

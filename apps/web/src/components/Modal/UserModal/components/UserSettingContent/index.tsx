@@ -12,7 +12,7 @@ import { UserState } from "@/src/app";
 import { useSetRecoilState } from "recoil";
 
 // ** Component Imports
-import { ImageUploader } from "@/src/components/ImageUploader";
+import { ImageUploader } from "@/src/components/Image/ImageUploader";
 import { GetUserInfoResponse, UserInfo } from "@/src/type/user";
 
 // ** Type Imports

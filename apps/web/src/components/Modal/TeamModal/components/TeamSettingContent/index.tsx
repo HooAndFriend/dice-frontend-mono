@@ -4,7 +4,7 @@ import { Get, Put } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 
 // ** Component Imports
-import { ImageUploader } from "@/src/components/ImageUploader";
+import { ImageUploader } from "@/src/components/Image/ImageUploader";
 
 // ** Recoil Imports
 import { useRecoilState, useRecoilValue } from "recoil";

@@ -1,7 +1,7 @@
 // ** React Imports
 import Image from "next/image";
 import { ChangeEvent } from "react";
-import CustomImage from "../Image/CustomImage";
+import CustomImage from "../CustomImage";
 
 interface PropsType {
   image: string;

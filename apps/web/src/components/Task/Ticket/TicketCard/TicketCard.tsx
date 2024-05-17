@@ -15,7 +15,7 @@ import { RoleType } from "@/src/type/common";
 import dayjs from "dayjs";
 import TicketComment from "../TicketComment";
 import TicketHistory from "../TicketHistory";
-import ImagePreview from "../../../ImagePreview";
+import ImagePreview from "../../../Image/ImagePreview";
 
 interface PropsType {
   data: TicketInfo;

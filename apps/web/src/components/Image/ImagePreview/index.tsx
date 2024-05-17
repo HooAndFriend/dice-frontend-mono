@@ -6,7 +6,7 @@ import { Fragment } from "react";
 // ** ui Imports
 import { Dialog, Transition } from "@headlessui/react";
 
-import CustomImage from "../Image/CustomImage";
+import CustomImage from "../CustomImage";
 
 interface PropsType {
   open: boolean;

@@ -3,7 +3,7 @@ import { WorkspaceState } from "@/src/app";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 // ** Component Imports
-import { ImageUploader } from "@/src/components/ImageUploader";
+import { ImageUploader } from "@/src/components/Image/ImageUploader";
 
 // ** Type Imports
 import {

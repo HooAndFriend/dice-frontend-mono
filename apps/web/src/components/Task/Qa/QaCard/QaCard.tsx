@@ -8,7 +8,7 @@ import QaUserButton from "../QaUserButton";
 import { QaFileUploader } from "../QaFileUploader";
 import QaDatePicker from "../QaDatePicker";
 import QaHistory from "../QaHistory";
-import ImagePreview from "../../../ImagePreview";
+import ImagePreview from "../../../Image/ImagePreview";
 import QaEditor from "../QaEditor";
 
 // ** Type Imports

@@ -5,7 +5,7 @@ import { ChangeEvent, KeyboardEvent } from "react";
 import { SaveWorkspaceParam } from "@/src/type/workspace";
 
 // ** Component Imports
-import { ImageUploader } from "@/src/components/ImageUploader";
+import { ImageUploader } from "@/src/components/Image/ImageUploader";
 
 interface PropsType {
   data: SaveWorkspaceParam;

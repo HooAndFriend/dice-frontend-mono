@@ -81,11 +81,11 @@ const UserSelectBox = ({ checkedList, setCheckedList }: PropsType) => {
       </div>
       {open && (
         <div
-          className="absolute w-[184px] h-[230px] top-[50px] left-0 bg-white shadow-lg rounded-lg overflow-y-auto z-30"
+          className="absolute w-[250px] h-[230px] top-[50px] left-0 bg-white shadow-lg rounded-lg overflow-y-auto z-30"
           ref={dropdownRef}
         >
           {data.data.data.map((item) => (
-            <div className="flex items-center justify-center px-[5px] py-[8px]">
+            <div className="flex items-center px-[5px] py-[8px]">
               <div
                 className="w-[168px] cursor-pointer h-[32px] py-[10px] rounded-[8px] px-[8px] flex items-center"
                 onClick={(e) => {
@@ -93,34 +93,40 @@ const UserSelectBox = ({ checkedList, setCheckedList }: PropsType) => {
                 }}
                 key={item.id}
               >
-                <input
-                  type="checkbox"
-                  className="mr-[13px]"
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setCheckedList([...checkedList, item]);
-                    } else {
-                      setCheckedList([
-                        ...checkedList.filter((_) => _.id !== item.id),
-                      ]);
-                    }
-                  }}
-                  checked={checkedList.some((_) => _.id === item.id)}
-                />
-                <CustomImage
-                  className="rounded-full border border-[#EBEBEC]"
-                  src={
-                    item.teamUser.user.profile
-                      ? item.teamUser.user.profile
-                      : "/images/dice.png"
-                  }
-                  alt="profile"
-                  width={30}
-                  height={30}
-                />
-                <p className="text-[12px] ml-[13px]">
-                  {item.teamUser.user.nickname}
-                </p>
+                <div className="flex items-center mb-4">
+                  <input
+                    id="default-checkbox"
+                    type="checkbox"
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setCheckedList([...checkedList, item]);
+                      } else {
+                        setCheckedList([
+                          ...checkedList.filter((_) => _.id !== item.id),
+                        ]);
+                      }
+                    }}
+                    checked={checkedList.some((_) => _.id === item.id)}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <label
+                    htmlFor="default-checkbox"
+                    className="flex items-center text-sm font-medium text-gray-900 ms-2 dark:text-gray-300"
+                  >
+                    <CustomImage
+                      className="rounded-full border border-[#EBEBEC] mr-[10px]"
+                      src={
+                        item.teamUser.user.profile
+                          ? item.teamUser.user.profile
+                          : "/images/dice.png"
+                      }
+                      alt="profile"
+                      width={30}
+                      height={30}
+                    />
+                    {item.teamUser.user.nickname}
+                  </label>
+                </div>
               </div>
             </div>
           ))}

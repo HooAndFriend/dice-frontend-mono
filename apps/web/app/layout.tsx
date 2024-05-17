@@ -2,9 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 // ** Provider Imports
-import RocoilRootProvider from "@/src/components/Provider/recoil-provider";
+import RocoilRootProvider from "@/src/provider/recoil-provider";
 import { DialogProvider } from "../src/context/DialogContext";
-import SwrProvider from "@/src/components/Provider/swr-provider";
+import SwrProvider from "@/src/provider/swr-provider";
 
 export const metadata: Metadata = {
   title: "HI-DICE",

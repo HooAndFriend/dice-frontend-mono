@@ -20,6 +20,7 @@ export const StatusList: EpicStatus[] = [
 interface PropsType {
   status: EpicStatus;
   open: boolean;
+  isQa: boolean;
   handleStatus: (status: EpicStatus) => void;
   handleOpen: () => void;
 }
@@ -27,6 +28,7 @@ interface PropsType {
 const StatusPopover = ({
   status,
   open,
+  isQa,
   handleStatus,
   handleOpen,
 }: PropsType) => {
@@ -51,16 +53,29 @@ const StatusPopover = ({
 
   return (
     <div className="relative z-4">
-      <button
-        className="w-[84px] h-[30px] rounded-[6px] flex justify-center text-[12px] items-center text-white font-spoqa"
-        style={{ backgroundColor: getStateBoxColor(status) }}
-        onClick={(e) => {
-          e.stopPropagation();
-          handleOpen();
-        }}
-      >
-        {status}
-      </button>
+      {isQa ? (
+        <button
+          className="w-[120px] h-[45px] rounded-[30px] flex justify-center items-center text-white font-spoqa font-bold"
+          style={{ backgroundColor: getStateBoxColor(status) }}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleOpen();
+          }}
+        >
+          {status}
+        </button>
+      ) : (
+        <button
+          className="w-[84px] h-[30px] rounded-[6px] flex justify-center text-[12px] items-center text-white font-spoqa"
+          style={{ backgroundColor: getStateBoxColor(status) }}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleOpen();
+          }}
+        >
+          {status}
+        </button>
+      )}
       {open && (
         <div
           className="absolute w-[184px] h-[230px] top-[50px] right-0 bg-white shadow-lg rounded-lg overflow-y-auto z-30"

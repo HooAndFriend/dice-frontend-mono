@@ -64,6 +64,7 @@ const TicketStatusButton = ({ status, ticketId, refetch }: PropsType) => {
 
   return (
     <StatusPopover
+      isQa={false}
       status={status}
       open={open}
       handleStatus={handleStatus}

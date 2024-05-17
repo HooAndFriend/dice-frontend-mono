@@ -62,6 +62,7 @@ const QaStatusButton = ({ status, qaId, refetch }: PropsType) => {
 
   return (
     <StatusPopover
+      isQa
       status={status}
       open={open}
       handleStatus={handleStatus}

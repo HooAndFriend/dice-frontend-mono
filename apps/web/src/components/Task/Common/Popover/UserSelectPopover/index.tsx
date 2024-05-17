@@ -60,6 +60,8 @@ const UserSelectPopover = ({
     };
   }, []);
 
+  console.log("profile : ", profile);
+
   return (
     <div className="relative">
       <div
@@ -72,7 +74,7 @@ const UserSelectPopover = ({
         <Tooltip text={nickname}>
           <CustomImage
             className="rounded-full border border-[#EBEBEC] mr-[10px] "
-            src={profile}
+            src={profile ? profile : "/image/dice.png"}
             alt="profile"
             width={width ? width : 30}
             height={height ? height : 30}

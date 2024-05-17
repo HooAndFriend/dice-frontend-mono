@@ -4,32 +4,18 @@
 import { useEffect, useRef, useState, ChangeEvent } from "react";
 
 // ** Type Imports
-import { EpicStatus, GetEpicListResponse } from "@/src/type/epic";
+import { GetEpicListResponse } from "@/src/type/epic";
 
 // ** Swr Imports
 import useSWR from "swr";
 import { Get } from "@/src/repository";
-import { getStateBoxColor } from "@/src/utils/color";
 
 interface PropsType {
-  selectedStatus: EpicStatus[];
-  handleEpicSelectFilter: (item: EpicStatus) => void;
+  selectdIds: number[];
+  handleEpicSelectFilter: (id: number) => void;
 }
 
-const statusList: EpicStatus[] = [
-  "WAITING",
-  "DOING",
-  "DONE",
-  "COMPLETE",
-  "HOLD",
-  "REOPEN",
-  "NOTHING",
-];
-
-const TicketStatusSelectFilter = ({
-  selectedStatus,
-  handleEpicSelectFilter,
-}: PropsType) => {
+const EpicFilter = ({ selectdIds, handleEpicSelectFilter }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
 
@@ -42,6 +28,10 @@ const TicketStatusSelectFilter = ({
   const handleOpen = () => {
     setOpen((c) => !c);
   };
+
+  const { data, isLoading } = useSWR("/v1/epic/list", async (url) =>
+    Get<GetEpicListResponse>(url)
+  );
 
   useEffect(() => {
     const clickOutside = (e: MouseEvent) => {
@@ -69,7 +59,7 @@ const TicketStatusSelectFilter = ({
           handleOpen();
         }}
       >
-        <h1>STATUS</h1>
+        <h1>EPIC</h1>
         <img src="/svg/arrow-down.svg" alt="arrow" />
       </div>
       {open && (
@@ -88,31 +78,22 @@ const TicketStatusSelectFilter = ({
           </div>
           <hr className="w-full" />
           <div className="px-[8px] py-[8px]">
-            {statusList
-              .filter((item) => item.includes(name))
+            {data.data.data
+              .filter((item) => item.name.includes(name))
               .map((item) => (
-                <div className="flex items-center mb-4" key={item}>
+                <div className="flex items-center mb-4" key={item.id}>
                   <input
                     id="default-checkbox"
                     type="checkbox"
-                    checked={selectedStatus.includes(item)}
-                    onChange={() => handleEpicSelectFilter(item)}
+                    checked={selectdIds.includes(item.id)}
+                    onChange={() => handleEpicSelectFilter(item.id)}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
                     htmlFor="default-checkbox"
-                    className="flex items-center text-sm font-medium text-gray-900 ms-2 dark:text-gray-300"
+                    className="text-sm font-medium text-gray-900 ms-2 dark:text-gray-300"
                   >
-                    <div
-                      className="w-[12px] h-[12px] rounded-[3px]"
-                      style={{ backgroundColor: getStateBoxColor(item) }}
-                    />
-                    <p
-                      className="text-[12px] ml-[13px]"
-                      style={{ color: status === item ? "black" : "#ACACAC" }}
-                    >
-                      {item}
-                    </p>
+                    {item.name}
                   </label>
                 </div>
               ))}
@@ -123,4 +104,4 @@ const TicketStatusSelectFilter = ({
   );
 };
 
-export default TicketStatusSelectFilter;
+export default EpicFilter;

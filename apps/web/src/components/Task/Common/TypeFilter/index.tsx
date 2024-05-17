@@ -19,10 +19,7 @@ interface PropsType {
   handleTypeSelectFilter: (id: number) => void;
 }
 
-const TicketTypeSelectFilter = ({
-  selectedTypeIds,
-  handleTypeSelectFilter,
-}: PropsType) => {
+const TypeFilter = ({ selectedTypeIds, handleTypeSelectFilter }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
 
@@ -127,4 +124,4 @@ const TicketTypeSelectFilter = ({
   );
 };
 
-export default TicketTypeSelectFilter;
+export default TypeFilter;

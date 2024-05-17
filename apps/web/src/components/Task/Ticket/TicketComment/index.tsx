@@ -16,7 +16,7 @@ import { GetTicketCommentListResponse } from "@/src/type/ticket";
 // ** Components Imports
 import CustomImage from "../../../Image/CustomImage";
 import TicketCommentItem from "../TicketCommentItem";
-import TicketCommentSkeleton from "./TicketCommentSkeleton";
+import CommentSkeleton from "../../Common/Comment/CommentSkeleton";
 
 interface PropsType {
   ticketId: number;
@@ -123,7 +123,7 @@ const TicketComment = ({ ticketId }: PropsType) => {
       </div>
       <div className="mt-9">
         {commentLoading ? (
-          <TicketCommentSkeleton />
+          <CommentSkeleton />
         ) : (
           commentData.data.data.map((item) => (
             <TicketCommentItem

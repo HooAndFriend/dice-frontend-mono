@@ -1,4 +1,4 @@
-const QaCommentSkeleton = () => {
+const CommentSkeleton = () => {
   return (
     <div className="mt-[44px] space-y-4 animate-pulse w-full h-[564px]">
       <div className="w-full h-16 bg-gray-200 rounded"></div>
@@ -18,4 +18,4 @@ const QaCommentSkeleton = () => {
   );
 };
 
-export default QaCommentSkeleton;
+export default CommentSkeleton;

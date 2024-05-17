@@ -16,7 +16,7 @@ import QaCommentItem from "../QaCommentItem";
 
 // ** Type Imports
 import { AddCommentResponse, GetCommentListResponse } from "@/src/type/qa";
-import QaCommentSkeleton from "./QaCommentSkeleton";
+import CommentSkeleton from "../../Common/Comment/CommentSkeleton";
 
 interface PropsType {
   qaId: number;
@@ -124,7 +124,7 @@ const QaComment = ({ qaId }: PropsType) => {
       </div>
       <div className="mt-9">
         {isLoading ? (
-          <QaCommentSkeleton />
+          <CommentSkeleton />
         ) : (
           data.data.data.map((item) => (
             <QaCommentItem

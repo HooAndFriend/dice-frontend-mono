@@ -87,7 +87,7 @@ const StatusFilter = ({
           <hr className="w-full" />
           <div className="px-[8px] py-[8px]">
             {statusList
-              .filter((item) => item.includes(name))
+              .filter((item) => item.toLowerCase().includes(name.toLowerCase()))
               .map((item) => (
                 <div className="flex items-center mb-4" key={item}>
                   <input

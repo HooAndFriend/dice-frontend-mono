@@ -85,7 +85,9 @@ const TypeFilter = ({ selectedTypeIds, handleTypeSelectFilter }: PropsType) => {
             {isLoading
               ? []
               : data.data.data
-                  .filter((item) => item.name.includes(name))
+                  .filter((item) =>
+                    item.name.toLowerCase().includes(name.toLowerCase())
+                  )
                   .map((item) => (
                     <div className="flex items-center mb-4" key={item.id}>
                       <input

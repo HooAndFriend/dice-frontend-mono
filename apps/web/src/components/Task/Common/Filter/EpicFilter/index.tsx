@@ -78,25 +78,28 @@ const EpicFilter = ({ selectdIds, handleEpicSelectFilter }: PropsType) => {
           </div>
           <hr className="w-full" />
           <div className="px-[8px] py-[8px]">
-            {data.data.data
-              .filter((item) => item.name.includes(name))
-              .map((item) => (
-                <div className="flex items-center mb-4" key={item.id}>
-                  <input
-                    id="default-checkbox"
-                    type="checkbox"
-                    checked={selectdIds.includes(item.id)}
-                    onChange={() => handleEpicSelectFilter(item.id)}
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label
-                    htmlFor="default-checkbox"
-                    className="text-sm font-medium text-gray-900 ms-2 dark:text-gray-300"
-                  >
-                    {item.name}
-                  </label>
-                </div>
-              ))}
+            {!isLoading &&
+              data.data.data
+                .filter((item) =>
+                  item.name.toLowerCase().includes(name.toLowerCase())
+                )
+                .map((item) => (
+                  <div className="flex items-center mb-4" key={item.id}>
+                    <input
+                      id="default-checkbox"
+                      type="checkbox"
+                      checked={selectdIds.includes(item.id)}
+                      onChange={() => handleEpicSelectFilter(item.id)}
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                      htmlFor="default-checkbox"
+                      className="text-sm font-medium text-gray-900 ms-2 dark:text-gray-300"
+                    >
+                      {item.name}
+                    </label>
+                  </div>
+                ))}
           </div>
         </div>
       )}

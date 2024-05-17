@@ -1,6 +1,6 @@
 // ** Component Imports
 import EpicTable from "@/src/components/Task/Epic/EpicTable";
-import EpicSearchCard from "../../components/Task/Epic/EpicSearchCard";
+import WordFilter from "../../components/Task/Common/WordFilter";
 import EpicCard from "@/src/components/Task/Epic/EpicCard";
 import TicketCard from "@/src/components/Task/Ticket/TicketCard";
 
@@ -34,7 +34,7 @@ const EpicContainerView = ({
 }: PropsType) => {
   return (
     <div className="w-full">
-      <EpicSearchCard value={word} onChange={handleWord} />
+      <WordFilter value={word} onChange={handleWord} />
       <div className="mt-[56px] mb-[44px]">
         <h1 className="pl-4 font-bold text-md">Total Epic : {epicCount}</h1>
       </div>

@@ -6,7 +6,7 @@ interface PropsType {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const EpicSearchCard = ({ value, onChange }: PropsType) => {
+const WordFilter = ({ value, onChange }: PropsType) => {
   return (
     <div>
       <div className="mt-6 h-[90px] w-full bg-white rounded-[20px] shadow-md p-4 flex items-center">
@@ -19,4 +19,4 @@ const EpicSearchCard = ({ value, onChange }: PropsType) => {
   );
 };
 
-export default EpicSearchCard;
+export default WordFilter;

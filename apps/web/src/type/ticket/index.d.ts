@@ -38,11 +38,13 @@ export interface TicketInfo {
   };
   admin: {
     id: number;
+    email: string;
     nickname: string;
     profile: string;
   };
   worker: {
     id: number;
+    email: string;
     nickname: string;
     profile: string;
   };

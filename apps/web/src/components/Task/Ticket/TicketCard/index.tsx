@@ -68,11 +68,13 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     },
     admin: {
       id: 0,
+      email: "",
       nickname: "",
       profile: "",
     },
     worker: {
       id: 0,
+      email: "",
       nickname: "",
       profile: "",
     },

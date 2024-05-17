@@ -136,6 +136,7 @@ const TicketCardView = ({
             <TicketUserButton
               profile={data.admin ? data.admin.profile : "/images/dice.png"}
               ticketId={data.id}
+              email={data.admin ? data.admin.email : "-"}
               nickname={data.admin ? data.admin.nickname : "-"}
               userId={data.admin ? data.admin.id : 0}
               type="admin"
@@ -152,6 +153,7 @@ const TicketCardView = ({
           <TicketUserButton
             profile={data.worker ? data.worker.profile : "/images/dice.png"}
             ticketId={data.id}
+            email={data.admin ? data.admin.email : "-"}
             nickname={data.worker ? data.worker.nickname : "-"}
             userId={data.worker ? data.worker.id : 0}
             type="user"

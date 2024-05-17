@@ -29,6 +29,7 @@ const TicketKanbanCard = ({ data, handleClick }: PropsType) => {
         <TicketUserButton
           profile={data.worker?.profile}
           nickname={data.worker?.nickname}
+          email={data.admin ? data.admin.email : "-"}
           userId={data.worker?.id}
           type="user"
           ticketId={data.id}

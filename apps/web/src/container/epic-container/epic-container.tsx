@@ -36,7 +36,9 @@ const EpicContainerView = ({
     <div className="w-full">
       <WordFilter value={word} onChange={handleWord} />
       <div className="mt-[56px] mb-[44px]">
-        <h1 className="pl-4 font-bold text-md">Total Epic : {epicCount}</h1>
+        <h1 className="text-[18px] font-san-medium">
+          Total Epic : {epicCount}
+        </h1>
       </div>
       <div className={`${selectContent.id !== 0 && "flex"}`}>
         <div style={{ width: selectContent.id !== 0 ? "65%" : "100%" }}>

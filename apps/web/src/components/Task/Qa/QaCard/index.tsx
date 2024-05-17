@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 
 // ** Component Imports
 import QaCardView from "./QaCard";
-import QaCardSkeletonView from "./QaCardSkeleton";
+import CardSkeleton from "../../Common/Card/CardSkeleton";
 
 // ** Service Imports
 import useSWR, { mutate } from "swr";
@@ -166,7 +166,7 @@ const QaCard = ({ qaId, handleClose, refetch: handleRefetch }: PropsType) => {
     setMode({ asIs: "view", toBe: "view", memo: "view", title: "view" });
   }, [qaId]);
 
-  if (issueLoading) return <QaCardSkeletonView />;
+  if (issueLoading) return <CardSkeleton />;
 
   return (
     <QaCardView

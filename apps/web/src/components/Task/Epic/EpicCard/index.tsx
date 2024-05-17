@@ -3,7 +3,7 @@ import { useState } from "react";
 
 // ** Componet imports
 import EpicCardView from "./EpicCard";
-import EpicCardSkeleton from "./EpicCardSkeleton";
+import CardSkeleton from "../../Common/Card/CardSkeleton";
 
 // ** Service Imports
 import { Delete, Get, Patch } from "@/src/repository";
@@ -113,7 +113,7 @@ const EpicCard = ({ epicId, handleClose }: PropsType) => {
     }
   );
 
-  if (isLoading) return <EpicCardSkeleton />;
+  if (isLoading) return <CardSkeleton />;
 
   return (
     <EpicCardView

@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 
 // ** Componet imports
 import TicketCardView from "./TicketCard";
-import TicketCardSkeletonView from "./TicketCardSkeleton";
+import CardSkeleton from "../../Common/Card/CardSkeleton";
 
 // ** Service Imports
 import { Delete, Get, Patch } from "@/src/repository";
@@ -179,7 +179,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     }
   );
 
-  if (isLoading) return <TicketCardSkeletonView />;
+  if (isLoading) return <CardSkeleton />;
 
   return (
     <TicketCardView

@@ -1,6 +1,6 @@
 // ** Component Imports
-import TicketSettingAddItem from "@/src/components/Ticket/TicketSettingAddItem";
-import TicketSettingItem from "@/src/components/Ticket/TicketSettingItem";
+import TicketSettingAddItem from "@/src/components/Task/Ticket/TicketSettingAddItem";
+import TicketSettingItem from "@/src/components/Task/Ticket/TicketSettingItem";
 
 // ** Type Imports
 import { SettingListInfo, TicketSettingType } from "@/src/type/ticket";

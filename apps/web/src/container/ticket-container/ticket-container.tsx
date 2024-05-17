@@ -2,9 +2,9 @@
 import Image from "next/image";
 
 // ** Component Imports
-import TicketCard from "@/src/components/Ticket/TicketCard";
-import TicketTable from "@/src/components/Ticket/TicketTable";
-import TicketSearchCard from "../../components/Ticket/TicketSearchCard";
+import TicketCard from "@/src/components/Task/Ticket/TicketCard";
+import TicketTable from "@/src/components/Task/Ticket/TicketTable";
+import TicketSearchCard from "../../components/Task/Ticket/TicketSearchCard";
 
 // ** Type Imports
 import { TicketInfo } from "@/src/type/ticket";
@@ -13,9 +13,9 @@ import { EpicStatus } from "@/src/type/epic";
 
 // ** Utils Imports
 import { DropResult } from "react-beautiful-dnd";
-import TicketViewToggleButton from "@/src/components/Ticket/TicketViewToggleButton";
-import TicketKanbanBoard from "@/src/components/Ticket/TicketKanbanBoard";
-import TicketTableSkeleton from "@/src/components/Ticket/TicketTable/TicketTableSkeleton";
+import TicketViewToggleButton from "@/src/components/Task/Ticket/TicketViewToggleButton";
+import TicketKanbanBoard from "@/src/components/Task/Ticket/TicketKanbanBoard";
+import TicketTableSkeleton from "@/src/components/Task/Ticket/TicketTable/TicketTableSkeleton";
 
 interface PropsType {
   ticketId: number;

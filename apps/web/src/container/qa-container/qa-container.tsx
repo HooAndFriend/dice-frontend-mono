@@ -2,10 +2,10 @@
 import Image from "next/image";
 
 // ** Component Imports
-import QaCard from "../../components/Qa/QaCard";
+import QaCard from "../../components/Task/Qa/QaCard";
 import CustomSearch from "@/src/components/Input/CustomSearch";
-import StatusItem from "../../components/Qa/StatusItem";
-import QaItem from "../../components/Qa/QaItem";
+import StatusItem from "../../components/Task/Qa/StatusItem";
+import QaItem from "../../components/Task/Qa/QaItem";
 import QaSaveModal from "@/src/components/Modal/QaSaveModal";
 import CustomImage from "@/src/components/Image/CustomImage";
 import UserSelectBox from "@/src/components/UserSelectBox";

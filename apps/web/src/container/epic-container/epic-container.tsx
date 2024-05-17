@@ -1,15 +1,15 @@
 // ** Component Imports
-import EpicTable from "@/src/components/Epic/EpicTable";
-import EpicSearchCard from "../../components/Epic/EpicSearchCard";
-import EpicCard from "@/src/components/Epic/EpicCard";
-import TicketCard from "@/src/components/Ticket/TicketCard";
+import EpicTable from "@/src/components/Task/Epic/EpicTable";
+import EpicSearchCard from "../../components/Task/Epic/EpicSearchCard";
+import EpicCard from "@/src/components/Task/Epic/EpicCard";
+import TicketCard from "@/src/components/Task/Ticket/TicketCard";
 
 // ** Utils Imports
 import { DropResult } from "react-beautiful-dnd";
 
 // ** Type Imports
 import { EpicInfo, SelectContent } from "@/src/type/epic";
-import EpicTableSkeleton from "@/src/components/Epic/EpicTable/EpicTableSkeleton";
+import EpicTableSkeleton from "@/src/components/Task/Epic/EpicTable/EpicTableSkeleton";
 
 interface PropsType {
   word: string;

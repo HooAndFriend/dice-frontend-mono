@@ -60,8 +60,6 @@ const UserSelectPopover = ({
     };
   }, []);
 
-  console.log("profile : ", profile);
-
   return (
     <div className="relative">
       <div

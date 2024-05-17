@@ -42,7 +42,7 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
       className="flex h-[80px] py-[24px] hover:bg-slate-400 rounded-lg"
       onClick={() => handleClick(data.id)}
     >
-      <div className="flex w-[10%] items-center pl-[48px]">
+      <div className="flex w-[10%] items-center justify-center">
         <TicketSettingButton data={data} isText={false} />
       </div>
       <div className="flex w-[40%] items-center">
@@ -61,12 +61,8 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
           {highlightFirstMatch(data.name, word)}
         </h1>
       </div>
-      {!isEpic && (
-        <div className="flex w-[10%] items-center justify-center">
-          <TicketEpicButton data={data} />
-        </div>
-      )}
-      <div className="flex w-[10%] items-center justify-center">
+      <div className="flex w-[20%] items-center justify-around">
+        {!isEpic && <TicketEpicButton data={data} />}
         <TicketUserButton
           profile={data.worker?.profile}
           nickname={data.worker?.nickname}
@@ -77,10 +73,10 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
           isNickname={false}
         />
       </div>
-      <div className="flex w-[20%] items-center justify-center">
+      <div className="flex w-[15%] items-center justify-center">
         <p>{data.dueDate ? dayjs(data.dueDate).format("YYYY-MM-DD") : "-"}</p>
       </div>
-      <div className="flex items-center">
+      <div className="flex w-[15%] items-center justify-center">
         <TicketStatusButton ticketId={data.id} status={data.status} />
       </div>
     </div>

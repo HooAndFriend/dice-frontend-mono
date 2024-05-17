@@ -3,10 +3,10 @@ import CustomSearch from "@/src/components/Input/CustomSearch";
 import UserSelectBox from "../../../UserSelectBox";
 import { WorkspaceUser } from "@/src/type/workspace";
 import CustomSelect from "../../../Input/CustomSelect";
-import EpicSelectFilter from "../../Common/EpicFilter";
+import EpicSelectFilter from "../../Common/Filter/EpicFilter";
 import { EpicStatus } from "@/src/type/epic";
-import TicketStatusSelectFilter from "../../Common/StatusFilter";
-import TicketTypeSelectFilter from "../../Common/TypeFilter";
+import TicketStatusSelectFilter from "../../Common/Filter/StatusFilter";
+import TicketTypeSelectFilter from "../../Common/Filter/TypeFilter";
 
 interface PropsType {
   value: string;

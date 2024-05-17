@@ -1,6 +1,6 @@
 // ** Component Imports
 import EpicTable from "@/src/components/Task/Epic/EpicTable";
-import WordFilter from "../../components/Task/Common/WordFilter";
+import WordFilter from "../../components/Task/Common/Filter/WordFilter";
 import EpicCard from "@/src/components/Task/Epic/EpicCard";
 import TicketCard from "@/src/components/Task/Ticket/TicketCard";
 

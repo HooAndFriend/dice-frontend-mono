@@ -12,7 +12,7 @@ import { GetTicketSettingListResponse } from "@/src/type/ticket";
 import { getTicketSettingImage } from "@/src/utils/ticket-setting";
 
 // ** Component Imports
-import CustomImage from "../../../Image/CustomImage";
+import CustomImage from "../../../../Image/CustomImage";
 
 interface PropsType {
   selectedTypeIds: number[];

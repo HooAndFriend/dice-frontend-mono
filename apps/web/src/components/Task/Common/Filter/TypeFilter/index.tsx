@@ -64,6 +64,9 @@ const TypeFilter = ({ selectedTypeIds, handleTypeSelectFilter }: PropsType) => {
         }}
       >
         <h1>TYPE</h1>
+        <div className="ml-[5px] w-[25px] h-[25px] rounded-full bg-[#623AD6] flex items-center justify-center text-white">
+          {selectedTypeIds.length}
+        </div>
         <img src="/svg/arrow-down.svg" alt="arrow" />
       </div>
       {open && (

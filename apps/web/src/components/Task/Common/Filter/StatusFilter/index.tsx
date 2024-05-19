@@ -61,13 +61,16 @@ const StatusFilter = ({
   return (
     <div className="relative">
       <div
-        className="flex items-center cursor-pointer w-[120px] h-[50px] justify-between px-[15px]"
+        className="flex items-center cursor-pointer w-[150px] h-[50px] justify-between px-[15px]"
         onClick={(e) => {
           e.stopPropagation();
           handleOpen();
         }}
       >
         <h1>STATUS</h1>
+        <div className="ml-[5px] w-[25px] h-[25px] rounded-full bg-[#623AD6] flex items-center justify-center text-white">
+          {selectedStatus.length}
+        </div>
         <img src="/svg/arrow-down.svg" alt="arrow" />
       </div>
       {open && (

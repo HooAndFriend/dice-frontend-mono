@@ -60,6 +60,9 @@ const EpicFilter = ({ selectdIds, handleEpicSelectFilter }: PropsType) => {
         }}
       >
         <h1>EPIC</h1>
+        <div className="ml-[5px] w-[25px] h-[25px] rounded-full bg-[#623AD6] flex items-center justify-center text-white">
+          {selectdIds.length}
+        </div>
         <img src="/svg/arrow-down.svg" alt="arrow" />
       </div>
       {open && (

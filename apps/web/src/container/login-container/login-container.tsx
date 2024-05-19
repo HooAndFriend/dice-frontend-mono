@@ -130,7 +130,7 @@ const LoginContainerView = ({
                   height={24}
                 />
               </div>
-              <div
+              {/* <div
                 className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
                 // onClick={() => handleSocialLogin("APPLE")}
               >
@@ -140,7 +140,7 @@ const LoginContainerView = ({
                   width={28}
                   height={28}
                 />
-              </div>
+              </div> */}
               <div
                 className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
                 onClick={() => handleSocialLogin("GITHUB")}

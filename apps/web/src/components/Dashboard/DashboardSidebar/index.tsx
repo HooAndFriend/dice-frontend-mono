@@ -83,7 +83,8 @@ const DashboardSidebard = () => {
     <div className="w-[70px] border-r-2 border-[#EBEBEC]">
       <div className="flex justify-center h-4/5">
         <div>
-          <TeamPopover />
+          <WorkspacePopover />
+          {/* <TeamPopover /> */}
           {sidbarMenuList.map((item) => (
             <MenuItem {...item} key={item.id} />
           ))}

@@ -7,7 +7,6 @@ import Link from "next/link";
 import CustomImage from "../../Image/CustomImage";
 import UserPopover from "../../Popover/UserPopover";
 import NotificationPopover from "../../Popover/NotificationPopover";
-import WorkspacePopover from "../../Popover/WorkspacePopover";
 
 const DashboardHeader = () => {
   return (
@@ -22,9 +21,7 @@ const DashboardHeader = () => {
             className="ml-[30px]"
           />
         </Link>
-        <WorkspacePopover />
       </div>
-
       <div className="flex items-center mr-[30px]">
         <NotificationPopover />
         <UserPopover />

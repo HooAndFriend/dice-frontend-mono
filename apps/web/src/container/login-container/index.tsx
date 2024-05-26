@@ -88,7 +88,9 @@ const LoginContainer = () => {
           workspaceFunction: data.team.workspace[0].workspaceFunction,
           role: "ADMIN",
         });
-        router.push("/dashboard");
+        router.push(
+          `/dashboard/${data.team.uuid}/${data.team.workspace[0].uuid}`
+        );
       },
       onError: (error) => {
         handleOpen({
@@ -139,7 +141,9 @@ const LoginContainer = () => {
           role: "ADMIN",
         });
 
-        router.push("/dashboard");
+        router.push(
+          `/dashboard/${data.team.uuid}/${data.team.workspace[0].uuid}`
+        );
       },
       onError: (error) => {
         if (error.response.data.statusCode === 404) {

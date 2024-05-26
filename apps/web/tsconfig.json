@@ -32,7 +32,7 @@
     "../../html/www/types/**/*.ts",
     "dist/types/**/*.ts",
     "public/firebase-messaging-sw.js",
-    "app/dashboard/board/[id]"
+    "app/dashboard/**/*"
   ],
   "exclude": ["node_modules"]
 }

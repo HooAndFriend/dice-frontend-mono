@@ -2,7 +2,6 @@
 import DashboardContainer from "@/src/container/dashboard-container";
 
 const DashboardPage = () => {
-  console.log(10);
   return <DashboardContainer />;
 };
 

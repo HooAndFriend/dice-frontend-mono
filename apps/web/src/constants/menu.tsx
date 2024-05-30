@@ -13,14 +13,14 @@ export const MenuList = [
   {
     id: 1,
     name: "TICKET",
-    link: "/dashboard/epic",
+    link: "/epic",
     icon: TicketIcon,
     isClicked: false,
   },
   {
     id: 2,
     name: "QA",
-    link: "/dashboard/qa",
+    link: "/qa",
     icon: QaIcon,
     isClicked: false,
   },

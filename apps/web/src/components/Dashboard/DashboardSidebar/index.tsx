@@ -12,7 +12,7 @@ import { MenuList } from "@/src/constants/menu";
 import DashboardIcon from "@/public/svg/dashboard.svg";
 
 // ** Recoil Imports
-import { WorkspaceState } from "@/src/app";
+import { TeamState, WorkspaceState } from "@/src/app";
 import { useRecoilValue } from "recoil";
 
 // ** Utils Imports
@@ -20,7 +20,8 @@ import { isUndefined } from "loadsh";
 import TeamPopover from "../../Popover/TeamPopover";
 
 const DashboardSidebard = () => {
-  const { workspaceFunction } = useRecoilValue(WorkspaceState);
+  const { workspaceFunction, uuid } = useRecoilValue(WorkspaceState);
+  const { uuid: teamUUid } = useRecoilValue(TeamState);
 
   const [path, setPath] = useState<string>("");
   const [sidbarMenuList, setSidbarMenuList] = useState([]);
@@ -29,11 +30,9 @@ const DashboardSidebard = () => {
   const router = useRouter();
 
   useEffect(() => {
-    setPath(
-      pathname.split("/")[2]
-        ? `/dashboard/${pathname.split("/")[2]}`
-        : "/dashboard"
-    );
+    const pathArray = pathname.split("/");
+
+    setPath(pathArray[4] ? `/${pathArray[4]}` : "/");
   }, [pathname]);
 
   useEffect(() => {
@@ -47,7 +46,7 @@ const DashboardSidebard = () => {
       {
         id: 0,
         name: "DASHBOARD",
-        link: "/dashboard",
+        link: "/",
         icon: DashboardIcon,
         isClicked: false,
       },
@@ -57,9 +56,13 @@ const DashboardSidebard = () => {
       ),
     ].map((item) => {
       if (item.link === path) {
-        return { ...item, isClicked: true };
+        return {
+          ...item,
+          isClicked: true,
+          link: `/dashboard/${teamUUid}/${uuid}/${item.link}`,
+        };
       }
-      return item;
+      return { ...item, link: `/dashboard/${teamUUid}/${uuid}/${item.link}` };
     });
 
     setSidbarMenuList(arr);

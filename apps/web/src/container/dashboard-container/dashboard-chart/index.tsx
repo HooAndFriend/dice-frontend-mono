@@ -28,7 +28,7 @@ const DashboardChart = () => {
   if (isLoading) return;
 
   return (
-    <div className="mt-6 h-[720px] w-[380px] bg-white rounded-[20px] shadow-md py-4 px-8 overflow-y-auto overflow-x-hidden">
+    <div className="mt-6 h-[564px] w-[380px] bg-white rounded-[20px] shadow-md py-4 px-8 overflow-y-auto overflow-x-hidden">
       <div className="w-full">
         <h1 className="text-[32px] font-bold">My Task</h1>
       </div>

@@ -22,7 +22,7 @@ const DashboardCalendar = () => {
 
   return (
     <div
-      className={`mt-6 h-[720px] w-[1170px] bg-white rounded-[20px] shadow-md py-4 px-8 overflow-scroll`}
+      className={`mt-6 h-[564px] w-[1170px] bg-white rounded-[20px] shadow-md py-4 px-8 overflow-scroll`}
     >
       <CustomCalendar
         event={data.data.data.map((item) => ({

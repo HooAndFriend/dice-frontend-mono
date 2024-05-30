@@ -28,14 +28,14 @@ const DashboardContainerView = ({
   return (
     <div className="flex justify-center p-5">
       <div>
-        <div className="flex items-center justify-between">
+        {/* <div className="flex items-center justify-between">
           <h1 className="text-[32px] font-bold">{name}</h1>
           <h1 className="text-[20px] text-[#676767]">
             {`${dates.startDate.format(
               "MMM DD, YYYY"
             )} ~ ${dates.endDate.format("MMM DD, YYYY")}`}
           </h1>
-        </div>
+        </div> */}
         <div className="flex space-x-4">
           <DashboardCard
             width="380px"

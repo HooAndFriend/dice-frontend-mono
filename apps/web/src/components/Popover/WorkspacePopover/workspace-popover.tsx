@@ -75,7 +75,7 @@ const WorkspacePopoverView = ({
                       width={30}
                       height={30}
                     />
-                    <h4 className="text-[#EBEBEC]">Add Team</h4>
+                    <h4 className="text-[#EBEBEC]">Add Workspace</h4>
                   </div>
                 </Link>
               </div>

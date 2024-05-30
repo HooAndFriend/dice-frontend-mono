@@ -10,11 +10,11 @@ import NotificationPopover from "../../Popover/NotificationPopover";
 
 const DashboardHeader = () => {
   return (
-    <div className="h-[70px] border-b-2 border-[#EBEBEC] flex items-center justify-between">
+    <div className="h-[60px] border-b-2 border-[#EBEBEC] flex items-center justify-between bg-main">
       <div className="flex items-center">
         <Link href="/dashboard">
           <CustomImage
-            src="/images/logo.png"
+            src="/svg/white-logo.svg"
             width={110}
             height={30}
             alt="logo"

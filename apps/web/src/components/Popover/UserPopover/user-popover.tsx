@@ -33,7 +33,7 @@ const UserPopoverView = ({
           image={userState.profile ? userState.profile : "/images/dice.png"}
           alt="profile"
         />
-        <h1 className="text-[16px]">{userState.nickname}</h1>
+        <h1 className="text-[16px] text-white">{userState.nickname}</h1>
       </div>
       {open && (
         <>

@@ -11,8 +11,13 @@ import TicketIcon from "@/public/svg/ticket-icon.svg";
 import EpicIcon from "@/public/svg/epic-icon.svg";
 import SprintIcon from "@/public/svg/sprint-icon.svg";
 import SettintIcon from "@/public/svg/ticket-setting.svg";
+import { useRecoilValue } from "recoil";
+import { TeamState, WorkspaceState } from "@/src/app";
 
 const TicketSidebar = () => {
+  const { uuid: worksapceUid } = useRecoilValue(WorkspaceState);
+  const { uuid: teamUid } = useRecoilValue(TeamState);
+
   const pathname = usePathname();
 
   const sidebarMenuList = useMemo(
@@ -21,14 +26,14 @@ const TicketSidebar = () => {
         {
           id: 1,
           name: "Epic",
-          link: "/dashboard/epic",
+          link: `/dashboard/${teamUid}/${worksapceUid}/epic`,
           icon: EpicIcon,
           isClicked: false,
         },
         {
           id: 2,
           name: "Ticket",
-          link: "/dashboard/epic/ticket",
+          link: `/dashboard/${teamUid}/${worksapceUid}/epic/ticket`,
           icon: TicketIcon,
           isClicked: false,
         },
@@ -42,7 +47,7 @@ const TicketSidebar = () => {
         {
           id: 4,
           name: "Setting",
-          link: "/dashboard/epic/setting",
+          link: `/dashboard/${teamUid}/${worksapceUid}/epic/setting`,
           icon: SettintIcon,
           isClicked: false,
         },
@@ -56,7 +61,7 @@ const TicketSidebar = () => {
   );
 
   return (
-    <div className="w-[235px] bg-white border-r-2 border-[#EBEBEC]">
+    <div className="w-[180px] bg-white border-r-2 border-[#EBEBEC]">
       <div className="flex justify-center h-4/5">
         <div className="w-full">
           {sidebarMenuList.map((item) => (

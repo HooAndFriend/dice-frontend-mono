@@ -10,7 +10,7 @@ export default function Layout({
       <TicketSidebar />
       <div
         className="py-[30px] px-[47px] h-full"
-        style={{ width: `calc(100% - 235px)` }}
+        style={{ width: `calc(100% - 180px)` }}
       >
         {children}
       </div>

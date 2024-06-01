@@ -4,14 +4,19 @@ import CustomImage from "../../Image/CustomImage";
 interface PropsType {
   value?: string;
   name?: string;
+  width?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CustomSearch = ({ value, onChange, name }: PropsType) => {
+const CustomSearch = ({ value, onChange, name, width }: PropsType) => {
   return (
-    <div className="w-[443px] h-[50px] rounded-[10px] border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4">
+    <div
+      className={`w-[${
+        width ? width : "443px"
+      }] h-[50px] rounded-[10px] bg-white border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4`}
+    >
       <input
-        className="h-[45px] placeholder-[#EBEBEC] focus:outline-none"
+        className="h-[45px] w-full placeholder-[#EBEBEC] focus:outline-none"
         placeholder="Search"
         value={value}
         name={name}

@@ -16,11 +16,11 @@ const TicketMenuItem = ({ link, icon: Icon, isClicked, name }: PropsType) => {
           isClicked ? "bg-[#623AD6]" : ""
         }`}
       >
-        <div className="w-[30%]">
+        {/* <div className="w-[30%]">
           <div className="pl-4 rounded-lg w-[40px] h-[40px] flex justify-center items-center">
             <Icon className="" />
           </div>
-        </div>
+        </div> */}
         <div className="w-[70%]">
           <h1 className={`text-${isClicked ? "white" : "black"}`}>{name}</h1>
         </div>

@@ -17,18 +17,18 @@ export const MenuList = [
     icon: TicketIcon,
     isClicked: false,
   },
+  // {
+  //   id: 2,
+  //   name: "QA",
+  //   link: "/qa",
+  //   icon: QaIcon,
+  //   isClicked: false,
+  // },
   {
-    id: 2,
-    name: "QA",
-    link: "/qa",
+    id: 3,
+    name: "BOARD",
+    link: "/board",
     icon: QaIcon,
     isClicked: false,
   },
-  // {
-  //   id: 3,
-  //   name: "BOARD",
-  //   link: "/dashboard/board",
-  //   icon: TicketIcon,
-  //   isClicked: false,
-  // },
 ];

@@ -26,14 +26,14 @@ const TicketSidebar = () => {
         {
           id: 1,
           name: "Epic",
-          link: `/dashboard/${teamUid}/${worksapceUid}/epic`,
+          link: `/dashboard/${worksapceUid}/epic`,
           icon: EpicIcon,
           isClicked: false,
         },
         {
           id: 2,
           name: "Ticket",
-          link: `/dashboard/${teamUid}/${worksapceUid}/epic/ticket`,
+          link: `/dashboard/${worksapceUid}/epic/ticket`,
           icon: TicketIcon,
           isClicked: false,
         },
@@ -47,7 +47,7 @@ const TicketSidebar = () => {
         {
           id: 4,
           name: "Setting",
-          link: `/dashboard/${teamUid}/${worksapceUid}/epic/setting`,
+          link: `/dashboard/${worksapceUid}/epic/setting`,
           icon: SettintIcon,
           isClicked: false,
         },

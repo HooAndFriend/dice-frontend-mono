@@ -16,6 +16,12 @@ import { DropResult } from "react-beautiful-dnd";
 import TicketViewToggleButton from "@/src/components/Task/Ticket/TicketViewToggleButton";
 import TicketKanbanBoard from "@/src/components/Task/Ticket/TicketKanbanBoard";
 import TicketTableSkeleton from "@/src/components/Task/Ticket/TicketTable/TicketTableSkeleton";
+import Component from "@/src/components/Table";
+import CustomSearch from "@/src/components/Input/CustomSearch";
+import TicketStatusSelectFilter from "@/src/components/task/Common/Filter/StatusFilter";
+import TicketTypeSelectFilter from "@/src/components/task/Common/Filter/TypeFilter";
+import EpicSelectFilter from "@/src/components/task/Common/Filter/EpicFilter";
+import UserSelectBox from "@/src/components/UserSelectBox";
 
 interface PropsType {
   ticketId: number;
@@ -60,7 +66,7 @@ const TicketContainerView = ({
 }: PropsType) => {
   return (
     <div className="w-full">
-      <TicketSearchCard
+      {/* <TicketSearchCard
         value={word}
         selectedStatus={selectedStatus}
         selectedEpicIds={selectedEpicIds}
@@ -71,11 +77,30 @@ const TicketContainerView = ({
         onChange={handleWord}
         checkedList={checkedList}
         setCheckedList={setCheckedList}
-      />
+      /> */}
       <div className="flex items-center justify-between mt-8">
-        <h1 className="text-[18px] font-san-medium">
+        <div className="flex ">
+          <CustomSearch width="200px" />
+          <EpicSelectFilter
+            selectdIds={selectedEpicIds}
+            handleEpicSelectFilter={handleEpicSelectFilter}
+          />
+          <TicketStatusSelectFilter
+            selectedStatus={selectedStatus}
+            handleEpicSelectFilter={handleStatusSelectFilter}
+          />
+          <TicketTypeSelectFilter
+            selectedTypeIds={selectedTypeIds}
+            handleTypeSelectFilter={handleTypeSelectFilter}
+          />
+          <UserSelectBox
+            checkedList={checkedList}
+            setCheckedList={setCheckedList}
+          />
+        </div>
+        {/* <h1 className="text-[18px] font-san-medium">
           Total Ticket : {ticketCount}
-        </h1>
+        </h1> */}
         <TicketViewToggleButton mode={mode} setMode={setMode} />
       </div>
       <div className={`${ticketId !== 0 && "flex"}`}>
@@ -84,35 +109,36 @@ const TicketContainerView = ({
             isLoading ? (
               <TicketTableSkeleton />
             ) : (
-              <TicketTable
-                handleClick={setTicketId}
-                word={word}
-                data={data
-                  .filter((item) => item.name.includes(word))
-                  .filter((item) =>
-                    checkedList.length === 0
-                      ? true
-                      : checkedList.some(
-                          (_) => _.teamUser.user.id === item.worker?.id
-                        )
-                  )
-                  .filter((item) =>
-                    selectedEpicIds.length === 0
-                      ? true
-                      : selectedEpicIds.includes(item.epic?.id)
-                  )
-                  .filter((item) =>
-                    selectedStatus.length === 0
-                      ? true
-                      : selectedStatus.includes(item.status)
-                  )
-                  .filter((item) =>
-                    selectedTypeIds.length === 0
-                      ? true
-                      : selectedTypeIds.includes(item.ticketSetting?.id)
-                  )}
-                onDragEnd={onDragEnd}
-              />
+              <Component data={data} />
+              // <TicketTable
+              //   handleClick={setTicketId}
+              //   word={word}
+              //   data={data
+              //     .filter((item) => item.name.includes(word))
+              //     .filter((item) =>
+              //       checkedList.length === 0
+              //         ? true
+              //         : checkedList.some(
+              //             (_) => _.teamUser.user.id === item.worker?.id
+              //           )
+              //     )
+              //     .filter((item) =>
+              //       selectedEpicIds.length === 0
+              //         ? true
+              //         : selectedEpicIds.includes(item.epic?.id)
+              //     )
+              //     .filter((item) =>
+              //       selectedStatus.length === 0
+              //         ? true
+              //         : selectedStatus.includes(item.status)
+              //     )
+              //     .filter((item) =>
+              //       selectedTypeIds.length === 0
+              //         ? true
+              //         : selectedTypeIds.includes(item.ticketSetting?.id)
+              //     )}
+              //   onDragEnd={onDragEnd}
+              // />
             )
           ) : (
             <TicketKanbanBoard

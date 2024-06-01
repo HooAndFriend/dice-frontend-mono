@@ -9,14 +9,14 @@ import { useMemo } from "react";
 import TicketMenuItem from "../TicketMenuItem";
 import TicketIcon from "@/public/svg/ticket-icon.svg";
 import EpicIcon from "@/public/svg/epic-icon.svg";
-import SprintIcon from "@/public/svg/sprint-icon.svg";
 import SettintIcon from "@/public/svg/ticket-setting.svg";
+
+// ** Recoil Imports
 import { useRecoilValue } from "recoil";
-import { TeamState, WorkspaceState } from "@/src/app";
+import { WorkspaceState } from "@/src/app";
 
 const TicketSidebar = () => {
   const { uuid: worksapceUid } = useRecoilValue(WorkspaceState);
-  const { uuid: teamUid } = useRecoilValue(TeamState);
 
   const pathname = usePathname();
 
@@ -32,7 +32,7 @@ const TicketSidebar = () => {
         },
         {
           id: 2,
-          name: "Ticket",
+          name: "Table",
           link: `/dashboard/${worksapceUid}/epic/ticket`,
           icon: TicketIcon,
           isClicked: false,

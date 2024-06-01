@@ -11,9 +11,6 @@ import { Get, Patch } from "@/src/repository";
 import useSWRMutation from "swr/mutation";
 import useSWR from "swr";
 
-// ** Utils Imports
-import { DropResult } from "react-beautiful-dnd";
-
 // ** Type Imports
 import { GetTicketListResponse } from "@/src/type/ticket";
 import { CommonResponse } from "@/src/type/common";
@@ -90,13 +87,6 @@ const TicketConatiner = () => {
     }
   };
 
-  const onDragEnd = ({ source, destination }: DropResult) => {
-    updateOrder.trigger({
-      ticketId: source.index,
-      targetTicketId: destination.index,
-    });
-  };
-
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
 
@@ -123,7 +113,6 @@ const TicketConatiner = () => {
       handleStatusSelectFilter={handleStatusSelectFilter}
       handleEpicSelectFilter={handleEpicSelectFilter}
       handleWord={(e) => setWord(e.target.value)}
-      onDragEnd={onDragEnd}
       setMode={setMode}
       setCheckedList={setCheckedList}
       setTicketId={setTicketId}

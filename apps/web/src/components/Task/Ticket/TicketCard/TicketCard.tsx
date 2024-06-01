@@ -59,7 +59,7 @@ const TicketCardView = ({
   handlePreviewOpen,
 }: PropsType) => {
   return (
-    <div className="mt-[44px] h-[564px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
+    <div className="h-full overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <TicketSettingButton data={data} isText={false} />

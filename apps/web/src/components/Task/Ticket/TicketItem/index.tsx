@@ -38,48 +38,61 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
   };
 
   return (
-    <div
-      className="flex h-[80px] py-[24px] w-full hover:bg-slate-400 rounded-lg"
+    <tr
+      className="border-b transition-colors data-[state=selected]:bg-muted cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
       onClick={() => handleClick(data.id)}
     >
-      <div className="flex w-[10%] items-center justify-center">
-        <TicketSettingButton data={data} isText={false} />
-      </div>
-      <div className="flex w-[40%] items-center">
-        <h1
-          className={`text-[16px] mr-4 ${
-            data.status === "DONE" && "line-through"
-          } ${data.status === "REOPEN" && "text-red-300"}`}
-        >
-          {data.code}
-        </h1>
-        <h1
-          className={`text-[16px] ${data.status === "DONE" && "line-through"} ${
-            data.status === "REOPEN" && "text-red-300"
-          }`}
-        >
-          {highlightFirstMatch(data.name, word)}
-        </h1>
-      </div>
-      <div className="flex w-[20%] items-center justify-around">
-        {!isEpic && <TicketEpicButton data={data} />}
-        <TicketUserButton
-          profile={data.worker ? data.worker.profile : "/images/dice.png"}
-          nickname={data.worker ? data.worker.nickname : "-"}
-          email={data.worker ? data.worker.email : "-"}
-          userId={data.worker?.id}
-          type="user"
-          ticketId={data.id}
-          isNickname={false}
-        />
-      </div>
-      <div className="flex w-[15%] items-center justify-center">
-        <p>{data.dueDate ? dayjs(data.dueDate).format("YYYY-MM-DD") : "-"}</p>
-      </div>
-      <div className="flex w-[15%] items-center justify-center">
+      <td
+        className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+        style={{ width: "5%" }}
+      >
+        <div className="flex items-center justify-center">
+          <TicketSettingButton data={data} isText={false} />
+        </div>
+      </td>
+      <td
+        className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6"
+        style={{ width: "50%" }}
+      >
+        {data.name}
+      </td>
+      <td
+        className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 font-medium pl-6"
+        style={{ width: "15%" }}
+      >
+        <div className="flex items-center justify-center">
+          <TicketEpicButton data={data} />
+        </div>
+      </td>
+      <td
+        className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+        style={{ width: "5%" }}
+      >
+        <div className="flex items-center justify-center">
+          <TicketUserButton
+            profile={data.worker ? data.worker.profile : "/images/dice.png"}
+            nickname={data.worker ? data.worker.nickname : "-"}
+            email={data.worker ? data.worker.email : "-"}
+            userId={data.worker?.id}
+            type="user"
+            ticketId={data.id}
+            isNickname={false}
+          />
+        </div>
+      </td>
+      <td
+        className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+        style={{ width: "15%" }}
+      >
+        2023-06-15
+      </td>
+      <td
+        className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+        style={{ width: "10%" }}
+      >
         <TicketStatusButton ticketId={data.id} status={data.status} />
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 };
 

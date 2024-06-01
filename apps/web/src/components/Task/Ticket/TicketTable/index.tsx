@@ -4,66 +4,42 @@ import { useRecoilValue } from "recoil";
 
 // ** Component Imports
 import TicketAddItem from "../TicketAddItem";
-import TicketHeader from "../TicketHeader";
 import TicketItem from "../TicketItem";
+import TicketHeader from "../TicketHeader";
 
 // ** Type Imports
 import { TicketInfo } from "@/src/type/ticket";
-
-// ** Utils Imports
-import {
-  DragDropContext,
-  Draggable,
-  Droppable,
-  DropResult,
-} from "react-beautiful-dnd";
 
 interface PropsType {
   data: TicketInfo[];
   word: string;
   handleClick?: (id: number) => void;
-  onDragEnd: ({ source, destination }: DropResult) => void;
 }
 
-const TicketTable = ({ word, handleClick, data, onDragEnd }: PropsType) => {
+const TicketTable = ({ word, handleClick, data }: PropsType) => {
   const { role } = useRecoilValue(WorkspaceState);
 
   return (
-    <div className="mt-[44px] h-[564px] overflow-y-auto overflow-x-hidden w-full bg-white rounded-[20px] shadow-md p-[24px]">
-      <TicketHeader isEpic={false} />
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
+    <div className="w-full h-full bg-white border rounded-lg scrollbar-thumb-slate-700 scrollbar-track-slate-300">
+      <div className="relative w-full h-full overflow-y-scroll scrollbar-thin">
+        <div className="relative w-full overflow-auto">
+          <table className="w-full text-sm caption-bottom">
+            <TicketHeader />
+            <tbody className="[&amp;_tr:last-child]:border-0">
               {data.map((item) => (
-                <Draggable
+                <TicketItem
+                  handleClick={handleClick}
+                  word={word}
+                  data={item}
                   key={item.id}
-                  draggableId={item.id.toString()}
-                  index={item.id}
-                >
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                    >
-                      <TicketItem
-                        handleClick={handleClick}
-                        word={word}
-                        data={item}
-                        key={item.id}
-                        isEpic={false}
-                      />
-                    </div>
-                  )}
-                </Draggable>
+                  isEpic={false}
+                />
               ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-      {role !== "VIEWER" && <TicketAddItem />}
+            </tbody>
+            {role !== "VIEWER" && <TicketAddItem />}
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

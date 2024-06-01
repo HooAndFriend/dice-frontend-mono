@@ -8,10 +8,7 @@ export default function Layout({
   return (
     <div className="flex w-full h-full">
       <TicketSidebar />
-      <div
-        className="py-[30px] px-[47px] h-full"
-        style={{ width: `calc(100% - 180px)` }}
-      >
+      <div className="px-[47px] h-full" style={{ width: `calc(100% - 180px)` }}>
         {children}
       </div>
     </div>

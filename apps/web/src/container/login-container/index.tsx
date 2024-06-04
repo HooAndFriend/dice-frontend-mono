@@ -71,24 +71,15 @@ const LoginContainer = () => {
           nickname: data.user.nickname,
         });
 
-        setTeamState({
-          id: data.team.id,
-          name: data.team.name,
-          profile: data.team.profile,
-          uuid: data.team.uuid,
-          isPersonal: true,
-          role: "ADMIN",
-        });
-
         setWorkspaceState({
-          id: data.team.workspace[0].id,
-          name: data.team.workspace[0].name,
-          profile: data.team.workspace[0].profile,
-          uuid: data.team.workspace[0].uuid,
-          workspaceFunction: data.team.workspace[0].workspaceFunction,
+          id: data.workspace[0].id,
+          name: data.workspace[0].name,
+          profile: data.workspace[0].profile,
+          uuid: data.workspace[0].uuid,
+          workspaceFunction: data.workspace[0].workspaceFunction,
           role: "ADMIN",
         });
-        router.push(`/dashboard/${data.team.workspace[0].uuid}`);
+        router.push(`/dashboard/${data.workspace[0].uuid}`);
       },
       onError: (error) => {
         handleOpen({
@@ -121,25 +112,16 @@ const LoginContainer = () => {
           nickname: data.user.nickname,
         });
 
-        setTeamState({
-          id: data.team.id,
-          name: data.team.name,
-          profile: data.team.profile,
-          uuid: data.team.uuid,
-          isPersonal: true,
-          role: "ADMIN",
-        });
-
         setWorkspaceState({
-          id: data.team.workspace[0].id,
-          name: data.team.workspace[0].name,
-          profile: data.team.workspace[0].profile,
-          uuid: data.team.workspace[0].uuid,
-          workspaceFunction: data.team.workspace[0].workspaceFunction,
+          id: data.workspace[0].id,
+          name: data.workspace[0].name,
+          profile: data.workspace[0].profile,
+          uuid: data.workspace[0].uuid,
+          workspaceFunction: data.workspace[0].workspaceFunction,
           role: "ADMIN",
         });
 
-        router.push(`/dashboard/${data.team.workspace[0].uuid}`);
+        router.push(`/dashboard/${data.workspace[0].uuid}`);
       },
       onError: (error) => {
         if (error.response.data.statusCode === 404) {

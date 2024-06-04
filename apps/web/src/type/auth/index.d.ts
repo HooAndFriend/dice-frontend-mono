@@ -46,14 +46,7 @@ export interface DiceLoginResponse extends Response {
     nickname: string;
     profile: string;
   };
-  team: {
-    id: number;
-    name: string;
-    profile: string;
-    uuid: string;
-    description: string;
-    workspace: LoginWorksapceResponse[];
-  };
+  workspace: LoginWorksapceResponse[];
 }
 
 export interface LoginWorksapceResponse {
@@ -94,14 +87,7 @@ export interface DiceSocialLoginResponse extends Response {
     nickname: string;
     profile: string;
   };
-  team: {
-    id: number;
-    name: string;
-    profile: string;
-    uuid: string;
-    description: string;
-    workspace: LoginWorksapceResponse[];
-  };
+  workspace: LoginWorksapceResponse[];
 }
 
 export interface DiceSocialSignupResponse extends Response {

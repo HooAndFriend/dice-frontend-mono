@@ -25,15 +25,29 @@ const TicketSidebar = () => {
       [
         {
           id: 1,
-          name: "Epic",
+          name: "Gantt",
           link: `/dashboard/${worksapceUid}/epic`,
           icon: EpicIcon,
           isClicked: false,
         },
         {
           id: 2,
+          name: "Sprint",
+          link: `/dashboard/${worksapceUid}/epic/sprint`,
+          icon: TicketIcon,
+          isClicked: false,
+        },
+        {
+          id: 3,
+          name: "Kanban",
+          link: `/dashboard/${worksapceUid}/epic/kanban`,
+          icon: TicketIcon,
+          isClicked: false,
+        },
+        {
+          id: 2,
           name: "Table",
-          link: `/dashboard/${worksapceUid}/epic/ticket`,
+          link: `/dashboard/${worksapceUid}/epic/table`,
           icon: TicketIcon,
           isClicked: false,
         },
@@ -45,7 +59,7 @@ const TicketSidebar = () => {
         //   isClicked: false,
         // },
         {
-          id: 4,
+          id: 5,
           name: "Setting",
           link: `/dashboard/${worksapceUid}/epic/setting`,
           icon: SettintIcon,

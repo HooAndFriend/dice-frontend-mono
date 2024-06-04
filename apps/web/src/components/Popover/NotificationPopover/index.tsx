@@ -71,7 +71,7 @@ const NotificationPopover = () => {
             height={25}
             alt="notification"
           />
-          {!isLoading && newNotificationCount(data.data.data) > 0 && (
+          {/* {!isLoading && newNotificationCount(data.data.data) > 0 && (
             <div
               style={{ position: "absolute", top: -5, left: 15 }}
               className="w-[15px] h-[15px] rounded-full bg-red-600 flex items-center justify-center"
@@ -80,7 +80,7 @@ const NotificationPopover = () => {
                 {newNotificationCount(data.data.data)}
               </h1>
             </div>
-          )}
+          )} */}
         </div>
       </div>
       {open && (
@@ -97,10 +97,10 @@ const NotificationPopover = () => {
               </p>
             </div>
             <hr className="my-3" />
-            {!isLoading &&
+            {/* {!isLoading &&
               data.data.data.map((item) => (
                 <NotificationItem key={item.id} data={item} />
-              ))}
+              ))} */}
           </div>
         </>
       )}

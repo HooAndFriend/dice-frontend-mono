@@ -1,7 +1,7 @@
-import EpicConatiner from "@/src/container/epic-container";
+import TicketConatiner from "@/src/container/ticket-container";
 
 const TicketPage = () => {
-  return <EpicConatiner />;
+  return <TicketConatiner />;
 };
 
 export default TicketPage;

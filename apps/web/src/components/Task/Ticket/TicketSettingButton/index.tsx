@@ -4,7 +4,11 @@ import { useState, useEffect, useRef } from "react";
 // ** Type Imports
 import { Get, Patch } from "@/src/repository";
 import { CommonResponse } from "@/src/type/common";
-import { GetTicketSettingListResponse, TicketInfo } from "@/src/type/ticket";
+import {
+  GetTicketSettingListResponse,
+  Ticket,
+  TicketInfo,
+} from "@/src/type/ticket";
 
 // ** Service Imports
 import useSWRMutation from "swr/mutation";
@@ -19,7 +23,7 @@ import CustomImage from "../../../Image/CustomImage";
 import { getTicketSettingImage } from "@/src/utils/ticket-setting";
 
 interface PropsType {
-  data: TicketInfo;
+  data: Ticket;
   isText: boolean;
 }
 
@@ -46,7 +50,7 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
     "/v1/ticket/ticket-setting",
     async (url: string, { arg }: { arg: number }) =>
       await Patch<CommonResponse<void>>(url, {
-        ticketId: data.id,
+        ticketId: data.ticketId,
         settingId: arg,
       }),
     {
@@ -54,7 +58,7 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
         setOpen(false);
         mutate("/v1/epic");
         mutate("/v1/ticket");
-        mutate(`/v1/ticket/detail/${data.id}`);
+        mutate(`/v1/ticket/detail/${data.ticketId}`);
       },
       onError: (error) => {
         handleModalOpen({

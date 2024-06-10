@@ -10,12 +10,12 @@ import TicketDatePicker from "../TicketDatePicker";
 import dayjs from "dayjs";
 
 // ** Type Imports
-import { TicketInfo } from "@/src/type/ticket";
+import { Ticket } from "@/src/type/ticket";
 import TicketSettingButton from "../TicketSettingButton";
 import TicketEpicButton from "../TicketEpicButton";
 
 interface PropsType {
-  data: TicketInfo;
+  data: Ticket;
   isEpic: boolean;
   word: string;
   handleClick: (id: number) => void;
@@ -40,7 +40,7 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
   return (
     <tr
       className="border-b transition-colors data-[state=selected]:bg-muted cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
-      onClick={() => handleClick(data.id)}
+      onClick={() => handleClick(data.ticketId)}
     >
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
@@ -52,17 +52,9 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
       </td>
       <td
         className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6"
-        style={{ width: "50%" }}
+        style={{ width: "60%" }}
       >
         {data.name}
-      </td>
-      <td
-        className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 font-medium pl-6"
-        style={{ width: "15%" }}
-      >
-        <div className="flex items-center justify-center">
-          <TicketEpicButton data={data} />
-        </div>
       </td>
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
@@ -73,9 +65,9 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
             profile={data.worker ? data.worker.profile : "/images/dice.png"}
             nickname={data.worker ? data.worker.nickname : "-"}
             email={data.worker ? data.worker.email : "-"}
-            userId={data.worker?.id}
+            userId={data.worker?.userId}
             type="user"
-            ticketId={data.id}
+            ticketId={data.ticketId}
             isNickname={false}
           />
         </div>
@@ -88,9 +80,9 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
       </td>
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-        style={{ width: "10%" }}
+        style={{ width: "15%" }}
       >
-        <TicketStatusButton ticketId={data.id} status={data.status} />
+        <TicketStatusButton ticketId={data.ticketId} status={data.status} />
       </td>
     </tr>
   );

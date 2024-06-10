@@ -4,7 +4,7 @@ import { CommentInfo } from "../qa";
 
 export interface GetTicketListResponse extends CommonResponse {
   count: number;
-  data: TicketInfo[];
+  data: Ticket[];
 }
 
 export interface GetTicketResponse extends CommonResponse, TicketInfo {}
@@ -12,6 +12,24 @@ export interface GetTicketResponse extends CommonResponse, TicketInfo {}
 export interface GetTicketHistoryListResponse extends CommonResponse {
   count: number;
   data: TicketHistory[];
+}
+
+export interface Ticket {
+  ticketId: number;
+  name: string;
+  orderId: number;
+  status: EpicStatus;
+  code: string;
+  dueDate: string | null;
+  completeDate: string | null;
+  reopenDate: string | null;
+  ticketSetting: {
+    ticketSettingId: number;
+    type: TicketSettingType;
+    name: string;
+  };
+  worker: TicketUser;
+  subTickets: Ticket[];
 }
 
 export interface TicketInfo {
@@ -36,19 +54,10 @@ export interface TicketInfo {
     id: number;
     name: string;
   };
-  admin: {
-    id: number;
-    email: string;
-    nickname: string;
-    profile: string;
-  };
-  worker: {
-    id: number;
-    email: string;
-    nickname: string;
-    profile: string;
-  };
+  admin: TicketUser;
+  worker: TicketUser;
 }
+
 export interface GetTicketSettingListResponse extends Response {
   data: SettingListInfo[];
   count: number;
@@ -129,4 +138,11 @@ export interface TicketSettingSaveProps {
   name: string;
   description: string;
   type: TicketSettingType;
+}
+
+export interface TicketUser {
+  userId: number;
+  email: string;
+  nickname: string;
+  profile: string;
 }

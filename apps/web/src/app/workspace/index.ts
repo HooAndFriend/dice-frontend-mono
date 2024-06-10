@@ -10,7 +10,7 @@ import { WorksapceFunction } from "@/src/type/workspace";
 import { RoleType } from "@/src/type/common";
 
 export interface WorkspaceStateType {
-  id: number;
+  workspaceId: number;
   name: string;
   profile: string;
   uuid: string;
@@ -19,7 +19,7 @@ export interface WorkspaceStateType {
 }
 
 export const workspaceInitState: WorkspaceStateType = {
-  id: 0,
+  workspaceId: 0,
   name: "",
   profile: "",
   uuid: "",

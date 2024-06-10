@@ -72,7 +72,7 @@ const LoginContainer = () => {
         });
 
         setWorkspaceState({
-          id: data.workspace[0].workspaceId,
+          workspaceId: data.workspace[0].workspaceId,
           name: data.workspace[0].name,
           profile: data.workspace[0].profile,
           uuid: data.workspace[0].uuid,
@@ -113,7 +113,7 @@ const LoginContainer = () => {
         });
 
         setWorkspaceState({
-          id: data.workspace[0].workspaceId,
+          workspaceId: data.workspace[0].workspaceId,
           name: data.workspace[0].name,
           profile: data.workspace[0].profile,
           uuid: data.workspace[0].uuid,

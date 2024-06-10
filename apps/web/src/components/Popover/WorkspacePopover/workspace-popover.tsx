@@ -57,9 +57,9 @@ const WorkspacePopoverView = ({
               <div className="mt-2">
                 {data.map((item) => (
                   <WorkspaceBox
-                    key={item.id}
-                    id={item.id}
-                    workspaceId={workspace.id}
+                    key={item.workspaceUserId}
+                    id={item.workspaceUserId}
+                    workspaceId={workspace.workspaceId}
                     profile={item.workspace.profile}
                     name={item.workspace.name}
                     onClick={() => handleUpdateWorkspace(item)}

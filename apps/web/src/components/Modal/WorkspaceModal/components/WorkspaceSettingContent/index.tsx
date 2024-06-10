@@ -19,14 +19,13 @@ import useSWR, { mutate } from "swr";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
-import { useEffect } from "react";
 
 // ** Utils Imports
 import useInput from "@/src/hooks/useInput";
 
 const WorkspaceSettingContent = () => {
   const { data, handleInput, setData } = useInput<WorkspaceDetailInfo>({
-    id: 0,
+    workspaceId: 0,
     name: "",
     profile: "",
     comment: "",

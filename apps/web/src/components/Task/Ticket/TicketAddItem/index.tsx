@@ -6,7 +6,7 @@ import { KeyboardEvent, useState } from "react";
 // ** Component Imports
 import CustomInput from "@/src/components/Input/CustomInput";
 import CustomImage from "../../../Image/CustomImage";
-import EpicSelect from "../../Epic/EpicSelect";
+import TicketSelectSettingButton from "../TicketSelectSettingButton";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
@@ -18,9 +18,6 @@ import { mutate } from "swr";
 
 // ** Type Imports
 import { CommonResponse } from "@/src/type/common";
-import { TicketSettingType } from "@/src/type/ticket";
-import TicketSettingTypeButton from "../TicketSettingTypeButton";
-import TicketSelectSettingButton from "../TicketSelectSettingButton";
 
 interface PropsType {
   epicId?: number;
@@ -33,9 +30,6 @@ const TicketAddItem = ({ epicId }: PropsType) => {
   const [button, setButton] = useState<boolean>(false);
 
   const [selectTypeId, setSelectTypeId] = useState<number>(0);
-  const [selectEpicId, setSelectEpicId] = useState<string>(
-    epicId ? epicId.toString() : ""
-  );
 
   const handleOpen = () => setOpen((c) => !c);
 
@@ -46,7 +40,6 @@ const TicketAddItem = ({ epicId }: PropsType) => {
     async (url: string) =>
       await Post<CommonResponse<void>>(url, {
         name,
-        epicId: Number(selectEpicId),
         settingId: selectTypeId,
       }),
     {
@@ -96,12 +89,6 @@ const TicketAddItem = ({ epicId }: PropsType) => {
             selectTypeId={selectTypeId}
             setSelectTypeId={setSelectTypeId}
           />
-          <div className="mx-[15px]">
-            <EpicSelect
-              selectEpicId={selectEpicId}
-              setSelectEpicId={setSelectEpicId}
-            />
-          </div>
           <CustomInput
             placeholder="Enter Ticket Name"
             borderRadius="8px"

@@ -125,7 +125,7 @@ const SignupContainer = () => {
         });
 
         setWorkspaceState({
-          id: data.workspace.workspaceId,
+          workspaceId: data.workspace.workspaceId,
           name: data.workspace.name,
           profile: data.workspace.profile,
           uuid: data.workspace.uuid,

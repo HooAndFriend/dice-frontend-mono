@@ -10,15 +10,9 @@ const TicketHeader = () => {
         </th>
         <th
           className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 pl-6"
-          style={{ width: "50%" }}
+          style={{ width: "60%" }}
         >
           Title
-        </th>
-        <th
-          className="h-12 px-4 text-center align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 pl-6"
-          style={{ width: "15%" }}
-        >
-          EPIC
         </th>
         <th
           className="h-12 px-4 text-center align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 pl-6"
@@ -34,7 +28,7 @@ const TicketHeader = () => {
         </th>
         <th
           className="h-12 px-4 text-center align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 pl-6"
-          style={{ width: "10%" }}
+          style={{ width: "15%" }}
         >
           Status
         </th>

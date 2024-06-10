@@ -33,11 +33,11 @@ const WorkspaceMemberContent = ({ handleOpen }: PropsType) => {
       <div className="w-full h-[562px] mt-[29px] overflow-y-auto overflow-x-hidden">
         {data.data.data.map((item) => (
           <WorkspaceUserBox
-            key={item.id}
-            id={item.id}
-            email={item.teamUser.user.email}
-            profile={item.teamUser.user.profile}
-            nickname={item.teamUser.user.nickname}
+            key={item.workspaceUserId}
+            id={item.workspaceUserId}
+            email={item.user.email}
+            profile={item.user.profile}
+            nickname={item.user.nickname}
             role={item.role}
           />
         ))}

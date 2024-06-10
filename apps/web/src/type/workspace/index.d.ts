@@ -69,15 +69,13 @@ export interface GetDateTaskListResponse extends CommonResponse {
 }
 
 export interface WorkspaceUserDetailInfo {
-  id: number;
+  workspaceUserId: number;
   role: RoleType;
-  teamUser: {
-    id: 3;
-    user: {
-      email: string;
-      nickname: string;
-      profile: string;
-    };
+  user: {
+    userId: number;
+    email: string;
+    nickname: string;
+    profile: string;
   };
 }
 
@@ -93,7 +91,7 @@ export interface WorkspaceInviteUser {
 }
 
 export interface WorkspaceDetailInfo {
-  id: number;
+  workspaceId: number;
   name: string;
   comment: string;
   profile: string;
@@ -111,11 +109,13 @@ export interface WorksapceUserInfo {
 }
 
 export interface WorkspaceUser {
-  id: 1;
+  workspaceUserId: number;
   role: RoleType;
-  teamUser: {
-    id: number;
-    user: { id: number; email: string; nickname: string; profile: string };
+  user: {
+    userId: number;
+    email: string;
+    nickname: string;
+    profile: string;
   };
 }
 
@@ -129,10 +129,10 @@ export interface TeamWorkspaceInfo {
 }
 
 export interface WorkspaceInfo {
-  id: number;
+  workspaceUserId: number;
   role: RoleType;
   workspace: {
-    id: number;
+    workspaceId: number;
     name: string;
     profile: string;
     uuid: string;

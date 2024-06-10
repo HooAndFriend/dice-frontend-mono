@@ -8,10 +8,10 @@ import TicketItem from "../TicketItem";
 import TicketHeader from "../TicketHeader";
 
 // ** Type Imports
-import { TicketInfo } from "@/src/type/ticket";
+import { Ticket } from "@/src/type/ticket";
 
 interface PropsType {
-  data: TicketInfo[];
+  data: Ticket[];
   word: string;
   handleClick?: (id: number) => void;
 }
@@ -31,7 +31,7 @@ const TicketTable = ({ word, handleClick, data }: PropsType) => {
                   handleClick={handleClick}
                   word={word}
                   data={item}
-                  key={item.id}
+                  key={item.ticketId}
                   isEpic={false}
                 />
               ))}

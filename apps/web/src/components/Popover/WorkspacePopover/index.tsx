@@ -29,7 +29,7 @@ const WorkspacePopover = () => {
     error,
     isLoading,
     mutate: handleRefetch,
-  } = useSWR("/v1/workspace-user/team", async (url) =>
+  } = useSWR("/v1/workspace-user/workspace", async (url) =>
     Get<GetWorkspaceListResponse>(url)
   );
 
@@ -40,7 +40,7 @@ const WorkspacePopover = () => {
 
   const handleUpdateWorkspace = (item: WorkspaceInfo) => {
     setWorkspaceState({
-      id: item.id,
+      workspaceId: item.workspaceUserId,
       name: item.workspace.name,
       profile: item.workspace.profile,
       uuid: item.workspace.uuid,

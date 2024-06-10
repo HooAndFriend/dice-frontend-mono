@@ -100,8 +100,8 @@ const WorkspaceModalView = ({
                         <div className="w-[187px] h-[29.926px] mt-[60px] flex relative">
                           {data.slice(0, 3).map((item) => (
                             <CustomImage
-                              src={item.teamUser.user.profile}
-                              key={item.id}
+                              src={item.user.profile}
+                              key={item.workspaceUserId}
                               alt="Sample Image"
                               className="w-[29.204px] h-[29.926px] rounded-full"
                               width={29}

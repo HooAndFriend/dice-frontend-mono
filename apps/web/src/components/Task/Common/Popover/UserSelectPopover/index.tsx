@@ -101,21 +101,21 @@ const UserSelectPopover = ({
             {data.map((item) => (
               <div
                 className="flex w-[206px] h-[32px] items-center rounded-[8px] cursor-pointer"
-                key={item.id}
-                onClick={() => handleUpdateUser(item.teamUser.user.id)}
+                key={item.workspaceUserId}
+                onClick={() => handleUpdateUser(item.user.userId)}
                 style={{
                   backgroundColor:
-                    item.teamUser.user.email === email ? "#F4F4FA" : "white",
+                    item.user.email === email ? "#F4F4FA" : "white",
                 }}
               >
                 <CustomImage
                   className="rounded-full border border-[#EBEBEC] mr-[10px]"
                   alt="profile"
-                  src={item.teamUser.user.profile}
+                  src={item.user.profile}
                   width={20}
                   height={20}
                 />
-                <p className="text-[12px]">{item.teamUser.user.nickname}</p>
+                <p className="text-[12px]">{item.user.nickname}</p>
               </div>
             ))}
           </div>

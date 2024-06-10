@@ -1,18 +1,13 @@
-// ** Next Imports
-import Image from "next/image";
-
 // ** Component Imports
 import TicketUserButton from "../TicketUserButton";
 import TicketStatusButton from "../TicketStatusButton";
-import TicketDatePicker from "../TicketDatePicker";
+import TicketSettingButton from "../TicketSettingButton";
 
 // ** Utils Imports
 import dayjs from "dayjs";
 
 // ** Type Imports
 import { Ticket } from "@/src/type/ticket";
-import TicketSettingButton from "../TicketSettingButton";
-import TicketEpicButton from "../TicketEpicButton";
 
 interface PropsType {
   data: Ticket;

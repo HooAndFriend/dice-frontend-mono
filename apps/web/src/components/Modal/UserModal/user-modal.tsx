@@ -106,7 +106,7 @@ const UserModalView = ({
                             />
                             Setting
                           </div>
-                          <div
+                          {/* <div
                             onClick={() => setTab(1)}
                             className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-[16px] font-san-bold cursor-pointer ${
                               tab === 1
@@ -124,7 +124,7 @@ const UserModalView = ({
                               height={24}
                             />
                             Team
-                          </div>
+                          </div> */}
                           <div
                             onClick={() => setTab(2)}
                             className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-[16px] font-san-bold cursor-pointer ${
@@ -150,7 +150,7 @@ const UserModalView = ({
                       </div>
                       <div className="w-[742px] h-[601px]">
                         {tab === 0 && <SettingContent />}
-                        {tab === 1 && <TeamContent />}
+                        {/* {tab === 1 && <TeamContent />} */}
                         {tab === 2 && <WorkspaceContent />}
                       </div>
                     </div>

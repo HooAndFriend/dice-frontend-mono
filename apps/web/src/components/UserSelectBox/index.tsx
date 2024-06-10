@@ -65,8 +65,8 @@ const UserSelectBox = ({ checkedList, setCheckedList }: PropsType) => {
       >
         {checkedList.slice(0, 3).map((item) => (
           <CustomImage
-            src={item.teamUser.user.profile}
-            key={item.id}
+            src={item.user.profile}
+            key={item.workspaceUserId}
             alt="Sample Image"
             className="rounded-full"
             width={30}
@@ -91,7 +91,7 @@ const UserSelectBox = ({ checkedList, setCheckedList }: PropsType) => {
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
-                key={item.id}
+                key={item.workspaceUserId}
               >
                 <div className="flex items-center mb-4">
                   <input
@@ -102,11 +102,15 @@ const UserSelectBox = ({ checkedList, setCheckedList }: PropsType) => {
                         setCheckedList([...checkedList, item]);
                       } else {
                         setCheckedList([
-                          ...checkedList.filter((_) => _.id !== item.id),
+                          ...checkedList.filter(
+                            (_) => _.workspaceUserId !== item.workspaceUserId
+                          ),
                         ]);
                       }
                     }}
-                    checked={checkedList.some((_) => _.id === item.id)}
+                    checked={checkedList.some(
+                      (_) => _.workspaceUserId === item.workspaceUserId
+                    )}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -116,15 +120,15 @@ const UserSelectBox = ({ checkedList, setCheckedList }: PropsType) => {
                     <CustomImage
                       className="rounded-full border border-[#EBEBEC] mr-[10px]"
                       src={
-                        item.teamUser.user.profile
-                          ? item.teamUser.user.profile
+                        item.user.profile
+                          ? item.user.profile
                           : "/images/dice.png"
                       }
                       alt="profile"
                       width={30}
                       height={30}
                     />
-                    {item.teamUser.user.nickname}
+                    {item.user.nickname}
                   </label>
                 </div>
               </div>

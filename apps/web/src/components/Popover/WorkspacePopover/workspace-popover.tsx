@@ -66,7 +66,7 @@ const WorkspacePopoverView = ({
                     handleModalOpen={handleModalOpen}
                   />
                 ))}
-                <Link href="/save-team">
+                <Link href="/save-workspace">
                   <div className="flex items-center mt-5">
                     <CustomImage
                       className="border rounded-[10px] mr-3"

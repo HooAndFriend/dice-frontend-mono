@@ -12,7 +12,7 @@ import { Post } from "@/src/repository";
 
 // ** Recoil Imports
 import { useRecoilValue } from "recoil";
-import { AuthState, TeamState } from "@/src/app";
+import { AuthState, TeamState, WorkspaceState } from "@/src/app";
 
 // ** Component Imports
 import SaveWorkspaceContainerView from "./save-workspace-container";
@@ -35,7 +35,7 @@ const SaveWorkspaceContainer = () => {
       "https://firebasestorage.googleapis.com/v0/b/dice-dev-a5b63.appspot.com/o/images%2FIMG_6159.jpg?alt=media&token=450c0181-8826-4856-b611-509712872450",
   });
 
-  const { uuid } = useRecoilValue(TeamState);
+  const { uuid } = useRecoilValue(WorkspaceState);
   const { accessToken } = useRecoilValue(AuthState);
 
   const { handleOpen } = useDialog();
@@ -47,7 +47,7 @@ const SaveWorkspaceContainer = () => {
     async (url: string) => await Post<CommonResponse<void>>(url, data),
     {
       onSuccess: ({ data }) => {
-        router.push("/dashboard");
+        router.push(`/dashboard/${uuid}`);
       },
       onError: (error) => {
         handleOpen({

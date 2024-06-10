@@ -23,7 +23,7 @@ import CustomImage from "../../../Image/CustomImage";
 import { getTicketSettingImage } from "@/src/utils/ticket-setting";
 
 interface PropsType {
-  data: Ticket;
+  data: Ticket | TicketInfo;
   isText: boolean;
 }
 
@@ -56,7 +56,6 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
     {
       onSuccess: () => {
         setOpen(false);
-        mutate("/v1/epic");
         mutate("/v1/ticket");
         mutate(`/v1/ticket/detail/${data.ticketId}`);
       },

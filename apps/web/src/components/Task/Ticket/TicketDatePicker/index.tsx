@@ -28,7 +28,6 @@ const TicketDatePicker = ({ value, ticketId }: PropsType) => {
       await Patch<CommonResponse<void>>(url, { ticketId, dueDate: arg }),
     {
       onSuccess: () => {
-        mutate("/v1/epic");
         mutate("/v1/ticket");
         mutate(`/v1/ticket/detail/${ticketId}`);
         handleOpen();

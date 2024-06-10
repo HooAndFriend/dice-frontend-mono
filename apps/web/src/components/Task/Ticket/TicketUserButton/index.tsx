@@ -66,7 +66,6 @@ const TicketUserButton = ({
       await Put<CommonResponse<void>>(url, { ticketId, type, userId: arg }),
     {
       onSuccess: () => {
-        mutate("/v1/epic");
         mutate("/v1/ticket");
         mutate(`/v1/ticket/detail/${ticketId}`);
         setOpen(false);

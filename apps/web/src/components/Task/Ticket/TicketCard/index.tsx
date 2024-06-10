@@ -52,7 +52,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
   const { data, handleInput, setData } = useInput<TicketInfo>({
     createdDate: null,
     modifiedDate: null,
-    id: 0,
+    ticketId: 0,
     name: "",
     status: "",
     content: "",
@@ -62,18 +62,14 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     completeDate: null,
     reopenDate: null,
     ticketFile: [],
-    epic: {
-      id: 0,
-      name: "",
-    },
     admin: {
-      id: 0,
+      userId: 0,
       email: "",
       nickname: "",
       profile: "",
     },
     worker: {
-      id: 0,
+      userId: 0,
       email: "",
       nickname: "",
       profile: "",
@@ -121,7 +117,6 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
     {
       onSuccess: () => {
         setMode((c) => ({ ...c, [currentArg]: "view" }));
-        mutate("/v1/epic");
         mutate("/v1/ticket");
         mutate(`/v1/ticket/detail/${ticketId}`);
       },
@@ -165,7 +160,6 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       onSuccess: () => {
         ticketRefetch();
         handleClose();
-        mutate("/v1/epic");
         mutate("/v1/ticket");
         mutate(`/v1/ticket/detail/${ticketId}`);
       },

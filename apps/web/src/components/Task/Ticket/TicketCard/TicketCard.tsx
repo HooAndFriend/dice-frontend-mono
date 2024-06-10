@@ -68,7 +68,7 @@ const TicketCardView = ({
         <div className="flex items-center">
           <p
             className="text-[12px] text-gray-500 cursor-pointer underline"
-            onClick={() => handleDeleteTicket(data.id)}
+            onClick={() => handleDeleteTicket(data.ticketId)}
           >
             Delete
           </p>
@@ -116,7 +116,7 @@ const TicketCardView = ({
             </div>
           </div>
         )}
-        <TicketStatusButton status={data.status} ticketId={data.id} />
+        <TicketStatusButton status={data.status} ticketId={data.ticketId} />
       </div>
       <hr className="my-[20px]" />
       <div className="flex items-center">
@@ -135,10 +135,10 @@ const TicketCardView = ({
           <h3 className="text-[16px]">
             <TicketUserButton
               profile={data.admin ? data.admin.profile : "/images/dice.png"}
-              ticketId={data.id}
+              ticketId={data.ticketId}
               email={data.admin ? data.admin.email : "-"}
               nickname={data.admin ? data.admin.nickname : "-"}
-              userId={data.admin ? data.admin.id : 0}
+              userId={data.admin ? data.admin.userId : 0}
               type="admin"
               isNickname={true}
             />
@@ -152,10 +152,10 @@ const TicketCardView = ({
         <div className="flex items-center">
           <TicketUserButton
             profile={data.worker ? data.worker.profile : "/images/dice.png"}
-            ticketId={data.id}
+            ticketId={data.ticketId}
             email={data.worker ? data.worker.email : "-"}
             nickname={data.worker ? data.worker.nickname : "-"}
-            userId={data.worker ? data.worker.id : 0}
+            userId={data.worker ? data.worker.userId : 0}
             type="user"
             isNickname={true}
           />
@@ -177,7 +177,7 @@ const TicketCardView = ({
       <div className="flex items-center mt-[20px]">
         <h1 className="w-[110px] text-[16px]">DueDate</h1>
         <TicketDatePicker
-          ticketId={data.id}
+          ticketId={data.ticketId}
           value={data.dueDate ? dayjs(data.dueDate).format("YYYY-MM-DD") : ""}
         />
       </div>
@@ -266,7 +266,10 @@ const TicketCardView = ({
       <h1 className="my-4 text-[16px]">File</h1>
       <div className="flex items-center">
         {data.ticketFile.length < 4 && (
-          <TicketFileUploader ticketId={data.id} refetch={ticketRefetch} />
+          <TicketFileUploader
+            ticketId={data.ticketId}
+            refetch={ticketRefetch}
+          />
         )}
         {data.ticketFile.map((item) => (
           <div
@@ -280,7 +283,7 @@ const TicketCardView = ({
             />
             <h1
               className="absolute px-2 py-1 m-1 text-xs leading-none text-white bg-black rounded-full cursor-pointer -right-2 -top-2"
-              onClick={() => handleDeleteTicketFile(item.id)}
+              onClick={() => handleDeleteTicketFile(item.ticketFileId)}
             >
               X
             </h1>
@@ -311,9 +314,9 @@ const TicketCardView = ({
         </button>
       </div>
       {subType === "comment" ? (
-        <TicketComment ticketId={data.id} />
+        <TicketComment ticketId={data.ticketId} />
       ) : (
-        <TicketHistory ticketId={data.id} />
+        <TicketHistory ticketId={data.ticketId} />
       )}
       {previewOpen && (
         <ImagePreview

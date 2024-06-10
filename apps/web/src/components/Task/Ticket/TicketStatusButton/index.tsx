@@ -44,7 +44,6 @@ const TicketStatusButton = ({ status, ticketId, refetch }: PropsType) => {
     {
       onSuccess: () => {
         setOpen(false);
-        mutate("/v1/epic");
         mutate("/v1/ticket");
         mutate(`/v1/ticket/detail/${ticketId}`);
 

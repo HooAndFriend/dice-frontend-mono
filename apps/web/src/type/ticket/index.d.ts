@@ -23,37 +23,25 @@ export interface Ticket {
   dueDate: string | null;
   completeDate: string | null;
   reopenDate: string | null;
-  ticketSetting: {
-    ticketSettingId: number;
-    type: TicketSettingType;
-    name: string;
-  };
+  ticketSetting: TicketSetting;
   worker: TicketUser;
   subTickets: Ticket[];
 }
 
 export interface TicketInfo {
-  createdDate: Date;
-  modifiedDate: Date;
-  id: number;
+  createdDate: "2024-06-04T16:15:02.902Z";
+  modifiedDate: "2024-06-08T08:18:15.575Z";
+  ticketId: number;
   name: string;
   status: EpicStatus;
-  content: string;
+  content: string | null;
   code: string;
-  storypoint: number;
-  dueDate: Date;
-  completeDate: Date;
-  reopenDate: Date;
-  ticketFile: { id: number; url: string }[];
-  ticketSetting: {
-    id: number;
-    type: TicketSettingType;
-    name: string;
-  };
-  epic: {
-    id: number;
-    name: string;
-  };
+  storypoint: 0;
+  dueDate: string | null;
+  completeDate: string | null;
+  reopenDate: string | null;
+  ticketFile: TicketFile[];
+  ticketSetting: TicketSetting;
   admin: TicketUser;
   worker: TicketUser;
 }
@@ -145,4 +133,15 @@ export interface TicketUser {
   email: string;
   nickname: string;
   profile: string;
+}
+
+export interface TicketSetting {
+  ticketSettingId: number;
+  type: TicketSettingType;
+  name: string;
+}
+
+export interface TicketFile {
+  ticketFileId: number;
+  url: string;
 }

@@ -12,7 +12,7 @@ import { Post } from "@/src/repository";
 
 // ** Recoil Imports
 import { useRecoilValue } from "recoil";
-import { AuthState, TeamState, WorkspaceState } from "@/src/app";
+import { AuthState, WorkspaceState } from "@/src/app";
 
 // ** Component Imports
 import SaveWorkspaceContainerView from "./save-workspace-container";

@@ -13,11 +13,9 @@ import UserPopoverView from "./user-popover";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   AuthState,
-  TeamState,
   UserState,
   WorkspaceState,
   authInitState,
-  teamInitState,
   userInitState,
   workspaceInitState,
 } from "@/src/app";
@@ -33,7 +31,6 @@ const UserPopover = () => {
   const [userState, setUserState] = useRecoilState(UserState);
   const setWorkspaceState = useSetRecoilState(WorkspaceState);
   const setAuthState = useSetRecoilState(AuthState);
-  const setTeamState = useSetRecoilState(TeamState);
 
   const handleOpen = () => setOpen((cur) => !cur);
   const handleModalOpen = () => setModalOpen(true);
@@ -42,7 +39,6 @@ const UserPopover = () => {
     setAuthState(authInitState);
     setUserState(userInitState);
     setWorkspaceState(workspaceInitState);
-    setTeamState(teamInitState);
 
     router.push("/");
   };

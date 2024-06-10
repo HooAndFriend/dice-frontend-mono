@@ -5,12 +5,7 @@ import { CommonResponse } from "@/src/type/common";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 // ** Recoil Imports
-import {
-  AuthStateType,
-  TeamStateType,
-  UserStateType,
-  WorkspaceStateType,
-} from "../app";
+import { AuthStateType, UserStateType, WorkspaceStateType } from "../app";
 
 export const client = axios.create({
   baseURL: "/api",
@@ -69,14 +64,12 @@ client.interceptors.request.use((config) => {
     authState: AuthStateType;
     userState: UserStateType;
     workspaceState: WorkspaceStateType;
-    teamState: TeamStateType;
   } = JSON.parse(localStorage.getItem("recoil-persist"));
 
   if (recoilValue) {
     config.headers["Authorization"] =
       `Bearer ${recoilValue.authState.accessToken}`;
     config.headers["workspace-code"] = recoilValue.workspaceState.uuid;
-    config.headers["team-code"] = recoilValue.teamState.uuid;
   }
 
   return config;

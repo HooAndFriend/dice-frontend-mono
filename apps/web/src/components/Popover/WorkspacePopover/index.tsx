@@ -1,14 +1,14 @@
 "use client";
 
 // ** React Imports
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 // ** Component Imports
 import WorkspacePopoverView from "./workspace-popover";
 
 // ** Recoil Imports
-import { TeamState, WorkspaceState } from "@/src/app";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { WorkspaceState } from "@/src/app";
+import { useRecoilState } from "recoil";
 
 // ** Service Imports
 import useSWR, { mutate } from "swr";
@@ -22,7 +22,6 @@ const WorkspacePopover = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState);
-  const { id } = useRecoilValue(TeamState);
 
   const {
     data,
@@ -50,10 +49,6 @@ const WorkspacePopover = () => {
 
     mutate("/v1/qa");
   };
-
-  useEffect(() => {
-    handleRefetch();
-  }, [id]);
 
   if (isLoading) return;
 

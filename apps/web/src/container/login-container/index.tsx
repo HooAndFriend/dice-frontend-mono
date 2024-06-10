@@ -11,7 +11,7 @@ import useSWRMutation from "swr/mutation";
 import { Post } from "@/src/repository";
 
 // ** Recoil Imports
-import { AuthState, TeamState, UserState, WorkspaceState } from "@/src/app";
+import { AuthState, UserState, WorkspaceState } from "@/src/app";
 import { useSetRecoilState } from "recoil";
 
 // ** Component Imports
@@ -47,7 +47,6 @@ const LoginContainer = () => {
 
   const setUserState = useSetRecoilState(UserState);
   const setWorkspaceState = useSetRecoilState(WorkspaceState);
-  const setTeamState = useSetRecoilState(TeamState);
   const setAuthState = useSetRecoilState(AuthState);
 
   const { handleOpen } = useDialog();

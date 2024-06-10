@@ -1,7 +1,5 @@
-import TicketConatiner from "@/src/container/ticket-container";
-
 const TicketPage = () => {
-  return <TicketConatiner />;
+  return <h1>Kanban Page</h1>;
 };
 
 export default TicketPage;

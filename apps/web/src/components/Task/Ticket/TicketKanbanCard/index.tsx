@@ -15,11 +15,11 @@ const TicketKanbanCard = ({ data, handleClick }: PropsType) => {
   return (
     <div
       className="w-full h-[157px] shadow-xl rounded-[15px] bg-white p-[20px] cursor-pointer mb-[25px]"
-      onClick={() => handleClick(data.id)}
+      onClick={() => handleClick(data.ticketId)}
     >
-      <h1 className="text-[18px]">{data.epic ? data.epic.name : ""}</h1>
+      {/* <h1 className="text-[18px]">{data.epic ? data.epic.name : ""}</h1> */}
       <div className="mt-[15px] mb-[25px]">
-        <TicketStatusButton status={data.status} ticketId={data.id} />
+        <TicketStatusButton status={data.status} ticketId={data.ticketId} />
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
@@ -30,9 +30,9 @@ const TicketKanbanCard = ({ data, handleClick }: PropsType) => {
           profile={data.worker?.profile}
           nickname={data.worker?.nickname}
           email={data.worker ? data.worker.email : "-"}
-          userId={data.worker?.id}
+          userId={data.worker?.userId}
           type="user"
-          ticketId={data.id}
+          ticketId={data.ticketId}
           isNickname={false}
         />
       </div>

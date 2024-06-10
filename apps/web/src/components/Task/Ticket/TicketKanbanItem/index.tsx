@@ -3,10 +3,10 @@ import { TicketInfo } from "@/src/type/ticket";
 
 // ** Component Imports
 import TicketKanbanCard from "../TicketKanbanCard";
+import TicketKanbanBoardSkeleton from "../TicketKanbanBoard/TicketKanbanBoardSkeleton";
 
 // ** Type Imports
 import { EpicStatus } from "@/src/type/epic";
-import TicketKanbanBoardSkeleton from "../TicketKanbanBoard/TicketKanbanBoardSkeleton";
 
 interface PropsType {
   data: TicketInfo[];
@@ -32,7 +32,7 @@ const TicketKanbanItem = ({
           <TicketKanbanCard
             data={item}
             handleClick={handleClick}
-            key={item.id}
+            key={item.ticketId}
           />
         ))
       )}

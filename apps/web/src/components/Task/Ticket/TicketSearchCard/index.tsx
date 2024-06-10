@@ -2,7 +2,6 @@
 import CustomSearch from "@/src/components/Input/CustomSearch";
 import UserSelectBox from "../../../UserSelectBox";
 import { WorkspaceUser } from "@/src/type/workspace";
-import EpicSelectFilter from "../../Common/Filter/EpicFilter";
 import { EpicStatus } from "@/src/type/epic";
 import TicketStatusSelectFilter from "../../Common/Filter/StatusFilter";
 import TicketTypeSelectFilter from "../../Common/Filter/TypeFilter";
@@ -36,12 +35,6 @@ const TicketSearchCard = ({
     <div>
       <div className="mt-6 h-[90px] w-full bg-white rounded-[20px] shadow-md p-4 flex items-center">
         <CustomSearch value={value} onChange={onChange} />
-        <div className="ml-[10px]">
-          <EpicSelectFilter
-            selectdIds={selectedEpicIds}
-            handleEpicSelectFilter={handleEpicSelectFilter}
-          />
-        </div>
         <div className="ml-[10px]">
           <TicketStatusSelectFilter
             selectedStatus={selectedStatus}

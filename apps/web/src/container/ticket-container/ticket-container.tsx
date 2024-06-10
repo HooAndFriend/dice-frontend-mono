@@ -3,8 +3,8 @@ import TicketCard from "@/src/components/Task/Ticket/TicketCard";
 import TicketTable from "@/src/components/Task/Ticket/TicketTable";
 import TicketTableSkeleton from "@/src/components/Task/Ticket/TicketTable/TicketTableSkeleton";
 import CustomSearch from "@/src/components/Input/CustomSearch";
-import TicketStatusSelectFilter from "@/src/components/task/Common/Filter/StatusFilter";
-import TicketTypeSelectFilter from "@/src/components/task/Common/Filter/TypeFilter";
+import TicketStatusSelectFilter from "@/src/components/Task/Common/Filter/StatusFilter";
+import TicketTypeSelectFilter from "@/src/components/Task/Common/Filter/TypeFilter";
 import UserSelectBox from "@/src/components/UserSelectBox";
 
 // ** Type Imports

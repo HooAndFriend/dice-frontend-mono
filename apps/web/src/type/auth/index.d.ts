@@ -42,19 +42,21 @@ export interface DiceLoginResponse extends Response {
     refreshToken: string;
   };
   user: {
-    email: string;
     nickname: string;
     profile: string;
+    email: string;
+    fcmToken: string;
   };
   workspace: LoginWorksapceResponse[];
 }
 
 export interface LoginWorksapceResponse {
-  id: number;
+  workspaceId: number;
   name: string;
   comment: string;
   profile: string;
   uuid: string;
+  isPersonal: boolean;
   workspaceFunction: WorksapceFunction[];
 }
 
@@ -67,14 +69,15 @@ export interface DiceSignupResponse extends Response {
     email: string;
     nickname: string;
     profile: string;
+    fcmToken: string;
   };
-  team: {
-    id: number;
+  workspace: {
+    workspaceId: number;
     name: string;
+    comment: string;
     profile: string;
     uuid: string;
-    description: string;
-    workspace: LoginWorksapceResponse[];
+    workspaceFunction: WorksapceFunction[];
   };
 }
 export interface DiceSocialLoginResponse extends Response {
@@ -86,6 +89,7 @@ export interface DiceSocialLoginResponse extends Response {
     email: string;
     nickname: string;
     profile: string;
+    fcmToken: string;
   };
   workspace: LoginWorksapceResponse[];
 }
@@ -99,14 +103,15 @@ export interface DiceSocialSignupResponse extends Response {
     email: string;
     nickname: string;
     profile: string;
+    fcmToken: string;
   };
-  team: {
-    id: number;
+  workspace: {
+    workspaceId: number;
     name: string;
+    comment: string;
     profile: string;
     uuid: string;
-    description: string;
-    workspace: LoginWorksapceResponse[];
+    workspaceFunction: WorksapceFunction[];
   };
 }
 

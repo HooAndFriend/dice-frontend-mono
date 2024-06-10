@@ -8,7 +8,7 @@ export interface SaveWorkspaceParam {
 }
 
 export interface WorksapceFunction {
-  id: nunber;
+  workspaceFunctionId: nunber;
   function: WorksapceFunctionType;
 }
 

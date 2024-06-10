@@ -99,7 +99,7 @@ const DashboardContainerView = ({
         </div>
         <div className="flex space-x-4">
           <DashboardChart />
-          <DashboardCalendar />
+          {/* <DashboardCalendar /> */}
         </div>
       </div>
     </div>

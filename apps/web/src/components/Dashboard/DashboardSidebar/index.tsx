@@ -31,7 +31,8 @@ const DashboardSidebard = () => {
   useEffect(() => {
     const pathArray = pathname.split("/");
 
-    setPath(pathArray[3] ? `/${pathArray[3]}` : "/");
+    // setPath(pathArray[3] ? `/${pathArray[3]}` : "/");
+    setPath(pathArray[2] ? `/${pathArray[2]}` : "/");
   }, [pathname]);
 
   useEffect(() => {
@@ -54,16 +55,19 @@ const DashboardSidebard = () => {
         workspaceFunction.find((_) => _.function === item.name)
       ),
     ].map((item) => {
+      console.log(item.link, path);
       if (item.link === path) {
         return {
           ...item,
           isClicked: true,
-          link: `/dashboard/${worksapceUid}/${item.link}`,
+          // link: `/dashboard/${worksapceUid}/${item.link}`,
+          link: `/dashboard${item.link}`,
         };
       }
       return {
         ...item,
-        link: `/dashboard/${worksapceUid}/${item.link}`,
+        // link: `/dashboard/${worksapceUid}/${item.link}`,
+        link: `/dashboard${item.link}`,
       };
     });
 

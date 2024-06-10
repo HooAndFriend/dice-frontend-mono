@@ -78,7 +78,8 @@ const LoginContainer = () => {
           workspaceFunction: data.workspace[0].workspaceFunction,
           role: "ADMIN",
         });
-        router.push(`/dashboard/${data.workspace[0].uuid}`);
+        // router.push(`/dashboard/${data.workspace[0].uuid}`);
+        router.push(`/dashboard`);
       },
       onError: (error) => {
         handleOpen({
@@ -120,7 +121,8 @@ const LoginContainer = () => {
           role: "ADMIN",
         });
 
-        router.push(`/dashboard/${data.workspace[0].uuid}`);
+        // router.push(`/dashboard/${data.workspace[0].uuid}`);
+        router.push(`/dashboard`);
       },
       onError: (error) => {
         if (error.response.data.statusCode === 404) {

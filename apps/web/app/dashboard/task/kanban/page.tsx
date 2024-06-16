@@ -1,5 +1,8 @@
-const TicketPage = () => {
-  return <h1>Kanban Page</h1>;
+// ** Component Imports
+import KanbanContainer from "@/src/container/kanban-container";
+
+const KanbanPage = () => {
+  return <KanbanContainer />;
 };
 
-export default TicketPage;
+export default KanbanPage;

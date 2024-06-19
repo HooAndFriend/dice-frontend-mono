@@ -3,15 +3,17 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
+    "clear:port": "kill-port 3000 3001 3002",
+    "dev": "pnpm clear:port && turbo run dev --parallel --no-cache",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "docker:build": "docker build --no-cache --rm -f Dockerfile -t pinomaker/dice-frontend:latest . --platform linux/amd64",
     "docker:push": "docker push pinomaker/dice-frontend:latest"
   },
   "devDependencies": {
+    "kill-port": "^2.0.1",
     "prettier": "^3.1.0",
-    "turbo": "latest"
+    "turbo": "^2.0.3"
   },
   "packageManager": "pnpm@8.9.0",
   "engines": {

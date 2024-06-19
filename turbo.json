@@ -1,7 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
-  "pipeline": {
+  "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
@@ -12,6 +12,10 @@
     "dev": {
       "cache": false,
       "persistent": true
-    }
+    },
+    "sourcemap": {
+      "dependsOn": ["^sourcemap"]
+    },
+    "type:check": {}
   }
 }

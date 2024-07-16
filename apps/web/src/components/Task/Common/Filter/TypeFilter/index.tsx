@@ -57,16 +57,18 @@ const TypeFilter = ({ selectedTypeIds, handleTypeSelectFilter }: PropsType) => {
   return (
     <div className="relative">
       <div
-        className="flex items-center cursor-pointer w-[120px] h-[50px] justify-between px-[15px]"
+        className=" border border-[#EBEBEC]  rounded-[10px] bg-white flex items-center cursor-pointer w-[150px] h-[30px] justify-between px-[8px]"
         onClick={(e) => {
           e.stopPropagation();
           handleOpen();
         }}
       >
-        <h1>TYPE</h1>
-        <div className="ml-[5px] w-[25px] h-[25px] rounded-full bg-[#623AD6] flex items-center justify-center text-white">
-          {selectedTypeIds.length}
-        </div>
+        <h1 className="text-[#EBEBEC]">type</h1>
+        {selectedTypeIds.length > 0 && (
+          <div className="ml-[5px] w-[20px] text-[12px] h-[20px] rounded-full bg-[#623AD6] flex items-center justify-center text-white">
+            {selectedTypeIds.length}
+          </div>
+        )}
         <img src="/svg/arrow-down.svg" alt="arrow" />
       </div>
       {open && (

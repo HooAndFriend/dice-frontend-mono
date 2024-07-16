@@ -21,7 +21,7 @@ const KanbanContainerView = ({ data }: PropsType) => {
   return (
     <div className="w-full h-full">
       <div className="flex items-center justify-between pt-8 h-[8%]">
-        <div className="flex items-center">
+        <div className="flex items-center space-x-4">
           <CustomSearch width="200px" value={""} onChange={() => {}} />
           <TicketStatusSelectFilter
             selectedStatus={[]}

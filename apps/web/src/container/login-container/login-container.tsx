@@ -3,9 +3,7 @@ import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Type Imports
 import { DiceLoginParma, SocialType } from "@/src/type/auth";
-import Image from "next/image";
 import CustomImage from "@/src/components/Image/CustomImage";
-import CustomInput from "@/src/components/Input/CustomInput";
 
 interface PropsType {
   loginUser: DiceLoginParma;
@@ -110,17 +108,6 @@ const LoginContainerView = ({
             <div className="w-full flex justify-between m-auto mt-[46px]">
               <div
                 className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
-                onClick={() => handleSocialLogin("MICROSOFT")}
-              >
-                <CustomImage
-                  src="/images/microsoft.png"
-                  alt="Microsoft"
-                  width={24}
-                  height={24}
-                />
-              </div>
-              <div
-                className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
                 onClick={() => handleSocialLogin("GOOGLE")}
               >
                 <CustomImage
@@ -130,17 +117,6 @@ const LoginContainerView = ({
                   height={24}
                 />
               </div>
-              {/* <div
-                className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
-                // onClick={() => handleSocialLogin("APPLE")}
-              >
-                <CustomImage
-                  src="/images/apple.png"
-                  alt="apple"
-                  width={28}
-                  height={28}
-                />
-              </div> */}
               <div
                 className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
                 onClick={() => handleSocialLogin("GITHUB")}
@@ -150,17 +126,6 @@ const LoginContainerView = ({
                   alt="github"
                   width={28}
                   height={28}
-                />
-              </div>
-              <div
-                className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
-                onClick={() => handleSocialLogin("TWITTER")}
-              >
-                <CustomImage
-                  src="/images/twitter.png"
-                  alt="twitter"
-                  width={24}
-                  height={19.83}
                 />
               </div>
             </div>

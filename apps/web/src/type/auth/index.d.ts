@@ -10,6 +10,8 @@ export interface DiceLoginParma {
 export interface SocialLoginParams {
   type: SocialType;
   token: string;
+  email: string;
+  displayName: string;
 }
 
 export interface DiceSignupParams {
@@ -25,6 +27,7 @@ export interface SocialSignupParams {
   email: string;
   nickname: string;
   fcmToken: string;
+  uuid?: string;
 }
 
 export type SocialType =

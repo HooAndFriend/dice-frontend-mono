@@ -27,7 +27,9 @@ import {
   DiceLoginParma,
   DiceLoginResponse,
   DiceSocialLoginResponse,
+  DiceSocialSignupResponse,
   SocialLoginParams,
+  SocialSignupParams,
   SocialType,
 } from "@/src/type/auth";
 
@@ -78,8 +80,47 @@ const LoginContainer = () => {
           workspaceFunction: data.workspace[0].workspaceFunction,
           role: "ADMIN",
         });
-        // router.push(`/dashboard/${data.workspace[0].uuid}`);
         router.push(`/dashboard`);
+      },
+      onError: (error) => {
+        handleOpen({
+          title: "Error",
+          message: error.response.data.message,
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
+      },
+    }
+  );
+
+  const socialSignup = useSWRMutation(
+    "/v1/auth/social/user",
+    async (url: string, { arg }: { arg: SocialSignupParams }) =>
+      await Post<DiceSocialSignupResponse>(url, {
+        ...arg,
+      }),
+    {
+      onSuccess: ({ data }) => {
+        setAuthState({
+          accessToken: data.token.accessToken,
+          refreshToken: data.token.refreshToken,
+        });
+        setUserState({
+          email: data.user.email,
+          profile: data.user.profile,
+          nickname: data.user.nickname,
+        });
+
+        setWorkspaceState({
+          workspaceId: data.workspace.workspaceId,
+          name: data.workspace.name,
+          profile: data.workspace.profile,
+          uuid: data.workspace.uuid,
+          workspaceFunction: data.workspace.workspaceFunction,
+          role: "ADMIN",
+        });
+        router.push("/dashboard");
       },
       onError: (error) => {
         handleOpen({
@@ -95,7 +136,14 @@ const LoginContainer = () => {
 
   const socialLogin = useSWRMutation(
     "/v1/auth/social",
-    async (url: string, { arg }: { arg: SocialLoginParams }) =>
+    async (
+      url: string,
+      {
+        arg,
+      }: {
+        arg: SocialLoginParams;
+      }
+    ) =>
       await Post<DiceSocialLoginResponse>(url, {
         ...arg,
         fcmToken: loginUser.fcmToken,
@@ -121,7 +169,6 @@ const LoginContainer = () => {
           role: "ADMIN",
         });
 
-        // router.push(`/dashboard/${data.workspace[0].uuid}`);
         router.push(`/dashboard`);
       },
       onError: (error) => {
@@ -129,15 +176,15 @@ const LoginContainer = () => {
           const arg: SocialLoginParams = JSON.parse(error.config.data);
 
           const uuid = searchParams.get("uuid");
-          if (uuid) {
-            router.push(
-              `/social-signup?token=${arg.token}&type=${arg.type}&uuid=${uuid}`
-            );
 
-            return;
-          }
-
-          router.push(`/social-signup?token=${arg.token}&type=${arg.type}`);
+          socialSignup.trigger({
+            token: arg.token,
+            type: arg.type,
+            email: arg.email,
+            nickname: arg.displayName,
+            fcmToken: loginUser.fcmToken,
+            uuid: uuid || undefined,
+          });
         }
 
         return;
@@ -160,7 +207,12 @@ const LoginContainer = () => {
     firebaseLogin(type).then((res) => {
       if (!res) return;
 
-      socialLogin.trigger({ token: res, type });
+      socialLogin.trigger({
+        token: res.uid,
+        type,
+        email: res.email,
+        displayName: res.displayName,
+      });
     });
   };
 

@@ -48,7 +48,7 @@ const TicketContainerView = ({
   return (
     <div className="w-full h-full">
       <div className="flex items-center justify-between pt-8 h-[8%]">
-        <div className="flex items-center">
+        <div className="flex items-center space-x-4">
           <CustomSearch width="200px" value={word} onChange={handleWord} />
           <TicketStatusSelectFilter
             selectedStatus={selectedStatus}
@@ -69,7 +69,7 @@ const TicketContainerView = ({
           </h1>
         </div>
       </div>
-      <div className={`${ticketId !== 0 && "flex"} h-[92%]`}>
+      <div className={`${ticketId !== 0 && "flex"} h-[92%] py-[24px]`}>
         <div style={{ width: ticketId !== 0 ? "65%" : "100%", height: "100%" }}>
           {isLoading ? (
             <TicketTableSkeleton />

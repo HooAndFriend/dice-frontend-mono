@@ -68,12 +68,14 @@ const StatusFilter = ({
         }}
       >
         <h1 className="text-[#EBEBEC]">status</h1>
-        {selectedStatus.length > 0 && (
-          <div className="ml-[5px] w-[20px] text-[12px] h-[20px] rounded-full bg-[#623AD6] flex items-center justify-center text-white">
-            {selectedStatus.length}
-          </div>
-        )}
-        <img src="/svg/arrow-down.svg" alt="arrow" />
+        <div className="flex items-center space-x-2">
+          {selectedStatus.length > 0 && (
+            <div className="ml-[5px] w-[20px] text-[12px] h-[20px] rounded-full bg-[#623AD6] flex items-center justify-center text-white">
+              {selectedStatus.length}
+            </div>
+          )}
+          <img src="/svg/arrow-down.svg" alt="arrow" />
+        </div>
       </div>
       {open && (
         <div

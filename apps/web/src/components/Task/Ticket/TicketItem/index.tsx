@@ -69,7 +69,7 @@ const TicketItem = ({ handleClick, data, isEpic, word }: PropsType) => {
       </td>
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-        style={{ width: "15%" }}
+        style={{ width: "15%", whiteSpace: "nowrap" }}
       >
         2023-06-15
       </td>

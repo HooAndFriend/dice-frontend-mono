@@ -77,7 +77,6 @@ const LoginContainer = () => {
           name: data.workspace[0].name,
           profile: data.workspace[0].profile,
           uuid: data.workspace[0].uuid,
-          workspaceFunction: data.workspace[0].workspaceFunction,
           role: "ADMIN",
         });
         router.push(`/dashboard`);
@@ -117,7 +116,6 @@ const LoginContainer = () => {
           name: data.workspace.name,
           profile: data.workspace.profile,
           uuid: data.workspace.uuid,
-          workspaceFunction: data.workspace.workspaceFunction,
           role: "ADMIN",
         });
         router.push("/dashboard");
@@ -165,7 +163,6 @@ const LoginContainer = () => {
           name: data.workspace[0].name,
           profile: data.workspace[0].profile,
           uuid: data.workspace[0].uuid,
-          workspaceFunction: data.workspace[0].workspaceFunction,
           role: "ADMIN",
         });
 

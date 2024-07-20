@@ -60,7 +60,6 @@ export interface LoginWorksapceResponse {
   profile: string;
   uuid: string;
   isPersonal: boolean;
-  workspaceFunction: WorksapceFunction[];
 }
 
 export interface DiceSignupResponse extends Response {
@@ -80,7 +79,6 @@ export interface DiceSignupResponse extends Response {
     comment: string;
     profile: string;
     uuid: string;
-    workspaceFunction: WorksapceFunction[];
   };
 }
 export interface DiceSocialLoginResponse extends Response {
@@ -114,7 +112,6 @@ export interface DiceSocialSignupResponse extends Response {
     comment: string;
     profile: string;
     uuid: string;
-    workspaceFunction: WorksapceFunction[];
   };
 }
 

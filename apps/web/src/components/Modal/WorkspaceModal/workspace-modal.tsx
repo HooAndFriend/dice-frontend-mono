@@ -155,7 +155,7 @@ const WorkspaceModalView = ({
                             />
                             Member
                           </div>
-                          <div
+                          {/* <div
                             onClick={() => setTab(2)}
                             className={`w-[205px] h-[40px] rounded-full flex items-center text-[16px] font-san-bold cursor-pointer ${
                               tab === 2
@@ -175,7 +175,7 @@ const WorkspaceModalView = ({
                               height={24}
                             />
                             Add Functions
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                       <div className="w-[742px] h-[601px]">
@@ -185,7 +185,7 @@ const WorkspaceModalView = ({
                             handleOpen={() => setAddOpen(true)}
                           />
                         )}
-                        {tab === 2 && <WorkspaceAddFunctionContent />}
+                        {/* {tab === 2 && <WorkspaceAddFunctionContent />} */}
                         {addOpen && (
                           <WorkspaceAddMemberContent
                             open={addOpen}

@@ -7,11 +7,6 @@ export interface SaveWorkspaceParam {
   profile: string;
 }
 
-export interface WorksapceFunction {
-  workspaceFunctionId: nunber;
-  function: WorksapceFunctionType;
-}
-
 export type WorksapceFunctionType = "" | "TICKET" | "QA" | "COLLECTION" | "ERD";
 
 export interface GetUserWorkspaceListResponse extends CommonResponse {

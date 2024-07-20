@@ -128,7 +128,6 @@ const SignupContainer = () => {
           name: data.workspace.name,
           profile: data.workspace.profile,
           uuid: data.workspace.uuid,
-          workspaceFunction: data.workspace.workspaceFunction,
           role: "ADMIN",
         });
         router.push("/dashboard");

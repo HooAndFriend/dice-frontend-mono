@@ -6,7 +6,6 @@ import { atom, useRecoilState } from "recoil";
 import { persistStorageAtom } from "../util";
 
 // ** Type Imports
-import { WorksapceFunction } from "@/src/type/workspace";
 import { RoleType } from "@/src/type/common";
 
 export interface WorkspaceStateType {
@@ -15,7 +14,6 @@ export interface WorkspaceStateType {
   profile: string;
   uuid: string;
   role: RoleType;
-  workspaceFunction: WorksapceFunction[];
 }
 
 export const workspaceInitState: WorkspaceStateType = {
@@ -24,7 +22,6 @@ export const workspaceInitState: WorkspaceStateType = {
   profile: "",
   uuid: "",
   role: "",
-  workspaceFunction: [],
 };
 
 export const WorkspaceState = atom<WorkspaceStateType>({

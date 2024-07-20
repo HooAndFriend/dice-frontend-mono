@@ -1,6 +1,6 @@
 "use client";
 // ** Next Imports
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 // ** React Imports
 import { useEffect, useState } from "react";
@@ -11,22 +11,11 @@ import WorkspacePopover from "../../Popover/WorkspacePopover";
 import { MenuList } from "@/src/constants/menu";
 import DashboardIcon from "@/public/svg/dashboard.svg";
 
-// ** Recoil Imports
-import { WorkspaceState } from "@/src/app";
-import { useRecoilValue } from "recoil";
-
-// ** Utils Imports
-import { isUndefined } from "loadsh";
-
 const DashboardSidebard = () => {
-  const { workspaceFunction, uuid: worksapceUid } =
-    useRecoilValue(WorkspaceState);
-
   const [path, setPath] = useState<string>("/");
   const [sidbarMenuList, setSidbarMenuList] = useState([]);
 
   const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     const pathArray = pathname.split("/");
@@ -36,12 +25,6 @@ const DashboardSidebard = () => {
   }, [pathname]);
 
   useEffect(() => {
-    if (isUndefined(workspaceFunction)) {
-      setSidbarMenuList([]);
-
-      return;
-    }
-
     const arr = [
       {
         id: 0,
@@ -51,9 +34,7 @@ const DashboardSidebard = () => {
         isClicked: false,
       },
       ,
-      ...MenuList.filter((item) =>
-        workspaceFunction.find((_) => _.function === item.name)
-      ),
+      ...MenuList,
     ].map((item) => {
       console.log(item.link, path);
       if (item.link === path) {
@@ -72,21 +53,7 @@ const DashboardSidebard = () => {
     });
 
     setSidbarMenuList(arr);
-  }, [workspaceFunction, path]);
-
-  useEffect(() => {
-    if (pathname.split("/")[2] === "qa") {
-      if (!workspaceFunction.find((_) => _.function === "QA")) {
-        router.push("/dashboard");
-      }
-    }
-
-    if (pathname.split("/")[2] === "epic") {
-      if (!workspaceFunction.find((_) => _.function === "TICKET")) {
-        router.push("/dashboard");
-      }
-    }
-  }, [workspaceFunction]);
+  }, [path]);
 
   return (
     <div className="w-[70px] border-r-2 border-[#EBEBEC]">

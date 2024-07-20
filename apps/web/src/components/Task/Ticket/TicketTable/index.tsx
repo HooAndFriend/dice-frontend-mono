@@ -35,8 +35,8 @@ const TicketTable = ({ word, handleClick, data }: PropsType) => {
                   isEpic={false}
                 />
               ))}
+              {role !== "VIEWER" && <TicketAddItem />}
             </tbody>
-            {role !== "VIEWER" && <TicketAddItem />}
           </table>
         </div>
       </div>

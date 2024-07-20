@@ -9,7 +9,7 @@ export interface GetBoardResponse extends CommonResponse, BoardDetail {}
 
 export interface BoardInfo {
   createdDate: Date;
-  id: number;
+  boardId: number;
   title: string;
   children: BoardInfo[];
 }
@@ -18,7 +18,7 @@ export interface BoardDetail {
   content: string;
   createdDate: Date;
   createdId: string;
-  id: number;
+  boardId: number;
   isDeleted: boolean;
   modifiedDate: Date;
   modifiedId: string;
@@ -27,7 +27,7 @@ export interface BoardDetail {
   children: BoardDetail[];
   parent: BoardDetail;
   createdUser: {
-    id: number;
+    userId: number;
     profile: string;
     nickname: string;
   };

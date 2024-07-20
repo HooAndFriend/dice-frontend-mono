@@ -20,12 +20,14 @@ const BoardMenuItem = ({ data }: PropsType) => {
 
   const { get } = useSearchParams();
 
+  console.log("DATA : ", data);
+
   return (
     <div>
-      <div className="flex items-center mb-2" key={data.id}>
+      <div className="flex items-center mb-2" key={data.boardId}>
         {data.children.length > 0 ? (
           <CustomImage
-            src={open ? "/svg/arrow-up.svg" : "/svg/arrow-down.svg"}
+            src={open ? "/svg/arrow-down.svg" : "/svg/arrow-up.svg"}
             alt="arrow"
             className="pb-1 cursor-pointer"
             width={12}
@@ -40,10 +42,10 @@ const BoardMenuItem = ({ data }: PropsType) => {
         {data.children.length > 0 ? (
           <p className="ml-2">{data.title}</p>
         ) : (
-          <Link href={`/dashboard/board?boardId=${data.id}`}>
+          <Link href={`/dashboard/board?boardId=${data.boardId}`}>
             <p
               className={`ml-2 ${
-                get("boardId") === String(data.id) && "text-blue-500"
+                get("boardId") === String(data.boardId) && "text-blue-500"
               }`}
             >
               {data.title}
@@ -54,17 +56,17 @@ const BoardMenuItem = ({ data }: PropsType) => {
       {open && (
         <div>
           {data.children.map((_) => (
-            <div className="flex items-center mb-2 ml-4" key={_.id}>
+            <div className="flex items-center mb-2 ml-4" key={_.boardId}>
               <div className="w-[12px] h-[12px] pl-1 pt-1">
                 <div className="w-[5px] h-[5px] bg-black rounded-full" />
               </div>
-              <Link href={`/dashboard/board?boardId=${_.id}`}>
+              <Link href={`/dashboard/board?boardId=${_.boardId}`}>
                 <p
                   className={`ml-2 ${
-                    get("boardId") === String(_.id) && "text-blue-500"
+                    get("boardId") === String(_.boardId) && "text-blue-500"
                   }`}
                 >
-                  {data.title}
+                  {_.title}
                 </p>
               </Link>
             </div>

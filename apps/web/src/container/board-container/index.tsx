@@ -36,7 +36,7 @@ const BoardContainer = () => {
     title: "",
     createdDate: null,
     createdId: "",
-    id: 0,
+    boardId: 0,
     isDeleted: false,
     modifiedDate: null,
     modifiedId: "",
@@ -44,7 +44,7 @@ const BoardContainer = () => {
     children: [],
     parent: null,
     createdUser: {
-      id: 0,
+      userId: 0,
       profile: "",
       nickname: "",
     },

@@ -26,10 +26,12 @@ const BoardSidebar = () => {
 
   const cancelButtonRef = useRef();
 
+  console.log("Board ", boardData);
+
   if (isLoading) return;
 
   return (
-    <div className="w-[200px] bg-white border-r-2 border-[#EBEBEC] px-4 py-2">
+    <div className="w-[300px] bg-white border-r-2 border-[#EBEBEC] px-4 py-2">
       <div className="flex items-center justify-between w-full">
         <h1 className="text-[14px] font-bold">Content</h1>
         <button
@@ -41,7 +43,7 @@ const BoardSidebar = () => {
       </div>
       <div className="mt-4">
         {boardData.data.data.map((item) => (
-          <BoardMenuItem data={item} key={item.id} />
+          <BoardMenuItem data={item} key={item.boardId} />
         ))}
       </div>
       {open && (

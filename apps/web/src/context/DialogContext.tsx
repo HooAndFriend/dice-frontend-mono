@@ -4,7 +4,7 @@
 import { createContext, useContext, useRef, useState } from "react";
 
 // ** Component Imports
-import AlertDialog from "@/src/components/Dialog/alert-dialog";
+import AlertDialog from "@/src/components/Dialog/AlertDialog";
 import { DialogArgs } from "@/src/type/component";
 
 interface ContextProps {

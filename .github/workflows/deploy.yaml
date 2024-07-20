@@ -36,4 +36,4 @@ jobs:
           chmod 400 $HOME/key.pem
       - name: Copy files to VM And Run Application
         run: |
-          ssh -i $HOME/key.pem aiara@${{ secrets.VM_HOST }} "sh restart.sh nginx"
+          ssh -i $HOME/key.pem dice@${{ secrets.VM_HOST }} "sh restart.sh nginx"

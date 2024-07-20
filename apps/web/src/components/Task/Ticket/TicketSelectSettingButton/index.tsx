@@ -104,6 +104,7 @@ const TicketSelectSettingButton = ({
           {!isLoading &&
             settingData.data.data.map((item) => (
               <div
+                key={item.id}
                 className="w-[168px] h-[32px] hover:bg-[#F4F4FA] rounded-[8px] p-[8px] flex items-center cursor-pointer"
                 onClick={() => {
                   setSelectTypeId(item.id);

@@ -43,7 +43,6 @@ const WorkspacePopover = () => {
       name: item.workspace.name,
       profile: item.workspace.profile,
       uuid: item.workspace.uuid,
-      workspaceFunction: item.workspace.workspaceFunction,
       role: item.role,
     });
 

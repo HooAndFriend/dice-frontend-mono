@@ -47,7 +47,10 @@ const IndexContainerView = ({}: PropsType) => {
       <div className="w-full mt-12 overflow-y-hidden">
         {!isLoading &&
           boardData.data.data.map((item) => (
-            <Link href={`/dashboard/board?boardId=${item.id}`} key={item.id}>
+            <Link
+              href={`/dashboard/board?boardId=${item.boardId}`}
+              key={item.boardId}
+            >
               <li className="w-full p-2 hover:bg-red-200">{item.title}</li>
             </Link>
           ))}

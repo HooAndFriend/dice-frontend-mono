@@ -13,7 +13,6 @@ module.exports = {
       "file.hi-dice.com",
     ],
   },
-  output: process.env.NODE_ENV === "development" ? "standalone" : "export",
   async rewrites() {
     return [
       {

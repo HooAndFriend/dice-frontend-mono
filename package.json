@@ -7,7 +7,7 @@
     "dev": "pnpm clear:port && turbo run dev --parallel --no-cache",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "docker:build": "docker build --no-cache --rm -f Dockerfile -t pinomaker/dice-frontend:latest . --platform linux/amd64",
+    "docker:build": "docker build --no-cache --rm -f Dockerfile -t pinomaker/dice-frontend:latest .",
     "docker:push": "docker push pinomaker/dice-frontend:latest"
   },
   "devDependencies": {

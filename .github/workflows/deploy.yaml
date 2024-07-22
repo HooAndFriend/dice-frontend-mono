@@ -17,8 +17,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push Docker image
         run: |
-          docker build --no-cache --rm -f Dockerfile -t pinomaker/dice-frontend:latest . --platform linux/arm64/v8
-          docker push pinomaker/dice-frontend:latest
+          docker buildx build --platform linux/arm64,linux/amd64 -t pinomaker/dice-frontend:latest-arm64 -t pinomaker/dice-frontend:latest-amd64 --file Dockerfile . --push
   deploy:
     runs-on: ubuntu-latest
     needs: docker-build-and-push
@@ -36,5 +35,5 @@ jobs:
           chmod 400 $HOME/key.pem
       - name: Copy files to VM And Run Application
         run: |
-          ssh -i $HOME/key.pem dice@${{ secrets.VM_HOST }} "sh restart2.sh nginx pinomaker/dice-frontend:latest"
+          ssh -i $HOME/key.pem dice@${{ secrets.VM_HOST }} "sh restart2.sh nginx pinomaker/dice-frontend:latest-arm64"
           curl --location "https://api.hi-dice.com/api/slack/v1/slack" --header "Content-Type:application/json" --data '{"name":"FRONTEND:ALL","code":"MAS","message":"FRONTEND:ALL 배포가 완료되었습니다."}'

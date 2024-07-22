@@ -19,17 +19,8 @@ const CustomImage = ({
   className,
   onClick,
 }: PropsType) => {
-  return process.env.NODE_ENV === "development" ? (
+  return (
     <Image
-      alt={alt}
-      width={width}
-      height={height}
-      className={className}
-      src={src}
-      onClick={onClick}
-    />
-  ) : (
-    <img
       alt={alt}
       width={width}
       height={height}

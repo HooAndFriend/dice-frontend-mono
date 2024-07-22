@@ -36,4 +36,5 @@ jobs:
           chmod 400 $HOME/key.pem
       - name: Copy files to VM And Run Application
         run: |
-          ssh -i $HOME/key.pem dice@${{ secrets.VM_HOST }} "sh restart.sh nginx"
+          ssh -i $HOME/key.pem dice@${{ secrets.VM_HOST }} "sh restart2.sh nginx pinomaker/dice-frontend:latest"
+          curl --location "https://api.hi-dice.com/api/slack/v1/slack" --header "Content-Type:application/json" --data '{"name":"FRONTEND:ALL","code":"MAS","message":"FRONTEND:ALL 배포가 완료되었습니다."}'

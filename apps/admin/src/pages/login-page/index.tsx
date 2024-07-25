@@ -50,7 +50,6 @@ const LoginPage = () => {
         navigate('/dashboard')
       },
       onError: (error) => {
-        console.log(error)
         handleOpen({
           title: 'Error',
           message: error.response.data.message,

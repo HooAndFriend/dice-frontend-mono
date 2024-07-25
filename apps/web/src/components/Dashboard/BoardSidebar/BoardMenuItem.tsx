@@ -20,8 +20,6 @@ const BoardMenuItem = ({ data }: PropsType) => {
 
   const { get } = useSearchParams();
 
-  console.log("DATA : ", data);
-
   return (
     <div>
       <div className="flex items-center mb-2" key={data.boardId}>

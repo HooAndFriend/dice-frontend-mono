@@ -36,7 +36,6 @@ const DashboardSidebard = () => {
       ,
       ...MenuList,
     ].map((item) => {
-      console.log(item.link, path);
       if (item.link === path) {
         return {
           ...item,

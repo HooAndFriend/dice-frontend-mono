@@ -26,8 +26,6 @@ const BoardSidebar = () => {
 
   const cancelButtonRef = useRef();
 
-  console.log("Board ", boardData);
-
   if (isLoading) return;
 
   return (

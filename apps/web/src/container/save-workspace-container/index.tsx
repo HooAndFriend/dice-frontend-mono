@@ -1,33 +1,41 @@
 // ** React Imports
-import { ChangeEvent, KeyboardEvent } from "react";
-
-// ** Type Imports
-import { SaveWorkspaceParam } from "@/src/type/workspace";
+import { KeyboardEvent } from "react";
 
 // ** Component Imports
 import { ImageUploader } from "@/src/components/Image/ImageUploader";
 
+// ** Type Imports
+import {
+  SubmitHandler,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  UseFormWatch,
+} from "react-hook-form";
+import { SaveWorkspaceParam } from "@/src/type/workspace";
+
 interface PropsType {
-  data: SaveWorkspaceParam;
-  handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleWorkspaceTeam: () => void;
   handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
   handleImage: (profile: string) => void;
+  register: UseFormRegister<SaveWorkspaceParam>;
+  handleSubmit: UseFormHandleSubmit<SaveWorkspaceParam>;
+  onSubmit: SubmitHandler<SaveWorkspaceParam>;
+  watch: UseFormWatch<SaveWorkspaceParam>;
 }
 
 const SaveWorkspaceContainer = ({
-  data,
-  handleInput,
   handleEnter,
-  handleWorkspaceTeam,
   handleImage,
+  register,
+  handleSubmit,
+  onSubmit,
+  watch,
 }: PropsType) => {
   return (
     <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
       <div className="-mt-12">
         <div className="flex justify-center w-full">
           <ImageUploader
-            image={data.profile}
+            image={watch("profile")}
             width="192px"
             height="192px"
             borderRadius="96px"
@@ -36,56 +44,50 @@ const SaveWorkspaceContainer = ({
             borderColor="#EBEBEC"
           />
         </div>
-        <div className="flex w-full mt-[30px]">
-          <div>
-            <label
-              htmlFor="name"
-              className="pb-1 pl-1 text-base font-medium text-black font-spoqa"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              className="font-normal font-spoqa border h-[50px] w-[330px] text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
-              placeholder="Enter Your Name"
-              value={data.name}
-              onChange={handleInput}
-              name="name"
-              onKeyDown={handleEnter}
-              required
-            />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex w-full mt-[30px]">
+            <div>
+              <label
+                htmlFor="name"
+                className="pb-1 pl-1 text-base font-medium text-black font-spoqa"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                className="font-normal font-spoqa border h-[50px] w-[330px] text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+                placeholder="Enter Your Name"
+                {...register("name")}
+                onKeyDown={handleEnter}
+              />
+            </div>
           </div>
-        </div>
-        <div className="flex w-full mt-[30px]">
-          <div>
-            <label
-              htmlFor="name"
-              className="pb-1 pl-1 text-base font-medium text-black font-spoqa"
-            >
-              Description
-            </label>
-            <input
-              type="text"
-              id="name"
-              className="font-normal font-spoqa border h-[50px] w-[330px] text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
-              placeholder="Enter Your Description"
-              value={data.comment}
-              onChange={handleInput}
-              name="comment"
-              onKeyDown={handleEnter}
-              required
-            />
+          <div className="flex w-full mt-[30px]">
+            <div>
+              <label
+                htmlFor="name"
+                className="pb-1 pl-1 text-base font-medium text-black font-spoqa"
+              >
+                Description
+              </label>
+              <input
+                type="text"
+                className="font-normal font-spoqa border h-[50px] w-[330px] text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+                placeholder="Enter Your Description"
+                {...register("comment")}
+                onKeyDown={handleEnter}
+              />
+            </div>
           </div>
-        </div>
-        <div className="flex w-full mt-[30px]">
-          <button
-            className="bg-[#623AD6] w-[330px] h-[55px] rounded-2xl text-white"
-            onClick={handleWorkspaceTeam}
-          >
-            ADD
-          </button>
-        </div>
+          <div className="flex w-full mt-[30px]">
+            <button
+              className="bg-[#623AD6] w-[330px] h-[55px] rounded-2xl text-white"
+              type="submit"
+            >
+              ADD
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

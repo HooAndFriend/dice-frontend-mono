@@ -10,33 +10,37 @@ import { KeyboardEvent } from "react";
 import useSWRMutation from "swr/mutation";
 import { Post } from "@/src/repository";
 
-// ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
-
 // ** Component Imports
 import SaveWorkspaceContainer from "@/src/container/save-workspace-container";
 
 // ** Utils Imports
-import useInput from "@/src/hooks/useInput";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 // ** Type Imports
 import { CommonResponse } from "@/src/type/common";
 import { SaveWorkspaceParam } from "@/src/type/workspace";
+import { saveWorksapceSchema } from "@/src/schema/workspace";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
 
 export default function Signup(): JSX.Element {
-  const { data, handleInput, setData } = useInput<SaveWorkspaceParam>({
-    name: "",
-    comment: "",
-    profile:
-      "https://firebasestorage.googleapis.com/v0/b/dice-dev-a5b63.appspot.com/o/images%2FIMG_6159.jpg?alt=media&token=450c0181-8826-4856-b611-509712872450",
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<SaveWorkspaceParam>({
+    resolver: zodResolver(saveWorksapceSchema),
+    defaultValues: {
+      name: "",
+      profile:
+        "https://firebasestorage.googleapis.com/v0/b/dice-dev-a5b63.appspot.com/o/images%2FIMG_6159.jpg?alt=media&token=450c0181-8826-4856-b611-509712872450",
+      comment: "",
+    },
   });
-
-  const { uuid } = useRecoilValue(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
 
   const { handleOpen } = useDialog();
 
@@ -44,10 +48,11 @@ export default function Signup(): JSX.Element {
 
   const saveWorkspace = useSWRMutation(
     "/v1/workspace",
-    async (url: string) => await Post<CommonResponse<void>>(url, data),
+    async (url: string, { arg }: { arg: SaveWorkspaceParam }) =>
+      await Post<CommonResponse<void>>(url, arg),
     {
       onSuccess: ({ data }) => {
-        router.push(`/dashboard/${uuid}`);
+        router.push(`/dashboard`);
       },
       onError: (error) => {
         handleOpen({
@@ -62,22 +67,27 @@ export default function Signup(): JSX.Element {
   );
 
   const handleImage = (profile: string) => {
-    setData((cur) => ({ ...cur, profile }));
+    setValue("profile", profile);
   };
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      saveWorkspace.trigger();
+      handleSubmit(onSubmit)();
     }
+  };
+
+  const onSubmit = (data: SaveWorkspaceParam) => {
+    saveWorkspace.trigger(data);
   };
 
   return (
     <SaveWorkspaceContainer
-      data={data}
-      handleInput={handleInput}
+      watch={watch}
       handleEnter={handleEnter}
-      handleWorkspaceTeam={saveWorkspace.trigger}
       handleImage={handleImage}
+      register={register}
+      handleSubmit={handleSubmit}
+      onSubmit={onSubmit}
     />
   );
 }

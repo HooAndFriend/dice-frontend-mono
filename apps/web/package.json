@@ -28,6 +28,7 @@
     "@egg-/editor-js-quote": "^2.5.0",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
+    "@hookform/resolvers": "^3.9.0",
     "@reduxjs/toolkit": "^2.0.1",
     "@repo/ui": "workspace:*",
     "async-mutex": "^0.4.0",
@@ -47,10 +48,12 @@
     "react-beautiful-dnd": "^13.1.1",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.52.1",
     "react-quill": "^2.0.0",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
-    "swr": "^2.2.4"
+    "swr": "^2.2.4",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.2",

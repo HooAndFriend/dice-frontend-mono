@@ -1,84 +1,93 @@
-"use client";
-
-// ** Next Imports
-import { useRouter } from "next/navigation";
-
 // ** React Imports
-import { KeyboardEvent } from "react";
-
-// ** Service Imports
-import useSWRMutation from "swr/mutation";
-import { Post } from "@/src/repository";
-
-// ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { AuthState, WorkspaceState } from "@/src/app";
-
-// ** Component Imports
-import SaveWorkspaceContainerView from "./save-workspace-container";
-
-// ** Utils Imports
-import useInput from "@/src/hooks/useInput";
+import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
 import { SaveWorkspaceParam } from "@/src/type/workspace";
 
-// ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+// ** Component Imports
+import { ImageUploader } from "@/src/components/Image/ImageUploader";
 
-const SaveWorkspaceContainer = () => {
-  const { data, handleInput, setData } = useInput<SaveWorkspaceParam>({
-    name: "",
-    comment: "",
-    profile:
-      "https://firebasestorage.googleapis.com/v0/b/dice-dev-a5b63.appspot.com/o/images%2FIMG_6159.jpg?alt=media&token=450c0181-8826-4856-b611-509712872450",
-  });
+interface PropsType {
+  data: SaveWorkspaceParam;
+  handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleWorkspaceTeam: () => void;
+  handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
+  handleImage: (profile: string) => void;
+}
 
-  const { uuid } = useRecoilValue(WorkspaceState);
-  const { accessToken } = useRecoilValue(AuthState);
-
-  const { handleOpen } = useDialog();
-
-  const router = useRouter();
-
-  const saveWorkspace = useSWRMutation(
-    "/v1/workspace",
-    async (url: string) => await Post<CommonResponse<void>>(url, data),
-    {
-      onSuccess: ({ data }) => {
-        router.push(`/dashboard/${uuid}`);
-      },
-      onError: (error) => {
-        handleOpen({
-          title: "Error",
-          message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-      },
-    }
-  );
-
-  const handleImage = (profile: string) => {
-    setData((cur) => ({ ...cur, profile }));
-  };
-
-  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      saveWorkspace.trigger();
-    }
-  };
-
+const SaveWorkspaceContainer = ({
+  data,
+  handleInput,
+  handleEnter,
+  handleWorkspaceTeam,
+  handleImage,
+}: PropsType) => {
   return (
-    <SaveWorkspaceContainerView
-      data={data}
-      handleInput={handleInput}
-      handleEnter={handleEnter}
-      handleWorkspaceTeam={saveWorkspace.trigger}
-      handleImage={handleImage}
-    />
+    <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
+      <div className="-mt-12">
+        <div className="flex justify-center w-full">
+          <ImageUploader
+            image={data.profile}
+            width="192px"
+            height="192px"
+            borderRadius="96px"
+            setPath={handleImage}
+            borderWidth="3px"
+            borderColor="#EBEBEC"
+          />
+        </div>
+        <div className="flex w-full mt-[30px]">
+          <div>
+            <label
+              htmlFor="name"
+              className="pb-1 pl-1 text-base font-medium text-black font-spoqa"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="font-normal font-spoqa border h-[50px] w-[330px] text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+              placeholder="Enter Your Name"
+              value={data.name}
+              onChange={handleInput}
+              name="name"
+              onKeyDown={handleEnter}
+              required
+            />
+          </div>
+        </div>
+        <div className="flex w-full mt-[30px]">
+          <div>
+            <label
+              htmlFor="name"
+              className="pb-1 pl-1 text-base font-medium text-black font-spoqa"
+            >
+              Description
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="font-normal font-spoqa border h-[50px] w-[330px] text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+              placeholder="Enter Your Description"
+              value={data.comment}
+              onChange={handleInput}
+              name="comment"
+              onKeyDown={handleEnter}
+              required
+            />
+          </div>
+        </div>
+        <div className="flex w-full mt-[30px]">
+          <button
+            className="bg-[#623AD6] w-[330px] h-[55px] rounded-2xl text-white"
+            onClick={handleWorkspaceTeam}
+          >
+            ADD
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

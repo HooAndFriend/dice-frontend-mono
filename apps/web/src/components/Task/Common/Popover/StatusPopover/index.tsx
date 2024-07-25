@@ -82,7 +82,10 @@ const StatusPopover = ({
           ref={dropdownRef}
         >
           {StatusList.map((item) => (
-            <div className="flex items-center justify-center px-[5px] py-[8px]">
+            <div
+              className="flex items-center justify-center px-[5px] py-[8px]"
+              key={item}
+            >
               <div
                 className="w-[168px] cursor-pointer h-[32px] py-[10px] rounded-[8px] px-[8px] flex items-center"
                 onClick={(e) => {

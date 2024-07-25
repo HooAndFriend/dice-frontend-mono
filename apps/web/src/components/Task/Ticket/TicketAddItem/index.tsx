@@ -83,15 +83,12 @@ const TicketAddItem = ({ epicId }: PropsType) => {
   return (
     <>
       {open ? (
-        <tr className="border-b transition-colors data-[state=selected]:bg-muted cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800">
+        <tr className="border-b transition-colors data-[state=selected]:bg-muted cursor-pointer dark:hover:bg-gray-800 w-full">
           <td
             className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
             style={{ width: "5%" }}
           >
-            <div
-              className="flex items-center justify-center"
-              onClick={handleOpen}
-            >
+            <div className="flex items-center justify-center">
               <TicketSelectSettingButton
                 selectTypeId={selectTypeId}
                 setSelectTypeId={setSelectTypeId}
@@ -99,41 +96,44 @@ const TicketAddItem = ({ epicId }: PropsType) => {
             </div>
           </td>
           <td
-            className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6 flex items-center"
-            style={{ width: "60%" }}
+            className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6"
+            style={{ width: "95%" }}
+            colSpan={4}
           >
-            <CustomInput
-              placeholder="Enter Ticket Name"
-              borderRadius="8px"
-              height="40px"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              onKeyDown={handleEnter}
-            />
-            <div className="ml-4" onClick={saveTicket.trigger}>
-              <CustomImage
-                onClick={handleOpen}
-                src={"/svg/add-black-box.svg"}
-                alt="black-box"
-                width={36}
-                height={36}
+            <div className="flex items-center">
+              <CustomInput
+                placeholder="Enter Ticket Name"
+                borderRadius="8px"
+                height="30px"
+                width="200px"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                onKeyDown={handleEnter}
               />
-            </div>
-            <div className="ml-4 cursor-pointer" onClick={handleClose}>
-              <h1 className="font-bold text-[24px]">X</h1>
+              <div className="ml-4" onClick={saveTicket.trigger}>
+                <CustomImage
+                  src={"/svg/add-black-box.svg"}
+                  alt="black-box"
+                  width={30}
+                  height={30}
+                />
+              </div>
+              <div className="ml-4 cursor-pointer" onClick={handleClose}>
+                <h1 className="font-bold text-[24px]">X</h1>
+              </div>
             </div>
           </td>
         </tr>
       ) : (
-        <tr className="border-b transition-colors data-[state=selected]:bg-muted cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800">
+        <tr
+          className="border-b transition-colors data-[state=selected]:bg-muted cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 w-full"
+          onClick={handleOpen}
+        >
           <td
             className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
             style={{ width: "5%" }}
           >
-            <div
-              className="flex items-center justify-center"
-              onClick={handleOpen}
-            >
+            <div className="flex items-center justify-center">
               <CustomImage
                 src="/svg/add-box.svg"
                 width={36}
@@ -144,7 +144,8 @@ const TicketAddItem = ({ epicId }: PropsType) => {
           </td>
           <td
             className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6"
-            style={{ width: "60%" }}
+            style={{ width: "95%" }}
+            colSpan={4}
           >
             <h1 className="text-[#DDDDDD] text-[16px] font-bold">Add Ticket</h1>
           </td>

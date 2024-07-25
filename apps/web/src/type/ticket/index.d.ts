@@ -57,7 +57,7 @@ export interface GetTicketCommentListResponse extends Response {
 }
 
 export interface SettingListInfo {
-  id: number;
+  ticketSettingId: number;
   name: string;
   type: TicketSettingType;
   description: string;

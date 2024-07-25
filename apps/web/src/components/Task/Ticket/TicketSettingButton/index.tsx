@@ -135,7 +135,7 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
           {settingData.data.data.map((item) => (
             <div
               className="w-[168px] h-[32px] hover:bg-[#F4F4FA] rounded-[8px] p-[8px] flex items-center cursor-pointer"
-              onClick={() => updateTicketSetting.trigger(item.id)}
+              onClick={() => updateTicketSetting.trigger(item.ticketSettingId)}
             >
               <div
                 className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"

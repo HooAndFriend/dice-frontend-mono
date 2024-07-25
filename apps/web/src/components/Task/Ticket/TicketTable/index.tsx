@@ -22,7 +22,7 @@ const TicketTable = ({ word, handleClick, data }: PropsType) => {
   return (
     <div className="w-full h-full bg-white border rounded-lg scrollbar-thumb-slate-700 scrollbar-track-slate-300">
       <div className="relative w-full h-full overflow-y-scroll scrollbar-thin">
-        <div className="relative w-full overflow-auto">
+        <div className="w-full h-full ">
           <table className="w-full text-sm caption-bottom">
             <TicketHeader />
             <tbody className="[&amp;_tr:last-child]:border-0">

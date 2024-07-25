@@ -1,18 +1,9 @@
-// ** React Imports
-import { useState, useEffect, useRef, useMemo } from "react";
-
-// ** Type Imports
-import { Get } from "@/src/repository";
-import { GetTicketSettingListResponse } from "@/src/type/ticket";
-
-// ** Service Imports
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import useSWR from "swr";
-
-// ** Component Imports
 import Tooltip from "../../../Tooltip";
 import CustomImage from "../../../Image/CustomImage";
-
-// ** Utils Imports
+import { Get } from "@/src/repository";
+import { GetTicketSettingListResponse } from "@/src/type/ticket";
 import { getTicketSettingImage } from "@/src/utils/ticket-setting";
 
 interface PropsType {
@@ -25,11 +16,10 @@ const TicketSelectSettingButton = ({
   setSelectTypeId,
 }: PropsType) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOpen = () => {
-    setOpen((c) => !c);
+    setOpen((prev) => !prev);
   };
 
   const {
@@ -44,8 +34,10 @@ const TicketSelectSettingButton = ({
     () =>
       isLoading
         ? null
-        : settingData.data.data.find((item) => item.id === selectTypeId),
-    [settingData, selectTypeId]
+        : settingData?.data?.data.find(
+            (item) => item.ticketSettingId === selectTypeId
+          ),
+    [settingData, selectTypeId, isLoading]
   );
 
   useEffect(() => {
@@ -65,10 +57,16 @@ const TicketSelectSettingButton = ({
     };
   }, []);
 
-  if (error) return;
+  useEffect(() => {
+    if (selectTypeId || isLoading) return;
+
+    setSelectTypeId(settingData?.data?.data[0]?.ticketSettingId || 0);
+  }, [selectTypeId, settingData, isLoading, setSelectTypeId]);
+
+  if (error) return null;
 
   return (
-    <div className="relative z-4">
+    <div className="relative">
       <div
         className="flex items-center cursor-pointer"
         onClick={(e) => {
@@ -79,7 +77,7 @@ const TicketSelectSettingButton = ({
         <Tooltip text={type ? type.type : ""}>
           {type ? (
             <div
-              className="w-[40px] h-[40px] rounded-[6px] flex items-center justify-center"
+              className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
               style={{
                 backgroundColor: getTicketSettingImage(type.type).color,
               }}
@@ -87,8 +85,8 @@ const TicketSelectSettingButton = ({
               <CustomImage
                 src={getTicketSettingImage(type.type).url}
                 alt="ticket_setting"
-                width={25}
-                height={25}
+                width={16}
+                height={16}
               />
             </div>
           ) : (
@@ -98,16 +96,16 @@ const TicketSelectSettingButton = ({
       </div>
       {open && (
         <div
-          className="absolute p-[8px] bg-[#F8FAFC] w-[184px] h-[184px] top-[40px] left-0 rounded-[10px] overflow-y-auto z-10 overflow-x-hidden"
+          className="absolute p-[8px] bg-[#F8FAFC] w-[184px] h-[184px] top-[40px] left-0 rounded-[10px] overflow-y-auto z-50 overflow-x-hidden"
           ref={dropdownRef}
         >
           {!isLoading &&
-            settingData.data.data.map((item) => (
+            settingData?.data?.data.map((item) => (
               <div
-                key={item.id}
+                key={item.ticketSettingId}
                 className="w-[168px] h-[32px] hover:bg-[#F4F4FA] rounded-[8px] p-[8px] flex items-center cursor-pointer"
                 onClick={() => {
-                  setSelectTypeId(item.id);
+                  setSelectTypeId(item.ticketSettingId);
                   handleOpen();
                 }}
               >

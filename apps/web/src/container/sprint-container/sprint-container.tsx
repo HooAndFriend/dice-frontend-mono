@@ -11,7 +11,7 @@ import UserSelectBox from "@/src/components/UserSelectBox";
 import { Ticket } from "@/src/type/ticket";
 import { WorkspaceUser } from "@/src/type/workspace";
 import { EpicStatus } from "@/src/type/epic";
-import SprintArea from "@/src/components/Task/\bSprint/SprintArea";
+import SprintArea from "@/src/components/Task/Sprint/SprintArea";
 
 interface PropsType {
   ticketId: number;

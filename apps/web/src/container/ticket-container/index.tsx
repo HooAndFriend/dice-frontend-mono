@@ -28,6 +28,7 @@ interface PropsType {
   setCheckedList: (list: WorkspaceUser[]) => void;
   setTicketId: (id: number) => void;
   handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  updateOrder: (arg: { ticketId: number; targetTicketId: number }) => void;
 }
 
 const TicketContainer = ({
@@ -44,6 +45,7 @@ const TicketContainer = ({
   setCheckedList,
   handleTypeSelectFilter,
   handleStatusSelectFilter,
+  updateOrder,
 }: PropsType) => {
   return (
     <div className="w-full h-full">
@@ -75,6 +77,7 @@ const TicketContainer = ({
             <TicketTableSkeleton />
           ) : (
             <TicketTable
+              updateOrder={updateOrder}
               handleClick={setTicketId}
               word={word}
               data={data

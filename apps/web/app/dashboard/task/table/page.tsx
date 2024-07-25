@@ -110,6 +110,7 @@ const TicketPage = () => {
       handleTypeSelectFilter={handleTypeSelectFilter}
       handleStatusSelectFilter={handleStatusSelectFilter}
       handleEpicSelectFilter={handleEpicSelectFilter}
+      updateOrder={updateOrder.trigger}
       handleWord={(e) => setWord(e.target.value)}
       setCheckedList={setCheckedList}
       setTicketId={setTicketId}

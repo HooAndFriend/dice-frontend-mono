@@ -1,7 +1,5 @@
-import TicketConatiner from "@/src/container/ticket-container";
-
-const TicketPage = () => {
-  return <TicketConatiner />;
+const GanttPage = () => {
+  return <h1></h1>;
 };
 
-export default TicketPage;
+export default GanttPage;

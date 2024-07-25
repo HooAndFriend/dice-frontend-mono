@@ -1,5 +1,7 @@
+import GanttContainer from "@/src/container/gantt-container";
+
 const GanttPage = () => {
-  return <h1></h1>;
+  return <GanttContainer />;
 };
 
 export default GanttPage;

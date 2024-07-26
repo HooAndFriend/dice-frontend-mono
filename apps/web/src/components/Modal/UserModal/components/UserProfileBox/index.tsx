@@ -1,4 +1,3 @@
-import CustomImage from "@/src/components/Image/CustomImage";
 import { RoleType } from "@/src/type/common";
 import Image from "next/image";
 
@@ -12,12 +11,12 @@ const UserProfileBox = ({ name, profile, role }: PropsType) => {
   return (
     <div className="w-[361px] h-[89px] rounded-3xl shadow-md flex items-center justify-between p-5">
       <div className="flex items-center">
-        <CustomImage
+        <Image
           width={40}
           height={40}
           src={profile}
           alt="profile"
-          className="rounded-full"
+          className="rounded-[20px]"
         />
         <h1 className="ml-3">{name}</h1>
       </div>

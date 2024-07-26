@@ -66,7 +66,7 @@ const UserModalView = ({
                     <div className="w-[1072px] h-[38px] flex justify-between">
                       <div className="font-mosk text-[32px]">User Setting</div>
                       <div onClick={() => setOpen(false)}>
-                        <CustomImage
+                        <Image
                           alt="X"
                           src="/svg/XButton.svg"
                           width={32}
@@ -76,10 +76,12 @@ const UserModalView = ({
                     </div>
                     <div className="flex w-[1072px] h-[601px] pt-[40px] justify-between">
                       <div className="bg-main w-[274px] h-full rounded-tr-[20px] rounded-b-[20px] flex flex-col items-center">
-                        <img
+                        <Image
+                          width={91}
+                          height={91}
                           src={profile}
                           alt="Sample Image"
-                          className="w-[91px] h-[91px] object-cover rounded-full mt-[52px]"
+                          className="w-[91px] h-[91px] object-cover rounded-[20px] mt-[52px]"
                         />
                         <div className="mt-[20px] font-san-bold text-[24px] text-white">
                           {nickname}
@@ -87,7 +89,7 @@ const UserModalView = ({
                         <div className="mt-[57px]">
                           <div
                             onClick={() => setTab(0)}
-                            className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-[16px] font-san-bold cursor-pointer ${
+                            className={`mb-[15px] w-[205px] h-[40px] rounded-[20px] flex items-center text-[16px] font-san-bold cursor-pointer ${
                               tab === 0
                                 ? "text-main bg-white"
                                 : "bg-main text-white"
@@ -127,7 +129,7 @@ const UserModalView = ({
                           </div> */}
                           <div
                             onClick={() => setTab(2)}
-                            className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-[16px] font-san-bold cursor-pointer ${
+                            className={`mb-[15px] w-[205px] h-[40px] rounded-[20px] flex items-center text-[16px] font-san-bold cursor-pointer ${
                               tab === 2
                                 ? "text-main bg-white"
                                 : "bg-main text-white"

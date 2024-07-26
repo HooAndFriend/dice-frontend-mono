@@ -27,7 +27,12 @@ const SprintArea = ({ data }: PropsType) => {
       </div>
       {open && (
         <div className="w-full h-full p-[12px]">
-          <TicketTable handleClick={() => {}} word={""} data={data} />
+          <TicketTable
+            handleClick={() => {}}
+            word={""}
+            data={data}
+            updateOrder={() => {}}
+          />
         </div>
       )}
     </div>

@@ -34,7 +34,7 @@ const SettingContainerView = ({
           data.map((item) => (
             <>
               <TicketSettingItem
-                key={item.id}
+                key={item.ticketSettingId}
                 item={item}
                 handleData={handleData}
               />

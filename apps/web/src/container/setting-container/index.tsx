@@ -38,7 +38,10 @@ const SettingConatiner = () => {
     "/v1/ticket/setting",
     async (url: string) =>
       await Patch<CommonResponse<void>>(url, {
-        data: data.map((item) => ({ ...item, settingId: item.id })),
+        data: data.map((item) => ({
+          ...item,
+          settingId: item.ticketSettingId,
+        })),
       }),
     {
       onSuccess: () => {
@@ -62,7 +65,9 @@ const SettingConatiner = () => {
     type: "name" | "type" | "description"
   ) => {
     setData((cur) =>
-      cur.map((item) => (item.id === id ? { ...item, [type]: value } : item))
+      cur.map((item) =>
+        item.ticketSettingId === id ? { ...item, [type]: value } : item
+      )
     );
   };
 

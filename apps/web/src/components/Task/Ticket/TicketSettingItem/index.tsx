@@ -30,11 +30,11 @@ const TicketSettingItem = ({ item, handleData }: PropsType) => {
   const { handleOpen } = useDialog();
 
   const setType = (type: TicketSettingType) => {
-    handleData(item.id, type, "type");
+    handleData(item.ticketSettingId, type, "type");
   };
 
   const deleteSettingType = useSWRMutation(
-    `/v1/ticket/setting/${item.id}`,
+    `/v1/ticket/setting/${item.ticketSettingId}`,
     async (url: string) => await Delete<CommonResponse<void>>(url),
     {
       onSuccess: () => {
@@ -61,7 +61,9 @@ const TicketSettingItem = ({ item, handleData }: PropsType) => {
         <div className="px-8">
           <CustomInput
             value={item.name}
-            onChange={(e) => handleData(item.id, e.target.value, "name")}
+            onChange={(e) =>
+              handleData(item.ticketSettingId, e.target.value, "name")
+            }
             width="165px"
             height="50px"
             borderRadius="10px"
@@ -70,7 +72,9 @@ const TicketSettingItem = ({ item, handleData }: PropsType) => {
         <div>
           <CustomInput
             value={item.description}
-            onChange={(e) => handleData(item.id, e.target.value, "description")}
+            onChange={(e) =>
+              handleData(item.ticketSettingId, e.target.value, "description")
+            }
             width="600px"
             height="50px"
             borderRadius="10px"

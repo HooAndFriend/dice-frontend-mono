@@ -4,6 +4,7 @@ import UserModal from "@/src/components/Modal/UserModal";
 
 // ** Type Imports
 import { UserStateType } from "@/src/app";
+import Image from "next/image";
 
 interface PropsType {
   open: boolean;
@@ -29,9 +30,12 @@ const UserPopoverView = ({
   return (
     <div>
       <div onClick={handleOpen} className="flex items-center cursor-pointer">
-        <ProfileBox
-          image={userState.profile ? userState.profile : "/images/dice.png"}
+        <Image
+          width={24}
+          height={24}
+          src={userState.profile ? userState.profile : "/images/dice.png"}
           alt="profile"
+          className=" rounded-[12px] mr-[8px]"
         />
         <h1 className="text-[16px]">{userState.nickname}</h1>
       </div>

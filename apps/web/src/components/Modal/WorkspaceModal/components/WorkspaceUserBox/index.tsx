@@ -79,12 +79,12 @@ const WorkspaceUserBox = ({
   return (
     <div className="mb-[21px] w-[726px] h-20 border-[#EBEBEC] border shadow-md rounded-[15px] flex items-center justify-between">
       <div className="flex">
-        <CustomImage
+        <Image
           src={profile}
           alt="Sample Image"
           width={45}
           height={45}
-          className="rounded-full ml-[17px] mr-4 "
+          className="rounded-[23px] ml-[17px] mr-4 "
         />
         <div className="h-[45px]">
           <div className="text-base font-spoqa">{nickname}</div>
@@ -118,7 +118,7 @@ const WorkspaceUserBox = ({
               ADMIN
             </option>
           </select>
-          <CustomImage
+          <Image
             src="/svg/boldX.svg"
             alt="delete"
             width={24}

@@ -89,35 +89,39 @@ const WorkspaceModalView = ({
                     </div>
                     <div className="flex w-[1072px] h-[601px] pt-[40px] justify-between">
                       <div className="bg-main w-[274px] h-[601px] rounded-tr-[20px] rounded-b-[20px] flex flex-col items-center">
-                        <img
+                        <Image
+                          width={91}
+                          height={91}
                           src={profile}
                           alt="Sample Image"
-                          className="w-[91px] h-[91px] object-cover rounded-full mt-[50px]"
+                          className="w-[91px] h-[91px] object-cover rounded-[20px] mt-[50px] "
                         />
                         <div className="mt-[20px] font-san-bold text-[24px] text-white">
                           {name}
                         </div>
                         <div className="w-[187px] h-[29.926px] mt-[60px] flex relative">
                           {data.slice(0, 3).map((item) => (
-                            <CustomImage
+                            <Image
                               src={item.user.profile}
                               key={item.workspaceUserId}
                               alt="Sample Image"
-                              className="w-[29.204px] h-[29.926px] rounded-full"
+                              className="w-[29.204px] h-[29.926px] rounded-[15px]"
                               width={29}
                               height={29}
                             />
                           ))}
-                          <img
+                          <Image
+                            width={29}
+                            height={29}
                             src="/svg/dot.svg"
                             alt="Sample Image"
-                            className="bg-white w-[29.204px] h-[29.926px] rounded-full absolute left-[72.62px]"
+                            className="bg-white w-[29.204px] h-[29.926px] rounded-[15px] absolute left-[72.62px]"
                           />
                         </div>
                         <div className="mt-[35.07px]">
                           <div
                             onClick={() => setTab(0)}
-                            className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-[16px] font-san-bold cursor-pointer ${
+                            className={`mb-[15px] w-[205px] h-[40px] rounded-[20px] flex items-center text-[16px] font-san-bold cursor-pointer ${
                               tab == 0
                                 ? "text-main bg-white"
                                 : "bg-main text-white"
@@ -138,7 +142,7 @@ const WorkspaceModalView = ({
                           </div>
                           <div
                             onClick={() => setTab(1)}
-                            className={`mb-[15px] w-[205px] h-[40px] rounded-full flex items-center text-[16px] font-san-bold cursor-pointer ${
+                            className={`mb-[15px] w-[205px] h-[40px] rounded-[20px] flex items-center text-[16px] font-san-bold cursor-pointer ${
                               tab === 1
                                 ? "text-main bg-white"
                                 : "bg-main text-white"

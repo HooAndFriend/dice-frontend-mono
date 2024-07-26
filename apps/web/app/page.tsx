@@ -18,7 +18,6 @@ import { useSetRecoilState } from "recoil";
 import LoginContainer from "@/src/container/login-container";
 
 // ** Utils Imports
-import useInput from "@/src/hooks/useInput";
 import { firebaseLogin } from "@/src/utils/firebase-auth";
 import { requestNotificationPermission } from "@/src/utils/firebase-push";
 
@@ -35,16 +34,19 @@ import {
 
 // ** Dialog Imports
 import { useDialog } from "@/src/context/DialogContext";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { diceLoginSchema } from "@/src/schema/user";
 
 export default function Page(): JSX.Element {
   const {
-    data: loginUser,
-    handleInput,
-    setData,
-  } = useInput<DiceLoginParma>({
-    email: "",
-    password: "",
-    fcmToken: "",
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<DiceLoginParma>({
+    resolver: zodResolver(diceLoginSchema),
   });
 
   const setUserState = useSetRecoilState(UserState);
@@ -58,7 +60,8 @@ export default function Page(): JSX.Element {
 
   const login = useSWRMutation(
     "/v1/auth",
-    async (url: string) => await Post<DiceLoginResponse>(url, loginUser),
+    async (url: string, { arg }: { arg: DiceLoginParma }) =>
+      await Post<DiceLoginResponse>(url, arg),
     {
       onSuccess: ({ data }) => {
         setAuthState({
@@ -144,7 +147,7 @@ export default function Page(): JSX.Element {
     ) =>
       await Post<DiceSocialLoginResponse>(url, {
         ...arg,
-        fcmToken: loginUser.fcmToken,
+        fcmToken: watch("fcmToken"),
       }),
     {
       onSuccess: ({ data }: any) => {
@@ -179,7 +182,7 @@ export default function Page(): JSX.Element {
             type: arg.type,
             email: arg.email,
             nickname: arg.displayName,
-            fcmToken: loginUser.fcmToken,
+            fcmToken: watch("fcmToken"),
             uuid: uuid || undefined,
           });
         }
@@ -215,24 +218,29 @@ export default function Page(): JSX.Element {
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      login.trigger();
+      handleSubmit(onSubmit)();
     }
+  };
+
+  const onSubmit = (data: DiceLoginParma) => {
+    login.trigger(data);
   };
 
   useEffect(() => {
     requestNotificationPermission().then((fcmToken) => {
-      setData((c) => ({ ...c, fcmToken }));
+      setValue("fcmToken", fcmToken);
     });
   }, []);
 
   return (
     <LoginContainer
-      loginUser={loginUser}
-      handleInput={handleInput}
-      handleLogin={login.trigger}
       handleSocialLogin={handleSocialLogin}
       handleSignup={handleSignup}
       handleEnter={handleEnter}
+      register={register}
+      handleSubmit={handleSubmit}
+      onSubmit={onSubmit}
+      watch={watch}
     />
   );
 }

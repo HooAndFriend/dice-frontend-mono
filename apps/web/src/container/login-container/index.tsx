@@ -1,239 +1,138 @@
-"use client";
-
-// ** Next Imports
-import { useRouter, useSearchParams } from "next/navigation";
-
-// ** React Imports
-import { KeyboardEvent, useEffect } from "react";
-
-// ** Service Imports
-import useSWRMutation from "swr/mutation";
-import { Post } from "@/src/repository";
-
-// ** Recoil Imports
-import { AuthState, UserState, WorkspaceState } from "@/src/app";
-import { useSetRecoilState } from "recoil";
-
-// ** Component Imports
-import LoginContainerView from "./login-container";
-
-// ** Utils Imports
-import useInput from "@/src/hooks/useInput";
-import { firebaseLogin } from "@/src/utils/firebase-auth";
-import { requestNotificationPermission } from "@/src/utils/firebase-push";
+// ** Reacat Imports
+import { ChangeEvent, KeyboardEvent } from "react";
 
 // ** Type Imports
-import {
-  DiceLoginParma,
-  DiceLoginResponse,
-  DiceSocialLoginResponse,
-  DiceSocialSignupResponse,
-  SocialLoginParams,
-  SocialSignupParams,
-  SocialType,
-} from "@/src/type/auth";
+import { DiceLoginParma, SocialType } from "@/src/type/auth";
+import CustomImage from "@/src/components/Image/CustomImage";
 
-// ** Dialog Imports
-import { useDialog } from "../../context/DialogContext";
+interface PropsType {
+  loginUser: DiceLoginParma;
+  handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleLogin: () => void;
+  handleSignup: () => void;
+  handleSocialLogin: (type: SocialType) => void;
+  handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
+}
 
-const LoginContainer = () => {
-  const {
-    data: loginUser,
-    handleInput,
-    setData,
-  } = useInput<DiceLoginParma>({
-    email: "",
-    password: "",
-    fcmToken: "",
-  });
-
-  const setUserState = useSetRecoilState(UserState);
-  const setWorkspaceState = useSetRecoilState(WorkspaceState);
-  const setAuthState = useSetRecoilState(AuthState);
-
-  const { handleOpen } = useDialog();
-
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const login = useSWRMutation(
-    "/v1/auth",
-    async (url: string) => await Post<DiceLoginResponse>(url, loginUser),
-    {
-      onSuccess: ({ data }) => {
-        setAuthState({
-          accessToken: data.token.accessToken,
-          refreshToken: data.token.refreshToken,
-        });
-
-        setUserState({
-          email: data.user.email,
-          profile: data.user.profile,
-          nickname: data.user.nickname,
-        });
-
-        setWorkspaceState({
-          workspaceId: data.workspace[0].workspaceId,
-          name: data.workspace[0].name,
-          profile: data.workspace[0].profile,
-          uuid: data.workspace[0].uuid,
-          role: "ADMIN",
-        });
-        router.push(`/dashboard`);
-      },
-      onError: (error) => {
-        handleOpen({
-          title: "Error",
-          message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-      },
-    }
-  );
-
-  const socialSignup = useSWRMutation(
-    "/v1/auth/social/user",
-    async (url: string, { arg }: { arg: SocialSignupParams }) =>
-      await Post<DiceSocialSignupResponse>(url, {
-        ...arg,
-      }),
-    {
-      onSuccess: ({ data }) => {
-        setAuthState({
-          accessToken: data.token.accessToken,
-          refreshToken: data.token.refreshToken,
-        });
-        setUserState({
-          email: data.user.email,
-          profile: data.user.profile,
-          nickname: data.user.nickname,
-        });
-
-        setWorkspaceState({
-          workspaceId: data.workspace.workspaceId,
-          name: data.workspace.name,
-          profile: data.workspace.profile,
-          uuid: data.workspace.uuid,
-          role: "ADMIN",
-        });
-        router.push("/dashboard");
-      },
-      onError: (error) => {
-        handleOpen({
-          title: "Error",
-          message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-      },
-    }
-  );
-
-  const socialLogin = useSWRMutation(
-    "/v1/auth/social",
-    async (
-      url: string,
-      {
-        arg,
-      }: {
-        arg: SocialLoginParams;
-      }
-    ) =>
-      await Post<DiceSocialLoginResponse>(url, {
-        ...arg,
-        fcmToken: loginUser.fcmToken,
-      }),
-    {
-      onSuccess: ({ data }: any) => {
-        setAuthState({
-          accessToken: data.token.accessToken,
-          refreshToken: data.token.refreshToken,
-        });
-        setUserState({
-          email: data.user.email,
-          profile: data.user.profile,
-          nickname: data.user.nickname,
-        });
-
-        setWorkspaceState({
-          workspaceId: data.workspace[0].workspaceId,
-          name: data.workspace[0].name,
-          profile: data.workspace[0].profile,
-          uuid: data.workspace[0].uuid,
-          role: "ADMIN",
-        });
-
-        router.push(`/dashboard`);
-      },
-      onError: (error) => {
-        if (error.response.data.statusCode === 404) {
-          const arg: SocialLoginParams = JSON.parse(error.config.data);
-
-          const uuid = searchParams.get("uuid");
-
-          socialSignup.trigger({
-            token: arg.token,
-            type: arg.type,
-            email: arg.email,
-            nickname: arg.displayName,
-            fcmToken: loginUser.fcmToken,
-            uuid: uuid || undefined,
-          });
-        }
-
-        return;
-      },
-    }
-  );
-
-  const handleSignup = () => {
-    const uuid = searchParams.get("uuid");
-    if (uuid) {
-      router.push(`/signup?uuid=${uuid}`);
-
-      return;
-    }
-
-    router.push("/signup");
-  };
-
-  const handleSocialLogin = async (type: SocialType) => {
-    firebaseLogin(type).then((res) => {
-      if (!res) return;
-
-      socialLogin.trigger({
-        token: res.uid,
-        type,
-        email: res.email,
-        displayName: res.displayName,
-      });
-    });
-  };
-
-  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      login.trigger();
-    }
-  };
-
-  useEffect(() => {
-    requestNotificationPermission().then((fcmToken) => {
-      setData((c) => ({ ...c, fcmToken }));
-    });
-  }, []);
-
+const LoginContainer = ({
+  loginUser,
+  handleInput,
+  handleLogin,
+  handleSocialLogin,
+  handleSignup,
+  handleEnter,
+}: PropsType) => {
   return (
-    <LoginContainerView
-      loginUser={loginUser}
-      handleInput={handleInput}
-      handleLogin={login.trigger}
-      handleSocialLogin={handleSocialLogin}
-      handleSignup={handleSignup}
-      handleEnter={handleEnter}
-    />
+    <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
+      <div className="bg-white w-[900px] h-[613px] flex shadow-md rounded-[20px]">
+        <div className="w-[449px] h-full  bg-[#F6F8FF] flex">
+          <div className="w-[89px] h-[27px] ml-[34px] mt-[45px] flex items-center">
+            <CustomImage
+              src="/images/dice2.png"
+              alt="leftTop"
+              width={19}
+              height={17}
+            />
+            <div className="ml-1 text-xl font-medium text-main font-open">
+              HIDICE
+            </div>
+          </div>
+          <div className="flex items-end justify-end w-[270px] h-[240px] mt-[332px] ml-[21px]">
+            <CustomImage
+              src="/images/dice.png"
+              alt="My Image"
+              width={270}
+              height={240}
+            />
+          </div>
+        </div>
+        <div className="flex justify-center w-[451px] h-full">
+          <div className="w-[330px] h-[409px]">
+            <div className="flex justify-center mt-[102px]">
+              <div className="w-full">
+                <label
+                  htmlFor="email"
+                  className="block mb-[14px] text-base font-medium text-gray-900 dark:text-black text-[16px] line-height-[24px]"
+                >
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="text"
+                  className="border h-[50px] text-[16px] text-gray-900 text-base p-[15px] rounded-[10px] block w-full border-[#EBEBEC] placeholder-[#DDDDDD] dark:text-black bg-white"
+                  placeholder="Enter Your Email"
+                  onChange={handleInput}
+                  name="email"
+                  value={loginUser.email}
+                  required
+                />
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <div className="w-full mt-[20px]">
+                <label
+                  htmlFor="password"
+                  className="block mb-[14px] text-base font-medium text-gray-900 dark:text-black text-[16px] line-height-[24px]"
+                >
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  className="border h-[50px] text-[16px] text-gray-900 text-base p-[15px] rounded-[10px] block w-full border-[#EBEBEC] placeholder-[#DDDDDD] dark:text-black bg-white"
+                  placeholder="Enter Your Password"
+                  onChange={handleInput}
+                  name="password"
+                  value={loginUser.password}
+                  onKeyDown={handleEnter}
+                  required
+                />
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <div className="w-full mt-12">
+                <button
+                  className="w-full bg-main text-white rounded-[15px] h-[55px] text-[18px] font-san-bold"
+                  onClick={handleLogin}
+                >
+                  LOGIN
+                </button>
+                <div
+                  className="flex justify-end text-[14px] underline w-full text-[#676767] mt-[15px] cursor-pointer"
+                  onClick={handleSignup}
+                >
+                  HIDICE Signup
+                </div>
+              </div>
+            </div>
+            <div className="w-full flex justify-between m-auto mt-[46px]">
+              <div
+                className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
+                onClick={() => handleSocialLogin("GOOGLE")}
+              >
+                <CustomImage
+                  src="/images/google.png"
+                  alt="google"
+                  width={24}
+                  height={24}
+                />
+              </div>
+              <div
+                className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
+                onClick={() => handleSocialLogin("GITHUB")}
+              >
+                <CustomImage
+                  src="/images/github.png"
+                  alt="github"
+                  width={28}
+                  height={28}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -9,6 +9,7 @@ import { WorkspaceStateType } from "@/src/app";
 import WorkspaceModal from "@/src/components/Modal/WorkspaceModal";
 import WorkspaceBox from "./component/workspace-box";
 import CustomImage from "../../Image/CustomImage";
+import Image from "next/image";
 
 interface PropsType {
   open: boolean;
@@ -38,15 +39,15 @@ const WorkspacePopoverView = ({
       <div>
         <div className="py-3 cursor-pointer">
           <div
-            className={`rounded-lg w-[40px] h-[40px] flex justify-center items-center`}
+            className={`w-[40px] h-[40px] flex justify-center items-center`}
             onClick={handleOpen}
           >
-            <CustomImage
+            <Image
               src={workspace.profile}
               width={36}
               height={36}
               alt="profile"
-              className="rounded-lg"
+              className="rounded-[10px]"
             />
           </div>
         </div>

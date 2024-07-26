@@ -53,7 +53,7 @@ const WorkspacePopoverView = ({
         {open && (
           <>
             <div onClick={handleOpen} className="fixed inset-0 z-10" />
-            <div className="popover px-4 rounded-[20px] w-[300px] h-[200px] absolute bg-white shadow-md -translate-x-3 z-10">
+            <div className="popover px-4 pb-4 rounded-[20px] w-[300px] h-[200px] absolute bg-white shadow-md -translate-x-3 z-10 overflow-auto">
               <div className="mt-2">
                 {data.map((item) => (
                   <WorkspaceBox

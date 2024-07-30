@@ -46,7 +46,10 @@ const BoardSaveModal = ({
   const saveQa = useSWRMutation(
     "/v1/board",
     async (url: string) =>
-      await Post<CommonResponse<void>>(url, { ...data, parentId }),
+      await Post<CommonResponse<void>>(url, {
+        ...data,
+        parentId: parentId !== 0 ? parentId : null,
+      }),
     {
       onSuccess: ({ data }) => {
         setOpen(false);

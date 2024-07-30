@@ -58,7 +58,7 @@ const BoardContainer = ({
           </button>
         </div>
       </div>
-      <div className="mt-[12px]">
+      <div className="mt-[24px]">
         {readOnly ? (
           <h1 className="font-bold text-[32px]">{board.title}</h1>
         ) : (
@@ -68,7 +68,7 @@ const BoardContainer = ({
             value={board.title}
             onChange={handleInput}
             name="title"
-            className="h-[40px] w-[600px] border-none"
+            className="h-[40px] w-[600px] border-none  text-[32px]"
           />
         )}
       </div>

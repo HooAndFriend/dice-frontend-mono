@@ -15,6 +15,7 @@ import BoardSaveModal from "../../Modal/BoardSaveModal";
 
 const BoardSidebar = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const [selectedBoardId, setSelectedBoardId] = useState<number>(0);
 
   const {
     data: boardData,
@@ -25,6 +26,11 @@ const BoardSidebar = () => {
   });
 
   const cancelButtonRef = useRef();
+
+  const handleOpen = (boardId: number) => {
+    setSelectedBoardId(boardId);
+    setOpen(true);
+  };
 
   if (isLoading) return;
 
@@ -41,7 +47,11 @@ const BoardSidebar = () => {
       </div>
       <div className="mt-4">
         {boardData.data.data.map((item) => (
-          <BoardMenuItem data={item} key={item.boardId} />
+          <BoardMenuItem
+            data={item}
+            key={item.boardId}
+            handleOpen={handleOpen}
+          />
         ))}
       </div>
       {open && (
@@ -50,6 +60,7 @@ const BoardSidebar = () => {
           setOpen={setOpen}
           refetch={mutate}
           cancelButtonRef={cancelButtonRef}
+          parentId={selectedBoardId}
         />
       )}
     </div>

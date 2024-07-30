@@ -7,6 +7,7 @@ import Tooltip from "@/src/components/Tooltip";
 
 // ** Type Imports
 import { WorkspaceUser } from "@/src/type/workspace";
+import Image from "next/image";
 
 interface PropsType {
   open: boolean;
@@ -41,8 +42,6 @@ const UserSelectPopover = ({
 }: PropsType) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  // const { email } = useRecoilValue(UserState);
-
   useEffect(() => {
     const clickOutside = (e: MouseEvent) => {
       if (
@@ -70,8 +69,8 @@ const UserSelectPopover = ({
         }}
       >
         <Tooltip text={nickname}>
-          <CustomImage
-            className="rounded-full border border-[#EBEBEC] mr-[10px] "
+          <Image
+            className="rounded-[15px] border border-[#EBEBEC] mr-[10px] "
             src={profile ? profile : "/image/dice.png"}
             alt="profile"
             width={width ? width : 30}
@@ -108,8 +107,8 @@ const UserSelectPopover = ({
                     item.user.email === email ? "#F4F4FA" : "white",
                 }}
               >
-                <CustomImage
-                  className="rounded-full border border-[#EBEBEC] mr-[10px]"
+                <Image
+                  className="rounded-[10px] border border-[#EBEBEC] mr-[10px]"
                   alt="profile"
                   src={item.user.profile}
                   width={20}

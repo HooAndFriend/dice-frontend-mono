@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 // ** Recoil Imports
 import { UserState } from "@/src/app";
 import { useRecoilValue } from "recoil";
+import Image from "next/image";
 
 interface PropsType {
   data: CommentInfo;
@@ -39,8 +40,8 @@ const CommentItem = ({
     <div className="w-full mb-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <CustomImage
-            className="rounded-full border border-lightGray mr-[10px]"
+          <Image
+            className="rounded-[15px] border border-lightGray mr-[10px]"
             src={data.user.profile}
             alt="profile"
             width={30}

@@ -293,7 +293,7 @@ const TicketCardView = ({
       <hr className="my-[20px]" />
       <div className="flex items-center">
         <button
-          className="text-[12px] px-2 h-[30px] rounded-lg mr-2"
+          className="text-[12px] px-2 h-[30px] rounded-[8px] mr-2"
           style={{
             backgroundColor: subType === "comment" ? "#623AD6" : "white",
             color: subType === "comment" ? "white" : "#623AD6",
@@ -303,7 +303,7 @@ const TicketCardView = ({
           comment
         </button>
         <button
-          className="text-[12px] px-2 h-[30px] rounded-lg"
+          className="text-[12px] px-2 h-[30px] rounded-[8px]"
           style={{
             backgroundColor: subType === "history" ? "#623AD6" : "white",
             color: subType === "history" ? "white" : "#623AD6",

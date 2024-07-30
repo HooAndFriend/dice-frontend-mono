@@ -6,6 +6,7 @@ import CustomImage from "../../../Image/CustomImage";
 
 // ** Utils Imports
 import dayjs from "dayjs";
+import Image from "next/image";
 
 interface PropsType {
   data: TicketHistory;
@@ -39,8 +40,8 @@ const TicketHistoryItem = ({ data }: PropsType) => {
     <div className="w-full mb-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <CustomImage
-            className="rounded-full border border-lightGray mr-[10px]"
+          <Image
+            className="rounded-[15px] border border-lightGray mr-[10px]"
             alt="profile"
             src={data?.user?.profile || "/image/dice.png"}
             width={30}

@@ -15,7 +15,7 @@ const SprintArea = ({ data }: PropsType) => {
 
   return (
     <div className="w-full bg-gray-200 rounded-[12px]">
-      <div className="w-full h-[70px] flex items-center px-[12px] space-x-4">
+      <div className="w-full h-[50px] flex items-center px-[12px] space-x-4">
         <h1 className="cursor-pointer " onClick={() => setOpen((cur) => !cur)}>
           {">"}
         </h1>
@@ -26,7 +26,7 @@ const SprintArea = ({ data }: PropsType) => {
         <h1>({data.length}개 이슈)</h1>
       </div>
       {open && (
-        <div className="w-full h-full p-[12px]">
+        <div className="w-full h-full px-[12px] pb-[12px]">
           <TicketTable
             handleClick={() => {}}
             word={""}

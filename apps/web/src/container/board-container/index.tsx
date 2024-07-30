@@ -1,144 +1,94 @@
-"use client";
-
 // ** Next Imports
-import { useRouter, useSearchParams } from "next/navigation";
-
-// ** React Imports
-import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
 // ** Component Imports
-import BoardContainerView from "./board-container";
-
-// ** Type Imports
+import CustomImage from "@/src/components/Image/CustomImage";
 import { OutputData } from "@editorjs/editorjs";
-import { CommonResponse } from "@/src/type/common";
-import { BoardDetail, GetBoardResponse } from "@/src/type/board";
-
-// ** Service Imports
-import useSWRMutation from "swr/mutation";
-import { Delete, Get, Put } from "@/src/repository";
-
-// ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
-import useSWR, { mutate } from "swr";
 
 // ** Utils Imports
-import useInput from "@/src/hooks/useInput";
-import IndexContainerView from "./index-container";
+import dayjs from "dayjs";
+import { BoardDetail } from "@/src/type/board";
+import ProfileBox from "@/src/components/ProfileBox";
 
-const BoardContainer = () => {
-  const {
-    data: board,
-    handleInput,
-    setData: setBoard,
-  } = useInput<BoardDetail>({
-    content: "",
-    title: "",
-    createdDate: null,
-    createdId: "",
-    boardId: 0,
-    isDeleted: false,
-    modifiedDate: null,
-    modifiedId: "",
-    orderId: 0,
-    children: [],
-    parent: null,
-    createdUser: {
-      userId: 0,
-      profile: "",
-      nickname: "",
-    },
-  });
+interface PropsType {
+  content: OutputData;
+  readOnly: boolean;
+  board: BoardDetail;
+  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setReadOnly: (readOnly: boolean) => void;
+  handleSave: () => void;
+  handleDelete: () => void;
+  setContent: (content: OutputData) => void;
+}
 
-  const [content, setContent] = useState<OutputData>();
-  const [readOnly, setReadOnly] = useState<boolean>(true);
+const DiceEditor = dynamic(() => import("@/src/components/DiceEditor"), {
+  ssr: false,
+});
 
-  const { get } = useSearchParams();
-  const router = useRouter();
-
-  const { handleOpen } = useDialog();
-
-  const handleSave = () => {
-    updateBoard.trigger();
-  };
-
-  const { mutate: boardRefetch } = useSWR(
-    `/v1/board/${get("boardId")}`,
-    async (url) => {
-      if (!get("boardId")) return;
-      return Get<GetBoardResponse>(url);
-    },
-    {
-      onSuccess: ({ data }) => {
-        setBoard(data);
-        setContent(JSON.parse(data.content));
-      },
-    }
-  );
-
-  const updateBoard = useSWRMutation(
-    "/v1/board",
-    async (url: string) => {
-      return await Put<CommonResponse<void>>(url, {
-        boardId: Number(get("boardId")),
-        title: board.title,
-        content: JSON.stringify(content),
-      });
-    },
-    {
-      onSuccess: ({ data }) => {
-        setReadOnly(true);
-      },
-      onError: (error) => {
-        handleOpen({
-          title: "Error",
-          message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-      },
-    }
-  );
-
-  const deleteBoard = useSWRMutation(
-    "/v1/board/",
-    async (url: string) =>
-      await Delete<CommonResponse<void>>(url + get("boardId")),
-    {
-      onSuccess: ({ data }) => {
-        router.push("/dashboard/board");
-        mutate("/v1/board");
-      },
-      onError: (error) => {
-        handleOpen({
-          title: "Error",
-          message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-      },
-    }
-  );
-
-  useEffect(() => {
-    setReadOnly(true);
-  }, [get("boardId")]);
-
-  if (!get("boardId") || !board) return <IndexContainerView />;
-
+const BoardContainer = ({
+  content,
+  readOnly,
+  board,
+  handleInput,
+  setReadOnly,
+  setContent,
+  handleSave,
+  handleDelete,
+}: PropsType) => {
   return (
-    <BoardContainerView
-      content={content}
-      readOnly={readOnly}
-      board={board}
-      handleInput={handleInput}
-      setReadOnly={setReadOnly}
-      setContent={setContent}
-      handleSave={handleSave}
-      handleDelete={deleteBoard.trigger}
-    />
+    <div className="w-full h-full p-4 bg-white">
+      <div className="flex items-center justify-between">
+        <h1 className="font-bold text-[18px] text-gray-500">
+          {board.parent
+            ? `${board.parent.title}  /  ${board.title}`
+            : board.title}
+        </h1>
+        <div className="flex items-center">
+          <button
+            className="w-[80px] rounded-[5px]  h-[30px] bg-slate-300"
+            onClick={handleDelete}
+          >
+            DELETE
+          </button>
+          <button
+            className="w-[80px] rounded-[5px] ml-2 h-[30px] bg-slate-300"
+            onClick={readOnly ? () => setReadOnly(false) : handleSave}
+          >
+            {readOnly ? "EDIT" : "SAVE"}
+          </button>
+        </div>
+      </div>
+      <div className="mt-[12px]">
+        {readOnly ? (
+          <h1 className="font-bold text-[32px]">{board.title}</h1>
+        ) : (
+          <input
+            type="text"
+            placeholder="Enter Title"
+            value={board.title}
+            onChange={handleInput}
+            name="title"
+            className="h-[40px] w-[600px] border-none"
+          />
+        )}
+      </div>
+      <div className="flex items-center ml-[8px]">
+        <ProfileBox image={board.createdUser.profile} alt="profile" />
+        <div className="ml-[8px]">
+          <h1 className="text-gray-500 text-[12px] ">
+            {dayjs().format("YYYY-MM-DD HH:mm:ss")}
+          </h1>
+        </div>
+      </div>
+      <div className="w-full overflow-y-hidden pt-[8px]">
+        <DiceEditor
+          boardId={board.boardId}
+          content={content}
+          setContent={setContent}
+          readOnly={readOnly}
+        />
+      </div>
+    </div>
   );
 };
 

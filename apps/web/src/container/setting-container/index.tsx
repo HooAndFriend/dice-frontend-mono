@@ -1,85 +1,67 @@
-"use client";
-// ** React Imports
-import { useState } from "react";
-
 // ** Component Imports
-import SettingContainerView from "./setting-container";
-
-// ** Service Imports
-import { Get, Patch } from "@/src/repository";
-import useSWR from "swr";
-import useSWRMutation from "swr/mutation";
+import TicketSettingAddItem from "@/src/components/Task/Ticket/TicketSettingAddItem";
+import TicketSettingItem from "@/src/components/Task/Ticket/TicketSettingItem";
 
 // ** Type Imports
-import {
-  GetTicketSettingListResponse,
-  SettingListInfo,
-  TicketSettingType,
-} from "@/src/type/ticket";
-import { CommonResponse } from "@/src/type/common";
+import { SettingListInfo, TicketSettingType } from "@/src/type/ticket";
+import TicketSettingSkeleton from "./TicketSettingSkeleton";
 
-// ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
-
-const SettingConatiner = () => {
-  const [data, setData] = useState<SettingListInfo[]>([]);
-
-  const { handleOpen } = useDialog();
-
-  const { mutate, isLoading } = useSWR(
-    "/v1/ticket/setting",
-    async (url) => {
-      return await Get<GetTicketSettingListResponse>(url);
-    },
-    { onSuccess: (data) => setData(data.data.data) }
-  );
-
-  const updateTicketSetting = useSWRMutation(
-    "/v1/ticket/setting",
-    async (url: string) =>
-      await Patch<CommonResponse<void>>(url, {
-        data: data.map((item) => ({
-          ...item,
-          settingId: item.ticketSettingId,
-        })),
-      }),
-    {
-      onSuccess: () => {
-        mutate();
-      },
-      onError: (error) => {
-        handleOpen({
-          title: "Error",
-          message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-      },
-    }
-  );
-
-  const handleData = (
+interface PropsType {
+  data: SettingListInfo[];
+  isLoading: boolean;
+  handleData: (
     id: number,
     value: string | TicketSettingType,
     type: "name" | "type" | "description"
-  ) => {
-    setData((cur) =>
-      cur.map((item) =>
-        item.ticketSettingId === id ? { ...item, [type]: value } : item
-      )
-    );
-  };
+  ) => void;
+  updateTicketSetting: () => void;
+  refetch: () => void;
+}
 
+const SettingContainer = ({
+  data,
+  isLoading,
+  handleData,
+  updateTicketSetting,
+  refetch,
+}: PropsType) => {
   return (
-    <SettingContainerView
-      data={data}
-      handleData={handleData}
-      updateTicketSetting={updateTicketSetting.trigger}
-      refetch={mutate}
-      isLoading={isLoading}
-    />
+    <div>
+      <div className="mt-6 overflow-auto w-full bg-white rounded-[20px] shadow-md py-4 px-8">
+        {isLoading ? (
+          <TicketSettingSkeleton />
+        ) : (
+          data.map((item) => (
+            <>
+              <TicketSettingItem
+                key={item.ticketSettingId}
+                item={item}
+                handleData={handleData}
+              />
+              <hr className="my-[25px]" />
+            </>
+          ))
+        )}
+        <div className="w-full h-[75px] flex items-center">
+          <TicketSettingAddItem />
+        </div>
+      </div>
+      <div className="flex justify-end mt-[40px]">
+        <button
+          onClick={refetch}
+          className="w-[275px] h-[55px] text-[#623AD6] border-[#623AD6] rounded-[15px] bg-white border-solid border-[2px]"
+        >
+          RESET
+        </button>
+        <button
+          onClick={updateTicketSetting}
+          className="w-[275px] h-[55px] bg-[#623AD6] text-white rounded-[15px] ml-4"
+        >
+          UPDATE
+        </button>
+      </div>
+    </div>
   );
 };
 
-export default SettingConatiner;
+export default SettingContainer;

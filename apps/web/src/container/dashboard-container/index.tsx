@@ -92,7 +92,7 @@ const DashboardContainer = () => {
             />
           </div>
           <div className="grid gap-6 lg:grid-cols-3">
-            <Card className="col-span-2 bg-white shadow">
+            <Card className="bg-white rounded-[20px] shadow-md">
               <CardHeader>
                 <CardTitle>Tickets Needing Attention</CardTitle>
               </CardHeader>

@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 
 // ** Component Imports
-import TicketContainer from "@/src/container/ticket-container";
+import TableContainer from "@/src/container/table-container";
 
 // ** Service Imports
 import { Get, Patch } from "@/src/repository";
@@ -20,7 +20,7 @@ import { useDialog } from "@/src/context/DialogContext";
 import { WorkspaceUser } from "@/src/type/workspace";
 import { EpicStatus } from "@/src/type/epic";
 
-const TicketPage = () => {
+const TablePage = () => {
   const [word, setWord] = useState<string>("");
   const [selectedEpicIds, setSelectedEpicIds] = useState<number[]>([]);
   const [selectedStatus, setSelectedStatus] = useState<EpicStatus[]>([]);
@@ -98,7 +98,7 @@ const TicketPage = () => {
   if (error || !enabled) return;
 
   return (
-    <TicketContainer
+    <TableContainer
       ticketId={ticketId}
       selectedStatus={selectedStatus}
       selectedTypeIds={selectedTypeIds}
@@ -119,4 +119,4 @@ const TicketPage = () => {
   );
 };
 
-export default TicketPage;
+export default TablePage;

@@ -125,13 +125,13 @@ const TicketItem = ({
       </td>
       <td
         className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6"
-        style={{ width: "60%" }}
+        style={{ width: "55%" }}
       >
         {data.name}
       </td>
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-        style={{ width: "5%" }}
+        style={{ width: "10%" }}
       >
         <div className="flex items-center justify-center">
           <TicketUserButton

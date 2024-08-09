@@ -1,21 +1,11 @@
 // ** Component Imports
+import EpicItem from "../EpicItem";
 
 // ** Type Imports
 import { EpicInfo, SelectContent } from "@/src/type/epic";
 
 // ** Utils Imports
-import {
-  DragDropContext,
-  Draggable,
-  Droppable,
-  DropResult,
-} from "react-beautiful-dnd";
-
-// ** Recoil Imports
-import { WorkspaceState } from "@/src/app";
-import { useRecoilValue } from "recoil";
-import EpicItem from "../EpicItem";
-import EpicAddItem from "../EpicAddItem";
+import { DropResult } from "react-beautiful-dnd";
 
 interface PropsType {
   epicData: EpicInfo[];
@@ -25,42 +15,24 @@ interface PropsType {
 }
 
 const EpicTable = ({ epicData, word, onDragEnd, handleClick }: PropsType) => {
-  const { role } = useRecoilValue(WorkspaceState);
-
   return (
-    <div className="h-[564px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md px-[24px]">
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
+    <div className="w-full h-full bg-white rounded-lg scrollbar-thumb-slate-700 scrollbar-track-slate-300">
+      <div className="relative w-full h-full overflow-y-scroll scrollbar-thin">
+        <div className="w-full h-full ">
+          <table className="w-full text-sm caption-bottom">
+            <tbody className="[&amp;_tr:last-child]:border-0">
               {epicData.map((item) => (
-                <Draggable
+                <EpicItem
                   key={item.epicId}
-                  draggableId={item.epicId.toString()}
-                  index={item.epicId}
-                >
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                    >
-                      <EpicItem
-                        key={item.epicId}
-                        item={item}
-                        word={word}
-                        handleClick={handleClick}
-                      />
-                    </div>
-                  )}
-                </Draggable>
+                  item={item}
+                  word=""
+                  handleClick={() => {}}
+                />
               ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-      {role !== "VIEWER" && <EpicAddItem />}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

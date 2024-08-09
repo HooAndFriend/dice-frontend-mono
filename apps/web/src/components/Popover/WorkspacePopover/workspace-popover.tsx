@@ -48,6 +48,7 @@ const WorkspacePopoverView = ({
               height={36}
               alt="profile"
               className="rounded-[10px]"
+              priority
             />
           </div>
         </div>

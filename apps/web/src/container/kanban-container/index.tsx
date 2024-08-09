@@ -46,7 +46,7 @@ const KanbanContainer = ({ data }: PropsType) => {
                 {data
                   .filter((_) => _.status === item)
                   .map((ticket) => (
-                    <KanbanCard data={ticket} />
+                    <KanbanCard data={ticket} key={ticket.ticketId} />
                   ))}
               </div>
             </div>

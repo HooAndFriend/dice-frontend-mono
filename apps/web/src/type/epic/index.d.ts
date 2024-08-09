@@ -1,5 +1,5 @@
 import { CommonResponse, RoleType } from "../common";
-import { TicketInfo } from "../ticket";
+import { Ticket, TicketInfo } from "../ticket";
 
 export interface GetEpicListResponse extends CommonResponse {
   count: number;
@@ -14,15 +14,15 @@ export interface GetEpicSimpleListResponse extends CommonResponse {
 }
 
 export interface EpicInfo {
-  id: number;
+  epicId: number;
   code: string;
   name: string;
   doneTicketCount: number;
-  ticket: TicketInfo[];
+  ticket: Ticket[];
 }
 
 export interface Epic {
-  id: number;
+  epicId: number;
   name: string;
   orderId: number;
   code: string;

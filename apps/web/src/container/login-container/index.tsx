@@ -107,9 +107,9 @@ const LoginContainer = ({
                   </div>
                 </div>
               </div>
-              <div className="w-full flex justify-between m-auto mt-[46px]">
+              <div className="w-full flex justify-around m-auto mt-[46px]">
                 <div
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
+                  className="flex items-center justify-center w-[48px] h-[48px] bg-white rounded-[24px] shadow-md cursor-pointer"
                   onClick={() => handleSocialLogin("GOOGLE")}
                 >
                   <CustomImage
@@ -120,7 +120,7 @@ const LoginContainer = ({
                   />
                 </div>
                 <div
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md cursor-pointer"
+                  className="flex items-center justify-center w-[48px] h-[48px] bg-white rounded-[24px] shadow-md cursor-pointer"
                   onClick={() => handleSocialLogin("GITHUB")}
                 >
                   <CustomImage

@@ -11,13 +11,7 @@ import TicketIcon from "@/public/svg/ticket-icon.svg";
 import EpicIcon from "@/public/svg/epic-icon.svg";
 import SettintIcon from "@/public/svg/ticket-setting.svg";
 
-// ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { WorkspaceState } from "@/src/app";
-
 const TicketSidebar = () => {
-  const { uuid: worksapceUid } = useRecoilValue(WorkspaceState);
-
   const pathname = usePathname();
 
   const sidebarMenuList = useMemo(
@@ -48,7 +42,7 @@ const TicketSidebar = () => {
           isClicked: false,
         },
         {
-          id: 2,
+          id: 4,
           name: "Table",
           // link: `/dashboard/${worksapceUid}/task/table`,
           link: "/dashboard/task/table",

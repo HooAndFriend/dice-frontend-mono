@@ -41,6 +41,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
       await Post<CommonResponse<void>>(url, {
         name,
         settingId: selectTypeId,
+        epicId,
       }),
     {
       onSuccess: () => {

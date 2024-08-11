@@ -1,31 +1,18 @@
 "use client";
 
 // ** React Imports
-import {
-  MouseEvent,
-  MouseEventHandler,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { useEffect, useMemo, useState } from "react";
 
 // ** Component Imports
 import TicketItem from "@/src/components/Task/Ticket/TicketItem";
-import TicketHeader from "@/src/components/Task/Ticket/TicketHeader";
 import TicketAddItem from "@/src/components/Task/Ticket/TicketAddItem";
-import CustomImage from "@/src/components/Image/CustomImage";
 
 // ** Type Imports
 import { EpicInfo, SelectContent } from "@/src/type/epic";
 import { CommonResponse, NoneType } from "@/src/type/common";
 
 // ** Utils Imports
-import {
-  DragDropContext,
-  Draggable,
-  DropResult,
-  Droppable,
-} from "react-beautiful-dnd";
+import { DropResult } from "react-beautiful-dnd";
 
 // ** Context Imports
 import { useDialog } from "@/src/context/DialogContext";
@@ -106,9 +93,14 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
 
   if (!enabled) return;
 
+  console.log("Item Ticket : ", item.ticket);
+
   return (
-    <tr className="w-full border-b" onClick={handleOpen}>
-      <div className="w-full transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer">
+    <>
+      <tr
+        className="w-full border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
+        onClick={handleOpen}
+      >
         <td
           className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
           style={{ width: "5%" }}
@@ -150,9 +142,9 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
             </div>
           </div>
         </td>
-      </div>
+      </tr>
       {open && (
-        <div className="pl-[24px]">
+        <>
           <DndProvider backend={HTML5Backend}>
             {item.ticket.map((ticket) => (
               <TicketItem
@@ -164,9 +156,10 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
               />
             ))}
           </DndProvider>
-        </div>
+          {role !== "VIEWER" && <TicketAddItem epicId={item.epicId} />}
+        </>
       )}
-    </tr>
+    </>
   );
 };
 

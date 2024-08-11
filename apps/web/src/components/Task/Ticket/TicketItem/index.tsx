@@ -107,7 +107,7 @@ const TicketItem = ({
 
   return (
     <tr
-      className="border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
+      className="border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer w-full"
       onClick={() => handleClick(data.ticketId)}
       data-handler-id={handlerId}
       style={{

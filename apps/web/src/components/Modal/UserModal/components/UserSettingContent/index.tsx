@@ -109,6 +109,7 @@ const UserSettingContent = () => {
           value={data.email}
           name="email"
           onChange={handleInput}
+          disabled
         />
       </div>
       <button

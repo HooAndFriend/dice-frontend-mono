@@ -40,7 +40,7 @@ const KanbanContainer = ({ data }: PropsType) => {
             <div className="w-[300px] flex-shrink-0" key={item}>
               <div className="flex items-center justify-between px-[12px]">
                 <h1>{item}</h1>
-                <h1>+</h1>
+                <h1 className="cursor-pointer ">+</h1>
               </div>
               <div className="p-2">
                 {data

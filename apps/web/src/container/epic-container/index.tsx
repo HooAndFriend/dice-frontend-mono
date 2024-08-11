@@ -46,24 +46,36 @@ const EpicContainer = ({
   onDragEnd,
 }: PropsType) => {
   return (
-    <div className="w-full">
-      {/* <EpicSearchCard
-        word={word}
-        handleWord={handleWord}
-        selectedStatus={selectedStatus}
-        selectedTypeIds={selectedTypeIds}
-        checkedList={checkedList}
-        setCheckedList={setCheckedList}
-        handleTypeSelectFilter={handleTypeSelectFilter}
-        handleStatusSelectFilter={handleStatusSelectFilter}
-      /> */}
-      <div className="mt-[56px] mb-[44px]">
-        <h1 className="text-[18px] font-san-medium">
-          Total Epic : {epicCount}
-        </h1>
+    <div className="w-full h-full">
+      <div className="flex items-center justify-between pt-8 h-[8%]">
+        {/* <div className="flex items-center space-x-4">
+          <CustomSearch width="200px" value={word} onChange={handleWord} />
+          <TicketStatusSelectFilter
+            selectedStatus={selectedStatus}
+            handleEpicSelectFilter={handleStatusSelectFilter}
+          />
+          <TicketTypeSelectFilter
+            selectedTypeIds={selectedTypeIds}
+            handleTypeSelectFilter={handleTypeSelectFilter}
+          />
+          <UserSelectBox
+            checkedList={checkedList}
+            setCheckedList={setCheckedList}
+          />
+        </div>
+        <div className="flex items-center">
+          <h1 className="text-[18px] font-san-medium">
+            Total Ticket : {ticketCount}
+          </h1>
+        </div> */}
       </div>
-      <div className={`${selectContent.id !== 0 && "flex"}`}>
-        <div style={{ width: selectContent.id !== 0 ? "65%" : "100%" }}>
+      <div className={`${selectContent.id !== 0 && "flex"} h-[92%] py-[24px]`}>
+        <div
+          style={{
+            width: selectContent.id !== 0 ? "65%" : "100%",
+            height: "100%",
+          }}
+        >
           {isLoading ? (
             <></>
           ) : (

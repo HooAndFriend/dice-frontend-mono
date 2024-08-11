@@ -1,20 +1,21 @@
 // ** Component Imports
+import { WorkspaceState } from "@/src/app";
 import EpicItem from "../EpicItem";
 
 // ** Type Imports
-import { EpicInfo, SelectContent } from "@/src/type/epic";
+import { EpicInfo } from "@/src/type/epic";
 
 // ** Utils Imports
-import { DropResult } from "react-beautiful-dnd";
+import { useRecoilValue } from "recoil";
+import EpicAddItem from "../EpicAddItem";
 
 interface PropsType {
   epicData: EpicInfo[];
-  word: string;
-  handleClick: (value: SelectContent) => void;
-  onDragEnd: ({ source, destination }: DropResult) => void;
 }
 
-const EpicTable = ({ epicData, word, onDragEnd, handleClick }: PropsType) => {
+const EpicTable = ({ epicData }: PropsType) => {
+  const { role } = useRecoilValue(WorkspaceState);
+
   return (
     <div className="w-full h-full bg-white rounded-[8px] scrollbar-thumb-slate-700 scrollbar-track-slate-300">
       <div className="relative w-full h-full overflow-y-scroll scrollbar-thin">
@@ -29,6 +30,7 @@ const EpicTable = ({ epicData, word, onDragEnd, handleClick }: PropsType) => {
                   handleClick={() => {}}
                 />
               ))}
+              {role !== "VIEWER" && <EpicAddItem />}
             </tbody>
           </table>
         </div>

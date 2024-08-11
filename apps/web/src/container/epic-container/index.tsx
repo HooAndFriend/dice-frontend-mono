@@ -81,8 +81,6 @@ const EpicContainer = ({
           ) : (
             // <EpicTableSkeleton />
             <EpicTable
-              word={word}
-              handleClick={setSelectContent}
               epicData={epicData
                 .filter((item) => item.name.includes(word))
                 .map((item) => ({
@@ -106,7 +104,6 @@ const EpicContainer = ({
                   //       )
                   // ),
                 }))}
-              onDragEnd={onDragEnd}
             />
           )}
         </div>

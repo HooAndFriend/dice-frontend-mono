@@ -66,13 +66,31 @@ const EpicAddItem = () => {
   };
 
   return (
-    <div className="w-full h-[75px] flex items-center">
-      {open ? (
-        <>
+    <tr className="w-full border-b h-[76px]">
+      <td
+        className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+        style={{ width: "5%" }}
+      >
+        <div className="flex items-center justify-center">
+          <div className="flex items-center cursor-pointer">
+            <div
+              className="w-[24px] h-[24px] bg-green-300 items-center justify-center flex font-bold rounded-[6px] cursor-pointer"
+              onClick={handleOpen}
+            >
+              +
+            </div>
+          </div>
+        </div>
+      </td>
+      {open && (
+        <td
+          className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6 flex items-center"
+          style={{ width: "95%" }}
+        >
           <CustomInput
             placeholder="Enter Epic Name"
             borderRadius="8px"
-            height="36px"
+            height="26px"
             value={name}
             onChange={(e) => setName(e.target.value)}
             onKeyDown={handleEnter}
@@ -81,28 +99,16 @@ const EpicAddItem = () => {
             <CustomImage
               src={"/svg/add-black-box.svg"}
               alt="black-box"
-              width={36}
-              height={36}
+              width={26}
+              height={26}
             />
           </div>
           <div className="ml-4 cursor-pointer" onClick={handleClose}>
             <h1 className="font-bold text-[24px]">X</h1>
           </div>
-        </>
-      ) : (
-        <div onClick={handleOpen} className="flex items-center w-full h-full">
-          <CustomImage
-            src="/svg/add-box.svg"
-            width={36}
-            height={36}
-            alt="add-box"
-          />
-          <h1 className="text-[#DDDDDD] text-[16px] font-bold ml-4">
-            Add Epic
-          </h1>
-        </div>
+        </td>
       )}
-    </div>
+    </tr>
   );
 };
 

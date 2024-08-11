@@ -60,7 +60,7 @@ const UserModalView = ({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl">
+              <Dialog.Panel className="relative overflow-hidden text-left transition-all transform bg-white rounded-[8px] shadow-xl">
                 <div className="flex items-center justify-center bg-[#FAFAFB] ">
                   <div className="bg-white w-[1192px] h-[769px] rounded-[20px] shadow-md px-[45px] py-[60px]">
                     <div className="w-[1072px] h-[38px] flex justify-between">

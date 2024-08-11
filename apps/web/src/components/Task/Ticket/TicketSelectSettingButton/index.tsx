@@ -90,7 +90,7 @@ const TicketSelectSettingButton = ({
               />
             </div>
           ) : (
-            <div className="w-[24px] h-[24px] bg-green-300 rounded-lg" />
+            <div className="w-[24px] h-[24px] bg-green-300 rounded-[8px]" />
           )}
         </Tooltip>
       </div>

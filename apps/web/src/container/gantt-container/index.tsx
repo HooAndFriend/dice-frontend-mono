@@ -74,7 +74,7 @@ const GanttContainer = ({}: PropsType) => {
   ];
 
   return (
-    <div className="bg-white mt-[24px] p-[24px] rounded-lg w-full overflow-x-auto relative">
+    <div className="bg-white mt-[24px] p-[24px] rounded-[8px] w-full overflow-x-auto relative">
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border-collapse table-fixed">
           <thead>

@@ -16,7 +16,7 @@ interface PropsType {
 
 const EpicTable = ({ epicData, word, onDragEnd, handleClick }: PropsType) => {
   return (
-    <div className="w-full h-full bg-white rounded-lg scrollbar-thumb-slate-700 scrollbar-track-slate-300">
+    <div className="w-full h-full bg-white rounded-[8px] scrollbar-thumb-slate-700 scrollbar-track-slate-300">
       <div className="relative w-full h-full overflow-y-scroll scrollbar-thin">
         <div className="w-full h-full ">
           <table className="w-full text-sm caption-bottom">

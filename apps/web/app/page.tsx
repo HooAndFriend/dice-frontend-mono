@@ -204,16 +204,26 @@ export default function Page(): JSX.Element {
   };
 
   const handleSocialLogin = async (type: SocialType) => {
-    firebaseLogin(type).then((res) => {
-      if (!res) return;
+    firebaseLogin(type)
+      .then((res) => {
+        if (!res) return;
 
-      socialLogin.trigger({
-        token: res.uid,
-        type,
-        email: res.email,
-        displayName: res.displayName,
+        socialLogin.trigger({
+          token: res.uid,
+          type,
+          email: res.email,
+          displayName: res.displayName,
+        });
+      })
+      .catch((error) => {
+        handleOpen({
+          title: "Error",
+          message: "다른 계정으로 시도해주세요.",
+          logLevel: "warn",
+          buttonText: "Close",
+          type: "alert",
+        });
       });
-    });
   };
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {

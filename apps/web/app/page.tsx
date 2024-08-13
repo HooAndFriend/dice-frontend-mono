@@ -82,7 +82,7 @@ export default function Page(): JSX.Element {
           uuid: data.workspace[0].uuid,
           role: "ADMIN",
         });
-        router.push(`/dashboard`);
+        router.push(`/${data.workspace[0].uuid}/dashboard`);
       },
       onError: (error) => {
         handleOpen({

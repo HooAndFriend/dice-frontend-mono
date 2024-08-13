@@ -76,7 +76,7 @@ const UserSelectBox = ({ checkedList, setCheckedList }: PropsType) => {
         <img
           src="/svg/dot.svg"
           alt="Sample Image"
-          className="bg-white w-[29] h-[29] rounded-full"
+          className="w-[29px] h-[29px]"
         />
       </div>
       {open && (

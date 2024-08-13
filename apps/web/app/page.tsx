@@ -121,7 +121,7 @@ export default function Page(): JSX.Element {
           uuid: data.workspace.uuid,
           role: "ADMIN",
         });
-        router.push("/dashboard");
+        router.push(`/${data.workspace[0].uuid}/dashboard`);
       },
       onError: (error) => {
         handleOpen({
@@ -169,7 +169,7 @@ export default function Page(): JSX.Element {
           role: "ADMIN",
         });
 
-        router.push(`/dashboard`);
+        router.push(`/${data.workspace[0].uuid}/dashboard`);
       },
       onError: (error) => {
         if (error.response.data.statusCode === 404) {

@@ -10,18 +10,21 @@ import MenuItem from "../../MenuItem";
 import WorkspacePopover from "../../Popover/WorkspacePopover";
 import { MenuList } from "@/src/constants/menu";
 import DashboardIcon from "@/public/svg/dashboard.svg";
+import { useRecoilValue } from "recoil";
+import { WorkspaceState } from "@/src/app";
 
 const DashboardSidebard = () => {
   const [path, setPath] = useState<string>("/");
   const [sidbarMenuList, setSidbarMenuList] = useState([]);
+
+  const { uuid } = useRecoilValue(WorkspaceState);
 
   const pathname = usePathname();
 
   useEffect(() => {
     const pathArray = pathname.split("/");
 
-    // setPath(pathArray[3] ? `/${pathArray[3]}` : "/");
-    setPath(pathArray[2] ? `/${pathArray[2]}` : "/");
+    setPath(pathArray[3] ? `/${pathArray[3]}` : "/");
   }, [pathname]);
 
   useEffect(() => {
@@ -41,13 +44,13 @@ const DashboardSidebard = () => {
           ...item,
           isClicked: true,
           // link: `/dashboard/${worksapceUid}/${item.link}`,
-          link: `/dashboard${item.link}`,
+          link: `/${uuid}/dashboard${item.link}`,
         };
       }
       return {
         ...item,
         // link: `/dashboard/${worksapceUid}/${item.link}`,
-        link: `/dashboard${item.link}`,
+        link: `/${uuid}/dashboard${item.link}`,
       };
     });
 

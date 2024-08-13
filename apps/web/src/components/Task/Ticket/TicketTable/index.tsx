@@ -17,6 +17,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 // ** Type Imports
 import { Ticket } from "@/src/type/ticket";
+import EpicHeader from "../../Epic/EpicHeader";
 
 interface PropsType {
   data: Ticket[];
@@ -44,11 +45,11 @@ const TicketTable = ({ word, handleClick, data, updateOrder }: PropsType) => {
   }, []);
 
   return (
-    <div className="w-full h-full bg-white border rounded-lg scrollbar-thumb-slate-700 scrollbar-track-slate-300">
+    <div className="w-full h-full bg-white rounded-[8px] scrollbar-thumb-slate-700 scrollbar-track-slate-300">
       <div className="relative w-full h-full overflow-y-scroll scrollbar-thin">
         <div className="w-full h-full ">
           <table className="w-full text-sm caption-bottom">
-            <TicketHeader />
+            <EpicHeader />
 
             <tbody className="[&amp;_tr:last-child]:border-0">
               <DndProvider backend={HTML5Backend}>

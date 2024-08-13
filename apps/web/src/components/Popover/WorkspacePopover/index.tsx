@@ -1,4 +1,6 @@
 "use client";
+// ** Next Imports
+import { useRouter } from "next/navigation";
 
 // ** React Imports
 import { useRef, useState } from "react";
@@ -20,6 +22,8 @@ import { GetWorkspaceListResponse, WorkspaceInfo } from "@/src/type/workspace";
 const WorkspacePopover = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState);
 
@@ -46,7 +50,7 @@ const WorkspacePopover = () => {
       role: item.role,
     });
 
-    mutate("/v1/qa");
+    router.push(`/${item.workspace.uuid}/dashboard`);
   };
 
   if (isLoading) return;

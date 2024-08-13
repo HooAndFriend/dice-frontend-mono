@@ -166,3 +166,8 @@ export interface DateTask {
   type: string;
   createdDate: Date;
 }
+
+export interface InviteWorksapceUserParam {
+  email: string;
+  role: RoleType;
+}

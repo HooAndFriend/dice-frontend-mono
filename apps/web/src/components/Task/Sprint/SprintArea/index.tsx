@@ -1,8 +1,5 @@
 import { Ticket } from "@/src/type/ticket";
-import TicketSettingButton from "../../Ticket/TicketSettingButton";
-import TicketUserButton from "../../Ticket/TicketUserButton";
 import dayjs from "dayjs";
-import CustomImage from "@/src/components/Image/CustomImage";
 import { useState } from "react";
 import TicketTable from "../../Ticket/TicketTable";
 
@@ -14,7 +11,7 @@ const SprintArea = ({ data }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <div className="w-full bg-gray-200 rounded-[12px]">
+    <div className="w-full bg-white border  rounded-[12px]">
       <div className="w-full h-[50px] flex items-center px-[12px] space-x-4">
         <h1 className="cursor-pointer " onClick={() => setOpen((cur) => !cur)}>
           {">"}
@@ -26,7 +23,7 @@ const SprintArea = ({ data }: PropsType) => {
         <h1>({data.length}개 이슈)</h1>
       </div>
       {open && (
-        <div className="w-full h-full px-[12px] pb-[12px]">
+        <div className="w-full h-full pb-[12px]">
           <TicketTable
             handleClick={() => {}}
             word={""}

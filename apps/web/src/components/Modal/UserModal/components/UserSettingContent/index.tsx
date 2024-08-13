@@ -94,7 +94,7 @@ const UserSettingContent = () => {
         <input
           id="nickname"
           placeholder="Enter Your Nickname"
-          className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+          className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-[8px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
           value={data.nickname}
           name="nickname"
           onChange={handleInput}
@@ -105,10 +105,11 @@ const UserSettingContent = () => {
         <input
           id="email"
           placeholder="Enter Your Email"
-          className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+          className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-[8px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
           value={data.email}
           name="email"
           onChange={handleInput}
+          disabled
         />
       </div>
       <button

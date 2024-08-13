@@ -55,7 +55,7 @@ const SaveWorkspaceContainer = ({
               </label>
               <input
                 type="text"
-                className="font-normal font-spoqa border h-[50px] w-[330px] text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+                className="font-normal font-spoqa border h-[50px] w-[330px] text-gray-900 text-base p-4 rounded-[12px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
                 placeholder="Enter Your Name"
                 {...register("name")}
                 onKeyDown={handleEnter}
@@ -72,7 +72,7 @@ const SaveWorkspaceContainer = ({
               </label>
               <input
                 type="text"
-                className="font-normal font-spoqa border h-[50px] w-[330px] text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+                className="font-normal font-spoqa border h-[50px] w-[330px] text-gray-900 text-base p-4 rounded-[12px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
                 placeholder="Enter Your Description"
                 {...register("comment")}
                 onKeyDown={handleEnter}
@@ -81,7 +81,7 @@ const SaveWorkspaceContainer = ({
           </div>
           <div className="flex w-full mt-[30px]">
             <button
-              className="bg-[#623AD6] w-[330px] h-[55px] rounded-2xl text-white"
+              className="bg-[#623AD6] w-[330px] h-[55px] rounded-[12px] text-white"
               type="submit"
             >
               ADD

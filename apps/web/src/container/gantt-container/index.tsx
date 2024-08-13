@@ -90,6 +90,7 @@ const GanttContainer = ({}: PropsType) => {
                         <td className="p-2 bg-white border min-w-[300px]">
                             릴리즈
                         </td>
+
                     </tr>
                     {tasks.map((item, index) => (
                         <Fragment key={index}>

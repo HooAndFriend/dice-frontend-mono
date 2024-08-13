@@ -1,10 +1,15 @@
+// ** Next Imports
+import dynamic from "next/dynamic";
+
+// ** React Imports
+import { useEffect, useState } from "react";
+
 // ** Component Imports
 import ProfileBox from "../../ProfileBox";
 import UserModal from "@/src/components/Modal/UserModal";
 
 // ** Type Imports
 import { UserStateType } from "@/src/app";
-import Image from "next/image";
 
 interface PropsType {
   open: boolean;
@@ -16,6 +21,7 @@ interface PropsType {
   handleOpen: () => void;
   handleLogout: () => void;
 }
+const DynamicImage = dynamic(() => import("next/image"), { ssr: false });
 
 const UserPopoverView = ({
   open,
@@ -27,17 +33,23 @@ const UserPopoverView = ({
   handleModalOpen,
   handleLogout,
 }: PropsType) => {
+  const [nickname, setNickname] = useState<string>("");
+
+  useEffect(() => {
+    setNickname(userState.nickname);
+  }, [userState]);
+
   return (
     <div>
       <div onClick={handleOpen} className="flex items-center cursor-pointer">
-        <Image
+        <DynamicImage
           width={24}
           height={24}
           src={userState.profile ? userState.profile : "/images/dice.png"}
           alt="profile"
           className=" rounded-[12px] mr-[8px]"
         />
-        <h1 className="text-[16px]">{userState.nickname}</h1>
+        <h1 className="text-[16px]">{nickname}</h1>
       </div>
       {open && (
         <>

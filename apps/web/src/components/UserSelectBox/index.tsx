@@ -76,12 +76,12 @@ const UserSelectBox = ({ checkedList, setCheckedList }: PropsType) => {
         <img
           src="/svg/dot.svg"
           alt="Sample Image"
-          className="bg-white w-[29] h-[29] rounded-full"
+          className="w-[29px] h-[29px]"
         />
       </div>
       {open && (
         <div
-          className="absolute w-[250px] h-[230px] top-[50px] left-0 bg-white shadow-lg rounded-lg overflow-y-auto z-30"
+          className="absolute w-[250px] h-[230px] top-[50px] left-0 bg-white shadow-lg rounded-[8px] overflow-y-auto z-30"
           ref={dropdownRef}
         >
           {data.data.data.map((item) => (

@@ -93,7 +93,7 @@ const WorkspaceSettingContent = () => {
         <input
           id="workspace name"
           placeholder="Enter Your Nickname"
-          className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+          className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-[8px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
           value={isLoading ? "" : data.name}
           onChange={handleInput}
           name="name"
@@ -103,7 +103,7 @@ const WorkspaceSettingContent = () => {
         <label className="text-[18px] font-san-bold">description</label>
         <input
           id="description"
-          className="text-left mt-[14px] font-normal font-spoqa border h-[175px] w-full text-gray-900 text-base p-4 rounded-lg block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+          className="text-left mt-[14px] font-normal font-spoqa border h-[175px] w-full text-gray-900 text-base p-4 rounded-[8px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
           value={isLoading ? "" : data.comment}
           onChange={handleInput}
           name="comment"

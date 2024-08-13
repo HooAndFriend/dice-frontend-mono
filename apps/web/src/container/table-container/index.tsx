@@ -31,7 +31,7 @@ interface PropsType {
   updateOrder: (arg: { ticketId: number; targetTicketId: number }) => void;
 }
 
-const TicketContainer = ({
+const TableContainer = ({
   ticketId,
   data,
   word,
@@ -117,4 +117,4 @@ const TicketContainer = ({
   );
 };
 
-export default TicketContainer;
+export default TableContainer;

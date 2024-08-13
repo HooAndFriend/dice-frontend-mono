@@ -83,7 +83,7 @@ const UserSelectPopover = ({
       </div>
       {open && (
         <div
-          className="absolute w-[222px] h-[158px] bg-white shadow-lg top-[50px] left-0 rounded-lg overflow-y-auto z-10 overflow-x-hidden"
+          className="absolute w-[222px] h-[158px] bg-white shadow-lg top-[50px] left-0 rounded-[8px] overflow-y-auto z-10 overflow-x-hidden"
           ref={dropdownRef}
         >
           <div className="flex items-center justify-center w-full px-2 py-2">

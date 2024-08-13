@@ -81,6 +81,9 @@ const EpicContainer = ({
           ) : (
             // <EpicTableSkeleton />
             <EpicTable
+              handleClick={(value: SelectContent) => {
+                setSelectContent(value);
+              }}
               epicData={epicData
                 .filter((item) => item.name.includes(word))
                 .map((item) => ({

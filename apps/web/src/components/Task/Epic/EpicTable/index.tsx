@@ -3,7 +3,7 @@ import { WorkspaceState } from "@/src/app";
 import EpicItem from "../EpicItem";
 
 // ** Type Imports
-import { EpicInfo } from "@/src/type/epic";
+import { EpicInfo, SelectContent } from "@/src/type/epic";
 
 // ** Utils Imports
 import { useRecoilValue } from "recoil";
@@ -11,9 +11,10 @@ import EpicAddItem from "../EpicAddItem";
 
 interface PropsType {
   epicData: EpicInfo[];
+  handleClick: (value: SelectContent) => void;
 }
 
-const EpicTable = ({ epicData }: PropsType) => {
+const EpicTable = ({ epicData, handleClick }: PropsType) => {
   const { role } = useRecoilValue(WorkspaceState);
 
   return (
@@ -27,7 +28,7 @@ const EpicTable = ({ epicData }: PropsType) => {
                   key={item.epicId}
                   item={item}
                   word=""
-                  handleClick={() => {}}
+                  handleClick={handleClick}
                 />
               ))}
               {role !== "VIEWER" && <EpicAddItem />}

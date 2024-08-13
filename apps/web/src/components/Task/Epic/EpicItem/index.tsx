@@ -93,8 +93,6 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
 
   if (!enabled) return;
 
-  console.log("Item Ticket : ", item.ticket);
-
   return (
     <>
       <tr
@@ -152,7 +150,9 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
                 data={ticket}
                 word={word}
                 isEpic
-                handleClick={() => {}}
+                handleClick={(ticketId: number) => {
+                  handleClick({ id: ticketId, type: "TICKET" });
+                }}
               />
             ))}
           </DndProvider>

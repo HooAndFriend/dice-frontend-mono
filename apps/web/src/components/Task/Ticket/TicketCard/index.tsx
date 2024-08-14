@@ -118,6 +118,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       onSuccess: () => {
         setMode((c) => ({ ...c, [currentArg]: "view" }));
         mutate("/v1/ticket");
+        mutate("/v1/epic");
         mutate(`/v1/ticket/detail/${ticketId}`);
       },
       onError: (error) => {
@@ -161,6 +162,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
         ticketRefetch();
         handleClose();
         mutate("/v1/ticket");
+        mutate("/v1/epic");
         mutate(`/v1/ticket/detail/${ticketId}`);
       },
       onError: (error) => {

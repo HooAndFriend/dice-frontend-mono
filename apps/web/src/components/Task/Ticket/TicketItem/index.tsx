@@ -117,7 +117,7 @@ const TicketItem = ({
     >
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-        style={{ width: "5%" }}
+        style={{ width: "5%", paddingLeft: isEpic ? "48px" : "" }}
       >
         <div className="flex items-center justify-center">
           <TicketSettingButton data={data} isText={false} />

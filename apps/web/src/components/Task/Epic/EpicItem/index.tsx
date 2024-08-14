@@ -144,17 +144,18 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
       {open && (
         <>
           <DndProvider backend={HTML5Backend}>
-            {item.ticket.map((ticket) => (
-              <TicketItem
-                key={ticket.ticketId}
-                data={ticket}
-                word={word}
-                isEpic
-                handleClick={(ticketId: number) => {
-                  handleClick({ id: ticketId, type: "TICKET" });
-                }}
-              />
-            ))}
+            {open &&
+              item.ticket.map((ticket) => (
+                <TicketItem
+                  key={ticket.ticketId}
+                  data={ticket}
+                  word={word}
+                  isEpic
+                  handleClick={(ticketId: number) => {
+                    handleClick({ id: ticketId, type: "TICKET" });
+                  }}
+                />
+              ))}
           </DndProvider>
           {role !== "VIEWER" && <TicketAddItem epicId={item.epicId} />}
         </>

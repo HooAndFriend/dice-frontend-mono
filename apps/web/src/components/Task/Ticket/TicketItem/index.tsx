@@ -127,7 +127,7 @@ const TicketItem = ({
         className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6"
         style={{ width: "55%" }}
       >
-        {data.name}
+        {`${data.code} - ${data.name}`}
       </td>
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"

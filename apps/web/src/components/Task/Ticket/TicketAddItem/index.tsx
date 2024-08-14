@@ -49,6 +49,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
         setOpen(false);
         setName("");
         mutate("/v1/ticket");
+        mutate("/v1/epic");
       },
       onError: (error) => {
         handleModalOpen({

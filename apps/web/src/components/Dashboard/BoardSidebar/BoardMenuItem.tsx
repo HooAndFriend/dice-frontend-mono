@@ -1,12 +1,12 @@
 // ** Next Imports
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import {useSearchParams} from "next/navigation";
 
 // ** React Imports
-import { useState } from "react";
+import {useState} from "react";
 
 // ** Type Imports
-import { BoardInfo } from "@/src/type/board";
+import {BoardInfo} from "@/src/type/board";
 
 // ** Component Imports
 import CustomImage from "../../Image/CustomImage";
@@ -16,10 +16,10 @@ interface PropsType {
   handleOpen: (boardId: number) => void;
 }
 
-const BoardMenuItem = ({ data, handleOpen }: PropsType) => {
+const BoardMenuItem = ({data, handleOpen}: PropsType) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const { get } = useSearchParams();
+  const {get} = useSearchParams();
 
   return (
     <div>
@@ -42,7 +42,7 @@ const BoardMenuItem = ({ data, handleOpen }: PropsType) => {
           {data.children.length > 0 ? (
             <p className="ml-2">{data.title}</p>
           ) : (
-            <Link href={`/dashboard/board?boardId=${data.boardId}`}>
+            <Link href={`board?boardId=${data.boardId}`}>
               <p
                 className={`ml-2 ${
                   get("boardId") === String(data.boardId) && "text-blue-500"
@@ -62,12 +62,12 @@ const BoardMenuItem = ({ data, handleOpen }: PropsType) => {
       </div>
       {open && (
         <div>
-          {data.children.map((_) => (
+          {data.children.map(_ => (
             <div className="flex items-center mb-2 ml-4" key={_.boardId}>
               <div className="w-[12px] h-[12px] pl-1 pt-1">
                 <div className="w-[5px] h-[5px] bg-black rounded-full" />
               </div>
-              <Link href={`/dashboard/board?boardId=${_.boardId}`}>
+              <Link href={`board?boardId=${_.boardId}`}>
                 <p
                   className={`ml-2 ${
                     get("boardId") === String(_.boardId) && "text-blue-500"

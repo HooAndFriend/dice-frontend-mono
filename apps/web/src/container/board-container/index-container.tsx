@@ -5,14 +5,16 @@ import Link from "next/link";
 import CustomImage from "@/src/components/Image/CustomImage";
 
 // ** Service Imports
-import { Get } from "@/src/repository";
+import {Get} from "@/src/repository";
 import useSWR from "swr";
 
 // ** Type Imports
-import { GetBoardListResponse } from "@/src/type/board";
+import {GetBoardListResponse} from "@/src/type/board";
 
 // ** Utils Imports
 import dayjs from "dayjs";
+import {useRecoilValue} from "recoil";
+import {WorkspaceState} from "@/src/app";
 
 interface PropsType {}
 
@@ -21,9 +23,11 @@ const IndexContainerView = ({}: PropsType) => {
     data: boardData,
     isLoading,
     mutate,
-  } = useSWR("/v1/board", async (url) => {
+  } = useSWR("/v1/board", async url => {
     return Get<GetBoardListResponse>(url);
   });
+
+  const {uuid} = useRecoilValue(WorkspaceState);
 
   return (
     <div className="w-full h-full p-4 bg-white">
@@ -46,11 +50,8 @@ const IndexContainerView = ({}: PropsType) => {
       </div>
       <div className="w-full mt-12 overflow-y-hidden">
         {!isLoading &&
-          boardData.data.data.map((item) => (
-            <Link
-              href={`/dashboard/board?boardId=${item.boardId}`}
-              key={item.boardId}
-            >
+          boardData.data.data.map(item => (
+            <Link href={`board?boardId=${item.boardId}`} key={item.boardId}>
               <li className="w-full p-2 hover:bg-red-200">{item.title}</li>
             </Link>
           ))}

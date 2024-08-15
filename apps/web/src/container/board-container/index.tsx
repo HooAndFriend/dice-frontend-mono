@@ -3,11 +3,11 @@ import dynamic from "next/dynamic";
 
 // ** Component Imports
 import CustomImage from "@/src/components/Image/CustomImage";
-import { OutputData } from "@editorjs/editorjs";
+import {OutputData} from "@editorjs/editorjs";
 
 // ** Utils Imports
 import dayjs from "dayjs";
-import { BoardDetail } from "@/src/type/board";
+import {BoardDetail} from "@/src/type/board";
 import ProfileBox from "@/src/components/ProfileBox";
 
 interface PropsType {
@@ -68,7 +68,7 @@ const BoardContainer = ({
             value={board.title}
             onChange={handleInput}
             name="title"
-            className="h-[40px] w-[600px] border-none  text-[32px]"
+            className="h-[40px] w-[600px] border-none  text-[32px] px-0 my-1 font-bold"
           />
         )}
       </div>

@@ -1,17 +1,17 @@
 // ** Component Imports
-import TicketCard from "@/src/components/Task/Ticket/TicketCard";
-import TicketTable from "@/src/components/Task/Ticket/TicketTable";
-import TicketTableSkeleton from "@/src/components/Task/Ticket/TicketTable/TicketTableSkeleton";
-import CustomSearch from "@/src/components/Input/CustomSearch";
-import TicketStatusSelectFilter from "@/src/components/Task/Common/Filter/StatusFilter";
-import TicketTypeSelectFilter from "@/src/components/Task/Common/Filter/TypeFilter";
-import UserSelectBox from "@/src/components/UserSelectBox";
+import TicketCard from '@/src/components/Task/Ticket/TicketCard';
+import TicketTable from '@/src/components/Task/Ticket/TicketTable';
+import TicketTableSkeleton from '@/src/components/Task/Ticket/TicketTable/TicketTableSkeleton';
+import CustomSearch from '@/src/components/Input/CustomSearch';
+import TicketStatusSelectFilter from '@/src/components/Task/Common/Filter/StatusFilter';
+import TicketTypeSelectFilter from '@/src/components/Task/Common/Filter/TypeFilter';
+import UserSelectBox from '@/src/components/UserSelectBox';
 
 // ** Type Imports
-import { Ticket } from "@/src/type/ticket";
-import { WorkspaceUser } from "@/src/type/workspace";
-import { EpicStatus } from "@/src/type/epic";
-import SprintArea from "@/src/components/Task/Sprint/SprintArea";
+import {Ticket} from '@/src/type/ticket';
+import {WorkspaceUser} from '@/src/type/workspace';
+import {EpicStatus} from '@/src/type/epic';
+import SprintArea from '@/src/components/Task/Sprint/SprintArea';
 
 interface PropsType {
   ticketId: number;
@@ -70,9 +70,9 @@ const SprintContainer = ({
           </h1>
         </div>
       </div>
-      <div className={`${ticketId !== 0 && "flex"} h-[92%] py-[24px]`}>
+      <div className={`${ticketId !== 0 && 'flex'} h-[92%] py-[24px]`}>
         <div
-          style={{ width: ticketId !== 0 ? "65%" : "100%", height: "100%" }}
+          style={{width: ticketId !== 0 ? '65%' : '100%', height: '100%'}}
           className="space-y-4 "
         >
           {isLoading ? <TicketTableSkeleton /> : <SprintArea data={data} />}

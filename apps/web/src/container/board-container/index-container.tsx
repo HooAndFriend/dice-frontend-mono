@@ -1,20 +1,20 @@
 // ** Next Imports
-import Link from "next/link";
+import Link from 'next/link'
 
 // ** Component Imports
-import CustomImage from "@/src/components/Image/CustomImage";
+import CustomImage from '@/src/components/Image/CustomImage'
 
 // ** Service Imports
-import {Get} from "@/src/repository";
-import useSWR from "swr";
+import {Get} from '@/src/repository'
+import useSWR from 'swr'
 
 // ** Type Imports
-import {GetBoardListResponse} from "@/src/type/board";
+import {GetBoardListResponse} from '@/src/type/board'
 
 // ** Utils Imports
-import dayjs from "dayjs";
-import {useRecoilValue} from "recoil";
-import {WorkspaceState} from "@/src/app";
+import dayjs from 'dayjs'
+import {useRecoilValue} from 'recoil'
+import {WorkspaceState} from '@/src/app'
 
 interface PropsType {}
 
@@ -23,11 +23,9 @@ const IndexContainerView = ({}: PropsType) => {
     data: boardData,
     isLoading,
     mutate,
-  } = useSWR("/v1/board", async url => {
-    return Get<GetBoardListResponse>(url);
-  });
-
-  const {uuid} = useRecoilValue(WorkspaceState);
+  } = useSWR('/v1/board', async url => {
+    return Get<GetBoardListResponse>(url)
+  })
 
   return (
     <div className="w-full h-full p-4 bg-white">
@@ -36,7 +34,7 @@ const IndexContainerView = ({}: PropsType) => {
       </div>
       <div className="flex items-center mt-4">
         <CustomImage
-          src={"/images/dice.png"}
+          src={'/images/dice.png'}
           width={30}
           height={30}
           alt="profile"
@@ -44,7 +42,7 @@ const IndexContainerView = ({}: PropsType) => {
         <div className="ml-4">
           <h1 className="text-[14px] ">HI-DICE</h1>
           <h1 className="text-gray-500 text-[12px] ">
-            {dayjs().format("YYYY-MM-DD HH:mm:ss")}
+            {dayjs().format('YYYY-MM-DD HH:mm:ss')}
           </h1>
         </div>
       </div>
@@ -57,7 +55,7 @@ const IndexContainerView = ({}: PropsType) => {
           ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default IndexContainerView;
+export default IndexContainerView

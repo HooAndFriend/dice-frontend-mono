@@ -1,29 +1,29 @@
 // ** Next Imports
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic'
 
 // ** Component Imports
-import CustomImage from "@/src/components/Image/CustomImage";
-import {OutputData} from "@editorjs/editorjs";
+import CustomImage from '@/src/components/Image/CustomImage'
+import {OutputData} from '@editorjs/editorjs'
 
 // ** Utils Imports
-import dayjs from "dayjs";
-import {BoardDetail} from "@/src/type/board";
-import ProfileBox from "@/src/components/ProfileBox";
+import dayjs from 'dayjs'
+import {BoardDetail} from '@/src/type/board'
+import ProfileBox from '@/src/components/ProfileBox'
 
 interface PropsType {
-  content: OutputData;
-  readOnly: boolean;
-  board: BoardDetail;
-  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  setReadOnly: (readOnly: boolean) => void;
-  handleSave: () => void;
-  handleDelete: () => void;
-  setContent: (content: OutputData) => void;
+  content: OutputData
+  readOnly: boolean
+  board: BoardDetail
+  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void
+  setReadOnly: (readOnly: boolean) => void
+  handleSave: () => void
+  handleDelete: () => void
+  setContent: (content: OutputData) => void
 }
 
-const DiceEditor = dynamic(() => import("@/src/components/DiceEditor"), {
+const DiceEditor = dynamic(() => import('@/src/components/DiceEditor'), {
   ssr: false,
-});
+})
 
 const BoardContainer = ({
   content,
@@ -54,7 +54,7 @@ const BoardContainer = ({
             className="w-[80px] rounded-[5px] ml-2 h-[30px] bg-slate-300"
             onClick={readOnly ? () => setReadOnly(false) : handleSave}
           >
-            {readOnly ? "EDIT" : "SAVE"}
+            {readOnly ? 'EDIT' : 'SAVE'}
           </button>
         </div>
       </div>
@@ -76,7 +76,7 @@ const BoardContainer = ({
         <ProfileBox image={board.createdUser.profile} alt="profile" />
         <div className="ml-[8px]">
           <h1 className="text-gray-500 text-[12px] ">
-            {dayjs().format("YYYY-MM-DD HH:mm:ss")}
+            {dayjs().format('YYYY-MM-DD HH:mm:ss')}
           </h1>
         </div>
       </div>
@@ -89,7 +89,7 @@ const BoardContainer = ({
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BoardContainer;
+export default BoardContainer

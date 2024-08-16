@@ -1,25 +1,25 @@
 // ** Next Imports
-import Link from "next/link";
-import {useSearchParams} from "next/navigation";
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 
 // ** React Imports
-import {useState} from "react";
+import { useState } from 'react'
 
 // ** Type Imports
-import {BoardInfo} from "@/src/type/board";
+import { BoardInfo } from '@/src/type/board'
 
 // ** Component Imports
-import CustomImage from "../../Image/CustomImage";
+import CustomImage from '../../Image/CustomImage'
 
 interface PropsType {
-  data: BoardInfo;
-  handleOpen: (boardId: number) => void;
+  data: BoardInfo
+  handleOpen: (boardId: number) => void
 }
 
-const BoardMenuItem = ({data, handleOpen}: PropsType) => {
-  const [open, setOpen] = useState<boolean>(false);
+const BoardMenuItem = ({ data, handleOpen }: PropsType) => {
+  const [open, setOpen] = useState<boolean>(false)
 
-  const {get} = useSearchParams();
+  const { get } = useSearchParams()
 
   return (
     <div>
@@ -27,7 +27,7 @@ const BoardMenuItem = ({data, handleOpen}: PropsType) => {
         <div className="flex items-center">
           {data.children.length > 0 ? (
             <CustomImage
-              src={open ? "/svg/arrow-down.svg" : "/svg/arrow-up.svg"}
+              src={open ? '/svg/arrow-down.svg' : '/svg/arrow-up.svg'}
               alt="arrow"
               className="pb-1 cursor-pointer"
               width={12}
@@ -45,7 +45,7 @@ const BoardMenuItem = ({data, handleOpen}: PropsType) => {
             <Link href={`board?boardId=${data.boardId}`}>
               <p
                 className={`ml-2 ${
-                  get("boardId") === String(data.boardId) && "text-blue-500"
+                  get('boardId') === String(data.boardId) && 'text-blue-500'
                 }`}
               >
                 {data.title}
@@ -70,7 +70,7 @@ const BoardMenuItem = ({data, handleOpen}: PropsType) => {
               <Link href={`board?boardId=${_.boardId}`}>
                 <p
                   className={`ml-2 ${
-                    get("boardId") === String(_.boardId) && "text-blue-500"
+                    get('boardId') === String(_.boardId) && 'text-blue-500'
                   }`}
                 >
                   {_.title}
@@ -81,7 +81,7 @@ const BoardMenuItem = ({data, handleOpen}: PropsType) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default BoardMenuItem;
+export default BoardMenuItem

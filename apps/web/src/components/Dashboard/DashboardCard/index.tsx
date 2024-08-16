@@ -4,7 +4,6 @@ import Image from "next/image";
 
 interface PropsType {
   width?: string;
-  height?: string;
   color: string;
   icon: string;
   title: string;
@@ -14,7 +13,6 @@ interface PropsType {
 
 const DashboardCard = ({
   width,
-  height,
   color,
   icon,
   title,
@@ -23,7 +21,7 @@ const DashboardCard = ({
 }: PropsType) => {
   return (
     <div
-      className={`h-[${height ? height : "215px"}] w-[${
+      className={` h-full w-[${
         width ? width : "380px"
       }] bg-white rounded-[20px] shadow-md p-[24px]`}
     >

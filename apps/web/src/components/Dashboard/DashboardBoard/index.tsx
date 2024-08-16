@@ -16,7 +16,7 @@ const DashboardBoard = ({}: PropsType) => {
   );
 
   return (
-    <div className="bg-white rounded-[20px] shadow-md p-[24px]">
+    <div className="bg-white rounded-[20px] shadow-md p-[24px] lg:col-span-1 flex-1">
       <h1 className="text-2xl font-bold">Recent wiki</h1>
       <div className="grid gap-4 pt-[16px]">
         {!isLoading &&

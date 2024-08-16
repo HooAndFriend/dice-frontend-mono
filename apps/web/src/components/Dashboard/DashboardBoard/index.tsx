@@ -8,9 +8,12 @@ import DashboardBoardItem from "./components/DashboardBoardItem";
 interface PropsType {}
 
 const DashboardBoard = ({}: PropsType) => {
-  const { data, isLoading, mutate } = useSWR("/v1/board", async (url) => {
-    return Get<GetBoardListResponse>(url);
-  });
+  const { data, isLoading, mutate } = useSWR(
+    "/v1/board/simple",
+    async (url) => {
+      return Get<GetBoardListResponse>(url);
+    }
+  );
 
   return (
     <div className="bg-white rounded-[20px] shadow-md p-[24px]">

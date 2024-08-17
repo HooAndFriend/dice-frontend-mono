@@ -112,12 +112,16 @@ const TicketItem = ({
       data-handler-id={handlerId}
       style={{
         opacity,
+        width: '100%',
       }}
       ref={ref}
     >
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-        style={{ width: '5%', paddingLeft: isEpic ? '48px' : '' }}
+        style={{
+          width: '5%',
+          paddingLeft: isEpic ? '48px' : '',
+        }}
       >
         <div className="flex items-center justify-center">
           <TicketSettingButton data={data} isText={false} />
@@ -135,7 +139,9 @@ const TicketItem = ({
       </td>
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-        style={{ width: '10%' }}
+        style={{
+          width: '10%',
+        }}
       >
         <div className="flex items-center justify-center">
           <TicketUserButton
@@ -151,13 +157,18 @@ const TicketItem = ({
       </td>
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-        style={{ width: '15%', whiteSpace: 'nowrap' }}
+        style={{
+          width: '15%',
+          whiteSpace: 'nowrap',
+        }}
       >
         {data.dueDate ? dayjs(data.dueDate).format('YYYY-MM-DD') : '-'}
       </td>
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-        style={{ width: '15%' }}
+        style={{
+          width: '15%',
+        }}
       >
         <TicketStatusButton ticketId={data.ticketId} status={data.status} />
       </td>

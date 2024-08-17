@@ -102,26 +102,25 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
           handleOpen()
         }}
       >
-        <Tooltip text={data.ticketSetting ? data.ticketSetting.type : ''}>
-          {data.ticketSetting ? (
-            <div
-              className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
-              style={{
-                backgroundColor: getTicketSettingImage(data.ticketSetting.type)
-                  .color,
-              }}
-            >
-              <CustomImage
-                src={getTicketSettingImage(data.ticketSetting.type).url}
-                alt="ticket_setting"
-                width={16}
-                height={16}
-              />
-            </div>
-          ) : (
-            <div className="w-[24px] h-[24px] bg-green-300 rounded-[6px]" />
-          )}
-        </Tooltip>
+        {data.ticketSetting ? (
+          <div
+            className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
+            style={{
+              backgroundColor: getTicketSettingImage(data.ticketSetting.type)
+                .color,
+            }}
+          >
+            <CustomImage
+              src={getTicketSettingImage(data.ticketSetting.type).url}
+              alt="ticket_setting"
+              width={16}
+              height={16}
+            />
+          </div>
+        ) : (
+          <div className="w-[24px] h-[24px] bg-green-300 rounded-[6px]" />
+        )}
+
         {isText && (
           <h3 className="text-[16px] ml-4">
             {data.ticketSetting ? data.ticketSetting.type : '-'}

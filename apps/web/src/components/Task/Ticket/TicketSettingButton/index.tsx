@@ -123,7 +123,7 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
 
         {isText && (
           <h3 className="text-[16px] ml-4">
-            {data.ticketSetting ? data.ticketSetting.type : '-'}
+            {data.ticketSetting ? data.ticketSetting.name : '-'}
           </h3>
         )}
       </div>

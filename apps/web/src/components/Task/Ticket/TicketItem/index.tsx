@@ -1,25 +1,25 @@
 // ** React Imports
-import { useRef } from "react";
+import { useRef } from 'react'
 
 // ** Component Imports
-import TicketUserButton from "../TicketUserButton";
-import TicketStatusButton from "../TicketStatusButton";
-import TicketSettingButton from "../TicketSettingButton";
-import type { Identifier, XYCoord } from "dnd-core";
+import TicketUserButton from '../TicketUserButton'
+import TicketStatusButton from '../TicketStatusButton'
+import TicketSettingButton from '../TicketSettingButton'
+import type { Identifier, XYCoord } from 'dnd-core'
 
 // ** Utils Imports
-import dayjs from "dayjs";
-import { useDrag, useDrop } from "react-dnd";
+import dayjs from 'dayjs'
+import { useDrag, useDrop } from 'react-dnd'
 
 // ** Type Imports
-import { Ticket } from "@/src/type/ticket";
+import { Ticket } from '@/src/type/ticket'
 
 interface PropsType {
-  data: Ticket;
-  isEpic: boolean;
-  word: string;
-  handleClick: (id: number) => void;
-  moveCard?: (dragIndex: number, hoverIndex: number) => void;
+  data: Ticket
+  isEpic: boolean
+  word: string
+  handleClick: (id: number) => void
+  moveCard?: (dragIndex: number, hoverIndex: number) => void
 }
 
 const TicketItem = ({
@@ -29,81 +29,81 @@ const TicketItem = ({
   word,
   moveCard,
 }: PropsType) => {
-  const ref = useRef<HTMLTableRowElement>(null);
+  const ref = useRef<HTMLTableRowElement>(null)
   const [{ handlerId }, drop] = useDrop<
     Ticket,
     void,
     { handlerId: Identifier | null }
   >({
-    accept: "card",
+    accept: 'card',
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
-      };
+      }
     },
     drop(item: Ticket, monitor) {
       if (!ref.current) {
-        return;
+        return
       }
-      const dragIndex = item.ticketId;
-      const hoverIndex = data.ticketId;
+      const dragIndex = item.ticketId
+      const hoverIndex = data.ticketId
 
-      console.log("DRAG INDEX : ", dragIndex);
-      console.log("HOVER INDEX : ", hoverIndex);
+      console.log('DRAG INDEX : ', dragIndex)
+      console.log('HOVER INDEX : ', hoverIndex)
 
       if (dragIndex === hoverIndex) {
-        return;
+        return
       }
 
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      const hoverBoundingRect = ref.current?.getBoundingClientRect()
 
       const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
 
-      const clientOffset = monitor.getClientOffset();
-      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
+      const clientOffset = monitor.getClientOffset()
+      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
+        return
       }
 
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
+        return
       }
 
-      moveCard(dragIndex, hoverIndex);
-      item.orderId = hoverIndex;
+      moveCard(dragIndex, hoverIndex)
+      item.orderId = hoverIndex
     },
-  });
+  })
 
   const [{ isDragging }, drag] = useDrag({
-    type: "card",
+    type: 'card',
     item: () => {
-      return { ...data };
+      return { ...data }
     },
     collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),
     }),
-  });
+  })
 
-  const opacity = isDragging ? 0 : 1;
+  const opacity = isDragging ? 0 : 1
 
-  drag(drop(ref));
+  drag(drop(ref))
 
   const highlightFirstMatch = (text: string, word: string) => {
-    const index = text.toLowerCase().indexOf(word.toLowerCase());
-    if (index === -1) return text;
-    const before = text.slice(0, index);
-    const match = text.slice(index, index + word.length);
-    const after = text.slice(index + word.length);
+    const index = text.toLowerCase().indexOf(word.toLowerCase())
+    if (index === -1) return text
+    const before = text.slice(0, index)
+    const match = text.slice(index, index + word.length)
+    const after = text.slice(index + word.length)
     return (
       <>
         {before}
         <mark>{match}</mark>
         {after}
       </>
-    );
-  };
+    )
+  }
 
   return (
     <tr
@@ -117,7 +117,7 @@ const TicketItem = ({
     >
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-        style={{ width: "5%", paddingLeft: isEpic ? "48px" : "" }}
+        style={{ width: '5%', paddingLeft: isEpic ? '48px' : '' }}
       >
         <div className="flex items-center justify-center">
           <TicketSettingButton data={data} isText={false} />
@@ -125,19 +125,23 @@ const TicketItem = ({
       </td>
       <td
         className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6"
-        style={{ width: "55%" }}
+        style={{
+          width: '55%',
+          textDecorationLine:
+            data.status === 'COMPLETE' ? 'line-through' : 'none',
+        }}
       >
         {`${data.code} - ${data.name}`}
       </td>
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-        style={{ width: "10%" }}
+        style={{ width: '10%' }}
       >
         <div className="flex items-center justify-center">
           <TicketUserButton
-            profile={data.worker ? data.worker.profile : "/images/dice.png"}
-            nickname={data.worker ? data.worker.nickname : "-"}
-            email={data.worker ? data.worker.email : "-"}
+            profile={data.worker ? data.worker.profile : '/images/dice.png'}
+            nickname={data.worker ? data.worker.nickname : '-'}
+            email={data.worker ? data.worker.email : '-'}
             userId={data.worker?.userId}
             type="user"
             ticketId={data.ticketId}
@@ -147,18 +151,18 @@ const TicketItem = ({
       </td>
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-        style={{ width: "15%", whiteSpace: "nowrap" }}
+        style={{ width: '15%', whiteSpace: 'nowrap' }}
       >
-        {data.dueDate ? dayjs(data.dueDate).format("YYYY-MM-DD") : "-"}
+        {data.dueDate ? dayjs(data.dueDate).format('YYYY-MM-DD') : '-'}
       </td>
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-        style={{ width: "15%" }}
+        style={{ width: '15%' }}
       >
         <TicketStatusButton ticketId={data.ticketId} status={data.status} />
       </td>
     </tr>
-  );
-};
+  )
+}
 
-export default TicketItem;
+export default TicketItem

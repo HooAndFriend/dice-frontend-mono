@@ -1,53 +1,53 @@
 // ** React Imports
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from 'react'
 
 // ** Type Imports
-import { Get, Patch } from "@/src/repository";
-import { CommonResponse } from "@/src/type/common";
+import { Get, Patch } from '@/src/repository'
+import { CommonResponse } from '@/src/type/common'
 import {
   GetTicketSettingListResponse,
   Ticket,
   TicketInfo,
-} from "@/src/type/ticket";
+} from '@/src/type/ticket'
 
 // ** Service Imports
-import useSWRMutation from "swr/mutation";
-import useSWR, { mutate } from "swr";
+import useSWRMutation from 'swr/mutation'
+import useSWR, { mutate } from 'swr'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+import { useDialog } from '@/src/context/DialogContext'
 
 // ** Component Imports
-import Tooltip from "../../../Tooltip";
-import CustomImage from "../../../Image/CustomImage";
-import { getTicketSettingImage } from "@/src/utils/ticket-setting";
+import Tooltip from '../../../Tooltip'
+import CustomImage from '../../../Image/CustomImage'
+import { getTicketSettingImage } from '@/src/utils/ticket-setting'
 
 interface PropsType {
-  data: Ticket | TicketInfo;
-  isText: boolean;
+  data: Ticket | TicketInfo
+  isText: boolean
 }
 
 const TicketSettingButton = ({ data, isText }: PropsType) => {
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null)
 
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false)
 
-  const { handleOpen: handleModalOpen } = useDialog();
+  const { handleOpen: handleModalOpen } = useDialog()
 
   const handleOpen = () => {
-    setOpen((c) => !c);
-  };
+    setOpen((c) => !c)
+  }
 
   const {
     data: settingData,
     error,
     isLoading,
-  } = useSWR("/v1/ticket/setting", async (url) =>
-    Get<GetTicketSettingListResponse>(url)
-  );
+  } = useSWR('/v1/ticket/setting', async (url) =>
+    Get<GetTicketSettingListResponse>(url),
+  )
 
   const updateTicketSetting = useSWRMutation(
-    "/v1/ticket/ticket-setting",
+    '/v1/ticket/ticket-setting',
     async (url: string, { arg }: { arg: number }) =>
       await Patch<CommonResponse<void>>(url, {
         ticketId: data.ticketId,
@@ -55,21 +55,22 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
       }),
     {
       onSuccess: () => {
-        setOpen(false);
-        mutate("/v1/ticket");
-        mutate(`/v1/ticket/detail/${data.ticketId}`);
+        setOpen(false)
+        mutate('/v1/ticket')
+        mutate('/v1/epic')
+        mutate(`/v1/ticket/detail/${data.ticketId}`)
       },
       onError: (error) => {
         handleModalOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
   useEffect(() => {
     const clickOutside = (e: MouseEvent) => {
@@ -77,31 +78,31 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target as Node)
       ) {
-        handleOpen();
+        handleOpen()
       }
-    };
+    }
 
-    document.addEventListener("mousedown", clickOutside);
+    document.addEventListener('mousedown', clickOutside)
 
     return () => {
-      document.removeEventListener("mousedown", clickOutside);
-    };
-  }, []);
+      document.removeEventListener('mousedown', clickOutside)
+    }
+  }, [])
 
-  if (isLoading) return;
+  if (isLoading) return
 
-  if (error) return;
+  if (error) return
 
   return (
     <div className="relative z-4">
       <div
         className="flex items-center cursor-pointer"
         onClick={(e) => {
-          e.stopPropagation();
-          handleOpen();
+          e.stopPropagation()
+          handleOpen()
         }}
       >
-        <Tooltip text={data.ticketSetting ? data.ticketSetting.type : ""}>
+        <Tooltip text={data.ticketSetting ? data.ticketSetting.type : ''}>
           {data.ticketSetting ? (
             <div
               className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
@@ -123,7 +124,7 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
         </Tooltip>
         {isText && (
           <h3 className="text-[16px] ml-4">
-            {data.ticketSetting ? data.ticketSetting.type : "-"}
+            {data.ticketSetting ? data.ticketSetting.type : '-'}
           </h3>
         )}
       </div>
@@ -156,7 +157,7 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TicketSettingButton;
+export default TicketSettingButton

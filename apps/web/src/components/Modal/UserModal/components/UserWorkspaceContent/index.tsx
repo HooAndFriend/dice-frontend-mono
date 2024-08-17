@@ -1,20 +1,20 @@
 // ** Service Imports
-import { Get } from "@/src/repository";
-import useSWR from "swr";
+import { Get } from '@/src/repository'
+import useSWR from 'swr'
 
 // ** Type Imports
-import { GetUserWorkspaceListResponse } from "@/src/type/workspace";
+import { GetUserWorkspaceListResponse } from '@/src/type/workspace'
 
 // ** Component Imports
-import UserProfileBox from "../UserProfileBox";
+import UserProfileBox from '../UserProfileBox'
 
 const UserWorkspaceContent = () => {
   const { data, error, isLoading } = useSWR(
-    "/v1/workspace-user/my",
-    async (url) => Get<GetUserWorkspaceListResponse>(url)
-  );
+    '/v1/workspace-user/my',
+    async (url) => Get<GetUserWorkspaceListResponse>(url),
+  )
 
-  if (isLoading) return;
+  if (isLoading) return
 
   return (
     <div className="w-full h-full">
@@ -30,7 +30,7 @@ const UserWorkspaceContent = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UserWorkspaceContent;
+export default UserWorkspaceContent

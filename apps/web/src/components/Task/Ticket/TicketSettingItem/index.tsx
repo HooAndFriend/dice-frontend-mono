@@ -1,56 +1,56 @@
 // ** Component Imports
-import { SettingListInfo, TicketSettingType } from "@/src/type/ticket";
+import { SettingListInfo, TicketSettingType } from '@/src/type/ticket'
 
 // ** Component Imports
-import CustomInput from "../../../Input/CustomInput";
-import CustomImage from "../../../Image/CustomImage";
-import TicketSettingTypeButton from "../TicketSettingTypeButton";
+import CustomInput from '../../../Input/CustomInput'
+import CustomImage from '../../../Image/CustomImage'
+import TicketSettingTypeButton from '../TicketSettingTypeButton'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+import { useDialog } from '@/src/context/DialogContext'
 
 // ** Service Imports
-import useSWRMutation from "swr/mutation";
-import { Delete } from "@/src/repository";
-import { mutate } from "swr";
+import useSWRMutation from 'swr/mutation'
+import { Delete } from '@/src/repository'
+import { mutate } from 'swr'
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
+import { CommonResponse } from '@/src/type/common'
 
 interface PropsType {
-  item: SettingListInfo;
+  item: SettingListInfo
   handleData: (
     id: number,
     value: string | TicketSettingType,
-    type: "name" | "type" | "description"
-  ) => void;
+    type: 'name' | 'type' | 'description',
+  ) => void
 }
 
 const TicketSettingItem = ({ item, handleData }: PropsType) => {
-  const { handleOpen } = useDialog();
+  const { handleOpen } = useDialog()
 
   const setType = (type: TicketSettingType) => {
-    handleData(item.ticketSettingId, type, "type");
-  };
+    handleData(item.ticketSettingId, type, 'type')
+  }
 
   const deleteSettingType = useSWRMutation(
     `/v1/ticket/setting/${item.ticketSettingId}`,
     async (url: string) => await Delete<CommonResponse<void>>(url),
     {
       onSuccess: () => {
-        mutate("/v1/ticket/setting");
+        mutate('/v1/ticket/setting')
       },
       onError: (error) => {
         handleOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
   return (
     <div className="flex items-center justify-between">
@@ -62,7 +62,7 @@ const TicketSettingItem = ({ item, handleData }: PropsType) => {
           <CustomInput
             value={item.name}
             onChange={(e) =>
-              handleData(item.ticketSettingId, e.target.value, "name")
+              handleData(item.ticketSettingId, e.target.value, 'name')
             }
             width="165px"
             height="50px"
@@ -73,7 +73,7 @@ const TicketSettingItem = ({ item, handleData }: PropsType) => {
           <CustomInput
             value={item.description}
             onChange={(e) =>
-              handleData(item.ticketSettingId, e.target.value, "description")
+              handleData(item.ticketSettingId, e.target.value, 'description')
             }
             width="600px"
             height="50px"
@@ -83,14 +83,14 @@ const TicketSettingItem = ({ item, handleData }: PropsType) => {
       </div>
       <div onClick={() => deleteSettingType.trigger()} className="ml-4">
         <CustomImage
-          src={"/svg/boldX.svg"}
+          src={'/svg/boldX.svg'}
           alt="black-box"
           width={36}
           height={36}
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TicketSettingItem;
+export default TicketSettingItem

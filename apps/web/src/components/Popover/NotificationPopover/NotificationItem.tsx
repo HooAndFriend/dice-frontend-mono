@@ -1,43 +1,43 @@
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+import { useDialog } from '@/src/context/DialogContext'
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
-import { Notification } from "@/src/type/notification";
+import { CommonResponse } from '@/src/type/common'
+import { Notification } from '@/src/type/notification'
 
 // ** Utils Imports
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
 // ** Service Imports
-import { Patch } from "@/src/repository";
-import useSWRMutation from "swr/mutation";
-import { mutate } from "swr";
+import { Patch } from '@/src/repository'
+import useSWRMutation from 'swr/mutation'
+import { mutate } from 'swr'
 
 interface PropsType {
-  data: Notification;
+  data: Notification
 }
 
 const NotificationItem = ({ data }: PropsType) => {
-  const { handleOpen: handleDialogOpen } = useDialog();
+  const { handleOpen: handleDialogOpen } = useDialog()
 
   const readNotification = useSWRMutation(
     `/push/v1/notification/${data.id}`,
     async (url: string) => await Patch<CommonResponse<void>>(url),
     {
       onSuccess: () => {
-        mutate("/push/v1/notification");
+        mutate('/push/v1/notification')
       },
       onError: (error) => {
         handleDialogOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
   return (
     <div
@@ -48,13 +48,13 @@ const NotificationItem = ({ data }: PropsType) => {
         <div className="flex items-center justify-between">
           <p className="text-[12px] font-san-bold">{data.title}</p>
           <p className="text-[10px] text-gray-500 mt-1">
-            {dayjs(data.createdDate).format("YYYY-MM-DD HH:mm:ss")}
+            {dayjs(data.createdDate).format('YYYY-MM-DD HH:mm:ss')}
           </p>
         </div>
         <p className="text-[12px] py-[5px]">{data.body}</p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NotificationItem;
+export default NotificationItem

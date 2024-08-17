@@ -1,45 +1,45 @@
-"use client";
+'use client'
 // ** Next Imports
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'
 
 // ** React Imports
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react'
 
 // ** Component Imports
-import WorkspacePopoverView from "./workspace-popover";
+import WorkspacePopoverView from './workspace-popover'
 
 // ** Recoil Imports
-import { WorkspaceState } from "@/src/app";
-import { useRecoilState } from "recoil";
+import { WorkspaceState } from '@/src/app'
+import { useRecoilState } from 'recoil'
 
 // ** Service Imports
-import useSWR, { mutate } from "swr";
-import { Get } from "@/src/repository";
+import useSWR, { mutate } from 'swr'
+import { Get } from '@/src/repository'
 
 // ** Type Imports
-import { GetWorkspaceListResponse, WorkspaceInfo } from "@/src/type/workspace";
+import { GetWorkspaceListResponse, WorkspaceInfo } from '@/src/type/workspace'
 
 const WorkspacePopover = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false)
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
 
-  const router = useRouter();
+  const router = useRouter()
 
-  const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState);
+  const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState)
 
   const {
     data,
     error,
     isLoading,
     mutate: handleRefetch,
-  } = useSWR("/v1/workspace-user/workspace", async (url) =>
-    Get<GetWorkspaceListResponse>(url)
-  );
+  } = useSWR('/v1/workspace-user/workspace', async (url) =>
+    Get<GetWorkspaceListResponse>(url),
+  )
 
-  const cancelButtonRef = useRef(null);
+  const cancelButtonRef = useRef(null)
 
-  const handleOpen = () => setOpen((cur) => !cur);
-  const handleModalOpen = () => setModalOpen(true);
+  const handleOpen = () => setOpen((cur) => !cur)
+  const handleModalOpen = () => setModalOpen(true)
 
   const handleUpdateWorkspace = (item: WorkspaceInfo) => {
     setWorkspaceState({
@@ -48,14 +48,14 @@ const WorkspacePopover = () => {
       profile: item.workspace.profile,
       uuid: item.workspace.uuid,
       role: item.role,
-    });
+    })
 
-    router.push(`/${item.workspace.uuid}/dashboard`);
-  };
+    router.push(`/${item.workspace.uuid}/dashboard`)
+  }
 
-  if (isLoading) return;
+  if (isLoading) return
 
-  if (error) return;
+  if (error) return
 
   return (
     <WorkspacePopoverView
@@ -69,7 +69,7 @@ const WorkspacePopover = () => {
       handleUpdateWorkspace={handleUpdateWorkspace}
       workspace={workspaceState}
     />
-  );
-};
+  )
+}
 
-export default WorkspacePopover;
+export default WorkspacePopover

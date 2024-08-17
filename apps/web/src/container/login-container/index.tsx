@@ -1,24 +1,24 @@
 // ** React Imports
-import { ChangeEvent, KeyboardEvent } from "react";
+import { ChangeEvent, KeyboardEvent } from 'react'
 
 // ** Type Imports
-import { DiceLoginParma, SocialType } from "@/src/type/auth";
-import CustomImage from "@/src/components/Image/CustomImage";
+import { DiceLoginParma, SocialType } from '@/src/type/auth'
+import CustomImage from '@/src/components/Image/CustomImage'
 import {
   SubmitHandler,
   UseFormHandleSubmit,
   UseFormRegister,
   UseFormWatch,
-} from "react-hook-form";
+} from 'react-hook-form'
 
 interface PropsType {
-  register: UseFormRegister<DiceLoginParma>;
-  handleSubmit: UseFormHandleSubmit<DiceLoginParma>;
-  onSubmit: SubmitHandler<DiceLoginParma>;
-  watch: UseFormWatch<DiceLoginParma>;
-  handleSignup: () => void;
-  handleSocialLogin: (type: SocialType) => void;
-  handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
+  register: UseFormRegister<DiceLoginParma>
+  handleSubmit: UseFormHandleSubmit<DiceLoginParma>
+  onSubmit: SubmitHandler<DiceLoginParma>
+  watch: UseFormWatch<DiceLoginParma>
+  handleSignup: () => void
+  handleSocialLogin: (type: SocialType) => void
+  handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void
 }
 
 const LoginContainer = ({
@@ -69,7 +69,7 @@ const LoginContainer = ({
                     type="text"
                     className="border h-[50px] text-[16px] text-gray-900 text-base p-[15px] rounded-[10px] block w-full border-[#EBEBEC] placeholder-[#DDDDDD] dark:text-black bg-white"
                     placeholder="Enter Your Email"
-                    {...register("email", { required: true })}
+                    {...register('email', { required: true })}
                   />
                 </div>
               </div>
@@ -87,7 +87,7 @@ const LoginContainer = ({
                     className="border h-[50px] text-[16px] text-gray-900 text-base p-[15px] rounded-[10px] block w-full border-[#EBEBEC] placeholder-[#DDDDDD] dark:text-black bg-white"
                     placeholder="Enter Your Password"
                     onKeyDown={handleEnter}
-                    {...register("password", { required: true })}
+                    {...register('password', { required: true })}
                   />
                 </div>
               </div>
@@ -110,7 +110,7 @@ const LoginContainer = ({
               <div className="w-full flex justify-around m-auto mt-[46px]">
                 <div
                   className="flex items-center justify-center w-[48px] h-[48px] bg-white rounded-[24px] shadow-md cursor-pointer"
-                  onClick={() => handleSocialLogin("GOOGLE")}
+                  onClick={() => handleSocialLogin('GOOGLE')}
                 >
                   <CustomImage
                     src="/images/google.png"
@@ -121,7 +121,7 @@ const LoginContainer = ({
                 </div>
                 <div
                   className="flex items-center justify-center w-[48px] h-[48px] bg-white rounded-[24px] shadow-md cursor-pointer"
-                  onClick={() => handleSocialLogin("GITHUB")}
+                  onClick={() => handleSocialLogin('GITHUB')}
                 >
                   <CustomImage
                     src="/images/github.png"
@@ -136,7 +136,7 @@ const LoginContainer = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoginContainer;
+export default LoginContainer

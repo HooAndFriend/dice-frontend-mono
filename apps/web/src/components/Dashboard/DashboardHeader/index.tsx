@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
 // ** Next Imports
-import Link from "next/link";
+import Link from 'next/link'
 
 // ** Component Imports
-import CustomImage from "../../Image/CustomImage";
-import UserPopover from "../../Popover/UserPopover";
-import NotificationPopover from "../../Popover/NotificationPopover";
+import CustomImage from '../../Image/CustomImage'
+import UserPopover from '../../Popover/UserPopover'
+import NotificationPopover from '../../Popover/NotificationPopover'
 
 const DashboardHeader = () => {
   return (
@@ -27,7 +27,7 @@ const DashboardHeader = () => {
         <UserPopover />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DashboardHeader;
+export default DashboardHeader

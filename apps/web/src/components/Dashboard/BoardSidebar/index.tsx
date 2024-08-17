@@ -1,38 +1,38 @@
-"use client";
+'use client'
 // ** React Imports
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react'
 
 // ** Service Imports
-import { Get } from "@/src/repository";
-import useSWR from "swr";
+import { Get } from '@/src/repository'
+import useSWR from 'swr'
 
 // ** Type Imports
-import { GetBoardListResponse } from "@/src/type/board";
+import { GetBoardListResponse } from '@/src/type/board'
 
 // ** Component Imports
-import BoardMenuItem from "./BoardMenuItem";
-import BoardSaveModal from "../../Modal/BoardSaveModal";
+import BoardMenuItem from './BoardMenuItem'
+import BoardSaveModal from '../../Modal/BoardSaveModal'
 
 const BoardSidebar = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [selectedBoardId, setSelectedBoardId] = useState<number>(0);
+  const [open, setOpen] = useState<boolean>(false)
+  const [selectedBoardId, setSelectedBoardId] = useState<number>(0)
 
   const {
     data: boardData,
     isLoading,
     mutate,
-  } = useSWR("/v1/board", async (url) => {
-    return Get<GetBoardListResponse>(url);
-  });
+  } = useSWR('/v1/board', async (url) => {
+    return Get<GetBoardListResponse>(url)
+  })
 
-  const cancelButtonRef = useRef();
+  const cancelButtonRef = useRef()
 
   const handleOpen = (boardId: number) => {
-    setSelectedBoardId(boardId);
-    setOpen(true);
-  };
+    setSelectedBoardId(boardId)
+    setOpen(true)
+  }
 
-  if (isLoading) return;
+  if (isLoading) return
 
   return (
     <div className="w-[300px] bg-white border-r-2 border-[#EBEBEC] px-4 py-2">
@@ -64,7 +64,7 @@ const BoardSidebar = () => {
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default BoardSidebar;
+export default BoardSidebar

@@ -15,7 +15,7 @@ const CommentSkeleton = () => {
         <div className="w-1/2 h-4 bg-gray-200 rounded"></div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CommentSkeleton;
+export default CommentSkeleton

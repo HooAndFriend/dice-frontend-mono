@@ -1,55 +1,55 @@
 // ** React Imports
-import { ChangeEvent, KeyboardEvent, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useState } from 'react'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+import { useDialog } from '@/src/context/DialogContext'
 
 // ** Service Imports
-import { Get, Post } from "@/src/repository";
-import useSWRMutation from "swr/mutation";
-import useSWR from "swr";
+import { Get, Post } from '@/src/repository'
+import useSWRMutation from 'swr/mutation'
+import useSWR from 'swr'
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
-import { GetTicketCommentListResponse } from "@/src/type/ticket";
+import { CommonResponse } from '@/src/type/common'
+import { GetTicketCommentListResponse } from '@/src/type/ticket'
 
 // ** Components Imports
-import CustomImage from "../../../Image/CustomImage";
-import TicketCommentItem from "../TicketCommentItem";
-import CommentSkeleton from "../../Common/Comment/CommentSkeleton";
+import CustomImage from '../../../Image/CustomImage'
+import TicketCommentItem from '../TicketCommentItem'
+import CommentSkeleton from '../../Common/Comment/CommentSkeleton'
 
 interface PropsType {
-  ticketId: number;
+  ticketId: number
 }
 
 const TicketComment = ({ ticketId }: PropsType) => {
-  const [comment, setComment] = useState<string>("");
-  const [button, setButton] = useState<boolean>(false);
+  const [comment, setComment] = useState<string>('')
+  const [button, setButton] = useState<boolean>(false)
 
-  const { handleOpen } = useDialog();
+  const { handleOpen } = useDialog()
 
   const saveTicketComment = useSWRMutation(
-    "/v1/ticket/comment",
+    '/v1/ticket/comment',
     async (url: string) =>
       await Post<CommonResponse<void>>(url, { content: comment, ticketId }),
     {
       onSuccess: () => {
-        setButton(false);
-        setComment("");
-        commentRefetch();
+        setButton(false)
+        setComment('')
+        commentRefetch()
       },
       onError: (error) => {
         handleOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-        setButton(false);
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
+        setButton(false)
       },
-    }
-  );
+    },
+  )
 
   const {
     data: commentData,
@@ -57,47 +57,47 @@ const TicketComment = ({ ticketId }: PropsType) => {
     isLoading: commentLoading,
     mutate: commentRefetch,
   } = useSWR(`/v1/ticket/comment/${ticketId}`, async (url) =>
-    Get<GetTicketCommentListResponse>(url)
-  );
+    Get<GetTicketCommentListResponse>(url),
+  )
 
   const handleSaveTicketComment = () => {
-    if (comment === "") {
+    if (comment === '') {
       handleOpen({
-        title: "Error",
-        message: "Enter Comment",
-        logLevel: "warn",
-        buttonText: "Close",
-        type: "alert",
-      });
+        title: 'Error',
+        message: 'Enter Comment',
+        logLevel: 'warn',
+        buttonText: 'Close',
+        type: 'alert',
+      })
 
-      return;
+      return
     }
 
-    saveTicketComment.trigger();
-  };
+    saveTicketComment.trigger()
+  }
 
   const handleCommentEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      if (comment === "") {
+    if (e.key === 'Enter') {
+      if (comment === '') {
         handleOpen({
-          title: "Error",
-          message: "Enter Comment",
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          title: 'Error',
+          message: 'Enter Comment',
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
 
-        return;
+        return
       }
 
-      if (button) return;
-      setButton(true);
-      saveTicketComment.trigger();
+      if (button) return
+      setButton(true)
+      saveTicketComment.trigger()
     }
-  };
+  }
 
   const handleComment = (e: ChangeEvent<HTMLInputElement>) =>
-    setComment(e.target.value);
+    setComment(e.target.value)
 
   return (
     <div>
@@ -135,7 +135,7 @@ const TicketComment = ({ ticketId }: PropsType) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TicketComment;
+export default TicketComment

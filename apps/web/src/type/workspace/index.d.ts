@@ -1,32 +1,32 @@
-import { RoleType, CommonResponse } from "../common";
-import { EpicStatus } from "../epic";
+import { RoleType, CommonResponse } from '../common'
+import { EpicStatus } from '../epic'
 
 export interface SaveWorkspaceParam {
-  name: string;
-  comment: string;
-  profile: string;
+  name: string
+  comment: string
+  profile: string
 }
 
-export type WorksapceFunctionType = "" | "TICKET" | "QA" | "COLLECTION" | "ERD";
+export type WorksapceFunctionType = '' | 'TICKET' | 'QA' | 'COLLECTION' | 'ERD'
 
 export interface GetUserWorkspaceListResponse extends CommonResponse {
-  count: number;
-  data: TeamInfo[];
+  count: number
+  data: TeamInfo[]
 }
 
 export interface GetWorkspaceFunctionListResponse extends CommonResponse {
-  count: number;
-  data: WorkspaceFunction[];
+  count: number
+  data: WorkspaceFunction[]
 }
 
 export interface GetTeamWorkspaceListResponse extends CommonResponse {
-  count: number;
-  data: TeamWorkspaceInfo[];
+  count: number
+  data: TeamWorkspaceInfo[]
 }
 
 export interface GetWorkspaceListResponse extends CommonResponse {
-  count: number;
-  data: WorkspaceInfo[];
+  count: number
+  data: WorkspaceInfo[]
 }
 
 export interface GetWorkspaceInfoResponse
@@ -34,18 +34,18 @@ export interface GetWorkspaceInfoResponse
     WorkspaceDetailInfo {}
 
 export interface GetWorkspaceUserListResponse extends CommonResponse {
-  count: number;
-  data: WorkspaceUserDetailInfo[];
+  count: number
+  data: WorkspaceUserDetailInfo[]
 }
 
 export interface GetWorkspaceUserInviteListResponse extends CommonResponse {
-  count: number;
-  data: WorkspaceInviteUser[];
+  count: number
+  data: WorkspaceInviteUser[]
 }
 
 export interface GetSearchWorkspaceUserListResponse extends CommonResponse {
-  count: number;
-  data: WorkspaceUser[];
+  count: number
+  data: WorkspaceUser[]
 }
 
 export interface GetTodayTaskCountResponse extends CommonResponse, TaskCount {}
@@ -54,120 +54,120 @@ export interface GetDoneTaskCountResponse extends CommonResponse, TaskCount {}
 
 export interface GetTaskProgressResponse extends CommonResponse, TaskProgress {}
 export interface GetTaskListResponse extends CommonResponse {
-  count: number;
-  data: Task[];
+  count: number
+  data: Task[]
 }
 
 export interface GetDateTaskListResponse extends CommonResponse {
-  count: number;
-  data: DateTask[];
+  count: number
+  data: DateTask[]
 }
 
 export interface WorkspaceUserDetailInfo {
-  workspaceUserId: number;
-  role: RoleType;
+  workspaceUserId: number
+  role: RoleType
   user: {
-    userId: number;
-    email: string;
-    nickname: string;
-    profile: string;
-  };
+    userId: number
+    email: string
+    nickname: string
+    profile: string
+  }
 }
 
 export interface WorkspaceInviteUser {
-  id: number;
-  role: RoleType;
+  id: number
+  role: RoleType
   user: {
-    id: number;
-    email: string;
-    nickname: string;
-    profile: string;
-  };
+    id: number
+    email: string
+    nickname: string
+    profile: string
+  }
 }
 
 export interface WorkspaceDetailInfo {
-  workspaceId: number;
-  name: string;
-  comment: string;
-  profile: string;
+  workspaceId: number
+  name: string
+  comment: string
+  profile: string
 }
 
 export interface WorksapceUserInfo {
-  id: number;
-  role: RoleType;
+  id: number
+  role: RoleType
   workspace: {
-    id: number;
-    name: string;
-    profile: string;
-    uuid: string;
-  };
+    id: number
+    name: string
+    profile: string
+    uuid: string
+  }
 }
 
 export interface WorkspaceUser {
-  workspaceUserId: number;
-  role: RoleType;
+  workspaceUserId: number
+  role: RoleType
   user: {
-    userId: number;
-    email: string;
-    nickname: string;
-    profile: string;
-  };
+    userId: number
+    email: string
+    nickname: string
+    profile: string
+  }
 }
 
 export interface TeamWorkspaceInfo {
-  workspace_id: number;
-  workspace_name: string;
-  workspace_comment: string;
-  workspace_profile: string;
-  workspace_uuid: string;
-  workspaceUserCount: string;
+  workspace_id: number
+  workspace_name: string
+  workspace_comment: string
+  workspace_profile: string
+  workspace_uuid: string
+  workspaceUserCount: string
 }
 
 export interface WorkspaceInfo {
-  workspaceUserId: number;
-  role: RoleType;
+  workspaceUserId: number
+  role: RoleType
   workspace: {
-    workspaceId: number;
-    name: string;
-    profile: string;
-    uuid: string;
-    comment: string;
-    workspaceFunction: WorksapceFunction[];
-  };
+    workspaceId: number
+    name: string
+    profile: string
+    uuid: string
+    comment: string
+    workspaceFunction: WorksapceFunction[]
+  }
 }
 
 export interface WorkspaceFunction {
-  function: WorksapceFunctionType;
-  isUse: boolean;
+  function: WorksapceFunctionType
+  isUse: boolean
 }
 
 export interface TaskCount {
-  count: number;
-  yesterdayCount: number;
+  count: number
+  yesterdayCount: number
 }
 
 export interface TaskProgress {
-  todayProgress: 39.130434782608695;
-  yesterdayProgress: 11.11111111111111;
+  todayProgress: 39.130434782608695
+  yesterdayProgress: 11.11111111111111
 }
 
 export interface Task {
-  createdDate: Date;
-  id: number;
-  code: string;
-  status: EpicStatus;
-  title: string;
+  createdDate: Date
+  id: number
+  code: string
+  status: EpicStatus
+  title: string
 }
 
 export interface DateTask {
-  id: number;
-  name: string;
-  dueDate: Date;
-  type: string;
-  createdDate: Date;
+  id: number
+  name: string
+  dueDate: Date
+  type: string
+  createdDate: Date
 }
 
 export interface InviteWorksapceUserParam {
-  email: string;
-  role: RoleType;
+  email: string
+  role: RoleType
 }

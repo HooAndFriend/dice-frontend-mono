@@ -1,25 +1,25 @@
 // ** Service Imports
-import useSWR from "swr";
-import { Get } from "@/src/repository";
+import useSWR from 'swr'
+import { Get } from '@/src/repository'
 
 // ** Component Imports
-import WorkspaceUserBox from "../WorkspaceUserBox";
+import WorkspaceUserBox from '../WorkspaceUserBox'
 
 // ** Type Imports
-import { GetWorkspaceUserListResponse } from "@/src/type/workspace";
+import { GetWorkspaceUserListResponse } from '@/src/type/workspace'
 
 interface PropsType {
-  handleOpen: () => void;
+  handleOpen: () => void
 }
 
 const WorkspaceMemberContent = ({ handleOpen }: PropsType) => {
-  const { data, error, isLoading } = useSWR("/v1/workspace-user", async (url) =>
-    Get<GetWorkspaceUserListResponse>(url)
-  );
+  const { data, error, isLoading } = useSWR('/v1/workspace-user', async (url) =>
+    Get<GetWorkspaceUserListResponse>(url),
+  )
 
-  if (isLoading) return;
+  if (isLoading) return
 
-  if (error) return;
+  if (error) return
 
   return (
     <div>
@@ -43,7 +43,7 @@ const WorkspaceMemberContent = ({ handleOpen }: PropsType) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default WorkspaceMemberContent;
+export default WorkspaceMemberContent

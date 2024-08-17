@@ -1,13 +1,13 @@
 // ** Next Imports
-import CustomImage from "@/src/components/Image/CustomImage";
+import CustomImage from '@/src/components/Image/CustomImage'
 
 interface PropsType {
-  id: number;
-  workspaceId: number;
-  profile: string;
-  name: string;
-  onClick: () => void;
-  handleModalOpen: () => void;
+  id: number
+  workspaceId: number
+  profile: string
+  name: string
+  onClick: () => void
+  handleModalOpen: () => void
 }
 
 const WorkspaceBox = ({
@@ -31,7 +31,7 @@ const WorkspaceBox = ({
           width={30}
           height={30}
         />
-        <h4 className={`${id === workspaceId && "text-[#623AD6]"}`}>{name}</h4>
+        <h4 className={`${id === workspaceId && 'text-[#623AD6]'}`}>{name}</h4>
       </div>
       {id === workspaceId && (
         <CustomImage
@@ -44,7 +44,7 @@ const WorkspaceBox = ({
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default WorkspaceBox;
+export default WorkspaceBox

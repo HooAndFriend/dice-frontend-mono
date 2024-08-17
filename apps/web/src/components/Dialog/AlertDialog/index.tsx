@@ -1,24 +1,24 @@
 // ** React Imports
-import { Fragment } from "react";
+import { Fragment } from 'react'
 
 // ** ui Imports
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition } from '@headlessui/react'
 import {
   ExclamationTriangleIcon,
   InformationCircleIcon,
-} from "@heroicons/react/24/outline";
-import { DialogType, LogLevel } from "@/src/type/component";
+} from '@heroicons/react/24/outline'
+import { DialogType, LogLevel } from '@/src/type/component'
 
 interface PropsType {
-  title: string;
-  message: string;
-  buttonText: string;
-  logLevel: LogLevel;
-  open: boolean;
-  cancelButtonRef: any;
-  type: DialogType;
-  comfirmButtonText: string;
-  setOpen: (open: boolean) => void;
+  title: string
+  message: string
+  buttonText: string
+  logLevel: LogLevel
+  open: boolean
+  cancelButtonRef: any
+  type: DialogType
+  comfirmButtonText: string
+  setOpen: (open: boolean) => void
 }
 
 const AlertDialog = ({
@@ -68,16 +68,16 @@ const AlertDialog = ({
                   <div className="sm:flex sm:items-start">
                     <div
                       className={`mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full ${
-                        logLevel === "info" ? "bg-green-100" : "bg-red-100"
+                        logLevel === 'info' ? 'bg-green-100' : 'bg-red-100'
                       } sm:mx-0 sm:h-10 sm:w-10`}
                     >
-                      {logLevel === "warn" && (
+                      {logLevel === 'warn' && (
                         <ExclamationTriangleIcon
                           className="w-6 h-6 text-red-600"
                           aria-hidden="true"
                         />
                       )}
-                      {logLevel === "info" && (
+                      {logLevel === 'info' && (
                         <InformationCircleIcon
                           className="w-6 h-6 text-green-600"
                           aria-hidden="true"
@@ -101,17 +101,17 @@ const AlertDialog = ({
                   <button
                     type="button"
                     className={`inline-flex w-full justify-center rounded-md ${
-                      logLevel === "info" ? "bg-green-600" : "bg-red-600"
+                      logLevel === 'info' ? 'bg-green-600' : 'bg-red-600'
                     } px-3 py-2 text-sm font-semibold text-white shadow-sm ${
-                      logLevel === "info"
-                        ? "hover:bg-green-500"
-                        : "hover:bg-red-500"
+                      logLevel === 'info'
+                        ? 'hover:bg-green-500'
+                        : 'hover:bg-red-500'
                     } sm:ml-3 sm:w-auto`}
                     onClick={() => setOpen(false)}
                   >
                     {buttonText}
                   </button>
-                  {type === "comfirm" && (
+                  {type === 'comfirm' && (
                     <button
                       type="button"
                       className={`inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-5 sm:ml-3 sm:w-auto`}
@@ -127,7 +127,7 @@ const AlertDialog = ({
         </div>
       </Dialog>
     </Transition.Root>
-  );
-};
+  )
+}
 
-export default AlertDialog;
+export default AlertDialog

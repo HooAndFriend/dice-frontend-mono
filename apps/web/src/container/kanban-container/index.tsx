@@ -1,17 +1,17 @@
-"use client";
+'use client'
 // ** Component Imports
-import CustomSearch from "@/src/components/Input/CustomSearch";
-import TicketStatusSelectFilter from "@/src/components/Task/Common/Filter/StatusFilter";
-import TicketTypeSelectFilter from "@/src/components/Task/Common/Filter/TypeFilter";
-import KanbanCard from "@/src/components/Task/Kanban/KanbanCard";
-import UserSelectBox from "@/src/components/UserSelectBox";
-import { statusList } from "@/src/constants/status";
+import CustomSearch from '@/src/components/Input/CustomSearch'
+import TicketStatusSelectFilter from '@/src/components/Task/Common/Filter/StatusFilter'
+import TicketTypeSelectFilter from '@/src/components/Task/Common/Filter/TypeFilter'
+import KanbanCard from '@/src/components/Task/Kanban/KanbanCard'
+import UserSelectBox from '@/src/components/UserSelectBox'
+import { statusList } from '@/src/constants/status'
 
 // ** Type Imports
-import { Ticket } from "@/src/type/ticket";
+import { Ticket } from '@/src/type/ticket'
 
 interface PropsType {
-  data: Ticket[];
+  data: Ticket[]
 }
 
 const KanbanContainer = ({ data }: PropsType) => {
@@ -19,7 +19,7 @@ const KanbanContainer = ({ data }: PropsType) => {
     <div className="w-full h-full">
       <div className="flex items-center justify-between pt-8 h-[8%]">
         <div className="flex items-center space-x-4">
-          <CustomSearch width="200px" value={""} onChange={() => {}} />
+          <CustomSearch width="200px" value={''} onChange={() => {}} />
           <TicketStatusSelectFilter
             selectedStatus={[]}
             handleEpicSelectFilter={() => {}}
@@ -54,7 +54,7 @@ const KanbanContainer = ({ data }: PropsType) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default KanbanContainer;
+export default KanbanContainer

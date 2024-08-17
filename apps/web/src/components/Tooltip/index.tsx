@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { useState } from "react";
+import { useState } from 'react'
 
 const Tooltip = ({ children, text }) => {
-  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false)
 
   return (
     <div className="relative inline-block">
@@ -19,6 +19,6 @@ const Tooltip = ({ children, text }) => {
         </div>
       )}
     </div>
-  );
-};
-export default Tooltip;
+  )
+}
+export default Tooltip

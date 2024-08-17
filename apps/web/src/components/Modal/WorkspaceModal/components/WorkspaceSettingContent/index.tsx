@@ -1,52 +1,52 @@
 // ** Recoil Imports
-import { WorkspaceState } from "@/src/app";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { WorkspaceState } from '@/src/app'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 // ** Component Imports
-import { ImageUploader } from "@/src/components/Image/ImageUploader";
+import { ImageUploader } from '@/src/components/Image/ImageUploader'
 
 // ** Type Imports
 import {
   GetWorkspaceInfoResponse,
   WorkspaceDetailInfo,
-} from "@/src/type/workspace";
-import { CommonResponse } from "@/src/type/common";
+} from '@/src/type/workspace'
+import { CommonResponse } from '@/src/type/common'
 
 // ** Service Imports
-import { Get, Put } from "@/src/repository";
-import useSWRMutation from "swr/mutation";
-import useSWR, { mutate } from "swr";
+import { Get, Put } from '@/src/repository'
+import useSWRMutation from 'swr/mutation'
+import useSWR, { mutate } from 'swr'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+import { useDialog } from '@/src/context/DialogContext'
 
 // ** Utils Imports
-import useInput from "@/src/hooks/useInput";
+import useInput from '@/src/hooks/useInput'
 
 const WorkspaceSettingContent = () => {
   const { data, handleInput, setData } = useInput<WorkspaceDetailInfo>({
     workspaceId: 0,
-    name: "",
-    profile: "",
-    comment: "",
-  });
+    name: '',
+    profile: '',
+    comment: '',
+  })
 
-  const setWorkspaceState = useSetRecoilState(WorkspaceState);
+  const setWorkspaceState = useSetRecoilState(WorkspaceState)
 
-  const { handleOpen } = useDialog();
+  const { handleOpen } = useDialog()
 
   const { error, isLoading } = useSWR(
-    "/v1/workspace/home",
+    '/v1/workspace/home',
     async (url) => Get<GetWorkspaceInfoResponse>(url),
     {
       onSuccess: (res) => {
-        setData(res.data);
+        setData(res.data)
       },
-    }
-  );
+    },
+  )
 
   const updateWorkspace = useSWRMutation(
-    "/v1/workspace",
+    '/v1/workspace',
     async (url: string) =>
       await Put<CommonResponse<void>>(url, {
         name: data.name,
@@ -55,36 +55,36 @@ const WorkspaceSettingContent = () => {
       }),
     {
       onSuccess: () => {
-        mutate("/v1/workspace/home");
+        mutate('/v1/workspace/home')
 
         setWorkspaceState((cur) => ({
           ...cur,
           profile: data.profile,
           name: data.name,
           comment: data.comment,
-        }));
+        }))
       },
       onError: (error) => {
         handleOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
   const handleImage = (profile: string) => {
-    setData((cur) => ({ ...cur, profile }));
-  };
+    setData((cur) => ({ ...cur, profile }))
+  }
 
   return (
     <div>
       <label className="text-[18px] font-san-bold">Profile</label>
       <ImageUploader
-        image={isLoading ? "" : data.profile}
+        image={isLoading ? '' : data.profile}
         mode="edit"
         setPath={handleImage}
       />
@@ -94,7 +94,7 @@ const WorkspaceSettingContent = () => {
           id="workspace name"
           placeholder="Enter Your Nickname"
           className="mt-[14px] font-normal font-spoqa border h-[50px] w-full text-gray-900 text-base p-4 rounded-[8px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
-          value={isLoading ? "" : data.name}
+          value={isLoading ? '' : data.name}
           onChange={handleInput}
           name="name"
         />
@@ -104,7 +104,7 @@ const WorkspaceSettingContent = () => {
         <input
           id="description"
           className="text-left mt-[14px] font-normal font-spoqa border h-[175px] w-full text-gray-900 text-base p-4 rounded-[8px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
-          value={isLoading ? "" : data.comment}
+          value={isLoading ? '' : data.comment}
           onChange={handleInput}
           name="comment"
         />
@@ -116,7 +116,7 @@ const WorkspaceSettingContent = () => {
         Update
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default WorkspaceSettingContent;
+export default WorkspaceSettingContent

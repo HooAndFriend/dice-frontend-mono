@@ -1,14 +1,14 @@
 // ** Next Imports
-import CustomImage from "@/src/components/Image/CustomImage";
-import Image from "next/image";
+import CustomImage from '@/src/components/Image/CustomImage'
+import Image from 'next/image'
 
 interface PropsType {
-  width?: string;
-  color: string;
-  icon: string;
-  title: string;
-  text: string;
-  value: number;
+  width?: string
+  color: string
+  icon: string
+  title: string
+  text: string
+  value: number
 }
 
 const DashboardCard = ({
@@ -22,7 +22,7 @@ const DashboardCard = ({
   return (
     <div
       className={` h-full w-[${
-        width ? width : "380px"
+        width ? width : '380px'
       }] bg-white rounded-[20px] shadow-md p-[24px]`}
     >
       <div
@@ -37,7 +37,7 @@ const DashboardCard = ({
         <p className="text-[#676767]">{title}</p>
         {value === 0 ? (
           <div className="flex">
-            <p className={`text-[${value >= 0 ? "#FF553E" : "#22B863"}] -mr-2`}>
+            <p className={`text-[${value >= 0 ? '#FF553E' : '#22B863'}] -mr-2`}>
               0%
             </p>
           </div>
@@ -45,21 +45,21 @@ const DashboardCard = ({
           <div className="flex">
             <Image
               src={`${
-                value >= 0 ? "/svg/dashboard-up.svg" : "/svg/dashboard-down.svg"
+                value >= 0 ? '/svg/dashboard-up.svg' : '/svg/dashboard-down.svg'
               }`}
               width={20}
               height={20}
               alt="up"
               className="mr-2"
             />
-            <p className={`text-[${value >= 0 ? "#FF553E" : "#22B863"}] -mr-2`}>
+            <p className={`text-[${value >= 0 ? '#FF553E' : '#22B863'}] -mr-2`}>
               {value >= 0 ? `+ ${value}%` : `- ${value * -1}%`}
             </p>
           </div>
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DashboardCard;
+export default DashboardCard

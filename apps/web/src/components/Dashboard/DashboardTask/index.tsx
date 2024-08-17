@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import {
   Table,
   TableHeader,
@@ -6,19 +6,15 @@ import {
   TableHead,
   TableBody,
   TableCell,
-} from "@/src/components/ui/table";
+} from '@/src/components/ui/table'
 import {
   Card,
   CardHeader,
   CardTitle,
   CardContent,
-} from "@/src/components/ui/card";
-import {
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-} from "@/src/components/ui/avatar";
-import { Badge } from "@/src/components/ui/badge";
+} from '@/src/components/ui/card'
+import { Avatar, AvatarImage, AvatarFallback } from '@/src/components/ui/avatar'
+import { Badge } from '@/src/components/ui/badge'
 
 interface PropsType {}
 
@@ -118,7 +114,7 @@ const DashboardTask = ({}: PropsType) => {
         </Table>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
-export default DashboardTask;
+export default DashboardTask

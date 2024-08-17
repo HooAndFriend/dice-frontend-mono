@@ -1,21 +1,21 @@
 // ** Component Imports
-import TicketSettingAddItem from "@/src/components/Task/Ticket/TicketSettingAddItem";
-import TicketSettingItem from "@/src/components/Task/Ticket/TicketSettingItem";
+import TicketSettingAddItem from '@/src/components/Task/Ticket/TicketSettingAddItem'
+import TicketSettingItem from '@/src/components/Task/Ticket/TicketSettingItem'
 
 // ** Type Imports
-import { SettingListInfo, TicketSettingType } from "@/src/type/ticket";
-import TicketSettingSkeleton from "./TicketSettingSkeleton";
+import { SettingListInfo, TicketSettingType } from '@/src/type/ticket'
+import TicketSettingSkeleton from './TicketSettingSkeleton'
 
 interface PropsType {
-  data: SettingListInfo[];
-  isLoading: boolean;
+  data: SettingListInfo[]
+  isLoading: boolean
   handleData: (
     id: number,
     value: string | TicketSettingType,
-    type: "name" | "type" | "description"
-  ) => void;
-  updateTicketSetting: () => void;
-  refetch: () => void;
+    type: 'name' | 'type' | 'description',
+  ) => void
+  updateTicketSetting: () => void
+  refetch: () => void
 }
 
 const SettingContainer = ({
@@ -61,7 +61,7 @@ const SettingContainer = ({
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SettingContainer;
+export default SettingContainer

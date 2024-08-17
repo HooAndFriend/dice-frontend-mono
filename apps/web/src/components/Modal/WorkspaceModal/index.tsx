@@ -1,40 +1,40 @@
-"use client";
+'use client'
 
 // ** React Imports
-import { useState } from "react";
+import { useState } from 'react'
 
 // ** Component Imports
-import WorkspaceModalView from "./workspace-modal";
+import WorkspaceModalView from './workspace-modal'
 
 // ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { WorkspaceState } from "@/src/app";
+import { useRecoilValue } from 'recoil'
+import { WorkspaceState } from '@/src/app'
 
 // ** Service Imports
-import useSWR from "swr";
-import { Get } from "@/src/repository";
+import useSWR from 'swr'
+import { Get } from '@/src/repository'
 
 // ** Type Imports
-import { GetWorkspaceUserListResponse } from "@/src/type/workspace";
+import { GetWorkspaceUserListResponse } from '@/src/type/workspace'
 
 interface PropsType {
-  open: boolean;
-  cancelButtonRef: any;
-  setOpen: (open: boolean) => void;
+  open: boolean
+  cancelButtonRef: any
+  setOpen: (open: boolean) => void
 }
 
 const WorkspaceModal = ({ open, setOpen, cancelButtonRef }: PropsType) => {
-  const [tab, setTab] = useState<number>(0);
+  const [tab, setTab] = useState<number>(0)
 
-  const [addOpen, setAddOpen] = useState<boolean>(false);
+  const [addOpen, setAddOpen] = useState<boolean>(false)
 
-  const { profile, name, uuid } = useRecoilValue(WorkspaceState);
+  const { profile, name, uuid } = useRecoilValue(WorkspaceState)
 
-  const { data, error, isLoading } = useSWR("/v1/workspace-user", async (url) =>
-    Get<GetWorkspaceUserListResponse>(url)
-  );
+  const { data, error, isLoading } = useSWR('/v1/workspace-user', async (url) =>
+    Get<GetWorkspaceUserListResponse>(url),
+  )
 
-  if (isLoading) return;
+  if (isLoading) return
 
   return (
     <WorkspaceModalView
@@ -49,7 +49,7 @@ const WorkspaceModal = ({ open, setOpen, cancelButtonRef }: PropsType) => {
       cancelButtonRef={cancelButtonRef}
       data={data.data.data}
     />
-  );
-};
+  )
+}
 
-export default WorkspaceModal;
+export default WorkspaceModal

@@ -1,57 +1,57 @@
-"use client";
+'use client'
 // ** React Imports
-import { useState } from "react";
+import { useState } from 'react'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+import { useDialog } from '@/src/context/DialogContext'
 
 // ** Service Imports
-import { Delete, Patch } from "@/src/repository";
-import useSWRMutation from "swr/mutation";
+import { Delete, Patch } from '@/src/repository'
+import useSWRMutation from 'swr/mutation'
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
-import { CommentInfo } from "@/src/type/qa";
+import { CommonResponse } from '@/src/type/common'
+import { CommentInfo } from '@/src/type/qa'
 
 // ** Component Imports
-import CommentItem from "../../Common/Comment/CommentItem";
+import CommentItem from '../../Common/Comment/CommentItem'
 
 interface PropsType {
-  data: CommentInfo;
-  commentRefetch: () => void;
+  data: CommentInfo
+  commentRefetch: () => void
 }
 
 const TicketCommentItem = ({ data, commentRefetch }: PropsType) => {
-  const [content, setContent] = useState<string>(data.content);
-  const [mode, setMode] = useState<"view" | "edit">("view");
+  const [content, setContent] = useState<string>(data.content)
+  const [mode, setMode] = useState<'view' | 'edit'>('view')
 
-  const { handleOpen } = useDialog();
+  const { handleOpen } = useDialog()
 
   const handleComment = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setContent(e.target.value);
-  };
+    setContent(e.target.value)
+  }
 
   const deleteComment = useSWRMutation(
     `/v1/ticket/comment/${data.id}`,
     async (url: string) => await Delete<CommonResponse<void>>(url),
     {
       onSuccess: () => {
-        commentRefetch();
+        commentRefetch()
       },
       onError: (error) => {
         handleOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
   const updateComment = useSWRMutation(
-    "/v1/ticket/comment",
+    '/v1/ticket/comment',
     async (url: string) =>
       await Patch<CommonResponse<void>>(url, {
         commentId: data.id,
@@ -59,20 +59,20 @@ const TicketCommentItem = ({ data, commentRefetch }: PropsType) => {
       }),
     {
       onSuccess: () => {
-        commentRefetch();
-        setMode("view");
+        commentRefetch()
+        setMode('view')
       },
       onError: (error) => {
         handleOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
   return (
     <CommentItem
@@ -84,7 +84,7 @@ const TicketCommentItem = ({ data, commentRefetch }: PropsType) => {
       handleUpdateComment={updateComment.trigger}
       handleDeleteComment={deleteComment.trigger}
     />
-  );
-};
+  )
+}
 
-export default TicketCommentItem;
+export default TicketCommentItem

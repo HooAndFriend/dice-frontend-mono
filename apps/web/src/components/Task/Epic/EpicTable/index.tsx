@@ -1,21 +1,21 @@
 // ** Component Imports
-import { WorkspaceState } from "@/src/app";
-import EpicItem from "../EpicItem";
+import { WorkspaceState } from '@/src/app'
+import EpicItem from '../EpicItem'
 
 // ** Type Imports
-import { EpicInfo, SelectContent } from "@/src/type/epic";
+import { EpicInfo, SelectContent } from '@/src/type/epic'
 
 // ** Utils Imports
-import { useRecoilValue } from "recoil";
-import EpicAddItem from "../EpicAddItem";
+import { useRecoilValue } from 'recoil'
+import EpicAddItem from '../EpicAddItem'
 
 interface PropsType {
-  epicData: EpicInfo[];
-  handleClick: (value: SelectContent) => void;
+  epicData: EpicInfo[]
+  handleClick: (value: SelectContent) => void
 }
 
 const EpicTable = ({ epicData, handleClick }: PropsType) => {
-  const { role } = useRecoilValue(WorkspaceState);
+  const { role } = useRecoilValue(WorkspaceState)
 
   return (
     <div className="w-full h-full bg-white rounded-[8px] scrollbar-thumb-slate-700 scrollbar-track-slate-300">
@@ -31,12 +31,12 @@ const EpicTable = ({ epicData, handleClick }: PropsType) => {
                   handleClick={handleClick}
                 />
               ))}
-              {role !== "VIEWER" && <EpicAddItem />}
+              {role !== 'VIEWER' && <EpicAddItem />}
             </tbody>
           </table>
         </div>
       </div>
     </div>
-  );
-};
-export default EpicTable;
+  )
+}
+export default EpicTable

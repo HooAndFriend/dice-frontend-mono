@@ -1,34 +1,34 @@
 // ** Component Imports
-import TicketCard from '@/src/components/Task/Ticket/TicketCard';
-import TicketTable from '@/src/components/Task/Ticket/TicketTable';
-import TicketTableSkeleton from '@/src/components/Task/Ticket/TicketTable/TicketTableSkeleton';
-import CustomSearch from '@/src/components/Input/CustomSearch';
-import TicketStatusSelectFilter from '@/src/components/Task/Common/Filter/StatusFilter';
-import TicketTypeSelectFilter from '@/src/components/Task/Common/Filter/TypeFilter';
-import UserSelectBox from '@/src/components/UserSelectBox';
+import TicketCard from '@/src/components/Task/Ticket/TicketCard'
+import TicketTable from '@/src/components/Task/Ticket/TicketTable'
+import TicketTableSkeleton from '@/src/components/Task/Ticket/TicketTable/TicketTableSkeleton'
+import CustomSearch from '@/src/components/Input/CustomSearch'
+import TicketStatusSelectFilter from '@/src/components/Task/Common/Filter/StatusFilter'
+import TicketTypeSelectFilter from '@/src/components/Task/Common/Filter/TypeFilter'
+import UserSelectBox from '@/src/components/UserSelectBox'
 
 // ** Type Imports
-import {Ticket} from '@/src/type/ticket';
-import {WorkspaceUser} from '@/src/type/workspace';
-import {EpicStatus} from '@/src/type/epic';
-import SprintArea from '@/src/components/Task/Sprint/SprintArea';
+import { Ticket } from '@/src/type/ticket'
+import { WorkspaceUser } from '@/src/type/workspace'
+import { EpicStatus } from '@/src/type/epic'
+import SprintArea from '@/src/components/Task/Sprint/SprintArea'
 
 interface PropsType {
-  ticketId: number;
-  data: Ticket[];
-  word: string;
-  ticketCount: number;
-  isLoading: boolean;
-  checkedList: WorkspaceUser[];
-  selectedEpicIds: number[];
-  selectedStatus: EpicStatus[];
-  selectedTypeIds: number[];
-  handleTypeSelectFilter: (typeId: number) => void;
-  handleStatusSelectFilter: (status: EpicStatus) => void;
-  handleEpicSelectFilter: (epicId: number) => void;
-  setCheckedList: (list: WorkspaceUser[]) => void;
-  setTicketId: (id: number) => void;
-  handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  ticketId: number
+  data: Ticket[]
+  word: string
+  ticketCount: number
+  isLoading: boolean
+  checkedList: WorkspaceUser[]
+  selectedEpicIds: number[]
+  selectedStatus: EpicStatus[]
+  selectedTypeIds: number[]
+  handleTypeSelectFilter: (typeId: number) => void
+  handleStatusSelectFilter: (status: EpicStatus) => void
+  handleEpicSelectFilter: (epicId: number) => void
+  setCheckedList: (list: WorkspaceUser[]) => void
+  setTicketId: (id: number) => void
+  handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const SprintContainer = ({
@@ -72,7 +72,7 @@ const SprintContainer = ({
       </div>
       <div className={`${ticketId !== 0 && 'flex'} h-[92%] py-[24px]`}>
         <div
-          style={{width: ticketId !== 0 ? '65%' : '100%', height: '100%'}}
+          style={{ width: ticketId !== 0 ? '65%' : '100%', height: '100%' }}
           className="space-y-4 "
         >
           {isLoading ? <TicketTableSkeleton /> : <SprintArea data={data} />}
@@ -87,7 +87,7 @@ const SprintContainer = ({
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SprintContainer;
+export default SprintContainer

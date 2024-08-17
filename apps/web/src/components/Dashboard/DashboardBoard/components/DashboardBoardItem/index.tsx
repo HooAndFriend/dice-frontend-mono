@@ -1,16 +1,16 @@
-import { WorkspaceState } from "@/src/app";
-import { BoardInfo } from "@/src/type/board";
-import dayjs from "dayjs";
-import Link from "next/link";
+import { WorkspaceState } from '@/src/app'
+import { BoardInfo } from '@/src/type/board'
+import dayjs from 'dayjs'
+import Link from 'next/link'
 
-import { useRecoilValue } from "recoil";
+import { useRecoilValue } from 'recoil'
 
 interface PropsType {
-  data: BoardInfo;
+  data: BoardInfo
 }
 
 const DashboardBoardItem = ({ data }: PropsType) => {
-  const { uuid } = useRecoilValue(WorkspaceState);
+  const { uuid } = useRecoilValue(WorkspaceState)
 
   return (
     <Link href={`/${uuid}/dashboard/board/${data.boardId}`}>
@@ -25,15 +25,15 @@ const DashboardBoardItem = ({ data }: PropsType) => {
             development tools.
           </div>
           <div className="text-xs text-muted-foreground">
-            {dayjs(data.createdDate).format("YYYY-MM-DD HH:mm:ss")}
+            {dayjs(data.createdDate).format('YYYY-MM-DD HH:mm:ss')}
           </div>
         </div>
       </div>
     </Link>
-  );
-};
+  )
+}
 
-export default DashboardBoardItem;
+export default DashboardBoardItem
 
 function FileIcon(props) {
   return (
@@ -52,5 +52,5 @@ function FileIcon(props) {
       <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
       <path d="M14 2v4a2 2 0 0 0 2 2h4" />
     </svg>
-  );
+  )
 }

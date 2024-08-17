@@ -1,8 +1,8 @@
 // ** React Imports
-import { KeyboardEvent } from "react";
+import { KeyboardEvent } from 'react'
 
 // ** Component Imports
-import { ImageUploader } from "@/src/components/Image/ImageUploader";
+import { ImageUploader } from '@/src/components/Image/ImageUploader'
 
 // ** Type Imports
 import {
@@ -10,16 +10,16 @@ import {
   UseFormHandleSubmit,
   UseFormRegister,
   UseFormWatch,
-} from "react-hook-form";
-import { SaveWorkspaceParam } from "@/src/type/workspace";
+} from 'react-hook-form'
+import { SaveWorkspaceParam } from '@/src/type/workspace'
 
 interface PropsType {
-  handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
-  handleImage: (profile: string) => void;
-  register: UseFormRegister<SaveWorkspaceParam>;
-  handleSubmit: UseFormHandleSubmit<SaveWorkspaceParam>;
-  onSubmit: SubmitHandler<SaveWorkspaceParam>;
-  watch: UseFormWatch<SaveWorkspaceParam>;
+  handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void
+  handleImage: (profile: string) => void
+  register: UseFormRegister<SaveWorkspaceParam>
+  handleSubmit: UseFormHandleSubmit<SaveWorkspaceParam>
+  onSubmit: SubmitHandler<SaveWorkspaceParam>
+  watch: UseFormWatch<SaveWorkspaceParam>
 }
 
 const SaveWorkspaceContainer = ({
@@ -35,7 +35,7 @@ const SaveWorkspaceContainer = ({
       <div className="-mt-12">
         <div className="flex justify-center w-full">
           <ImageUploader
-            image={watch("profile")}
+            image={watch('profile')}
             width="192px"
             height="192px"
             borderRadius="96px"
@@ -57,7 +57,7 @@ const SaveWorkspaceContainer = ({
                 type="text"
                 className="font-normal font-spoqa border h-[50px] w-[330px] text-gray-900 text-base p-4 rounded-[12px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
                 placeholder="Enter Your Name"
-                {...register("name")}
+                {...register('name')}
                 onKeyDown={handleEnter}
               />
             </div>
@@ -74,7 +74,7 @@ const SaveWorkspaceContainer = ({
                 type="text"
                 className="font-normal font-spoqa border h-[50px] w-[330px] text-gray-900 text-base p-4 rounded-[12px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
                 placeholder="Enter Your Description"
-                {...register("comment")}
+                {...register('comment')}
                 onKeyDown={handleEnter}
               />
             </div>
@@ -90,7 +90,7 @@ const SaveWorkspaceContainer = ({
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SaveWorkspaceContainer;
+export default SaveWorkspaceContainer

@@ -1,11 +1,11 @@
-import { Get } from "@/src/repository";
-import { GetTicketHistoryListResponse } from "@/src/type/ticket";
-import useSWR from "swr";
-import TicketHistoryItem from "../TicketHistoryItem";
-import TicketHistorySkeleton from "./TicketHistorySkeleton";
+import { Get } from '@/src/repository'
+import { GetTicketHistoryListResponse } from '@/src/type/ticket'
+import useSWR from 'swr'
+import TicketHistoryItem from '../TicketHistoryItem'
+import TicketHistorySkeleton from './TicketHistorySkeleton'
 
 interface PropsType {
-  ticketId: number;
+  ticketId: number
 }
 
 const TicketHistory = ({ ticketId }: PropsType) => {
@@ -15,10 +15,10 @@ const TicketHistory = ({ ticketId }: PropsType) => {
     isLoading,
     mutate: commentRefetch,
   } = useSWR(`/log/v1/ticket-history-log/${ticketId}`, async (url) =>
-    Get<GetTicketHistoryListResponse>(url)
-  );
+    Get<GetTicketHistoryListResponse>(url),
+  )
 
-  if (isLoading) return;
+  if (isLoading) return
 
   return (
     <div className="mt-2">
@@ -30,7 +30,7 @@ const TicketHistory = ({ ticketId }: PropsType) => {
         ))
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TicketHistory;
+export default TicketHistory

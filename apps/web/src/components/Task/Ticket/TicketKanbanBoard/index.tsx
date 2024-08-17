@@ -1,25 +1,25 @@
 // ** Type Imports
-import { TicketInfo } from "@/src/type/ticket";
-import { EpicStatus } from "@/src/type/epic";
+import { TicketInfo } from '@/src/type/ticket'
+import { EpicStatus } from '@/src/type/epic'
 
 // ** Component Imports
-import TicketKanbanItem from "../TicketKanbanItem";
+import TicketKanbanItem from '../TicketKanbanItem'
 
 interface PropsType {
-  data: TicketInfo[];
-  isLoading: boolean;
-  handleClick?: (id: number) => void;
+  data: TicketInfo[]
+  isLoading: boolean
+  handleClick?: (id: number) => void
 }
 
 const StatusList: EpicStatus[] = [
-  "WAITING",
-  "DOING",
-  "DONE",
-  "COMPLETE",
-  "REOPEN",
-  "HOLD",
-  "NOTHING",
-];
+  'WAITING',
+  'DOING',
+  'DONE',
+  'COMPLETE',
+  'REOPEN',
+  'HOLD',
+  'NOTHING',
+]
 
 const TicketKanbanBoard = ({ data, handleClick, isLoading }: PropsType) => {
   return (
@@ -36,7 +36,7 @@ const TicketKanbanBoard = ({ data, handleClick, isLoading }: PropsType) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default TicketKanbanBoard;
+export default TicketKanbanBoard

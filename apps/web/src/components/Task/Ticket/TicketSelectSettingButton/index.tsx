@@ -1,44 +1,44 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
-import useSWR from "swr";
-import Tooltip from "../../../Tooltip";
-import CustomImage from "../../../Image/CustomImage";
-import { Get } from "@/src/repository";
-import { GetTicketSettingListResponse } from "@/src/type/ticket";
-import { getTicketSettingImage } from "@/src/utils/ticket-setting";
+import React, { useState, useEffect, useRef, useMemo } from 'react'
+import useSWR from 'swr'
+import Tooltip from '../../../Tooltip'
+import CustomImage from '../../../Image/CustomImage'
+import { Get } from '@/src/repository'
+import { GetTicketSettingListResponse } from '@/src/type/ticket'
+import { getTicketSettingImage } from '@/src/utils/ticket-setting'
 
 interface PropsType {
-  selectTypeId: number;
-  setSelectTypeId: (value: number) => void;
+  selectTypeId: number
+  setSelectTypeId: (value: number) => void
 }
 
 const TicketSelectSettingButton = ({
   selectTypeId,
   setSelectTypeId,
 }: PropsType) => {
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const [open, setOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null)
+  const [open, setOpen] = useState<boolean>(false)
 
   const handleOpen = () => {
-    setOpen((prev) => !prev);
-  };
+    setOpen((prev) => !prev)
+  }
 
   const {
     data: settingData,
     error,
     isLoading,
-  } = useSWR("/v1/ticket/setting", async (url) =>
-    Get<GetTicketSettingListResponse>(url)
-  );
+  } = useSWR('/v1/ticket/setting', async (url) =>
+    Get<GetTicketSettingListResponse>(url),
+  )
 
   const type = useMemo(
     () =>
       isLoading
         ? null
         : settingData?.data?.data.find(
-            (item) => item.ticketSettingId === selectTypeId
+            (item) => item.ticketSettingId === selectTypeId,
           ),
-    [settingData, selectTypeId, isLoading]
-  );
+    [settingData, selectTypeId, isLoading],
+  )
 
   useEffect(() => {
     const clickOutside = (e: MouseEvent) => {
@@ -46,35 +46,35 @@ const TicketSelectSettingButton = ({
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target as Node)
       ) {
-        handleOpen();
+        handleOpen()
       }
-    };
+    }
 
-    document.addEventListener("mousedown", clickOutside);
+    document.addEventListener('mousedown', clickOutside)
 
     return () => {
-      document.removeEventListener("mousedown", clickOutside);
-    };
-  }, []);
+      document.removeEventListener('mousedown', clickOutside)
+    }
+  }, [])
 
   useEffect(() => {
-    if (selectTypeId || isLoading) return;
+    if (selectTypeId || isLoading) return
 
-    setSelectTypeId(settingData?.data?.data[0]?.ticketSettingId || 0);
-  }, [selectTypeId, settingData, isLoading, setSelectTypeId]);
+    setSelectTypeId(settingData?.data?.data[0]?.ticketSettingId || 0)
+  }, [selectTypeId, settingData, isLoading, setSelectTypeId])
 
-  if (error) return null;
+  if (error) return null
 
   return (
     <div className="relative">
       <div
         className="flex items-center cursor-pointer"
         onClick={(e) => {
-          e.stopPropagation();
-          handleOpen();
+          e.stopPropagation()
+          handleOpen()
         }}
       >
-        <Tooltip text={type ? type.type : ""}>
+        <Tooltip text={type ? type.type : ''}>
           {type ? (
             <div
               className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
@@ -105,8 +105,8 @@ const TicketSelectSettingButton = ({
                 key={item.ticketSettingId}
                 className="w-[168px] h-[32px] hover:bg-[#F4F4FA] rounded-[8px] p-[8px] flex items-center cursor-pointer"
                 onClick={() => {
-                  setSelectTypeId(item.ticketSettingId);
-                  handleOpen();
+                  setSelectTypeId(item.ticketSettingId)
+                  handleOpen()
                 }}
               >
                 <div
@@ -128,7 +128,7 @@ const TicketSelectSettingButton = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TicketSelectSettingButton;
+export default TicketSelectSettingButton

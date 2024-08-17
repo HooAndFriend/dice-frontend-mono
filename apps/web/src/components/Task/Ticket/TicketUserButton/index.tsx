@@ -1,31 +1,31 @@
-"use client";
+'use client'
 
 // ** React Imports
-import { useEffect, useState, ChangeEvent } from "react";
+import { useEffect, useState, ChangeEvent } from 'react'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+import { useDialog } from '@/src/context/DialogContext'
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
-import { GetSearchWorkspaceUserListResponse } from "@/src/type/workspace";
+import { CommonResponse } from '@/src/type/common'
+import { GetSearchWorkspaceUserListResponse } from '@/src/type/workspace'
 
 // ** Swr Imports
-import useSWR, { mutate } from "swr";
-import useSWRMutation from "swr/mutation";
-import { Get, Put } from "@/src/repository";
+import useSWR, { mutate } from 'swr'
+import useSWRMutation from 'swr/mutation'
+import { Get, Put } from '@/src/repository'
 
 // ** Component Imports
-import UserSelectPopover from "../../Common/Popover/UserSelectPopover";
+import UserSelectPopover from '../../Common/Popover/UserSelectPopover'
 
 interface PropsType {
-  profile: string;
-  userId: number;
-  email: string;
-  ticketId: number;
-  nickname?: string;
-  isNickname?: boolean;
-  type: "user" | "admin";
+  profile: string
+  userId: number
+  email: string
+  ticketId: number
+  nickname?: string
+  isNickname?: boolean
+  type: 'user' | 'admin'
 }
 
 const TicketUserButton = ({
@@ -36,56 +36,56 @@ const TicketUserButton = ({
   type,
   nickname,
 }: PropsType) => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [name, setName] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false)
+  const [name, setName] = useState<string>('')
 
-  const { handleOpen: handleDialogOpen } = useDialog();
+  const { handleOpen: handleDialogOpen } = useDialog()
 
   const handleName = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
+    setName(e.target.value)
+  }
 
   const handleOpen = () => {
-    setOpen((c) => !c);
-  };
+    setOpen((c) => !c)
+  }
 
   const {
     data,
     error,
     isLoading,
     mutate: refetch,
-  } = useSWR("/v1/workspace-user/search", async (url) =>
+  } = useSWR('/v1/workspace-user/search', async (url) =>
     Get<GetSearchWorkspaceUserListResponse>(url, {
       params: { name },
-    })
-  );
+    }),
+  )
 
   const updateTicketUser = useSWRMutation(
-    "/v1/ticket/user",
+    '/v1/ticket/user',
     async (url: string, { arg }: { arg: number }) =>
       await Put<CommonResponse<void>>(url, { ticketId, type, userId: arg }),
     {
       onSuccess: () => {
-        mutate("/v1/ticket");
-        mutate("/v1/epic");
-        mutate(`/v1/ticket/detail/${ticketId}`);
-        setOpen(false);
+        mutate('/v1/ticket')
+        mutate('/v1/epic')
+        mutate(`/v1/ticket/detail/${ticketId}`)
+        setOpen(false)
       },
       onError: (error) => {
         handleDialogOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
   useEffect(() => {
-    refetch();
-  }, [name]);
+    refetch()
+  }, [name])
 
   return (
     <UserSelectPopover
@@ -101,7 +101,7 @@ const TicketUserButton = ({
       handleName={handleName}
       handleUpdateUser={updateTicketUser.trigger}
     />
-  );
-};
+  )
+}
 
-export default TicketUserButton;
+export default TicketUserButton

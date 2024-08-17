@@ -1,27 +1,27 @@
 // ** Next Imports
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic'
 
 // ** React Imports
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 // ** Component Imports
-import ProfileBox from "../../ProfileBox";
-import UserModal from "@/src/components/Modal/UserModal";
+import ProfileBox from '../../ProfileBox'
+import UserModal from '@/src/components/Modal/UserModal'
 
 // ** Type Imports
-import { UserStateType } from "@/src/app";
+import { UserStateType } from '@/src/app'
 
 interface PropsType {
-  open: boolean;
-  modalOpen: boolean;
-  cancelButtonRef: any;
-  userState: UserStateType;
-  setModalOpen: (value: boolean) => void;
-  handleModalOpen: () => void;
-  handleOpen: () => void;
-  handleLogout: () => void;
+  open: boolean
+  modalOpen: boolean
+  cancelButtonRef: any
+  userState: UserStateType
+  setModalOpen: (value: boolean) => void
+  handleModalOpen: () => void
+  handleOpen: () => void
+  handleLogout: () => void
 }
-const DynamicImage = dynamic(() => import("next/image"), { ssr: false });
+const DynamicImage = dynamic(() => import('next/image'), { ssr: false })
 
 const UserPopoverView = ({
   open,
@@ -33,11 +33,11 @@ const UserPopoverView = ({
   handleModalOpen,
   handleLogout,
 }: PropsType) => {
-  const [nickname, setNickname] = useState<string>("");
+  const [nickname, setNickname] = useState<string>('')
 
   useEffect(() => {
-    setNickname(userState.nickname);
-  }, [userState]);
+    setNickname(userState.nickname)
+  }, [userState])
 
   return (
     <div>
@@ -45,7 +45,7 @@ const UserPopoverView = ({
         <DynamicImage
           width={24}
           height={24}
-          src={userState.profile ? userState.profile : "/images/dice.png"}
+          src={userState.profile ? userState.profile : '/images/dice.png'}
           alt="profile"
           className=" rounded-[12px] mr-[8px]"
         />
@@ -58,7 +58,7 @@ const UserPopoverView = ({
             <div className="flex items-center">
               <ProfileBox
                 image={
-                  userState.profile ? userState.profile : "/images/dice.png"
+                  userState.profile ? userState.profile : '/images/dice.png'
                 }
                 alt="profile"
                 width={40}
@@ -93,7 +93,7 @@ const UserPopoverView = ({
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default UserPopoverView;
+export default UserPopoverView

@@ -1,75 +1,75 @@
-"use client";
+'use client'
 
 // ** React Imports
-import { KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useState } from 'react'
 
 // ** Component Imports
-import CustomInput from "@/src/components/Input/CustomInput";
+import CustomInput from '@/src/components/Input/CustomInput'
 
 // ** Service Imports
-import useSWRMutation from "swr/mutation";
-import { Post } from "@/src/repository";
+import useSWRMutation from 'swr/mutation'
+import { Post } from '@/src/repository'
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
+import { CommonResponse } from '@/src/type/common'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
-import CustomImage from "@/src/components/Image/CustomImage";
+import { useDialog } from '@/src/context/DialogContext'
+import CustomImage from '@/src/components/Image/CustomImage'
 
 const EpicAddItem = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [button, setButton] = useState<boolean>(false);
-  const [name, setName] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false)
+  const [button, setButton] = useState<boolean>(false)
+  const [name, setName] = useState<string>('')
 
-  const { handleOpen: handleModalOpen } = useDialog();
+  const { handleOpen: handleModalOpen } = useDialog()
 
-  const handleOpen = () => setOpen((c) => !c);
+  const handleOpen = () => setOpen((c) => !c)
 
   const saveEpic = useSWRMutation(
-    "/v1/epic",
+    '/v1/epic',
     async (url: string) => await Post<CommonResponse<void>>(url, { name }),
     {
       onSuccess: () => {
-        setButton(true);
-        handleClose();
+        setButton(true)
+        handleClose()
       },
       onError: (error) => {
         handleModalOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-        setButton(false);
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
+        setButton(false)
       },
-    }
-  );
+    },
+  )
 
   const handleClose = () => {
-    setOpen(false);
-    setName("");
-    setButton(false);
-  };
+    setOpen(false)
+    setName('')
+    setButton(false)
+  }
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      if (button) return;
-      setButton(true);
-      saveEpic.trigger();
+    if (e.key === 'Enter') {
+      if (button) return
+      setButton(true)
+      saveEpic.trigger()
     }
 
-    if (e.key === "Escape") {
-      handleClose();
+    if (e.key === 'Escape') {
+      handleClose()
     }
-  };
+  }
 
   return (
     <tr className="w-full border-b h-[76px]">
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-        style={{ width: "5%" }}
+        style={{ width: '5%' }}
       >
         <div className="flex items-center justify-center">
           <div className="flex items-center cursor-pointer">
@@ -85,7 +85,7 @@ const EpicAddItem = () => {
       {open && (
         <td
           className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6 flex items-center"
-          style={{ width: "95%" }}
+          style={{ width: '95%' }}
         >
           <CustomInput
             placeholder="Enter Epic Name"
@@ -97,7 +97,7 @@ const EpicAddItem = () => {
           />
           <div className="ml-4 cursor-pointer" onClick={saveEpic.trigger}>
             <CustomImage
-              src={"/svg/add-black-box.svg"}
+              src={'/svg/add-black-box.svg'}
               alt="black-box"
               width={26}
               height={26}
@@ -109,7 +109,7 @@ const EpicAddItem = () => {
         </td>
       )}
     </tr>
-  );
-};
+  )
+}
 
-export default EpicAddItem;
+export default EpicAddItem

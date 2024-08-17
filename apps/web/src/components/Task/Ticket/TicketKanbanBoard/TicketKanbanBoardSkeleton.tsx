@@ -5,7 +5,7 @@ const TicketKanbanBoardSkeleton = () => {
       <div className="w-[280px] h-[187px] shadow-xl rounded-[15px] bg-gray-200 mr-[30px]" />
       <div className="w-[280px] h-[187px] shadow-xl rounded-[15px] bg-gray-200 mr-[30px]" />
     </div>
-  );
-};
+  )
+}
 
-export default TicketKanbanBoardSkeleton;
+export default TicketKanbanBoardSkeleton

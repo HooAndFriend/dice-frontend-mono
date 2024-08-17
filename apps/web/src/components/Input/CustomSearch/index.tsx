@@ -1,18 +1,18 @@
-import Image from "next/image";
-import CustomImage from "../../Image/CustomImage";
+import Image from 'next/image'
+import CustomImage from '../../Image/CustomImage'
 
 interface PropsType {
-  value?: string;
-  name?: string;
-  width?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string
+  name?: string
+  width?: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const CustomSearch = ({ value, onChange, name, width }: PropsType) => {
   return (
     <div
       className={`w-[${
-        width ? width : "443px"
+        width ? width : '443px'
       }] h-[30px] rounded-[10px] bg-white border border-[#EBEBEC] flex items-center justify-between px-[8px]`}
     >
       <div className="flex items-center justify-center h-full">
@@ -31,7 +31,7 @@ const CustomSearch = ({ value, onChange, name, width }: PropsType) => {
         onChange={onChange}
       />
     </div>
-  );
-};
+  )
+}
 
-export default CustomSearch;
+export default CustomSearch

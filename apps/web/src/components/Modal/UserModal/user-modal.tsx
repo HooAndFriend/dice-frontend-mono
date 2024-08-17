@@ -1,24 +1,24 @@
 // ** React Imports
-import { Fragment } from "react";
+import { Fragment } from 'react'
 
 // ** ui Imports
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition } from '@headlessui/react'
 
 // ** Component Imports
-import SettingContent from "./components/UserSettingContent";
-import TeamContent from "./components/UserTeamContent";
-import WorkspaceContent from "./components/UserWorkspaceContent";
-import Image from "next/image";
-import CustomImage from "../../Image/CustomImage";
+import SettingContent from './components/UserSettingContent'
+import TeamContent from './components/UserTeamContent'
+import WorkspaceContent from './components/UserWorkspaceContent'
+import Image from 'next/image'
+import CustomImage from '../../Image/CustomImage'
 
 interface PropsType {
-  open: boolean;
-  cancelButtonRef: any;
-  tab: number;
-  profile: string;
-  nickname: string;
-  setTab: (tab: number) => void;
-  setOpen: (open: boolean) => void;
+  open: boolean
+  cancelButtonRef: any
+  tab: number
+  profile: string
+  nickname: string
+  setTab: (tab: number) => void
+  setOpen: (open: boolean) => void
 }
 
 const UserModalView = ({
@@ -91,16 +91,16 @@ const UserModalView = ({
                             onClick={() => setTab(0)}
                             className={`mb-[15px] w-[205px] h-[40px] rounded-[20px] flex items-center text-[16px] font-san-bold cursor-pointer ${
                               tab === 0
-                                ? "text-main bg-white"
-                                : "bg-main text-white"
+                                ? 'text-main bg-white'
+                                : 'bg-main text-white'
                             }`}
                           >
                             <CustomImage
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 0
-                                  ? "/svg/setting.svg"
-                                  : "/svg/settingW.svg"
+                                  ? '/svg/setting.svg'
+                                  : '/svg/settingW.svg'
                               }
                               alt="setting"
                               width={24}
@@ -131,16 +131,16 @@ const UserModalView = ({
                             onClick={() => setTab(2)}
                             className={`mb-[15px] w-[205px] h-[40px] rounded-[20px] flex items-center text-[16px] font-san-bold cursor-pointer ${
                               tab === 2
-                                ? "text-main bg-white"
-                                : "bg-main text-white"
+                                ? 'text-main bg-white'
+                                : 'bg-main text-white'
                             }`}
                           >
                             <CustomImage
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 2
-                                  ? "/svg/workspace.svg"
-                                  : "/svg/workspaceW.svg"
+                                  ? '/svg/workspace.svg'
+                                  : '/svg/workspaceW.svg'
                               }
                               alt="workspace"
                               width={24}
@@ -164,7 +164,7 @@ const UserModalView = ({
         </div>
       </Dialog>
     </Transition.Root>
-  );
-};
+  )
+}
 
-export default UserModalView;
+export default UserModalView

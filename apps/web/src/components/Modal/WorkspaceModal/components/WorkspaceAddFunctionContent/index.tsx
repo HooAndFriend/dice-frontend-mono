@@ -1,84 +1,84 @@
 // ** Recoil Imports
-import { useRecoilValue } from "recoil";
-import { WorkspaceState } from "@/src/app";
+import { useRecoilValue } from 'recoil'
+import { WorkspaceState } from '@/src/app'
 
 // ** Service Imports
-import useSWR from "swr";
-import { Get, Post, Put } from "@/src/repository";
+import useSWR from 'swr'
+import { Get, Post, Put } from '@/src/repository'
 
 // ** Type Imports
 import {
   GetWorkspaceFunctionListResponse,
   WorksapceFunctionType,
-} from "@/src/type/workspace";
-import useSWRMutation from "swr/mutation";
+} from '@/src/type/workspace'
+import useSWRMutation from 'swr/mutation'
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
+import { CommonResponse } from '@/src/type/common'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
-import { useState } from "react";
-import Image from "next/image";
-import CustomImage from "@/src/components/Image/CustomImage";
+import { useDialog } from '@/src/context/DialogContext'
+import { useState } from 'react'
+import Image from 'next/image'
+import CustomImage from '@/src/components/Image/CustomImage'
 
 const WorkspaceAddFunctionContent = () => {
-  const [word, setWord] = useState<string>("");
+  const [word, setWord] = useState<string>('')
 
-  const { role } = useRecoilValue(WorkspaceState);
+  const { role } = useRecoilValue(WorkspaceState)
 
-  const { handleOpen } = useDialog();
+  const { handleOpen } = useDialog()
 
   const { data, error, isLoading, mutate } = useSWR(
-    "/v1/workspace-function/function",
-    async (url) => Get<GetWorkspaceFunctionListResponse>(url)
-  );
+    '/v1/workspace-function/function',
+    async (url) => Get<GetWorkspaceFunctionListResponse>(url),
+  )
 
   const removeWorkspaceFunction = useSWRMutation(
-    "/v1/workspace-function",
+    '/v1/workspace-function',
     async (url: string, { arg }: { arg: WorksapceFunctionType }) =>
       await Put<CommonResponse<void>>(url, {
         function: arg,
       }),
     {
       onSuccess: () => {
-        mutate();
+        mutate()
       },
       onError: (error) => {
         handleOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
   const addWorkspaceFunction = useSWRMutation(
-    "/v1/workspace-function",
+    '/v1/workspace-function',
     async (url: string, { arg }: { arg: WorksapceFunctionType }) =>
       await Post<CommonResponse<void>>(url, {
         function: arg,
       }),
     {
       onSuccess: () => {
-        mutate();
+        mutate()
       },
       onError: (error) => {
         handleOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
-  if (isLoading) return;
+  if (isLoading) return
 
   return (
     <div>
@@ -109,7 +109,7 @@ const WorkspaceAddFunctionContent = () => {
                 key={item.function}
               >
                 {item.function}
-                {role === "ADMIN" && (
+                {role === 'ADMIN' && (
                   <CustomImage
                     alt="trashcanIcon"
                     className="mr-[13px] cursor-pointer"
@@ -134,7 +134,7 @@ const WorkspaceAddFunctionContent = () => {
             .map((item, index) => (
               <div
                 className={`border border-[#EBEBEC] w-[360px] h-[76px] rounded-[20px] flex items-center font-spoqa text-base justify-between mb-3 ${
-                  index % 2 === 0 ? "mr-3" : "ml-3"
+                  index % 2 === 0 ? 'mr-3' : 'ml-3'
                 }`}
                 key={item.function}
               >
@@ -145,7 +145,7 @@ const WorkspaceAddFunctionContent = () => {
                   />
                   {item.function}
                 </div>
-                {role === "ADMIN" && (
+                {role === 'ADMIN' && (
                   <div
                     className="w-[97px] h-9 border border-[#EBEBEC] rounded-[50px] flex items-center font-spoqa font-bold text-base justify-center mr-[18px] cursor-pointer"
                     onClick={() => addWorkspaceFunction.trigger(item.function)}
@@ -165,7 +165,7 @@ const WorkspaceAddFunctionContent = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default WorkspaceAddFunctionContent;
+export default WorkspaceAddFunctionContent

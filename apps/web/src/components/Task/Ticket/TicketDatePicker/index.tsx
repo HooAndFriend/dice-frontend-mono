@@ -1,53 +1,53 @@
 // ** Service Imports
-import { mutate } from "swr";
-import { Patch } from "@/src/repository";
-import useSWRMutation from "swr/mutation";
+import { mutate } from 'swr'
+import { Patch } from '@/src/repository'
+import useSWRMutation from 'swr/mutation'
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
+import { CommonResponse } from '@/src/type/common'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
-import { useState } from "react";
-import CustomImage from "../../../Image/CustomImage";
+import { useDialog } from '@/src/context/DialogContext'
+import { useState } from 'react'
+import CustomImage from '../../../Image/CustomImage'
 
 interface PropsType {
-  value: string;
-  ticketId: number;
+  value: string
+  ticketId: number
 }
 
 const TicketDatePicker = ({ value, ticketId }: PropsType) => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false)
 
-  const handleOpen = () => setOpen((c) => !c);
-  const { handleOpen: handleDialogOpen } = useDialog();
+  const handleOpen = () => setOpen((c) => !c)
+  const { handleOpen: handleDialogOpen } = useDialog()
 
   const updateTicket = useSWRMutation(
-    "v1/ticket/dueDate",
+    'v1/ticket/dueDate',
     async (url: string, { arg }: { arg: string }) =>
       await Patch<CommonResponse<void>>(url, { ticketId, dueDate: arg }),
     {
       onSuccess: () => {
-        mutate("/v1/ticket");
-        mutate("/v1/epic");
-        mutate(`/v1/ticket/detail/${ticketId}`);
-        handleOpen();
+        mutate('/v1/ticket')
+        mutate('/v1/epic')
+        mutate(`/v1/ticket/detail/${ticketId}`)
+        handleOpen()
       },
       onError: (error) => {
         handleDialogOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateTicket.trigger(e.target.value);
-  };
+    updateTicket.trigger(e.target.value)
+  }
 
   return (
     <div>
@@ -63,7 +63,7 @@ const TicketDatePicker = ({ value, ticketId }: PropsType) => {
           className="flex items-center px-[16px] h-[40px] bg-[#F2F4F6] rounded-[5px] w-[240px] justify-between cursor-pointer"
           onDoubleClick={handleOpen}
         >
-          <p>{value ? value : "-"}</p>
+          <p>{value ? value : '-'}</p>
           <CustomImage
             width={24}
             height={24}
@@ -74,7 +74,7 @@ const TicketDatePicker = ({ value, ticketId }: PropsType) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TicketDatePicker;
+export default TicketDatePicker

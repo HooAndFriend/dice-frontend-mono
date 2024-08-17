@@ -1,66 +1,66 @@
-"use client";
+'use client'
 
 // ** React Imports
-import { useState } from "react";
+import { useState } from 'react'
 
 // ** Component Imports
-import CustomImage from "../../Image/CustomImage";
-import NotificationItem from "./NotificationItem";
+import CustomImage from '../../Image/CustomImage'
+import NotificationItem from './NotificationItem'
 
 // ** Service Imports
-import { Get, Put } from "@/src/repository";
-import useSWR from "swr";
-import useSWRMutation from "swr/mutation";
+import { Get, Put } from '@/src/repository'
+import useSWR from 'swr'
+import useSWRMutation from 'swr/mutation'
 
 // ** Type Imports
 import {
   GetNotificationListResponse,
   Notification,
-} from "@/src/type/notification";
-import { CommonResponse } from "@/src/type/common";
+} from '@/src/type/notification'
+import { CommonResponse } from '@/src/type/common'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+import { useDialog } from '@/src/context/DialogContext'
 
 const NotificationPopover = () => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false)
 
-  const handleOpen = () => setOpen((cur) => !cur);
+  const handleOpen = () => setOpen((cur) => !cur)
 
-  const { handleOpen: handleDialogOpen } = useDialog();
+  const { handleOpen: handleDialogOpen } = useDialog()
 
   const { error, isLoading, data, mutate } = useSWR(
-    "/push/v1/notification",
-    async (url) => Get<GetNotificationListResponse>(url)
-  );
+    '/push/v1/notification',
+    async (url) => Get<GetNotificationListResponse>(url),
+  )
 
   const readNotification = useSWRMutation(
-    "/push/v1/notification",
+    '/push/v1/notification',
     async (url: string) => await Put<CommonResponse<void>>(url),
     {
       onSuccess: () => {
-        mutate();
+        mutate()
       },
       onError: (error) => {
         handleDialogOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
   const newNotificationCount = (data: Notification[]) =>
-    data.reduce((acc, cur) => (cur.status === "READ" ? acc : acc + 1), 0);
+    data.reduce((acc, cur) => (cur.status === 'READ' ? acc : acc + 1), 0)
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>
 
   return (
     <div>
-      <div style={{ position: "relative" }}>
+      <div style={{ position: 'relative' }}>
         <div
           onClick={handleOpen}
           className="flex items-center justify-center mr-6 cursor-pointer"
@@ -105,7 +105,7 @@ const NotificationPopover = () => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default NotificationPopover;
+export default NotificationPopover

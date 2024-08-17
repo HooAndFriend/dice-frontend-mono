@@ -1,10 +1,10 @@
 // ** Next Imports
-import Image from "next/image";
-import CustomImage from "../../../Image/CustomImage";
+import Image from 'next/image'
+import CustomImage from '../../../Image/CustomImage'
 
 interface PropsType {
-  mode: "kanban" | "list";
-  setMode: (mode: "kanban" | "list") => void;
+  mode: 'kanban' | 'list'
+  setMode: (mode: 'kanban' | 'list') => void
 }
 
 const TicketViewToggleButton = ({ mode, setMode }: PropsType) => {
@@ -12,16 +12,16 @@ const TicketViewToggleButton = ({ mode, setMode }: PropsType) => {
     <div className="w-[100px] bg-white h-[50px] rounded-[30px] border-1 border-solid border-[#EBEBEC] flex items-center justify-between">
       <div
         className="w-[50px] h-[50px] rounded-full flex items-center justify-center cursor-pointer"
-        onClick={() => setMode("kanban")}
+        onClick={() => setMode('kanban')}
         style={{
-          backgroundColor: mode === "kanban" ? "black" : "white",
+          backgroundColor: mode === 'kanban' ? 'black' : 'white',
         }}
       >
         <CustomImage
           src={
-            mode === "kanban"
-              ? "/svg/ticket/board-list-white.svg"
-              : "/svg/ticket/board-list-black.svg"
+            mode === 'kanban'
+              ? '/svg/ticket/board-list-white.svg'
+              : '/svg/ticket/board-list-black.svg'
           }
           alt="icon"
           width={24}
@@ -30,16 +30,16 @@ const TicketViewToggleButton = ({ mode, setMode }: PropsType) => {
       </div>
       <div
         className="w-[50px] h-[50px] rounded-full flex items-center justify-center cursor-pointer"
-        onClick={() => setMode("list")}
+        onClick={() => setMode('list')}
         style={{
-          backgroundColor: mode === "list" ? "black" : "white",
+          backgroundColor: mode === 'list' ? 'black' : 'white',
         }}
       >
         <CustomImage
           src={
-            mode === "list"
-              ? "/svg/ticket/ticket-list-white.svg"
-              : "/svg/ticket/ticket-list-black.svg"
+            mode === 'list'
+              ? '/svg/ticket/ticket-list-white.svg'
+              : '/svg/ticket/ticket-list-black.svg'
           }
           alt="icon"
           width={24}
@@ -47,7 +47,7 @@ const TicketViewToggleButton = ({ mode, setMode }: PropsType) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TicketViewToggleButton;
+export default TicketViewToggleButton

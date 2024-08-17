@@ -1,19 +1,19 @@
 // ** Component Imports
-import UserProfileBox from "../UserProfileBox";
+import UserProfileBox from '../UserProfileBox'
 
 // ** Service Imports
-import useSWR from "swr";
-import { Get } from "@/src/repository";
+import useSWR from 'swr'
+import { Get } from '@/src/repository'
 
 // ** Type Imports
-import { GetUserTeamListResponse } from "@/src/type/team";
+import { GetUserTeamListResponse } from '@/src/type/team'
 
 const UserTeamContent = () => {
-  const { data, error, isLoading } = useSWR("/v1/team-user", async (url) =>
-    Get<GetUserTeamListResponse>(url)
-  );
+  const { data, error, isLoading } = useSWR('/v1/team-user', async (url) =>
+    Get<GetUserTeamListResponse>(url),
+  )
 
-  if (isLoading) return;
+  if (isLoading) return
 
   return (
     <div className="w-full h-full">
@@ -29,6 +29,6 @@ const UserTeamContent = () => {
         ))}
       </div>
     </div>
-  );
-};
-export default UserTeamContent;
+  )
+}
+export default UserTeamContent

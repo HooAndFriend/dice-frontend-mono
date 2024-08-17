@@ -1,45 +1,45 @@
-"use client";
+'use client'
 
 // ** React Imports
-import { useEffect, useRef, useState, ChangeEvent } from "react";
+import { useEffect, useRef, useState, ChangeEvent } from 'react'
 
 // ** Type Imports
-import { EpicStatus, GetEpicListResponse } from "@/src/type/epic";
+import { EpicStatus, GetEpicListResponse } from '@/src/type/epic'
 
 // ** Utils Imports
-import { getStateBoxColor } from "@/src/utils/color";
+import { getStateBoxColor } from '@/src/utils/color'
 
 interface PropsType {
-  selectedStatus: EpicStatus[];
-  handleEpicSelectFilter: (item: EpicStatus) => void;
+  selectedStatus: EpicStatus[]
+  handleEpicSelectFilter: (item: EpicStatus) => void
 }
 
 const statusList: EpicStatus[] = [
-  "WAITING",
-  "DOING",
-  "DONE",
-  "COMPLETE",
-  "HOLD",
-  "REOPEN",
-  "NOTHING",
-];
+  'WAITING',
+  'DOING',
+  'DONE',
+  'COMPLETE',
+  'HOLD',
+  'REOPEN',
+  'NOTHING',
+]
 
 const StatusFilter = ({
   selectedStatus,
   handleEpicSelectFilter,
 }: PropsType) => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [name, setName] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false)
+  const [name, setName] = useState<string>('')
 
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null)
 
   const handleName = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
+    setName(e.target.value)
+  }
 
   const handleOpen = () => {
-    setOpen((c) => !c);
-  };
+    setOpen((c) => !c)
+  }
 
   useEffect(() => {
     const clickOutside = (e: MouseEvent) => {
@@ -47,24 +47,24 @@ const StatusFilter = ({
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target as Node)
       ) {
-        handleOpen();
+        handleOpen()
       }
-    };
+    }
 
-    document.addEventListener("mousedown", clickOutside);
+    document.addEventListener('mousedown', clickOutside)
 
     return () => {
-      document.removeEventListener("mousedown", clickOutside);
-    };
-  }, []);
+      document.removeEventListener('mousedown', clickOutside)
+    }
+  }, [])
 
   return (
     <div className="relative">
       <div
         className=" border border-[#EBEBEC]  rounded-[10px] bg-white flex items-center cursor-pointer w-[150px] h-[30px] justify-between px-[8px]"
         onClick={(e) => {
-          e.stopPropagation();
-          handleOpen();
+          e.stopPropagation()
+          handleOpen()
         }}
       >
         <h1 className="text-[#EBEBEC]">status</h1>
@@ -114,7 +114,7 @@ const StatusFilter = ({
                     />
                     <p
                       className="text-[12px] ml-[13px]"
-                      style={{ color: status === item ? "black" : "#ACACAC" }}
+                      style={{ color: status === item ? 'black' : '#ACACAC' }}
                     >
                       {item}
                     </p>
@@ -125,7 +125,7 @@ const StatusFilter = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default StatusFilter;
+export default StatusFilter

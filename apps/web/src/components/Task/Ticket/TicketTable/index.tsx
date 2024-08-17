@@ -1,35 +1,35 @@
 // ** React Imports
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react'
 
 // ** Recoil Imports
-import { WorkspaceState } from "@/src/app";
-import { useRecoilValue } from "recoil";
+import { WorkspaceState } from '@/src/app'
+import { useRecoilValue } from 'recoil'
 
 // ** Component Imports
-import TicketAddItem from "../TicketAddItem";
-import TicketItem from "../TicketItem";
-import TicketHeader from "../TicketHeader";
+import TicketAddItem from '../TicketAddItem'
+import TicketItem from '../TicketItem'
+import TicketHeader from '../TicketHeader'
 
 // ** Utils Imports
-import update from "immutability-helper";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import update from 'immutability-helper'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 // ** Type Imports
-import { Ticket } from "@/src/type/ticket";
-import EpicHeader from "../../Epic/EpicHeader";
+import { Ticket } from '@/src/type/ticket'
+import EpicHeader from '../../Epic/EpicHeader'
 
 interface PropsType {
-  data: Ticket[];
-  word: string;
-  updateOrder: (arg: { ticketId: number; targetTicketId: number }) => void;
-  handleClick?: (id: number) => void;
+  data: Ticket[]
+  word: string
+  updateOrder: (arg: { ticketId: number; targetTicketId: number }) => void
+  handleClick?: (id: number) => void
 }
 
 const TicketTable = ({ word, handleClick, data, updateOrder }: PropsType) => {
-  const [ticketList, setTicketList] = useState<Ticket[]>(data);
+  const [ticketList, setTicketList] = useState<Ticket[]>(data)
 
-  const { role } = useRecoilValue(WorkspaceState);
+  const { role } = useRecoilValue(WorkspaceState)
 
   const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
     setTicketList((prevCards: Ticket[]) =>
@@ -38,11 +38,11 @@ const TicketTable = ({ word, handleClick, data, updateOrder }: PropsType) => {
           [dragIndex, 1],
           [hoverIndex, 0, prevCards[dragIndex] as any],
         ],
-      })
-    );
+      }),
+    )
 
-    updateOrder({ ticketId: dragIndex, targetTicketId: hoverIndex });
-  }, []);
+    updateOrder({ ticketId: dragIndex, targetTicketId: hoverIndex })
+  }, [])
 
   return (
     <div className="w-full h-full bg-white rounded-[8px] scrollbar-thumb-slate-700 scrollbar-track-slate-300">
@@ -66,13 +66,13 @@ const TicketTable = ({ word, handleClick, data, updateOrder }: PropsType) => {
                     />
                   ))}
               </DndProvider>
-              {role !== "VIEWER" && <TicketAddItem />}
+              {role !== 'VIEWER' && <TicketAddItem />}
             </tbody>
           </table>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TicketTable;
+export default TicketTable

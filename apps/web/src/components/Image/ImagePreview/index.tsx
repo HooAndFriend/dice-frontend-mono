@@ -1,18 +1,18 @@
-"use client";
+'use client'
 
 // ** React Imports
-import { Fragment } from "react";
+import { Fragment } from 'react'
 
 // ** ui Imports
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition } from '@headlessui/react'
 
-import CustomImage from "../CustomImage";
+import CustomImage from '../CustomImage'
 
 interface PropsType {
-  open: boolean;
-  cancelButtonRef: any;
-  setOpen: (open: boolean) => void;
-  image: string;
+  open: boolean
+  cancelButtonRef: any
+  setOpen: (open: boolean) => void
+  image: string
 }
 
 const ImagePreview = ({ open, setOpen, cancelButtonRef, image }: PropsType) => {
@@ -61,7 +61,7 @@ const ImagePreview = ({ open, setOpen, cancelButtonRef, image }: PropsType) => {
         </div>
       </Dialog>
     </Transition.Root>
-  );
-};
+  )
+}
 
-export default ImagePreview;
+export default ImagePreview

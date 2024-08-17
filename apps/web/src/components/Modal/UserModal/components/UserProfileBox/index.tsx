@@ -1,10 +1,10 @@
-import { RoleType } from "@/src/type/common";
-import Image from "next/image";
+import { RoleType } from '@/src/type/common'
+import Image from 'next/image'
 
 interface PropsType {
-  name: string;
-  profile: string;
-  role: RoleType;
+  name: string
+  profile: string
+  role: RoleType
 }
 
 const UserProfileBox = ({ name, profile, role }: PropsType) => {
@@ -22,7 +22,7 @@ const UserProfileBox = ({ name, profile, role }: PropsType) => {
       </div>
       <h1>{role}</h1>
     </div>
-  );
-};
+  )
+}
 
-export default UserProfileBox;
+export default UserProfileBox

@@ -1,28 +1,28 @@
 // ** React Imports
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react'
 
 // ** Componet Import
-import CustomImage from "@/src/components/Image/CustomImage";
+import CustomImage from '@/src/components/Image/CustomImage'
 
 // ** Type Imports
-import { CommentInfo } from "@/src/type/qa";
+import { CommentInfo } from '@/src/type/qa'
 
 // ** Utils Imports
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
 // ** Recoil Imports
-import { UserState } from "@/src/app";
-import { useRecoilValue } from "recoil";
-import Image from "next/image";
+import { UserState } from '@/src/app'
+import { useRecoilValue } from 'recoil'
+import Image from 'next/image'
 
 interface PropsType {
-  data: CommentInfo;
-  mode: "view" | "edit";
-  comment: string;
-  setMode: (mode: "view" | "edit") => void;
-  handleComment: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleUpdateComment: () => void;
-  handleDeleteComment: () => void;
+  data: CommentInfo
+  mode: 'view' | 'edit'
+  comment: string
+  setMode: (mode: 'view' | 'edit') => void
+  handleComment: (e: ChangeEvent<HTMLInputElement>) => void
+  handleUpdateComment: () => void
+  handleDeleteComment: () => void
 }
 
 const CommentItem = ({
@@ -34,7 +34,7 @@ const CommentItem = ({
   handleUpdateComment,
   handleDeleteComment,
 }: PropsType) => {
-  const { email } = useRecoilValue(UserState);
+  const { email } = useRecoilValue(UserState)
 
   return (
     <div className="w-full mb-5">
@@ -50,13 +50,13 @@ const CommentItem = ({
           <div className="flex font-spoqa">
             <div className="mr-[10px] text-[16px]">{data.user.nickname}</div>
             <div className="flex items-center text-[12px] text-darkGray">
-              {dayjs(data.createdDate).format("YYYY-MM-DD HH:mm:ss")}
+              {dayjs(data.createdDate).format('YYYY-MM-DD HH:mm:ss')}
             </div>
             {email === data.user.email && (
               <>
                 <div
                   className="flex items-center ml-4 mr-2 text-xs cursor-pointer text-darkGray"
-                  onClick={() => setMode("edit")}
+                  onClick={() => setMode('edit')}
                 >
                   edit
                 </div>
@@ -71,7 +71,7 @@ const CommentItem = ({
           </div>
         </div>
       </div>
-      {mode === "view" ? (
+      {mode === 'view' ? (
         <div className="ml-[41px] mt-[9px] text-[16px]">{data.content}</div>
       ) : (
         <div className="ml-[41px] mt-5">
@@ -90,7 +90,7 @@ const CommentItem = ({
             </button>
             <button
               className="w-[60px] h-[30px] flex items-center justify-center rounded-[8px]"
-              onClickCapture={() => setMode("view")}
+              onClickCapture={() => setMode('view')}
             >
               cancel
             </button>
@@ -98,7 +98,7 @@ const CommentItem = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default CommentItem;
+export default CommentItem

@@ -1,20 +1,20 @@
-import Embed from "@editorjs/embed";
-import Table from "@editorjs/table";
-import List from "@editorjs/list";
-import LinkTool from "@editorjs/link";
-import Header from "@editorjs/header";
-import ColorPlugin from "editorjs-text-color-plugin";
-import CheckList from "@editorjs/checklist";
-import Delimiter from "@editorjs/delimiter";
-import InlineCode from "@editorjs/inline-code";
-import SimpleImage from "@editorjs/simple-image";
-import AttachesTool from "@egg-/editor-js-attaches";
-import Quote from "@egg-/editor-js-quote";
-import ImageTool from "@editorjs/image";
-import Paragraph from "@editorjs/paragraph";
-import Warning from "@editorjs/warning";
+import Embed from '@editorjs/embed'
+import Table from '@editorjs/table'
+import List from '@editorjs/list'
+import LinkTool from '@editorjs/link'
+import Header from '@editorjs/header'
+import ColorPlugin from 'editorjs-text-color-plugin'
+import CheckList from '@editorjs/checklist'
+import Delimiter from '@editorjs/delimiter'
+import InlineCode from '@editorjs/inline-code'
+import SimpleImage from '@editorjs/simple-image'
+import AttachesTool from '@egg-/editor-js-attaches'
+import Quote from '@egg-/editor-js-quote'
+import ImageTool from '@editorjs/image'
+import Paragraph from '@editorjs/paragraph'
+import Warning from '@editorjs/warning'
 // import { uploadFile } from "services/editor";
-import Alert from "editorjs-alert";
+import Alert from 'editorjs-alert'
 
 export const tools = {
   paragraph: {
@@ -22,7 +22,7 @@ export const tools = {
     inlineToolbar: true,
     config: {
       preserveBlank: true,
-      placeholder: "Please enter text.",
+      placeholder: 'Please enter text.',
     },
     toolbox: {
       icon: `
@@ -38,12 +38,12 @@ export const tools = {
     class: Header,
     inlineToolbar: true,
     config: {
-      placeholder: "Enter a title",
+      placeholder: 'Enter a title',
       levels: [1, 2, 3],
       defaultLevel: 1,
     },
     toolbox: {
-      title: "Title Type A",
+      title: 'Title Type A',
       icon: `
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M3.125 4.375V13.75" stroke="#ADADAD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -58,12 +58,12 @@ export const tools = {
     class: Header,
     inlineToolbar: true,
     config: {
-      placeholder: "Enter a title",
+      placeholder: 'Enter a title',
       levels: [1, 2, 3],
       defaultLevel: 2,
     },
     toolbox: {
-      title: "Title Type B",
+      title: 'Title Type B',
       icon: `
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M2.5 3.5V11" stroke="#ADADAD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -78,12 +78,12 @@ export const tools = {
     class: Header,
     inlineToolbar: true,
     config: {
-      placeholder: "Enter a title",
+      placeholder: 'Enter a title',
       levels: [1, 2, 3],
       defaultLevel: 3,
     },
     toolbox: {
-      title: "Title Type C",
+      title: 'Title Type C',
       icon: `
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M1.875 2.625V8.25" stroke="#ADADAD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -98,7 +98,7 @@ export const tools = {
     class: CheckList,
     inlineToolbar: true,
     toolbox: {
-      title: "To-do list",
+      title: 'To-do list',
       icon: `
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M15.1875 5.0625L7.3125 12.9375L3.375 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -110,10 +110,10 @@ export const tools = {
     class: List,
     inlineToolbar: true,
     config: {
-      defaultStyle: "unordered",
+      defaultStyle: 'unordered',
     },
     toolbox: {
-      title: "Bulleted list",
+      title: 'Bulleted list',
       icon: `
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M6.875 5H16.875" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -130,10 +130,10 @@ export const tools = {
     class: List,
     inlineToolbar: true,
     config: {
-      defaultStyle: "ordered",
+      defaultStyle: 'ordered',
     },
     toolbox: {
-      title: "Numbered list",
+      title: 'Numbered list',
       icon: `
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8.125 10H16.875" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -162,7 +162,7 @@ export const tools = {
     class: Quote,
     inlineToolbar: true,
     toolbox: {
-      title: "Quotation",
+      title: 'Quotation',
       icon: `
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8.4375 11.25H3.125C2.95924 11.25 2.80027 11.1842 2.68306 11.0669C2.56585 10.9497 2.5 10.7908 2.5 10.625V5.625C2.5 5.45924 2.56585 5.30027 2.68306 5.18306C2.80027 5.06585 2.95924 5 3.125 5H7.8125C7.97826 5 8.13723 5.06585 8.25444 5.18306C8.37165 5.30027 8.4375 5.45924 8.4375 5.625V12.5C8.4375 13.3288 8.10826 14.1237 7.52221 14.7097C6.93616 15.2958 6.1413 15.625 5.3125 15.625" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -174,7 +174,7 @@ export const tools = {
   delimiter: {
     class: Delimiter,
     toolbox: {
-      title: "Contour",
+      title: 'Contour',
       icon: `
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M3.125 10H16.875" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -186,10 +186,10 @@ export const tools = {
     class: Warning,
     inlineToolbar: true,
     config: {
-      messagePlaceholder: "Please enter text",
+      messagePlaceholder: 'Please enter text',
     },
     toolbox: {
-      title: "Callout",
+      title: 'Callout',
       icon: `
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M10 4.375V15.625" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -222,7 +222,7 @@ export const tools = {
   video: {
     class: ImageTool,
     toolbox: {
-      title: "Video",
+      title: 'Video',
       icon: `
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M17.8203 9.46904L6.57812 2.59404C6.48349 2.53566 6.37499 2.50359 6.26382 2.50113C6.15265 2.49867 6.04284 2.52591 5.94571 2.58005C5.84859 2.63419 5.76766 2.71326 5.71128 2.8091C5.65491 2.90494 5.62512 3.01409 5.625 3.12529V16.8753C5.62512 16.9865 5.65491 17.0956 5.71128 17.1915C5.76766 17.2873 5.84859 17.3664 5.94571 17.4205C6.04284 17.4747 6.15265 17.5019 6.26382 17.4994C6.37499 17.497 6.48349 17.4649 6.57812 17.4065L17.8203 10.5315C17.9126 10.4769 17.9891 10.3992 18.0423 10.3061C18.0954 10.2129 18.1233 10.1075 18.1233 10.0003C18.1233 9.89304 18.0954 9.78765 18.0423 9.69449C17.9891 9.60133 17.9126 9.52363 17.8203 9.46904V9.46904Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -230,8 +230,8 @@ export const tools = {
       `,
     },
     config: {
-      field: "video",
-      types: "video/*",
+      field: 'video',
+      types: 'video/*',
       buttonContent: `<svg class="video"></svg> Select a Video`,
       endpoints: {
         byFile: `${process.env.REACT_APP_API_URL}/uploads/editor/video`, // Your backend file uploader endpoint
@@ -241,7 +241,7 @@ export const tools = {
   linkTool: {
     class: LinkTool,
     toolbox: {
-      title: "Bookmark",
+      title: 'Bookmark',
       icon: `
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M15 17.5L10 14.375L5 17.5V3.75C5 3.58424 5.06585 3.42527 5.18306 3.30806C5.30027 3.19085 5.45924 3.125 5.625 3.125H14.375C14.5408 3.125 14.6997 3.19085 14.8169 3.30806C14.9342 3.42527 15 3.58424 15 3.75V17.5Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -255,7 +255,7 @@ export const tools = {
   attaches: {
     class: AttachesTool,
     toolbox: {
-      title: "File",
+      title: 'File',
       icon: `
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M15.625 17.5H4.375C4.20924 17.5 4.05027 17.4342 3.93306 17.3169C3.81585 17.1997 3.75 17.0408 3.75 16.875V3.125C3.75 2.95924 3.81585 2.80027 3.93306 2.68306C4.05027 2.56585 4.20924 2.5 4.375 2.5H11.875L16.25 6.875V16.875C16.25 17.0408 16.1842 17.1997 16.0669 17.3169C15.9497 17.4342 15.7908 17.5 15.625 17.5Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -291,31 +291,31 @@ export const tools = {
     class: ColorPlugin, // if load from CDN, please try: window.ColorPlugin
     config: {
       colorCollections: [
-        "#EC7878",
-        "#9C27B0",
-        "#673AB7",
-        "#3F51B5",
-        "#0070FF",
-        "#03A9F4",
-        "#00BCD4",
-        "#4CAF50",
-        "#8BC34A",
-        "#CDDC39",
-        "#FFF",
+        '#EC7878',
+        '#9C27B0',
+        '#673AB7',
+        '#3F51B5',
+        '#0070FF',
+        '#03A9F4',
+        '#00BCD4',
+        '#4CAF50',
+        '#8BC34A',
+        '#CDDC39',
+        '#FFF',
       ],
-      defaultColor: "#FF1300",
-      type: "text",
+      defaultColor: '#FF1300',
+      type: 'text',
       customPicker: true, // add a button to allow selecting any colour
     },
   },
   Marker: {
     class: ColorPlugin, // if load from CDN, please try: window.ColorPlugin
     config: {
-      defaultColor: "#FFBF00",
-      type: "marker",
+      defaultColor: '#FFBF00',
+      type: 'marker',
       icon: `<svg fill="#000000" height="200px" width="200px" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M17.6,6L6.9,16.7c-0.2,0.2-0.3,0.4-0.3,0.6L6,23.9c0,0.3,0.1,0.6,0.3,0.8C6.5,24.9,6.7,25,7,25c0,0,0.1,0,0.1,0l6.6-0.6 c0.2,0,0.5-0.1,0.6-0.3L25,13.4L17.6,6z"></path> <path d="M26.4,12l1.4-1.4c1.2-1.2,1.1-3.1-0.1-4.3l-3-3c-0.6-0.6-1.3-0.9-2.2-0.9c-0.8,0-1.6,0.3-2.2,0.9L19,4.6L26.4,12z"></path> </g> <g> <path d="M28,29H4c-0.6,0-1-0.4-1-1s0.4-1,1-1h24c0.6,0,1,0.4,1,1S28.6,29,28,29z"></path> </g> </g></svg>`,
     },
   },
   inlineCode: InlineCode,
   simpleImage: SimpleImage,
-};
+}

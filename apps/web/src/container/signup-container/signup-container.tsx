@@ -1,17 +1,17 @@
 // ** Reacat Imports
-import { ChangeEvent, KeyboardEvent } from "react";
+import { ChangeEvent, KeyboardEvent } from 'react'
 
 // ** Type Imports
-import { DiceSignupParams } from "@/src/type/auth";
+import { DiceSignupParams } from '@/src/type/auth'
 
 interface PropsType {
-  signupUser: DiceSignupParams;
-  passwordCheck: string;
-  handlePasswordCheck: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleJoin: () => void;
-  handleCancel: () => void;
-  handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
+  signupUser: DiceSignupParams
+  passwordCheck: string
+  handlePasswordCheck: (e: ChangeEvent<HTMLInputElement>) => void
+  handleInput: (e: ChangeEvent<HTMLInputElement>) => void
+  handleJoin: () => void
+  handleCancel: () => void
+  handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void
 }
 
 const SignupContainerView = ({
@@ -117,7 +117,7 @@ const SignupContainerView = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignupContainerView;
+export default SignupContainerView

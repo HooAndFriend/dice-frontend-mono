@@ -1,31 +1,31 @@
 // ** React Imports
-import { Fragment } from "react";
+import { Fragment } from 'react'
 
 // ** ui Imports
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition } from '@headlessui/react'
 
 // ** Component Imports
-import WorkspaceSettingContent from "@/src/components/Modal/WorkspaceModal/components/WorkspaceSettingContent";
-import WorkspaceMemberContent from "@/src/components/Modal/WorkspaceModal/components/WorkspaceMemberContent";
-import WorkspaceAddFunctionContent from "@/src/components/Modal/WorkspaceModal/components/WorkspaceAddFunctionContent";
-import WorkspaceAddMemberContent from "./components/WorkspaceAddMemberContent";
+import WorkspaceSettingContent from '@/src/components/Modal/WorkspaceModal/components/WorkspaceSettingContent'
+import WorkspaceMemberContent from '@/src/components/Modal/WorkspaceModal/components/WorkspaceMemberContent'
+import WorkspaceAddFunctionContent from '@/src/components/Modal/WorkspaceModal/components/WorkspaceAddFunctionContent'
+import WorkspaceAddMemberContent from './components/WorkspaceAddMemberContent'
 
 // ** Type Imports
-import { WorkspaceUserDetailInfo } from "@/src/type/workspace";
-import Image from "next/image";
-import CustomImage from "../../Image/CustomImage";
+import { WorkspaceUserDetailInfo } from '@/src/type/workspace'
+import Image from 'next/image'
+import CustomImage from '../../Image/CustomImage'
 
 interface PropsType {
-  open: boolean;
-  addOpen: boolean;
-  cancelButtonRef: any;
-  tab: number;
-  profile: string;
-  name: string;
-  data: WorkspaceUserDetailInfo[];
-  setTab: (tab: number) => void;
-  setAddOpen: (open: boolean) => void;
-  setOpen: (open: boolean) => void;
+  open: boolean
+  addOpen: boolean
+  cancelButtonRef: any
+  tab: number
+  profile: string
+  name: string
+  data: WorkspaceUserDetailInfo[]
+  setTab: (tab: number) => void
+  setAddOpen: (open: boolean) => void
+  setOpen: (open: boolean) => void
 }
 
 const WorkspaceModalView = ({
@@ -123,16 +123,16 @@ const WorkspaceModalView = ({
                             onClick={() => setTab(0)}
                             className={`mb-[15px] w-[205px] h-[40px] rounded-[20px] flex items-center text-[16px] font-san-bold cursor-pointer ${
                               tab == 0
-                                ? "text-main bg-white"
-                                : "bg-main text-white"
+                                ? 'text-main bg-white'
+                                : 'bg-main text-white'
                             }`}
                           >
                             <CustomImage
                               className="ml-[18px] mr-5"
                               src={
                                 tab === 0
-                                  ? "/svg/setting.svg"
-                                  : "/svg/settingW.svg"
+                                  ? '/svg/setting.svg'
+                                  : '/svg/settingW.svg'
                               }
                               alt="setting"
                               width={24}
@@ -144,14 +144,14 @@ const WorkspaceModalView = ({
                             onClick={() => setTab(1)}
                             className={`mb-[15px] w-[205px] h-[40px] rounded-[20px] flex items-center text-[16px] font-san-bold cursor-pointer ${
                               tab === 1
-                                ? "text-main bg-white"
-                                : "bg-main text-white"
+                                ? 'text-main bg-white'
+                                : 'bg-main text-white'
                             }`}
                           >
                             <CustomImage
                               className="ml-[18px] mr-5"
                               src={
-                                tab === 1 ? "/svg/team.svg" : "/svg/teamW.svg"
+                                tab === 1 ? '/svg/team.svg' : '/svg/teamW.svg'
                               }
                               alt="member"
                               width={24}
@@ -206,7 +206,7 @@ const WorkspaceModalView = ({
         </div>
       </Dialog>
     </Transition.Root>
-  );
-};
+  )
+}
 
-export default WorkspaceModalView;
+export default WorkspaceModalView

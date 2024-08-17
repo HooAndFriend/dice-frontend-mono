@@ -1,32 +1,32 @@
 // ** Component Imports
 // import EpicCard from "@/src/components/Task/Epic/EpicCard";
-import TicketCard from "@/src/components/Task/Ticket/TicketCard";
+import TicketCard from '@/src/components/Task/Ticket/TicketCard'
 // import EpicTableSkeleton from "@/src/components/Task/Epic/EpicTable/EpicTableSkeleton";
 // import EpicSearchCard from "@/src/components/Task/Epic/EpicSearchCard";
 
 // ** Utils Imports
-import { DropResult } from "react-beautiful-dnd";
+import { DropResult } from 'react-beautiful-dnd'
 
 // ** Type Imports
-import { EpicInfo, EpicStatus, SelectContent } from "@/src/type/epic";
-import { WorkspaceUser } from "@/src/type/workspace";
-import EpicTable from "@/src/components/Task/Epic/EpicTable";
+import { EpicInfo, EpicStatus, SelectContent } from '@/src/type/epic'
+import { WorkspaceUser } from '@/src/type/workspace'
+import EpicTable from '@/src/components/Task/Epic/EpicTable'
 
 interface PropsType {
-  word: string;
-  epicData: EpicInfo[];
-  epicCount: number;
-  isLoading: boolean;
-  checkedList: WorkspaceUser[];
-  selectContent: SelectContent;
-  selectedTypeIds: number[];
-  selectedStatus: EpicStatus[];
-  handleTypeSelectFilter: (typeId: number) => void;
-  handleStatusSelectFilter: (status: EpicStatus) => void;
-  setCheckedList: (list: WorkspaceUser[]) => void;
-  setSelectContent: (value: SelectContent) => void;
-  handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onDragEnd: ({ source, destination }: DropResult) => void;
+  word: string
+  epicData: EpicInfo[]
+  epicCount: number
+  isLoading: boolean
+  checkedList: WorkspaceUser[]
+  selectContent: SelectContent
+  selectedTypeIds: number[]
+  selectedStatus: EpicStatus[]
+  handleTypeSelectFilter: (typeId: number) => void
+  handleStatusSelectFilter: (status: EpicStatus) => void
+  setCheckedList: (list: WorkspaceUser[]) => void
+  setSelectContent: (value: SelectContent) => void
+  handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onDragEnd: ({ source, destination }: DropResult) => void
 }
 
 const EpicContainer = ({
@@ -69,11 +69,11 @@ const EpicContainer = ({
           </h1>
         </div> */}
       </div>
-      <div className={`${selectContent.id !== 0 && "flex"} h-[92%] py-[24px]`}>
+      <div className={`${selectContent.id !== 0 && 'flex'} h-[92%] py-[24px]`}>
         <div
           style={{
-            width: selectContent.id !== 0 ? "65%" : "100%",
-            height: "100%",
+            width: selectContent.id !== 0 ? '65%' : '100%',
+            height: '100%',
           }}
         >
           {isLoading ? (
@@ -82,7 +82,7 @@ const EpicContainer = ({
             // <EpicTableSkeleton />
             <EpicTable
               handleClick={(value: SelectContent) => {
-                setSelectContent(value);
+                setSelectContent(value)
               }}
               epicData={epicData
                 .filter((item) => item.name.includes(word))
@@ -118,17 +118,17 @@ const EpicContainer = ({
             />
           </div>
         )} */}
-        {selectContent.id !== 0 && selectContent.type === "TICKET" && (
+        {selectContent.id !== 0 && selectContent.type === 'TICKET' && (
           <div className="w-[35%] ml-8 -mt-[44px]">
             <TicketCard
               ticketId={selectContent.id}
-              handleClose={() => setSelectContent({ id: 0, type: "TICKET" })}
+              handleClose={() => setSelectContent({ id: 0, type: 'TICKET' })}
             />
           </div>
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EpicContainer;
+export default EpicContainer

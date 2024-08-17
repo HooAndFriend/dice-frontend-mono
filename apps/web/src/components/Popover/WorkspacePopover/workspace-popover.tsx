@@ -1,26 +1,26 @@
 // ** Next Imports
-import Link from "next/link";
+import Link from 'next/link'
 
 // ** Type Imports
-import { WorkspaceInfo } from "@/src/type/workspace";
-import { WorkspaceStateType } from "@/src/app";
+import { WorkspaceInfo } from '@/src/type/workspace'
+import { WorkspaceStateType } from '@/src/app'
 
 // ** Component Imports
-import WorkspaceModal from "@/src/components/Modal/WorkspaceModal";
-import WorkspaceBox from "./component/workspace-box";
-import CustomImage from "../../Image/CustomImage";
-import Image from "next/image";
+import WorkspaceModal from '@/src/components/Modal/WorkspaceModal'
+import WorkspaceBox from './component/workspace-box'
+import CustomImage from '../../Image/CustomImage'
+import Image from 'next/image'
 
 interface PropsType {
-  open: boolean;
-  modalOpen: boolean;
-  cancelButtonRef: any;
-  data: WorkspaceInfo[];
-  workspace: WorkspaceStateType;
-  setModalOpen: (value: boolean) => void;
-  handleModalOpen: () => void;
-  handleOpen: () => void;
-  handleUpdateWorkspace: (item: WorkspaceInfo) => void;
+  open: boolean
+  modalOpen: boolean
+  cancelButtonRef: any
+  data: WorkspaceInfo[]
+  workspace: WorkspaceStateType
+  setModalOpen: (value: boolean) => void
+  handleModalOpen: () => void
+  handleOpen: () => void
+  handleUpdateWorkspace: (item: WorkspaceInfo) => void
 }
 
 const WorkspacePopoverView = ({
@@ -93,7 +93,7 @@ const WorkspacePopoverView = ({
         )}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default WorkspacePopoverView;
+export default WorkspacePopoverView

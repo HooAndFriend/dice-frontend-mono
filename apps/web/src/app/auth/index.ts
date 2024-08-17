@@ -1,22 +1,22 @@
 // ** React Imports
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 // ** Recoil Imports
-import { atom, useRecoilState } from "recoil";
-import { persistStorageAtom } from "../util";
+import { atom, useRecoilState } from 'recoil'
+import { persistStorageAtom } from '../util'
 
 export interface AuthStateType {
-  accessToken: string;
-  refreshToken: string;
+  accessToken: string
+  refreshToken: string
 }
 
 export const authInitState = {
-  accessToken: "",
-  refreshToken: "",
-};
+  accessToken: '',
+  refreshToken: '',
+}
 
 export const AuthState = atom<AuthStateType>({
-  key: "authState",
+  key: 'authState',
   default: authInitState,
   effects_UNSTABLE: [persistStorageAtom],
-});
+})

@@ -1,22 +1,22 @@
 // ** Component Imports
-import CustomSearch from "@/src/components/Input/CustomSearch";
-import UserSelectBox from "../../../UserSelectBox";
-import { WorkspaceUser } from "@/src/type/workspace";
-import { EpicStatus } from "@/src/type/epic";
-import TicketStatusSelectFilter from "../../Common/Filter/StatusFilter";
-import TicketTypeSelectFilter from "../../Common/Filter/TypeFilter";
+import CustomSearch from '@/src/components/Input/CustomSearch'
+import UserSelectBox from '../../../UserSelectBox'
+import { WorkspaceUser } from '@/src/type/workspace'
+import { EpicStatus } from '@/src/type/epic'
+import TicketStatusSelectFilter from '../../Common/Filter/StatusFilter'
+import TicketTypeSelectFilter from '../../Common/Filter/TypeFilter'
 
 interface PropsType {
-  value: string;
-  checkedList: WorkspaceUser[];
-  selectedEpicIds: number[];
-  selectedStatus: EpicStatus[];
-  selectedTypeIds: number[];
-  handleTypeSelectFilter: (typeId: number) => void;
-  handleStatusSelectFilter: (status: EpicStatus) => void;
-  handleEpicSelectFilter: (epicId: number) => void;
-  setCheckedList: (checkedList: WorkspaceUser[]) => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string
+  checkedList: WorkspaceUser[]
+  selectedEpicIds: number[]
+  selectedStatus: EpicStatus[]
+  selectedTypeIds: number[]
+  handleTypeSelectFilter: (typeId: number) => void
+  handleStatusSelectFilter: (status: EpicStatus) => void
+  handleEpicSelectFilter: (epicId: number) => void
+  setCheckedList: (checkedList: WorkspaceUser[]) => void
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const TicketSearchCard = ({
@@ -55,7 +55,7 @@ const TicketSearchCard = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TicketSearchCard;
+export default TicketSearchCard

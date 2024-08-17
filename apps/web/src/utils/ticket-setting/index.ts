@@ -1,56 +1,56 @@
-import { TicketSettingType } from "@/src/type/ticket";
+import { TicketSettingType } from '@/src/type/ticket'
 
 export const getTicketSettingImage = (
   value: TicketSettingType,
-  url?: string
+  url?: string,
 ) => {
   switch (value) {
-    case "BLACK":
+    case 'BLACK':
       return {
-        url: "/svg/ticket-setting/black.svg",
-        color: "#565656",
-      };
+        url: '/svg/ticket-setting/black.svg',
+        color: '#565656',
+      }
 
-    case "BLUE":
+    case 'BLUE':
       return {
-        url: "/svg/ticket-setting/blue.svg",
-        color: "#0033FF",
-      };
+        url: '/svg/ticket-setting/blue.svg',
+        color: '#0033FF',
+      }
 
-    case "GREEN":
+    case 'GREEN':
       return {
-        url: "/svg/ticket-setting/green.svg",
-        color: "#89E6AD",
-      };
+        url: '/svg/ticket-setting/green.svg',
+        color: '#89E6AD',
+      }
 
-    case "PURPLE":
+    case 'PURPLE':
       return {
-        url: "/svg/ticket-setting/purple.svg",
-        color: "#623AD6",
-      };
+        url: '/svg/ticket-setting/purple.svg',
+        color: '#623AD6',
+      }
 
-    case "RED":
+    case 'RED':
       return {
-        url: "/svg/ticket-setting/red.svg",
-        color: "#FF0000",
-      };
+        url: '/svg/ticket-setting/red.svg',
+        color: '#FF0000',
+      }
 
-    case "YELLOW":
+    case 'YELLOW':
       return {
-        url: "/svg/ticket-setting/yellow.svg",
-        color: "#FEAF06",
-      };
+        url: '/svg/ticket-setting/yellow.svg',
+        color: '#FEAF06',
+      }
 
-    case "PINK":
+    case 'PINK':
       return {
-        url: "/svg/ticket-setting/pink.svg",
-        color: "#FF006F",
-      };
+        url: '/svg/ticket-setting/pink.svg',
+        color: '#FF006F',
+      }
 
     default:
       return {
         url,
-        color: "#DDDDDD",
-      };
+        color: '#DDDDDD',
+      }
   }
-};
+}

@@ -1,87 +1,87 @@
 // ** Types Imports
-import { CommonResponse } from "@/src/type/common";
+import { CommonResponse } from '@/src/type/common'
 
 // ** Utils Imports
-import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 
 // ** Recoil Imports
-import { AuthStateType, UserStateType, WorkspaceStateType } from "../app";
+import { AuthStateType, UserStateType, WorkspaceStateType } from '../app'
 
 export const client = axios.create({
-  baseURL: "/api",
-});
+  baseURL: '/api',
+})
 
 export const Get = async <T>(
   url: string,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<CommonResponse<T>> => {
-  const response = await client.get(url, config);
+  const response = await client.get(url, config)
 
-  return response.data;
-};
+  return response.data
+}
 
 export const Post = async <T>(
   url: string,
   data?: any,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<CommonResponse<T>> => {
-  const response = await client.post(url, data, config);
+  const response = await client.post(url, data, config)
 
-  return response.data;
-};
+  return response.data
+}
 
 export const Put = async <T>(
   url: string,
   data?: any,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<CommonResponse<T>> => {
-  const response = await client.put(url, data, config);
+  const response = await client.put(url, data, config)
 
-  return response.data;
-};
+  return response.data
+}
 
 export const Patch = async <T>(
   url: string,
   data?: any,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<CommonResponse<T>> => {
-  const response = await client.patch(url, data, config);
+  const response = await client.patch(url, data, config)
 
-  return response.data;
-};
+  return response.data
+}
 
 export const Delete = async <T>(
   url: string,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ): Promise<CommonResponse<T>> => {
-  const response = await client.delete(url, config);
+  const response = await client.delete(url, config)
 
-  return response.data;
-};
+  return response.data
+}
 
 client.interceptors.request.use((config) => {
   const recoilValue: {
-    authState: AuthStateType;
-    userState: UserStateType;
-    workspaceState: WorkspaceStateType;
-  } = JSON.parse(localStorage.getItem("recoil-persist"));
+    authState: AuthStateType
+    userState: UserStateType
+    workspaceState: WorkspaceStateType
+  } = JSON.parse(localStorage.getItem('recoil-persist'))
 
   if (recoilValue) {
-    config.headers["Authorization"] =
-      `Bearer ${recoilValue.authState.accessToken}`;
-    config.headers["workspace-code"] = recoilValue.workspaceState.uuid;
+    config.headers['Authorization'] =
+      `Bearer ${recoilValue.authState.accessToken}`
+    config.headers['workspace-code'] = recoilValue.workspaceState.uuid
   }
 
-  return config;
-});
+  return config
+})
 
 client.interceptors.response.use(
   (response) => {
-    return response;
+    return response
   },
   async (error) => {
-    const err = error as AxiosError;
+    const err = error as AxiosError
 
-    return Promise.reject(error);
-  }
-);
+    return Promise.reject(error)
+  },
+)

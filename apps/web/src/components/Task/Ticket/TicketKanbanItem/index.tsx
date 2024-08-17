@@ -1,18 +1,18 @@
 // ** Type Imports
-import { TicketInfo } from "@/src/type/ticket";
+import { TicketInfo } from '@/src/type/ticket'
 
 // ** Component Imports
-import TicketKanbanCard from "../TicketKanbanCard";
-import TicketKanbanBoardSkeleton from "../TicketKanbanBoard/TicketKanbanBoardSkeleton";
+import TicketKanbanCard from '../TicketKanbanCard'
+import TicketKanbanBoardSkeleton from '../TicketKanbanBoard/TicketKanbanBoardSkeleton'
 
 // ** Type Imports
-import { EpicStatus } from "@/src/type/epic";
+import { EpicStatus } from '@/src/type/epic'
 
 interface PropsType {
-  data: TicketInfo[];
-  status: EpicStatus;
-  isLoading: boolean;
-  handleClick?: (id: number) => void;
+  data: TicketInfo[]
+  status: EpicStatus
+  isLoading: boolean
+  handleClick?: (id: number) => void
 }
 
 const TicketKanbanItem = ({
@@ -37,7 +37,7 @@ const TicketKanbanItem = ({
         ))
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TicketKanbanItem;
+export default TicketKanbanItem

@@ -1,28 +1,28 @@
 // ** React Imports
-import { ChangeEvent, useEffect, useRef } from "react";
+import { ChangeEvent, useEffect, useRef } from 'react'
 
 // ** Component Imports
-import CustomImage from "@/src/components/Image/CustomImage";
-import Tooltip from "@/src/components/Tooltip";
+import CustomImage from '@/src/components/Image/CustomImage'
+import Tooltip from '@/src/components/Tooltip'
 
 // ** Type Imports
-import { WorkspaceUser } from "@/src/type/workspace";
-import Image from "next/image";
+import { WorkspaceUser } from '@/src/type/workspace'
+import Image from 'next/image'
 
 interface PropsType {
-  open: boolean;
-  name: string;
-  email: string;
-  profile: string;
-  nickname: string;
-  width?: number;
-  height?: number;
-  isLoading: boolean;
-  isNickname: boolean;
-  data: WorkspaceUser[];
-  handleOpen: () => void;
-  handleName: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleUpdateUser: (userId: number) => void;
+  open: boolean
+  name: string
+  email: string
+  profile: string
+  nickname: string
+  width?: number
+  height?: number
+  isLoading: boolean
+  isNickname: boolean
+  data: WorkspaceUser[]
+  handleOpen: () => void
+  handleName: (e: ChangeEvent<HTMLInputElement>) => void
+  handleUpdateUser: (userId: number) => void
 }
 
 const UserSelectPopover = ({
@@ -40,7 +40,7 @@ const UserSelectPopover = ({
   handleName,
   handleUpdateUser,
 }: PropsType) => {
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const clickOutside = (e: MouseEvent) => {
@@ -48,30 +48,30 @@ const UserSelectPopover = ({
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target as Node)
       ) {
-        handleOpen();
+        handleOpen()
       }
-    };
+    }
 
-    document.addEventListener("mousedown", clickOutside);
+    document.addEventListener('mousedown', clickOutside)
 
     return () => {
-      document.removeEventListener("mousedown", clickOutside);
-    };
-  }, []);
+      document.removeEventListener('mousedown', clickOutside)
+    }
+  }, [])
 
   return (
     <div className="relative">
       <div
         className="flex items-center cursor-pointer"
         onClick={(e) => {
-          e.stopPropagation();
-          handleOpen();
+          e.stopPropagation()
+          handleOpen()
         }}
       >
         <Tooltip text={nickname}>
           <Image
             className="rounded-[15px] border border-[#EBEBEC] mr-[10px] "
-            src={profile ? profile : "/image/dice.png"}
+            src={profile ? profile : '/image/dice.png'}
             alt="profile"
             width={width ? width : 30}
             height={height ? height : 30}
@@ -104,7 +104,7 @@ const UserSelectPopover = ({
                 onClick={() => handleUpdateUser(item.user.userId)}
                 style={{
                   backgroundColor:
-                    item.user.email === email ? "#F4F4FA" : "white",
+                    item.user.email === email ? '#F4F4FA' : 'white',
                 }}
               >
                 <Image
@@ -121,7 +121,7 @@ const UserSelectPopover = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default UserSelectPopover;
+export default UserSelectPopover

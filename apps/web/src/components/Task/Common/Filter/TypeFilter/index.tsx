@@ -1,41 +1,41 @@
-"use client";
+'use client'
 
 // ** React Imports
-import { useEffect, useRef, useState, ChangeEvent } from "react";
+import { useEffect, useRef, useState, ChangeEvent } from 'react'
 
 // ** Swr Imports
-import useSWR from "swr";
-import { Get } from "@/src/repository";
+import useSWR from 'swr'
+import { Get } from '@/src/repository'
 
 // ** Type Imports
-import { GetTicketSettingListResponse } from "@/src/type/ticket";
-import { getTicketSettingImage } from "@/src/utils/ticket-setting";
+import { GetTicketSettingListResponse } from '@/src/type/ticket'
+import { getTicketSettingImage } from '@/src/utils/ticket-setting'
 
 // ** Component Imports
-import CustomImage from "../../../../Image/CustomImage";
+import CustomImage from '../../../../Image/CustomImage'
 
 interface PropsType {
-  selectedTypeIds: number[];
-  handleTypeSelectFilter: (id: number) => void;
+  selectedTypeIds: number[]
+  handleTypeSelectFilter: (id: number) => void
 }
 
 const TypeFilter = ({ selectedTypeIds, handleTypeSelectFilter }: PropsType) => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [name, setName] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false)
+  const [name, setName] = useState<string>('')
 
-  const { data, error, isLoading } = useSWR("/v1/ticket/setting", async (url) =>
-    Get<GetTicketSettingListResponse>(url)
-  );
+  const { data, error, isLoading } = useSWR('/v1/ticket/setting', async (url) =>
+    Get<GetTicketSettingListResponse>(url),
+  )
 
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null)
 
   const handleName = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
+    setName(e.target.value)
+  }
 
   const handleOpen = () => {
-    setOpen((c) => !c);
-  };
+    setOpen((c) => !c)
+  }
 
   useEffect(() => {
     const clickOutside = (e: MouseEvent) => {
@@ -43,24 +43,24 @@ const TypeFilter = ({ selectedTypeIds, handleTypeSelectFilter }: PropsType) => {
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target as Node)
       ) {
-        handleOpen();
+        handleOpen()
       }
-    };
+    }
 
-    document.addEventListener("mousedown", clickOutside);
+    document.addEventListener('mousedown', clickOutside)
 
     return () => {
-      document.removeEventListener("mousedown", clickOutside);
-    };
-  }, []);
+      document.removeEventListener('mousedown', clickOutside)
+    }
+  }, [])
 
   return (
     <div className="relative">
       <div
         className=" border border-[#EBEBEC]  rounded-[10px] bg-white flex items-center cursor-pointer w-[150px] h-[30px] justify-between px-[8px]"
         onClick={(e) => {
-          e.stopPropagation();
-          handleOpen();
+          e.stopPropagation()
+          handleOpen()
         }}
       >
         <h1 className="text-[#EBEBEC]">type</h1>
@@ -93,7 +93,7 @@ const TypeFilter = ({ selectedTypeIds, handleTypeSelectFilter }: PropsType) => {
               ? []
               : data.data.data
                   .filter((item) =>
-                    item.name.toLowerCase().includes(name.toLowerCase())
+                    item.name.toLowerCase().includes(name.toLowerCase()),
                   )
                   .map((item) => (
                     <div
@@ -135,7 +135,7 @@ const TypeFilter = ({ selectedTypeIds, handleTypeSelectFilter }: PropsType) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TypeFilter;
+export default TypeFilter

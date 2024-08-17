@@ -1,20 +1,20 @@
 // ** React Imports
-import Image from "next/image";
-import { ChangeEvent } from "react";
-import CustomImage from "../CustomImage";
+import Image from 'next/image'
+import { ChangeEvent } from 'react'
+import CustomImage from '../CustomImage'
 
 interface PropsType {
-  image: string;
-  inputRef: HTMLInputElement | any;
-  width?: string;
-  height?: string;
-  boxColor?: string;
-  borderRadius?: string | number;
-  borderColor?: string;
-  borderWidth?: string;
-  mode?: "write" | "edit";
-  handleImageChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleClick: () => void;
+  image: string
+  inputRef: HTMLInputElement | any
+  width?: string
+  height?: string
+  boxColor?: string
+  borderRadius?: string | number
+  borderColor?: string
+  borderWidth?: string
+  mode?: 'write' | 'edit'
+  handleImageChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleClick: () => void
 }
 const ImageUploaderView = ({
   image,
@@ -31,29 +31,29 @@ const ImageUploaderView = ({
 }: PropsType) => {
   return (
     <div>
-      {mode === "write" ? (
+      {mode === 'write' ? (
         <div
           onClick={handleClick}
           style={{
             borderRadius,
-            width: width ? width : "100px",
-            height: height ? height : "100px",
+            width: width ? width : '100px',
+            height: height ? height : '100px',
             border: `solid ${borderWidth} ${borderColor}`,
           }}
           className="flex items-center justify-center cursor-pointer"
         >
-          {image !== "" ? (
+          {image !== '' ? (
             <img
               src={image}
               alt="Preview"
-              style={{ width: "100%", height: "100%", borderRadius }}
+              style={{ width: '100%', height: '100%', borderRadius }}
             />
           ) : (
             <div
               style={{
-                width: "90%",
-                height: "90%",
-                backgroundColor: boxColor ? boxColor : "",
+                width: '90%',
+                height: '90%',
+                backgroundColor: boxColor ? boxColor : '',
                 borderRadius,
               }}
             />
@@ -84,10 +84,10 @@ const ImageUploaderView = ({
         accept="image/*"
         ref={inputRef}
         onChange={handleImageChange}
-        style={{ display: "none" }}
+        style={{ display: 'none' }}
       />
     </div>
-  );
-};
+  )
+}
 
-export default ImageUploaderView;
+export default ImageUploaderView

@@ -1,18 +1,18 @@
-import { recoilPersist } from "recoil-persist";
+import { recoilPersist } from 'recoil-persist'
 
 const sessionStorage =
-  typeof window !== "undefined" ? window.sessionStorage : undefined;
+  typeof window !== 'undefined' ? window.sessionStorage : undefined
 
 export const { persistAtom } = recoilPersist({
-  key: "sessionStorageState",
+  key: 'sessionStorageState',
   storage: sessionStorage,
-});
+})
 
 const localStorage =
-  typeof window !== "undefined" ? window.localStorage : undefined;
+  typeof window !== 'undefined' ? window.localStorage : undefined
 
 export const { persistAtom: persistStorageAtom } = recoilPersist({
-  key: "recoil-persist",
+  key: 'recoil-persist',
   storage: localStorage,
   converter: JSON,
-});
+})

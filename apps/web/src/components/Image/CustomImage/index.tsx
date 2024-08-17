@@ -1,14 +1,14 @@
-import { NoneType } from "@/src/type/common";
-import Image from "next/image";
-import { MouseEvent } from "react";
+import { NoneType } from '@/src/type/common'
+import Image from 'next/image'
+import { MouseEvent } from 'react'
 
 interface PropsType {
-  width: number;
-  height: number;
-  alt: string;
-  src: string;
-  className?: string;
-  onClick?: (e: NoneType) => void;
+  width: number
+  height: number
+  alt: string
+  src: string
+  className?: string
+  onClick?: (e: NoneType) => void
 }
 
 const CustomImage = ({
@@ -28,7 +28,7 @@ const CustomImage = ({
       src={src}
       onClick={onClick}
     />
-  );
-};
+  )
+}
 
-export default CustomImage;
+export default CustomImage

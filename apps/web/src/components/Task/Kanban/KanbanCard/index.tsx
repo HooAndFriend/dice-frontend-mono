@@ -1,11 +1,11 @@
-import { Ticket } from "@/src/type/ticket";
-import TicketSettingButton from "../../Ticket/TicketSettingButton";
-import TicketUserButton from "../../Ticket/TicketUserButton";
-import dayjs from "dayjs";
-import CustomImage from "@/src/components/Image/CustomImage";
+import { Ticket } from '@/src/type/ticket'
+import TicketSettingButton from '../../Ticket/TicketSettingButton'
+import TicketUserButton from '../../Ticket/TicketUserButton'
+import dayjs from 'dayjs'
+import CustomImage from '@/src/components/Image/CustomImage'
 
 interface PropsType {
-  data: Ticket;
+  data: Ticket
 }
 
 const KanbanCard = ({ data }: PropsType) => {
@@ -24,7 +24,7 @@ const KanbanCard = ({ data }: PropsType) => {
           className=""
           alt="calendar"
         />
-        <h1>{data.dueDate ? dayjs(data.dueDate).format("YYYY-MM-DD") : "-"}</h1>
+        <h1>{data.dueDate ? dayjs(data.dueDate).format('YYYY-MM-DD') : '-'}</h1>
       </div>
       <div className="flex items-center justify-between mt-[24px]">
         <div className="flex items-center justify-between">
@@ -32,9 +32,9 @@ const KanbanCard = ({ data }: PropsType) => {
           <p className="text-[12px] pl-[8px]">{data.code}</p>
         </div>
         <TicketUserButton
-          profile={data.worker ? data.worker.profile : "/images/dice.png"}
-          nickname={data.worker ? data.worker.nickname : "-"}
-          email={data.worker ? data.worker.email : "-"}
+          profile={data.worker ? data.worker.profile : '/images/dice.png'}
+          nickname={data.worker ? data.worker.nickname : '-'}
+          email={data.worker ? data.worker.email : '-'}
           userId={data.worker?.userId}
           type="user"
           ticketId={data.ticketId}
@@ -42,7 +42,7 @@ const KanbanCard = ({ data }: PropsType) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default KanbanCard;
+export default KanbanCard

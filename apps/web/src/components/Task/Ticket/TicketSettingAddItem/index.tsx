@@ -1,71 +1,71 @@
-"use client";
+'use client'
 
 // ** React Imports
-import { useState } from "react";
+import { useState } from 'react'
 
 // ** Component Imports
-import CustomInput from "@/src/components/Input/CustomInput";
-import CustomImage from "../../../Image/CustomImage";
-import TicketSettingTypeButton from "../TicketSettingTypeButton";
+import CustomInput from '@/src/components/Input/CustomInput'
+import CustomImage from '../../../Image/CustomImage'
+import TicketSettingTypeButton from '../TicketSettingTypeButton'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+import { useDialog } from '@/src/context/DialogContext'
 
 // ** Utils Imports
-import useInput from "@/src/hooks/useInput";
+import useInput from '@/src/hooks/useInput'
 
 // ** Service Imports
-import useSWRMutation from "swr/mutation";
-import { Post } from "@/src/repository";
-import { mutate } from "swr";
+import useSWRMutation from 'swr/mutation'
+import { Post } from '@/src/repository'
+import { mutate } from 'swr'
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
-import { TicketSettingSaveProps, TicketSettingType } from "@/src/type/ticket";
+import { CommonResponse } from '@/src/type/common'
+import { TicketSettingSaveProps, TicketSettingType } from '@/src/type/ticket'
 
 const TicketSettingAddItem = () => {
   const { data, handleInit, handleInput, setData } =
     useInput<TicketSettingSaveProps>({
-      name: "",
-      description: "",
-      type: "GREEN",
-    });
+      name: '',
+      description: '',
+      type: 'GREEN',
+    })
 
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false)
 
-  const handleOpen = () => setOpen((c) => !c);
+  const handleOpen = () => setOpen((c) => !c)
 
-  const { handleOpen: handleModalOpen } = useDialog();
+  const { handleOpen: handleModalOpen } = useDialog()
 
   const saveTicketSetting = useSWRMutation(
-    "/v1/ticket/setting",
+    '/v1/ticket/setting',
     async (url: string) => await Post<CommonResponse<void>>(url, data),
     {
       onSuccess: () => {
-        setOpen(false);
-        handleInit();
-        mutate("/v1/ticket/setting");
+        setOpen(false)
+        handleInit()
+        mutate('/v1/ticket/setting')
       },
       onError: (error) => {
         handleModalOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
   const setType = (type: TicketSettingType) => {
-    setData((c) => ({ ...c, type }));
-  };
+    setData((c) => ({ ...c, type }))
+  }
 
   const handleClose = () => {
-    setOpen(false);
-    handleInit();
-  };
+    setOpen(false)
+    handleInit()
+  }
 
   return (
     <div>
@@ -100,7 +100,7 @@ const TicketSettingAddItem = () => {
             />
           </div>
           <div className="flex items-center mt-[30px]">
-            {data.name === "" ? (
+            {data.name === '' ? (
               <button className="w-[94px] h-[50px] rounded-[10px] text-[#D9D9D9] bg-[#EBEBEC] ml-[24px]">
                 만들기
               </button>
@@ -137,7 +137,7 @@ const TicketSettingAddItem = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TicketSettingAddItem;
+export default TicketSettingAddItem

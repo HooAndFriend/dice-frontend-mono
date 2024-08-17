@@ -1,26 +1,26 @@
 export interface PaginationRequest {
-  page: number;
-  pageSize: number;
+  page: number
+  pageSize: number
 }
 
 export interface CommonResponse<T> {
-  statusCode: number;
-  message: string;
-  data?: T;
+  statusCode: number
+  message: string
+  data?: T
 }
 
 export interface Dates {
-  startDate: Dayjs;
-  endDate: Dayjs;
+  startDate: Dayjs
+  endDate: Dayjs
 }
 
-export type NoneType = any;
+export type NoneType = any
 
-export type RoleType = "ADMIN" | "VIEWER" | "WRITEER" | "";
+export type RoleType = 'ADMIN' | 'VIEWER' | 'WRITEER' | ''
 
 export interface QaCardEditMode {
-  title: "view" | "edit";
-  asIs: "view" | "edit";
-  toBe: "view" | "edit";
-  memo: "view" | "edit";
+  title: 'view' | 'edit'
+  asIs: 'view' | 'edit'
+  toBe: 'view' | 'edit'
+  memo: 'view' | 'edit'
 }

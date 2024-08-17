@@ -1,28 +1,28 @@
 // ** React Imports
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react'
 
 // ** Type Imports
-import { EpicStatus } from "@/src/type/epic";
+import { EpicStatus } from '@/src/type/epic'
 
 // ** Utils Imports
-import { getStateBoxColor } from "@/src/utils/color";
+import { getStateBoxColor } from '@/src/utils/color'
 
 export const StatusList: EpicStatus[] = [
-  "WAITING",
-  "DOING",
-  "DONE",
-  "COMPLETE",
-  "HOLD",
-  "REOPEN",
-  "NOTHING",
-];
+  'WAITING',
+  'DOING',
+  'DONE',
+  'COMPLETE',
+  'HOLD',
+  'REOPEN',
+  'NOTHING',
+]
 
 interface PropsType {
-  status: EpicStatus;
-  open: boolean;
-  isQa: boolean;
-  handleStatus: (status: EpicStatus) => void;
-  handleOpen: () => void;
+  status: EpicStatus
+  open: boolean
+  isQa: boolean
+  handleStatus: (status: EpicStatus) => void
+  handleOpen: () => void
 }
 
 const StatusPopover = ({
@@ -32,7 +32,7 @@ const StatusPopover = ({
   handleStatus,
   handleOpen,
 }: PropsType) => {
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const clickOutside = (e: MouseEvent) => {
@@ -40,16 +40,16 @@ const StatusPopover = ({
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target as Node)
       ) {
-        handleOpen();
+        handleOpen()
       }
-    };
+    }
 
-    document.addEventListener("mousedown", clickOutside);
+    document.addEventListener('mousedown', clickOutside)
 
     return () => {
-      document.removeEventListener("mousedown", clickOutside);
-    };
-  }, []);
+      document.removeEventListener('mousedown', clickOutside)
+    }
+  }, [])
 
   return (
     <div className="relative z-4">
@@ -58,8 +58,8 @@ const StatusPopover = ({
           className="w-[120px] h-[45px] rounded-[30px] flex justify-center items-center text-white font-spoqa font-bold"
           style={{ backgroundColor: getStateBoxColor(status) }}
           onClick={(e) => {
-            e.stopPropagation();
-            handleOpen();
+            e.stopPropagation()
+            handleOpen()
           }}
         >
           {status}
@@ -69,8 +69,8 @@ const StatusPopover = ({
           className="w-[84px] h-[30px] rounded-[6px] flex justify-center text-[12px] items-center text-white font-spoqa"
           style={{ backgroundColor: getStateBoxColor(status) }}
           onClick={(e) => {
-            e.stopPropagation();
-            handleOpen();
+            e.stopPropagation()
+            handleOpen()
           }}
         >
           {status}
@@ -89,12 +89,12 @@ const StatusPopover = ({
               <div
                 className="w-[168px] cursor-pointer h-[32px] py-[10px] rounded-[8px] px-[8px] flex items-center"
                 onClick={(e) => {
-                  e.stopPropagation();
-                  handleStatus(item);
+                  e.stopPropagation()
+                  handleStatus(item)
                 }}
                 key={item}
                 style={{
-                  backgroundColor: status === item ? "#F4F4FA" : "white",
+                  backgroundColor: status === item ? '#F4F4FA' : 'white',
                 }}
               >
                 <div
@@ -103,7 +103,7 @@ const StatusPopover = ({
                 />
                 <p
                   className="text-[12px] ml-[13px]"
-                  style={{ color: status === item ? "black" : "#ACACAC" }}
+                  style={{ color: status === item ? 'black' : '#ACACAC' }}
                 >
                   {item}
                 </p>
@@ -158,7 +158,7 @@ const StatusPopover = ({
     //     </div>
     //   )}
     // </div>
-  );
-};
+  )
+}
 
-export default StatusPopover;
+export default StatusPopover

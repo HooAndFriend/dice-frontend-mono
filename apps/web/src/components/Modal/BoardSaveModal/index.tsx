@@ -1,31 +1,31 @@
-"use client";
+'use client'
 
 // ** React Imports
-import { Fragment, KeyboardEvent, useState } from "react";
+import { Fragment, KeyboardEvent, useState } from 'react'
 
 // ** ui Imports
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition } from '@headlessui/react'
 
 // ** Utils Imports
-import useInput from "@/src/hooks/useInput";
+import useInput from '@/src/hooks/useInput'
 
 // ** Type Imports
-import { SaveQaParam } from "@/src/type/qa";
-import { CommonResponse } from "@/src/type/common";
+import { SaveQaParam } from '@/src/type/qa'
+import { CommonResponse } from '@/src/type/common'
 
 // ** Service Imports
-import useSWRMutation from "swr/mutation";
-import { Post } from "@/src/repository";
+import useSWRMutation from 'swr/mutation'
+import { Post } from '@/src/repository'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+import { useDialog } from '@/src/context/DialogContext'
 
 interface PropsType {
-  open: boolean;
-  parentId?: number;
-  cancelButtonRef: any;
-  setOpen: (open: boolean) => void;
-  refetch: () => void;
+  open: boolean
+  parentId?: number
+  cancelButtonRef: any
+  setOpen: (open: boolean) => void
+  refetch: () => void
 }
 
 const BoardSaveModal = ({
@@ -35,16 +35,16 @@ const BoardSaveModal = ({
   cancelButtonRef,
   refetch,
 }: PropsType) => {
-  const [button, setButton] = useState<boolean>(false);
+  const [button, setButton] = useState<boolean>(false)
 
   const { data, handleInput, handleInit } = useInput<SaveQaParam>({
-    title: "",
-  });
+    title: '',
+  })
 
-  const { handleOpen } = useDialog();
+  const { handleOpen } = useDialog()
 
   const saveQa = useSWRMutation(
-    "/v1/board",
+    '/v1/board',
     async (url: string) =>
       await Post<CommonResponse<void>>(url, {
         ...data,
@@ -52,29 +52,29 @@ const BoardSaveModal = ({
       }),
     {
       onSuccess: ({ data }) => {
-        setOpen(false);
-        refetch();
+        setOpen(false)
+        refetch()
       },
       onError: (error) => {
         handleOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-        setButton(false);
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
+        setButton(false)
       },
-    }
-  );
+    },
+  )
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      if (button) return;
-      setButton(true);
-      saveQa.trigger();
+    if (e.key === 'Enter') {
+      if (button) return
+      setButton(true)
+      saveQa.trigger()
     }
-  };
+  }
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -143,7 +143,7 @@ const BoardSaveModal = ({
         </div>
       </Dialog>
     </Transition.Root>
-  );
-};
+  )
+}
 
-export default BoardSaveModal;
+export default BoardSaveModal

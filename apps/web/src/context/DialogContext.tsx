@@ -1,37 +1,37 @@
-"use client";
+'use client'
 
 // ** React Imports
-import { createContext, useContext, useRef, useState } from "react";
+import { createContext, useContext, useRef, useState } from 'react'
 
 // ** Component Imports
-import AlertDialog from "@/src/components/Dialog/AlertDialog";
-import { DialogArgs } from "@/src/type/component";
+import AlertDialog from '@/src/components/Dialog/AlertDialog'
+import { DialogArgs } from '@/src/type/component'
 
 interface ContextProps {
-  handleOpen: (dialogArgs?: DialogArgs) => void;
+  handleOpen: (dialogArgs?: DialogArgs) => void
 }
 
-const Context = createContext<ContextProps>({} as ContextProps);
+const Context = createContext<ContextProps>({} as ContextProps)
 
 const defaultDialogArgs: DialogArgs = {
-  title: "Warning",
-  buttonText: "Close",
-  comfirmButtonText: "Send",
-  message: "You are Dead",
-  logLevel: "warn",
-  type: "alert",
-};
+  title: 'Warning',
+  buttonText: 'Close',
+  comfirmButtonText: 'Send',
+  message: 'You are Dead',
+  logLevel: 'warn',
+  type: 'alert',
+}
 
 export function DialogProvider({ children }: { children: React.ReactNode }) {
-  const [open, setOpen] = useState<boolean>(false);
-  const [dialogArgs, setDialogArgs] = useState<DialogArgs>(defaultDialogArgs);
+  const [open, setOpen] = useState<boolean>(false)
+  const [dialogArgs, setDialogArgs] = useState<DialogArgs>(defaultDialogArgs)
 
   const handleOpen = (dialogArgs?: DialogArgs) => {
-    setDialogArgs(dialogArgs ? dialogArgs : defaultDialogArgs);
-    setOpen(true);
-  };
+    setDialogArgs(dialogArgs ? dialogArgs : defaultDialogArgs)
+    setOpen(true)
+  }
 
-  const cancelButtonRef = useRef(null);
+  const cancelButtonRef = useRef(null)
 
   return (
     <Context.Provider value={{ handleOpen }}>
@@ -45,9 +45,9 @@ export function DialogProvider({ children }: { children: React.ReactNode }) {
         type={dialogArgs.type}
       />
     </Context.Provider>
-  );
+  )
 }
 
 export function useDialog() {
-  return useContext(Context);
+  return useContext(Context)
 }

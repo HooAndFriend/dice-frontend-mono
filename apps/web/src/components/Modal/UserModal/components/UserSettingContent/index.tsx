@@ -1,48 +1,48 @@
 // ** React Imports
 
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
 // ** Swr Imports
-import useSWR, { mutate } from "swr";
-import { Get, Put } from "@/src/repository";
-import useSWRMutation from "swr/mutation";
+import useSWR, { mutate } from 'swr'
+import { Get, Put } from '@/src/repository'
+import useSWRMutation from 'swr/mutation'
 
 // ** Recoil Imports
-import { UserState } from "@/src/app";
-import { useSetRecoilState } from "recoil";
+import { UserState } from '@/src/app'
+import { useSetRecoilState } from 'recoil'
 
 // ** Component Imports
-import { ImageUploader } from "@/src/components/Image/ImageUploader";
-import { GetUserInfoResponse, UserInfo } from "@/src/type/user";
+import { ImageUploader } from '@/src/components/Image/ImageUploader'
+import { GetUserInfoResponse, UserInfo } from '@/src/type/user'
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
+import { CommonResponse } from '@/src/type/common'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+import { useDialog } from '@/src/context/DialogContext'
 
 // ** Utils Imports
-import useInput from "@/src/hooks/useInput";
+import useInput from '@/src/hooks/useInput'
 
 const UserSettingContent = () => {
   const { data, setData, handleInput } = useInput<UserInfo>({
-    email: "",
-    nickname: "",
-    profile: "",
-  });
+    email: '',
+    nickname: '',
+    profile: '',
+  })
 
-  const setUserState = useSetRecoilState(UserState);
+  const setUserState = useSetRecoilState(UserState)
 
-  const { handleOpen } = useDialog();
+  const { handleOpen } = useDialog()
 
   const {
     error,
     isLoading,
     data: userData,
-  } = useSWR("/v1/user", async (url) => Get<GetUserInfoResponse>(url));
+  } = useSWR('/v1/user', async (url) => Get<GetUserInfoResponse>(url))
 
   const updateUser = useSWRMutation(
-    "/v1/user",
+    '/v1/user',
     async (url: string) =>
       await Put<CommonResponse<void>>(url, {
         nickname: data.nickname,
@@ -50,40 +50,40 @@ const UserSettingContent = () => {
       }),
     {
       onSuccess: ({ data: responseData }) => {
-        mutate("/v1/user");
+        mutate('/v1/user')
         setUserState((cur) => ({
           ...cur,
           profile: data.profile,
           nickname: data.nickname,
-        }));
+        }))
       },
       onError: (error) => {
         handleOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
   const handleImage = (profile: string) => {
-    setData((cur) => ({ ...cur, profile }));
-  };
+    setData((cur) => ({ ...cur, profile }))
+  }
 
   useEffect(() => {
-    if (isLoading) return;
+    if (isLoading) return
 
-    if (error) return;
+    if (error) return
 
-    setData(userData.data);
-  }, [userData]);
+    setData(userData.data)
+  }, [userData])
 
-  if (isLoading) return;
+  if (isLoading) return
 
-  if (error) return;
+  if (error) return
 
   return (
     <div>
@@ -119,7 +119,7 @@ const UserSettingContent = () => {
         Update
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default UserSettingContent;
+export default UserSettingContent

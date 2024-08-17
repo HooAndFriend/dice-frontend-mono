@@ -1,42 +1,42 @@
-"use client";
+'use client'
 
 // ** React Imports
-import { KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useState } from 'react'
 
 // ** Component Imports
-import CustomInput from "@/src/components/Input/CustomInput";
-import CustomImage from "../../../Image/CustomImage";
-import TicketSelectSettingButton from "../TicketSelectSettingButton";
+import CustomInput from '@/src/components/Input/CustomInput'
+import CustomImage from '../../../Image/CustomImage'
+import TicketSelectSettingButton from '../TicketSelectSettingButton'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+import { useDialog } from '@/src/context/DialogContext'
 
 // ** Service Imports
-import useSWRMutation from "swr/mutation";
-import { Post } from "@/src/repository";
-import { mutate } from "swr";
+import useSWRMutation from 'swr/mutation'
+import { Post } from '@/src/repository'
+import { mutate } from 'swr'
 
 // ** Type Imports
-import { CommonResponse } from "@/src/type/common";
+import { CommonResponse } from '@/src/type/common'
 
 interface PropsType {
-  epicId?: number;
+  epicId?: number
 }
 
 const TicketAddItem = ({ epicId }: PropsType) => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [name, setName] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false)
+  const [name, setName] = useState<string>('')
 
-  const [button, setButton] = useState<boolean>(false);
+  const [button, setButton] = useState<boolean>(false)
 
-  const [selectTypeId, setSelectTypeId] = useState<number>(0);
+  const [selectTypeId, setSelectTypeId] = useState<number>(0)
 
-  const handleOpen = () => setOpen((c) => !c);
+  const handleOpen = () => setOpen((c) => !c)
 
-  const { handleOpen: handleModalOpen } = useDialog();
+  const { handleOpen: handleModalOpen } = useDialog()
 
   const saveTicket = useSWRMutation(
-    "/v1/ticket",
+    '/v1/ticket',
     async (url: string) =>
       await Post<CommonResponse<void>>(url, {
         name,
@@ -45,42 +45,42 @@ const TicketAddItem = ({ epicId }: PropsType) => {
       }),
     {
       onSuccess: () => {
-        setButton(false);
-        setOpen(false);
-        setName("");
-        mutate("/v1/ticket");
-        mutate("/v1/epic");
+        setButton(false)
+        setOpen(false)
+        setName('')
+        mutate('/v1/ticket')
+        mutate('/v1/epic')
       },
       onError: (error) => {
         handleModalOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
-        setButton(false);
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
+        setButton(false)
       },
-    }
-  );
+    },
+  )
 
   const handleClose = () => {
-    setOpen(false);
-    setName("");
-    setButton(false);
-  };
+    setOpen(false)
+    setName('')
+    setButton(false)
+  }
 
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      if (button) return;
-      setButton(true);
-      saveTicket.trigger();
+    if (e.key === 'Enter') {
+      if (button) return
+      setButton(true)
+      saveTicket.trigger()
     }
 
-    if (e.key === "Escape") {
-      handleClose();
+    if (e.key === 'Escape') {
+      handleClose()
     }
-  };
+  }
 
   return (
     <>
@@ -88,7 +88,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
         <tr className="border-b transition-colors data-[state=selected]:bg-muted cursor-pointer dark:hover:bg-gray-800 w-full">
           <td
             className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-            style={{ width: "5%" }}
+            style={{ width: '5%' }}
           >
             <div className="flex items-center justify-center">
               <TicketSelectSettingButton
@@ -99,7 +99,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
           </td>
           <td
             className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6"
-            style={{ width: "95%" }}
+            style={{ width: '95%' }}
             colSpan={4}
           >
             <div className="flex items-center">
@@ -114,7 +114,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
               />
               <div className="ml-4" onClick={saveTicket.trigger}>
                 <CustomImage
-                  src={"/svg/add-black-box.svg"}
+                  src={'/svg/add-black-box.svg'}
                   alt="black-box"
                   width={30}
                   height={30}
@@ -133,7 +133,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
         >
           <td
             className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-            style={{ width: "5%" }}
+            style={{ width: '5%' }}
           >
             <div className="flex items-center justify-center">
               <CustomImage
@@ -146,7 +146,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
           </td>
           <td
             className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6"
-            style={{ width: "95%" }}
+            style={{ width: '95%' }}
             colSpan={4}
           >
             <h1 className="text-[#DDDDDD] text-[16px] font-bold">Add Ticket</h1>
@@ -154,7 +154,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
         </tr>
       )}
     </>
-  );
-};
+  )
+}
 
-export default TicketAddItem;
+export default TicketAddItem

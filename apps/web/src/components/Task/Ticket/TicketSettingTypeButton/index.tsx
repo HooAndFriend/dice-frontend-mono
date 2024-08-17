@@ -1,39 +1,39 @@
 // ** React Imports
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from 'react'
 
 // ** Type Imports
-import { TicketSettingType } from "@/src/type/ticket";
+import { TicketSettingType } from '@/src/type/ticket'
 
 // ** Utils Imports
-import { getTicketSettingImage } from "@/src/utils/ticket-setting";
+import { getTicketSettingImage } from '@/src/utils/ticket-setting'
 
 // ** Component Imports
-import CustomImage from "../../../Image/CustomImage";
+import CustomImage from '../../../Image/CustomImage'
 
 const SettingType: TicketSettingType[] = [
-  "RED",
-  "BLUE",
-  "GREEN",
-  "YELLOW",
-  "PURPLE",
-  "BLACK",
-  "PINK",
+  'RED',
+  'BLUE',
+  'GREEN',
+  'YELLOW',
+  'PURPLE',
+  'BLACK',
+  'PINK',
   // "OTHER",
-];
+]
 
 interface PropsType {
-  type: TicketSettingType;
-  setType: (type: TicketSettingType) => void;
+  type: TicketSettingType
+  setType: (type: TicketSettingType) => void
 }
 
 const TicketSettingTypeButton = ({ type, setType }: PropsType) => {
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null)
 
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false)
 
   const handleOpen = () => {
-    setOpen((c) => !c);
-  };
+    setOpen((c) => !c)
+  }
 
   useEffect(() => {
     const clickOutside = (e: MouseEvent) => {
@@ -41,24 +41,24 @@ const TicketSettingTypeButton = ({ type, setType }: PropsType) => {
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target as Node)
       ) {
-        handleOpen();
+        handleOpen()
       }
-    };
+    }
 
-    document.addEventListener("mousedown", clickOutside);
+    document.addEventListener('mousedown', clickOutside)
 
     return () => {
-      document.removeEventListener("mousedown", clickOutside);
-    };
-  }, []);
+      document.removeEventListener('mousedown', clickOutside)
+    }
+  }, [])
 
   return (
     <div className="relative z-10">
       <div
         className="flex items-center cursor-pointer"
         onClick={(e) => {
-          e.stopPropagation();
-          handleOpen();
+          e.stopPropagation()
+          handleOpen()
         }}
       >
         <div
@@ -86,12 +86,12 @@ const TicketSettingTypeButton = ({ type, setType }: PropsType) => {
               <div
                 className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center cursor-pointer"
                 style={{
-                  border: item === type ? "black 1px solid" : "",
+                  border: item === type ? 'black 1px solid' : '',
                   backgroundColor: getTicketSettingImage(item).color,
                 }}
                 onClick={() => {
-                  setType(item);
-                  handleOpen();
+                  setType(item)
+                  handleOpen()
                 }}
               >
                 <CustomImage
@@ -106,7 +106,7 @@ const TicketSettingTypeButton = ({ type, setType }: PropsType) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TicketSettingTypeButton;
+export default TicketSettingTypeButton

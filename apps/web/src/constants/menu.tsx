@@ -1,19 +1,19 @@
-import TicketIcon from "@/public/svg/ticket.svg";
-import QaIcon from "@/public/svg/qa.svg";
+import TicketIcon from '@/public/svg/ticket.svg'
+import QaIcon from '@/public/svg/qa.svg'
 
 export interface MenuType {
-  id: number;
-  name: string;
-  link: string;
-  icon: React.FC<{ className: string }>;
-  isClicked: boolean;
+  id: number
+  name: string
+  link: string
+  icon: React.FC<{ className: string }>
+  isClicked: boolean
 }
 
 export const MenuList = [
   {
     id: 1,
-    name: "TICKET",
-    link: "/task",
+    name: 'TICKET',
+    link: '/task',
     icon: TicketIcon,
     isClicked: false,
   },
@@ -26,9 +26,9 @@ export const MenuList = [
   // },
   {
     id: 3,
-    name: "BOARD",
-    link: "/board",
+    name: 'BOARD',
+    link: '/board',
     icon: QaIcon,
     isClicked: false,
   },
-];
+]

@@ -1,20 +1,20 @@
 // ** Service Imports
-import { Post } from "@/src/repository";
-import useSWRMutation from "swr/mutation";
+import { Post } from '@/src/repository'
+import useSWRMutation from 'swr/mutation'
 
 // ** Context Imports
-import { useDialog } from "@/src/context/DialogContext";
+import { useDialog } from '@/src/context/DialogContext'
 
 // ** Type Imports
-import { CommonResponse, RoleType } from "@/src/type/common";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { inviteWorkspaceUserSchema } from "@/src/schema/workspace";
-import { useForm } from "react-hook-form";
-import { InviteWorksapceUserParam } from "@/src/type/workspace";
+import { CommonResponse, RoleType } from '@/src/type/common'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { inviteWorkspaceUserSchema } from '@/src/schema/workspace'
+import { useForm } from 'react-hook-form'
+import { InviteWorksapceUserParam } from '@/src/type/workspace'
 
 interface PropsType {
-  open: boolean;
-  setOpen: (value: boolean) => void;
+  open: boolean
+  setOpen: (value: boolean) => void
 }
 
 const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
@@ -24,38 +24,38 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
     formState: { errors },
   } = useForm<InviteWorksapceUserParam>({
     resolver: zodResolver(inviteWorkspaceUserSchema),
-  });
+  })
 
-  const { handleOpen } = useDialog();
+  const { handleOpen } = useDialog()
 
   const inviteWorkspaceUser = useSWRMutation(
-    "/v1/workspace-user",
+    '/v1/workspace-user',
     async (url: string, { arg }: { arg: InviteWorksapceUserParam }) =>
       await Post<CommonResponse<void>>(url, arg),
     {
       onSuccess: ({ data }) => {
-        setOpen(false);
+        setOpen(false)
       },
       onError: (error) => {
         handleOpen({
-          title: "Error",
+          title: 'Error',
           message: error.response.data.message,
-          logLevel: "warn",
-          buttonText: "Close",
-          type: "alert",
-        });
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
       },
-    }
-  );
+    },
+  )
 
   const onSubmit = (data: InviteWorksapceUserParam) => {
-    inviteWorkspaceUser.trigger(data);
-  };
+    inviteWorkspaceUser.trigger(data)
+  }
 
   return (
     <div
       className={`bg-black bg-opacity-25 w-full h-screen font-spoqa flex justify-center items-center fixed top-0 left-0 z-50 ${
-        open ? "" : "hidden"
+        open ? '' : 'hidden'
       }`}
     >
       <div className="w-[617px] h-[171px] rounded-[20px] bg-white px-[34px] mr-[30px]">
@@ -70,21 +70,21 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
                 <input
                   className="w-3/4 focus:outline-none"
                   placeholder="Enter Email or nickName"
-                  {...register("email", { required: true })}
+                  {...register('email', { required: true })}
                 />
                 <select
                   id="select2"
                   className="w-1/4 text-[#676767] focus:outline-none border-none"
                   style={{ padding: 0 }}
-                  {...register("role", { required: true })}
+                  {...register('role', { required: true })}
                 >
-                  <option className="w-full" value={"VIEWER"}>
+                  <option className="w-full" value={'VIEWER'}>
                     VIEWER
                   </option>
-                  <option className="w-full" value={"WRITER"}>
+                  <option className="w-full" value={'WRITER'}>
                     WRITEER
                   </option>
-                  <option className="w-full" value={"ADMIN"}>
+                  <option className="w-full" value={'ADMIN'}>
                     ADMIN
                   </option>
                 </select>
@@ -100,7 +100,7 @@ const WorkspaceAddMemberContent = ({ open, setOpen }: PropsType) => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default WorkspaceAddMemberContent;
+export default WorkspaceAddMemberContent

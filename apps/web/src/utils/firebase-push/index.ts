@@ -1,36 +1,36 @@
-import { app } from "@/src/config/firebaseConfig";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { app } from '@/src/config/firebaseConfig'
+import { getMessaging, getToken, onMessage } from 'firebase/messaging'
 
 export async function requestNotificationPermission() {
-  const permission = await Notification.requestPermission();
-  if (permission === "granted") {
-    return await getFirebaseToken();
+  const permission = await Notification.requestPermission()
+  if (permission === 'granted') {
+    return await getFirebaseToken()
   }
 }
 
 export async function getFirebaseToken() {
   try {
     if (
-      typeof window !== "undefined" &&
-      typeof window.navigator !== "undefined"
+      typeof window !== 'undefined' &&
+      typeof window.navigator !== 'undefined'
     ) {
-      const messaging = getMessaging(app);
+      const messaging = getMessaging(app)
       const fcmToken = await getToken(messaging, {
         vapidKey: process.env.NEXT_PUBLIC_VAPID_KEY,
-      });
+      })
       if (fcmToken) {
         onMessage(messaging, (payload) => {
-          console.log("Foreground Message received. ", payload);
+          console.log('Foreground Message received. ', payload)
 
-          alert("Message received. " + payload.notification.title);
-        });
+          alert('Message received. ' + payload.notification.title)
+        })
 
-        return fcmToken;
+        return fcmToken
       }
 
-      requestNotificationPermission();
+      requestNotificationPermission()
     }
   } catch (error) {
-    console.log("ERROR : ", error);
+    console.log('ERROR : ', error)
   }
 }

@@ -1,14 +1,14 @@
 // ** Type Imports
-import { TicketInfo } from "@/src/type/ticket";
+import { TicketInfo } from '@/src/type/ticket'
 
 // ** Component Imports
-import TicketStatusButton from "../TicketStatusButton";
-import TicketSettingButton from "../TicketSettingButton";
-import TicketUserButton from "../TicketUserButton";
+import TicketStatusButton from '../TicketStatusButton'
+import TicketSettingButton from '../TicketSettingButton'
+import TicketUserButton from '../TicketUserButton'
 
 interface PropsType {
-  data: TicketInfo;
-  handleClick?: (id: number) => void;
+  data: TicketInfo
+  handleClick?: (id: number) => void
 }
 
 const TicketKanbanCard = ({ data, handleClick }: PropsType) => {
@@ -29,7 +29,7 @@ const TicketKanbanCard = ({ data, handleClick }: PropsType) => {
         <TicketUserButton
           profile={data.worker?.profile}
           nickname={data.worker?.nickname}
-          email={data.worker ? data.worker.email : "-"}
+          email={data.worker ? data.worker.email : '-'}
           userId={data.worker?.userId}
           type="user"
           ticketId={data.ticketId}
@@ -37,7 +37,7 @@ const TicketKanbanCard = ({ data, handleClick }: PropsType) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TicketKanbanCard;
+export default TicketKanbanCard

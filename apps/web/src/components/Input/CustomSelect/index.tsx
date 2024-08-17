@@ -1,14 +1,14 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react'
 
 interface PropsType {
-  value?: string;
-  option: string;
-  placeholder?: string;
-  name?: string;
-  width?: string;
-  height?: string;
-  item?: { label: string; value: string }[];
-  setValue?: (e: ChangeEvent<HTMLSelectElement>) => void;
+  value?: string
+  option: string
+  placeholder?: string
+  name?: string
+  width?: string
+  height?: string
+  item?: { label: string; value: string }[]
+  setValue?: (e: ChangeEvent<HTMLSelectElement>) => void
 }
 
 const CustomSelect = ({
@@ -40,7 +40,7 @@ const CustomSelect = ({
         <option>{option}</option>
       )}
     </select>
-  );
-};
+  )
+}
 
-export default CustomSelect;
+export default CustomSelect

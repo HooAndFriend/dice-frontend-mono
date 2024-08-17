@@ -40,7 +40,7 @@ const BoardContainer = ({
       <div className="flex items-center justify-between">
         <h1 className="font-bold text-[18px] text-gray-500">
           {board.parent
-            ? `${board.parent.title}  /  ${board.title}`
+            ? `${board.parent.title}  /${board.title}`
             : board.title}
         </h1>
         <div className="flex items-center">
@@ -68,7 +68,7 @@ const BoardContainer = ({
             value={board.title}
             onChange={handleInput}
             name="title"
-            className="h-[40px] w-[600px] border-none  text-[32px]"
+            className="h-[40px] w-[600px] border-none  text-[32px] px-0 my-1 font-bold"
           />
         )}
       </div>

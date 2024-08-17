@@ -13,6 +13,8 @@ import { GetBoardListResponse } from "@/src/type/board";
 
 // ** Utils Imports
 import dayjs from "dayjs";
+import { useRecoilValue } from "recoil";
+import { WorkspaceState } from "@/src/app";
 
 interface PropsType {}
 
@@ -38,8 +40,8 @@ const IndexContainerView = ({}: PropsType) => {
           alt="profile"
         />
         <div className="ml-4">
-          <h1 className="text-[14px] ">HI-DICE</h1>
-          <h1 className="text-gray-500 text-[12px] ">
+          <h1 className="text-[14px]">HI-DICE</h1>
+          <h1 className="text-gray-500 text-[12px]">
             {dayjs().format("YYYY-MM-DD HH:mm:ss")}
           </h1>
         </div>
@@ -47,10 +49,7 @@ const IndexContainerView = ({}: PropsType) => {
       <div className="w-full mt-12 overflow-y-hidden">
         {!isLoading &&
           boardData.data.data.map((item) => (
-            <Link
-              href={`/dashboard/board?boardId=${item.boardId}`}
-              key={item.boardId}
-            >
+            <Link href={`board?boardId=${item.boardId}`} key={item.boardId}>
               <li className="w-full p-2 hover:bg-red-200">{item.title}</li>
             </Link>
           ))}

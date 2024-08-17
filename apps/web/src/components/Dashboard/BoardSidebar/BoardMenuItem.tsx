@@ -42,7 +42,7 @@ const BoardMenuItem = ({ data, handleOpen }: PropsType) => {
           {data.children.length > 0 ? (
             <p className="ml-2">{data.title}</p>
           ) : (
-            <Link href={`/dashboard/board?boardId=${data.boardId}`}>
+            <Link href={`board?boardId=${data.boardId}`}>
               <p
                 className={`ml-2 ${
                   get("boardId") === String(data.boardId) && "text-blue-500"
@@ -67,7 +67,7 @@ const BoardMenuItem = ({ data, handleOpen }: PropsType) => {
               <div className="w-[12px] h-[12px] pl-1 pt-1">
                 <div className="w-[5px] h-[5px] bg-black rounded-full" />
               </div>
-              <Link href={`/dashboard/board?boardId=${_.boardId}`}>
+              <Link href={`board?boardId=${_.boardId}`}>
                 <p
                   className={`ml-2 ${
                     get("boardId") === String(_.boardId) && "text-blue-500"

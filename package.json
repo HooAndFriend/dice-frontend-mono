@@ -11,6 +11,8 @@
     "docker:push": "docker push pinomaker/dice-frontend:latest"
   },
   "devDependencies": {
+    "@editorjs/header": "^2.8.7",
+    "@editorjs/paragraph": "^2.11.6",
     "kill-port": "^2.0.1",
     "prettier": "^3.1.0",
     "turbo": "^2.0.3"

@@ -1,41 +1,46 @@
 // ** Components Imports
-import CustomInput from "../../../Input/CustomInput";
-import TicketStatusButton from "../TicketStatusButton";
-import QuillEditor from "../../../QuillEditor";
-import TicketDatePicker from "../TicketDatePicker";
-import TicketFileUploader from "../TicketFileUploader";
-import TicketUserButton from "../TicketUserButton";
-import TicketSettingButton from "../TicketSettingButton";
+import CustomInput from '../../../Input/CustomInput'
+import TicketStatusButton from '../TicketStatusButton'
+import QuillEditor from '../../../QuillEditor'
+import TicketDatePicker from '../TicketDatePicker'
+import TicketFileUploader from '../TicketFileUploader'
+import TicketUserButton from '../TicketUserButton'
+import TicketSettingButton from '../TicketSettingButton'
 
 // ** Type Imports
-import { TicketEditMode, TicketInfo } from "@/src/type/ticket";
-import { RoleType } from "@/src/type/common";
+import { TicketEditMode, TicketInfo } from '@/src/type/ticket'
+import { RoleType } from '@/src/type/common'
 
 // ** Utils Imports
-import dayjs from "dayjs";
-import TicketComment from "../TicketComment";
-import TicketHistory from "../TicketHistory";
-import ImagePreview from "../../../Image/ImagePreview";
+import dayjs from 'dayjs'
+import TicketComment from '../TicketComment'
+import TicketHistory from '../TicketHistory'
+import ImagePreview from '../../../Image/ImagePreview'
+import { KeyboardEvent } from 'react'
 
 interface PropsType {
-  data: TicketInfo;
-  mode: TicketEditMode;
-  role: RoleType;
-  subType: "comment" | "history";
-  selectImage: string;
-  previewOpen: boolean;
-  cancelButtonRef: any;
-  setSubType: (type: "comment" | "history") => void;
-  setPreviewOpen: (open: boolean) => void;
-  setMode: (mode: TicketEditMode) => void;
-  setData: (data: TicketInfo) => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  ticketRefetch: () => void;
-  handleClose: () => void;
-  handleDeleteTicket: (id: number) => void;
-  handleDeleteTicketFile: (id: number) => void;
-  handleUpdateTicket: (value: "content" | "name" | "storypoint") => void;
-  handlePreviewOpen: (image: string) => void;
+  data: TicketInfo
+  mode: TicketEditMode
+  role: RoleType
+  subType: 'comment' | 'history'
+  selectImage: string
+  previewOpen: boolean
+  cancelButtonRef: any
+  setSubType: (type: 'comment' | 'history') => void
+  setPreviewOpen: (open: boolean) => void
+  setMode: (mode: TicketEditMode) => void
+  setData: (data: TicketInfo) => void
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  ticketRefetch: () => void
+  handleClose: () => void
+  handleDeleteTicket: (id: number) => void
+  handleDeleteTicketFile: (id: number) => void
+  handleEnter: (
+    e: KeyboardEvent<HTMLInputElement>,
+    type: 'content' | 'name',
+  ) => void
+  handleUpdateTicket: (value: 'content' | 'name' | 'storypoint') => void
+  handlePreviewOpen: (image: string) => void
 }
 
 const TicketCardView = ({
@@ -57,6 +62,7 @@ const TicketCardView = ({
   handleDeleteTicketFile,
   handleUpdateTicket,
   handlePreviewOpen,
+  handleEnter,
 }: PropsType) => {
   return (
     <div className="h-full overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
@@ -81,15 +87,15 @@ const TicketCardView = ({
         </div>
       </div>
       <div className="flex items-center justify-between mt-[30px]">
-        {mode.name === "view" ? (
+        {mode.name === 'view' ? (
           <h1
             onDoubleClick={() => {
-              if (role === "VIEWER") return;
-              setMode({ ...mode, name: "edit" });
+              if (role === 'VIEWER') return
+              setMode({ ...mode, name: 'edit' })
             }}
             className="h-full cursor-pointer min-w-1/2 text-[16px]"
           >
-            {data.name.length === 0 ? "-" : data.name}
+            {data.name.length === 0 ? '-' : data.name}
           </h1>
         ) : (
           <div className="flex items-center w-full font-bold">
@@ -99,17 +105,18 @@ const TicketCardView = ({
               name="name"
               onChange={onChange}
               className="w-full h-[40px] border border-[#EBEBEC] rounded-[10px] px-4"
+              onKeyDown={(e) => handleEnter(e, 'name')}
             />
             <div className="flex items-center mx-2">
               <button
                 className="w-[30px] h-[30px] bg-[#623AD6] text-white rounded-[8px] flex items-center justify-center mr-2"
-                onClick={() => handleUpdateTicket("name")}
+                onClick={() => handleUpdateTicket('name')}
               >
                 V
               </button>
               <button
                 className="w-[30px] h-[30px] rounded-[8px] flex items-center justify-center"
-                onClickCapture={() => setMode({ ...mode, name: "view" })}
+                onClickCapture={() => setMode({ ...mode, name: 'view' })}
               >
                 X
               </button>
@@ -134,10 +141,10 @@ const TicketCardView = ({
         <div className="flex items-center">
           <h3 className="text-[16px]">
             <TicketUserButton
-              profile={data.admin ? data.admin.profile : "/images/dice.png"}
+              profile={data.admin ? data.admin.profile : '/images/dice.png'}
               ticketId={data.ticketId}
-              email={data.admin ? data.admin.email : "-"}
-              nickname={data.admin ? data.admin.nickname : "-"}
+              email={data.admin ? data.admin.email : '-'}
+              nickname={data.admin ? data.admin.nickname : '-'}
               userId={data.admin ? data.admin.userId : 0}
               type="admin"
               isNickname={true}
@@ -151,10 +158,10 @@ const TicketCardView = ({
         </div>
         <div className="flex items-center">
           <TicketUserButton
-            profile={data.worker ? data.worker.profile : "/images/dice.png"}
+            profile={data.worker ? data.worker.profile : '/images/dice.png'}
             ticketId={data.ticketId}
-            email={data.worker ? data.worker.email : "-"}
-            nickname={data.worker ? data.worker.nickname : "-"}
+            email={data.worker ? data.worker.email : '-'}
+            nickname={data.worker ? data.worker.nickname : '-'}
             userId={data.worker ? data.worker.userId : 0}
             type="user"
             isNickname={true}
@@ -165,38 +172,38 @@ const TicketCardView = ({
       <div className="flex items-center">
         <h1 className="w-[110px] text-[16px]">RegDate</h1>
         <h3 className="text-[16px]">
-          {dayjs(data.createdDate).format("YYYY-MM-DD HH:mm:ss")}
+          {dayjs(data.createdDate).format('YYYY-MM-DD HH:mm:ss')}
         </h3>
       </div>
       <div className="flex items-center mt-[20px]">
         <h1 className="w-[110px] text-[16px]">ModDate</h1>
         <h3 className="text-[16px]">
-          {dayjs(data.modifiedDate).format("YYYY-MM-DD HH:mm:ss")}
+          {dayjs(data.modifiedDate).format('YYYY-MM-DD HH:mm:ss')}
         </h3>
       </div>
       <div className="flex items-center mt-[20px]">
         <h1 className="w-[110px] text-[16px]">DueDate</h1>
         <TicketDatePicker
           ticketId={data.ticketId}
-          value={data.dueDate ? dayjs(data.dueDate).format("YYYY-MM-DD") : ""}
+          value={data.dueDate ? dayjs(data.dueDate).format('YYYY-MM-DD') : ''}
         />
       </div>
       <div className="flex items-center mt-[20px]">
         <h1 className="w-[110px] text-[16px]">ComDate</h1>
         <h3 className="text-[16px]">
           {data.completeDate
-            ? dayjs(data.completeDate).format("YYYY-MM-DD HH:mm:ss")
-            : "-"}
+            ? dayjs(data.completeDate).format('YYYY-MM-DD HH:mm:ss')
+            : '-'}
         </h3>
       </div>
       <hr className="my-[20px]" />
       <h1 className="mb-4 text-[16px]">Story Point</h1>
-      {mode.storypoint === "view" ? (
+      {mode.storypoint === 'view' ? (
         <div
           className="h-[40px] rounded-[10px] border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4 cursor-pointer text-[16px]"
           onDoubleClick={() => {
-            if (role === "VIEWER") return;
-            setMode({ ...mode, storypoint: "edit" });
+            if (role === 'VIEWER') return
+            setMode({ ...mode, storypoint: 'edit' })
           }}
         >
           {data.storypoint}
@@ -215,13 +222,13 @@ const TicketCardView = ({
           <div className="flex items-center mt-2">
             <button
               className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
-              onClick={() => handleUpdateTicket("storypoint")}
+              onClick={() => handleUpdateTicket('storypoint')}
             >
               save
             </button>
             <button
               className="w-[60px] h-[30px] flex items-center justify-center rounded-[8px]"
-              onClickCapture={() => setMode({ ...mode, storypoint: "view" })}
+              onClickCapture={() => setMode({ ...mode, storypoint: 'view' })}
             >
               cancel
             </button>
@@ -229,13 +236,13 @@ const TicketCardView = ({
         </div>
       )}
       <h1 className="my-4 text-[16px]">Content</h1>
-      {mode.content === "view" ? (
+      {mode.content === 'view' ? (
         <div
           dangerouslySetInnerHTML={{ __html: data.content }}
           className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto text-[16px] cursor-pointer"
           onDoubleClick={() => {
-            if (role === "VIEWER") return;
-            setMode({ ...mode, content: "edit" });
+            if (role === 'VIEWER') return
+            setMode({ ...mode, content: 'edit' })
           }}
         />
       ) : (
@@ -250,13 +257,13 @@ const TicketCardView = ({
           <div className="flex items-center mt-2">
             <button
               className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
-              onClick={() => handleUpdateTicket("content")}
+              onClick={() => handleUpdateTicket('content')}
             >
               save
             </button>
             <button
               className="w-[60px] h-[30px] flex items-center justify-center rounded-[8px]"
-              onClickCapture={() => setMode({ ...mode, content: "view" })}
+              onClickCapture={() => setMode({ ...mode, content: 'view' })}
             >
               cancel
             </button>
@@ -295,25 +302,25 @@ const TicketCardView = ({
         <button
           className="text-[12px] px-2 h-[30px] rounded-[8px] mr-2"
           style={{
-            backgroundColor: subType === "comment" ? "#623AD6" : "white",
-            color: subType === "comment" ? "white" : "#623AD6",
+            backgroundColor: subType === 'comment' ? '#623AD6' : 'white',
+            color: subType === 'comment' ? 'white' : '#623AD6',
           }}
-          onClick={() => setSubType("comment")}
+          onClick={() => setSubType('comment')}
         >
           comment
         </button>
         <button
           className="text-[12px] px-2 h-[30px] rounded-[8px]"
           style={{
-            backgroundColor: subType === "history" ? "#623AD6" : "white",
-            color: subType === "history" ? "white" : "#623AD6",
+            backgroundColor: subType === 'history' ? '#623AD6' : 'white',
+            color: subType === 'history' ? 'white' : '#623AD6',
           }}
-          onClick={() => setSubType("history")}
+          onClick={() => setSubType('history')}
         >
           history
         </button>
       </div>
-      {subType === "comment" ? (
+      {subType === 'comment' ? (
         <TicketComment ticketId={data.ticketId} />
       ) : (
         <TicketHistory ticketId={data.ticketId} />
@@ -327,7 +334,7 @@ const TicketCardView = ({
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TicketCardView;
+export default TicketCardView

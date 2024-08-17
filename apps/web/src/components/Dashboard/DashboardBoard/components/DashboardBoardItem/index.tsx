@@ -1,27 +1,35 @@
+import { WorkspaceState } from "@/src/app";
 import { BoardInfo } from "@/src/type/board";
 import dayjs from "dayjs";
+import Link from "next/link";
+
+import { useRecoilValue } from "recoil";
 
 interface PropsType {
   data: BoardInfo;
 }
 
 const DashboardBoardItem = ({ data }: PropsType) => {
+  const { uuid } = useRecoilValue(WorkspaceState);
+
   return (
-    <div className="flex items-start gap-4">
-      <div className="p-2 rounded-full bg-accent text-accent-foreground">
-        <FileIcon className="w-5 h-5" />
-      </div>
-      <div className="grid gap-1">
-        <div className="font-medium">{data.title}</div>
-        <div className="text-sm text-muted-foreground">
-          Explore strategies for seamlessly connecting Jira with your other
-          development tools.
+    <Link href={`/${uuid}/dashboard/board/${data.boardId}`}>
+      <div className="flex items-start gap-4 cursor-pointer">
+        <div className="p-2 rounded-full bg-accent text-accent-foreground">
+          <FileIcon className="w-5 h-5" />
         </div>
-        <div className="text-xs text-muted-foreground">
-          {dayjs(data.createdDate).format("YYYY-MM-DD HH:mm:ss")}
+        <div className="grid gap-1">
+          <div className="font-medium">{data.title}</div>
+          <div className="text-sm text-muted-foreground">
+            Explore strategies for seamlessly connecting Jira with your other
+            development tools.
+          </div>
+          <div className="text-xs text-muted-foreground">
+            {dayjs(data.createdDate).format("YYYY-MM-DD HH:mm:ss")}
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

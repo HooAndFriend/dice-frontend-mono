@@ -9,7 +9,7 @@ interface PropsType {
 
 const UserProfileBox = ({ name, profile, role }: PropsType) => {
   return (
-    <div className="w-[361px] h-[89px] rounded-3xl shadow-md flex items-center justify-between p-5">
+    <div className="w-[361px] h-[89px] rounded-[12px] shadow-md flex items-center justify-between p-5">
       <div className="flex items-center">
         <Image
           width={40}

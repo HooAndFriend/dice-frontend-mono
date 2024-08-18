@@ -21,9 +21,10 @@ import { CommonResponse } from '@/src/type/common'
 
 interface PropsType {
   epicId?: number
+  isEpic?: boolean
 }
 
-const TicketAddItem = ({ epicId }: PropsType) => {
+const TicketAddItem = ({ epicId, isEpic }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
   const [name, setName] = useState<string>('')
 
@@ -88,7 +89,7 @@ const TicketAddItem = ({ epicId }: PropsType) => {
         <tr className="border-b transition-colors data-[state=selected]:bg-muted cursor-pointer dark:hover:bg-gray-800 w-full">
           <td
             className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-            style={{ width: '5%' }}
+            style={{ width: '5%', paddingLeft: isEpic ? '48px' : '' }}
           >
             <div className="flex items-center justify-center">
               <TicketSelectSettingButton
@@ -128,18 +129,18 @@ const TicketAddItem = ({ epicId }: PropsType) => {
         </tr>
       ) : (
         <tr
-          className="border-b transition-colors data-[state=selected]:bg-muted cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 w-full"
+          className="border-b transition-colors data-[state=selected]:bg-muted cursor-pointer dark:hover:bg-gray-800 w-full"
           onClick={handleOpen}
         >
           <td
             className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
-            style={{ width: '5%' }}
+            style={{ width: '5%', paddingLeft: isEpic ? '48px' : '' }}
           >
             <div className="flex items-center justify-center">
               <CustomImage
                 src="/svg/add-box.svg"
-                width={36}
-                height={36}
+                width={24}
+                height={24}
                 alt="add-box"
               />
             </div>

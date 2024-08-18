@@ -167,10 +167,12 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
                         }}
                       />
                     ))}
+                    {role !== 'VIEWER' && (
+                      <TicketAddItem epicId={item.epicId} isEpic />
+                    )}
                   </tbody>
                 </table>
               </DndProvider>
-              {role !== 'VIEWER' && <TicketAddItem epicId={item.epicId} />}
             </td>
           </tr>
         </>

@@ -26,11 +26,11 @@ const PasswordPageView = ({}: PropsType) => {
         </div>
         <div className="flex justify-between px-[64px] mt-4">
           <Link to="/">
-            <button className="w-[190px] h-[40px] bg-white rounded-md border-2 border-solid border-[#E6E6E6]">
+            <button className="w-[190px] h-[40px] bg-white rounded-[12px] border-2 border-solid border-[#E6E6E6]">
               로그인으로 이동
             </button>
           </Link>
-          <button className="w-[190px] h-[40px] bg-[#623AD6] text-white rounded-md">
+          <button className="w-[190px] h-[40px] bg-[#623AD6] text-white rounded-[12px]">
             이메일 전송
           </button>
         </div>

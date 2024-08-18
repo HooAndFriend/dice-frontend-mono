@@ -100,7 +100,7 @@ const AlertDialog = ({
                 <div className="px-4 py-3 bg-gray-50 sm:flex sm:flex-row-reverse sm:px-6">
                   <button
                     type="button"
-                    className={`inline-flex w-full justify-center rounded-md ${
+                    className={`inline-flex w-full justify-center rounded-[12px] ${
                       logLevel === 'info' ? 'bg-green-600' : 'bg-red-600'
                     } px-3 py-2 text-sm font-semibold text-white shadow-sm ${
                       logLevel === 'info'
@@ -114,7 +114,7 @@ const AlertDialog = ({
                   {type === 'comfirm' && (
                     <button
                       type="button"
-                      className={`inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-5 sm:ml-3 sm:w-auto`}
+                      className={`inline-flex w-full justify-center rounded-[12px] bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-5 sm:ml-3 sm:w-auto`}
                       onClick={() => setOpen(false)}
                     >
                       {comfirmButtonText}

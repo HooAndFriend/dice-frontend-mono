@@ -130,7 +130,7 @@ const BoardSaveModal = ({
                   </div>
                   <div className="flex justify-end mt-5">
                     <button
-                      className="bg-[#623AD6] w-[72px] h-[32px] rounded-md text-white"
+                      className="bg-[#623AD6] w-[72px] h-[32px] rounded-[12px] text-white"
                       onClick={saveQa.trigger}
                     >
                       Save

@@ -27,7 +27,7 @@ const LoginPageView = ({
             />
           </div>
           <div className="flex justify-center w-full mt-4">
-            <div className="mt-4 w-[300px] h-[40px] rounded-md border-[#EFEFEF] border-2 flex items-center justify-center bg-white p-2">
+            <div className="mt-4 w-[300px] h-[40px] rounded-[12px] border-[#EFEFEF] border-2 flex items-center justify-center bg-white p-2">
               <img
                 src="/images/email.png"
                 alt="logo"
@@ -44,7 +44,7 @@ const LoginPageView = ({
             </div>
           </div>
           <div className="flex justify-center w-full">
-            <div className="mt-4 w-[300px] h-[40px] rounded-md border-[#EFEFEF] border-2 flex items-center bg-white p-2">
+            <div className="mt-4 w-[300px] h-[40px] rounded-[12px] border-[#EFEFEF] border-2 flex items-center bg-white p-2">
               <img
                 src="/images/password.png"
                 alt="logo"
@@ -69,7 +69,7 @@ const LoginPageView = ({
           </div>
           <div className="flex justify-center w-full">
             <button
-              className="w-[300px] h-[40px] text-white bg-[#623AD6] rounded-md mt-4"
+              className="w-[300px] h-[40px] text-white bg-[#623AD6] rounded-[12px] mt-4"
               onClick={handleLogin}
             >
               로그인

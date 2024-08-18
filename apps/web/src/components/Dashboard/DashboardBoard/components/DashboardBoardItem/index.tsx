@@ -20,10 +20,6 @@ const DashboardBoardItem = ({ data }: PropsType) => {
         </div>
         <div className="grid gap-1">
           <div className="font-medium">{data.title}</div>
-          <div className="text-sm text-muted-foreground">
-            Explore strategies for seamlessly connecting Jira with your other
-            development tools.
-          </div>
           <div className="text-xs text-muted-foreground">
             {dayjs(data.createdDate).format('YYYY-MM-DD HH:mm:ss')}
           </div>

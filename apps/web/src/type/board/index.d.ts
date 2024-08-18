@@ -11,6 +11,7 @@ export interface BoardInfo {
   createdDate: Date
   boardId: number
   title: string
+  content: string
   children: BoardInfo[]
 }
 

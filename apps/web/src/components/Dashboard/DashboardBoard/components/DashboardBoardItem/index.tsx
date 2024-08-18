@@ -13,7 +13,7 @@ const DashboardBoardItem = ({ data }: PropsType) => {
   const { uuid } = useRecoilValue(WorkspaceState)
 
   return (
-    <Link href={`/${uuid}/dashboard/board/${data.boardId}`}>
+    <Link href={`/${uuid}/dashboard/board?boardId=${data.boardId}`}>
       <div className="flex items-start gap-4 cursor-pointer">
         <div className="p-2 rounded-full bg-accent text-accent-foreground">
           <FileIcon className="w-5 h-5" />

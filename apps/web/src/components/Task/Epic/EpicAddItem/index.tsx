@@ -82,7 +82,8 @@ const EpicAddItem = () => {
           </div>
         </div>
       </td>
-      {open && (
+
+      {open ? (
         <td
           className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6 flex items-center"
           style={{ width: '95%' }}
@@ -107,6 +108,12 @@ const EpicAddItem = () => {
             <h1 className="font-bold text-[24px]">X</h1>
           </div>
         </td>
+      ) : (
+        <td
+          className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6"
+          style={{ width: '95%' }}
+          colSpan={4}
+        ></td>
       )}
     </tr>
   )

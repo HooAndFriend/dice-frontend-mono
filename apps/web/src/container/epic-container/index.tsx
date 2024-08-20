@@ -16,7 +16,6 @@ interface PropsType {
   epicCount: number
   isLoading: boolean
   selectContent: SelectContent
-  updateOrder: (arg: { epicId: number; targetEpicId: number }) => void
   setSelectContent: (value: SelectContent) => void
 }
 
@@ -24,7 +23,6 @@ const EpicContainer = ({
   epicData,
   isLoading,
   epicCount,
-  updateOrder,
   word,
   selectContent,
   setSelectContent,
@@ -43,7 +41,6 @@ const EpicContainer = ({
             <EpicTableSkeleton />
           ) : (
             <EpicTable
-              updateOrder={updateOrder}
               handleClick={(value: SelectContent) => {
                 setSelectContent(value)
               }}

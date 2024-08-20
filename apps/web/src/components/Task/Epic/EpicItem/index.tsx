@@ -1,7 +1,7 @@
 'use client'
 
 // ** React Imports
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 // ** Component Imports
 import TicketItem from '@/src/components/Task/Ticket/TicketItem'
@@ -9,40 +9,21 @@ import TicketAddItem from '@/src/components/Task/Ticket/TicketAddItem'
 
 // ** Type Imports
 import { EpicInfo, SelectContent } from '@/src/type/epic'
-import { CommonResponse, NoneType } from '@/src/type/common'
-
-// ** Utils Imports
-import { DropResult } from 'react-beautiful-dnd'
-
-// ** Context Imports
-import { useDialog } from '@/src/context/DialogContext'
-
-// ** Service Imports
-import { Patch } from '@/src/repository'
-import useSWRMutation from 'swr/mutation'
-import { mutate } from 'swr'
 
 // ** Recoil Imports
 import { useRecoilValue } from 'recoil'
 import { WorkspaceState } from '@/src/app'
-import { DndProvider, useDrag, useDrop } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
 
 interface PropsType {
   item: EpicInfo
-  word: string
-  index: number
-  moveItem: (dragIndex: number, hoverIndex: number) => void
   handleClick: (value: SelectContent) => void
 }
 
-const EpicItem = ({ item, handleClick, word, index, moveItem }: PropsType) => {
+const EpicItem = ({ item, handleClick }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
   const [enabled, setEnabled] = useState<boolean>(false)
 
   const handleOpen = () => setOpen((c) => !c)
-
-  const { handleOpen: handleDialogOpen } = useDialog()
 
   const { role } = useRecoilValue(WorkspaceState)
 
@@ -54,50 +35,6 @@ const EpicItem = ({ item, handleClick, word, index, moveItem }: PropsType) => {
 
     return `${(item.doneTicketCount / item.ticket.length) * 100}%`
   }, [item])
-
-  const updateOrder = useSWRMutation(
-    '/v1/ticket/order',
-    async (
-      url: string,
-      { arg }: { arg: { ticketId: number; targetTicketId: number } },
-    ) => await Patch<CommonResponse<void>>(url, arg),
-    {
-      onSuccess: ({ data }) => {
-        mutate('/v1/epic')
-      },
-      onError: (error) => {
-        handleDialogOpen({
-          title: 'Error',
-          message: error.response.data.message,
-          logLevel: 'warn',
-          buttonText: 'Close',
-          type: 'alert',
-        })
-      },
-    },
-  )
-
-  const ref = useRef<HTMLTableRowElement>(null)
-
-  const [, drop] = useDrop({
-    accept: 'EPIC_ITEM',
-    hover(draggedItem: { index: number }) {
-      if (draggedItem.index !== index) {
-        moveItem(draggedItem.index, index)
-        draggedItem.index = index
-      }
-    },
-  })
-
-  const [{ isDragging }, drag] = useDrag({
-    type: 'EPIC_ITEM',
-    item: { index },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  })
-
-  drag(drop(ref))
 
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true))
@@ -118,8 +55,7 @@ const EpicItem = ({ item, handleClick, word, index, moveItem }: PropsType) => {
           handleOpen()
           handleClick({ id: item.epicId, type: 'EPIC' })
         }}
-        style={{ width: '100%', opacity: isDragging ? 0.5 : 1 }}
-        ref={ref}
+        style={{ width: '100%' }}
       >
         <td
           className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
@@ -173,26 +109,23 @@ const EpicItem = ({ item, handleClick, word, index, moveItem }: PropsType) => {
         <>
           <tr>
             <td colSpan={3} style={{ padding: 0 }}>
-              <DndProvider backend={HTML5Backend}>
-                <table className="w-full">
-                  <tbody>
-                    {item.ticket.map((ticket) => (
-                      <TicketItem
-                        key={ticket.ticketId}
-                        data={ticket}
-                        word={word}
-                        isEpic
-                        handleClick={(ticketId: number) => {
-                          handleClick({ id: ticketId, type: 'TICKET' })
-                        }}
-                      />
-                    ))}
-                    {role !== 'VIEWER' && (
-                      <TicketAddItem epicId={item.epicId} isEpic />
-                    )}
-                  </tbody>
-                </table>
-              </DndProvider>
+              <table className="w-full">
+                <tbody>
+                  {item.ticket.map((ticket) => (
+                    <TicketItem
+                      key={ticket.ticketId}
+                      data={ticket}
+                      isEpic
+                      handleClick={(ticketId: number) => {
+                        handleClick({ id: ticketId, type: 'TICKET' })
+                      }}
+                    />
+                  ))}
+                  {role !== 'VIEWER' && (
+                    <TicketAddItem epicId={item.epicId} isEpic />
+                  )}
+                </tbody>
+              </table>
             </td>
           </tr>
         </>

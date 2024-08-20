@@ -15,6 +15,7 @@ export interface GetEpicSimpleListResponse extends CommonResponse {
 
 export interface EpicInfo {
   epicId: number
+  orderId: number
   code: string
   name: string
   doneTicketCount: number

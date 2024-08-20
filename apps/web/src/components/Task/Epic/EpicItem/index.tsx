@@ -1,7 +1,7 @@
 'use client'
 
 // ** React Imports
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 // ** Component Imports
 import TicketItem from '@/src/components/Task/Ticket/TicketItem'
@@ -25,16 +25,18 @@ import { mutate } from 'swr'
 // ** Recoil Imports
 import { useRecoilValue } from 'recoil'
 import { WorkspaceState } from '@/src/app'
-import { DndProvider } from 'react-dnd'
+import { DndProvider, useDrag, useDrop } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
 interface PropsType {
   item: EpicInfo
   word: string
+  index: number
+  moveItem: (dragIndex: number, hoverIndex: number) => void
   handleClick: (value: SelectContent) => void
 }
 
-const EpicItem = ({ item, handleClick, word }: PropsType) => {
+const EpicItem = ({ item, handleClick, word, index, moveItem }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
   const [enabled, setEnabled] = useState<boolean>(false)
 
@@ -75,12 +77,27 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
     },
   )
 
-  const onDragEnd = ({ source, destination }: DropResult) => {
-    updateOrder.trigger({
-      ticketId: source.index,
-      targetTicketId: destination.index,
-    })
-  }
+  const ref = useRef<HTMLTableRowElement>(null)
+
+  const [, drop] = useDrop({
+    accept: 'EPIC_ITEM',
+    hover(draggedItem: { index: number }) {
+      if (draggedItem.index !== index) {
+        moveItem(draggedItem.index, index)
+        draggedItem.index = index
+      }
+    },
+  })
+
+  const [{ isDragging }, drag] = useDrag({
+    type: 'EPIC_ITEM',
+    item: { index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  })
+
+  drag(drop(ref))
 
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true))
@@ -101,7 +118,8 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
           handleOpen()
           handleClick({ id: item.epicId, type: 'EPIC' })
         }}
-        style={{ width: '100%' }}
+        style={{ width: '100%', opacity: isDragging ? 0.5 : 1 }}
+        ref={ref}
       >
         <td
           className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"

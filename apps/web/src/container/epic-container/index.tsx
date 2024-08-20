@@ -1,15 +1,11 @@
 // ** Component Imports
-// import EpicCard from "@/src/components/Task/Epic/EpicCard";
-import TicketCard from '@/src/components/Task/Ticket/TicketCard'
-// import EpicTableSkeleton from "@/src/components/Task/Epic/EpicTable/EpicTableSkeleton";
-// import EpicSearchCard from "@/src/components/Task/Epic/EpicSearchCard";
 
-// ** Utils Imports
-import { DropResult } from 'react-beautiful-dnd'
+import TicketCard from '@/src/components/Task/Ticket/TicketCard'
 
 // ** Type Imports
-import { EpicInfo, EpicStatus, SelectContent } from '@/src/type/epic'
-import { WorkspaceUser } from '@/src/type/workspace'
+import { EpicInfo, SelectContent } from '@/src/type/epic'
+
+// ** Component Imports
 import EpicTable from '@/src/components/Task/Epic/EpicTable'
 import EpicTableSkeleton from '@/src/components/Task/Epic/EpicTable/EpicTableSkeleton'
 import EpicCard from '@/src/components/Task/Epic/EpicCard'
@@ -19,58 +15,23 @@ interface PropsType {
   epicData: EpicInfo[]
   epicCount: number
   isLoading: boolean
-  checkedList: WorkspaceUser[]
   selectContent: SelectContent
-  selectedTypeIds: number[]
-  selectedStatus: EpicStatus[]
-  handleTypeSelectFilter: (typeId: number) => void
-  handleStatusSelectFilter: (status: EpicStatus) => void
-  setCheckedList: (list: WorkspaceUser[]) => void
+  updateOrder: (arg: { epicId: number; targetEpicId: number }) => void
   setSelectContent: (value: SelectContent) => void
-  handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onDragEnd: ({ source, destination }: DropResult) => void
 }
 
 const EpicContainer = ({
   epicData,
   isLoading,
   epicCount,
+  updateOrder,
   word,
-  checkedList,
   selectContent,
-  selectedTypeIds,
-  selectedStatus,
-  setCheckedList,
-  handleStatusSelectFilter,
-  handleTypeSelectFilter,
   setSelectContent,
-  handleWord,
-  onDragEnd,
 }: PropsType) => {
   return (
     <div className="w-full h-full">
-      <div className="flex items-center justify-between pt-8 h-[8%]">
-        {/* <div className="flex items-center space-x-4">
-          <CustomSearch width="200px" value={word} onChange={handleWord} />
-          <TicketStatusSelectFilter
-            selectedStatus={selectedStatus}
-            handleEpicSelectFilter={handleStatusSelectFilter}
-          />
-          <TicketTypeSelectFilter
-            selectedTypeIds={selectedTypeIds}
-            handleTypeSelectFilter={handleTypeSelectFilter}
-          />
-          <UserSelectBox
-            checkedList={checkedList}
-            setCheckedList={setCheckedList}
-          />
-        </div>
-        <div className="flex items-center">
-          <h1 className="text-[18px] font-san-medium">
-            Total Ticket : {ticketCount}
-          </h1>
-        </div> */}
-      </div>
+      <div className="flex items-center justify-between pt-8 h-[8%]"></div>
       <div className={`${selectContent.id !== 0 && 'flex'} h-[92%] py-[24px]`}>
         <div
           style={{
@@ -82,6 +43,7 @@ const EpicContainer = ({
             <EpicTableSkeleton />
           ) : (
             <EpicTable
+              updateOrder={updateOrder}
               handleClick={(value: SelectContent) => {
                 setSelectContent(value)
               }}

@@ -11,6 +11,7 @@ import { DropResult } from 'react-beautiful-dnd'
 import { EpicInfo, EpicStatus, SelectContent } from '@/src/type/epic'
 import { WorkspaceUser } from '@/src/type/workspace'
 import EpicTable from '@/src/components/Task/Epic/EpicTable'
+import EpicTableSkeleton from '@/src/components/Task/Epic/EpicTable/EpicTableSkeleton'
 
 interface PropsType {
   word: string
@@ -77,9 +78,8 @@ const EpicContainer = ({
           }}
         >
           {isLoading ? (
-            <></>
+            <EpicTableSkeleton />
           ) : (
-            // <EpicTableSkeleton />
             <EpicTable
               handleClick={(value: SelectContent) => {
                 setSelectContent(value)

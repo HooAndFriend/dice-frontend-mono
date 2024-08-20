@@ -169,7 +169,7 @@ const GanttContainer = ({}: PropsType) => {
                                 onMouseLeave={() => setHoveredTask({ range: null, index: null })}
                             >
                               {hoveredTask.range && hoveredTask.index === `${index}` && (
-                                  <div className="absolute top-[-1.5rem] left-0 bg-black text-white text-xs p-1 rounded">
+                                  <div className="absolute top-[-1.5rem] left-0 bg-black text-white text-xs p-1 rounded w-[145px]">
                                     {hoveredTask.range}
                                   </div>
                               )}
@@ -197,7 +197,7 @@ const GanttContainer = ({}: PropsType) => {
                                           onMouseLeave={() => setHoveredTask({ range: null, index: null })}
                                       >
                                         {hoveredTask.range && hoveredTask.index === `${index}-${subIndex}` && (
-                                            <div className="absolute top-[-1.5rem] left-0 bg-black text-white text-xs p-1 rounded">
+                                            <div className="absolute top-[-1.5rem] left-0 bg-black text-white text-xs p-1 rounded w-[145px]">
                                               {hoveredTask.range}
                                             </div>
                                         )}

@@ -97,10 +97,12 @@ const EpicItem = ({ item, handleClick, word }: PropsType) => {
     <>
       <tr
         className="w-full border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
-        onClick={handleOpen}
-        style={{ width: '100%' }} // Removed table-layout: fixed to prevent conflicts
+        onClick={() => {
+          handleOpen()
+          handleClick({ id: item.epicId, type: 'EPIC' })
+        }}
+        style={{ width: '100%' }}
       >
-        {/* Parent table cells */}
         <td
           className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
           style={{

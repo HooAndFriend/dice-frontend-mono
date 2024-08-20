@@ -12,6 +12,7 @@ import { EpicInfo, EpicStatus, SelectContent } from '@/src/type/epic'
 import { WorkspaceUser } from '@/src/type/workspace'
 import EpicTable from '@/src/components/Task/Epic/EpicTable'
 import EpicTableSkeleton from '@/src/components/Task/Epic/EpicTable/EpicTableSkeleton'
+import EpicCard from '@/src/components/Task/Epic/EpicCard'
 
 interface PropsType {
   word: string
@@ -110,14 +111,14 @@ const EpicContainer = ({
             />
           )}
         </div>
-        {/* {selectContent.id !== 0 && selectContent.type === "EPIC" && (
+        {selectContent.id !== 0 && selectContent.type === 'EPIC' && (
           <div className="w-[35%] ml-[30px]">
             <EpicCard
               epicId={selectContent.id}
-              handleClose={() => setSelectContent({ id: 0, type: "EPIC" })}
+              handleClose={() => setSelectContent({ id: 0, type: 'EPIC' })}
             />
           </div>
-        )} */}
+        )}
         {selectContent.id !== 0 && selectContent.type === 'TICKET' && (
           <div className="w-[35%] ml-8 -mt-[44px]">
             <TicketCard

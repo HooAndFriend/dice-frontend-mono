@@ -65,29 +65,36 @@ export interface SettingListInfo {
 
 export interface TicketHistory {
   createdDate: Date
-  id: string
+  ticketHistoryLogId: string
   ticketId: number
-  email: string
+  creatorEmail: string
+  creatorNickname: string
+  creatorProfile: string
   type: TicketHistoryType
-  log: string
-  user: {
-    email: string
-    nickname: string
-    profile: string
-  }
+  beforeLog: string
+  beforeEmail: string
+  beforeNickname: string
+  beforeProfile: string
+  afterLog: string
+  afterEmail: string
+  afterNickname: string
+  afterProfile: string
 }
 
 export type TicketHistoryType =
-  | 'DUE_DATE'
-  | 'STATUS'
-  | 'WORKER'
-  | 'ADMIN'
-  | 'CONTENT'
-  | 'UPLOAD_FILE'
+  | 'UPDATE_NAME'
+  | 'UPDATE_SP'
+  | 'UPDATE_CONTENT'
+  | 'UPDATE_WORKER'
+  | 'UPDATE_ADMIN'
+  | 'UPDATE_STATUS'
+  | 'UPDATE_DUE_DATE'
+  | 'UPDATE_TYPE'
+  | 'ADD_COMMENT'
+  | 'UPDATE_COMMENT'
+  | 'DELETE_COMMENT'
+  | 'ADD_FILE'
   | 'DELETE_FILE'
-  | 'CREATE'
-  | 'TITLE'
-  | 'SP'
 
 export interface TicketEditMode {
   content: 'view' | 'edit'

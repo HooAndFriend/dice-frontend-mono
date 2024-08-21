@@ -26,7 +26,7 @@ const TicketHistory = ({ ticketId }: PropsType) => {
         <TicketHistorySkeleton />
       ) : (
         data.data.data.map((item) => (
-          <TicketHistoryItem key={item.id} data={item} />
+          <TicketHistoryItem key={item.ticketHistoryLogId} data={item} />
         ))
       )}
     </div>

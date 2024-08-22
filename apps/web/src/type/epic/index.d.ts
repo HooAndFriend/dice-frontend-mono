@@ -12,7 +12,10 @@ export interface GetEpicSimpleListResponse extends CommonResponse {
   data: Epic[]
   count: number
 }
-
+export interface GetGanttEpicListResponse extends CommonResponse {
+  data: EpicWithDates[]
+  count: number
+}
 export interface EpicInfo {
   epicId: number
   orderId: number
@@ -60,4 +63,9 @@ export interface EpicDetail {
 export interface SelectContent {
   id: number
   type: 'TICKET' | 'EPIC'
+}
+
+interface EpicWithDates extends EpicInfo {
+  startDate: string;
+  endDate: string;
 }

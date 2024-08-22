@@ -41,6 +41,7 @@ export interface TicketStats {
 }
 
 export interface Ticket {
+  createdDate: string
   ticketId: number
   name: string
   orderId: number

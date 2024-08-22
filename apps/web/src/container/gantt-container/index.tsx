@@ -93,11 +93,11 @@ const GanttContainer = ({data}: PropsType) => {
   return (
       <div className="bg-white mt-6 p-6 rounded-lg w-full">
         <div className="flex">
-          <div className="flex overflow-x-auto">
-            <table className="bg-white border-collapse table-fixed w-[350px]">
+          <div className="overflow-x-auto">
+            <table className="bg-white border-collapse table-fixed min-w-[350px] h-[45px]">
               <thead>
               <tr>
-                <th className="p-2 text-left bg-white border w-[350px]">스프린트</th>
+                <th className="p-2 text-left bg-white border min-w-[350px]">스프린트</th>
               </tr>
               </thead>
               <tbody className="max-h-[45px]">
@@ -105,7 +105,7 @@ const GanttContainer = ({data}: PropsType) => {
                 <Fragment key={index}>
                   <tr>
                     <td
-                      className="p-2 bg-white border cursor-pointer w-[350px]"
+                      className="p-2 bg-white border cursor-pointer min-w-[350px]"
                       onClick={() => toggleRow(index)}
                     >
                       {item.code + ' ' + item.name}

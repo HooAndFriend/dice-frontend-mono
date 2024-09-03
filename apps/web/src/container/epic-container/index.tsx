@@ -9,6 +9,10 @@ import { EpicInfo, SelectContent } from '@/src/type/epic'
 import EpicTable from '@/src/components/Task/Epic/EpicTable'
 import EpicTableSkeleton from '@/src/components/Task/Epic/EpicTable/EpicTableSkeleton'
 import EpicCard from '@/src/components/Task/Epic/EpicCard'
+import CustomSearch from '@/src/components/Input/CustomSearch'
+import TicketStatusSelectFilter from '@/src/components/Task/Common/Filter/StatusFilter'
+import TicketTypeSelectFilter from '@/src/components/Task/Common/Filter/TypeFilter'
+import UserSelectBox from '@/src/components/UserSelectBox'
 
 interface PropsType {
   word: string
@@ -29,7 +33,20 @@ const EpicContainer = ({
 }: PropsType) => {
   return (
     <div className="w-full h-full">
-      <div className="flex items-center justify-between pt-8 h-[8%]"></div>
+      <div className="flex items-center justify-between pt-8 h-[8%]">
+        <div className="flex items-center space-x-4">
+          <CustomSearch width="200px" value={''} onChange={() => {}} />
+          <TicketStatusSelectFilter
+            selectedStatus={[]}
+            handleEpicSelectFilter={() => {}}
+          />
+          <TicketTypeSelectFilter
+            selectedTypeIds={[]}
+            handleTypeSelectFilter={() => {}}
+          />
+          <UserSelectBox checkedList={[]} setCheckedList={() => {}} />
+        </div>
+      </div>
       <div className={`${selectContent.id !== 0 && 'flex'} h-[92%] py-[24px]`}>
         <div
           style={{

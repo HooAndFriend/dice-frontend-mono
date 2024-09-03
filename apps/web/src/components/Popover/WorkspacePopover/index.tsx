@@ -1,6 +1,6 @@
 'use client'
 // ** Next Imports
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 // ** React Imports
 import { useRef, useState } from 'react'
@@ -23,6 +23,7 @@ const WorkspacePopover = () => {
   const [open, setOpen] = useState<boolean>(false)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
 
+  const pathname = usePathname()
   const router = useRouter()
 
   const [workspaceState, setWorkspaceState] = useRecoilState(WorkspaceState)
@@ -50,7 +51,12 @@ const WorkspacePopover = () => {
       role: item.role,
     })
 
-    router.push(`/${item.workspace.uuid}/dashboard`)
+    const newPath = pathname.replace(
+      /\/[^\/]+\/dashboard/,
+      `/${item.workspace.uuid}/dashboard`,
+    )
+
+    router.push(newPath)
   }
 
   if (isLoading) return

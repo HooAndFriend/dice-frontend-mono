@@ -1,5 +1,7 @@
 // ** Next Imports
+import { WorkspaceState } from '@/src/app'
 import CustomImage from '@/src/components/Image/CustomImage'
+import { useRecoilValue } from 'recoil'
 
 interface PropsType {
   id: number
@@ -18,6 +20,7 @@ const WorkspaceBox = ({
   workspaceId,
   handleModalOpen,
 }: PropsType) => {
+  const { role } = useRecoilValue(WorkspaceState)
   return (
     <div
       className="flex items-center justify-between mt-5"
@@ -33,7 +36,7 @@ const WorkspaceBox = ({
         />
         <h4 className={`${id === workspaceId && 'text-[#623AD6]'}`}>{name}</h4>
       </div>
-      {id === workspaceId && (
+      {id === workspaceId && role === 'ADMIN' && (
         <CustomImage
           className="border rounded-[10px] mr-3 cursor-pointer"
           src="/svg/setting.svg"

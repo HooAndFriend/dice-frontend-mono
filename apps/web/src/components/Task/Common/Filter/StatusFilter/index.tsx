@@ -70,7 +70,7 @@ const StatusFilter = ({
         <h1 className="text-[#EBEBEC]">status</h1>
         <div className="flex items-center space-x-2">
           {selectedStatus.length > 0 && (
-            <div className="ml-[5px] w-[20px] text-[12px] h-[20px] rounded-full bg-[#623AD6] flex items-center justify-center text-white">
+            <div className="ml-[5px] w-[20px] text-[12px] h-[20px] rounded-[10px] bg-[#623AD6] flex items-center justify-center text-white">
               {selectedStatus.length}
             </div>
           )}
@@ -102,7 +102,7 @@ const StatusFilter = ({
                     type="checkbox"
                     checked={selectedStatus.includes(item)}
                     onChange={() => handleEpicSelectFilter(item)}
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-[12px] h-[12px] text-blue-600 bg-gray-100 border-gray-300 rounded-[3px] focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
                     htmlFor="default-checkbox"

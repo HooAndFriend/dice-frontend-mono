@@ -91,7 +91,11 @@ const NotificationPopover = () => {
               <h1>Notification</h1>
               <p
                 className="text-gray-500 cursor-pointer text-[12px] mr-2"
-                onClick={readNotification.trigger}
+                onClick={() => {
+                  if (data.data.data.length > 0) {
+                    readNotification.trigger()
+                  }
+                }}
               >
                 Read All
               </p>

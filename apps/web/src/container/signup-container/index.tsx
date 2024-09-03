@@ -1,165 +1,122 @@
-'use client'
-
-// ** Next Imports
-import { useRouter, useSearchParams } from 'next/navigation'
-
-// ** React Imports
-import { ChangeEvent, KeyboardEvent, useState } from 'react'
-
-// ** Service Imports
-import useSWRMutation from 'swr/mutation'
-import { Post } from '@/src/repository'
-
-// ** Recoil Imports
-import { AuthState, UserState, WorkspaceState } from '@/src/app'
-import { useSetRecoilState } from 'recoil'
-
-// ** Component Imports
-import SignupContainerView from './signup-container'
-
-// ** Utils Imports
-import useInput from '@/src/hooks/useInput'
+// ** Reacat Imports
+import { ChangeEvent, KeyboardEvent } from 'react'
 
 // ** Type Imports
-import { DiceSignupParams, DiceSignupResponse } from '@/src/type/auth'
+import { DiceSignupParams } from '@/src/type/auth'
 
-// ** Context Imports
-import { useDialog } from '@/src/context/DialogContext'
+interface PropsType {
+  signupUser: DiceSignupParams
+  passwordCheck: string
+  handlePasswordCheck: (e: ChangeEvent<HTMLInputElement>) => void
+  handleInput: (e: ChangeEvent<HTMLInputElement>) => void
+  handleJoin: () => void
+  handleCancel: () => void
+  handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void
+}
 
-const SignupContainer = () => {
-  const { data: signupUser, handleInput } = useInput<DiceSignupParams>({
-    email: '',
-    password: '',
-    nickname: '',
-    fcmToken: '',
-  })
-
-  const [passwordCheck, setPasswordCheck] = useState<string>('')
-
-  const setUserState = useSetRecoilState(UserState)
-  const setWorkspaceState = useSetRecoilState(WorkspaceState)
-  const setAuthState = useSetRecoilState(AuthState)
-
-  const { handleOpen } = useDialog()
-
-  const router = useRouter()
-  const searchParams = useSearchParams()
-
-  const handleCancel = () => {
-    router.push('/')
-  }
-
-  const handlePasswordCheck = (e: ChangeEvent<HTMLInputElement>) => {
-    setPasswordCheck(e.target.value)
-  }
-
-  const handleJoin = () => {
-    if (signupUser.email === '') {
-      handleOpen({
-        title: 'Error',
-        message: 'Enter Email',
-        logLevel: 'warn',
-        buttonText: 'Close',
-        type: 'alert',
-      })
-
-      return
-    }
-
-    if (signupUser.password === '') {
-      handleOpen({
-        title: 'Error',
-        message: 'Enter Password',
-        logLevel: 'warn',
-        buttonText: 'Close',
-        type: 'alert',
-      })
-
-      return
-    }
-
-    if (signupUser.password !== passwordCheck) {
-      handleOpen({
-        title: 'Error',
-        message: 'Check Password',
-        logLevel: 'warn',
-        buttonText: 'Close',
-        type: 'alert',
-      })
-
-      return
-    }
-
-    if (signupUser.nickname === '') {
-      handleOpen({
-        title: 'Error',
-        message: 'Enter Nickname',
-        logLevel: 'warn',
-        buttonText: 'Close',
-        type: 'alert',
-      })
-      return
-    }
-
-    signup.trigger()
-  }
-
-  const signup = useSWRMutation(
-    '/v1/auth/user',
-    async (url: string) =>
-      await Post<DiceSignupResponse>(url, {
-        ...signupUser,
-        uuid: searchParams.get('uuid') ? searchParams.get('uuid') : null,
-      }),
-    {
-      onSuccess: ({ data }) => {
-        setAuthState({
-          accessToken: data.token.accessToken,
-          refreshToken: data.token.refreshToken,
-        })
-        setUserState({
-          email: data.user.email,
-          profile: data.user.profile,
-          nickname: data.user.nickname,
-        })
-
-        setWorkspaceState({
-          workspaceId: data.workspace.workspaceId,
-          name: data.workspace.name,
-          profile: data.workspace.profile,
-          uuid: data.workspace.uuid,
-          role: 'ADMIN',
-        })
-        router.push('/dashboard')
-      },
-      onError: (error) => {
-        handleOpen({
-          title: 'Error',
-          message: error.response.data.message,
-          logLevel: 'warn',
-          buttonText: 'Close',
-          type: 'alert',
-        })
-      },
-    },
-  )
-
-  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleJoin()
-    }
-  }
-
+const SignupContainer = ({
+  signupUser,
+  passwordCheck,
+  handlePasswordCheck,
+  handleInput,
+  handleJoin,
+  handleCancel,
+  handleEnter,
+}: PropsType) => {
   return (
-    <SignupContainerView
-      signupUser={signupUser}
-      passwordCheck={passwordCheck}
-      handlePasswordCheck={handlePasswordCheck}
-      handleInput={handleInput}
-      handleJoin={handleJoin}
-      handleCancel={handleCancel}
-      handleEnter={handleEnter}
-    />
+    <div className="flex w-full h-screen items-center justify-center bg-[#FAFAFB] ">
+      <div className="bg-white w-[660px] h-[565px] rounded-[20px] shadow-md">
+        <div className="flex justify-center text-[40px] font-san-bold mt-[80px]">
+          Signup
+        </div>
+        <div>
+          <div className="flex mt-[60px] w-[540px] h-[50px] items-center m-auto">
+            <label
+              htmlFor="first_name"
+              className="text-black mr-[65px] text-[16px] font-san-medium"
+            >
+              Email
+              <span className="ml-1 text-base font-medium text-[#F45050] font-spoqa">
+                *
+              </span>
+            </label>
+            <input
+              type="text"
+              id="Email"
+              className="border h-[50px] w-[420px] text-gray-900 text-base p-[15px] rounded-[10px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+              placeholder="Enter Your Email"
+              value={signupUser.email}
+              onChange={handleInput}
+              name="email"
+              required
+            />
+          </div>
+          <div className="flex mt-5 w-[540px] h-[50px] items-center m-auto">
+            <label
+              htmlFor="password"
+              className="text-black mr-[37px] text-[16px] font-san-medium"
+            >
+              Password
+              <span className="ml-1 text-base font-medium text-[#F45050] font-spoqa">
+                *
+              </span>
+            </label>
+            <input
+              type="password"
+              className="border h-[50px] w-[200px] mr-[20px] text-gray-900 text-base p-[15px] rounded-[10px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+              placeholder="Enter Your Password"
+              value={signupUser.password}
+              onChange={handleInput}
+              name="password"
+              required
+            />
+            <input
+              type="password"
+              className="border h-[50px] w-[200px] mr-[20px] text-gray-900 text-base p-[15px] rounded-[10px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+              placeholder="Enter Your Password"
+              value={passwordCheck}
+              onChange={handlePasswordCheck}
+              required
+            />
+          </div>
+          <div className="flex mt-5 w-[540px] h-[50px] items-center m-auto">
+            <label
+              htmlFor="NickName"
+              className="text-black mr-[37px] text-[16px] font-san-medium"
+            >
+              NickName
+              <span className="ml-1 text-base font-medium text-[#F45050] font-spoqa">
+                *
+              </span>
+            </label>
+            <input
+              type="text"
+              className="border h-[50px] w-[420px] text-gray-900 text-base p-[15px] rounded-[10px] block border-[#EBEBEC] placeholder-[#DDD] dark:text-black "
+              placeholder="Enter Your NickName"
+              value={signupUser.nickname}
+              onChange={handleInput}
+              name="nickname"
+              onKeyDown={handleEnter}
+              required
+            />
+          </div>
+          <div className="w-[540px] h-[55px] flex m-auto mt-[50px] justify-between">
+            <button
+              className="h-full w-[257px] bg-[#EBEBEC] rounded-[15px] text-white text-[18px] font-san-bold"
+              onClick={handleCancel}
+            >
+              CANCEL
+            </button>
+            <button
+              className="h-full w-[257px] bg-main rounded-[15px] text-white text-[18px] font-san-bold"
+              onClick={handleJoin}
+            >
+              JOIN
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

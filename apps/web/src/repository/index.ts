@@ -65,11 +65,12 @@ client.interceptors.request.use((config) => {
     userState: UserStateType
     workspaceState: WorkspaceStateType
   } = JSON.parse(localStorage.getItem('recoil-persist'))
+  const worksapceCode = window.location.pathname.split('/')[1]
 
   if (recoilValue) {
     config.headers['Authorization'] =
       `Bearer ${recoilValue.authState.accessToken}`
-    config.headers['workspace-code'] = recoilValue.workspaceState.uuid
+    config.headers['workspace-code'] = worksapceCode
   }
 
   return config

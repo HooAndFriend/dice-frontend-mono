@@ -94,11 +94,11 @@ const EpicItem = ({ item, handleClick }: PropsType) => {
             </div>
             <div className="flex justify-center w-[10%]">
               <h4 className="text-[16px] font-san-medium">
-                {item.doneTicketCount === 0
+                {item.doneTicketCount === 0 || item.ticket.length === 0
                   ? 0
                   : ((item.doneTicketCount / item.ticket.length) * 100).toFixed(
                       2,
-                    )}{' '}
+                    )}
                 %
               </h4>
             </div>

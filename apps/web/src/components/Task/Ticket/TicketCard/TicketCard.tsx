@@ -289,7 +289,7 @@ const TicketCardView = ({
               className="absolute inset-0 w-full h-full rounded-[6px] bg-[#D9E0FF] cursor-pointer"
             />
             <h1
-              className="absolute px-2 py-1 m-1 text-xs leading-none text-white bg-black rounded-full cursor-pointer -right-2 -top-2"
+              className="absolute px-2 py-1 m-1 text-xs leading-none text-white bg-black rounded-[11px] cursor-pointer -right-2 -top-2"
               onClick={() => handleDeleteTicketFile(item.ticketFileId)}
             >
               X

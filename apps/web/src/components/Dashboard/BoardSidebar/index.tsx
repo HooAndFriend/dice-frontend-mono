@@ -40,7 +40,10 @@ const BoardSidebar = () => {
         <h1 className="text-[14px] font-bold">Content</h1>
         <button
           className="w-[20px] font-bold text-[16px] h-[20px] cursor-pointer"
-          onClick={() => setOpen(true)}
+          onClick={() => {
+            setSelectedBoardId(0)
+            setOpen(true)
+          }}
         >
           +
         </button>

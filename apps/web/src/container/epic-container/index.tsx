@@ -3,7 +3,8 @@
 import TicketCard from '@/src/components/Task/Ticket/TicketCard'
 
 // ** Type Imports
-import { EpicInfo, SelectContent } from '@/src/type/epic'
+import { EpicInfo, EpicStatus, SelectContent } from '@/src/type/epic'
+import { WorkspaceUser } from '@/src/type/workspace'
 
 // ** Component Imports
 import EpicTable from '@/src/components/Task/Epic/EpicTable'
@@ -20,7 +21,14 @@ interface PropsType {
   epicCount: number
   isLoading: boolean
   selectContent: SelectContent
+  checkedList: WorkspaceUser[]
+  selectedTypeIds: number[]
+  selectedStatus: EpicStatus[]
+  handleTypeSelectFilter: (typeId: number) => void
+  handleStatusSelectFilter: (status: EpicStatus) => void
+  setCheckedList: (list: WorkspaceUser[]) => void
   setSelectContent: (value: SelectContent) => void
+  handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const EpicContainer = ({
@@ -28,6 +36,13 @@ const EpicContainer = ({
   isLoading,
   epicCount,
   word,
+  checkedList,
+  selectedStatus,
+  selectedTypeIds,
+  handleWord,
+  handleStatusSelectFilter,
+  handleTypeSelectFilter,
+  setCheckedList,
   selectContent,
   setSelectContent,
 }: PropsType) => {
@@ -35,16 +50,19 @@ const EpicContainer = ({
     <div className="w-full h-full">
       <div className="flex items-center justify-between pt-8 h-[8%]">
         <div className="flex items-center space-x-4">
-          <CustomSearch width="200px" value={''} onChange={() => {}} />
+          <CustomSearch width="200px" value={word} onChange={handleWord} />
           <TicketStatusSelectFilter
-            selectedStatus={[]}
-            handleEpicSelectFilter={() => {}}
+            selectedStatus={selectedStatus}
+            handleEpicSelectFilter={handleStatusSelectFilter}
           />
           <TicketTypeSelectFilter
-            selectedTypeIds={[]}
-            handleTypeSelectFilter={() => {}}
+            selectedTypeIds={selectedTypeIds}
+            handleTypeSelectFilter={handleTypeSelectFilter}
           />
-          <UserSelectBox checkedList={[]} setCheckedList={() => {}} />
+          <UserSelectBox
+            checkedList={checkedList}
+            setCheckedList={setCheckedList}
+          />
         </div>
       </div>
       <div className={`${selectContent.id !== 0 && 'flex'} h-[92%] py-[24px]`}>
@@ -65,24 +83,26 @@ const EpicContainer = ({
                 .filter((item) => item.name.includes(word))
                 .map((item) => ({
                   ...item,
-                  ticket: item.ticket,
-                  // .filter((item) =>
-                  //   selectedStatus.length === 0
-                  //     ? true
-                  //     : selectedStatus.includes(item.status)
-                  // )
-                  // .filter((item) =>
-                  //   selectedTypeIds.length === 0
-                  //     ? true
-                  //     : selectedTypeIds.includes(item.ticketSetting?.id)
-                  // )
-                  // .filter((item) =>
-                  //   checkedList.length === 0
-                  //     ? true
-                  //     : checkedList.some(
-                  //         (_) => _.teamUser.user.id === item.worker?.id
-                  //       )
-                  // ),
+                  ticket: item.ticket
+                    .filter((item) =>
+                      selectedStatus.length === 0
+                        ? true
+                        : selectedStatus.includes(item.status),
+                    )
+                    .filter((item) =>
+                      selectedTypeIds.length === 0
+                        ? true
+                        : selectedTypeIds.includes(
+                            item.ticketSetting?.ticketSettingId,
+                          ),
+                    )
+                    .filter((item) =>
+                      checkedList.length === 0
+                        ? true
+                        : checkedList.some(
+                            (_) => _.user.userId === item.worker?.userId,
+                          ),
+                    ),
                 }))}
             />
           )}

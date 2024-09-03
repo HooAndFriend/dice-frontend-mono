@@ -13,10 +13,14 @@ import useSWR from 'swr'
 import { Get } from '@/src/repository'
 
 // ** Type Imports
-import { GetEpicListResponse, SelectContent } from '@/src/type/epic'
+import { EpicStatus, GetEpicListResponse, SelectContent } from '@/src/type/epic'
+import { WorkspaceUser } from '@/src/type/workspace'
 
 const EpicConatiner = () => {
   const [word, setWord] = useState<string>('')
+  const [selectedStatus, setSelectedStatus] = useState<EpicStatus[]>([])
+  const [selectedTypeIds, setSelectedTypeIds] = useState<number[]>([])
+  const [checkedList, setCheckedList] = useState<WorkspaceUser[]>([])
   const [enabled, setEnabled] = useState<boolean>(false)
   const [selectContent, setSelectContent] = useState<SelectContent>({
     id: 0,
@@ -28,6 +32,22 @@ const EpicConatiner = () => {
   const { data, error, isLoading } = useSWR('/v1/epic', async (url) =>
     Get<GetEpicListResponse>(url),
   )
+
+  const handleStatusSelectFilter = (status: EpicStatus) => {
+    if (selectedStatus.includes(status)) {
+      setSelectedStatus((c) => c.filter((s) => s !== status))
+    } else {
+      setSelectedStatus((c) => [...c, status])
+    }
+  }
+
+  const handleTypeSelectFilter = (typeId: number) => {
+    if (selectedTypeIds.includes(typeId)) {
+      setSelectedTypeIds((c) => c.filter((id) => id !== typeId))
+    } else {
+      setSelectedTypeIds((c) => [...c, typeId])
+    }
+  }
 
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true))
@@ -58,6 +78,13 @@ const EpicConatiner = () => {
       selectContent={selectContent}
       setSelectContent={setSelectContent}
       isLoading={isLoading}
+      checkedList={checkedList}
+      selectedStatus={selectedStatus}
+      selectedTypeIds={selectedTypeIds}
+      setCheckedList={setCheckedList}
+      handleWord={(e) => setWord(e.target.value)}
+      handleStatusSelectFilter={handleStatusSelectFilter}
+      handleTypeSelectFilter={handleTypeSelectFilter}
     />
   )
 }

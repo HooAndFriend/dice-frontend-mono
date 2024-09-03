@@ -130,7 +130,8 @@ export default function Signup(): JSX.Element {
           uuid: data.workspace.uuid,
           role: 'ADMIN',
         })
-        router.push('/dashboard')
+
+        router.push(`/${data.workspace.uuid}/dashboard`)
       },
       onError: (error) => {
         handleOpen({

@@ -31,7 +31,9 @@ const KanbanContainer = ({ data }: PropsType) => {
           <UserSelectBox checkedList={[]} setCheckedList={() => {}} />
         </div>
         <div className="flex items-center">
-          <h1 className="text-[18px] font-san-medium">Total Ticket : {0}</h1>
+          <h1 className="text-[18px] font-san-medium">
+            Total Ticket : {data.length}
+          </h1>
         </div>
       </div>
       <div className="h-[92%] py-[24px] w-full overflow-x-auto">

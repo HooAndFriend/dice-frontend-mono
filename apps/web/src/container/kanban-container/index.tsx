@@ -1,7 +1,6 @@
 'use client'
 // ** Component Imports
 import CustomSearch from '@/src/components/Input/CustomSearch'
-import TicketStatusSelectFilter from '@/src/components/Task/Common/Filter/StatusFilter'
 import TicketTypeSelectFilter from '@/src/components/Task/Common/Filter/TypeFilter'
 import KanbanCard from '@/src/components/Task/Kanban/KanbanCard'
 import UserSelectBox from '@/src/components/UserSelectBox'
@@ -9,26 +8,41 @@ import { statusList } from '@/src/constants/status'
 
 // ** Type Imports
 import { Ticket } from '@/src/type/ticket'
+import { WorkspaceUser } from '@/src/type/workspace'
 
 interface PropsType {
   data: Ticket[]
+  word: string
+  checkedList: WorkspaceUser[]
+  selectedEpicIds: number[]
+  selectedTypeIds: number[]
+  handleTypeSelectFilter: (typeId: number) => void
+  setCheckedList: (list: WorkspaceUser[]) => void
+  handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const KanbanContainer = ({ data }: PropsType) => {
+const KanbanContainer = ({
+  data,
+  word,
+  handleTypeSelectFilter,
+  handleWord,
+  selectedTypeIds,
+  setCheckedList,
+  checkedList,
+}: PropsType) => {
   return (
     <div className="w-full h-full">
       <div className="flex items-center justify-between pt-8 h-[8%]">
         <div className="flex items-center space-x-4">
-          <CustomSearch width="200px" value={''} onChange={() => {}} />
-          <TicketStatusSelectFilter
-            selectedStatus={[]}
-            handleEpicSelectFilter={() => {}}
-          />
+          <CustomSearch width="200px" value={word} onChange={handleWord} />
           <TicketTypeSelectFilter
-            selectedTypeIds={[]}
-            handleTypeSelectFilter={() => {}}
+            selectedTypeIds={selectedTypeIds}
+            handleTypeSelectFilter={handleTypeSelectFilter}
           />
-          <UserSelectBox checkedList={[]} setCheckedList={() => {}} />
+          <UserSelectBox
+            checkedList={checkedList}
+            setCheckedList={setCheckedList}
+          />
         </div>
         <div className="flex items-center">
           <h1 className="text-[18px] font-san-medium">

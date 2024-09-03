@@ -1,4 +1,6 @@
 'use client'
+// ** Next Imports
+import { useRouter } from 'next/navigation'
 
 // ** React Imports
 import { useEffect, useMemo, useState } from 'react'
@@ -23,9 +25,11 @@ const EpicItem = ({ item, handleClick }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
   const [enabled, setEnabled] = useState<boolean>(false)
 
+  const router = useRouter()
+
   const handleOpen = () => setOpen((c) => !c)
 
-  const { role } = useRecoilValue(WorkspaceState)
+  const { role, uuid } = useRecoilValue(WorkspaceState)
 
   const epicProgress = useMemo(() => {
     if (item.doneTicketCount === 0) {
@@ -53,6 +57,7 @@ const EpicItem = ({ item, handleClick }: PropsType) => {
         className="w-full border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
         onClick={() => {
           handleOpen()
+          router.push(`/${uuid}/dashboard/task/epic?epicId=${item.epicId}`)
           handleClick({ id: item.epicId, type: 'EPIC' })
         }}
         style={{ width: '100%' }}
@@ -117,6 +122,9 @@ const EpicItem = ({ item, handleClick }: PropsType) => {
                       data={ticket}
                       isEpic
                       handleClick={(ticketId: number) => {
+                        router.push(
+                          `/${uuid}/dashboard/task/epic?ticketId=${ticketId}`,
+                        )
                         handleClick({ id: ticketId, type: 'TICKET' })
                       }}
                     />

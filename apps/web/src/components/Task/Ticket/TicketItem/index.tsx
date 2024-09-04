@@ -68,7 +68,11 @@ const TicketItem = ({ handleClick, data, isEpic }: PropsType) => {
         style={{
           width: '15%',
           whiteSpace: 'nowrap',
-          color: dayjs().isSame(dayjs(data.dueDate), 'day') ? 'red' : 'black',
+          color:
+            dayjs().isSame(dayjs(data.dueDate), 'day') &&
+            !['COMPLETE', 'DONE'].includes(data.status)
+              ? 'red'
+              : 'black',
         }}
       >
         {data.dueDate ? dayjs(data.dueDate).format('YYYY-MM-DD') : '-'}

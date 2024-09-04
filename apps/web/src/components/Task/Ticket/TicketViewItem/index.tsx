@@ -95,6 +95,8 @@ const TicketViewItem = ({ handleClick, data, isEpic, isAdmin }: PropsType) => {
             !['COMPLETE', 'DONE'].includes(data.status)
               ? 'red'
               : 'black',
+          textDecorationLine:
+            data.status === 'COMPLETE' ? 'line-through' : 'none',
         }}
       >
         {data.dueDate ? dayjs(data.dueDate).format('YYYY-MM-DD') : '-'}

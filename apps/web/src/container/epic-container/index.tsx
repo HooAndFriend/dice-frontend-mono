@@ -116,7 +116,7 @@ const EpicContainer = ({
           </div>
         )}
         {selectContent.id !== 0 && selectContent.type === 'TICKET' && (
-          <div className="w-[35%] ml-8 -mt-[44px]">
+          <div className="w-[35%] ml-8">
             <TicketCard
               ticketId={selectContent.id}
               handleClose={() => setSelectContent({ id: 0, type: 'TICKET' })}

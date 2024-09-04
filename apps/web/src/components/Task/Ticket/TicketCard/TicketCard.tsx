@@ -168,33 +168,12 @@ const TicketCardView = ({
           />
         </div>
       </div>
-      <hr className="my-[20px]" />
-      <div className="flex items-center">
-        <h1 className="w-[110px] text-[16px]">RegDate</h1>
-        <h3 className="text-[16px]">
-          {dayjs(data.createdDate).format('YYYY-MM-DD HH:mm:ss')}
-        </h3>
-      </div>
-      <div className="flex items-center mt-[20px]">
-        <h1 className="w-[110px] text-[16px]">ModDate</h1>
-        <h3 className="text-[16px]">
-          {dayjs(data.modifiedDate).format('YYYY-MM-DD HH:mm:ss')}
-        </h3>
-      </div>
       <div className="flex items-center mt-[20px]">
         <h1 className="w-[110px] text-[16px]">DueDate</h1>
         <TicketDatePicker
           ticketId={data.ticketId}
           value={data.dueDate ? dayjs(data.dueDate).format('YYYY-MM-DD') : ''}
         />
-      </div>
-      <div className="flex items-center mt-[20px]">
-        <h1 className="w-[110px] text-[16px]">ComDate</h1>
-        <h3 className="text-[16px]">
-          {data.completeDate
-            ? dayjs(data.completeDate).format('YYYY-MM-DD HH:mm:ss')
-            : '-'}
-        </h3>
       </div>
       <hr className="my-[20px]" />
       <h1 className="mb-4 text-[16px]">Story Point</h1>
@@ -297,7 +276,15 @@ const TicketCardView = ({
           </div>
         ))}
       </div>
-      <hr className="my-[20px]" />
+      <div className="mt-[12px]">
+        <p className="text-[12px] text-gray-400">
+          created : {dayjs(data.createdDate).format('YYYY.MM.DD HH:mm:ss')}
+        </p>
+        <p className="text-[12px] text-gray-400">
+          modified : {dayjs(data.modifiedDate).format('YYYY.MM.DD HH:mm:ss')}
+        </p>
+      </div>
+      <hr className="mb-[20px] mt-[10px]" />
       <div className="flex items-center">
         <button
           className="text-[12px] px-2 h-[30px] rounded-[8px] mr-2"

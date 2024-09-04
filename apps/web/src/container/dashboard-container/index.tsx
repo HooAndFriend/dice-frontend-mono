@@ -2,7 +2,15 @@ import DashboardCard from '@/src/components/Dashboard/DashboardCard'
 import DashboardBoard from '@/src/components/Dashboard/DashboardBoard'
 import DashboardTask from '@/src/components/Dashboard/DashboardTask'
 
-const DashboardContainer = () => {
+// ** Type Imports
+import { TicketInfo } from '@/src/type/ticket'
+
+interface PropsType {
+  email: string
+  ticketData: TicketInfo[]
+}
+
+const DashboardContainer = ({ email, ticketData }: PropsType) => {
   return (
     <div className="flex min-h-screen w-full flex-col bg-[#FAFAFB] px-4 py-6">
       <div className="flex flex-col gap-6">
@@ -51,11 +59,14 @@ const DashboardContainer = () => {
             value={100}
           />
         </div>
-
-        {/* 이 부분이 2/3 높이를 차지 */}
         <div className="grid flex-1 gap-6 lg:grid-cols-3" style={{ flex: '2' }}>
           <div className="flex flex-col lg:col-span-2">
-            <DashboardTask />
+            <DashboardTask
+              data={ticketData.filter(
+                (ticket) => ticket.worker.email === email,
+              )}
+              isAdmin={false}
+            />
           </div>
           <div className="flex flex-col lg:col-span-1">
             <DashboardBoard />
@@ -66,7 +77,10 @@ const DashboardContainer = () => {
             <DashboardBoard />
           </div>
           <div className="flex flex-col lg:col-span-2">
-            <DashboardTask />
+            <DashboardTask
+              data={ticketData.filter((ticket) => ticket.admin.email === email)}
+              isAdmin
+            />
           </div>
         </div>
       </div>

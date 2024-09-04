@@ -7,15 +7,16 @@ import TicketSettingButton from '../TicketSettingButton'
 import dayjs from 'dayjs'
 
 // ** Type Imports
-import { Ticket } from '@/src/type/ticket'
+import { TicketInfo } from '@/src/type/ticket'
 
 interface PropsType {
-  data: Ticket
+  data: TicketInfo
   isEpic: boolean
+  isAdmin: boolean
   handleClick: (id: number) => void
 }
 
-const TicketViewItem = ({ handleClick, data, isEpic }: PropsType) => {
+const TicketViewItem = ({ handleClick, data, isEpic, isAdmin }: PropsType) => {
   return (
     <tr
       className="border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer w-full"
@@ -38,7 +39,7 @@ const TicketViewItem = ({ handleClick, data, isEpic }: PropsType) => {
       <td
         className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6"
         style={{
-          width: '55%',
+          width: isAdmin ? '45%' : '55%',
           textDecorationLine:
             data.status === 'COMPLETE' ? 'line-through' : 'none',
         }}
@@ -63,6 +64,27 @@ const TicketViewItem = ({ handleClick, data, isEpic }: PropsType) => {
           />
         </div>
       </td>
+
+      {isAdmin && (
+        <td
+          className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+          style={{
+            width: '10%',
+          }}
+        >
+          <div className="flex items-center justify-center">
+            <TicketUserButton
+              profile={data.admin ? data.admin.profile : '/images/dice.png'}
+              nickname={data.admin ? data.admin.nickname : '-'}
+              email={data.admin ? data.admin.email : '-'}
+              userId={data.admin?.userId}
+              type="user"
+              ticketId={data.ticketId}
+              isNickname={false}
+            />
+          </div>
+        </td>
+      )}
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
         style={{

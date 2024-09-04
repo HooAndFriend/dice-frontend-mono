@@ -9,6 +9,11 @@ export interface GetTicketListResponse extends CommonResponse {
 
 export interface GetTicketResponse extends CommonResponse, TicketInfo {}
 
+export interface GetMyTicketListResponse extends CommonResponse {
+  count: number
+  data: TicketInfo[]
+}
+
 export interface GetTicketHistoryListResponse extends CommonResponse {
   count: number
   data: TicketHistory[]

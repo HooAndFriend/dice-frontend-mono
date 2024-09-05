@@ -10,9 +10,15 @@ interface PropsType {
   email: string
   ticketStats: TicketStats
   ticketData: TicketInfo[]
+  handleClick: (ticketId: number) => void
 }
 
-const DashboardContainer = ({ email, ticketStats, ticketData }: PropsType) => {
+const DashboardContainer = ({
+  email,
+  ticketStats,
+  ticketData,
+  handleClick,
+}: PropsType) => {
   return (
     <div className="flex min-h-screen w-full flex-col bg-[#FAFAFB] px-4 py-6">
       <div className="flex flex-col gap-6">
@@ -47,6 +53,7 @@ const DashboardContainer = ({ email, ticketStats, ticketData }: PropsType) => {
                 (ticket) => ticket.worker && ticket.worker.email === email,
               )}
               isAdmin={false}
+              handleClick={handleClick}
             />
           </div>
           <div className="flex flex-col lg:col-span-1">
@@ -63,6 +70,7 @@ const DashboardContainer = ({ email, ticketStats, ticketData }: PropsType) => {
                 (ticket) => ticket.admin && ticket.admin.email === email,
               )}
               isAdmin
+              handleClick={handleClick}
             />
           </div>
         </div>

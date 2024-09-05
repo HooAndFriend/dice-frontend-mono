@@ -13,13 +13,13 @@ interface PropsType {
   data: TicketInfo
   isEpic: boolean
   isAdmin: boolean
-  handleClick: (id: number) => void
+  handleClick: (ticketid: number) => void
 }
 
 const TicketViewItem = ({ handleClick, data, isEpic, isAdmin }: PropsType) => {
   return (
     <tr
-      className="border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 w-full"
+      className="border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 w-full cursor-pointer"
       onClick={() => handleClick(data.ticketId)}
       style={{
         width: '100%',

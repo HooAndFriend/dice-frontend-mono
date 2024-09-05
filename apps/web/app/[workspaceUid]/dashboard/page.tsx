@@ -13,10 +13,13 @@ import {
 // ** Component Imports
 import DashboardContainer from '@/src/container/dashboard-container'
 import { useRecoilValue } from 'recoil'
-import { UserState } from '@/src/app'
+import { UserState, WorkspaceState } from '@/src/app'
+import { useRouter } from 'next/navigation'
 
 const DashboardPage = () => {
   const { email } = useRecoilValue(UserState)
+  const { uuid } = useRecoilValue(WorkspaceState)
+  const router = useRouter()
 
   const { data, isLoading, mutate } = useSWR('/v1/ticket/my', async (url) => {
     return Get<GetMyTicketListResponse>(url)
@@ -29,7 +32,9 @@ const DashboardPage = () => {
     },
   )
 
-  console.log('statsdata', statsData)
+  const handleClick = (ticketId: number) => {
+    router.push(`/${uuid}/dashboard/task/epic?ticketId=${ticketId}`)
+  }
 
   return (
     <DashboardContainer
@@ -50,6 +55,7 @@ const DashboardPage = () => {
       }
       ticketData={isLoading ? [] : data.data.data}
       email={email}
+      handleClick={handleClick}
     />
   )
 }

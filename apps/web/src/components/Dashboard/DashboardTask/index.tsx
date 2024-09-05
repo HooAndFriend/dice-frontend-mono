@@ -14,9 +14,10 @@ import TicketViewItem from '../../Task/Ticket/TicketViewItem'
 interface PropsType {
   data: TicketInfo[]
   isAdmin: boolean
+  handleClick: (ticketId: number) => void
 }
 
-const DashboardTask = ({ data, isAdmin }: PropsType) => {
+const DashboardTask = ({ data, isAdmin, handleClick }: PropsType) => {
   return (
     <Card className="bg-white max-h-[580px] rounded-[20px] shadow-md lg:col-span-2 flex-1 overflow-auto">
       <CardHeader>
@@ -73,7 +74,7 @@ const DashboardTask = ({ data, isAdmin }: PropsType) => {
                 data={ticket}
                 isEpic={false}
                 isAdmin={isAdmin}
-                handleClick={() => {}}
+                handleClick={handleClick}
               />
             ))}
           </TableBody>

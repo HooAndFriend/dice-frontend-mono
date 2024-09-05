@@ -63,7 +63,7 @@ const DashboardContainer = ({ email, ticketData }: PropsType) => {
           <div className="flex flex-col lg:col-span-2">
             <DashboardTask
               data={ticketData.filter(
-                (ticket) => ticket.worker.email === email,
+                (ticket) => ticket.worker && ticket.worker.email === email,
               )}
               isAdmin={false}
             />
@@ -78,7 +78,9 @@ const DashboardContainer = ({ email, ticketData }: PropsType) => {
           </div>
           <div className="flex flex-col lg:col-span-2">
             <DashboardTask
-              data={ticketData.filter((ticket) => ticket.admin.email === email)}
+              data={ticketData.filter(
+                (ticket) => ticket.admin && ticket.admin.email === email,
+              )}
               isAdmin
             />
           </div>

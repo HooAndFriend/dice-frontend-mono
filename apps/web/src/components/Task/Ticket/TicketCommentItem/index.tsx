@@ -32,7 +32,7 @@ const TicketCommentItem = ({ data, commentRefetch }: PropsType) => {
   }
 
   const deleteComment = useSWRMutation(
-    `/v1/ticket/comment/${data.id}`,
+    `/v1/ticket/comment/${data.ticketCommentId}`,
     async (url: string) => await Delete<CommonResponse<void>>(url),
     {
       onSuccess: () => {
@@ -54,7 +54,7 @@ const TicketCommentItem = ({ data, commentRefetch }: PropsType) => {
     '/v1/ticket/comment',
     async (url: string) =>
       await Patch<CommonResponse<void>>(url, {
-        commentId: data.id,
+        commentId: data.ticketCommentId,
         content,
       }),
     {

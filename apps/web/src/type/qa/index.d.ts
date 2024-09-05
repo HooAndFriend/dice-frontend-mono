@@ -96,7 +96,7 @@ export interface GetCommentListResponse extends CommonResponse {
 }
 
 export interface CommentInfo {
-  id: number
+  ticketCommentId: number
   content: string
   createdDate: string
   modifiedDate: string

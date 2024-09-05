@@ -127,7 +127,7 @@ const TicketComment = ({ ticketId }: PropsType) => {
         ) : (
           commentData.data.data.map((item) => (
             <TicketCommentItem
-              key={item.id}
+              key={item.ticketCommentId}
               data={item}
               commentRefetch={commentRefetch}
             />

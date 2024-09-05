@@ -1,5 +1,5 @@
 // ** React Imports
-import { KeyboardEvent, useRef, useState } from 'react'
+import { KeyboardEvent, useEffect, useRef, useState } from 'react'
 
 // ** Componet imports
 import TicketCardView from './TicketCard'
@@ -185,6 +185,14 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       updateTicket.trigger(type)
     }
   }
+
+  useEffect(() => {
+    setMode({
+      content: 'view',
+      storypoint: 'view',
+      name: 'view',
+    })
+  }, [ticketId])
 
   if (isLoading) return <CardSkeleton />
 

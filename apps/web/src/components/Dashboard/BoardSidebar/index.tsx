@@ -64,6 +64,7 @@ const BoardSidebar = () => {
           refetch={mutate}
           cancelButtonRef={cancelButtonRef}
           parentId={selectedBoardId}
+          
         />
       )}
     </div>

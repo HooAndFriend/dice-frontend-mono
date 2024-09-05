@@ -1,4 +1,6 @@
 'use client'
+// ** Next Imports
+import { useRouter } from 'next/navigation'
 
 // ** React Imports
 import { Fragment, KeyboardEvent, useState } from 'react'
@@ -11,7 +13,6 @@ import useInput from '@/src/hooks/useInput'
 
 // ** Type Imports
 import { SaveQaParam } from '@/src/type/qa'
-import { CommonResponse } from '@/src/type/common'
 
 // ** Service Imports
 import useSWRMutation from 'swr/mutation'
@@ -19,6 +20,10 @@ import { Post } from '@/src/repository'
 
 // ** Context Imports
 import { useDialog } from '@/src/context/DialogContext'
+
+// ** Recoil Imports
+import { useRecoilValue } from 'recoil'
+import { WorkspaceState } from '@/src/app'
 
 interface PropsType {
   open: boolean
@@ -36,6 +41,9 @@ const BoardSaveModal = ({
   refetch,
 }: PropsType) => {
   const [button, setButton] = useState<boolean>(false)
+  const router = useRouter()
+
+  const { uuid } = useRecoilValue(WorkspaceState)
 
   const { data, handleInput, handleInit } = useInput<SaveQaParam>({
     title: '',
@@ -46,12 +54,13 @@ const BoardSaveModal = ({
   const saveQa = useSWRMutation(
     '/v1/board',
     async (url: string) =>
-      await Post<CommonResponse<void>>(url, {
+      await Post<number>(url, {
         ...data,
         parentId: parentId !== 0 ? parentId : null,
       }),
     {
       onSuccess: ({ data }) => {
+        router.push(`/${uuid}/dashboard/board?boardId=${data}`)
         setOpen(false)
         refetch()
       },

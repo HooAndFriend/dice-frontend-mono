@@ -3,14 +3,16 @@ import DashboardBoard from '@/src/components/Dashboard/DashboardBoard'
 import DashboardTask from '@/src/components/Dashboard/DashboardTask'
 
 // ** Type Imports
-import { TicketInfo } from '@/src/type/ticket'
+import { TicketInfo, TicketStats } from '@/src/type/ticket'
+import DashboardUserCard from '@/src/components/Dashboard/DashboardUserCard'
 
 interface PropsType {
   email: string
+  ticketStats: TicketStats
   ticketData: TicketInfo[]
 }
 
-const DashboardContainer = ({ email, ticketData }: PropsType) => {
+const DashboardContainer = ({ email, ticketStats, ticketData }: PropsType) => {
   return (
     <div className="flex min-h-screen w-full flex-col bg-[#FAFAFB] px-4 py-6">
       <div className="flex flex-col gap-6">
@@ -19,44 +21,23 @@ const DashboardContainer = ({ email, ticketData }: PropsType) => {
           style={{ flex: '1' }}
         >
           <DashboardCard
-            width="380px"
-            color="#F4F4FA"
             icon="/svg/dashboard-task.svg"
             title="Today Tasks"
-            text={'3건(66%)'}
-            value={100}
+            text={`${ticketStats.user.myTodayDoneCount} / ${ticketStats.user.myTodayCount}`}
           />
           <DashboardCard
-            width="380px"
-            color="#F4F4FA"
-            icon="/svg/dashboard-user.svg"
-            title="Review Tasks"
-            text={'0건'}
-            value={100}
-          />
-          <DashboardCard
-            width="380px"
-            color="#F4F4FA"
-            icon="/svg/dashboard-progress.svg"
-            title="Sprint Progress"
-            text={'0건'}
-            value={100}
-          />
-          <DashboardCard
-            width="380px"
-            color="#F4F4FA"
             icon="/svg/dashboard-task-2.svg"
-            title="Completed Tasks"
-            text={'0건'}
-            value={100}
+            title="My Tasks"
+            text={`${ticketStats.user.myDoneCount} / ${ticketStats.user.myCount}`}
           />
           <DashboardCard
-            width="380px"
-            color="#F4F4FA"
             icon="/svg/dashboard-progress.svg"
-            title="Progress"
-            text={'0건'}
-            value={100}
+            title="Total Tasks"
+            text={`${ticketStats.totalDoneCount} / ${ticketStats.totalCount}`}
+          />
+          <DashboardUserCard
+            icon="/svg/dashboard-user.svg"
+            data={ticketStats}
           />
         </div>
         <div className="grid flex-1 gap-6 lg:grid-cols-3" style={{ flex: '2' }}>

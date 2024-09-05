@@ -103,7 +103,18 @@ const EpicContainer = ({
                             (_) => _.user.userId === item.worker?.userId,
                           ),
                     ),
-                }))}
+                }))
+                .filter((item) => {
+                  if (
+                    selectedStatus.length > 0 ||
+                    selectedTypeIds.length > 0 ||
+                    checkedList.length > 0
+                  ) {
+                    return item.ticket.length > 0
+                  }
+
+                  return true
+                })}
             />
           )}
         </div>

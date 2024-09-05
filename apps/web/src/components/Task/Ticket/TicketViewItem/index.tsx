@@ -19,7 +19,7 @@ interface PropsType {
 const TicketViewItem = ({ handleClick, data, isEpic, isAdmin }: PropsType) => {
   return (
     <tr
-      className="border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer w-full"
+      className="border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 w-full"
       onClick={() => handleClick(data.ticketId)}
       style={{
         width: '100%',

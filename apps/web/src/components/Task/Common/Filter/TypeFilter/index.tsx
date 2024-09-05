@@ -101,7 +101,7 @@ const TypeFilter = ({ selectedTypeIds, handleTypeSelectFilter }: PropsType) => {
                       key={item.ticketSettingId}
                     >
                       <input
-                        id="default-checkbox"
+                        id={`checkbox-${item.ticketSettingId}`}
                         type="checkbox"
                         checked={selectedTypeIds.includes(item.ticketSettingId)}
                         onChange={() =>
@@ -110,7 +110,7 @@ const TypeFilter = ({ selectedTypeIds, handleTypeSelectFilter }: PropsType) => {
                         className="w-[12px] h-[12px] text-blue-600 bg-gray-100 border-gray-300 rounded-[3px] focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                       />
                       <label
-                        htmlFor="default-checkbox"
+                        htmlFor={`checkbox-${item.ticketSettingId}`}
                         className="flex items-center text-sm font-medium text-gray-900 ms-2 dark:text-gray-300"
                       >
                         <div

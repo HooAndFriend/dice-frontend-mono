@@ -95,7 +95,7 @@ const UserSelectBox = ({ checkedList, setCheckedList }: PropsType) => {
               >
                 <div className="flex items-center mb-4">
                   <input
-                    id="default-checkbox"
+                    id={`checkbox-${item.workspaceUserId}`}
                     type="checkbox"
                     onChange={(e) => {
                       if (e.target.checked) {
@@ -114,7 +114,7 @@ const UserSelectBox = ({ checkedList, setCheckedList }: PropsType) => {
                     className="w-[12px] h-[12px] text-blue-600 bg-gray-100 border-gray-300 rounded-[3px] focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
-                    htmlFor="default-checkbox"
+                    htmlFor={`checkbox-${item.workspaceUserId}`}
                     className="flex items-center text-sm font-medium text-gray-900 ms-2 dark:text-gray-300"
                   >
                     <CustomImage

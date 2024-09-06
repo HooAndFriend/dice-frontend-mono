@@ -75,6 +75,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       profile: '',
     },
     ticketSetting: null,
+    subTickets: [],
   })
 
   const { role } = useRecoilValue(WorkspaceState)

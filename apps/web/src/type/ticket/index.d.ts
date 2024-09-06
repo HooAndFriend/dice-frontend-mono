@@ -70,6 +70,7 @@ export interface TicketInfo {
   ticketSetting: TicketSetting
   admin: TicketUser
   worker: TicketUser
+  subTickets: TicketInfo[]
 }
 
 export interface GetTicketSettingListResponse extends Response {

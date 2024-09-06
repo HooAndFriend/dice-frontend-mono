@@ -17,6 +17,7 @@ import TicketComment from '../TicketComment'
 import TicketHistory from '../TicketHistory'
 import ImagePreview from '../../../Image/ImagePreview'
 import { KeyboardEvent } from 'react'
+import SubTicketItem from '../SubTicketItem'
 
 interface PropsType {
   data: TicketInfo
@@ -64,6 +65,7 @@ const TicketCardView = ({
   handlePreviewOpen,
   handleEnter,
 }: PropsType) => {
+  console.log('Data: ', data)
   return (
     <div className="h-full overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
       <div className="flex items-center justify-between">
@@ -268,6 +270,14 @@ const TicketCardView = ({
             >
               X
             </h1>
+          </div>
+        ))}
+      </div>
+      <h1 className="my-4 text-[16px]">Linked Ticket</h1>
+      <div>
+        {data.subTickets.map((ticket) => (
+          <div className="mb-[10px]">
+            <SubTicketItem key={ticket.ticketId} ticket={ticket} />
           </div>
         ))}
       </div>

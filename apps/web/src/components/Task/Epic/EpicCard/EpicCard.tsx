@@ -33,7 +33,7 @@ const EpicCardView = ({
   handleDeleteEpic,
 }: PropsType) => {
   return (
-    <div className="h-[564px] overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
+    <div className="h-full overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <h1 className="text-[18px] font-bold">{data.code}</h1>

@@ -39,17 +39,15 @@ const DashboardSidebard = () => {
       ,
       ...MenuList,
     ].map((item) => {
-      if (item.link === path) {
+      if ('/' + item.link.split('/')[1] === path) {
         return {
           ...item,
           isClicked: true,
-          // link: `/dashboard/${worksapceUid}/${item.link}`,
           link: `/${uuid}/dashboard${item.link}`,
         }
       }
       return {
         ...item,
-        // link: `/dashboard/${worksapceUid}/${item.link}`,
         link: `/${uuid}/dashboard${item.link}`,
       }
     })

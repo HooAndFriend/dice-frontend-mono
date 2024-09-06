@@ -126,46 +126,40 @@ const TicketCardView = ({
         <TicketStatusButton status={data.status} ticketId={data.ticketId} />
       </div>
       <hr className="my-[20px]" />
-      <div className="flex items-center">
-        <div className="w-[110px]">
-          <h1 className="text-[16px]">Type</h1>
-        </div>
-        <div className="flex items-center">
-          <TicketSettingButton data={data} isText />
-        </div>
-      </div>
       <div className="flex items-center mt-[20px]">
-        <div className="w-[110px]">
-          <h1 className="text-[16px]">Admin</h1>
-        </div>
-        <div className="flex items-center">
-          <h3 className="text-[16px]">
+        <div className="flex items-center w-1/2">
+          <div className="w-[110px]">
+            <h1 className="text-[16px]">Worker</h1>
+          </div>
+          <div className="flex items-center">
             <TicketUserButton
-              profile={data.admin ? data.admin.profile : '/images/dice.png'}
+              profile={data.worker ? data.worker.profile : '/images/dice.png'}
               ticketId={data.ticketId}
-              email={data.admin ? data.admin.email : '-'}
-              nickname={data.admin ? data.admin.nickname : '-'}
-              userId={data.admin ? data.admin.userId : 0}
-              type="admin"
+              email={data.worker ? data.worker.email : '-'}
+              nickname={data.worker ? data.worker.nickname : '-'}
+              userId={data.worker ? data.worker.userId : 0}
+              type="user"
               isNickname={true}
             />
-          </h3>
+          </div>
         </div>
-      </div>
-      <div className="flex items-center mt-[20px]">
-        <div className="w-[110px]">
-          <h1 className="text-[16px]">Worker</h1>
-        </div>
-        <div className="flex items-center">
-          <TicketUserButton
-            profile={data.worker ? data.worker.profile : '/images/dice.png'}
-            ticketId={data.ticketId}
-            email={data.worker ? data.worker.email : '-'}
-            nickname={data.worker ? data.worker.nickname : '-'}
-            userId={data.worker ? data.worker.userId : 0}
-            type="user"
-            isNickname={true}
-          />
+        <div className="flex items-center w-1/2">
+          <div className="w-[110px]">
+            <h1 className="text-[16px]">Admin</h1>
+          </div>
+          <div className="flex items-center">
+            <h3 className="text-[16px]">
+              <TicketUserButton
+                profile={data.admin ? data.admin.profile : '/images/dice.png'}
+                ticketId={data.ticketId}
+                email={data.admin ? data.admin.email : '-'}
+                nickname={data.admin ? data.admin.nickname : '-'}
+                userId={data.admin ? data.admin.userId : 0}
+                type="admin"
+                isNickname={true}
+              />
+            </h3>
+          </div>
         </div>
       </div>
       <div className="flex items-center mt-[20px]">

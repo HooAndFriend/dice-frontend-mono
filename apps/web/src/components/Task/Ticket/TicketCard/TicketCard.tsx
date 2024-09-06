@@ -170,7 +170,42 @@ const TicketCardView = ({
         />
       </div>
       <hr className="my-[20px]" />
-      <h1 className="mb-4 text-[16px]">Story Point</h1>
+      <h1 className="my-4 text-[16px]">Content</h1>
+      {mode.content === 'view' ? (
+        <div
+          dangerouslySetInnerHTML={{ __html: data.content }}
+          className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto text-[16px] cursor-pointer"
+          onDoubleClick={() => {
+            if (role === 'VIEWER') return
+            setMode({ ...mode, content: 'edit' })
+          }}
+        />
+      ) : (
+        <div>
+          <QuillEditor
+            value={data.content}
+            onChange={(value: string) =>
+              setData({ ...data, content: value } as TicketInfo)
+            }
+            name="asIs"
+          />
+          <div className="flex items-center mt-2">
+            <button
+              className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
+              onClick={() => handleUpdateTicket('content')}
+            >
+              save
+            </button>
+            <button
+              className="w-[60px] h-[30px] flex items-center justify-center rounded-[8px]"
+              onClickCapture={() => setMode({ ...mode, content: 'view' })}
+            >
+              cancel
+            </button>
+          </div>
+        </div>
+      )}
+      <h1 className="my-4 text-[16px]">Story Point</h1>
       {mode.storypoint === 'view' ? (
         <div
           className="h-[40px] rounded-[10px] border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4 cursor-pointer text-[16px]"
@@ -208,41 +243,7 @@ const TicketCardView = ({
           </div>
         </div>
       )}
-      <h1 className="my-4 text-[16px]">Content</h1>
-      {mode.content === 'view' ? (
-        <div
-          dangerouslySetInnerHTML={{ __html: data.content }}
-          className="p-4 border border-[#EBEBEC] h-[80px] w-full rounded-[10px] overflow-y-auto text-[16px] cursor-pointer"
-          onDoubleClick={() => {
-            if (role === 'VIEWER') return
-            setMode({ ...mode, content: 'edit' })
-          }}
-        />
-      ) : (
-        <div>
-          <QuillEditor
-            value={data.content}
-            onChange={(value: string) =>
-              setData({ ...data, content: value } as TicketInfo)
-            }
-            name="asIs"
-          />
-          <div className="flex items-center mt-2">
-            <button
-              className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
-              onClick={() => handleUpdateTicket('content')}
-            >
-              save
-            </button>
-            <button
-              className="w-[60px] h-[30px] flex items-center justify-center rounded-[8px]"
-              onClickCapture={() => setMode({ ...mode, content: 'view' })}
-            >
-              cancel
-            </button>
-          </div>
-        </div>
-      )}
+
       <h1 className="my-4 text-[16px]">File</h1>
       <div className="flex items-center">
         {data.ticketFile.length < 4 && (

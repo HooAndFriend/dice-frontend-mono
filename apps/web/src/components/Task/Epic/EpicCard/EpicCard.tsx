@@ -125,10 +125,12 @@ const EpicCardView = ({
           </div>
         </div>
       )}
-      <h1 className="my-4 text-[16px]">Ticket</h1>
-      <div className="p-4 border border-[#EBEBEC] w-full rounded-[10px] text-[16px]">
-        {data.ticket.map((item) => (
-          <div>{/* <SubTicketItem key={item.id} ticket={item}/> */}</div>
+      <h1 className="my-4 text-[16px]">Tickets</h1>
+      <div className="w-full ">
+        {data.ticket.map((ticket) => (
+          <div className="mb-[10px]">
+            <SubTicketItem key={ticket.ticketId} ticket={ticket} />
+          </div>
         ))}
       </div>
     </div>

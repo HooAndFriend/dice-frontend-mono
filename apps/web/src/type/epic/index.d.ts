@@ -49,19 +49,12 @@ export interface EpicDetail {
   name: string
   code: string
   content: string
-  ticket: EpicChildTicket[]
+  ticket: TicketInfo[]
   admin: {
     id: number
     nickname: string
     profile: string
   }
-}
-
-export interface EpicChildTicket {
-  id: number
-  name: string
-  status: EpicStatus
-  code: string
 }
 
 export interface SelectContent {

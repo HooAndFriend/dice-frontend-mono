@@ -30,8 +30,9 @@ const SubTicketItem = ({ ticket }: PropsType) => {
       <div className="flex items-center">
         <TicketSettingButton data={ticket} isText={false} />
         <p
-          className="pl-[6px] text-[14px]"
+          className="pl-[6px] text-[14px] overflow-hidden whitespace-nowrap text-ellipsis"
           style={{
+            maxWidth: '180px',
             textDecorationLine:
               ticket.status === 'COMPLETE' ? 'line-through' : 'none',
           }}
@@ -39,7 +40,6 @@ const SubTicketItem = ({ ticket }: PropsType) => {
           {`${ticket.code} - ${ticket.name}`}
         </p>
       </div>
-
       <div className="flex items-center justify-end">
         <TicketUserButton
           profile={ticket.worker ? ticket.worker.profile : '/images/dice.png'}

@@ -65,7 +65,6 @@ const TicketCardView = ({
   handlePreviewOpen,
   handleEnter,
 }: PropsType) => {
-  console.log('Data: ', data)
   return (
     <div className="h-full overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
       <div className="flex items-center justify-between">
@@ -273,14 +272,29 @@ const TicketCardView = ({
           </div>
         ))}
       </div>
-      <h1 className="my-4 text-[16px]">Linked Ticket</h1>
+      <h1 className="my-4 text-[16px]">Linked Parent Ticket</h1>
       <div>
-        {data.subTickets.map((ticket) => (
+        {data.parentLink.map((ticket) => (
           <div className="mb-[10px]">
-            <SubTicketItem key={ticket.ticketId} ticket={ticket} />
+            <SubTicketItem
+              key={ticket.ticketLinkId}
+              ticket={ticket.parentTicket}
+            />
           </div>
         ))}
       </div>
+      <h1 className="my-4 text-[16px]">Linked Child Ticket</h1>
+      <div>
+        {data.childLink.map((ticket) => (
+          <div className="mb-[10px]">
+            <SubTicketItem
+              key={ticket.ticketLinkId}
+              ticket={ticket.childTicket}
+            />
+          </div>
+        ))}
+      </div>
+
       <div className="mt-[12px]">
         <p className="text-[12px] text-gray-400">
           created : {dayjs(data.createdDate).format('YYYY.MM.DD HH:mm:ss')}

@@ -70,7 +70,8 @@ export interface TicketInfo {
   ticketSetting: TicketSetting
   admin: TicketUser
   worker: TicketUser
-  subTickets: TicketInfo[]
+  childLink: TicketLink[]
+  parentLink: TicketLink[]
 }
 
 export interface GetTicketSettingListResponse extends Response {
@@ -178,4 +179,12 @@ export interface TicketSetting {
 export interface TicketFile {
   ticketFileId: number
   url: string
+}
+
+export interface TicketLink {
+  ticketLinkId: number
+  parentTicketId: number
+  childTicketId: number
+  parentTicket: TicketInfo
+  childTicket: TicketInfo
 }

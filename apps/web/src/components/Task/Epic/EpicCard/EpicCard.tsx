@@ -7,6 +7,7 @@ import { EpicDetail, EpicEditMode } from '@/src/type/epic'
 
 // ** Components Imports
 import QuillEditor from '../../../QuillEditor'
+import SubTicketItem from '../../Ticket/SubTicketItem'
 
 interface PropsType {
   data: EpicDetail
@@ -127,13 +128,7 @@ const EpicCardView = ({
       <h1 className="my-4 text-[16px]">Ticket</h1>
       <div className="p-4 border border-[#EBEBEC] w-full rounded-[10px] text-[16px]">
         {data.ticket.map((item) => (
-          <div className="flex items-center justify-between mb-2" key={item.id}>
-            <div className="flex items-center">
-              <p className="mr-2 font-bold">{item.code}</p>
-              <p>{item.name}</p>
-            </div>
-            <p>{item.status}</p>
-          </div>
+          <div>{/* <SubTicketItem key={item.id} ticket={item}/> */}</div>
         ))}
       </div>
     </div>

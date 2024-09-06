@@ -78,7 +78,7 @@ const StatusPopover = ({
       )}
       {open && (
         <div
-          className="absolute w-[184px] h-[230px] top-[50px] right-0 bg-white shadow-lg rounded-[8px] overflow-y-auto z-30"
+          className="absolute w-[184px] top-[50px] right-0 bg-white shadow-lg rounded-[8px] z-30"
           ref={dropdownRef}
         >
           {StatusList.map((item) => (

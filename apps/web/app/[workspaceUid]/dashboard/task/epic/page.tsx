@@ -66,7 +66,7 @@ const EpicConatiner = () => {
         type: 'TICKET',
       })
     }
-  }, [])
+  }, [searchParams])
 
   if (error || !enabled) return
 

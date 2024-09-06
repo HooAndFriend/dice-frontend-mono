@@ -1,15 +1,32 @@
+// ** Next Imports
+import { useRouter } from 'next/navigation'
+
+// ** Type Imports
 import { TicketInfo } from '@/src/type/ticket'
+
+// ** Component Imports
 import TicketSettingButton from '../TicketSettingButton'
 import TicketStatusButton from '../TicketStatusButton'
 import TicketUserButton from '../TicketUserButton'
+
+// ** Recoil Imports
+import { useRecoilValue } from 'recoil'
+import { WorkspaceState } from '@/src/app'
 
 interface PropsType {
   ticket: TicketInfo
 }
 
 const SubTicketItem = ({ ticket }: PropsType) => {
+  const router = useRouter()
+  const { uuid } = useRecoilValue(WorkspaceState)
   return (
-    <div className="w-full h-[50px] rounded-[5px] shadow grid grid-cols-2 items-center px-[12px]">
+    <div
+      className="w-full h-[50px] rounded-[5px] shadow grid grid-cols-2 items-center px-[12px] cursor-pointer"
+      onClick={() =>
+        router.push(`/${uuid}/dashboard/task/epic?ticketId=${ticket.ticketId}`)
+      }
+    >
       <div className="flex items-center">
         <TicketSettingButton data={ticket} isText={false} />
         <p

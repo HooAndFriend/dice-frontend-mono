@@ -272,7 +272,9 @@ const TicketCardView = ({
           </div>
         ))}
       </div>
-      <h1 className="my-4 text-[16px]">Linked Parent Ticket</h1>
+      {data.parentLink.length > 0 && (
+        <h1 className="my-4 text-[16px]">Linked Parent Ticket</h1>
+      )}
       <div>
         {data.parentLink.map((ticket) => (
           <div className="mb-[10px]">
@@ -283,7 +285,9 @@ const TicketCardView = ({
           </div>
         ))}
       </div>
-      <h1 className="my-4 text-[16px]">Linked Child Ticket</h1>
+      {data.childLink.length > 0 && (
+        <h1 className="my-4 text-[16px]">Linked Child Ticket</h1>
+      )}
       <div>
         {data.childLink.map((ticket) => (
           <div className="mb-[10px]">

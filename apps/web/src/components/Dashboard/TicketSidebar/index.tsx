@@ -22,16 +22,9 @@ const TicketSidebar = () => {
     () =>
       [
         {
-          id: 1,
-          name: 'Gantt',
-          link: `/${uuid}/dashboard/task`,
-          icon: EpicIcon,
-          isClicked: false,
-        },
-        {
-          id: 2,
-          name: 'Sprint',
-          link: `/${uuid}/dashboard/task/sprint`,
+          id: 4,
+          name: 'Epic',
+          link: `/${uuid}/dashboard/task/epic`,
           icon: TicketIcon,
           isClicked: false,
         },
@@ -43,9 +36,16 @@ const TicketSidebar = () => {
           isClicked: false,
         },
         {
-          id: 4,
-          name: 'Epic',
-          link: `/${uuid}/dashboard/task/epic`,
+          id: 1,
+          name: 'Gantt',
+          link: `/${uuid}/dashboard/task`,
+          icon: EpicIcon,
+          isClicked: false,
+        },
+        {
+          id: 2,
+          name: 'Sprint',
+          link: `/${uuid}/dashboard/task/sprint`,
           icon: TicketIcon,
           isClicked: false,
         },

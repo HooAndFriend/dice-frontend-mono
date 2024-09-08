@@ -85,7 +85,7 @@ const EpicItem = ({ item, handleClick }: PropsType) => {
         <td
           className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
           style={{
-            width: '70%',
+            width: '60%',
           }}
         >
           <div className="flex items-center justify-center w-full">
@@ -97,16 +97,23 @@ const EpicItem = ({ item, handleClick }: PropsType) => {
                 }}
               />
             </div>
-            <div className="flex justify-center w-[10%]">
-              <h4 className="text-[16px] font-san-medium">
-                {item.doneTicketCount === 0 || item.ticket.length === 0
-                  ? 0
-                  : ((item.doneTicketCount / item.ticket.length) * 100).toFixed(
-                      2,
-                    )}
-                %
-              </h4>
-            </div>
+          </div>
+        </td>
+        <td
+          className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+          style={{
+            width: '10%',
+          }}
+        >
+          <div className="flex justify-center w-[10%]">
+            <h4 className="text-[16px] font-san-medium">
+              {item.doneTicketCount === 0 || item.ticket.length === 0
+                ? 0
+                : ((item.doneTicketCount / item.ticket.length) * 100).toFixed(
+                    2,
+                  )}
+              %
+            </h4>
           </div>
         </td>
       </tr>

@@ -10,6 +10,7 @@ import {
 } from '@/src/components/ui/card'
 import { TicketInfo } from '@/src/type/ticket'
 import TicketViewItem from '../../Task/Ticket/TicketViewItem'
+import Image from 'next/image'
 
 interface PropsType {
   data: TicketInfo[]
@@ -79,6 +80,16 @@ const DashboardTask = ({ data, isAdmin, handleClick }: PropsType) => {
             ))}
           </TableBody>
         </Table>
+        {data.length === 0 && (
+          <div className="flex items-center justify-center h-full mt-[40px] text-muted-foreground">
+            <Image
+              src="/images/no_task.jpeg"
+              width={200}
+              height={150}
+              alt="No Data UI"
+            />
+          </div>
+        )}
       </CardContent>
     </Card>
   )

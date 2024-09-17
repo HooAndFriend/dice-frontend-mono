@@ -5,10 +5,16 @@ import TicketTypeSelectFilter from '@/src/components/Task/Common/Filter/TypeFilt
 import KanbanCard from '@/src/components/Task/Kanban/KanbanCard'
 import UserSelectBox from '@/src/components/UserSelectBox'
 import { statusList } from '@/src/constants/status'
+import { Put } from '@/src/repository'
+import { CommonResponse } from '@/src/type/common'
+import { EpicStatus } from '@/src/type/epic'
 
 // ** Type Imports
 import { Ticket } from '@/src/type/ticket'
 import { WorkspaceUser } from '@/src/type/workspace'
+import { useRef } from 'react'
+import { mutate } from 'swr'
+import useSWRMutation from 'swr/mutation'
 
 interface PropsType {
   data: Ticket[]
@@ -19,6 +25,7 @@ interface PropsType {
   handleTypeSelectFilter: (typeId: number) => void
   setCheckedList: (list: WorkspaceUser[]) => void
   handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void
+  refetch?: () => void
 }
 
 const KanbanContainer = ({
@@ -29,7 +36,59 @@ const KanbanContainer = ({
   selectedTypeIds,
   setCheckedList,
   checkedList,
+  refetch,
 }: PropsType) => {
+  const dragItem = useRef(0)
+  const dragOverItem = useRef()
+
+  const dragStart = (e, id) => {
+    dragItem.current = id
+    console.log(dragItem)
+  }
+
+  const dragEnter = (e, status) => {
+    dragOverItem.current = status
+    console.log(dragOverItem.current)
+  }
+
+  const drop = (e) => {
+    console.log(
+      'dragItem :',
+      dragItem.current,
+      'dragOverItem : ',
+      dragOverItem.current,
+    )
+    updateTicketStatus.trigger(dragOverItem.current)
+  }
+
+  const updateTicketStatus = useSWRMutation(
+    '/v1/ticket/status',
+    async (url: string, { arg }: { arg: EpicStatus }) =>
+      await Put<CommonResponse<void>>(url, {
+        status: arg,
+        ticketId: dragItem.current,
+      }),
+    {
+      onSuccess: () => {
+        mutate('/v1/ticket')
+        mutate('/v1/epic')
+        mutate(`/v1/ticket/detail/${dragItem.current}`)
+
+        refetch && refetch()
+      },
+      onError: (error) => {
+        console.log(error.response.data.message)
+        handleModalOpen({
+          title: 'Error',
+          message: error.response.data.message,
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
+      },
+    },
+  )
+
   return (
     <div className="w-full h-full">
       <div className="flex items-center justify-between pt-8 h-[8%]">
@@ -53,7 +112,13 @@ const KanbanContainer = ({
       <div className="h-[92%] py-[24px] w-full overflow-x-auto">
         <div className="flex space-x-2 w-max">
           {statusList.map((item) => (
-            <div className="w-[300px] flex-shrink-0" key={item}>
+            <div
+              onDragEnter={(e) => dragEnter(e, item)}
+              onDragEnd={drop}
+              onDragOver={(e) => e.preventDefault()}
+              className="w-[300px] flex-shrink-0"
+              key={item}
+            >
               <div className="flex items-center justify-between px-[12px]">
                 <h1>{item}</h1>
                 <h1 className="cursor-pointer ">+</h1>
@@ -62,7 +127,11 @@ const KanbanContainer = ({
                 {data
                   .filter((_) => _.status === item)
                   .map((ticket) => (
-                    <KanbanCard data={ticket} key={ticket.ticketId} />
+                    <KanbanCard
+                      dragStart={dragStart}
+                      data={ticket}
+                      key={ticket.ticketId}
+                    />
                   ))}
               </div>
             </div>
@@ -74,3 +143,12 @@ const KanbanContainer = ({
 }
 
 export default KanbanContainer
+function handleModalOpen(arg0: {
+  title: string
+  message: any
+  logLevel: string
+  buttonText: string
+  type: string
+}) {
+  throw new Error('Function not implemented.')
+}

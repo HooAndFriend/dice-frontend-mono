@@ -1,6 +1,7 @@
 'use client'
 // ** Component Imports
 import CustomSearch from '@/src/components/Input/CustomSearch'
+import AddTicketModal from '@/src/components/Modal/AddTicketModal'
 import TicketTypeSelectFilter from '@/src/components/Task/Common/Filter/TypeFilter'
 import KanbanCard from '@/src/components/Task/Kanban/KanbanCard'
 import UserSelectBox from '@/src/components/UserSelectBox'
@@ -12,7 +13,7 @@ import { EpicStatus } from '@/src/type/epic'
 // ** Type Imports
 import { Ticket } from '@/src/type/ticket'
 import { WorkspaceUser } from '@/src/type/workspace'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { mutate } from 'swr'
 import useSWRMutation from 'swr/mutation'
 
@@ -26,6 +27,7 @@ interface PropsType {
   setCheckedList: (list: WorkspaceUser[]) => void
   handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void
   refetch?: () => void
+  handleModal: () => void
 }
 
 const KanbanContainer = ({
@@ -37,9 +39,11 @@ const KanbanContainer = ({
   setCheckedList,
   checkedList,
   refetch,
+  handleModal,
 }: PropsType) => {
   const dragItem = useRef(0)
   const dragOverItem = useRef()
+  const [open, setOpen] = useState(false)
 
   const dragStart = (e, id) => {
     dragItem.current = id
@@ -121,7 +125,14 @@ const KanbanContainer = ({
             >
               <div className="flex items-center justify-between px-[12px]">
                 <h1>{item}</h1>
-                <h1 className="cursor-pointer ">+</h1>
+                <h1
+                  className="cursor-pointer"
+                  onClick={() => {
+                    setOpen(true)
+                  }}
+                >
+                  +
+                </h1>
               </div>
               <div className="p-2">
                 {data
@@ -138,6 +149,9 @@ const KanbanContainer = ({
           ))}
         </div>
       </div>
+      {open && (
+        <AddTicketModal open={open} setOpen={setOpen} refetch={refetch} />
+      )}
     </div>
   )
 }

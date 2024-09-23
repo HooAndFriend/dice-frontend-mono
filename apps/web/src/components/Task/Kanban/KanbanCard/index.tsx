@@ -6,11 +6,16 @@ import CustomImage from '@/src/components/Image/CustomImage'
 
 interface PropsType {
   data: Ticket
+  dragStart: (e, id) => void
 }
 
-const KanbanCard = ({ data }: PropsType) => {
+const KanbanCard = ({ data, dragStart }: PropsType) => {
   return (
-    <div className="mt-[12px] w-full rounded-[8px] border px-[16px] py-[12px] border-[#E1E3E8] bg-white flex flex-col justify-between">
+    <div
+      draggable
+      onDragStart={(e) => dragStart(e, data.ticketId)}
+      className="mt-[12px] w-full rounded-[8px] border px-[16px] py-[12px] border-[#E1E3E8] bg-white flex flex-col justify-between"
+    >
       <h1 className="font-bold text-[16px]">{data.name}</h1>
       <p className="text-[12px] text-gray-400 my-[8px]">
         Details about this item can go here but are truncated after a certain

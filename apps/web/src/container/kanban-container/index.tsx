@@ -6,6 +6,7 @@ import TicketTypeSelectFilter from '@/src/components/Task/Common/Filter/TypeFilt
 import KanbanCard from '@/src/components/Task/Kanban/KanbanCard'
 import UserSelectBox from '@/src/components/UserSelectBox'
 import { statusList } from '@/src/constants/status'
+import { useDialog } from '@/src/context/DialogContext'
 import { Put } from '@/src/repository'
 import { CommonResponse } from '@/src/type/common'
 import { EpicStatus } from '@/src/type/epic'
@@ -45,23 +46,17 @@ const KanbanContainer = ({
   const dragOverItem = useRef()
   const [open, setOpen] = useState(false)
 
+  const { handleOpen: handleModalOpen } = useDialog()
+
   const dragStart = (e, id) => {
     dragItem.current = id
-    console.log(dragItem)
   }
 
   const dragEnter = (e, status) => {
     dragOverItem.current = status
-    console.log(dragOverItem.current)
   }
 
   const drop = (e) => {
-    console.log(
-      'dragItem :',
-      dragItem.current,
-      'dragOverItem : ',
-      dragOverItem.current,
-    )
     updateTicketStatus.trigger(dragOverItem.current)
   }
 
@@ -157,12 +152,3 @@ const KanbanContainer = ({
 }
 
 export default KanbanContainer
-function handleModalOpen(arg0: {
-  title: string
-  message: any
-  logLevel: string
-  buttonText: string
-  type: string
-}) {
-  throw new Error('Function not implemented.')
-}

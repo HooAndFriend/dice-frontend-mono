@@ -10,26 +10,28 @@ import { Dialog, Transition } from '@headlessui/react'
 
 // ** Utils Imports
 import useInput from '@/src/hooks/useInput'
+import { getTicketSettingImage } from '@/src/utils/ticket-setting'
 
 // ** Type Imports
-import { SaveQaParam } from '@/src/type/qa'
-
-// ** Service Imports
-import useSWRMutation from 'swr/mutation'
-import { Get, Post } from '@/src/repository'
-
-// ** Context Imports
-import { useDialog } from '@/src/context/DialogContext'
-
-// ** Recoil Imports
 import { GetEpicListResponse } from '@/src/type/epic'
-import useSWR from 'swr'
-import CustomImage from '../../Image/CustomImage'
 import {
   GetTicketSettingListResponse,
   TicketSettingType,
 } from '@/src/type/ticket'
-import { getTicketSettingImage } from '@/src/utils/ticket-setting'
+
+// ** Swr Imports
+import useSWRMutation from 'swr/mutation'
+import { Get, Post } from '@/src/repository'
+import useSWR from 'swr'
+
+// ** Context Imports
+import { useDialog } from '@/src/context/DialogContext'
+
+// ** Component Imports
+import CustomImage from '../../Image/CustomImage'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ticketSchema } from '@/src/schema/ticket'
 
 interface PropsType {
   open: boolean
@@ -39,22 +41,30 @@ interface PropsType {
 
 const AddTicketModal = ({ open, setOpen, refetch }: PropsType) => {
   const [button, setButton] = useState<boolean>(false)
-  const [epicId, setEpicId] = useState(1)
-  const [settingId, setSettingId] = useState<number>()
+  const [epicId, setEpicId] = useState<number>(0)
+  const [settingId, setSettingId] = useState<number>(0)
   const [settingType, setSettingType] = useState<TicketSettingType>('GREEN')
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState<boolean>(false)
 
-  const { data, handleInput, handleInit } = useInput({
-    name: '',
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(ticketSchema),
   })
 
   const addTicket = useSWRMutation(
     '/v1/ticket',
-    async (url: string) =>
+    async (
+      url: string,
+      { arg }: { arg: { name: string; settingId: number; epicId: number } },
+    ) =>
       await Post<number>(url, {
-        name: data.name,
-        settingId: settingId,
-        epicId: epicId,
+        name: arg.name,
+        settingId: arg.settingId,
+        epicId: arg.epicId,
       }),
     {
       onSuccess: ({ data }) => {
@@ -73,6 +83,14 @@ const AddTicketModal = ({ open, setOpen, refetch }: PropsType) => {
       },
     },
   )
+
+  const onSubmit = (data) => {
+    addTicket.trigger({
+      name: data.name,
+      settingId: settingId,
+      epicId: epicId,
+    })
+  }
 
   const {
     data: epic,
@@ -123,7 +141,10 @@ const AddTicketModal = ({ open, setOpen, refetch }: PropsType) => {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative overflow-hidden text-left transition-all transform bg-white rounded-[8px] shadow-xl">
-                <div className="p-5 w-[500px] h-[200px]bg-[#FAFAFB] ">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="p-5 w-[500px] h-[200px]bg-[#FAFAFB] "
+                >
                   <div className="flex justify-between">
                     <h1 className="font-bold text-[24px]">Add Ticket</h1>
                     <h1
@@ -137,9 +158,9 @@ const AddTicketModal = ({ open, setOpen, refetch }: PropsType) => {
                     <h1 className="w-1/5 mr-5">Ticket Name</h1>
                     <input
                       type="text"
-                      value={data.name}
+                      {...register('name', { required: true })}
                       name="name"
-                      onChange={handleInput}
+                      id="name"
                       onKeyDown={handleEnter}
                       className="w-[400px] h-[40px] border-solid border-1 border-[#EFEFEF] rounded-[8px] pl-4 focus:outline-none"
                     />
@@ -151,7 +172,6 @@ const AddTicketModal = ({ open, setOpen, refetch }: PropsType) => {
                         name="epicId"
                         onChange={(e) => {
                           setEpicId(Number(e.target.value))
-                          console.log(e.target.value)
                         }}
                         className="w-[165px] h-[50px] border border-[#EBEBEC] rounded-[10px] pl-4"
                       >
@@ -216,15 +236,13 @@ const AddTicketModal = ({ open, setOpen, refetch }: PropsType) => {
 
                   <div className="flex justify-end mt-5">
                     <button
+                      type="submit"
                       className="bg-[#623AD6] w-[72px] h-[32px] rounded-[12px] text-white"
-                      onClick={() => {
-                        addTicket.trigger()
-                      }}
                     >
                       Save
                     </button>
                   </div>
-                </div>
+                </form>
               </Dialog.Panel>
             </Transition.Child>
           </div>

@@ -12,14 +12,19 @@ import TicketUserButton from '../TicketUserButton'
 // ** Recoil Imports
 import { useRecoilValue } from 'recoil'
 import { WorkspaceState } from '@/src/app'
+import { useState } from 'react'
 
 interface PropsType {
   ticket: TicketInfo
+  isChildren: boolean
 }
 
-const SubTicketItem = ({ ticket }: PropsType) => {
+const SubTicketItem = ({ ticket, isChildren }: PropsType) => {
+  const [isHovered, setIsHovered] = useState(false)
+
   const router = useRouter()
   const { uuid } = useRecoilValue(WorkspaceState)
+
   return (
     <div
       className="w-full h-[50px] rounded-[5px] shadow grid grid-cols-2 items-center px-[12px] cursor-pointer"
@@ -51,6 +56,17 @@ const SubTicketItem = ({ ticket }: PropsType) => {
           isNickname={false}
         />
         <TicketStatusButton ticketId={ticket.ticketId} status={ticket.status} />
+        <div
+          className="w-[45px] h-[45px] flex justify-center items-center cursor-pointer"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {isChildren && isHovered && (
+            <div className="w-[36px] h-[36px] bg-blue-100 rounded-[12px] flex justify-center items-center">
+              <h1 className="text-[18px]">X</h1>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

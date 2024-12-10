@@ -281,6 +281,7 @@ const TicketCardView = ({
             <SubTicketItem
               key={ticket.ticketLinkId}
               ticket={ticket.parentTicket}
+              isChildren={false}
             />
           </div>
         ))}
@@ -294,6 +295,7 @@ const TicketCardView = ({
             <SubTicketItem
               key={ticket.ticketLinkId}
               ticket={ticket.childTicket}
+              isChildren={true}
             />
           </div>
         ))}

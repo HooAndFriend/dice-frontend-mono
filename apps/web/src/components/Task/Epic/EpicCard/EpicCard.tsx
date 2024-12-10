@@ -129,7 +129,11 @@ const EpicCardView = ({
       <div className="w-full ">
         {data.ticket.map((ticket) => (
           <div className="mb-[10px]">
-            <SubTicketItem key={ticket.ticketId} ticket={ticket} />
+            <SubTicketItem
+              key={ticket.ticketId}
+              ticket={ticket}
+              isChildren={false}
+            />
           </div>
         ))}
       </div>

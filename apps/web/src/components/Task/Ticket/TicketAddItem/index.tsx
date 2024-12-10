@@ -75,6 +75,17 @@ const TicketAddItem = ({ epicId, isEpic }: PropsType) => {
     if (e.key === 'Enter') {
       if (button) return
       setButton(true)
+      if (name === '') {
+        handleModalOpen({
+          title: 'Error',
+          message: 'Enter Ticket Name',
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
+
+        return
+      }
       saveTicket.trigger()
     }
 
@@ -113,7 +124,23 @@ const TicketAddItem = ({ epicId, isEpic }: PropsType) => {
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={handleEnter}
               />
-              <div className="ml-4" onClick={saveTicket.trigger}>
+              <div
+                className="ml-4"
+                onClick={() => {
+                  if (name === '') {
+                    handleModalOpen({
+                      title: 'Error',
+                      message: 'Enter Ticket Name',
+                      logLevel: 'warn',
+                      buttonText: 'Close',
+                      type: 'alert',
+                    })
+
+                    return
+                  }
+                  saveTicket.trigger()
+                }}
+              >
                 <CustomImage
                   src={'/svg/add-black-box.svg'}
                   alt="black-box"

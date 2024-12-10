@@ -57,6 +57,18 @@ const EpicAddItem = () => {
     if (e.key === 'Enter') {
       if (button) return
       setButton(true)
+
+      if (name === '') {
+        handleModalOpen({
+          title: 'Error',
+          message: 'Enter Epic Name',
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
+
+        return
+      }
       saveEpic.trigger()
     }
 
@@ -96,7 +108,24 @@ const EpicAddItem = () => {
             onChange={(e) => setName(e.target.value)}
             onKeyDown={handleEnter}
           />
-          <div className="ml-4 cursor-pointer" onClick={saveEpic.trigger}>
+          <div
+            className="ml-4 cursor-pointer"
+            onClick={() => {
+              if (name === '') {
+                handleModalOpen({
+                  title: 'Error',
+                  message: 'Enter Epic Name',
+                  logLevel: 'warn',
+                  buttonText: 'Close',
+                  type: 'alert',
+                })
+
+                return
+              }
+
+              saveEpic.trigger()
+            }}
+          >
             <CustomImage
               src={'/svg/add-black-box.svg'}
               alt="black-box"

@@ -120,7 +120,7 @@ const EpicItem = ({ item, handleClick }: PropsType) => {
       {open && (
         <>
           <tr>
-            <td colSpan={3} style={{ padding: 0 }}>
+            <td colSpan={4} style={{ padding: 0, width: '100%' }}>
               <table className="w-full">
                 <tbody>
                   {item.ticket.map((ticket) => (

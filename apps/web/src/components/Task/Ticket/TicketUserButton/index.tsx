@@ -93,7 +93,13 @@ const TicketUserButton = ({
       name={name}
       email={email}
       profile={profile}
-      nickname={nickname}
+      nickname={
+        nickname === '-'
+          ? type === 'admin'
+            ? 'No Admin'
+            : 'No Worker'
+          : nickname
+      }
       isLoading={isLoading}
       data={isLoading ? [] : data.data.data}
       isNickname={isNickname}

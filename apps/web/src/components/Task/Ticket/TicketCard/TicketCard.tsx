@@ -294,8 +294,10 @@ const TicketCardView = ({
           <div className="mb-[10px]">
             <SubTicketItem
               key={ticket.ticketLinkId}
+              ticketLinkId={ticket.ticketLinkId}
               ticket={ticket.childTicket}
               isChildren={true}
+              ticketRefetch={ticketRefetch}
             />
           </div>
         ))}

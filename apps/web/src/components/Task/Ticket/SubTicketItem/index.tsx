@@ -1,8 +1,12 @@
 // ** Next Imports
 import { useRouter } from 'next/navigation'
 
+// ** React Imports
+import { useState } from 'react'
+
 // ** Type Imports
 import { TicketInfo } from '@/src/type/ticket'
+import { CommonResponse } from '@/src/type/common'
 
 // ** Component Imports
 import TicketSettingButton from '../TicketSettingButton'
@@ -12,18 +16,51 @@ import TicketUserButton from '../TicketUserButton'
 // ** Recoil Imports
 import { useRecoilValue } from 'recoil'
 import { WorkspaceState } from '@/src/app'
-import { useState } from 'react'
+
+// ** Service Imports
+import useSWRMutation from 'swr/mutation'
+import { Delete } from '@/src/repository'
+
+// ** Context Imports
+import { useDialog } from '@/src/context/DialogContext'
 
 interface PropsType {
   ticket: TicketInfo
   isChildren: boolean
+  ticketLinkId?: number
+  ticketRefetch?: () => void
 }
 
-const SubTicketItem = ({ ticket, isChildren }: PropsType) => {
+const SubTicketItem = ({
+  ticket,
+  isChildren,
+  ticketRefetch,
+  ticketLinkId,
+}: PropsType) => {
   const [isHovered, setIsHovered] = useState(false)
 
   const router = useRouter()
   const { uuid } = useRecoilValue(WorkspaceState)
+  const { handleOpen } = useDialog()
+
+  const deleteTicketLink = useSWRMutation(
+    `/v1/ticket/link/${ticketLinkId}`,
+    async (url: string) => Delete<CommonResponse<void>>(url),
+    {
+      onSuccess: () => {
+        ticketRefetch()
+      },
+      onError: (error) => {
+        handleOpen({
+          title: 'Error',
+          message: error.response.data.message,
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
+      },
+    },
+  )
 
   return (
     <div
@@ -62,7 +99,10 @@ const SubTicketItem = ({ ticket, isChildren }: PropsType) => {
           onMouseLeave={() => setIsHovered(false)}
         >
           {isChildren && isHovered && (
-            <div className="w-[36px] h-[36px] bg-blue-100 rounded-[12px] flex justify-center items-center">
+            <div
+              className="w-[36px] h-[36px] bg-blue-100 rounded-[12px] flex justify-center items-center"
+              onClick={() => deleteTicketLink.trigger()}
+            >
               <h1 className="text-[18px]">X</h1>
             </div>
           )}

@@ -26,6 +26,7 @@ interface PropsType {
   nickname?: string
   isNickname?: boolean
   type: 'user' | 'admin'
+  disabled?: boolean
 }
 
 const TicketUserButton = ({
@@ -35,6 +36,7 @@ const TicketUserButton = ({
   isNickname,
   type,
   nickname,
+  disabled,
 }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
   const [name, setName] = useState<string>('')
@@ -46,6 +48,7 @@ const TicketUserButton = ({
   }
 
   const handleOpen = () => {
+    if (disabled) return
     setOpen((c) => !c)
   }
 

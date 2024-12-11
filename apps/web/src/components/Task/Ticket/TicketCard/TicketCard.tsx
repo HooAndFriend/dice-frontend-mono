@@ -18,6 +18,7 @@ import TicketHistory from '../TicketHistory'
 import ImagePreview from '../../../Image/ImagePreview'
 import { KeyboardEvent } from 'react'
 import SubTicketItem from '../SubTicketItem'
+import TicketLink from '../TicketLink'
 
 interface PropsType {
   data: TicketInfo
@@ -26,9 +27,11 @@ interface PropsType {
   subType: 'comment' | 'history'
   selectImage: string
   previewOpen: boolean
+  linkOpen: boolean
   cancelButtonRef: any
   setSubType: (type: 'comment' | 'history') => void
   setPreviewOpen: (open: boolean) => void
+  setLinkOpen: (open: boolean) => void
   setMode: (mode: TicketEditMode) => void
   setData: (data: TicketInfo) => void
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -52,6 +55,7 @@ const TicketCardView = ({
   selectImage,
   previewOpen,
   cancelButtonRef,
+  linkOpen,
   setSubType,
   onChange,
   setData,
@@ -64,6 +68,7 @@ const TicketCardView = ({
   handleUpdateTicket,
   handlePreviewOpen,
   handleEnter,
+  setLinkOpen,
 }: PropsType) => {
   return (
     <div className="h-full overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
@@ -272,23 +277,39 @@ const TicketCardView = ({
           </div>
         ))}
       </div>
-      {data.parentLink.length > 0 && (
-        <h1 className="my-4 text-[16px]">Linked Parent Ticket</h1>
-      )}
       <div>
-        {data.parentLink.map((ticket) => (
-          <div className="mb-[10px]">
-            <SubTicketItem
-              key={ticket.ticketLinkId}
-              ticket={ticket.parentTicket}
-              isChildren={false}
-            />
+        {data.parentLink.length > 0 && (
+          <h1 className="my-4 text-[16px]">Linked Parent Ticket</h1>
+        )}
+        <div>
+          {data.parentLink.map((ticket) => (
+            <div className="mb-[10px]">
+              <SubTicketItem
+                key={ticket.ticketLinkId}
+                ticket={ticket.parentTicket}
+                isChildren={false}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="flex items-center">
+          <h1 className="my-4 text-[16px]">Linked Child Ticket</h1>
+          <div
+            className=" px-[8px] h-[24px] ml-4 rounded-[6px] bg-[#D9E0FF] flex items-center justify-center cursor-pointer text-[12px]"
+            onClick={() => setLinkOpen(true)}
+          >
+            Add Child Ticket
           </div>
-        ))}
+        </div>
+        {linkOpen && (
+          <TicketLink
+            ticketId={data.ticketId}
+            setLinkOpen={setLinkOpen}
+            ticketRefetch={ticketRefetch}
+          />
+        )}
       </div>
-      {data.childLink.length > 0 && (
-        <h1 className="my-4 text-[16px]">Linked Child Ticket</h1>
-      )}
+
       <div>
         {data.childLink.map((ticket) => (
           <div className="mb-[10px]">

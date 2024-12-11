@@ -25,9 +25,10 @@ import { getTicketSettingImage } from '@/src/utils/ticket-setting'
 interface PropsType {
   data: Ticket | TicketInfo
   isText: boolean
+  disabled?: boolean
 }
 
-const TicketSettingButton = ({ data, isText }: PropsType) => {
+const TicketSettingButton = ({ data, isText, disabled }: PropsType) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null)
 
   const [open, setOpen] = useState<boolean>(false)
@@ -35,6 +36,7 @@ const TicketSettingButton = ({ data, isText }: PropsType) => {
   const { handleOpen: handleModalOpen } = useDialog()
 
   const handleOpen = () => {
+    if (disabled) return
     setOpen((c) => !c)
   }
 

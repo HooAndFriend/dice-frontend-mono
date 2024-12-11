@@ -21,15 +21,22 @@ import StatusPopover from '../../Common/Popover/StatusPopover'
 interface PropsType {
   ticketId: number
   status: EpicStatus
+  disabled?: boolean
   refetch?: () => void
 }
 
-const TicketStatusButton = ({ status, ticketId, refetch }: PropsType) => {
+const TicketStatusButton = ({
+  status,
+  ticketId,
+  refetch,
+  disabled,
+}: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
 
   const { handleOpen: handleModalOpen } = useDialog()
 
   const handleOpen = () => {
+    if (disabled) return
     setOpen((c) => !c)
   }
 

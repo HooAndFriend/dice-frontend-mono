@@ -37,6 +37,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
   const [subType, setSubType] = useState<'comment' | 'history'>('comment')
   const [selectImage, setSelectImage] = useState<string>('')
   const [previewOpen, setPreviewOpen] = useState<boolean>(false)
+  const [linkOpen, setLinkOpen] = useState<boolean>(false)
 
   const cancelButtonRef = useRef(null)
 
@@ -219,6 +220,8 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       handleDeleteTicketFile={deleteTicketFile.trigger}
       handleUpdateTicket={updateTicket.trigger}
       handleEnter={handleEnter}
+      linkOpen={linkOpen}
+      setLinkOpen={setLinkOpen}
     />
   )
 }

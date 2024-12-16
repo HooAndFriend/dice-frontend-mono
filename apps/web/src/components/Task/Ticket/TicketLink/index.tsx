@@ -1,7 +1,7 @@
 'use client'
 
 // ** React Imports
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // ** Component Imports
 import TicketSettingButton from '../TicketSettingButton'
@@ -22,11 +22,17 @@ import { GetTicketListResponse, Ticket } from '@/src/type/ticket'
 
 interface PropsType {
   ticketId: number
+  childTicketIdList: number[]
   setLinkOpen: (value: boolean) => void
   ticketRefetch: () => void
 }
 
-const TicketLink = ({ ticketId, setLinkOpen, ticketRefetch }: PropsType) => {
+const TicketLink = ({
+  ticketId,
+  setLinkOpen,
+  childTicketIdList,
+  ticketRefetch,
+}: PropsType) => {
   const [name, setName] = useState<string>('')
   const [selectTicket, setSelectTicket] = useState<Ticket>(null)
 
@@ -128,9 +134,15 @@ const TicketLink = ({ ticketId, setLinkOpen, ticketRefetch }: PropsType) => {
               (ticket) =>
                 ticket.name.includes(name) || ticket.code.includes(name),
             )
+            .filter((ticket) => ticket.ticketId !== ticketId)
+            .filter((ticket) => !childTicketIdList.includes(ticket.ticketId))
             .map((ticket) => (
               <div
-                className="w-full h-[50px] rounded-[5px] shadow grid grid-cols-2 items-center px-[12px] cursor-pointer"
+                className={`w-full h-[50px] rounded-[5px] grid grid-cols-2 items-center px-[12px] cursor-pointer ${
+                  selectTicket && selectTicket.ticketId === ticket.ticketId
+                    ? ' bg-blue-400 text-white'
+                    : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                }`}
                 onClick={() => setSelectTicket(ticket)}
               >
                 <div className="flex items-center">

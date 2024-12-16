@@ -316,6 +316,9 @@ const TicketCardView = ({
         </div>
         {linkOpen && (
           <TicketLink
+            childTicketIdList={data.childLink.map(
+              (item) => item.childTicket.ticketId,
+            )}
             ticketId={data.ticketId}
             setLinkOpen={setLinkOpen}
             ticketRefetch={ticketRefetch}

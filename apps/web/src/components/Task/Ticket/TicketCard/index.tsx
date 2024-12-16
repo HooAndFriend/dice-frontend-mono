@@ -195,6 +195,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
       storypoint: 'view',
       name: 'view',
     })
+    setLinkOpen(false)
   }, [ticketId])
 
   if (isLoading) return <CardSkeleton />

@@ -47,11 +47,11 @@ const ImagePreview = ({ open, setOpen, cancelButtonRef, image }: PropsType) => {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative overflow-hidden text-left transition-all transform bg-white rounded-[8px] shadow-xl">
-                <div className="p-5 w-[1000px] h-[400px]bg-[#FAFAFB] ">
+                <div className="p-5 w-[1600px] h-[800px]bg-[#FAFAFB] ">
                   <CustomImage
                     src={image}
-                    width={1000}
-                    height={400}
+                    width={1600}
+                    height={800}
                     alt="image_preview"
                   />
                 </div>

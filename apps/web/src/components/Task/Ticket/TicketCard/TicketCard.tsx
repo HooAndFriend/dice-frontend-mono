@@ -301,6 +301,19 @@ const TicketCardView = ({
             Add Child Ticket
           </div>
         </div>
+        <div>
+          {data.childLink.map((ticket) => (
+            <div className="mb-[10px]">
+              <SubTicketItem
+                key={ticket.ticketLinkId}
+                ticketLinkId={ticket.ticketLinkId}
+                ticket={ticket.childTicket}
+                isChildren={true}
+                ticketRefetch={ticketRefetch}
+              />
+            </div>
+          ))}
+        </div>
         {linkOpen && (
           <TicketLink
             ticketId={data.ticketId}
@@ -309,21 +322,6 @@ const TicketCardView = ({
           />
         )}
       </div>
-
-      <div>
-        {data.childLink.map((ticket) => (
-          <div className="mb-[10px]">
-            <SubTicketItem
-              key={ticket.ticketLinkId}
-              ticketLinkId={ticket.ticketLinkId}
-              ticket={ticket.childTicket}
-              isChildren={true}
-              ticketRefetch={ticketRefetch}
-            />
-          </div>
-        ))}
-      </div>
-
       <div className="mt-[12px]">
         <p className="text-[12px] text-gray-400">
           created : {dayjs(data.createdDate).format('YYYY.MM.DD HH:mm:ss')}

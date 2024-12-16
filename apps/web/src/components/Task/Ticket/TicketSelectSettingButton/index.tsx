@@ -74,7 +74,7 @@ const TicketSelectSettingButton = ({
           handleOpen()
         }}
       >
-        <Tooltip text={type ? type.type : ''}>
+        <Tooltip text={type ? type.name : ''}>
           {type ? (
             <div
               className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"

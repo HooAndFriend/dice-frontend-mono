@@ -47,6 +47,7 @@ const TicketLink = ({ ticketId, setLinkOpen, ticketRefetch }: PropsType) => {
     {
       onSuccess: () => {
         ticketRefetch()
+        setLinkOpen(false)
       },
       onError: (error) => {
         handleOpen({

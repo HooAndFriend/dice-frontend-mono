@@ -18,10 +18,11 @@ import { WorkspaceState } from '@/src/app'
 
 interface PropsType {
   item: EpicInfo
+  selectContent: SelectContent
   handleClick: (value: SelectContent) => void
 }
 
-const EpicItem = ({ item, handleClick }: PropsType) => {
+const EpicItem = ({ item, handleClick, selectContent }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
   const [enabled, setEnabled] = useState<boolean>(false)
 
@@ -127,6 +128,11 @@ const EpicItem = ({ item, handleClick }: PropsType) => {
                     <TicketItem
                       key={ticket.ticketId}
                       data={ticket}
+                      selectTicketId={
+                        selectContent.type === 'TICKET'
+                          ? selectContent.id
+                          : undefined
+                      }
                       isEpic
                       handleClick={(ticketId: number) => {
                         router.push(

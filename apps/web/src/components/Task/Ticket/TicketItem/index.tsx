@@ -11,14 +11,24 @@ import { Ticket } from '@/src/type/ticket'
 
 interface PropsType {
   data: Ticket
+  selectTicketId?: number
   isEpic: boolean
   handleClick: (id: number) => void
 }
 
-const TicketViewItem = ({ handleClick, data, isEpic }: PropsType) => {
+const TicketViewItem = ({
+  handleClick,
+  data,
+  isEpic,
+  selectTicketId,
+}: PropsType) => {
   return (
     <tr
-      className="border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer w-full"
+      className={`border-b transition-colors cursor-pointer w-full ${
+        data.ticketId === selectTicketId
+          ? ' bg-blue-400 text-white'
+          : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+      }`}
       onClick={() => handleClick(data.ticketId)}
       style={{
         width: '100%',

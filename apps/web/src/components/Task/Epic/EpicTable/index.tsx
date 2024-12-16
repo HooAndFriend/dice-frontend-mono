@@ -16,10 +16,11 @@ import { EpicInfo, SelectContent } from '@/src/type/epic'
 
 interface PropsType {
   epicData: EpicInfo[]
+  selectContent: SelectContent
   handleClick: (value: SelectContent) => void
 }
 
-const EpicTable = ({ epicData, handleClick }: PropsType) => {
+const EpicTable = ({ epicData, handleClick, selectContent }: PropsType) => {
   const { role } = useRecoilValue(WorkspaceState)
 
   return (
@@ -30,6 +31,7 @@ const EpicTable = ({ epicData, handleClick }: PropsType) => {
             <tbody className="[&amp;_tr:last-child]:border-0">
               {epicData.map((item, index) => (
                 <EpicItem
+                  selectContent={selectContent}
                   key={item.epicId}
                   item={item}
                   handleClick={handleClick}

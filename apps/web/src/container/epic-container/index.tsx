@@ -79,6 +79,7 @@ const EpicContainer = ({
               handleClick={(value: SelectContent) => {
                 setSelectContent(value)
               }}
+              selectContent={selectContent}
               epicData={epicData
                 .filter((item) => item.name.includes(word))
                 .map((item) => ({

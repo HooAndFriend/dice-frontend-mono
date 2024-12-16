@@ -104,6 +104,7 @@ const EpicAddItem = () => {
             placeholder="Enter Epic Name"
             borderRadius="8px"
             height="26px"
+            width="400px"
             value={name}
             onChange={(e) => setName(e.target.value)}
             onKeyDown={handleEnter}

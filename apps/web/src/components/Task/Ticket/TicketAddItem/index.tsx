@@ -119,7 +119,7 @@ const TicketAddItem = ({ epicId, isEpic }: PropsType) => {
                 placeholder="Enter Ticket Name"
                 borderRadius="8px"
                 height="30px"
-                width="200px"
+                width="400px"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={handleEnter}

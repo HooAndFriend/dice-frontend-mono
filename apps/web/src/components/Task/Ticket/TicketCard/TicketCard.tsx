@@ -21,6 +21,7 @@ import SubTicketItem from '../SubTicketItem'
 import TicketLink from '../TicketLink'
 
 interface PropsType {
+  isPage?: boolean
   data: TicketInfo
   mode: TicketEditMode
   role: RoleType
@@ -48,6 +49,7 @@ interface PropsType {
 }
 
 const TicketCardView = ({
+  isPage,
   data,
   role,
   mode,
@@ -84,12 +86,14 @@ const TicketCardView = ({
           >
             Delete
           </p>
-          <h1
-            className="text-[24px] font-bold cursor-pointer ml-4"
-            onClick={handleClose}
-          >
-            X
-          </h1>
+          {!isPage && (
+            <h1
+              className="text-[24px] font-bold cursor-pointer ml-4"
+              onClick={handleClose}
+            >
+              X
+            </h1>
+          )}
         </div>
       </div>
       <div className="flex items-center justify-between mt-[30px]">

@@ -3,20 +3,32 @@ import TicketSettingButton from '../../Ticket/TicketSettingButton'
 import TicketUserButton from '../../Ticket/TicketUserButton'
 import dayjs from 'dayjs'
 import CustomImage from '@/src/components/Image/CustomImage'
+import TicketStatusButton from '../../Ticket/TicketStatusButton'
 
 interface PropsType {
   data: Ticket
+  isClick?: boolean
+  handleClick?: (id: number) => void
 }
 
-const KanbanCard = ({ data }: PropsType) => {
+const KanbanCard = ({ data, isClick, handleClick }: PropsType) => {
   return (
-    <div className="mt-[12px] w-full rounded-[8px] border px-[16px] py-[12px] border-[#E1E3E8] bg-white flex flex-col justify-between">
-      <h1 className="font-bold text-[16px]">{data.name}</h1>
-      <p className="text-[12px] text-gray-400 my-[8px]">
-        Details about this item can go here but are truncated after a certain
-        length.
-      </p>
-      <div className="my-[8px] flex items-center space-x-4">
+    <div
+      className={`mt-[12px] w-full rounded-[8px] border px-[16px] py-[12px] border-[#E1E3E8] bg-white flex flex-col justify-between ${
+        isClick ? 'cursor-pointer' : ''
+      }`}
+      onClick={() => {
+        isClick && handleClick && handleClick(data.ticketId)
+      }}
+    >
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          <TicketSettingButton data={data} isText={false} />
+          <p className="text-[12px] pl-[8px]">{data.code}</p>
+        </div>
+      </div>
+      <h1 className="font-bold text-[14px] mt-[16px]">{data.name}</h1>
+      <div className="flex items-center space-x-4 mt-[16px]">
         <CustomImage
           width={24}
           height={24}
@@ -27,9 +39,8 @@ const KanbanCard = ({ data }: PropsType) => {
         <h1>{data.dueDate ? dayjs(data.dueDate).format('YYYY-MM-DD') : '-'}</h1>
       </div>
       <div className="flex items-center justify-between mt-[24px]">
-        <div className="flex items-center justify-between">
-          <TicketSettingButton data={data} isText={false} />
-          <p className="text-[12px] pl-[8px]">{data.code}</p>
+        <div className="flex items-center">
+          <TicketStatusButton ticketId={data.ticketId} status={data.status} />
         </div>
         <TicketUserButton
           profile={data.worker ? data.worker.profile : '/images/dice.png'}

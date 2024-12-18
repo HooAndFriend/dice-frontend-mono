@@ -35,6 +35,13 @@ const TicketSidebar = () => {
           icon: TicketIcon,
           isClicked: false,
         },
+        {
+          id: 6,
+          name: 'Issue',
+          link: `/${uuid}/dashboard/task/issue`,
+          icon: SettintIcon,
+          isClicked: false,
+        },
         // {
         //   id: 1,
         //   name: 'Gantt',

@@ -30,10 +30,11 @@ import { useDialog } from '@/src/context/DialogContext'
 
 interface PropsType {
   ticketId: number
+  isPage?: boolean
   handleClose: () => void
 }
 
-const TicketCard = ({ ticketId, handleClose }: PropsType) => {
+const TicketCard = ({ ticketId, isPage, handleClose }: PropsType) => {
   const [subType, setSubType] = useState<'comment' | 'history'>('comment')
   const [selectImage, setSelectImage] = useState<string>('')
   const [previewOpen, setPreviewOpen] = useState<boolean>(false)
@@ -203,6 +204,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
 
   return (
     <TicketCardView
+      isPage={isPage}
       data={data}
       mode={mode}
       role={role}

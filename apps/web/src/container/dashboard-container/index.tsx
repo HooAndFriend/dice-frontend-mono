@@ -5,6 +5,7 @@ import DashboardTask from '@/src/components/Dashboard/DashboardTask'
 // ** Type Imports
 import { TicketInfo, TicketStats } from '@/src/type/ticket'
 import DashboardUserCard from '@/src/components/Dashboard/DashboardUserCard'
+import dayjs from 'dayjs'
 
 interface PropsType {
   email: string
@@ -54,6 +55,7 @@ const DashboardContainer = ({
               )}
               isAdmin={false}
               handleClick={handleClick}
+              title="My Tasks"
             />
           </div>
           <div className="flex flex-col lg:col-span-1">
@@ -66,11 +68,18 @@ const DashboardContainer = ({
           </div>
           <div className="flex flex-col lg:col-span-2">
             <DashboardTask
-              data={ticketData.filter(
-                (ticket) => ticket.admin && ticket.admin.email === email,
-              )}
-              isAdmin
+              data={ticketData
+                .filter(
+                  (ticket) => ticket.worker && ticket.worker.email === email,
+                )
+                .filter(
+                  (ticket) =>
+                    dayjs(ticket.dueDate).format('YYYY-MM-DD') ===
+                    dayjs().format('YYYY-MM-DD'),
+                )}
+              isAdmin={false}
               handleClick={handleClick}
+              title="My Today Tasks"
             />
           </div>
         </div>

@@ -13,16 +13,17 @@ import TicketViewItem from '../../Task/Ticket/TicketViewItem'
 import Image from 'next/image'
 
 interface PropsType {
+  title: string
   data: TicketInfo[]
   isAdmin: boolean
   handleClick: (ticketId: number) => void
 }
 
-const DashboardTask = ({ data, isAdmin, handleClick }: PropsType) => {
+const DashboardTask = ({ title, data, isAdmin, handleClick }: PropsType) => {
   return (
-    <Card className="bg-white max-h-[580px] rounded-[20px] shadow-md lg:col-span-2 flex-1 overflow-auto">
+    <Card className="bg-white max-h-[380px] rounded-[20px] shadow-md lg:col-span-2 flex-1 overflow-auto">
       <CardHeader>
-        <CardTitle>My Tickets</CardTitle>
+        <CardTitle>{`${title} (${data.length})`}</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>

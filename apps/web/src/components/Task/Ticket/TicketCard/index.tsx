@@ -122,6 +122,7 @@ const TicketCard = ({ ticketId, handleClose }: PropsType) => {
         setMode((c) => ({ ...c, [currentArg]: 'view' }))
         mutate('/v1/ticket')
         mutate('/v1/epic')
+        mutate(`/log/v1/ticket-history-log/${ticketId}`)
         mutate(`/v1/ticket/detail/${ticketId}`)
       },
       onError: (error) => {

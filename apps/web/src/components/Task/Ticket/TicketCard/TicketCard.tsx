@@ -211,7 +211,7 @@ const TicketCardView = ({
           </div>
         </div>
       )}
-      <h1 className="my-4 text-[16px]">Story Point</h1>
+      {/* <h1 className="my-4 text-[16px]">Story Point</h1>
       {mode.storypoint === 'view' ? (
         <div
           className="h-[40px] rounded-[10px] border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4 cursor-pointer text-[16px]"
@@ -248,7 +248,7 @@ const TicketCardView = ({
             </button>
           </div>
         </div>
-      )}
+      )} */}
 
       <h1 className="my-4 text-[16px]">File</h1>
       <div className="flex items-center">

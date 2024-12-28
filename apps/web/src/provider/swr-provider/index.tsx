@@ -7,7 +7,7 @@ import { AuthState } from '@/src/app'
 import { useRecoilState } from 'recoil'
 
 // ** Service Imports
-import { Post } from '@/src/repository'
+import { Get, Post } from '@/src/repository'
 
 // ** Type Imports
 import { ReissueResponse } from '@/src/type/auth'
@@ -67,6 +67,13 @@ const SwrProvider = ({ children }: { children: React.ReactNode }) => {
             }
           }
         },
+        fetcher: (resource, init) =>
+          Get(resource, {
+            headers: {
+              Authorization: `Bearer ${authState.accessToken}`,
+            },
+            ...init,
+          }),
       }}
     >
       {children}

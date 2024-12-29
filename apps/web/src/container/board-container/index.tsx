@@ -1,17 +1,19 @@
 // ** Next Imports
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+import { useSearchParams } from 'next/navigation'
 
 // ** Component Imports
 import CustomImage from '@/src/components/Image/CustomImage'
 import { OutputData } from '@editorjs/editorjs'
 
+// ** React Imports
+import { useEffect, useState } from 'react'
+
 // ** Utils Imports
 import dayjs from 'dayjs'
 import { BoardDetail } from '@/src/type/board'
 import ProfileBox from '@/src/components/ProfileBox'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { useSearchParams } from 'next/navigation'
 
 interface BoardData {
   boardId: number

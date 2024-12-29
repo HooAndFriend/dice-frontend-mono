@@ -9,6 +9,16 @@ import { OutputData } from '@editorjs/editorjs'
 import dayjs from 'dayjs'
 import { BoardDetail } from '@/src/type/board'
 import ProfileBox from '@/src/components/ProfileBox'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useSearchParams } from 'next/navigation'
+
+interface BoardData {
+  boardId: number
+  title: string
+  content: OutputData
+  createdAt: string
+}
 
 interface PropsType {
   content: OutputData
@@ -35,6 +45,54 @@ const BoardContainer = ({
   handleSave,
   handleDelete,
 }: PropsType) => {
+  const searchParams = useSearchParams()
+  const boardId = searchParams.get('boardId')
+  const [boardList, setBoardList] = useState<BoardData[]>([])
+
+  // 초기 데이터 로드
+  useEffect(() => {
+    const savedList = localStorage.getItem('boardList')
+    if (savedList) {
+      setBoardList(JSON.parse(savedList))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!boardId) return
+
+    const savedContent = localStorage.getItem(`board-${boardId}`)
+    if (savedContent) {
+      setContent(JSON.parse(savedContent))
+    } else {
+      setContent({ blocks: [] }) // 데이터가 없을 경우 빈 상태로 초기화
+    }
+  }, [boardId, setContent])
+
+  // 게시물 저장 함수
+  const saveBoard = () => {
+    const updatedBoard: BoardData = {
+      boardId: board.boardId || Date.now(), // 고유 ID 생성
+      title: board.title,
+      content,
+      createdAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+    }
+
+    const updatedList = boardList.some(
+      (item) => item.boardId === updatedBoard.boardId,
+    )
+      ? boardList.map((item) =>
+          item.boardId === updatedBoard.boardId ? updatedBoard : item,
+        ) // 기존 게시물 수정
+      : [...boardList, updatedBoard] // 새로운 게시물 추가
+
+    setBoardList(updatedList)
+    localStorage.setItem('boardList', JSON.stringify(updatedList)) // 로컬 저장소에 저장
+    localStorage.setItem(
+      `board-${board.boardId}`,
+      JSON.stringify(updatedBoard.content),
+    ) // 개별 콘텐츠 저장
+    handleSave() // 원래의 저장 로직 호출
+  }
   return (
     <div className="w-full h-full p-4 bg-white">
       <div className="flex items-center justify-between">
@@ -52,7 +110,7 @@ const BoardContainer = ({
           </button>
           <button
             className="w-[80px] rounded-[5px] ml-2 h-[30px] bg-slate-300"
-            onClick={readOnly ? () => setReadOnly(false) : handleSave}
+            onClick={readOnly ? () => setReadOnly(false) : saveBoard}
           >
             {readOnly ? 'EDIT' : 'SAVE'}
           </button>

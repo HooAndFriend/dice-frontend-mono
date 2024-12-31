@@ -1,19 +1,19 @@
 'use client'
 
 // ** React Imports
-import { useEffect, useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent } from 'react'
 
 // ** Context Imports
 import { useDialog } from '@/src/context/DialogContext'
 
 // ** Type Imports
 import { CommonResponse } from '@/src/type/common'
-import { GetSearchWorkspaceUserListResponse } from '@/src/type/workspace'
 
 // ** Swr Imports
-import useSWR, { mutate } from 'swr'
+import { mutate } from 'swr'
 import useSWRMutation from 'swr/mutation'
-import { Get, Put } from '@/src/repository'
+import { Put } from '@/src/repository'
+import { useGetWorkspaceUser } from '@/src/service/workspace-user'
 
 // ** Component Imports
 import UserSelectPopover from '../../Common/Popover/UserSelectPopover'
@@ -41,6 +41,8 @@ const TicketUserButton = ({
   const [open, setOpen] = useState<boolean>(false)
   const [name, setName] = useState<string>('')
 
+  const { data, error, isLoading, mutate: refetch } = useGetWorkspaceUser(name)
+
   const { handleOpen: handleDialogOpen } = useDialog()
 
   const handleName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,17 +53,6 @@ const TicketUserButton = ({
     if (disabled) return
     setOpen((c) => !c)
   }
-
-  const {
-    data,
-    error,
-    isLoading,
-    mutate: refetch,
-  } = useSWR('/v1/workspace-user/search', async (url) =>
-    Get<GetSearchWorkspaceUserListResponse>(url, {
-      params: { name },
-    }),
-  )
 
   const updateTicketUser = useSWRMutation(
     '/v1/ticket/user',
@@ -86,10 +77,6 @@ const TicketUserButton = ({
     },
   )
 
-  useEffect(() => {
-    refetch()
-  }, [name])
-
   return (
     <UserSelectPopover
       open={open}
@@ -104,7 +91,15 @@ const TicketUserButton = ({
           : nickname
       }
       isLoading={isLoading}
-      data={isLoading ? [] : data.data.data}
+      data={
+        isLoading
+          ? []
+          : name
+            ? data.data.data.filter((workspaceUser) =>
+                workspaceUser.user.nickname.includes(name),
+              )
+            : data.data.data
+      }
       isNickname={isNickname}
       handleOpen={handleOpen}
       handleName={handleName}

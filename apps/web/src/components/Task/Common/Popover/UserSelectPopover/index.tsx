@@ -114,7 +114,7 @@ const UserSelectPopover = ({
                   width={20}
                   height={20}
                 />
-                <p className="text-[12px]">{item.user.nickname}</p>
+                <p className="text-[12px] text-black">{item.user.nickname}</p>
               </div>
             ))}
           </div>

@@ -46,7 +46,7 @@ const TicketViewItem = ({
         </div>
       </td>
       <td
-        className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6"
+        className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6 text-black"
         style={{
           width: '55%',
           textDecorationLine:

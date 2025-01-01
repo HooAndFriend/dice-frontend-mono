@@ -23,6 +23,7 @@ import { Delete } from '@/src/repository'
 
 // ** Context Imports
 import { useDialog } from '@/src/context/DialogContext'
+import Tooltip from '@/src/components/Tooltip'
 
 interface PropsType {
   ticket: TicketInfo
@@ -71,16 +72,18 @@ const SubTicketItem = ({
     >
       <div className="flex items-center">
         <TicketSettingButton data={ticket} isText={false} />
-        <p
-          className="pl-[6px] text-[14px] overflow-hidden whitespace-nowrap text-ellipsis"
-          style={{
-            maxWidth: '180px',
-            textDecorationLine:
-              ticket.status === 'COMPLETE' ? 'line-through' : 'none',
-          }}
-        >
-          {`${ticket.code} - ${ticket.name}`}
-        </p>
+        <Tooltip text={`${ticket.code} - ${ticket.name}`}>
+          <p
+            className="pl-[6px] text-[14px] overflow-hidden whitespace-nowrap text-ellipsis"
+            style={{
+              maxWidth: '180px',
+              textDecorationLine:
+                ticket.status === 'COMPLETE' ? 'line-through' : 'none',
+            }}
+          >
+            {`${ticket.code} - ${ticket.name}`}
+          </p>
+        </Tooltip>
       </div>
       <div className="flex items-center justify-end">
         <TicketUserButton

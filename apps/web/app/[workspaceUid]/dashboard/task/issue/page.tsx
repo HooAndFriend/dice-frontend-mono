@@ -1,4 +1,6 @@
 'use client'
+// ** Next Imports
+import { useSearchParams } from 'next/navigation'
 
 // ** React Imports
 import { useEffect, useState } from 'react'
@@ -14,7 +16,10 @@ import useSWR from 'swr'
 import { GetTicketListResponse } from '@/src/type/ticket'
 
 // ** Context Imports
-import { WorkspaceUser } from '@/src/type/workspace'
+import {
+  GetSearchWorkspaceUserListResponse,
+  WorkspaceUser,
+} from '@/src/type/workspace'
 import { EpicStatus } from '@/src/type/epic'
 
 const TablePage = () => {
@@ -27,6 +32,13 @@ const TablePage = () => {
   const [checkedList, setCheckedList] = useState<WorkspaceUser[]>([])
 
   const [enabled, setEnabled] = useState<boolean>(false)
+
+  const searchParams = useSearchParams()
+
+  const { data: workspaceUserList, isLoading: isWorkspaceUserListLoading } =
+    useSWR('/v1/workspace-user/search', async (url) => {
+      return Get<GetSearchWorkspaceUserListResponse>(url)
+    })
 
   const {
     data,
@@ -67,6 +79,19 @@ const TablePage = () => {
       setEnabled(false)
     }
   }, [])
+
+  useEffect(() => {
+    const userId = searchParams.get('userId')
+
+    if (!userId || isWorkspaceUserListLoading || !workspaceUserList) return
+
+    const workspaceUser = workspaceUserList.data.data.find(
+      (user) => user.user.userId === Number(userId),
+    )
+    if (workspaceUser) {
+      setCheckedList((cur) => [...cur, workspaceUser])
+    }
+  }, [searchParams.get('userId'), workspaceUserList])
 
   useEffect(() => {
     setTicketId(data?.data?.data.length > 0 ? data.data.data[0].ticketId : 0)

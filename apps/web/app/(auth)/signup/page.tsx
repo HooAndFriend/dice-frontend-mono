@@ -118,6 +118,7 @@ export default function Signup(): JSX.Element {
           refreshToken: data.token.refreshToken,
         })
         setUserState({
+          userId: data.user.userId,
           email: data.user.email,
           profile: data.user.profile,
           nickname: data.user.nickname,

@@ -112,7 +112,9 @@ const TablePage = () => {
           : selectedTypeIds.includes(item.ticketSetting?.ticketSettingId),
       )
 
-    setTicketId(filterList.length > 0 ? filterList[0].ticketId : 0)
+    if (filterList) {
+      setTicketId(filterList.length > 0 ? filterList[0].ticketId : 0)
+    }
   }, [data, checkedList])
 
   if (error || !enabled) return

@@ -19,6 +19,7 @@ import ImagePreview from '../../../Image/ImagePreview'
 import { KeyboardEvent } from 'react'
 import SubTicketItem from '../SubTicketItem'
 import TicketLink from '../TicketLink'
+import ImageMultiPreview from '@/src/components/Image/ImageMultiPreview'
 
 interface PropsType {
   isPage?: boolean
@@ -366,11 +367,12 @@ const TicketCardView = ({
         <TicketHistory ticketId={data.ticketId} />
       )}
       {previewOpen && (
-        <ImagePreview
+        <ImageMultiPreview
           open={previewOpen}
           setOpen={setPreviewOpen}
-          image={selectImage}
+          image={data.ticketFile.map((item) => item.url)}
           cancelButtonRef={cancelButtonRef}
+          selectImage={selectImage}
         />
       )}
     </div>

@@ -65,37 +65,33 @@ const BoardContainer = ({
   const { get } = useSearchParams()
 
   // 초기 데이터 로드
-  useEffect(() => {
-    const fetchBoard = async () => {
-      if (!boardId) return
-      try {
-        const data = await Get<GetBoardResponse>(`/v1/board/${boardId}`)
-        const boardContent = data.data.content
+  const fetchBoard = async () => {
+    if (!boardId) return
+    try {
+      const data = await Get<GetBoardResponse>(`/v1/board/${boardId}`)
+      const boardContent = data.data.content
+      if (typeof boardContent === 'string') {
         setContent(JSON.parse(boardContent))
-      } catch (error) {
-        console.error('Error fetching board:', error)
-        handleOpen({
-          title: 'Error load board',
-          message: error.message,
-          logLevel: 'warn',
-          buttonText: 'Close',
-          type: 'alert',
-        })
-        setContent({ blocks: [] })
+      } else {
+        setContent(boardContent)
       }
+    } catch (error) {
+      console.error('Error fetching board:', error)
+      handleOpen({
+        title: 'Error load board',
+        message: error.message,
+        logLevel: 'warn',
+        buttonText: 'Close',
+        type: 'alert',
+      })
+      setContent({ blocks: [] })
     }
-    fetchBoard()
-  }, [boardId, setContent])
+  }
+  fetchBoard()
+  useEffect(() => {}, [boardId, setContent])
 
   // 게시물 저장 함수
   const saveBoard = async () => {
-    const updatedBoard = {
-      boardId: Number(boardId),
-      title: board.title,
-      content: JSON.stringify(content),
-      //content: content.blocks,
-    }
-
     try {
       if (board.boardId) {
         // 기존 게시물 수정
@@ -113,6 +109,8 @@ const BoardContainer = ({
         })
       }
       setReadOnly(true)
+      console.log('RE')
+      await fetchBoard()
       //handleSave() // 원래의 저장 로직 호출
     } catch (error) {
       console.error('Error saving board:', error)

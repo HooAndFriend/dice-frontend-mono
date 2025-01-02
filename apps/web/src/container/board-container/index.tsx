@@ -9,11 +9,21 @@ import { OutputData } from '@editorjs/editorjs'
 
 // ** React Imports
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 // ** Utils Imports
 import dayjs from 'dayjs'
-import { BoardDetail } from '@/src/type/board'
+import { BoardDetail, GetBoardResponse } from '@/src/type/board'
 import ProfileBox from '@/src/components/ProfileBox'
+
+// ** Service Imports
+import { Delete, Get, Patch, Post, Put } from '@/src/repository'
+
+// ** Type Imports
+import { CommonResponse } from '@/src/type/common'
+
+// ** Context Imports
+import { useDialog } from '@/src/context/DialogContext'
 
 interface BoardData {
   boardId: number
@@ -51,50 +61,109 @@ const BoardContainer = ({
   const boardId = searchParams.get('boardId')
   const [boardList, setBoardList] = useState<BoardData[]>([])
 
+  const { handleOpen } = useDialog()
+  const { get } = useSearchParams()
+
   // 초기 데이터 로드
   useEffect(() => {
-    const savedList = localStorage.getItem('boardList')
-    if (savedList) {
-      setBoardList(JSON.parse(savedList))
+    const fetchBoard = async () => {
+      if (!boardId) return
+      try {
+        const data = await Get<GetBoardResponse>(`/v1/board/${boardId}`)
+        const boardContent = data.data.content
+        setContent(JSON.parse(boardContent))
+      } catch (error) {
+        console.error('Error fetching board:', error)
+        handleOpen({
+          title: 'Error load board',
+          message: error.message,
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
+        setContent({ blocks: [] })
+      }
     }
-  }, [])
-
-  useEffect(() => {
-    if (!boardId) return
-
-    const savedContent = localStorage.getItem(`board-${boardId}`)
-    if (savedContent) {
-      setContent(JSON.parse(savedContent))
-    } else {
-      setContent({ blocks: [] }) // 데이터가 없을 경우 빈 상태로 초기화
-    }
+    fetchBoard()
   }, [boardId, setContent])
 
   // 게시물 저장 함수
-  const saveBoard = () => {
-    const updatedBoard: BoardData = {
-      boardId: board.boardId || Date.now(), // 고유 ID 생성
+  const saveBoard = async () => {
+    const updatedBoard = {
+      boardId: Number(boardId),
       title: board.title,
-      content,
-      createdAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+      content: JSON.stringify(content),
+      //content: content.blocks,
     }
 
-    const updatedList = boardList.some(
-      (item) => item.boardId === updatedBoard.boardId,
-    )
-      ? boardList.map((item) =>
-          item.boardId === updatedBoard.boardId ? updatedBoard : item,
-        ) // 기존 게시물 수정
-      : [...boardList, updatedBoard] // 새로운 게시물 추가
-
-    setBoardList(updatedList)
-    localStorage.setItem('boardList', JSON.stringify(updatedList)) // 로컬 저장소에 저장
-    localStorage.setItem(
-      `board-${board.boardId}`,
-      JSON.stringify(updatedBoard.content),
-    ) // 개별 콘텐츠 저장
-    handleSave() // 원래의 저장 로직 호출
+    try {
+      if (board.boardId) {
+        // 기존 게시물 수정
+        await Put<CommonResponse<void>>('/v1/board', {
+          boardId: Number(boardId),
+          title: board.title,
+          content: JSON.stringify(content),
+        })
+      } else {
+        // 새로운 게시물 생성
+        await Post<CommonResponse<void>>('/v1/board', {
+          boardId: Number(boardId),
+          title: board.title,
+          content: JSON.stringify(content),
+        })
+      }
+      setReadOnly(true)
+      //handleSave() // 원래의 저장 로직 호출
+    } catch (error) {
+      console.error('Error saving board:', error)
+      handleOpen({
+        title: 'Error content',
+        message: error.response.data.message,
+        logLevel: 'warn',
+        buttonText: 'Close',
+        type: 'alert',
+      })
+    }
   }
+
+  // 제목 수정 함수
+  const updateTitle = async (newTitle: string) => {
+    try {
+      const result = await Patch<CommonResponse<void>>('/v1/board', {
+        title: newTitle,
+        boardId: board.boardId,
+      })
+      console.log('result : ', result)
+      //handleSave()
+    } catch (error) {
+      console.error('Error updating title:', error)
+      handleOpen({
+        title: 'Error title',
+        message: error.response.data.message,
+        logLevel: 'warn',
+        buttonText: 'Close',
+        type: 'alert',
+      })
+    }
+  }
+
+  // 게시물 삭제 함수
+  const deleteBoard = async () => {
+    try {
+      //await Delete(`/v 1/board/${board.boardId}`)
+      handleDelete() // 원래의 삭제 로직 호출
+    } catch (error) {
+      console.error('Error deleting board:', error)
+      handleOpen({
+        title: 'Error delet',
+        message: error.response.data.message,
+        logLevel: 'warn',
+        buttonText: 'Close',
+        type: 'alert',
+      })
+    }
+  }
+
   return (
     <div className="w-full h-full p-4 bg-white">
       <div className="flex items-center justify-between">
@@ -106,7 +175,7 @@ const BoardContainer = ({
         <div className="flex items-center">
           <button
             className="w-[80px] rounded-[5px]  h-[30px] bg-slate-300"
-            onClick={handleDelete}
+            onClick={deleteBoard}
           >
             DELETE
           </button>
@@ -126,7 +195,10 @@ const BoardContainer = ({
             type="text"
             placeholder="Enter Title"
             value={board.title}
-            onChange={handleInput}
+            onChange={(e) => {
+              handleInput(e)
+              updateTitle(e.target.value)
+            }}
             name="title"
             className="h-[40px] w-[600px] border-none  text-[32px] px-0 my-1 font-bold"
           />

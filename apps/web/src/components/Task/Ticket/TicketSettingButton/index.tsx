@@ -152,7 +152,7 @@ const TicketSettingButton = ({ data, isText, disabled }: PropsType) => {
                   height={16}
                 />
               </div>
-              <h3 className="text-[14px] ml-[12px]">{item.name}</h3>
+              <h3 className="text-[14px] ml-[12px] text-black">{item.name}</h3>
             </div>
           ))}
         </div>

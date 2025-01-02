@@ -17,7 +17,7 @@ import { UserState, WorkspaceState } from '@/src/app'
 import { useRouter } from 'next/navigation'
 
 const DashboardPage = () => {
-  const { email } = useRecoilValue(UserState)
+  const { email, userId } = useRecoilValue(UserState)
   const { uuid } = useRecoilValue(WorkspaceState)
   const router = useRouter()
 
@@ -56,6 +56,8 @@ const DashboardPage = () => {
       ticketData={isLoading ? [] : data.data.data}
       email={email}
       handleClick={handleClick}
+      userId={userId}
+      workspaceUid={uuid}
     />
   )
 }

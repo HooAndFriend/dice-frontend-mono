@@ -6,12 +6,14 @@ import { atom, useRecoilState } from 'recoil'
 import { persistStorageAtom } from '../util'
 
 export interface UserStateType {
+  userId: number
   email: string
   nickname: string
   profile: string
 }
 
 export const userInitState = {
+  userId: 0,
   email: '',
   nickname: '',
   profile: '',

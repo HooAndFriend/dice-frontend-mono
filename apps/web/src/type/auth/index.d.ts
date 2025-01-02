@@ -45,6 +45,7 @@ export interface DiceLoginResponse extends Response {
     refreshToken: string
   }
   user: {
+    userId: number
     nickname: string
     profile: string
     email: string
@@ -68,6 +69,7 @@ export interface DiceSignupResponse extends Response {
     refreshToken: string
   }
   user: {
+    userId: number
     email: string
     nickname: string
     profile: string
@@ -87,6 +89,7 @@ export interface DiceSocialLoginResponse extends Response {
     refreshToken: string
   }
   user: {
+    userId: number
     email: string
     nickname: string
     profile: string
@@ -101,6 +104,7 @@ export interface DiceSocialSignupResponse extends Response {
     refreshToken: string
   }
   user: {
+    userId: number
     email: string
     nickname: string
     profile: string

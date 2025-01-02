@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState } from 'react'
+import { KeyboardEvent, useState } from 'react'
 
 // ** Componet imports
 import EpicCardView from './EpicCard'
@@ -39,6 +39,8 @@ const EpicCard = ({ epicId, handleClose }: PropsType) => {
     content: 'view',
   })
   const [currentArg, setCurrentArg] = useState<'content' | 'name'>('name')
+  const [button, setButton] = useState<boolean>(false)
+  const { handleOpen: handleModalOpen } = useDialog()
 
   const { data, setData, handleInput } = useInput<EpicDetail>({
     id: 0,
@@ -113,6 +115,29 @@ const EpicCard = ({ epicId, handleClose }: PropsType) => {
     },
   )
 
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      if (button) return
+      setButton(true)
+      if (data.name === '') {
+        handleModalOpen({
+          title: 'Error',
+          message: 'Enter Ticket Name',
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
+
+        return
+      }
+      updateEpic.trigger()
+    }
+
+    if (e.key === 'Escape') {
+      handleClose()
+    }
+  }
+
   if (isLoading) return <CardSkeleton />
 
   return (
@@ -126,6 +151,7 @@ const EpicCard = ({ epicId, handleClose }: PropsType) => {
       handleClose={handleClose}
       handleUpdateEpic={updateEpic.trigger}
       handleDeleteEpic={deleteEpic.trigger}
+      handleEnter={handleEnter}
     />
   )
 }

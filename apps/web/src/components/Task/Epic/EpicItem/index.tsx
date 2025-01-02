@@ -20,12 +20,21 @@ interface PropsType {
   item: EpicInfo
   selectContent: SelectContent
   handleClick: (value: SelectContent) => void
+  onDrag: (item) => void
+  onDragEnter: (item) => void
+  onDrop: (e) => void
 }
 
-const EpicItem = ({ item, handleClick, selectContent }: PropsType) => {
+const EpicItem = ({
+  item,
+  handleClick,
+  selectContent,
+  onDrag,
+  onDragEnter,
+  onDrop,
+}: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
   const [enabled, setEnabled] = useState<boolean>(false)
-
   const router = useRouter()
 
   const handleOpen = () => setOpen((c) => !c)
@@ -55,6 +64,14 @@ const EpicItem = ({ item, handleClick, selectContent }: PropsType) => {
   return (
     <>
       <tr
+        onDragStart={() => {
+          onDrag(item.epicId)
+        }}
+        onDragEnter={() => {
+          onDragEnter(item.epicId)
+        }}
+        onDragEnd={onDrop}
+        draggable
         className="w-full border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
         onClick={() => {
           handleOpen()

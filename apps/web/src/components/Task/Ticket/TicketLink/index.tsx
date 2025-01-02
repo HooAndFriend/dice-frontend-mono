@@ -34,7 +34,7 @@ const TicketLink = ({
   ticketRefetch,
 }: PropsType) => {
   const [name, setName] = useState<string>('')
-  const [selectTicket, setSelectTicket] = useState<Ticket>(null)
+  const [selectTicketList, setSelectTicketList] = useState<Ticket[]>([])
 
   const { handleOpen } = useDialog()
 
@@ -43,11 +43,11 @@ const TicketLink = ({
   )
 
   const saveTicketLink = useSWRMutation(
-    '/v1/ticket/link',
+    '/v1/ticket/link/multiple',
     async (url: string) => {
       return await Post<CommonResponse<void>>(url, {
         parentTicketId: ticketId,
-        childTicketId: selectTicket?.ticketId,
+        childTicketId: selectTicketList.map((ticket) => ticket.ticketId),
       })
     },
     {
@@ -76,7 +76,7 @@ const TicketLink = ({
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      {selectTicket && (
+      {selectTicketList.map((selectTicket) => (
         <div
           className="w-full h-[50px] rounded-[5px] shadow grid grid-cols-2 items-center px-[12px] cursor-pointer"
           // onClick={() => setSelectTicket(ticket)}
@@ -119,14 +119,20 @@ const TicketLink = ({
             <div className="w-[45px] h-[45px] flex justify-center items-center cursor-pointer">
               <div
                 className="w-[36px] h-[36px] bg-blue-100 rounded-[12px] flex justify-center items-center"
-                onClick={() => setSelectTicket(null)}
+                onClick={() =>
+                  setSelectTicketList((cur) =>
+                    cur.filter(
+                      (ticket) => ticket.ticketId !== selectTicket.ticketId,
+                    ),
+                  )
+                }
               >
                 <h1 className="text-[18px]">X</h1>
               </div>
             </div>
           </div>
         </div>
-      )}
+      ))}
       <div className="h-[240px] overflow-y-scroll  border border-lightGray  rounded-[10px] mt-[12px]">
         {!isLoading &&
           data?.data?.data
@@ -139,11 +145,13 @@ const TicketLink = ({
             .map((ticket) => (
               <div
                 className={`w-full h-[50px] rounded-[5px] grid grid-cols-2 items-center px-[12px] cursor-pointer ${
-                  selectTicket && selectTicket.ticketId === ticket.ticketId
+                  selectTicketList.some(
+                    (selectTicket) => selectTicket.ticketId === ticket.ticketId,
+                  )
                     ? ' bg-blue-400 text-white'
                     : 'hover:bg-gray-100 dark:hover:bg-gray-800'
                 }`}
-                onClick={() => setSelectTicket(ticket)}
+                onClick={() => setSelectTicketList((cur) => [...cur, ticket])}
               >
                 <div className="flex items-center">
                   <TicketSettingButton data={ticket} isText={false} disabled />
@@ -183,7 +191,7 @@ const TicketLink = ({
       <div className="mt-[12px] flex justify-end">
         <button
           className="bg-gray-200 mr-[6px] text-[12px] px-[12px] rounded-[6px]"
-          disabled={!selectTicket}
+          disabled={selectTicketList.length === 0}
           onClick={() => saveTicketLink.trigger()}
         >
           Add

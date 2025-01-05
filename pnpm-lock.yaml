@@ -283,6 +283,9 @@ importers:
       '@editorjs/checklist':
         specifier: ^1.6.0
         version: 1.6.0
+      '@editorjs/code':
+        specifier: ^2.9.3
+        version: 2.9.3
       '@editorjs/delimiter':
         specifier: ^1.4.0
         version: 1.4.0
@@ -310,6 +313,9 @@ importers:
       '@editorjs/paragraph':
         specifier: ^2.11.4
         version: 2.11.4
+      '@editorjs/quote':
+        specifier: ^2.7.6
+        version: 2.7.6
       '@editorjs/simple-image':
         specifier: ^1.6.0
         version: 1.6.0
@@ -478,7 +484,7 @@ importers:
         version: 3.1.0(tailwindcss@3.3.6)
       tailwindcss:
         specifier: ^3.3.6
-        version: 3.3.6
+        version: 3.3.6(ts-node@10.9.1)
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -3078,6 +3084,10 @@ packages:
     resolution: {integrity: sha512-fJE9dfFdgq8xU+sbsxjH0Kt8Yeatw9xHBJWb77DhRkEXz3OCoIS6hrRC1ewHEryxzIjxD8IyQrRq2f+Gz3BcmA==}
     dev: false
 
+  /@codexteam/icons@0.3.3:
+    resolution: {integrity: sha512-cp7mkZPgmBuSxigTm3Vb+DtVHYeX7qXfQd7o05vcLD8Ag5WvRlol2QSn5P10k0CDAJwmkH9nQGQLBycErS9lsQ==}
+    dev: false
+
   /@colors/colors@1.5.0:
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
     engines: {node: '>=0.1.90'}
@@ -3231,10 +3241,22 @@ packages:
       '@codexteam/icons': 0.3.0
     dev: false
 
+  /@editorjs/code@2.9.3:
+    resolution: {integrity: sha512-nXUrK3CjhpubvShYtcbkpZ9SU15IYwmJOsWZrlWYSzy9unZBRQthii6eABndsCtODzzV0yiSKmTp00RQkFow3Q==}
+    dependencies:
+      '@codexteam/icons': 0.3.3
+    dev: false
+
   /@editorjs/delimiter@1.4.0:
     resolution: {integrity: sha512-i1Wm3UQsVisM7Fh9focJ1a4kX2l7IxO3zrEd+GmYoPVaNwxb/63GLNbGfCCGZBuvUyzeUDnc8cdhD1QQGwUZIg==}
     dependencies:
       '@codexteam/icons': 0.0.5
+    dev: false
+
+  /@editorjs/dom@0.0.5:
+    resolution: {integrity: sha512-SZ78Gwpkp3EUhjBIp0lSojeQ35V9acF8SubJsMeOH/vlOUE40GOnvvwWZnF05lO7bIB0dOHhhJy4N7IIAWxP2w==}
+    dependencies:
+      '@editorjs/helpers': 0.0.4
     dev: false
 
   /@editorjs/editorjs@2.29.1:
@@ -3256,6 +3278,10 @@ packages:
       '@codexteam/icons': 0.0.5
       '@editorjs/editorjs': 2.29.1
     dev: true
+
+  /@editorjs/helpers@0.0.4:
+    resolution: {integrity: sha512-ieg3dzo2m1/ELze/RMNADiAiC5amXxIlVXoJ5vvXITOu/p/dPsrF+Oi3h5gBYvtGk9vg5LJUSG5YWU0tBUO1tw==}
+    dev: false
 
   /@editorjs/image@2.9.0:
     resolution: {integrity: sha512-xItihKJFiWJ06SMtLWQZvzHv4LRPNAFZYaHAXesBFzXvWwUrtVaVMcNSf0eNnw3InrPO3Po1vZRRgpsT+Ya3Bg==}
@@ -3293,6 +3319,13 @@ packages:
     dependencies:
       '@codexteam/icons': 0.0.4
     dev: true
+
+  /@editorjs/quote@2.7.6:
+    resolution: {integrity: sha512-D01KUMSDj2r+6Z+xjDkQqI+y6URpeHCvj0+P4pah+GtkG040lWjFb2H4pgHFXuol2cbfyAoraYSw85fuPheCvw==}
+    dependencies:
+      '@codexteam/icons': 0.3.3
+      '@editorjs/dom': 0.0.5
+    dev: false
 
   /@editorjs/simple-image@1.6.0:
     resolution: {integrity: sha512-WvdGfQPlozwZd3PXQrJnRXk6gEYbv1U2vRupYJ6lTd3/UsLInXYUX5jSFcnGB5ZMH3bd0JDZfcb4d4Sv1/1big==}
@@ -11399,7 +11432,7 @@ packages:
       react-markdown: 9.0.1(@types/react@18.2.5)(react@18.2.0)
       sharp: 0.32.6
       tailwind-merge: 2.2.1
-      tailwindcss: 3.3.6
+      tailwindcss: 3.3.6(ts-node@10.9.1)
     transitivePeerDependencies:
       - '@effect-ts/otel-node'
       - '@types/react'
@@ -14942,22 +14975,6 @@ packages:
       camelcase-css: 2.0.1
       postcss: 8.4.33
 
-  /postcss-load-config@4.0.2(postcss@8.4.33):
-    resolution: {integrity: sha512-bSVhyJGL00wMVoPUzAVAnbEoWyqRxkjv64tUl427SKnPrENtq6hJwUojroMz2VB+Q1edmi4IfrAPpami5VVgMQ==}
-    engines: {node: '>= 14'}
-    peerDependencies:
-      postcss: '>=8.0.9'
-      ts-node: '>=9.0.0'
-    peerDependenciesMeta:
-      postcss:
-        optional: true
-      ts-node:
-        optional: true
-    dependencies:
-      lilconfig: 3.0.0
-      postcss: 8.4.33
-      yaml: 2.3.4
-
   /postcss-load-config@4.0.2(postcss@8.4.33)(ts-node@10.9.1):
     resolution: {integrity: sha512-bSVhyJGL00wMVoPUzAVAnbEoWyqRxkjv64tUl427SKnPrENtq6hJwUojroMz2VB+Q1edmi4IfrAPpami5VVgMQ==}
     engines: {node: '>= 14'}
@@ -16907,7 +16924,7 @@ packages:
     peerDependencies:
       tailwindcss: 3.x
     dependencies:
-      tailwindcss: 3.3.6
+      tailwindcss: 3.3.6(ts-node@10.9.1)
     dev: true
 
   /tailwindcss-animate@1.0.7(tailwindcss@3.3.6):
@@ -16915,38 +16932,8 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
-      tailwindcss: 3.3.6
+      tailwindcss: 3.3.6(ts-node@10.9.1)
     dev: false
-
-  /tailwindcss@3.3.6:
-    resolution: {integrity: sha512-AKjF7qbbLvLaPieoKeTjG1+FyNZT6KaJMJPFeQyLfIp7l82ggH1fbHJSsYIvnbTFQOlkh+gBYpyby5GT1LIdLw==}
-    engines: {node: '>=14.0.0'}
-    hasBin: true
-    dependencies:
-      '@alloc/quick-lru': 5.2.0
-      arg: 5.0.2
-      chokidar: 3.5.3
-      didyoumean: 1.2.2
-      dlv: 1.1.3
-      fast-glob: 3.3.1
-      glob-parent: 6.0.2
-      is-glob: 4.0.3
-      jiti: 1.21.0
-      lilconfig: 2.1.0
-      micromatch: 4.0.5
-      normalize-path: 3.0.0
-      object-hash: 3.0.0
-      picocolors: 1.0.0
-      postcss: 8.4.33
-      postcss-import: 15.1.0(postcss@8.4.33)
-      postcss-js: 4.0.1(postcss@8.4.33)
-      postcss-load-config: 4.0.2(postcss@8.4.33)
-      postcss-nested: 6.0.1(postcss@8.4.33)
-      postcss-selector-parser: 6.0.13
-      resolve: 1.22.8
-      sucrase: 3.34.0
-    transitivePeerDependencies:
-      - ts-node
 
   /tailwindcss@3.3.6(ts-node@10.9.1):
     resolution: {integrity: sha512-AKjF7qbbLvLaPieoKeTjG1+FyNZT6KaJMJPFeQyLfIp7l82ggH1fbHJSsYIvnbTFQOlkh+gBYpyby5GT1LIdLw==}

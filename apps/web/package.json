@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@editorjs/checklist": "^1.6.0",
+    "@editorjs/code": "^2.9.3",
     "@editorjs/delimiter": "^1.4.0",
     "@editorjs/editorjs": "^2.29.1",
     "@editorjs/embed": "^2.7.1",
@@ -21,6 +22,7 @@
     "@editorjs/link": "^2.6.2",
     "@editorjs/list": "^1.9.0",
     "@editorjs/paragraph": "^2.11.4",
+    "@editorjs/quote": "^2.7.6",
     "@editorjs/simple-image": "^1.6.0",
     "@editorjs/table": "^2.3.0",
     "@editorjs/warning": "^1.4.0",

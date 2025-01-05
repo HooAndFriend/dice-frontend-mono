@@ -1,6 +1,5 @@
 // ** Next Imports
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
 
 // ** React Imports
 import { useState } from 'react'
@@ -9,77 +8,64 @@ import { useState } from 'react'
 import { BoardInfo } from '@/src/type/board'
 
 // ** Component Imports
-import CustomImage from '../../Image/CustomImage'
+import { ChevronDown, ChevronRight, Plus } from 'lucide-react'
 
 interface PropsType {
-  data: BoardInfo
-  handleOpen: (boardId: number) => void
+  board: BoardInfo
+  level?: number
+  handleOpen: (boardId?: number) => void
 }
 
-const BoardMenuItem = ({ data, handleOpen }: PropsType) => {
-  const [open, setOpen] = useState<boolean>(false)
-
-  const { get } = useSearchParams()
+const BoardMenuItem = ({ board, level = 0, handleOpen }: PropsType) => {
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center">
-          {data.children.length > 0 ? (
-            <CustomImage
-              src={open ? '/svg/arrow-down.svg' : '/svg/arrow-up.svg'}
-              alt="arrow"
-              className="pb-1 cursor-pointer"
-              width={12}
-              height={12}
-              onClick={() => setOpen(!open)}
-            />
-          ) : (
-            <div className="w-[12px] h-[12px] pl-1 pt-1">
-              <div className="w-[5px] h-[5px] bg-black rounded-full" />
-            </div>
-          )}
-          {data.children.length > 0 ? (
-            <p className="ml-2">{data.title}</p>
-          ) : (
-            <Link href={`board?boardId=${data.boardId}`}>
-              <p
-                className={`ml-2 ${
-                  get('boardId') === String(data.boardId) && 'text-blue-500'
-                }`}
-              >
-                {data.title}
-              </p>
-            </Link>
-          )}
+      <div
+        className={`flex items-center py-2 px-4 hover:bg-gray-200 cursor-pointer group`}
+        style={{ paddingLeft: `${level * 20 + 16}px` }}
+      >
+        {board.children && (
+          <button
+            className="mr-2"
+            onClick={(e) => {
+              e.stopPropagation()
+              setIsOpen(!isOpen)
+            }}
+          >
+            {isOpen ? (
+              <ChevronDown className="w-4 h-4" />
+            ) : (
+              <ChevronRight className="w-4 h-4" />
+            )}
+          </button>
+        )}
+        <Link href={`board?boardId=${board.boardId}`}>
+          <span className="flex-grow">{board.title}</span>
+        </Link>
+        <div className="flex items-center ml-auto transition-opacity opacity-0 group-hover:opacity-100">
+          <button
+            className="mr-1 cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation()
+              handleOpen(board.boardId)
+            }}
+            title="Add sub-item"
+          >
+            <Plus className="w-4 h-4 cursor-pointer" />
+          </button>
         </div>
-        <button
-          className="w-[20px] font-bold text-[16px] h-[20px] cursor-pointer"
-          onClick={() => handleOpen(data.boardId)}
-        >
-          +
-        </button>
       </div>
-      {open && (
-        <div>
-          {data.children.map((_) => (
-            <div className="flex items-center mb-2 ml-4" key={_.boardId}>
-              <div className="w-[12px] h-[12px] pl-1 pt-1">
-                <div className="w-[5px] h-[5px] bg-black rounded-full" />
-              </div>
-              <Link href={`board?boardId=${_.boardId}`}>
-                <p
-                  className={`ml-2 ${
-                    get('boardId') === String(_.boardId) && 'text-blue-500'
-                  }`}
-                >
-                  {_.title}
-                </p>
-              </Link>
-            </div>
-          ))}
-        </div>
-      )}
+      {isOpen &&
+        board.children &&
+        board.children.map((child) => (
+          <BoardMenuItem
+            key={child.boardId}
+            board={child}
+            level={level + 1}
+            handleOpen={handleOpen}
+          />
+        ))}
     </div>
   )
 }

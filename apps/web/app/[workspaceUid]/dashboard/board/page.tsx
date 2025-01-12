@@ -39,7 +39,7 @@ const BoardPage = () => {
     handleInput,
     setData: setBoard,
   } = useInput<BoardDetail>({
-    content: '',
+    content: null,
     title: '',
     createdDate: null,
     createdId: '',
@@ -105,7 +105,7 @@ const BoardPage = () => {
     return Get<GetBoardListResponse>(url)
   })
 
-  const { mutate: boardRefetch } = useSWR(
+  const { data, mutate: boardRefetch } = useSWR(
     `/v1/board/${get('boardId')}`,
     async (url) => {
       if (!get('boardId')) return
@@ -114,7 +114,7 @@ const BoardPage = () => {
     {
       onSuccess: ({ data }) => {
         setBoard(data)
-        setContent(JSON.parse(data.content))
+        setContent(data.content)
       },
     },
   )
@@ -125,7 +125,7 @@ const BoardPage = () => {
       return await Put<CommonResponse<void>>(url, {
         boardId: Number(get('boardId')),
         title: board.title,
-        content: JSON.stringify(content),
+        content,
       })
     },
     {

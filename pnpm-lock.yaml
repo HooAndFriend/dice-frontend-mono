@@ -385,9 +385,15 @@ importers:
       editorjs-alert:
         specifier: ^1.1.3
         version: 1.1.3
+      editorjs-html:
+        specifier: ^4.0.0
+        version: 4.0.0
       editorjs-text-color-plugin:
         specifier: ^2.0.4
         version: 2.0.4
+      editorjs-viewer:
+        specifier: ^2.0.3
+        version: 2.0.3
       firebase:
         specifier: ^10.7.2
         version: 10.7.2
@@ -10557,8 +10563,17 @@ packages:
     resolution: {integrity: sha512-5z4Vsvu6hlJnSr0tI0Qj9wF/s0L6MNFX5C4SNKbv5CDyMxc6vCzH2bZkJk9QQ/wKQiRCXPrAlw93OlCylKQBNA==}
     dev: false
 
+  /editorjs-html@4.0.0:
+    resolution: {integrity: sha512-UYIo1CM2tOcKPtVfLKDLebe/GEcUiVSnajUVHPtgccUm5IF1fAPS6lt14HNfQM667/7JJSO9gApTzKMUdjJ39A==}
+    dev: false
+
   /editorjs-text-color-plugin@2.0.4:
     resolution: {integrity: sha512-QpibTkOxs3ndlKNOLT8ZlC4ktc3/eKIajiLO0Jm/hh9AJug/CrM1/rAvHy+ldfUKavbWeI+YZvgjad0YTyoyGw==}
+    dev: false
+
+  /editorjs-viewer@2.0.3:
+    resolution: {integrity: sha512-qXkhPv5LGYk1tga5QnCy/u7chHNEAo+LBvXv+AJAdlZgi+aSSoRj0a59OasxQ8diOsgm9leCO/RGDWsawne55Q==}
+    engines: {node: '>=12.18.2'}
     dev: false
 
   /ee-first@1.1.1:

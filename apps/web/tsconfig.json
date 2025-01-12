@@ -34,5 +34,6 @@
     "public/firebase-messaging-sw.js",
     "app/[workspaceUid]/dashboard/**/*"
   ],
+  "typeRoots": ["./node_modules/@types", "src/type/common"],
   "exclude": ["node_modules"]
 }

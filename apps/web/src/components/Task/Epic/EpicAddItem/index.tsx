@@ -16,6 +16,7 @@ import { CommonResponse } from '@/src/type/common'
 // ** Context Imports
 import { useDialog } from '@/src/context/DialogContext'
 import CustomImage from '@/src/components/Image/CustomImage'
+import { mutate } from 'swr'
 
 const EpicAddItem = () => {
   const [open, setOpen] = useState<boolean>(false)
@@ -33,6 +34,7 @@ const EpicAddItem = () => {
       onSuccess: () => {
         setButton(true)
         handleClose()
+        mutate('/v1/epic')
       },
       onError: (error) => {
         handleModalOpen({

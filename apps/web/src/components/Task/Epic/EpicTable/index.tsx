@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 
 // Recoil Imports
 import { WorkspaceState } from '@/src/app'
@@ -11,12 +11,12 @@ import EpicAddItem from '../EpicAddItem'
 
 // ** Type Imports
 import { EpicInfo, SelectContent } from '@/src/type/epic'
+
+// ** Utils Imports
 import useSWRMutation from 'swr/mutation'
 import { Patch } from '@/src/repository'
 import { CommonResponse } from '@/src/type/common'
 import { mutate } from 'swr'
-
-// ** Utils Imports
 
 interface PropsType {
   epicData: EpicInfo[]
@@ -26,19 +26,41 @@ interface PropsType {
 
 const EpicTable = ({ epicData, handleClick, selectContent }: PropsType) => {
   const { role } = useRecoilValue(WorkspaceState)
-  const [epicId, setEpicId] = useState()
-  const [targetEpicId, setTargetEpicId] = useState()
+  const [localEpicData, setLocalEpicData] = useState(epicData)
+  const [epicId, setEpicId] = useState<number>(null)
+  const [targetEpicId, setTargetEpicId] = useState<number>()
 
-  const onDrag = (item) => {
-    setEpicId(item)
+  const onDragStart = (id: number) => {
+    setEpicId(id)
   }
 
-  const onDragEnter = (item) => {
-    setTargetEpicId(item)
+  const onDragOver = (
+    event: React.DragEvent<HTMLDivElement>,
+    targetId: number,
+  ) => {
+    event.preventDefault()
+    if (epicId && epicId !== targetId) {
+      const updatedData = reorderEpicData(localEpicData, epicId, targetId)
+      setLocalEpicData(updatedData)
+      setTargetEpicId(targetId)
+    }
   }
 
   const onDrop = () => {
     editEpic.trigger()
+  }
+
+  const reorderEpicData = (
+    data: EpicInfo[],
+    sourceId: number,
+    targetId: number,
+  ) => {
+    const sourceIndex = data.findIndex((item) => item.epicId === sourceId)
+    const targetIndex = data.findIndex((item) => item.epicId === targetId)
+    const updatedData = [...data]
+    const [removed] = updatedData.splice(sourceIndex, 1)
+    updatedData.splice(targetIndex, 0, removed)
+    return updatedData
   }
 
   const editEpic = useSWRMutation(
@@ -59,10 +81,10 @@ const EpicTable = ({ epicData, handleClick, selectContent }: PropsType) => {
         <div className="w-full h-full">
           <table className="w-full text-sm caption-bottom">
             <tbody className="[&amp;_tr:last-child]:border-0">
-              {epicData.map((item, index) => (
+              {localEpicData.map((item, index) => (
                 <EpicItem
-                  onDrag={onDrag}
-                  onDragEnter={onDragEnter}
+                  onDragStart={onDragStart}
+                  onDragOver={onDragOver}
                   onDrop={onDrop}
                   selectContent={selectContent}
                   key={item.epicId}

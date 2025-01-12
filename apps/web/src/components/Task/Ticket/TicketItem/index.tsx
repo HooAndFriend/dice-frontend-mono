@@ -14,6 +14,9 @@ interface PropsType {
   selectTicketId?: number
   isEpic: boolean
   handleClick: (id: number) => void
+  onDrag: (item) => void
+  onDragEnter: (item) => void
+  onDrop: (e) => void
 }
 
 const TicketViewItem = ({
@@ -21,9 +24,21 @@ const TicketViewItem = ({
   data,
   isEpic,
   selectTicketId,
+  onDrag,
+  onDragEnter,
+  onDrop,
 }: PropsType) => {
   return (
     <tr
+      onDragStart={() => {
+        console.log(data.ticketId)
+        onDrag(data.ticketId)
+      }}
+      onDragEnter={() => {
+        onDragEnter(data.ticketId)
+      }}
+      onDragEnd={onDrop}
+      draggable
       className={`border-b transition-colors cursor-pointer w-full ${
         data.ticketId === selectTicketId
           ? ' bg-blue-400 text-white'

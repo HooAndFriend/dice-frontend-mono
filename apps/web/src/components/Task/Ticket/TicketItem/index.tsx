@@ -14,9 +14,9 @@ interface PropsType {
   selectTicketId?: number
   isEpic: boolean
   handleClick: (id: number) => void
-  onDrag: (item) => void
-  onDragEnter: (item) => void
-  onDrop: (e) => void
+  onDrag?: (item) => void
+  onDragEnter?: (item) => void
+  onDrop?: (e) => void
 }
 
 const TicketViewItem = ({

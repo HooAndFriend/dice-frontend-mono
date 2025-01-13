@@ -9,6 +9,8 @@ import dayjs from 'dayjs'
 
 interface PropsType {
   email: string
+  userId: number
+  workspaceUid: string
   ticketStats: TicketStats
   ticketData: TicketInfo[]
   handleClick: (ticketId: number) => void
@@ -18,6 +20,8 @@ const DashboardContainer = ({
   email,
   ticketStats,
   ticketData,
+  userId,
+  workspaceUid,
   handleClick,
 }: PropsType) => {
   return (
@@ -56,6 +60,8 @@ const DashboardContainer = ({
               isAdmin={false}
               handleClick={handleClick}
               title="My Tasks"
+              userId={userId}
+              workspaceUid={workspaceUid}
             />
           </div>
           <div className="flex flex-col lg:col-span-1">
@@ -80,6 +86,8 @@ const DashboardContainer = ({
               isAdmin={false}
               handleClick={handleClick}
               title="My Today Tasks"
+              userId={userId}
+              workspaceUid={workspaceUid}
             />
           </div>
         </div>

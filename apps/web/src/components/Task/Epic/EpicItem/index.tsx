@@ -15,22 +15,47 @@ import { EpicInfo, SelectContent } from '@/src/type/epic'
 // ** Recoil Imports
 import { useRecoilValue } from 'recoil'
 import { WorkspaceState } from '@/src/app'
+import useSWRMutation from 'swr/mutation'
+import { Patch } from '@/src/repository'
+import { CommonResponse } from '@/src/type/common'
+import { mutate } from 'swr'
 
 interface PropsType {
   item: EpicInfo
   selectContent: SelectContent
   handleClick: (value: SelectContent) => void
+  onDragStart: (item) => void
+  onDragOver: (e, item) => void
+  onDrop: () => void
 }
 
-const EpicItem = ({ item, handleClick, selectContent }: PropsType) => {
+const EpicItem = ({
+  item,
+  handleClick,
+  selectContent,
+  onDragStart,
+  onDragOver,
+  onDrop,
+}: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
   const [enabled, setEnabled] = useState<boolean>(false)
-
+  const [ticketId, setTicketId] = useState()
+  const [targetTicketId, setTargetTicketId] = useState()
   const router = useRouter()
 
   const handleOpen = () => setOpen((c) => !c)
 
   const { role, uuid } = useRecoilValue(WorkspaceState)
+
+  const editTicket = useSWRMutation(
+    '/v1/ticket/order',
+    async (url: string) =>
+      await Patch<CommonResponse<void>>(url, { ticketId, targetTicketId }),
+    {
+      onSuccess: () => {},
+      onError: (err) => {},
+    },
+  )
 
   const epicProgress = useMemo(() => {
     if (item.doneTicketCount === 0) {
@@ -52,9 +77,25 @@ const EpicItem = ({ item, handleClick, selectContent }: PropsType) => {
 
   if (!enabled) return
 
+  const onDragTicket = (item) => {
+    setTicketId(item)
+  }
+
+  const onDragEnterTicket = (item) => {
+    setTargetTicketId(item)
+  }
+
+  const onDropTicket = () => {
+    editTicket.trigger()
+  }
+
   return (
     <>
       <tr
+        draggable
+        onDragStart={() => onDragStart(item.epicId)}
+        onDragOver={(e) => onDragOver(e, item.epicId)}
+        onDrop={onDrop}
         className="w-full border-b transition-colors data-[state=selected]:bg-muted hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
         onClick={() => {
           handleOpen()
@@ -126,6 +167,9 @@ const EpicItem = ({ item, handleClick, selectContent }: PropsType) => {
                 <tbody>
                   {item.ticket.map((ticket) => (
                     <TicketItem
+                      onDrag={onDragTicket}
+                      onDragEnter={onDragEnterTicket}
+                      onDrop={onDropTicket}
                       key={ticket.ticketId}
                       data={ticket}
                       selectTicketId={

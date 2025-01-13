@@ -1,11 +1,11 @@
 // ** Component Imports
-import DashboardSidebar from "@/src/components/Dashboard/DashboardSidebar";
-import DashboardHeader from "@/src/components/Dashboard/DashboardHeader";
+import DashboardSidebar from '@/src/components/Dashboard/DashboardSidebar'
+import DashboardHeader from '@/src/components/Dashboard/DashboardHeader'
 
 const DashboardRayout = ({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }): JSX.Element => {
   return (
     <div className="flex flex-col w-full h-screen">
@@ -15,12 +15,10 @@ const DashboardRayout = ({
         style={{ maxHeight: `calc(100% - 70px)` }}
       >
         <DashboardSidebar />
-        <div className="flex-1 bg-[#FAFAFB] overflow-y-scroll overflow-x-hidden">
-          {children}
-        </div>
+        <div className="flex-1 bg-[#FAFAFB]  overflow-x-hidden">{children}</div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DashboardRayout;
+export default DashboardRayout

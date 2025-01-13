@@ -1,5 +1,5 @@
 // ** React Imports
-import { ChangeEvent } from 'react'
+import { ChangeEvent, KeyboardEvent } from 'react'
 
 // ** Type Imports
 import { RoleType } from '@/src/type/common'
@@ -19,6 +19,7 @@ interface PropsType {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   handleUpdateEpic: (type: 'content' | 'name') => void
   handleDeleteEpic: () => void
+  handleEnter: (e: KeyboardEvent<HTMLInputElement>) => void
 }
 
 const EpicCardView = ({
@@ -31,6 +32,7 @@ const EpicCardView = ({
   handleClose,
   handleUpdateEpic,
   handleDeleteEpic,
+  handleEnter,
 }: PropsType) => {
   return (
     <div className="h-full overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
@@ -72,6 +74,7 @@ const EpicCardView = ({
               name="name"
               onChange={onChange}
               className="w-full h-[40px] border border-[#EBEBEC] rounded-[10px] px-4"
+              onKeyDown={handleEnter}
             />
             <div className="flex items-center mx-2">
               <button

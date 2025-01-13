@@ -1,3 +1,4 @@
+import { OutputData } from '@editorjs/editorjs'
 import { CommonResponse, RoleType } from '../common'
 
 export interface GetBoardListResponse extends CommonResponse {
@@ -16,7 +17,7 @@ export interface BoardInfo {
 }
 
 export interface BoardDetail {
-  content: string
+  content: OutputData
   createdDate: Date
   createdId: string
   boardId: number

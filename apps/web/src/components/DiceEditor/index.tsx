@@ -1,10 +1,8 @@
-// ** React Imports
-import { memo, useEffect, useMemo, useRef } from 'react'
-
-// ** Editor Js Imports
+import { memo, useEffect, useRef } from 'react'
 import EditorJS, { OutputData } from '@editorjs/editorjs'
 import { tools } from './constants'
 import './editor.css'
+import { safeParseJson } from '@/src/utils/json'
 
 interface PropsType {
   boardId: number
@@ -14,38 +12,46 @@ interface PropsType {
 }
 
 const DiceEditor = ({ boardId, content, setContent, readOnly }: PropsType) => {
-  const ref = useRef<HTMLDivElement>(null)
-  const editor = useMemo(
-    () =>
-      new EditorJS({
-        holder: `editorjs-${boardId}`,
-        tools,
-        readOnly,
-        minHeight: 30,
-        data: content,
-        autofocus: true,
-        placeholder: 'Let`s write an awesome story!',
-        onChange: (api) => {
-          !api.readOnly.isEnabled &&
-            api.saver.save().then(async (content) => {
-              setContent(content)
-            })
-        },
-      }),
-    [readOnly, boardId],
-  )
+  const editorRef = useRef<EditorJS | null>(null)
+  const editorHolderRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
+    if (!editorHolderRef.current) return
+
+    editorRef.current = new EditorJS({
+      holder: editorHolderRef.current.id,
+      tools,
+      readOnly,
+      minHeight: 30,
+      data: {
+        ...content,
+        blocks: content?.blocks.map((block) => ({
+          ...block,
+          data: safeParseJson(block.data),
+        })),
+      },
+      autofocus: true,
+      placeholder: 'Let`s write an awesome story!',
+      onChange: (api) => {
+        if (!api.readOnly.isEnabled) {
+          api.saver.save().then((newContent) => {
+            setContent(newContent)
+          })
+        }
+      },
+    })
+
     return () => {
-      if (editor && editor.destroy) {
-        editor.destroy()
+      if (editorRef.current) {
+        editorRef.current.destroy()
+        editorRef.current = null
       }
     }
-  }, [readOnly, boardId])
+  }, [boardId, content, readOnly, setContent])
 
   return (
     <div
-      ref={ref}
+      ref={editorHolderRef}
       className="w-full h-[750px] py-4 px-16 overflow-x-hidden overflow-y-scroll"
       id={`editorjs-${boardId}`}
     />

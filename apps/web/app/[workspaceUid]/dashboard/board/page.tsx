@@ -13,7 +13,12 @@ import IndexContainerView from '@/src/container/board-container/index-container'
 // ** Type Imports
 import { OutputData } from '@editorjs/editorjs'
 import { CommonResponse } from '@/src/type/common'
-import { BoardDetail, GetBoardResponse } from '@/src/type/board'
+import {
+  BoardDetail,
+  BoardInfo,
+  GetBoardListResponse,
+  GetBoardResponse,
+} from '@/src/type/board'
 
 // ** Service Imports
 import useSWRMutation from 'swr/mutation'
@@ -34,7 +39,7 @@ const BoardPage = () => {
     handleInput,
     setData: setBoard,
   } = useInput<BoardDetail>({
-    content: '',
+    content: null,
     title: '',
     createdDate: null,
     createdId: '',
@@ -65,7 +70,42 @@ const BoardPage = () => {
     updateBoard.trigger()
   }
 
-  const { mutate: boardRefetch } = useSWR(
+  const generateTitleList = (
+    boardData: BoardInfo[],
+    boardId: number,
+  ): string[] => {
+    if (!boardData) return []
+    const result: string[] = []
+
+    const findBoard = (boards: BoardInfo[], parentTitles: string[] = []) => {
+      for (const board of boards) {
+        if (board.boardId === boardId) {
+          result.push(...parentTitles, board.title)
+          return
+        }
+
+        if (board.children?.length > 0) {
+          findBoard(board.children, [...parentTitles, board.title])
+        }
+      }
+    }
+
+    if (boardData) {
+      findBoard(boardData)
+    }
+
+    return result
+  }
+
+  const {
+    data: boardData,
+    isLoading,
+    mutate: boardMutate,
+  } = useSWR('/v1/board', async (url) => {
+    return Get<GetBoardListResponse>(url)
+  })
+
+  const { data, mutate: boardRefetch } = useSWR(
     `/v1/board/${get('boardId')}`,
     async (url) => {
       if (!get('boardId')) return
@@ -74,7 +114,7 @@ const BoardPage = () => {
     {
       onSuccess: ({ data }) => {
         setBoard(data)
-        setContent(JSON.parse(data.content))
+        setContent(data.content)
       },
     },
   )
@@ -85,7 +125,7 @@ const BoardPage = () => {
       return await Put<CommonResponse<void>>(url, {
         boardId: Number(get('boardId')),
         title: board.title,
-        content: JSON.stringify(content),
+        content,
       })
     },
     {
@@ -141,6 +181,7 @@ const BoardPage = () => {
       setContent={setContent}
       handleSave={handleSave}
       handleDelete={deleteBoard.trigger}
+      boardList={generateTitleList(boardData?.data?.data, board.boardId)}
     />
   )
 }

@@ -16,16 +16,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 // ** Utils Imports
-<<<<<<< HEAD
 import dayjs from 'dayjs'
 import { BoardDetail, GetBoardResponse } from '@/src/type/board'
-import ProfileBox from '@/src/components/ProfileBox'
-=======
-
-// ** Type Imports
-import { BoardDetail } from '@/src/type/board'
-import EditorJSViewer from '@/src/components/DiceEditor/preview'
->>>>>>> f764b6b5f5c941bed9ce2dcc1bb084ef88a64668
 
 // ** Service Imports
 import { Delete, Get, Patch, Post, Put } from '@/src/repository'
@@ -35,6 +27,7 @@ import { CommonResponse } from '@/src/type/common'
 
 // ** Context Imports
 import { useDialog } from '@/src/context/DialogContext'
+import EditorJSViewer from '@/src/components/DiceEditor/preview'
 
 interface BoardData {
   boardId: number
@@ -63,7 +56,7 @@ const BoardContainer = ({
   content,
   readOnly,
   board,
-  boardList,
+  // boardList,
   handleInput,
   setReadOnly,
   setContent,
@@ -176,7 +169,6 @@ const BoardContainer = ({
   }
 
   return (
-<<<<<<< HEAD
     <div className="w-full h-full p-4 bg-white">
       <div className="flex items-center justify-between">
         <h1 className="font-bold text-[18px] text-gray-500">
@@ -214,21 +206,6 @@ const BoardContainer = ({
             name="title"
             className="h-[40px] w-[600px] border-none  text-[32px] px-0 my-1 font-bold"
           />
-=======
-    <div className="p-6 bg-white rounded-lg shadow-md">
-      <div className="flex items-center mb-4 text-sm text-gray-500">
-        {boardList.map((board, index) =>
-          boardList.length - 1 === index ? (
-            <span className="font-medium text-gray-700" key={board}>
-              {board}
-            </span>
-          ) : (
-            <Fragment key={board}>
-              <span>{board}</span>
-              <ChevronRight className="w-4 h-4 mx-2" />
-            </Fragment>
-          ),
->>>>>>> f764b6b5f5c941bed9ce2dcc1bb084ef88a64668
         )}
       </div>
       <h1 className="mb-4 text-3xl font-bold">{board.title}</h1>

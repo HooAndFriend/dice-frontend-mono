@@ -43,7 +43,7 @@ const BoardContainer = ({
   handleDelete,
 }: PropsType) => {
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
+    <div className="p-6 h-full bg-white rounded-lg shadow-md">
       <div className="flex items-center mb-4 text-sm text-gray-500">
         {boardList.map((board, index) =>
           boardList.length - 1 === index ? (

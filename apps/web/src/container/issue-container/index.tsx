@@ -10,12 +10,14 @@ import UserSelectBox from '@/src/components/UserSelectBox'
 // ** Type Imports
 import { Ticket } from '@/src/type/ticket'
 import { WorkspaceUser } from '@/src/type/workspace'
-import { EpicStatus } from '@/src/type/epic'
+import { EpicInfo, EpicStatus } from '@/src/type/epic'
 import IssueTable from '@/src/components/Task/Issue/IssueTable'
+import EpicFilter from '@/src/components/Task/Common/Filter/EpicFilter'
 
 interface PropsType {
   ticketId: number
   data: Ticket[]
+  epic: EpicInfo[]
   word: string
   ticketCount: number
   isLoading: boolean
@@ -34,15 +36,18 @@ interface PropsType {
 const IssueContainer = ({
   ticketId,
   data,
+  epic,
   word,
   selectedStatus,
   selectedTypeIds,
+  selectedEpicIds,
   isLoading,
   ticketCount,
   setTicketId,
   handleWord,
   checkedList,
   setCheckedList,
+  handleEpicSelectFilter,
   handleTypeSelectFilter,
   handleStatusSelectFilter,
 }: PropsType) => {
@@ -58,6 +63,10 @@ const IssueContainer = ({
           <TicketTypeSelectFilter
             selectedTypeIds={selectedTypeIds}
             handleTypeSelectFilter={handleTypeSelectFilter}
+          />
+          <EpicFilter
+            selectedEpicIds={selectedEpicIds}
+            handleEpicSelectFilter={handleEpicSelectFilter}
           />
           <UserSelectBox
             checkedList={checkedList}
@@ -77,7 +86,13 @@ const IssueContainer = ({
           ) : (
             <IssueTable
               handleClick={setTicketId}
-              data={data
+              data={epic
+                .filter((epic) =>
+                  selectedEpicIds.length === 0
+                    ? []
+                    : selectedEpicIds.includes(epic.epicId),
+                )
+                .reduce((acc, epic) => acc.concat(epic.ticket), [])
                 .filter((item) => item.name.includes(word))
                 .filter((item) =>
                   checkedList.length === 0

@@ -14,13 +14,13 @@ import useSWR from 'swr'
 
 // ** Type Imports
 import { GetTicketListResponse } from '@/src/type/ticket'
+import { EpicStatus, GetEpicListResponse } from '@/src/type/epic'
 
 // ** Context Imports
 import {
   GetSearchWorkspaceUserListResponse,
   WorkspaceUser,
 } from '@/src/type/workspace'
-import { EpicStatus } from '@/src/type/epic'
 
 const TablePage = () => {
   const [word, setWord] = useState<string>('')
@@ -70,6 +70,12 @@ const TablePage = () => {
       setSelectedTypeIds((c) => [...c, typeId])
     }
   }
+
+  const {
+    data: epicData,
+    error: epicError,
+    isLoading: epicLoading,
+  } = useSWR('/v1/epic', async (url) => Get<GetEpicListResponse>(url))
 
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true))
@@ -127,6 +133,7 @@ const TablePage = () => {
       selectedEpicIds={selectedEpicIds}
       data={isLoading ? [] : data.data.data}
       ticketCount={isLoading ? 0 : data.data.count}
+      epic={epicLoading ? [] : epicData?.data.data || []}
       word={word}
       checkedList={checkedList}
       handleTypeSelectFilter={handleTypeSelectFilter}

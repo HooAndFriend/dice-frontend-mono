@@ -1,10 +1,12 @@
 'use client'
 // ** Component Imports
 import CustomSearch from '@/src/components/Input/CustomSearch'
+import EpicFilter from '@/src/components/Task/Common/Filter/EpicFilter'
 import TicketTypeSelectFilter from '@/src/components/Task/Common/Filter/TypeFilter'
 import KanbanCard from '@/src/components/Task/Kanban/KanbanCard'
 import UserSelectBox from '@/src/components/UserSelectBox'
 import { statusList } from '@/src/constants/status'
+import { Epic, EpicInfo } from '@/src/type/epic'
 
 // ** Type Imports
 import { Ticket } from '@/src/type/ticket'
@@ -12,11 +14,13 @@ import { WorkspaceUser } from '@/src/type/workspace'
 
 interface PropsType {
   data: Ticket[]
+  epic: EpicInfo[]
   word: string
   checkedList: WorkspaceUser[]
   selectedEpicIds: number[]
   selectedTypeIds: number[]
   handleTypeSelectFilter: (typeId: number) => void
+  handleEpicSelectFilter: (epicId: number) => void
   setCheckedList: (list: WorkspaceUser[]) => void
   handleWord: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
@@ -24,6 +28,9 @@ interface PropsType {
 const KanbanContainer = ({
   data,
   word,
+  epic,
+  selectedEpicIds,
+  handleEpicSelectFilter,
   handleTypeSelectFilter,
   handleWord,
   selectedTypeIds,
@@ -38,6 +45,10 @@ const KanbanContainer = ({
           <TicketTypeSelectFilter
             selectedTypeIds={selectedTypeIds}
             handleTypeSelectFilter={handleTypeSelectFilter}
+          />
+          <EpicFilter
+            selectedEpicIds={selectedEpicIds}
+            handleEpicSelectFilter={handleEpicSelectFilter}
           />
           <UserSelectBox
             checkedList={checkedList}
@@ -59,8 +70,14 @@ const KanbanContainer = ({
                 <h1 className="cursor-pointer ">+</h1>
               </div>
               <div className="p-2">
-                {data
-                  .filter((_) => _.status === item)
+                {epic
+                  .filter((epic) =>
+                    selectedEpicIds.length === 0
+                      ? []
+                      : selectedEpicIds.includes(epic.epicId),
+                  )
+                  .reduce((acc, epic) => acc.concat(epic.ticket), [])
+                  .filter((ticket) => ticket.status === item)
                   .map((ticket) => (
                     <KanbanCard data={ticket} key={ticket.ticketId} />
                   ))}

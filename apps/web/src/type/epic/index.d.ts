@@ -66,6 +66,6 @@ export interface SelectContent {
 }
 
 interface EpicWithDates extends EpicInfo {
-  startDate: string;
-  endDate: string;
+  startDate: string
+  endDate: string
 }

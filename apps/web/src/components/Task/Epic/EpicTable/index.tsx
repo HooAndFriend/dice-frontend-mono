@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // Recoil Imports
 import { WorkspaceState } from '@/src/app'
@@ -29,6 +29,10 @@ const EpicTable = ({ epicData, handleClick, selectContent }: PropsType) => {
   const [localEpicData, setLocalEpicData] = useState(epicData)
   const [epicId, setEpicId] = useState<number>(null)
   const [targetEpicId, setTargetEpicId] = useState<number>()
+
+  useEffect(() => {
+    setLocalEpicData(epicData)
+  }, [epicData])
 
   const onDragStart = (id: number) => {
     setEpicId(id)

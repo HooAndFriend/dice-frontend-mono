@@ -57,7 +57,12 @@ const TicketViewItem = ({
         }}
       >
         <div className="flex items-center justify-center">
-          <TicketSettingButton data={data} isText={false} />
+          <TicketSettingButton
+            data={data.ticketSetting}
+            contentId={data.ticketId}
+            type="TICKET"
+            isText={false}
+          />
         </div>
       </td>
       <td

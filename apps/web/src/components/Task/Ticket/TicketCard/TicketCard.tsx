@@ -77,7 +77,12 @@ const TicketCardView = ({
     <div className="h-full overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <TicketSettingButton data={data} isText={false} />
+          <TicketSettingButton
+            data={data.ticketSetting}
+            contentId={data.ticketId}
+            type="TICKET"
+            isText={false}
+          />
           <h1 className="ml-4 text-[18px] font-bold">{data.code}</h1>
         </div>
         <div className="flex items-center">

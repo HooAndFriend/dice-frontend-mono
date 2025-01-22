@@ -82,7 +82,13 @@ const TicketLink = ({
           // onClick={() => setSelectTicket(ticket)}
         >
           <div className="flex items-center">
-            <TicketSettingButton data={selectTicket} isText={false} disabled />
+            <TicketSettingButton
+              data={selectTicket.ticketSetting}
+              contentId={selectTicket.ticketId}
+              type="TICKET"
+              isText={false}
+              disabled
+            />
             <p
               className="pl-[6px] text-[14px] overflow-hidden whitespace-nowrap text-ellipsis"
               style={{
@@ -154,7 +160,13 @@ const TicketLink = ({
                 onClick={() => setSelectTicketList((cur) => [...cur, ticket])}
               >
                 <div className="flex items-center">
-                  <TicketSettingButton data={ticket} isText={false} disabled />
+                  <TicketSettingButton
+                    data={ticket.ticketSetting}
+                    contentId={ticket.ticketId}
+                    type="TICKET"
+                    isText={false}
+                    disabled
+                  />
                   <p
                     className="pl-[6px] text-[14px] overflow-hidden whitespace-nowrap text-ellipsis"
                     style={{

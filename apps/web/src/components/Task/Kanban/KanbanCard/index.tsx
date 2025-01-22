@@ -23,7 +23,12 @@ const KanbanCard = ({ data, isClick, handleClick }: PropsType) => {
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <TicketSettingButton data={data} isText={false} />
+          <TicketSettingButton
+            data={data.ticketSetting}
+            contentId={data.ticketId}
+            type="TICKET"
+            isText={false}
+          />
           <p className="text-[12px] pl-[8px]">{data.code}</p>
         </div>
       </div>

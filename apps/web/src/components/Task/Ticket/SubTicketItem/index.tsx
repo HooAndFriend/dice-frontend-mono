@@ -71,7 +71,12 @@ const SubTicketItem = ({
       }
     >
       <div className="flex items-center w-[70%]">
-        <TicketSettingButton data={ticket} isText={false} />
+        <TicketSettingButton
+          data={ticket.ticketSetting}
+          contentId={ticket.ticketId}
+          type="TICKET"
+          isText={false}
+        />
         <div className="w-[calc(100%-24px)] flex">
           <Tooltip text={`${ticket.code} - ${ticket.name}`} width={64} isFull>
             <p

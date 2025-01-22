@@ -20,6 +20,7 @@ import { getTicketSettingImage } from '@/src/utils/ticket-setting'
 interface PropsType {
   data: TicketSetting
   type: 'EPIC' | 'TICKET'
+  size?: 'LARGE' | 'MEDIUM'
   contentId: number
   isText: boolean
   disabled?: boolean
@@ -31,6 +32,7 @@ const TicketSettingButton = ({
   type,
   isText,
   disabled,
+  size = 'MEDIUM',
 }: PropsType) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null)
 
@@ -124,10 +126,14 @@ const TicketSettingButton = ({
 
   if (error) return
 
+  const PX_SIZE = size === 'MEDIUM' ? '24px' : '30px'
+  const IMAGE_SIZE = size === 'MEDIUM' ? 16 : 20
+  const ROUNDED_SIZE = size === 'MEDIUM' ? '6px' : '8px'
+
   return (
     <div className="relative z-4">
       <div
-        className="flex items-center cursor-pointer"
+        className={`flex items-center ${!disabled && 'cursor-pointer'}`}
         onClick={(e) => {
           e.stopPropagation()
           handleOpen()
@@ -135,7 +141,7 @@ const TicketSettingButton = ({
       >
         {data ? (
           <div
-            className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
+            className={`w-[${PX_SIZE}] h-[${PX_SIZE}] rounded-[${ROUNDED_SIZE}] flex items-center justify-center`}
             style={{
               backgroundColor: getTicketSettingImage(data.type).color,
             }}
@@ -143,8 +149,8 @@ const TicketSettingButton = ({
             <CustomImage
               src={getTicketSettingImage(data.type).url}
               alt="ticket_setting"
-              width={16}
-              height={16}
+              width={IMAGE_SIZE}
+              height={IMAGE_SIZE}
             />
           </div>
         ) : (

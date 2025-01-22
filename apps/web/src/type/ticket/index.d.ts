@@ -1,5 +1,5 @@
 import { CommonResponse, RoleType } from '../common'
-import { EpicStatus } from '../epic'
+import { EpicInfo, EpicStatus } from '../epic'
 import { CommentInfo } from '../qa'
 
 export interface GetTicketListResponse extends CommonResponse {
@@ -73,6 +73,7 @@ export interface TicketInfo {
   worker: TicketUser
   childLink: TicketLink[]
   parentLink: TicketLink[]
+  epic: EpicInfo
 }
 
 export interface GetTicketSettingListResponse extends Response {

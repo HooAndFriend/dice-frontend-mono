@@ -15,7 +15,6 @@ import { RoleType } from '@/src/type/common'
 import dayjs from 'dayjs'
 import TicketComment from '../TicketComment'
 import TicketHistory from '../TicketHistory'
-import ImagePreview from '../../../Image/ImagePreview'
 import { KeyboardEvent } from 'react'
 import SubTicketItem from '../SubTicketItem'
 import TicketLink from '../TicketLink'
@@ -76,14 +75,19 @@ const TicketCardView = ({
   return (
     <div className="h-full overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
       <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          <TicketSettingButton
-            data={data.ticketSetting}
-            contentId={data.ticketId}
-            type="TICKET"
-            isText={false}
-          />
-          <h1 className="ml-4 text-[18px] font-bold">{data.code}</h1>
+        <div>
+          <div className="flex items-center">
+            <TicketSettingButton
+              data={data.ticketSetting}
+              contentId={data.ticketId}
+              type="TICKET"
+              isText={false}
+              disabled
+            />
+            <h1 className="ml-4 text-[14px] font-bold text-gray-600">
+              {data.code} /
+            </h1>
+          </div>
         </div>
         <div className="flex items-center">
           <p
@@ -101,6 +105,16 @@ const TicketCardView = ({
             </h1>
           )}
         </div>
+      </div>
+      <div className="flex items-center mt-2">
+        <TicketSettingButton
+          data={data.ticketSetting}
+          contentId={data.ticketId}
+          type="TICKET"
+          isText={false}
+          size="LARGE"
+        />
+        <h1 className="ml-4 text-[18px] font-bold">{data.code}</h1>
       </div>
       <div className="flex items-center justify-between mt-[30px]">
         {mode.name === 'view' ? (

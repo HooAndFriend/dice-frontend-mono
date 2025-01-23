@@ -79,6 +79,7 @@ const TicketCard = ({ ticketId, isPage, handleClose }: PropsType) => {
     ticketSetting: null,
     parentLink: [],
     childLink: [],
+    epic: null,
   })
 
   const { role } = useRecoilValue(WorkspaceState)

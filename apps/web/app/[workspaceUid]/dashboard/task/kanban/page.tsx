@@ -12,6 +12,7 @@ import { Get } from '@/src/repository'
 // ** Type Imports
 import { GetTicketListResponse } from '@/src/type/ticket'
 import { WorkspaceUser } from '@/src/type/workspace'
+import { GetEpicListResponse } from '@/src/type/epic'
 
 const KanbanPage = () => {
   const [selectedTypeIds, setSelectedTypeIds] = useState<number[]>([])
@@ -26,6 +27,19 @@ const KanbanPage = () => {
       setSelectedTypeIds((c) => [...c, typeId])
     }
   }
+  const handleEpicSelectFilter = (epicId: number) => {
+    if (selectedEpicIds.includes(epicId)) {
+      setSelectedEpicIds((ids) => ids.filter((id) => id !== epicId))
+    } else {
+      setSelectedEpicIds((ids) => [...ids, epicId])
+    }
+  }
+
+  const {
+    data: epicData,
+    error: epicError,
+    isLoading: epicLoading,
+  } = useSWR('/v1/epic', async (url) => Get<GetEpicListResponse>(url))
 
   const {
     data,
@@ -62,7 +76,9 @@ const KanbanPage = () => {
       word={word}
       checkedList={checkedList}
       selectedEpicIds={selectedEpicIds}
+      epic={epicLoading ? [] : epicData?.data.data || []}
       selectedTypeIds={selectedTypeIds}
+      handleEpicSelectFilter={handleEpicSelectFilter}
       handleTypeSelectFilter={handleTypeSelectFilter}
       setCheckedList={setCheckedList}
       handleWord={(e) => setWord(e.target.value)}

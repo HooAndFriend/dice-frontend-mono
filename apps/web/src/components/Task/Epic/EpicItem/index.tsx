@@ -18,7 +18,7 @@ import { WorkspaceState } from '@/src/app'
 import useSWRMutation from 'swr/mutation'
 import { Patch } from '@/src/repository'
 import { CommonResponse } from '@/src/type/common'
-import { mutate } from 'swr'
+import TicketSettingButton from '../../Ticket/TicketSettingButton'
 
 interface PropsType {
   item: EpicInfo
@@ -111,8 +111,13 @@ const EpicItem = ({
           }}
         >
           <div className="flex items-center justify-center">
-            <div className="flex items-center cursor-pointer">
-              <div className="w-[24px] h-[24px] bg-green-300 rounded-[6px]" />
+            <div className="flex items-center justify-center">
+              <TicketSettingButton
+                data={item.ticketSetting}
+                contentId={item.epicId}
+                type="EPIC"
+                isText={false}
+              />
             </div>
           </div>
         </td>

@@ -14,9 +14,9 @@ interface PropsType {
   selectTicketId?: number
   isEpic: boolean
   handleClick: (id: number) => void
-  onDrag: (item) => void
-  onDragEnter: (item) => void
-  onDrop: (e) => void
+  onDrag?: (item) => void
+  onDragEnter?: (item) => void
+  onDrop?: (e) => void
 }
 
 const TicketViewItem = ({
@@ -57,11 +57,16 @@ const TicketViewItem = ({
         }}
       >
         <div className="flex items-center justify-center">
-          <TicketSettingButton data={data} isText={false} />
+          <TicketSettingButton
+            data={data.ticketSetting}
+            contentId={data.ticketId}
+            type="TICKET"
+            isText={false}
+          />
         </div>
       </td>
       <td
-        className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6 text-black"
+        className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6 text-black overflow-hidden whitespace-nowrap text-ellipsis"
         style={{
           width: '55%',
           textDecorationLine:

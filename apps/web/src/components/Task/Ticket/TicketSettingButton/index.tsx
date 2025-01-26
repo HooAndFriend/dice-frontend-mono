@@ -4,11 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 // ** Type Imports
 import { Get, Patch } from '@/src/repository'
 import { CommonResponse } from '@/src/type/common'
-import {
-  GetTicketSettingListResponse,
-  Ticket,
-  TicketInfo,
-} from '@/src/type/ticket'
+import { GetTicketSettingListResponse, TicketSetting } from '@/src/type/ticket'
 
 // ** Service Imports
 import useSWRMutation from 'swr/mutation'
@@ -18,17 +14,26 @@ import useSWR, { mutate } from 'swr'
 import { useDialog } from '@/src/context/DialogContext'
 
 // ** Component Imports
-import Tooltip from '../../../Tooltip'
 import CustomImage from '../../../Image/CustomImage'
 import { getTicketSettingImage } from '@/src/utils/ticket-setting'
 
 interface PropsType {
-  data: Ticket | TicketInfo
+  data: TicketSetting
+  type: 'EPIC' | 'TICKET'
+  size?: 'LARGE' | 'MEDIUM'
+  contentId: number
   isText: boolean
   disabled?: boolean
 }
 
-const TicketSettingButton = ({ data, isText, disabled }: PropsType) => {
+const TicketSettingButton = ({
+  data,
+  contentId,
+  type,
+  isText,
+  disabled,
+  size = 'MEDIUM',
+}: PropsType) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null)
 
   const [open, setOpen] = useState<boolean>(false)
@@ -52,7 +57,7 @@ const TicketSettingButton = ({ data, isText, disabled }: PropsType) => {
     '/v1/ticket/ticket-setting',
     async (url: string, { arg }: { arg: number }) =>
       await Patch<CommonResponse<void>>(url, {
-        ticketId: data.ticketId,
+        ticketId: contentId,
         settingId: arg,
       }),
     {
@@ -60,7 +65,33 @@ const TicketSettingButton = ({ data, isText, disabled }: PropsType) => {
         setOpen(false)
         mutate('/v1/ticket')
         mutate('/v1/epic')
-        mutate(`/v1/ticket/detail/${data.ticketId}`)
+        mutate(`/v1/ticket/detail/${contentId}`)
+      },
+      onError: (error) => {
+        handleModalOpen({
+          title: 'Error',
+          message: error.response.data.message,
+          logLevel: 'warn',
+          buttonText: 'Close',
+          type: 'alert',
+        })
+      },
+    },
+  )
+
+  const updateEpicSetting = useSWRMutation(
+    '/v1/epic/ticket-setting',
+    async (url: string, { arg }: { arg: number }) =>
+      await Patch<CommonResponse<void>>(url, {
+        epicId: contentId,
+        settingId: arg,
+      }),
+    {
+      onSuccess: () => {
+        setOpen(false)
+        mutate('/v1/ticket')
+        mutate('/v1/epic')
+        mutate(`/v1/ticket/detail/${contentId}`)
       },
       onError: (error) => {
         handleModalOpen({
@@ -95,28 +126,31 @@ const TicketSettingButton = ({ data, isText, disabled }: PropsType) => {
 
   if (error) return
 
+  const PX_SIZE = size === 'MEDIUM' ? '24px' : '30px'
+  const IMAGE_SIZE = size === 'MEDIUM' ? 16 : 20
+  const ROUNDED_SIZE = size === 'MEDIUM' ? '6px' : '8px'
+
   return (
     <div className="relative z-4">
       <div
-        className="flex items-center cursor-pointer"
+        className={`flex items-center ${!disabled && 'cursor-pointer'}`}
         onClick={(e) => {
           e.stopPropagation()
           handleOpen()
         }}
       >
-        {data.ticketSetting ? (
+        {data ? (
           <div
-            className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
+            className={`w-[${PX_SIZE}] h-[${PX_SIZE}] rounded-[${ROUNDED_SIZE}] flex items-center justify-center`}
             style={{
-              backgroundColor: getTicketSettingImage(data.ticketSetting.type)
-                .color,
+              backgroundColor: getTicketSettingImage(data.type).color,
             }}
           >
             <CustomImage
-              src={getTicketSettingImage(data.ticketSetting.type).url}
+              src={getTicketSettingImage(data.type).url}
               alt="ticket_setting"
-              width={16}
-              height={16}
+              width={IMAGE_SIZE}
+              height={IMAGE_SIZE}
             />
           </div>
         ) : (
@@ -124,9 +158,7 @@ const TicketSettingButton = ({ data, isText, disabled }: PropsType) => {
         )}
 
         {isText && (
-          <h3 className="text-[16px] ml-4">
-            {data.ticketSetting ? data.ticketSetting.name : '-'}
-          </h3>
+          <h3 className="text-[16px] ml-4">{data ? data.name : '-'}</h3>
         )}
       </div>
       {open && (
@@ -137,7 +169,11 @@ const TicketSettingButton = ({ data, isText, disabled }: PropsType) => {
           {settingData.data.data.map((item) => (
             <div
               className="w-[168px] h-[32px] hover:bg-[#F4F4FA] rounded-[8px] p-[8px] flex items-center cursor-pointer"
-              onClick={() => updateTicketSetting.trigger(item.ticketSettingId)}
+              onClick={() =>
+                type === 'TICKET'
+                  ? updateTicketSetting.trigger(item.ticketSettingId)
+                  : updateEpicSetting.trigger(item.ticketSettingId)
+              }
             >
               <div
                 className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
@@ -152,7 +188,7 @@ const TicketSettingButton = ({ data, isText, disabled }: PropsType) => {
                   height={16}
                 />
               </div>
-              <h3 className="text-[14px] ml-[12px]">{item.name}</h3>
+              <h3 className="text-[14px] ml-[12px] text-black">{item.name}</h3>
             </div>
           ))}
         </div>

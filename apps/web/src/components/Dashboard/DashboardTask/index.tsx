@@ -1,4 +1,7 @@
 'use client'
+// ** Next Imports
+import Image from 'next/image'
+import Link from 'next/link'
 
 // ** Component Imports
 import { Table, TableBody } from '@/src/components/ui/table'
@@ -8,22 +11,34 @@ import {
   CardTitle,
   CardContent,
 } from '@/src/components/ui/card'
-import { TicketInfo } from '@/src/type/ticket'
 import TicketViewItem from '../../Task/Ticket/TicketViewItem'
-import Image from 'next/image'
+
+// ** Type Imports
+import { TicketInfo } from '@/src/type/ticket'
 
 interface PropsType {
   title: string
+  userId: number
+  workspaceUid: string
   data: TicketInfo[]
   isAdmin: boolean
   handleClick: (ticketId: number) => void
 }
 
-const DashboardTask = ({ title, data, isAdmin, handleClick }: PropsType) => {
+const DashboardTask = ({
+  title,
+  data,
+  isAdmin,
+  handleClick,
+  workspaceUid,
+  userId,
+}: PropsType) => {
   return (
     <Card className="bg-white max-h-[380px] rounded-[20px] shadow-md lg:col-span-2 flex-1 overflow-auto">
       <CardHeader>
-        <CardTitle>{`${title} (${data.length})`}</CardTitle>
+        <Link href={`/${workspaceUid}/dashboard/task/issue?userId=${userId}`}>
+          <CardTitle>{`${title} (${data.length})`}</CardTitle>
+        </Link>
       </CardHeader>
       <CardContent>
         <Table>

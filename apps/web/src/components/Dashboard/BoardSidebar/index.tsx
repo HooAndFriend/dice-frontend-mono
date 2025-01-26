@@ -12,10 +12,13 @@ import { GetBoardListResponse } from '@/src/type/board'
 // ** Component Imports
 import BoardMenuItem from './BoardMenuItem'
 import BoardSaveModal from '../../Modal/BoardSaveModal'
+import { Plus } from 'lucide-react'
 
 const BoardSidebar = () => {
   const [open, setOpen] = useState<boolean>(false)
-  const [selectedBoardId, setSelectedBoardId] = useState<number>(0)
+  const [menuBoardId, setMenuBoardId] = useState<number | null>(null)
+
+  const cancelButtonRef = useRef()
 
   const {
     data: boardData,
@@ -25,34 +28,34 @@ const BoardSidebar = () => {
     return Get<GetBoardListResponse>(url)
   })
 
-  const cancelButtonRef = useRef()
-
   const handleOpen = (boardId: number) => {
-    setSelectedBoardId(boardId)
+    setMenuBoardId(boardId)
     setOpen(true)
   }
 
   if (isLoading) return
 
   return (
-    <div className="w-[300px] bg-white border-r-2 border-[#EBEBEC] px-4 py-2">
-      <div className="flex items-center justify-between w-full">
-        <h1 className="text-[14px] font-bold">Content</h1>
+    <aside className="w-64 overflow-y-auto bg-white shadow-md">
+      <div className="p-4 border-b">
+        <h2 className="text-xl font-bold">Posts</h2>
+      </div>
+      <div className="p-4 border-b">
         <button
-          className="w-[20px] font-bold text-[16px] h-[20px] cursor-pointer"
+          className="w-full bg-blue-500 text-white px-4 py-2 rounded-[10px] hover:bg-blue-600 transition-colors flex items-center justify-center"
           onClick={() => {
-            setSelectedBoardId(0)
-            setOpen(true)
+            handleOpen(null)
           }}
         >
-          +
+          <Plus className="w-4 h-4 mr-2" />
+          Add New Board
         </button>
       </div>
-      <div className="mt-4">
-        {boardData.data.data.map((item) => (
+      <div className="py-4">
+        {boardData.data.data.map((board) => (
           <BoardMenuItem
-            data={item}
-            key={item.boardId}
+            key={board.boardId}
+            board={board}
             handleOpen={handleOpen}
           />
         ))}
@@ -63,11 +66,10 @@ const BoardSidebar = () => {
           setOpen={setOpen}
           refetch={mutate}
           cancelButtonRef={cancelButtonRef}
-          parentId={selectedBoardId}
-          
+          parentId={menuBoardId}
         />
       )}
-    </div>
+    </aside>
   )
 }
 

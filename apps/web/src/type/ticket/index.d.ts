@@ -1,3 +1,4 @@
+import { Priortiry } from '@/src/constants/priority'
 import { CommonResponse, RoleType } from '../common'
 import { EpicInfo, EpicStatus } from '../epic'
 import { CommentInfo } from '../qa'
@@ -52,6 +53,7 @@ export interface Ticket {
   reopenDate: string | null
   ticketSetting: TicketSetting
   worker: TicketUser
+  priority: Priortiry
   subTickets: Ticket[]
 }
 
@@ -64,6 +66,7 @@ export interface TicketInfo {
   content: string | null
   code: string
   storypoint: 0
+  priority: Priortiry
   dueDate: string | null
   completeDate: string | null
   reopenDate: string | null

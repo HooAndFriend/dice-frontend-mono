@@ -17,7 +17,6 @@ const TicketKanbanCard = ({ data, handleClick }: PropsType) => {
       className="w-full h-[157px] shadow-xl rounded-[15px] bg-white p-[20px] cursor-pointer mb-[25px]"
       onClick={() => handleClick(data.ticketId)}
     >
-      {/* <h1 className="text-[18px]">{data.epic ? data.epic.name : ""}</h1> */}
       <div className="mt-[15px] mb-[25px]">
         <TicketStatusButton status={data.status} ticketId={data.ticketId} />
       </div>

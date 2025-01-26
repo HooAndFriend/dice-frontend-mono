@@ -19,6 +19,7 @@ import { KeyboardEvent } from 'react'
 import SubTicketItem from '../SubTicketItem'
 import TicketLink from '../TicketLink'
 import ImageMultiPreview from '@/src/components/Image/ImageMultiPreview'
+import TicketPriorityButton from '../TicketPriority'
 
 interface PropsType {
   isPage?: boolean
@@ -78,14 +79,14 @@ const TicketCardView = ({
         <div>
           <div className="flex items-center">
             <TicketSettingButton
-              data={data.ticketSetting}
-              contentId={data.ticketId}
-              type="TICKET"
+              data={data?.epic?.ticketSetting}
+              contentId={data?.epic?.epicId}
+              type="EPIC"
               isText={false}
               disabled
             />
             <h1 className="ml-4 text-[14px] font-bold text-gray-600">
-              {data.code} /
+              {data?.epic?.code} /
             </h1>
           </div>
         </div>
@@ -197,6 +198,14 @@ const TicketCardView = ({
         <TicketDatePicker
           ticketId={data.ticketId}
           value={data.dueDate ? dayjs(data.dueDate).format('YYYY-MM-DD') : ''}
+        />
+      </div>
+      <div className="flex items-center mt-[20px]">
+        <h1 className="w-[110px] text-[16px]">Priortiry</h1>
+        <TicketPriorityButton
+          ticketId={data.ticketId}
+          priortiry={data.priority}
+          displayName
         />
       </div>
       <hr className="my-[20px]" />

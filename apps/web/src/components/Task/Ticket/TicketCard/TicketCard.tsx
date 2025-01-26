@@ -78,14 +78,14 @@ const TicketCardView = ({
         <div>
           <div className="flex items-center">
             <TicketSettingButton
-              data={data.ticketSetting}
-              contentId={data.ticketId}
-              type="TICKET"
+              data={data?.epic?.ticketSetting}
+              contentId={data?.epic?.epicId}
+              type="EPIC"
               isText={false}
               disabled
             />
             <h1 className="ml-4 text-[14px] font-bold text-gray-600">
-              {data.code} /
+              {data.epic.code} /
             </h1>
           </div>
         </div>

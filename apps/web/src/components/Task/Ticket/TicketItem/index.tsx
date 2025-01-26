@@ -8,6 +8,7 @@ import dayjs from 'dayjs'
 
 // ** Type Imports
 import { Ticket } from '@/src/type/ticket'
+import TicketPriorityButton from '../TicketPriority'
 
 interface PropsType {
   data: Ticket
@@ -96,7 +97,18 @@ const TicketViewItem = ({
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
         style={{
-          width: '15%',
+          width: '10%',
+        }}
+      >
+        <TicketPriorityButton
+          ticketId={data.ticketId}
+          priortiry={data.priority}
+        />
+      </td>
+      <td
+        className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+        style={{
+          width: '10%',
           whiteSpace: 'nowrap',
           color:
             dayjs().isSame(dayjs(data.dueDate), 'day') &&
@@ -112,7 +124,7 @@ const TicketViewItem = ({
       <td
         className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
         style={{
-          width: '15%',
+          width: '10%',
         }}
       >
         <TicketStatusButton ticketId={data.ticketId} status={data.status} />

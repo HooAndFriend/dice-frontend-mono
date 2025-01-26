@@ -4,6 +4,7 @@ import TicketUserButton from '../../Ticket/TicketUserButton'
 import dayjs from 'dayjs'
 import CustomImage from '@/src/components/Image/CustomImage'
 import TicketStatusButton from '../../Ticket/TicketStatusButton'
+import TicketPriorityButton from '../../Ticket/TicketPriority'
 
 interface PropsType {
   data: Ticket
@@ -30,6 +31,12 @@ const KanbanCard = ({ data, isClick, handleClick }: PropsType) => {
             isText={false}
           />
           <p className="text-[12px] pl-[8px]">{data.code}</p>
+        </div>
+        <div className="flex items-center">
+          <TicketPriorityButton
+            ticketId={data.ticketId}
+            priortiry={data.priority}
+          />
         </div>
       </div>
       <h1 className="font-bold text-[14px] mt-[16px]">{data.name}</h1>

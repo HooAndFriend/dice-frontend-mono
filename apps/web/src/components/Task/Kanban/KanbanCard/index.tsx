@@ -39,7 +39,7 @@ const KanbanCard = ({ data, isClick, handleClick }: PropsType) => {
           />
         </div>
       </div>
-      <h1 className="font-bold text-[14px] mt-[16px]">{data.name}</h1>
+      <h1 className="font-bold text-[12px] mt-[16px]">{data.name}</h1>
       <div className="flex items-center space-x-4 mt-[16px]">
         <CustomImage
           width={24}
@@ -48,7 +48,9 @@ const KanbanCard = ({ data, isClick, handleClick }: PropsType) => {
           className=""
           alt="calendar"
         />
-        <h1>{data.dueDate ? dayjs(data.dueDate).format('YYYY-MM-DD') : '-'}</h1>
+        <h1 className="text-[12px]">
+          {data.dueDate ? dayjs(data.dueDate).format('YYYY-MM-DD') : '-'}
+        </h1>
       </div>
       <div className="flex items-center justify-between mt-[24px]">
         <div className="flex items-center">

@@ -62,7 +62,7 @@ const TicketSettingTypeButton = ({ type, setType }: PropsType) => {
         }}
       >
         <div
-          className="w-[40px] h-[40px] rounded-[6px] flex items-center justify-center"
+          className="w-[30px] h-[30px] rounded-[6px] flex items-center justify-center"
           style={{
             backgroundColor: getTicketSettingImage(type).color,
           }}

@@ -51,7 +51,7 @@ const TicketViewItem = ({
       }}
     >
       <td
-        className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+        className="py-[12PX] align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
         style={{
           width: '5%',
           paddingLeft: isEpic ? '48px' : '',
@@ -67,9 +67,9 @@ const TicketViewItem = ({
         </div>
       </td>
       <td
-        className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6 text-black overflow-hidden whitespace-nowrap text-ellipsis"
+        className="py-[12PX] align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6 text-black overflow-hidden whitespace-nowrap text-ellipsis text-[12px]"
         style={{
-          width: '55%',
+          width: selectTicketId ? '40%' : '55%',
           textDecorationLine:
             data.status === 'COMPLETE' ? 'line-through' : 'none',
         }}
@@ -77,9 +77,9 @@ const TicketViewItem = ({
         {`${data.code} - ${data.name}`}
       </td>
       <td
-        className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+        className="py-[12PX] align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
         style={{
-          width: '10%',
+          width: selectTicketId ? '12.5%' : '10%',
         }}
       >
         <div className="flex items-center justify-center">
@@ -95,9 +95,9 @@ const TicketViewItem = ({
         </div>
       </td>
       <td
-        className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+        className="py-[12PX] align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
         style={{
-          width: '10%',
+          width: selectTicketId ? '12.5%' : '10%',
         }}
       >
         <TicketPriorityButton
@@ -106,9 +106,9 @@ const TicketViewItem = ({
         />
       </td>
       <td
-        className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+        className="py-[12PX] align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6 text-[12px]"
         style={{
-          width: '10%',
+          width: selectTicketId ? '15%' : '10%',
           whiteSpace: 'nowrap',
           color:
             dayjs().isSame(dayjs(data.dueDate), 'day') &&
@@ -122,9 +122,9 @@ const TicketViewItem = ({
         {data.dueDate ? dayjs(data.dueDate).format('YYYY-MM-DD') : '-'}
       </td>
       <td
-        className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+        className="py-[12PX] align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
         style={{
-          width: '10%',
+          width: selectTicketId ? '15%' : '10%',
         }}
       >
         <TicketStatusButton ticketId={data.ticketId} status={data.status} />

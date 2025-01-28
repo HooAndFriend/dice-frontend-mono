@@ -105,7 +105,7 @@ const EpicItem = ({
         style={{ width: '100%' }}
       >
         <td
-          className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+          className="py-[12px] align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
           style={{
             width: '5%',
           }}
@@ -122,7 +122,7 @@ const EpicItem = ({
           </div>
         </td>
         <td
-          className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6"
+          className="align-middle [&:has([role=checkbox])]:pr-0 font-medium pl-6 text-[12px] py-[12px]"
           style={{
             width: '25%',
           }}
@@ -130,7 +130,7 @@ const EpicItem = ({
           {`${item.code} - ${item.name}`}
         </td>
         <td
-          className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+          className="align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6 py-[12px]"
           style={{
             width: '60%',
           }}
@@ -147,13 +147,13 @@ const EpicItem = ({
           </div>
         </td>
         <td
-          className="p-4 align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6"
+          className="align-middle text-center [&:has([role=checkbox])]:pr-0 pl-6 py-[12px]"
           style={{
             width: '10%',
           }}
         >
           <div className="flex justify-center w-[10%]">
-            <h4 className="text-[16px] font-san-medium">
+            <h4 className="text-[12px] font-san-medium">
               {item.doneTicketCount === 0 || item.ticket.length === 0
                 ? 0
                 : ((item.doneTicketCount / item.ticket.length) * 100).toFixed(

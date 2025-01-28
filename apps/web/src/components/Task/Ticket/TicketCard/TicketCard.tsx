@@ -124,7 +124,7 @@ const TicketCardView = ({
               if (role === 'VIEWER') return
               setMode({ ...mode, name: 'edit' })
             }}
-            className="h-full cursor-pointer min-w-1/2 text-[16px]"
+            className="h-full cursor-pointer min-w-1/2 text-[14px]"
           >
             {data.name.length === 0 ? '-' : data.name}
           </h1>
@@ -160,7 +160,7 @@ const TicketCardView = ({
       <div className="flex items-center mt-[20px]">
         <div className="flex items-center w-1/2">
           <div className="w-[110px]">
-            <h1 className="text-[16px]">Worker</h1>
+            <h1 className="text-[14px]">Worker</h1>
           </div>
           <div className="flex items-center">
             <TicketUserButton
@@ -176,10 +176,10 @@ const TicketCardView = ({
         </div>
         <div className="flex items-center w-1/2">
           <div className="w-[110px]">
-            <h1 className="text-[16px]">Admin</h1>
+            <h1 className="text-[14px]">Admin</h1>
           </div>
           <div className="flex items-center">
-            <h3 className="text-[16px]">
+            <h3 className="text-[14px]">
               <TicketUserButton
                 profile={data.admin ? data.admin.profile : '/images/dice.png'}
                 ticketId={data.ticketId}
@@ -194,14 +194,14 @@ const TicketCardView = ({
         </div>
       </div>
       <div className="flex items-center mt-[20px]">
-        <h1 className="w-[110px] text-[16px]">DueDate</h1>
+        <h1 className="w-[110px] text-[14px]">DueDate</h1>
         <TicketDatePicker
           ticketId={data.ticketId}
           value={data.dueDate ? dayjs(data.dueDate).format('YYYY-MM-DD') : ''}
         />
       </div>
       <div className="flex items-center mt-[20px]">
-        <h1 className="w-[110px] text-[16px]">Priortiry</h1>
+        <h1 className="w-[110px] text-[14px]">Priortiry</h1>
         <TicketPriorityButton
           ticketId={data.ticketId}
           priortiry={data.priority}
@@ -209,11 +209,11 @@ const TicketCardView = ({
         />
       </div>
       <hr className="my-[20px]" />
-      <h1 className="my-4 text-[16px]">Content</h1>
+      <h1 className="my-4 text-[14px]">Content</h1>
       {mode.content === 'view' ? (
         <div
           dangerouslySetInnerHTML={{ __html: data.content }}
-          className="p-4 border border-[#EBEBEC] min-h-[80px] w-full rounded-[10px] overflow-y-auto text-[16px] cursor-pointer"
+          className="p-4 border border-[#EBEBEC] min-h-[80px] w-full rounded-[10px] overflow-y-auto text-[14px] cursor-pointer"
           onDoubleClick={() => {
             if (role === 'VIEWER') return
             setMode({ ...mode, content: 'edit' })
@@ -244,10 +244,10 @@ const TicketCardView = ({
           </div>
         </div>
       )}
-      {/* <h1 className="my-4 text-[16px]">Story Point</h1>
+      {/* <h1 className="my-4 text-[14px]">Story Point</h1>
       {mode.storypoint === 'view' ? (
         <div
-          className="h-[40px] rounded-[10px] border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4 cursor-pointer text-[16px]"
+          className="h-[40px] rounded-[10px] border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4 cursor-pointer text-[14px]"
           onDoubleClick={() => {
             if (role === 'VIEWER') return
             setMode({ ...mode, storypoint: 'edit' })
@@ -283,7 +283,7 @@ const TicketCardView = ({
         </div>
       )} */}
 
-      <h1 className="my-4 text-[16px]">File</h1>
+      <h1 className="my-4 text-[14px]">File</h1>
       <div className="flex items-center">
         {data.ticketFile.length < 4 && (
           <TicketFileUploader
@@ -312,7 +312,7 @@ const TicketCardView = ({
       </div>
       <div>
         {data.parentLink.length > 0 && (
-          <h1 className="my-4 text-[16px]">Linked Parent Ticket</h1>
+          <h1 className="my-4 text-[14px]">Linked Parent Ticket</h1>
         )}
         <div>
           {data.parentLink.map((ticket) => (
@@ -326,7 +326,7 @@ const TicketCardView = ({
           ))}
         </div>
         <div className="flex items-center">
-          <h1 className="my-4 text-[16px]">Linked Child Ticket</h1>
+          <h1 className="my-4 text-[14px]">Linked Child Ticket</h1>
           <div
             className=" px-[8px] h-[24px] ml-4 rounded-[6px] bg-[#D9E0FF] flex items-center justify-center cursor-pointer text-[12px]"
             onClick={() => setLinkOpen(true)}

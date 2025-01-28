@@ -55,7 +55,7 @@ const StatusPopover = ({
     <div className="relative z-4">
       {isQa ? (
         <button
-          className="w-[120px] h-[45px] rounded-[30px] flex justify-center items-center text-white font-spoqa font-bold"
+          className="w-[120px] h-[45px] rounded-[30px] flex justify-center items-center text-white font-spoqa font-bold text-[12px]"
           style={{ backgroundColor: getStateBoxColor(status) }}
           onClick={(e) => {
             e.stopPropagation()

@@ -10,13 +10,16 @@ import UserModal from '@/src/components/Modal/UserModal'
 
 // ** Type Imports
 import { UserStateType } from '@/src/app'
+import WorkspaceModal from '../../Modal/WorkspaceModal'
 
 interface PropsType {
   open: boolean
+  workspaceModalOpen: boolean
   modalOpen: boolean
   cancelButtonRef: any
   userState: UserStateType
   setModalOpen: (value: boolean) => void
+  setWorkspaceModalOpen: (value: boolean) => void
   handleModalOpen: () => void
   handleOpen: () => void
   handleLogout: () => void
@@ -26,6 +29,8 @@ const DynamicImage = dynamic(() => import('next/image'), { ssr: false })
 const UserPopoverView = ({
   open,
   modalOpen,
+  workspaceModalOpen,
+  setWorkspaceModalOpen,
   userState,
   cancelButtonRef,
   handleOpen,
@@ -73,12 +78,23 @@ const UserPopoverView = ({
             </div>
             <hr className="mt-3" />
             <div className="mt-2">
-              <h1 className="cursor-pointer " onClick={handleModalOpen}>
-                Setting
+              <h1
+                className="cursor-pointer text-[12px]"
+                onClick={handleModalOpen}
+              >
+                User Setting
               </h1>
             </div>
             <div className="mt-2">
-              <h1 className="cursor-pointer " onClick={handleLogout}>
+              <h1
+                className="cursor-pointer  text-[12px]"
+                onClick={() => setWorkspaceModalOpen(true)}
+              >
+                Workspace Setting
+              </h1>
+            </div>
+            <div className="mt-2">
+              <h1 className="cursor-pointer text-[12px]" onClick={handleLogout}>
                 Logout
               </h1>
             </div>
@@ -89,6 +105,13 @@ const UserPopoverView = ({
         <UserModal
           open={modalOpen}
           setOpen={setModalOpen}
+          cancelButtonRef={cancelButtonRef}
+        />
+      )}
+      {workspaceModalOpen && (
+        <WorkspaceModal
+          open={workspaceModalOpen}
+          setOpen={setWorkspaceModalOpen}
           cancelButtonRef={cancelButtonRef}
         />
       )}

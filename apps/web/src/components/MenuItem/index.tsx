@@ -1,25 +1,34 @@
 // ** Next Imports
 import Link from 'next/link'
+import CustomImage from '../Image/CustomImage'
+import { useRecoilValue } from 'recoil'
+import { WorkspaceState } from '@/src/app'
+import Image from 'next/image'
+import { ReactNode } from 'react'
 
 interface PropsType {
-  icon: React.FC<{ className: string }>
-  isClicked: boolean
-  link: string
+  children: JSX.Element
+  isOpen: boolean
+  label: string
+  // link: string
 }
 
-const MenuItem = ({ link, icon: Icon, isClicked }: PropsType) => {
+const MenuItem = ({ label, isOpen, children }: PropsType) => {
+  const workspace = useRecoilValue(WorkspaceState)
   return (
-    <Link href={link}>
-      <div className="mt-[15px]">
-        <div
-          className={`${
-            isClicked ? 'bg-[#623AD6]' : ''
-          } rounded-[10px] w-[40px] h-[40px] flex justify-center items-center`}
-        >
-          <Icon className="" />
-        </div>
+    <div className="w-full px-[32px]">
+      <div className="flex items-center justify-between w-full">
+        <h1 className="text-[12px] text-[#6A6F75]">{label}</h1>
+        <CustomImage
+          src={isOpen ? '/images/bottom.png' : '/images/top.png'}
+          alt="top"
+          width={20}
+          height={20}
+        />
       </div>
-    </Link>
+
+      {children}
+    </div>
   )
 }
 

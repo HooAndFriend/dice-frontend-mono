@@ -1,10 +1,10 @@
 'use client'
 
 // ** Next Imports
-import { useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 // ** React Imports
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 // ** Component Imports
 import BoardContainer from '@/src/container/board-container'
@@ -13,12 +13,7 @@ import IndexContainerView from '@/src/container/board-container/index-container'
 // ** Type Imports
 import { OutputData } from '@editorjs/editorjs'
 import { CommonResponse } from '@/src/type/common'
-import {
-  BoardDetail,
-  BoardInfo,
-  GetBoardListResponse,
-  GetBoardResponse,
-} from '@/src/type/board'
+import { BoardDetail, GetBoardResponse } from '@/src/type/board'
 
 // ** Service Imports
 import useSWRMutation from 'swr/mutation'
@@ -56,59 +51,28 @@ const BoardPage = () => {
       nickname: '',
     },
   })
-
   const [content, setContent] = useState<OutputData>()
   const [readOnly, setReadOnly] = useState<boolean>(true)
 
-  const { get } = useSearchParams()
   const router = useRouter()
+  const pathname = usePathname()
 
   const { uuid } = useRecoilValue(WorkspaceState)
   const { handleOpen } = useDialog()
+
+  const boardId = useMemo(
+    () => +pathname.split('/')[pathname.split('/').length - 1],
+    [pathname],
+  )
 
   const handleSave = () => {
     updateBoard.trigger()
   }
 
-  const generateTitleList = (
-    boardData: BoardInfo[],
-    boardId: number,
-  ): string[] => {
-    if (!boardData) return []
-    const result: string[] = []
-
-    const findBoard = (boards: BoardInfo[], parentTitles: string[] = []) => {
-      for (const board of boards) {
-        if (board.boardId === boardId) {
-          result.push(...parentTitles, board.title)
-          return
-        }
-
-        if (board.children?.length > 0) {
-          findBoard(board.children, [...parentTitles, board.title])
-        }
-      }
-    }
-
-    if (boardData) {
-      findBoard(boardData)
-    }
-
-    return result
-  }
-
-  const {
-    data: boardData,
-    isLoading,
-    mutate: boardMutate,
-  } = useSWR('/v1/board', async (url) => {
-    return Get<GetBoardListResponse>(url)
-  })
-
   const { data, mutate: boardRefetch } = useSWR(
-    `/v1/board/${get('boardId')}`,
+    `/v1/board/${boardId}`,
     async (url) => {
-      if (!get('boardId')) return
+      if (!boardId) return
       return Get<GetBoardResponse>(url)
     },
     {
@@ -123,7 +87,7 @@ const BoardPage = () => {
     '/v1/board',
     async (url: string) => {
       return await Put<CommonResponse<void>>(url, {
-        boardId: Number(get('boardId')),
+        boardId,
         title: board.title,
         content,
       })
@@ -146,8 +110,7 @@ const BoardPage = () => {
 
   const deleteBoard = useSWRMutation(
     '/v1/board/',
-    async (url: string) =>
-      await Delete<CommonResponse<void>>(url + get('boardId')),
+    async (url: string) => await Delete<CommonResponse<void>>(url + boardId),
     {
       onSuccess: ({ data }) => {
         router.push(`/${uuid}/dashboard/board`)
@@ -167,21 +130,19 @@ const BoardPage = () => {
 
   useEffect(() => {
     setReadOnly(true)
-  }, [get('boardId')])
+  }, [boardId])
 
-  if (!get('boardId') || !board) return <IndexContainerView />
+  if (!boardId || !board) return <IndexContainerView />
 
   return (
     <BoardContainer
       content={content}
       readOnly={readOnly}
       board={board}
-      handleInput={handleInput}
       setReadOnly={setReadOnly}
       setContent={setContent}
       handleSave={handleSave}
       handleDelete={deleteBoard.trigger}
-      boardList={generateTitleList(boardData?.data?.data, board.boardId)}
     />
   )
 }

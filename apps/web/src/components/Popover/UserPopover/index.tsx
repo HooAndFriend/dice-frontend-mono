@@ -23,6 +23,7 @@ import {
 const UserPopover = () => {
   const [open, setOpen] = useState<boolean>(false)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const [workspaceModalOpen, setWorkspaceModalOpen] = useState<boolean>(false)
 
   const cancelButtonRef = useRef(null)
 
@@ -46,6 +47,8 @@ const UserPopover = () => {
   return (
     <UserPopoverView
       open={open}
+      workspaceModalOpen={workspaceModalOpen}
+      setWorkspaceModalOpen={setWorkspaceModalOpen}
       handleOpen={handleOpen}
       modalOpen={modalOpen}
       userState={userState}

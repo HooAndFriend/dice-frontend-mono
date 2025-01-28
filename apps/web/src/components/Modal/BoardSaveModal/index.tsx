@@ -60,7 +60,7 @@ const BoardSaveModal = ({
       }),
     {
       onSuccess: ({ data }) => {
-        router.push(`/${uuid}/dashboard/board?boardId=${data}`)
+        router.push(`/${uuid}/dashboard/board/${data}`)
         setOpen(false)
         refetch()
       },

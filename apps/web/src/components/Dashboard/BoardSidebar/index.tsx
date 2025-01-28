@@ -12,11 +12,9 @@ import { GetBoardListResponse } from '@/src/type/board'
 // ** Component Imports
 import BoardMenuItem from './BoardMenuItem'
 import BoardSaveModal from '../../Modal/BoardSaveModal'
-import { Plus } from 'lucide-react'
 
 const BoardSidebar = () => {
   const [open, setOpen] = useState<boolean>(false)
-  const [menuBoardId, setMenuBoardId] = useState<number | null>(null)
 
   const cancelButtonRef = useRef()
 
@@ -29,36 +27,28 @@ const BoardSidebar = () => {
   })
 
   const handleOpen = (boardId: number) => {
-    setMenuBoardId(boardId)
     setOpen(true)
   }
 
   if (isLoading) return
 
   return (
-    <aside className="w-64 overflow-y-auto bg-white shadow-md">
-      <div className="p-4 border-b">
-        <h2 className="text-xl font-bold">Posts</h2>
-      </div>
-      <div className="p-4 border-b">
-        <button
-          className="w-full bg-blue-500 text-white px-4 py-2 rounded-[10px] hover:bg-blue-600 transition-colors flex items-center justify-center"
-          onClick={() => {
-            handleOpen(null)
-          }}
+    <aside className="w-full overflow-y-auto">
+      {boardData.data.data.map((board) => (
+        <BoardMenuItem
+          key={board.boardId}
+          board={board}
+          handleOpen={handleOpen}
+        />
+      ))}
+      <div className="px-[32px] pt-[20px]">
+        <div
+          className="w-full h-[36px] border-dashed rounded-[3px] border-[#CACED3] border-[1px] flex justify-center items-center cursor-pointer "
+          onClick={() => setOpen(true)}
         >
-          <Plus className="w-4 h-4 mr-2" />
-          Add New Board
-        </button>
-      </div>
-      <div className="py-4">
-        {boardData.data.data.map((board) => (
-          <BoardMenuItem
-            key={board.boardId}
-            board={board}
-            handleOpen={handleOpen}
-          />
-        ))}
+          <h1 className="text-[10px] text-[#6A6F75] mr-[8px]">+</h1>
+          <h1 className="text-[10px] text-[#6A6F75]">New Posts</h1>
+        </div>
       </div>
       {open && (
         <BoardSaveModal
@@ -66,7 +56,7 @@ const BoardSidebar = () => {
           setOpen={setOpen}
           refetch={mutate}
           cancelButtonRef={cancelButtonRef}
-          parentId={menuBoardId}
+          parentId={null}
         />
       )}
     </aside>

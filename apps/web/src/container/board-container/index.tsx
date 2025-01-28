@@ -1,11 +1,8 @@
 // ** Next Imports
 import dynamic from 'next/dynamic'
 
-// ** React Imports
-import { Fragment } from 'react'
-
 // ** Component Imports
-import { ChevronRight, Clock, Edit2, Trash2 } from 'lucide-react'
+import { Clock, Edit2, Trash2 } from 'lucide-react'
 import { OutputData } from '@editorjs/editorjs'
 import ProfileBox from '@/src/components/ProfileBox'
 
@@ -19,8 +16,6 @@ interface PropsType {
   content: OutputData
   readOnly: boolean
   board: BoardDetail
-  boardList: string[]
-  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void
   setReadOnly: (readOnly: boolean) => void
   handleSave: () => void
   handleDelete: () => void
@@ -35,29 +30,13 @@ const BoardContainer = ({
   content,
   readOnly,
   board,
-  boardList,
-  handleInput,
   setReadOnly,
   setContent,
   handleSave,
   handleDelete,
 }: PropsType) => {
   return (
-    <div className="p-6 h-full bg-white rounded-lg shadow-md">
-      <div className="flex items-center mb-4 text-sm text-gray-500">
-        {boardList.map((board, index) =>
-          boardList.length - 1 === index ? (
-            <span className="font-medium text-gray-700" key={board}>
-              {board}
-            </span>
-          ) : (
-            <Fragment key={board}>
-              <span>{board}</span>
-              <ChevronRight className="w-4 h-4 mx-2" />
-            </Fragment>
-          ),
-        )}
-      </div>
+    <div className="h-full p-6 bg-white rounded-lg shadow-md">
       <h1 className="mb-4 text-3xl font-bold">{board.title}</h1>
       <div className="flex items-center mb-6">
         <ProfileBox

@@ -54,7 +54,7 @@ const TicketSettingItem = ({ item, handleData }: PropsType) => {
 
   return (
     <div className="flex items-center justify-between">
-      <div className="flex h-[60px] items-center">
+      <div className="flex h-[30px] items-center w-full">
         <div className="flex items-center justify-center">
           <TicketSettingTypeButton type={item.type} setType={setType} />
         </div>
@@ -64,22 +64,20 @@ const TicketSettingItem = ({ item, handleData }: PropsType) => {
             onChange={(e) =>
               handleData(item.ticketSettingId, e.target.value, 'name')
             }
-            width="165px"
-            height="50px"
-            borderRadius="10px"
+            width="240px"
+            height="30px"
+            borderRadius="6px"
           />
         </div>
-        <div>
-          <CustomInput
-            value={item.description}
-            onChange={(e) =>
-              handleData(item.ticketSettingId, e.target.value, 'description')
-            }
-            width="600px"
-            height="50px"
-            borderRadius="10px"
-          />
-        </div>
+        <CustomInput
+          value={item.description}
+          onChange={(e) =>
+            handleData(item.ticketSettingId, e.target.value, 'description')
+          }
+          width="300px"
+          height="30px"
+          borderRadius="6px"
+        />
       </div>
       <div onClick={() => deleteSettingType.trigger()} className="ml-4">
         <CustomImage

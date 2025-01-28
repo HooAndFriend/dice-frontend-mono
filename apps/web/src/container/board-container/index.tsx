@@ -36,8 +36,8 @@ const BoardContainer = ({
   handleDelete,
 }: PropsType) => {
   return (
-    <div className="h-full p-6 bg-white rounded-lg shadow-md">
-      <h1 className="mb-4 text-3xl font-bold">{board.title}</h1>
+    <div className="h-full p-6 bg-white rounded-lg shadow-md px-[48px]">
+      <h1 className="mb-4 text-[24px] font-bold">{board.title}</h1>
       <div className="flex items-center mb-6">
         <ProfileBox
           image={board.createdUser.profile}

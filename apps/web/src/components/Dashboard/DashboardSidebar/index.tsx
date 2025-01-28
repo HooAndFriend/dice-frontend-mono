@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 
 // ** React Imports
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 // ** Component Imports
 import WorkspaceList from '../../WorkspaceList'
@@ -67,6 +67,11 @@ const getTaskMenuList = (uuid: string) => [
 ]
 
 const DashboardSidebard = () => {
+  const [open, setOpen] = useState({
+    workspace: true,
+    task: true,
+    board: true,
+  })
   const { uuid } = useRecoilValue(WorkspaceState)
 
   const pathname = usePathname()
@@ -81,51 +86,58 @@ const DashboardSidebard = () => {
             return item
           })
         : getTaskMenuList(uuid),
-    [pathname],
+    [pathname, uuid],
   )
 
   return (
-    <div className="w-[220px] border-r-2 border-[#EBEBEC] pt-[32px]">
-      <div className="w-full px-[32px]">
+    <div className="w-[220px] h-screen border-r border-[#EBEBEC] bg-white pt-8 overflow-y-auto">
+      {/* Workspaces Section */}
+      <div className="w-full px-8">
         <div className="flex items-center justify-between w-full">
           <h1 className="text-[12px] text-[#6A6F75]">Workspaces</h1>
           <CustomImage
-            src="/images/top.png"
-            // src={isOpen ? '/images/bottom.png' : '/images/top.png'}
-            alt="top"
+            onClick={() => setOpen({ ...open, workspace: !open.workspace })}
+            className="cursor-pointer"
+            src={open.workspace ? '/images/down.png' : '/images/top.png'}
+            alt="toggle"
             width={20}
             height={20}
           />
         </div>
-        <WorkspaceList />
+        {open.workspace && <WorkspaceList />}
       </div>
+
+      {/* Task Management Section */}
       <div className="w-full mt-[48px]">
-        <div className="flex items-center justify-between w-full px-[32px] mb-[20px]">
+        <div className="flex items-center justify-between w-full px-8 mb-[20px]">
           <h1 className="text-[12px] text-[#6A6F75]">Task Managements</h1>
           <CustomImage
-            src="/images/top.png"
-            // src={isOpen ? '/images/bottom.png' : '/images/top.png'}
-            alt="top"
+            onClick={() => setOpen({ ...open, task: !open.task })}
+            src={open.task ? '/images/down.png' : '/images/top.png'}
+            alt="toggle"
             width={20}
             height={20}
           />
         </div>
-        {sidebarMenuList.map((item) => (
-          <TicketMenuItem {...item} key={item.id} />
-        ))}
+        {open.task &&
+          sidebarMenuList.map((item) => (
+            <TicketMenuItem {...item} key={item.id} />
+          ))}
       </div>
+
+      {/* Board Section */}
       <div className="w-full mt-[48px]">
-        <div className="flex items-center justify-between w-full px-[32px] mb-[20px]">
+        <div className="flex items-center justify-between w-full px-8 mb-[20px]">
           <h1 className="text-[12px] text-[#6A6F75]">Board</h1>
           <CustomImage
-            src="/images/top.png"
-            // src={isOpen ? '/images/bottom.png' : '/images/top.png'}
-            alt="top"
+            onClick={() => setOpen({ ...open, board: !open.board })}
+            src={open.board ? '/images/down.png' : '/images/top.png'}
+            alt="toggle"
             width={20}
             height={20}
           />
         </div>
-        <BoardSidebar />
+        {open.board && <BoardSidebar />}
       </div>
     </div>
   )

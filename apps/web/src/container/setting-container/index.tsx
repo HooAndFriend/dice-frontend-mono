@@ -49,13 +49,13 @@ const SettingContainer = ({
       <div className="flex justify-end mt-[40px]">
         <button
           onClick={refetch}
-          className="w-[275px] h-[55px] text-[#623AD6] border-[#623AD6] rounded-[15px] bg-white border-solid border-[2px]"
+          className="w-[150px] h-[30px] text-[#623AD6] border-[#623AD6] rounded-[6px] text-[14px] bg-white border-solid border-[2px]"
         >
           RESET
         </button>
         <button
           onClick={updateTicketSetting}
-          className="w-[275px] h-[55px] bg-[#623AD6] text-white rounded-[15px] ml-4"
+          className="w-[150px] h-[30px] bg-[#623AD6] text-white rounded-[6px] text-[14px] ml-4"
         >
           UPDATE
         </button>

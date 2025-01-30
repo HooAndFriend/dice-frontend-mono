@@ -69,13 +69,16 @@ const UserSelectPopover = ({
         }}
       >
         <Tooltip text={nickname}>
-          <Image
-            className="rounded-[15px] border border-[#EBEBEC] mr-[10px] "
-            src={profile ? profile : '/image/dice.png'}
-            alt="profile"
-            width={width ? width : 30}
-            height={height ? height : 30}
-          />
+          <div className="w-[30px] h-[30px] min-w-[30px] min-h-[30px]">
+            <Image
+              className="rounded-[15px] border border-[#EBEBEC] mr-[10px]"
+              src={profile ? profile : '/image/dice.png'}
+              alt="profile"
+              width={width ? width : 30}
+              height={height ? height : 30}
+              style={{ width: '30px', height: '30px' }}
+            />
+          </div>
         </Tooltip>
         {isNickname && (
           <div className="ml-2 font-spoqa font-[16px]">{nickname}</div>

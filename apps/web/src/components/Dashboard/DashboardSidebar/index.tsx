@@ -90,7 +90,7 @@ const DashboardSidebard = () => {
   )
 
   return (
-    <div className="w-[220px] h-screen border-r border-[#EBEBEC] bg-white pt-8 overflow-y-auto">
+    <div className="w-[220px]  border-r border-[#EBEBEC] bg-white pt-8 overflow-y-auto">
       {/* Workspaces Section */}
       <div className="w-full px-8">
         <div className="flex items-center justify-between w-full">

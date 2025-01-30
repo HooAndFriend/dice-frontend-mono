@@ -11,7 +11,7 @@ interface PropsType {
 const EpicFilter = ({ selectedEpicIds, handleEpicSelectFilter }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
   const [name, setName] = useState<string>('')
-  const { data, isLoading } = useSWR('/v1/epic', async (url) =>
+  const { data, isLoading } = useSWR('/v1/epic/list', async (url) =>
     Get<GetEpicListResponse>(url),
   )
 

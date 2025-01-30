@@ -17,9 +17,7 @@ import EpicFilter from '@/src/components/Task/Common/Filter/EpicFilter'
 interface PropsType {
   ticketId: number
   data: Ticket[]
-  epic: EpicInfo[]
   word: string
-  ticketCount: number
   isLoading: boolean
   checkedList: WorkspaceUser[]
   selectedEpicIds: number[]
@@ -36,13 +34,11 @@ interface PropsType {
 const IssueContainer = ({
   ticketId,
   data,
-  epic,
   word,
   selectedStatus,
   selectedTypeIds,
   selectedEpicIds,
   isLoading,
-  ticketCount,
   setTicketId,
   handleWord,
   checkedList,
@@ -75,7 +71,7 @@ const IssueContainer = ({
         </div>
         <div className="flex items-center">
           <h1 className="text-[18px] font-san-medium">
-            Total Ticket : {ticketCount}
+            Total Ticket : {data.length}
           </h1>
         </div>
       </div>
@@ -84,36 +80,7 @@ const IssueContainer = ({
           {isLoading ? (
             <TicketTableSkeleton />
           ) : (
-            <IssueTable
-              handleClick={setTicketId}
-              data={epic
-                .filter((epic) =>
-                  selectedEpicIds.length === 0
-                    ? []
-                    : selectedEpicIds.includes(epic.epicId),
-                )
-                .reduce((acc, epic) => acc.concat(epic.ticket), [])
-                .filter((item) => item.name.includes(word))
-                .filter((item) =>
-                  checkedList.length === 0
-                    ? true
-                    : checkedList.some(
-                        (_) => _.user.userId === item.worker?.userId,
-                      ),
-                )
-                .filter((item) =>
-                  selectedStatus.length === 0
-                    ? true
-                    : selectedStatus.includes(item.status),
-                )
-                .filter((item) =>
-                  selectedTypeIds.length === 0
-                    ? true
-                    : selectedTypeIds.includes(
-                        item.ticketSetting?.ticketSettingId,
-                      ),
-                )}
-            />
+            <IssueTable handleClick={setTicketId} data={data} />
           )}
         </div>
         {ticketId !== 0 && (

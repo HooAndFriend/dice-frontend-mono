@@ -14,7 +14,6 @@ import { WorkspaceUser } from '@/src/type/workspace'
 
 interface PropsType {
   data: Ticket[]
-  epic: EpicInfo[]
   word: string
   checkedList: WorkspaceUser[]
   selectedEpicIds: number[]
@@ -28,7 +27,6 @@ interface PropsType {
 const KanbanContainer = ({
   data,
   word,
-  epic,
   selectedEpicIds,
   handleEpicSelectFilter,
   handleTypeSelectFilter,
@@ -70,13 +68,12 @@ const KanbanContainer = ({
                 <h1 className="cursor-pointer ">+</h1>
               </div>
               <div className="p-2">
-                {epic
+                {data
                   .filter((epic) =>
                     selectedEpicIds.length === 0
                       ? []
                       : selectedEpicIds.includes(epic.epicId),
                   )
-                  .reduce((acc, epic) => acc.concat(epic.ticket), [])
                   .filter((ticket) => ticket.status === item)
                   .map((ticket) => (
                     <KanbanCard data={ticket} key={ticket.ticketId} />

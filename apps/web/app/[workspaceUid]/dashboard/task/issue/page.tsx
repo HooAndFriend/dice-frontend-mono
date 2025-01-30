@@ -14,7 +14,7 @@ import useSWR from 'swr'
 
 // ** Type Imports
 import { GetTicketListResponse } from '@/src/type/ticket'
-import { EpicStatus, GetEpicListResponse } from '@/src/type/epic'
+import { EpicStatus } from '@/src/type/epic'
 
 // ** Context Imports
 import {
@@ -71,12 +71,6 @@ const TablePage = () => {
     }
   }
 
-  const {
-    data: epicData,
-    error: epicError,
-    isLoading: epicLoading,
-  } = useSWR('/v1/epic', async (url) => Get<GetEpicListResponse>(url))
-
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true))
 
@@ -131,9 +125,36 @@ const TablePage = () => {
       selectedStatus={selectedStatus}
       selectedTypeIds={selectedTypeIds}
       selectedEpicIds={selectedEpicIds}
-      data={isLoading ? [] : data.data.data}
-      ticketCount={isLoading ? 0 : data.data.count}
-      epic={epicLoading ? [] : epicData?.data.data || []}
+      data={
+        isLoading
+          ? []
+          : data?.data?.data
+              .filter(
+                (item) =>
+                  selectedEpicIds.length < 1 ||
+                  selectedEpicIds.includes(item.epic?.epicId),
+              )
+              .filter((item) => item.name.includes(word))
+              .filter((item) =>
+                checkedList.length === 0
+                  ? true
+                  : checkedList.some(
+                      (_) => _.user.userId === item.worker?.userId,
+                    ),
+              )
+              .filter((item) =>
+                selectedStatus.length === 0
+                  ? true
+                  : selectedStatus.includes(item.status),
+              )
+              .filter((item) =>
+                selectedTypeIds.length === 0
+                  ? true
+                  : selectedTypeIds.includes(
+                      item.ticketSetting?.ticketSettingId,
+                    ),
+              )
+      }
       word={word}
       checkedList={checkedList}
       handleTypeSelectFilter={handleTypeSelectFilter}

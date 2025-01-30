@@ -55,6 +55,7 @@ export interface Ticket {
   worker: TicketUser
   priority: Priortiry
   subTickets: Ticket[]
+  epic: EpicInfo
 }
 
 export interface TicketInfo {

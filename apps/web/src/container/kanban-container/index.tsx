@@ -69,10 +69,10 @@ const KanbanContainer = ({
               </div>
               <div className="p-2">
                 {data
-                  .filter((epic) =>
+                  .filter((item) =>
                     selectedEpicIds.length === 0
                       ? []
-                      : selectedEpicIds.includes(epic.epicId),
+                      : selectedEpicIds.includes(item.epic.epicId),
                   )
                   .filter((ticket) => ticket.status === item)
                   .map((ticket) => (

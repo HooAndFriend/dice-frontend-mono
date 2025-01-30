@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, ChangeEvent } from 'react'
 import useSWR from 'swr'
 import { Get } from '@/src/repository'
 import { GetEpicListResponse } from '@/src/type/epic'
+import TicketSettingButton from '../../../Ticket/TicketSettingButton'
 
 interface PropsType {
   selectedEpicIds: number[]
@@ -11,7 +12,7 @@ interface PropsType {
 const EpicFilter = ({ selectedEpicIds, handleEpicSelectFilter }: PropsType) => {
   const [open, setOpen] = useState<boolean>(false)
   const [name, setName] = useState<string>('')
-  const { data, isLoading } = useSWR('/v1/epic', async (url) =>
+  const { data, isLoading } = useSWR('/v1/epic/list', async (url) =>
     Get<GetEpicListResponse>(url),
   )
 
@@ -61,7 +62,7 @@ const EpicFilter = ({ selectedEpicIds, handleEpicSelectFilter }: PropsType) => {
       </div>
       {open && (
         <div
-          className="absolute w-[302px] h-[200px] bg-white shadow-lg top-[50px] left-0 rounded-[8px] overflow-y-auto z-10"
+          className="absolute w-[420px] h-[200px] bg-white shadow-lg top-[50px] left-0 rounded-[8px] overflow-y-auto z-10"
           ref={dropdownRef}
         >
           <div className="flex items-center justify-center w-full px-2 py-2">
@@ -90,11 +91,21 @@ const EpicFilter = ({ selectedEpicIds, handleEpicSelectFilter }: PropsType) => {
                         onChange={() => handleEpicSelectFilter(epic.epicId)}
                         className="w-[12px] h-[12px] text-blue-600 bg-gray-100 border-gray-300 rounded-[3px] focus:ring-2"
                       />
+
                       <label
                         htmlFor={`checkbox-${epic.epicId}`}
-                        className="text-sm font-medium text-gray-900 ms-2"
+                        className="flex py-[2px] items-center ml-[8px]"
                       >
-                        {epic.name}
+                        <TicketSettingButton
+                          data={epic.ticketSetting}
+                          contentId={epic.epicId}
+                          type="EPIC"
+                          isText={false}
+                          disabled
+                        />
+                        <h1 className="text-[12px] font-medium text-gray-900 ms-2">
+                          {`${epic.code} - ${epic.name}`}
+                        </h1>
                       </label>
                     </div>
                   ))}

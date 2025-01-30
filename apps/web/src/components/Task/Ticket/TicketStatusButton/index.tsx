@@ -71,7 +71,6 @@ const TicketStatusButton = ({
 
   return (
     <StatusPopover
-      isQa={false}
       status={status}
       open={open}
       handleStatus={handleStatus}

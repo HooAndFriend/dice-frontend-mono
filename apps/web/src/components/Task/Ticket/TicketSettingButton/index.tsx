@@ -1,5 +1,5 @@
-// ** React Imports
 import { useState, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 
 // ** Type Imports
 import { Get, Patch } from '@/src/repository'
@@ -35,14 +35,16 @@ const TicketSettingButton = ({
   size = 'MEDIUM',
 }: PropsType) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null)
-
   const [open, setOpen] = useState<boolean>(false)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
 
   const { handleOpen: handleModalOpen } = useDialog()
 
-  const handleOpen = () => {
+  const handleOpen = (e: React.MouseEvent) => {
     if (disabled) return
-    setOpen((c) => !c)
+    e.stopPropagation()
+    setPosition({ x: e.clientX, y: e.clientY }) // 마우스 위치 저장
+    setOpen((prev) => !prev)
   }
 
   const {
@@ -111,7 +113,7 @@ const TicketSettingButton = ({
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target as Node)
       ) {
-        handleOpen()
+        setOpen(false)
       }
     }
 
@@ -122,22 +124,18 @@ const TicketSettingButton = ({
     }
   }, [])
 
-  if (isLoading) return
-
-  if (error) return
+  if (isLoading) return null
+  if (error) return null
 
   const PX_SIZE = size === 'MEDIUM' ? '24px' : '30px'
   const IMAGE_SIZE = size === 'MEDIUM' ? 16 : 20
   const ROUNDED_SIZE = size === 'MEDIUM' ? '6px' : '8px'
 
   return (
-    <div className="relative z-4">
+    <div className="relative">
       <div
         className={`flex items-center ${!disabled && 'cursor-pointer'}`}
-        onClick={(e) => {
-          e.stopPropagation()
-          handleOpen()
-        }}
+        onClick={handleOpen}
       >
         {data ? (
           <div
@@ -161,38 +159,49 @@ const TicketSettingButton = ({
           <h3 className="text-[16px] ml-4">{data ? data.name : '-'}</h3>
         )}
       </div>
-      {open && (
-        <div
-          className="absolute p-[8px] bg-[#F8FAFC] w-[184px] h-[184px] top-[40px] left-0 rounded-[10px] overflow-y-auto z-10 overflow-x-hidden"
-          ref={dropdownRef}
-        >
-          {settingData.data.data.map((item) => (
-            <div
-              className="w-[168px] h-[32px] hover:bg-[#F4F4FA] rounded-[8px] p-[8px] flex items-center cursor-pointer"
-              onClick={() =>
-                type === 'TICKET'
-                  ? updateTicketSetting.trigger(item.ticketSettingId)
-                  : updateEpicSetting.trigger(item.ticketSettingId)
-              }
-            >
+      {open &&
+        createPortal(
+          <div
+            className="absolute p-[8px] bg-[#F8FAFC] w-[184px] h-[184px] rounded-[10px] overflow-y-auto z-10 overflow-x-hidden shadow-lg"
+            ref={dropdownRef}
+            style={{
+              position: 'fixed',
+              left: position.x,
+              top: position.y + 10,
+              transform: 'translateX(-50%)',
+            }}
+          >
+            {settingData?.data?.data.map((item) => (
               <div
-                className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
-                style={{
-                  backgroundColor: getTicketSettingImage(item.type).color,
-                }}
+                className="w-[168px] h-[32px] hover:bg-[#F4F4FA] rounded-[8px] p-[8px] flex items-center cursor-pointer"
+                key={item.ticketSettingId}
+                onClick={() =>
+                  type === 'TICKET'
+                    ? updateTicketSetting.trigger(item.ticketSettingId)
+                    : updateEpicSetting.trigger(item.ticketSettingId)
+                }
               >
-                <CustomImage
-                  src={getTicketSettingImage(item.type).url}
-                  alt="ticket_setting"
-                  width={16}
-                  height={16}
-                />
+                <div
+                  className="w-[24px] h-[24px] rounded-[6px] flex items-center justify-center"
+                  style={{
+                    backgroundColor: getTicketSettingImage(item.type).color,
+                  }}
+                >
+                  <CustomImage
+                    src={getTicketSettingImage(item.type).url}
+                    alt="ticket_setting"
+                    width={16}
+                    height={16}
+                  />
+                </div>
+                <h3 className="text-[14px] ml-[12px] text-black">
+                  {item.name}
+                </h3>
               </div>
-              <h3 className="text-[14px] ml-[12px] text-black">{item.name}</h3>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>,
+          document.body,
+        )}
     </div>
   )
 }

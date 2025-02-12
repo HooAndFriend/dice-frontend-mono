@@ -73,7 +73,6 @@ const TicketCardView = ({
   handleEnter,
   setLinkOpen,
 }: PropsType) => {
-  console.log('parentLink : ', data.parentLink)
   return (
     <div className="h-full overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
       <div className="flex items-center justify-between">
@@ -245,45 +244,6 @@ const TicketCardView = ({
           </div>
         </div>
       )}
-      {/* <h1 className="my-4 text-[14px]">Story Point</h1>
-      {mode.storypoint === 'view' ? (
-        <div
-          className="h-[40px] rounded-[10px] border border-[#EBEBEC] pl-4 flex items-center justify-between pr-4 cursor-pointer text-[14px]"
-          onDoubleClick={() => {
-            if (role === 'VIEWER') return
-            setMode({ ...mode, storypoint: 'edit' })
-          }}
-        >
-          {data.storypoint}
-        </div>
-      ) : (
-        <div>
-          <CustomInput
-            width="480px"
-            height="40px"
-            borderRadius="10px"
-            value={data.storypoint}
-            name="storypoint"
-            type="number"
-            onChange={onChange}
-          />
-          <div className="flex items-center mt-2">
-            <button
-              className="w-[60px] h-[30px] flex items-center justify-center text-white bg-[#623AD6] rounded-[8px] mr-2"
-              onClick={() => handleUpdateTicket('storypoint')}
-            >
-              save
-            </button>
-            <button
-              className="w-[60px] h-[30px] flex items-center justify-center rounded-[8px]"
-              onClickCapture={() => setMode({ ...mode, storypoint: 'view' })}
-            >
-              cancel
-            </button>
-          </div>
-        </div>
-      )} */}
-
       <h1 className="my-4 text-[14px]">File</h1>
       <div className="flex items-center">
         {data.ticketFile.length < 4 && (

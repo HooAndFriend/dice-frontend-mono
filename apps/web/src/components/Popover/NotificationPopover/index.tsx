@@ -77,7 +77,9 @@ const NotificationPopover = () => {
               className="w-[15px] h-[15px] rounded-[8px] bg-red-600 flex items-center justify-center"
             >
               <h1 className="text-white text-[10px]">
-                {newNotificationCount(data.data.data)}
+                {newNotificationCount(data.data.data) > 9
+                  ? '+9'
+                  : newNotificationCount(data.data.data)}
               </h1>
             </div>
           )}

@@ -73,6 +73,7 @@ const TicketCardView = ({
   handleEnter,
   setLinkOpen,
 }: PropsType) => {
+  console.log('parentLink : ', data.parentLink)
   return (
     <div className="h-full overflow-y-auto w-full bg-white rounded-[20px] shadow-md p-[24px] overflow-x-hidden">
       <div className="flex items-center justify-between">
@@ -319,7 +320,7 @@ const TicketCardView = ({
             <div className="mb-[10px]">
               <SubTicketItem
                 key={ticket.ticketLinkId}
-                ticket={ticket.parentTicket}
+                ticket={ticket.childTicket}
                 isChildren={false}
               />
             </div>

@@ -276,15 +276,17 @@ const TicketCardView = ({
           <h1 className="my-4 text-[14px]">Linked Parent Ticket</h1>
         )}
         <div>
-          {data.parentLink.map((ticket) => (
-            <div className="mb-[10px]">
-              <SubTicketItem
-                key={ticket.ticketLinkId}
-                ticket={ticket.childTicket}
-                isChildren={false}
-              />
-            </div>
-          ))}
+          {data.parentLink
+            .filter((ticket) => ticket.parentTicket)
+            .map((ticket) => (
+              <div className="mb-[10px]">
+                <SubTicketItem
+                  key={ticket.ticketLinkId}
+                  ticket={ticket.parentTicket}
+                  isChildren={false}
+                />
+              </div>
+            ))}
         </div>
         <div className="flex items-center">
           <h1 className="my-4 text-[14px]">Linked Child Ticket</h1>
@@ -296,17 +298,19 @@ const TicketCardView = ({
           </div>
         </div>
         <div>
-          {data.childLink.map((ticket) => (
-            <div className="mb-[10px]">
-              <SubTicketItem
-                key={ticket.ticketLinkId}
-                ticketLinkId={ticket.ticketLinkId}
-                ticket={ticket.childTicket}
-                isChildren={true}
-                ticketRefetch={ticketRefetch}
-              />
-            </div>
-          ))}
+          {data.childLink
+            .filter((ticket) => ticket.childTicket)
+            .map((ticket) => (
+              <div className="mb-[10px]">
+                <SubTicketItem
+                  key={ticket.ticketLinkId}
+                  ticketLinkId={ticket.ticketLinkId}
+                  ticket={ticket.childTicket}
+                  isChildren={true}
+                  ticketRefetch={ticketRefetch}
+                />
+              </div>
+            ))}
         </div>
         {linkOpen && (
           <TicketLink
